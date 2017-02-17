@@ -1,28 +1,50 @@
 import React, { PropTypes } from 'react';
+import styled from 'styled-components';
 import Element from '../elements';
 
-export const requirements = [
-  {
+export const variations = {
+  head: {
     type: 'element',
-    whitelist: ['Icon'],
+    options: ['Icon', 'Header'],
   },
-  {
+  paragraph: {
     type: 'element',
-    whitelist: ['Paragraph'],
+    options: ['Paragraph'],
   },
-  {
+  foot: {
     type: 'element',
-    whitelist: ['Button', 'Link'],
+    options: ['Button', 'Link'],
   }
-]
+}
 
-const TripleDecker = ({elements}) => (
-  <div>
-    {elements.map((element, i) => (
-      <Element {...element} key={i} />
-    ))}
-  </div>
-)
+const _Wrap = styled.div`
+  max-width: 400px;
+  padding: 40px;
+  text-align: center;
+`
+
+const _Margin = styled.div`
+  margin-bottom: 30px;
+`
+
+const TripleDecker = ({
+  head,
+  paragraph,
+  foot
+}) => {
+
+  return (
+    <_Wrap>
+      <_Margin>
+        <Element {...head} />
+      </_Margin>
+      <_Margin>
+        <Element {...paragraph} />
+      </_Margin>
+      <Element {...foot} />
+    </_Wrap>
+  )
+}
 
 TripleDecker.propTypes = {
 

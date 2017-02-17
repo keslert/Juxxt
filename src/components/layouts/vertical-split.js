@@ -1,13 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { _Flex } from '../common/styled-flex';
+import { _Flex, _DisplayFlex } from '../common/styled-flex';
 import Collection from '../collections';
 
 export const requirements = {
-  collections: [
-    {},
-    {},
-  ]
+  collections: 2,
 }
 
 const _VerticalSplit = styled.div`
@@ -20,7 +17,9 @@ const VerticalSplit = ({props, collections}) => {
       {collections.map((collection, i) => {
         return (
           <_Flex key={i}>
-            <Collection {...collection} />
+            <_DisplayFlex justify="center" align="center">
+              <Collection {...collection} />
+            </_DisplayFlex>
           </_Flex>
         )
       })}

@@ -1,63 +1,82 @@
-import React from 'react';
-import styled from 'styled-components';
-import Page from '../components/page';
-import { range } from 'lodash';
+import { layouts } from '../../components/layouts/all';
+import { collections } from '../../components/collections/all';
+import { elements } from '../../componenets/elements/all';
+import { random } from '../utils';
+import { keys, range } from 'lodash';
 
-import { variations as buttonVariations } from '../components/elements/button';
-import { randomItem } from '../core/utils';
+import { selectTheme, selectLayoutShade } from './color';
 
 
-const _App = styled.div``
+export function generate() {
 
-const _Window = styled.div`
-  overflow: scroll;
-  display: flex;
-  padding: 40px;
-`
+  const baseFontSize = 15;
+  const theme = selectTheme();
 
-const width = 500;
-const height = 818;
-const _PageWrapper = styled.div`
-  margin: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,.2);
-  width: ${width}px;
-  height: ${height}px;
-`
-
-const _Scale = styled.div`
-  transform-origin: 0px 0px;
-  transform: scale(${ width/1100 });
-`
-
-class App extends React.Component {
-  render() {
-    return (
-      <_App>
-        <_Window>
-          {range(0, 1).map(i => (
-            <_PageWrapper key={i}>
-              <_Scale>
-                <Page {...data} />
-              </_Scale>
-            </_PageWrapper>
-          ))}
-        </_Window>
-      </_App>
-    );
+  return {
+    baseFontSize,
+    theme,
+    content: {
+      sections: range(0, 3).map(() => generateSection(baseFontSize, theme)),
+    }
   }
+
+
+
+
+
+
+
 }
+
+function generateSection(baseFontSize, theme) {
+  const layoutName = selectLayout();
+  const layout = layouts[name];
+
+  const shade = selectLayoutShade();
+  const background = shade === 'light' ? random(theme.light) : random(theme.dark);
+  const collectionName = selectCollection();
+
+
+
+
+  return {
+    name: layoutName,
+    props: {},
+    collections: collectionNames.map(name => ({
+      name,
+
+    }))
+  }
+
+}
+
+function selectCollection() {
+  const name = random(keys(collections));
+  return name;
+}
+
+
+
+
+function selectLayout() {
+  const name = random(keys(layouts));
+  return name;
+}
+
+
+
+
+
+
+
+
 
 
 const data = {
 
 
   baseFontSize: 15,
-  theme: {
-    primary: '#00beef',
-    secondary: '#00aeef',
-    light: '#fff',
-    dark: '#ca0eee',
-  },
+  
 
 
   header: true,
@@ -65,7 +84,8 @@ const data = {
     sections: [{
       name: 'BasicLayout',
       props: {},
-      collections: [{
+
+      collection: {
         name: 'TripleDecker',
         props: {
           head: {
@@ -81,7 +101,7 @@ const data = {
             props: { type: randomItem(buttonVariations.type.options), icon: randomItem(buttonVariations.icon.options), size: randomItem(buttonVariations.size.options), background: '#544373', color: 'white' },
           }
         }
-      }],
+      },
     },
     {
       name: 'VerticalSplitLayout',
@@ -126,5 +146,3 @@ const data = {
   },
   footer: true,
 }
-
-export default App;

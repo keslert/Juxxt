@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import tinycolor from 'tinycolor2';
+import Icon from '../icon';
 
 const _Button = styled.span`
   box-sizing: border-box;
@@ -23,39 +24,6 @@ const _Button = styled.span`
   `}
   i { margin: 0 5px; }
 `
-
-
-export const variations = {
-  type: {
-    options: ['Rounded', 'Round', 'Square', 'Shadow'],
-    consistent: true,
-  },
-  size: {
-    options: ['Large', 'Medium', 'Small', 'Tiny'],
-    default: 'Medium',
-  },
-  icon: {
-    options: ['None', 'Left', 'Right'],
-  },
-}
-
-
-
-// Tweaks
-const defaultNudges = {
-  padding: { // What are the rules for good padding for buttons?
-    func: ({w, h}) => ({w, h: Math.min(w/2, w)})
-  },
-  boxShadow: {
-    optional: true,
-  },
-  width: {
-    optional: true
-  },
-  background: true,
-  color: true,
-  textTransform: true,
-}
 
 const getBorderRadius = (type, height) => {
   if(type === 'Rounded' || type === 'Shadow') {
@@ -108,9 +76,9 @@ const Button = ({
   const props = { background, color, borderRadius, boxShadow, fontSize, padding, ...overrides };
   return (
     <_Button {...props}>
-      {icon === 'Left' ? <i className="fa fa-rocket"></i> : null}
+      {icon === 'Left' ? <Icon name="rocket" /> : null}
       {text || "Button"}
-      {icon === 'Right' ? <i className="fa fa-rocket"></i> : null}
+      {icon === 'Right' ? <Icon name="rocket" /> : null}
     </_Button>
   )
 }
@@ -123,6 +91,35 @@ Button.propTypes = {
 
 export default Button;
 
+
+export const variations = {
+  type: {
+    options: ['Rounded', 'Round', 'Square', 'Shadow'],
+    consistent: true,
+  },
+  size: {
+    options: ['Large', 'Medium', 'Small', 'Tiny'],
+    default: 'Medium',
+  },
+  icon: {
+    options: ['None', 'Left', 'Right'],
+  },
+}
+
+export const nudges = {
+  padding: { // What are the rules for good padding for buttons?
+    func: ({w, h}) => ({w, h: Math.min(w/2, w)})
+  },
+  boxShadow: {
+    optional: true,
+  },
+  width: {
+    optional: true
+  },
+  background: true,
+  color: true,
+  textTransform: true,
+}
 
 // Shake
 // Poke

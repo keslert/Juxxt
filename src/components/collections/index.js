@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import TripleDecker from './triple-decker';
-
+import collections from './all';
 
 const _Collection = styled.div`
 
@@ -12,18 +11,10 @@ const Collection = ({
   name,
   props,
 }) => {
-  const getCollection = () => {
-    switch(name) {
-      case 'TripleDecker':
-        return <TripleDecker {...props} />;
-      default:
-        return <p>Bad Collection: {name}</p>
-    }
-  }
-
+  const Collection = collections[name]
   return (
     <_Collection {...props}>
-      {getCollection()}
+      <Collection.component {...props} />
     </_Collection>
   )
 
