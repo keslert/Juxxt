@@ -4,13 +4,20 @@ import { _Flex, _DisplayFlex } from '../common/styled-flex';
 import Collection from '../collections';
 
 export const requirements = {
-  collections: 1,
+  collection: {
+    type: 'Collection',
+    options: [],
+  }
 }
 
-const BasicLayout = ({props, collections}) => {
+export const params = {
+
+}
+
+const BasicLayout = ({requirements, overrides}) => {
   return (
     <_DisplayFlex justify="center" align="center">
-      <Collection {...collections[0]} />
+      <Collection {...requirements.collection} />
     </_DisplayFlex>
   )
 }

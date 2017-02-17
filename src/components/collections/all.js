@@ -1,9 +1,9 @@
-import TripleDecker, { variations as tripleDeckerVariations, nudges as tripleDeckerNudges } from './triple-decker';
+import TripleDecker, { requirements as tripleDeckerReqs, params as tripleDeckerParams } from './triple-decker';
 
 export default {
   TripleDecker: {
     component: TripleDecker,
-    variations: tripleDeckerVariations,
-    nudges: tripleDeckerNudges,
+    requirements: tripleDeckerReqs,
+    params: tripleDeckerParams,
   }
 }

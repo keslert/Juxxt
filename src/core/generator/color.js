@@ -1,4 +1,4 @@
-import { random } from '../utils';
+import { randomItem } from '../utils';
 
 export function selectTheme() {
   return {
@@ -11,5 +11,5 @@ export function selectTheme() {
 
 
 export function selectLayoutShade() {
-  return random(['light', 'light', 'light', 'dark']);
+  return randomItem(['light', 'light', 'light', 'dark']);
 }

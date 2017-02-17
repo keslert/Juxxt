@@ -7,18 +7,23 @@ const _Paragraph = styled.p`
 `
 
 const Paragraph = ({
+  text = "",
   color,
   fontSize,
-  children
+  requirements,
+  overrides,
 }) => (
   <_Paragraph color={color} fontSize={fontSize}>
     Lorem ipsum dolor sit amet, sea erant civibus id, fugit putent adolescens ad eos. Reque expetendis mei ea. Pro modo saperet ea.
   </_Paragraph>
 )
 
-Paragraph.propTypes = {
-  color: PropTypes.string,
-  fontSize: PropTypes.string,
+export const requirements = {
+
+}
+
+export const params = {
+
 }
 
 export default Paragraph;

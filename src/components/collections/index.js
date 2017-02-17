@@ -2,22 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import collections from './all';
 
-const _Collection = styled.div`
-
-`
-
-
-const Collection = ({
-  name,
-  props,
-}) => {
-  const Collection = collections[name]
+const Collection = (props) => {
+  const Collection = collections[props.name]
   return (
-    <_Collection {...props}>
-      <Collection.component {...props} />
-    </_Collection>
+    <Collection.component {...props} />
   )
-
 }
 
 export default Collection;

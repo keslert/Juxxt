@@ -9,7 +9,9 @@ const _Icon = styled.i`
 const Icon = ({
   color,
   fontSize,
-  name
+  name = 'Rocket',
+  requirements,
+  overrides,
 }) => (
   <_Icon className={`fa fa-${name}`}
     color={color} fontSize={fontSize} />
@@ -18,6 +20,15 @@ const Icon = ({
 Icon.propTypes = {
   color: PropTypes.string,
   fontSize: PropTypes.string,
+}
+
+
+export const requirements = {
+
+}
+
+export const params = {
+
 }
 
 export default Icon;

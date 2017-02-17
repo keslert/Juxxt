@@ -36,42 +36,38 @@ const getFontSize = (importance) => {
 }
 
 const Header = ({
-  text,
-  importance,
+  text = 'Header Material!',
   color,
   fontWeight,
-  overrides = {},
+  requirements,
+  overrides,
 }) => {
+
+  const { importance } = requirements;
 
   const fontSize = getFontSize(importance);
 
   const props = { fontSize, fontWeight, color, ...overrides}
 
   switch(importance) {
-    case 'h1':
-      return <_H1 {...props}>{text}</_H1>;
-    case 'h2':
-      return <_H2 {...props}>{text}</_H2>;
-    case 'h3':
-      return <_H3 {...props}>{text}</_H3>;
-    case 'h4':
-      return <_H4 {...props}>{text}</_H4>;
-    case 'h5':
-      return <_H5 {...props}>{text}</_H5>;
-    case 'h6':
-      return <_H6 {...props}>{text}</_H6>; 
+    case 'h1': return <_H1 {...props}>{text}</_H1>;
+    case 'h2': return <_H2 {...props}>{text}</_H2>;
+    case 'h3': return <_H3 {...props}>{text}</_H3>;
+    case 'h4': return <_H4 {...props}>{text}</_H4>;
+    case 'h5': return <_H5 {...props}>{text}</_H5>;
+    case 'h6': return <_H6 {...props}>{text}</_H6>; 
   }
 }
 
 export default Header;
 
-export const variations = {
+export const requirements = {
   importance: {
     options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
   },
 }
 
-export const nudges = {
+export const params = {
   color: true,
   textTransform: true,
   fontWeight: true,

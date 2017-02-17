@@ -8,11 +8,11 @@ const _Content = styled.div`
 `
 
 const Content = ({
-  sections,
+  layouts,
 }) => {
   return (
     <_Content>
-      {sections.map((section, i) => (
+      {layouts.map((section, i) => (
         <Layout {...section} key={i} />
       ))}
     </_Content>

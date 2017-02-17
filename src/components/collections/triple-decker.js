@@ -2,21 +2,6 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import Element from '../elements';
 
-export const variations = {
-  head: {
-    type: 'element',
-    options: ['Icon', 'Header'],
-  },
-  paragraph: {
-    type: 'element',
-    options: ['Paragraph'],
-  },
-  foot: {
-    type: 'element',
-    options: ['Button', 'Link'],
-  }
-}
-
 const _Wrap = styled.div`
   max-width: 400px;
   padding: 40px;
@@ -28,26 +13,40 @@ const _Margin = styled.div`
 `
 
 const TripleDecker = ({
-  head,
-  paragraph,
-  foot
+  requirements,
+  overrides,
 }) => {
+
+
 
   return (
     <_Wrap>
       <_Margin>
-        <Element {...head} />
+        <Element {...requirements.head} />
       </_Margin>
       <_Margin>
-        <Element {...paragraph} />
+        <Element {...requirements.paragraph} />
       </_Margin>
-      <Element {...foot} />
+      <Element {...requirements.foot} />
     </_Wrap>
   )
 }
+export default TripleDecker;
 
-TripleDecker.propTypes = {
 
+export const requirements = {
+  head: {
+    type: 'Element',
+    options: ['Icon', 'Header'],
+  },
+  paragraph: {
+    type: 'Element',
+    options: ['Paragraph'],
+  },
+  foot: {
+    type: 'Element',
+    options: ['Button'],
+  }
 }
 
-export default TripleDecker;
+export const params = {};

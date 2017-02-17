@@ -54,14 +54,14 @@ const getBoxShadow = (type, background) => {
 }
 
 const Button = ({
-  text,
-  type,
-  icon,
-  size,
-  background,
-  color,
+  text = "Button",
+  background = 'purple',
+  color = 'white',
+  requirements,
   overrides = {},
 }) => {
+
+  const { type, icon, size } = requirements;
 
   const fontSize = getFontSize(type, size);
   
@@ -77,7 +77,7 @@ const Button = ({
   return (
     <_Button {...props}>
       {icon === 'Left' ? <Icon name="rocket" /> : null}
-      {text || "Button"}
+      {text}
       {icon === 'Right' ? <Icon name="rocket" /> : null}
     </_Button>
   )
@@ -92,7 +92,7 @@ Button.propTypes = {
 export default Button;
 
 
-export const variations = {
+export const requirements = {
   type: {
     options: ['Rounded', 'Round', 'Square', 'Shadow'],
     consistent: true,
@@ -106,7 +106,7 @@ export const variations = {
   },
 }
 
-export const nudges = {
+export const params = {
   padding: { // What are the rules for good padding for buttons?
     func: ({w, h}) => ({w, h: Math.min(w/2, w)})
   },
@@ -125,11 +125,7 @@ export const nudges = {
 // Poke
 // and Nudge
 // your way to good design
-
 // The goal is to allow for 90% control
-
 // The extreme change bot, treats locks as a soft constraint
-
 // Once you have a button style, it shouldn't need to change...
-
 // Variations are not random. They are ordered by likelihood. This maintains the order when cycling back and forth through them.

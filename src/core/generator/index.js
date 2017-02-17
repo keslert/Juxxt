@@ -1,14 +1,13 @@
-import { layouts } from '../../components/layouts/all';
-import { collections } from '../../components/collections/all';
-import { elements } from '../../componenets/elements/all';
-import { random } from '../utils';
-import { keys, range } from 'lodash';
+import layouts from '../../components/layouts/all';
+import collections from '../../components/collections/all';
+import elements from '../../components/elements/all';
+import { randomItem } from '../utils';
+import { keys, range, map, reduce, zipObject, isEmpty } from 'lodash';
 
 import { selectTheme, selectLayoutShade } from './color';
 
 
 export function generate() {
-
   const baseFontSize = 15;
   const theme = selectTheme();
 
@@ -16,133 +15,91 @@ export function generate() {
     baseFontSize,
     theme,
     content: {
-      sections: range(0, 3).map(() => generateSection(baseFontSize, theme)),
+      layouts: range(0, 3).map(() => generateLayout(baseFontSize, theme)),
     }
   }
-
-
-
-
-
-
-
 }
 
-function generateSection(baseFontSize, theme) {
+
+// A layout must request at least one color scheme;
+function generateLayout(baseFontSize, theme) {
   const layoutName = selectLayout();
-  const layout = layouts[name];
+  const layout = layouts[layoutName];
 
   const shade = selectLayoutShade();
-  const background = shade === 'light' ? random(theme.light) : random(theme.dark);
-  const collectionName = selectCollection();
-
-
-
+  const background = shade === 'light' ? randomItem(theme.light) : randomItem(theme.dark);
+  
+  const _keys = keys(layout.requirements);
+  const requirements = zipObject(_keys, _keys.map(key => {
+    const req = layout.requirements[key];
+    if(req.type === 'Collection') {
+      return generateCollection(req.options);
+    } else {
+      return randomItem(req.options);
+    }
+  }))
 
   return {
     name: layoutName,
-    props: {},
-    collections: collectionNames.map(name => ({
-      name,
-
-    }))
+    requirements,
+    overrides: {},
   }
 
 }
 
-function selectCollection() {
-  const name = random(keys(collections));
-  return name;
+
+function generateCollection(options) {
+  const collectionName = selectCollection(options);
+  const collection = collections[collectionName];
+
+  const _keys = keys(collection.requirements);
+  const requirements = zipObject(_keys, _keys.map(key => {
+    const req = collection.requirements[key];
+    if(req.type === 'Element') {
+      return generateElement(req.options);
+    } else {
+      return randomItem(req.options);
+    }
+  }))
+
+  return {
+    name: collectionName,
+    requirements,
+    overrides: {},
+  }
+}
+
+function generateElement(options) {
+  const elementName = selectElement(options);
+  const element = elements[elementName];
+
+  const _keys = keys(element.requirements);
+  const requirements = zipObject(_keys, _keys.map(key => {
+    const req = element.requirements[key];
+    return randomItem(req.options);
+  }))
+
+  return {
+    name: elementName,
+    requirements,
+    overrides: {},
+  }
 }
 
 
+function selectElement(options) {
+  const name = randomItem(options);
+  return name;
+}
+
+function selectCollection(options) {
+  const _options = isEmpty(options) ? keys(collections) : options;
+  const name = randomItem(_options);
+  return name;
+}
 
 
 function selectLayout() {
-  const name = random(keys(layouts));
+  const name = randomItem(keys(layouts));
   return name;
-}
-
-
-
-
-
-
-
-
-
-
-const data = {
-
-
-  baseFontSize: 15,
-  
-
-
-  header: true,
-  content: {
-    sections: [{
-      name: 'BasicLayout',
-      props: {},
-
-      collection: {
-        name: 'TripleDecker',
-        props: {
-          head: {
-            name: 'Icon',
-            props: { name: 'plane' }
-          },
-          paragraph: {
-            name: 'Paragraph',
-            props: { color: '#333' },
-          },
-          foot: {
-            name: 'Button',
-            props: { type: randomItem(buttonVariations.type.options), icon: randomItem(buttonVariations.icon.options), size: randomItem(buttonVariations.size.options), background: '#544373', color: 'white' },
-          }
-        }
-      },
-    },
-    {
-      name: 'VerticalSplitLayout',
-      props: {},
-      collections: [
-        {
-          name: 'TripleDecker',
-          props: {
-            head: {
-              name: 'Icon',
-              props: { name: 'plane' }
-            },
-            paragraph: {
-              name: 'Paragraph',
-              props: { color: '#333' },
-            },
-            foot: {
-              name: 'Button',
-              props: { type: randomItem(buttonVariations.type.options), icon: randomItem(buttonVariations.icon.options), size: randomItem(buttonVariations.size.options), background: '#544373', color: 'white' },
-            }
-          }
-        },
-        {
-          name: 'TripleDecker',
-          props: {
-            head: {
-              name: 'Icon',
-              props: { name: 'plane' }
-            },
-            paragraph: {
-              name: 'Paragraph',
-              props: { color: '#333' },
-            },
-            foot: {
-              name: 'Button',
-              props: { type: randomItem(buttonVariations.type.options), icon: randomItem(buttonVariations.icon.options), size: randomItem(buttonVariations.size.options), background: '#544373', color: 'white' },
-            }
-          }
-        },
-      ]
-    }]
-  },
-  footer: true,
 }
