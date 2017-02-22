@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "jquery": "^2.2.4",
+    "keypress.js": "^2.1.4",
     "lodash": "^4.17.4",
     "normalize.css": "^5.0.0",
     "react": "^15.4.2",
@@ -15,6 +16,7 @@
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "reselect": "^2.5.4",
+    "shortid": "^2.2.6",
     "styled-components": "^1.4.3",
     "tinycolor2": "^1.4.1",
     "toastr": "^2.1.2"

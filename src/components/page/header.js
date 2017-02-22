@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const _Header = styled.div`
   height: 400px;
-  background: #f1f1f1;
+  background: #F6F9FC;
 `
 
 const Header = ({

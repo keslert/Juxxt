@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+
+import { connect } from 'react-redux';
 import Page from '../components/page';
 import { range } from 'lodash';
 
 import { variations as buttonVariations } from '../components/elements/button';
 import { randomItem } from '../core/utils';
-import { generate } from '../core/generator';
+import { generate, init } from '../core/generator';
 
 const _App = styled.div``
 
@@ -15,13 +17,10 @@ const _Window = styled.div`
   padding: 40px;
 `
 
-const width = 500;
-const height = 818;
+const width = 600;
 const _PageWrapper = styled.div`
-  margin: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,.2);
+  margin: 15px;
   width: ${width}px;
-  height: ${height}px;
 `
 
 const _Scale = styled.div`
@@ -35,27 +34,53 @@ class App extends React.Component {
     super();
 
     this.state = {
-      data: generate(),
+      pages: init(),
     }
   }
 
   componentDidMount() {
     setInterval(() => {
-      this.setState({data: generate()})
+      const { pages } = this.state;
+      this.setState({pages: [
+        this.generatePage(pages[0], 'shake'),
+        pages[1]
+      ]});
     }, 3000);
+
+    this.listener = new window.keypress.Listener();
+    this.listener.simple_combo('s', () => this.updatePages('shake')) //
+    this.listener.simple_combo('t', () => this.updatePages('stir')) //
+    this.listener.simple_combo('n', () => this.updatePages('nudge')) //
+    this.listener.simple_combo('left', () => null); // Go back
+  }
+
+  generatePage(page, type) {
+    return generate(
+      page,
+      type,
+      this.props.selected
+    );
+  }
+
+  updatePages(type) {
+    this.setState({
+      pages: this.state.pages.map(page => (
+        this.generatePage(page, type)
+      ))
+    })
   }
 
 
   render() {
 
-    const { data } = this.state;
+    const { pages } = this.state;
     return (
       <_App>
         <_Window>
-          {range(0, 1).map(i => (
+          {pages.map((page, i) => (
             <_PageWrapper key={i}>
               <_Scale>
-                <Page {...data} />
+                <Page {...page} />
               </_Scale>
             </_PageWrapper>
           ))}
@@ -65,84 +90,7 @@ class App extends React.Component {
   }
 }
 
-
-// const _data = 
-// {
-
-//   baseFontSize: 15,
-//   theme: {
-//     primary: '#00beef',
-//     secondary: '#00aeef',
-//     light: '#fff',
-//     dark: '#ca0eee',
-//   },
-
-
-//   header: true,
-//   content: {
-//     sections: [{
-//       name: 'BasicLayout',
-//       props: {},
-//       collections: [{
-//         name: 'TripleDecker',
-//         props: {
-//           head: {
-//             name: 'Icon',
-//             props: { name: 'plane' }
-//           },
-//           paragraph: {
-//             name: 'Paragraph',
-//             props: { color: '#333' },
-//           },
-//           foot: {
-//             name: 'Button',
-//             props: { type: randomItem(buttonVariations.type.options), icon: randomItem(buttonVariations.icon.options), size: randomItem(buttonVariations.size.options), background: '#544373', color: 'white' },
-//           }
-//         }
-//       }],
-//     },
-//     {
-//       name: 'FiftyFiftyLayout',
-//       props: {},
-//       collections: [
-//         {
-//           name: 'TripleDecker',
-//           props: {
-//             head: {
-//               name: 'Icon',
-//               props: { name: 'plane' }
-//             },
-//             paragraph: {
-//               name: 'Paragraph',
-//               props: { color: '#333' },
-//             },
-//             foot: {
-//               name: 'Button',
-//               props: { type: randomItem(buttonVariations.type.options), icon: randomItem(buttonVariations.icon.options), size: randomItem(buttonVariations.size.options), background: '#544373', color: 'white' },
-//             }
-//           }
-//         },
-//         {
-//           name: 'TripleDecker',
-//           props: {
-//             head: {
-//               name: 'Icon',
-//               props: { name: 'plane' }
-//             },
-//             paragraph: {
-//               name: 'Paragraph',
-//               props: { color: '#333' },
-//             },
-//             foot: {
-//               name: 'Button',
-//               props: { type: randomItem(buttonVariations.type.options), icon: randomItem(buttonVariations.icon.options), size: randomItem(buttonVariations.size.options), background: '#544373', color: 'white' },
-//             }
-//           }
-//         },
-//       ]
-//     }]
-//   },
-//   footer: true,
-// }
-
-export default App;
+const mapStateToProps = state => ({
+  selected: state.interface.selected,
+})
+export default connect(mapStateToProps)(App);

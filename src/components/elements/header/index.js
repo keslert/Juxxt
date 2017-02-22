@@ -36,18 +36,21 @@ const getFontSize = (importance) => {
 }
 
 const Header = ({
-  text = 'Header Material!',
-  color,
-  fontWeight,
+  text = 'Header',
+  pallet,
   requirements,
   overrides,
 }) => {
 
+  const color = pallet.highlightText;
   const { importance } = requirements;
 
   const fontSize = getFontSize(importance);
 
-  const props = { fontSize, fontWeight, color, ...overrides}
+  const props = { fontSize, color, 
+    textTransform: requirements.textTransform,
+    fontWeight: requirements.fontWeight,
+    ...overrides}
 
   switch(importance) {
     case 'h1': return <_H1 {...props}>{text}</_H1>;
@@ -64,6 +67,14 @@ export default Header;
 export const requirements = {
   importance: {
     options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+  },
+  textTransform: {
+    options: ['none', 'uppercase'],
+    consistent: true,
+  },
+  fontWeight: {
+    options: ['light', 'normal', 'bold'],
+    consistent: true,
   },
 }
 

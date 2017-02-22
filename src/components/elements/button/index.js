@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import tinycolor from 'tinycolor2';
 import Icon from '../icon';
 
+const _Float = styled.span`
+  float: ${props => props.direction}
+`
+
 const _Button = styled.span`
   box-sizing: border-box;
   cursor: pointer;
@@ -15,17 +19,17 @@ const _Button = styled.span`
     font-size: ${props.fontSize}px;
     text-transform: ${props.textTransform};
     box-shadow: ${props.boxShadow};
+    display: ${props.block ? 'block' : 'inline-block'};
 
-    ${props.width && `width: ${props.width}px;`}
-    ${props.block || props.width && 'display: block'};
-    &:hover {
-      background: ${tinycolor(props.background).lighten(5).toString()};
-    }
-  `}
-  i { margin: 0 5px; }
+    ${props.width && `width: ${props.width}px;`};
+  `};
+  &:hover {
+    background: ${props => tinycolor(props.background).lighten(5).toString()};
+  }
+  i { margin: 0 5px; };
 `
 
-const getBorderRadius = (type, height) => {
+const getBorderRadius = ({type}, height) => {
   if(type === 'Rounded' || type === 'Shadow') {
     return height / 6;
   } else if(type === 'Round') {
@@ -34,7 +38,7 @@ const getBorderRadius = (type, height) => {
   return 0;
 }
 
-const getFontSize = (type, size) => {
+const getFontSize = ({type, size}) => {
   let fSize = 12;
   if(size === 'Large') {
     fSize *= 1.2;
@@ -46,7 +50,7 @@ const getFontSize = (type, size) => {
   return fSize;
 }
 
-const getBoxShadow = (type, background) => {
+const getBoxShadow = ({type, background}) => {
   if(type === 'Shadow') {
     return `0 4px 0 ${tinycolor(background).darken(20).toString()}`;
   }
@@ -55,30 +59,37 @@ const getBoxShadow = (type, background) => {
 
 const Button = ({
   text = "Button",
-  background = 'purple',
-  color = 'white',
+  color,
+  background,
   requirements,
   overrides = {},
 }) => {
 
-  const { type, icon, size } = requirements;
+  const props = { 
+    text, 
+    color, 
+    background, 
+    ...requirements,
+  };
 
-  const fontSize = getFontSize(type, size);
+  const fontSize = getFontSize(props);
   
   const padTB = overrides.padTB || fontSize;
   const padLR = overrides.padLR || fontSize * 4;
   const padding = `${padTB}px ${padLR}px`;
   
   const _height = padTB * 2 + fontSize;
-  const borderRadius = getBorderRadius(type, _height);
-  const boxShadow = getBoxShadow(type, background);
+  const borderRadius = getBorderRadius(props, _height);
+  const boxShadow = getBoxShadow(props);
 
-  const props = { background, color, borderRadius, boxShadow, fontSize, padding, ...overrides };
+  const finalProps = { ...props, borderRadius, boxShadow, fontSize, padding, ...overrides };
+  
   return (
-    <_Button {...props}>
-      {icon === 'Left' ? <Icon name="rocket" /> : null}
+    <_Button {...finalProps} className="element">
+      <_Float direction={props.icon === 'Left' ? 'left' : 'right'}>
+        <Icon name="rocket" color={color} />
+      </_Float>
       {text}
-      {icon === 'Right' ? <Icon name="rocket" /> : null}
     </_Button>
   )
 }
@@ -120,12 +131,3 @@ export const params = {
   color: true,
   textTransform: true,
 }
-
-// Shake
-// Poke
-// and Nudge
-// your way to good design
-// The goal is to allow for 90% control
-// The extreme change bot, treats locks as a soft constraint
-// Once you have a button style, it shouldn't need to change...
-// Variations are not random. They are ordered by likelihood. This maintains the order when cycling back and forth through them.

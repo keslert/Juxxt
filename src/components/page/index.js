@@ -12,12 +12,12 @@ const _Page = styled.div`
 class Page extends React.Component {
   render() {
 
-    const { header, footer, content } = this.props;
+    const { header, footer, sections } = this.props;
 
     return (
       <_Page>
         <Header />
-        <Content {...content} />
+        <Content sections={sections} />
         <Footer />
       </_Page>
     )

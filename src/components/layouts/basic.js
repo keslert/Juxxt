@@ -14,11 +14,20 @@ export const params = {
 
 }
 
-const BasicLayout = ({requirements, overrides}) => {
+const _Layout = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${props => `
+    background: ${props.background}
+  `}
+`
+
+const BasicLayout = ({requirements, pallet, overrides}) => {
   return (
-    <_DisplayFlex justify="center" align="center">
-      <Collection {...requirements.collection} />
-    </_DisplayFlex>
+    <_Layout background={pallet.background}>
+      <Collection {...requirements.collection} pallet={pallet} />
+    </_Layout>
   )
 }
 export default BasicLayout;

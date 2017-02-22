@@ -8,12 +8,12 @@ const _Paragraph = styled.p`
 
 const Paragraph = ({
   text = "",
-  color,
+  pallet,
   fontSize,
   requirements,
   overrides,
 }) => (
-  <_Paragraph color={color} fontSize={fontSize}>
+  <_Paragraph color={pallet.text} fontSize={fontSize}>
     Lorem ipsum dolor sit amet, sea erant civibus id, fugit putent adolescens ad eos. Reque expetendis mei ea. Pro modo saperet ea.
   </_Paragraph>
 )

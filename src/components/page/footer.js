@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const _Footer = styled.div`
   height: 400px;
-  background: tomato;
+  background: #F6F9FC;
 `
 
 const Footer = ({
