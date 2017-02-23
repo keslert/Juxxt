@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { _DisplayFlex } from '../common/styled-flex';
-import Collection from '../collections';
+import { _DisplayFlex } from '../../common/styled-flex';
+import Group from '../groups';
 
 
 export const requirements = {
@@ -9,13 +9,10 @@ export const requirements = {
     type: 'color',
     options: ['Split', 'Light-Light', 'Dark-Dark', 'Same']
   },
-  collection: {
-    type: 'Collection',
+  group: {
+    type: 'Group',
     options: [],
   },
-  pallet2: {
-    type: 'pallet',
-  }
 }
 
 export const params = {
@@ -49,12 +46,12 @@ const FiftyFifty = ({
     <_FiftyFifty {...overrides}>
       <_Flex background={pallet.background} padding={padding}>
         <_DisplayFlex justify="center" align="center">
-          <Collection {...requirements.collection} pallet={pallet} />
+          <Group {...requirements.group} pallet={pallet} />
         </_DisplayFlex>
       </_Flex>
-      <_Flex background={requirements.pallet2.background} padding={padding}>
+      <_Flex background={pallet.background} padding={padding}>
         <_DisplayFlex justify="center" align="center">
-          <Collection {...requirements.collection} pallet={requirements.pallet2} />
+          <Group {...requirements.group} pallet={pallet} />
         </_DisplayFlex>
       </_Flex>
     </_FiftyFifty>

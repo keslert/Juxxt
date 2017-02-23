@@ -5,9 +5,10 @@ import { connect } from 'react-redux';
 import Page from '../components/page';
 import { range } from 'lodash';
 
-import { variations as buttonVariations } from '../components/elements/button';
 import { randomItem } from '../core/utils';
 import { generate, init } from '../core/generator';
+
+// https://land-book.com/
 
 const _App = styled.div``
 
@@ -39,19 +40,21 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    setInterval(() => {
-      const { pages } = this.state;
-      this.setState({pages: [
-        this.generatePage(pages[0], 'shake'),
-        pages[1]
-      ]});
-    }, 3000);
+    // setInterval(() => {
+    //   const { pages } = this.state;
+    //   this.setState({pages: [
+    //     this.generatePage(pages[0], 'shake'),
+    //     pages[1]
+    //   ]});
+    // }, 3000);
 
     this.listener = new window.keypress.Listener();
-    this.listener.simple_combo('s', () => this.updatePages('shake')) //
-    this.listener.simple_combo('t', () => this.updatePages('stir')) //
-    this.listener.simple_combo('n', () => this.updatePages('nudge')) //
-    this.listener.simple_combo('left', () => null); // Go back
+    this.listener.simple_combo('s', () => this.updatePage(this.state.pages[1], 'shake')) //
+    this.listener.simple_combo('t', () => this.updatePage(this.state.pages[1], 'stir')) //
+    this.listener.simple_combo('n', () => this.updatePage(this.state.pages[1], 'nudge')) //
+
+    this.listener.simple_combo('right', () => this.updatePage(this.state.pages[1], 'shake')) //
+
   }
 
   generatePage(page, type) {
@@ -60,6 +63,14 @@ class App extends React.Component {
       type,
       this.props.selected
     );
+  }
+
+  updatePage(page, type) {
+    this.setState({
+      pages: this.state.pages.map(_page => 
+        _page.uuid !== page.uuid ? _page : this.generatePage(page, type)
+      )
+    })
   }
 
   updatePages(type) {

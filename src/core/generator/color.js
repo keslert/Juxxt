@@ -26,7 +26,7 @@ function primaryLight(theme) {
     primary: theme.primary,
     secondary: theme.secondary,
     text: theme.text,
-    highlightText: theme.dark,
+    textHighlight: theme.dark,
   }
 }
 
@@ -42,7 +42,7 @@ function primaryDark(theme) {
     primary: theme.primary,
     secondary: theme.light,
     text: theme.invertedText,
-    highlightText: theme.light,
+    textHighlight: theme.light,
     links: theme.light,
   }
 }

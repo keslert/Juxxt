@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Header from './header';
-import Footer from './footer';
-import Content from './content';
+import Header from './headers';
+import Footer from './footers';
+import Section from './sections';
 
 const _Page = styled.div`
   width: 1100px;
@@ -17,7 +17,9 @@ class Page extends React.Component {
     return (
       <_Page>
         <Header />
-        <Content sections={sections} />
+        {sections.map((section, i) => (
+          <Section {...section} key={i} />
+        ))}
         <Footer />
       </_Page>
     )

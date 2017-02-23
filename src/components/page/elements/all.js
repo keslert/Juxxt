@@ -1,5 +1,5 @@
 import Button, { requirements as buttonRequirements, params as buttonParams } from './button';
-import Header, { requirements as headerRequirements, params as headerParams } from './header';
+import Heading, { requirements as headingRequirements, params as headingParams } from './heading';
 import Icon, { requirements as iconRequirements, params as iconParams } from './icon';
 import Paragraph, { requirements as paragraphRequirements, params as paragraphParams } from './paragraph';
 
@@ -10,10 +10,10 @@ export default {
     requirements: buttonRequirements,
     params: buttonParams,
   },
-  Header: {
-    component: Header,
-    requirements: headerRequirements,
-    params: headerParams,
+  Heading: {
+    component: Heading,
+    requirements: headingRequirements,
+    params: headingParams,
   },
   Icon: {
     component: Icon,

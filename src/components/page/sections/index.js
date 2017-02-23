@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import layouts from './all';
-import { setSelected } from '../../core/interface';
+import sections from './all';
+import { setSelected } from '../../../core/interface';
 import { includes } from 'lodash';
 
-const _Layout = styled.div`
+const _Section = styled.div`
   position: relative;
   margin-top: -1px;
   &:after {
@@ -28,13 +28,13 @@ const _Layout = styled.div`
   }
 `
 
-const Layout = (props) => {
+const Section = (props) => {
   const { isSelected, setSelected, name, uuid } = props;
-  const Layout = layouts[name];
+  const Section = sections[name];
   return (
-    <_Layout onClick={() => setSelected([uuid])} selected={isSelected}>
-      <Layout.component {...props} />
-    </_Layout>
+    <_Section onClick={() => setSelected([uuid])} selected={isSelected}>
+      <Section.component {...props} />
+    </_Section>
   )
 }
 
@@ -42,4 +42,4 @@ const mapStateToProps = (state, props) => ({
   isSelected: includes(state.interface.selected, props.uuid),
 });
 const mapDispatchToProps = Object.assign({setSelected});
-export default connect(mapStateToProps, mapDispatchToProps)(Layout);
+export default connect(mapStateToProps, mapDispatchToProps)(Section);

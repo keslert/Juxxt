@@ -6,12 +6,10 @@ const _Header = styled.div`
   background: #F6F9FC;
 `
 
-const Header = ({
-
-}) => {
+const Header = (props) => {
   return (
     <_Header>
-
+      
     </_Header>
   )
 }

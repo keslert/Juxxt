@@ -3,15 +3,13 @@ import styled from 'styled-components';
 
 const _Footer = styled.div`
   height: 400px;
-  background: #F6F9FC;
+  background: #212140;
 `
 
-const Footer = ({
-
-}) => {
+const Footer = (props) => {
   return (
     <_Footer>
-
+      
     </_Footer>
   )
 }

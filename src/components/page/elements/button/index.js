@@ -86,9 +86,6 @@ const Button = ({
   
   return (
     <_Button {...finalProps} className="element">
-      <_Float direction={props.icon === 'Left' ? 'left' : 'right'}>
-        <Icon name="rocket" color={color} />
-      </_Float>
       {text}
     </_Button>
   )
@@ -111,22 +108,19 @@ export const requirements = {
   size: {
     options: ['Large', 'Medium', 'Small', 'Tiny'],
     default: 'Medium',
+    consistent: true,
   },
   icon: {
-    options: ['None', 'Left', 'Right'],
+    options: ['None'], //, 'Left', 'Right'],
   },
 }
 
 export const params = {
-  padding: { // What are the rules for good padding for buttons?
-    func: ({w, h}) => ({w, h: Math.min(w/2, w)})
-  },
-  boxShadow: {
-    optional: true,
-  },
-  width: {
-    optional: true
-  },
+  fontSize: 12,
+  padTB: 12,
+  padLR: 48,
+  boxShadow: true,
+  minWidth: true,
   background: true,
   color: true,
   textTransform: true,

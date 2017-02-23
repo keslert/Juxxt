@@ -1,15 +1,11 @@
-import layouts from '../../components/layouts/all';
-import collections from '../../components/collections/all';
-import elements from '../../components/elements/all';
+import sections from '../../components/page/sections/all';
+import groups from '../../components/page/groups/all';
+import elements from '../../components/page/elements/all';
 import { randomItem } from '../utils';
 import { keys, range, map, reduce, zipObject, isEmpty, includes } from 'lodash';
 import shortid from 'shortid';
 
 import { selectTheme, selectPallet } from './color';
-
-
-
-
 
 export function init() {
   const _sections = range(0, 3).map(() => shortid.generate());
@@ -30,7 +26,7 @@ export function init() {
 
 let history = {}
 let memory = {};
-export function generate(page, modification, selected) {
+export function generate(page, modifications, selected) {
   memory = {};
   const theme = selectTheme();
 
@@ -39,7 +35,7 @@ export function generate(page, modification, selected) {
     theme,
     sections: page.sections.map(section => {
       if(includes(selected, section.uuid)) {
-        return generateSection(section, theme, modification);
+        return generateSection(section, theme, modifications);
       }
       return section;
     }),
@@ -51,34 +47,28 @@ export function generate(page, modification, selected) {
 }
 
 
-// A layout must request at least one color scheme;
-function generateSection(section, theme, modification) {
-  if(modification === 'nudge') {
+function generateSection(section, theme, modifications) {
+  if(modifications === 'nudge') {
     return {...section,
       pallet: selectPallet(theme),
       // Pick rest of params
     }
   }
 
-  if(modification === 'stir') {
 
-  }
-
-
-
-  const name = selectSection();
-  const _section = layouts[name];
+  const name = modifications === 'stir' ? section.name : selectSection();
+  const template = sections[name];
+  const _keys = keys(template.requirements);
   
-  const _keys = keys(_section.requirements);
   const requirements = zipObject(_keys, _keys.map(key => {
-    const req = _section.requirements[key];
-    if(req.type === 'Collection') {
-      return generateCollection(req.options);
-    } else if(req.type === 'pallet') {
-      return selectPallet(theme);
-    } else {
-      return randomItem(req.options);
-    }
+    const req = template.requirements[key];
+
+    if(req.type === 'Group') {
+      return modifications === 'stir'
+        ? generateGroup(section.requirements[key], [], modifications)
+        : generateGroup(null, req.options, modifications);
+    } 
+    return randomItem(req.options);
   }))
 
   return {
@@ -91,48 +81,62 @@ function generateSection(section, theme, modification) {
 }
 
 
-function generateCollection(options) {
-  const collectionName = selectCollection(options);
-  const collection = collections[collectionName];
+function generateGroup(group, options, modifications) {
+  if(modifications === 'nudge') {
+    return {...group
+      // Pick rest of params
+    };
+  }
 
-  const _keys = keys(collection.requirements);
+
+  const name = modifications === 'stir' ? group.name : selectGroup(options);
+  const template = groups[name];
+  const _keys = keys(template.requirements);
+  
   const requirements = zipObject(_keys, _keys.map(key => {
-    const req = collection.requirements[key];
+    const req = template.requirements[key];
     if(req.type === 'Element') {
-      return generateElement(req.options);
+      return modifications === 'stir'
+        ? generateElement(group.requirements[key], [], modifications)
+        : generateElement(null, req.options, modifications);
     } else {
       return randomItem(req.options);
     }
   }))
 
   return {
-    name: collectionName,
+    name,
     requirements,
     overrides: {},
   }
 }
 
-function generateElement(options) {
-  const elementName = selectElement(options);
-  const element = elements[elementName];
+function generateElement(element, options, modifications) {
+  if(modifications === 'nudge') {
+    return {...element,
+      // Pick rest of params
+    }
+  }
 
-  const _keys = keys(element.requirements);
+
+  const name = modifications === 'stir' ? element.name : selectElement(options);
+  const template = elements[name];
+
+  const _keys = keys(template.requirements);
   const requirements = zipObject(_keys, _keys.map(key => {
-    const req = element.requirements[key];
+    const req = template.requirements[key];
     if(req.consistent) {
       if(!memory[key]) {
-        memory[key] = randomItem(req.options);
+        memory[key] = modifications === 'stir' ? element.requirements[key] : randomItem(req.options);
       }
       return memory[key];
     }
-
-
 
     return randomItem(req.options);
   }))
 
   return {
-    name: elementName,
+    name,
     requirements,
     overrides: {},
   }
@@ -144,15 +148,15 @@ function selectElement(options) {
   return name;
 }
 
-function selectCollection(options) {
-  const _options = isEmpty(options) ? keys(collections) : options;
+function selectGroup(options) {
+  const _options = isEmpty(options) ? keys(groups) : options;
   const name = randomItem(_options);
   return name;
 }
 
 
 function selectSection() {
-  const name = randomItem(keys(layouts));
+  const name = randomItem(keys(sections));
   return name;
 }
 

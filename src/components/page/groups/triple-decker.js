@@ -19,15 +19,15 @@ const TripleDecker = ({
 }) => {
 
 
-  const color = requirements.head.name === 'Icon' ? pallet.primary : undefined;
+  const color = requirements.head.name === 'Icon' ? pallet.primary : pallet.textHighlight;
 
   return (
     <_Wrap>
       <_Margin>
-        <Element {...requirements.head} pallet={pallet} color={color} />
+        <Element {...requirements.head} color={color} />
       </_Margin>
       <_Margin>
-        <Element {...requirements.paragraph} pallet={pallet} />
+        <Element {...requirements.paragraph} color={pallet.text} />
       </_Margin>
       <Element {...requirements.foot} background={pallet.primary} color={'#fff'} />
     </_Wrap>
@@ -39,7 +39,7 @@ export default TripleDecker;
 export const requirements = {
   head: {
     type: 'Element',
-    options: ['Icon', 'Header'],
+    options: ['Icon', 'Heading'],
   },
   paragraph: {
     type: 'Element',
