@@ -26,15 +26,15 @@ const _Section = styled.div`
   `}
 `
 
-const BasicSection = ({requirements, pallet, overrides}) => {
+const BasicSection = ({requirements, palette, overrides}) => {
 
   const padding = `${params.padTB}px ${params.padLR}px`;
-  const background = pallet.background;
+  const background = palette.background;
   const props = { padding, background, ...overrides}
 
   return (
     <_Section {...props}>
-      <Group {...requirements.group} pallet={pallet} />
+      <Group {...requirements.group} palette={palette} />
     </_Section>
   )
 }

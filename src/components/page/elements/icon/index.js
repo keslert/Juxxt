@@ -1,35 +1,37 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
-const _Icon = styled.i`
-  color: ${props => props.color};
-  fontSize: ${props => props.fontSize};
+const _Icon = styled.span`
+  ${props => `
+    color: ${props.color};  
+    fontSize: ${props.fontSize};
+  `}
 `
 
 const Icon = ({
   color,
   fontSize,
   type = 'rocket',
-  pallet = {},
-  requirements,
   overrides,
-}) => (
-  <_Icon className={`fa fa-${type}`}
-    color={color || pallet.primary} fontSize={fontSize} />
-)
+  getGlobals,
+}) => {
+  const props = {
+    color,
+    fontSize: fontSize || 'inherit',
+  }
 
-Icon.propTypes = {
-  color: PropTypes.string,
-  fontSize: PropTypes.string,
+  return (
+    <_Icon {...props }>
+      <i className={`fa fa-${type}`}></i>
+    </_Icon>
+  )
 }
 
-
-export const requirements = {
-
-}
+export const requirements = {}
 
 export const params = {
-  
+  color: true,
+  fontSize: true,
 }
 
 export default Icon;

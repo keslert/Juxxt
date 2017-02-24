@@ -37,21 +37,21 @@ const _Flex = styled.div`
 const FiftyFifty = ({
   requirements, 
   overrides, 
-  pallet
+  palette
 }) => {
 
   const padding = `${params.padTB}px ${params.padLR}px`;
 
   return (
     <_FiftyFifty {...overrides}>
-      <_Flex background={pallet.background} padding={padding}>
+      <_Flex background={palette.background} padding={padding}>
         <_DisplayFlex justify="center" align="center">
-          <Group {...requirements.group} pallet={pallet} />
+          <Group {...requirements.group} palette={palette} />
         </_DisplayFlex>
       </_Flex>
-      <_Flex background={pallet.background} padding={padding}>
+      <_Flex background={palette.background} padding={padding}>
         <_DisplayFlex justify="center" align="center">
-          <Group {...requirements.group} pallet={pallet} />
+          <Group {...requirements.group} palette={palette} />
         </_DisplayFlex>
       </_Flex>
     </_FiftyFifty>

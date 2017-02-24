@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const _DisplayFlex = styled.div`
-  width: 100%;
   display: flex;
 
   ${ props => props.justify && `justify-content: ${props.justify}` }

@@ -1,62 +1,77 @@
-import sections from '../../components/page/sections/all';
-import groups from '../../components/page/groups/all';
-import elements from '../../components/page/elements/all';
+import sections from '../../components/page/sections/meta';
+import groups from '../../components/page/groups/meta';
+import elements from '../../components/page/elements/meta';
 import { randomItem } from '../utils';
-import { keys, range, map, reduce, zipObject, isEmpty, includes } from 'lodash';
+import { keys, range, map, reduce, zipObject, isEmpty, includes, pickBy } from 'lodash';
 import shortid from 'shortid';
 
-import { selectTheme, selectPallet } from './color';
+import { selectTheme, selectThemeVariation } from './color';
+
+
+
+const globals = {
+  theme: selectTheme(),
+  fonts: ['Montserrat'],
+  buttonStyle: randomItem(['Rounded', 'Round', 'Square', 'Shadow']),
+  heading: {
+    multiplier: 2.0,
+    weight: 'bold',
+    transform: 'none',
+  },
+  smallHeading: {
+    multipler: 1.2,
+    weight: 'bold',
+    transform: 'none',
+  },
+  fontSize: 14,
+}
+
 
 export function init() {
-  const _sections = range(0, 3).map(() => shortid.generate());
 
-  const page = generate({
+  const meta = {
     uuid: shortid.generate(),
-    sections: _sections.map(uuid => ({
-        uuid,
-    }))
-  }, 'shake', _sections);
+    sections: range(0, 5).map(_ => ({ uuid: shortid.generate() })),
+  }
 
+  const page = generate(meta, 'shake', map(meta.sections, 'uuid'));
   const page2 = {...page,
     uuid: shortid.generate(),
   }
   return [page, page2];
 }
 
-
 let history = {}
 let memory = {};
 export function generate(page, modifications, selected) {
   memory = {};
-  const theme = selectTheme();
+
+  const getGlobals = () => globals;
 
   const _page = {
     uuid: page.uuid,
-    theme,
-    sections: page.sections.map(section => {
+    globals,
+    sections: page.sections.map((section, index) => {
       if(includes(selected, section.uuid)) {
-        return generateSection(section, theme, modifications);
+        return generateSection({index, section, sections: page.sections, modifications, getGlobals});
       }
       return section;
     }),
   }
 
-
   pushHistory(_page);
   return _page;
 }
 
-
-function generateSection(section, theme, modifications) {
-  if(modifications === 'nudge') {
-    return {...section,
-      pallet: selectPallet(theme),
-      // Pick rest of params
+function generateSection(props) {
+  if(props.modifications === 'nudge') {
+    return {...props.section,
+      scheme: selectThemeVariation(),
     }
   }
 
 
-  const name = modifications === 'stir' ? section.name : selectSection();
+  const name = props.modifications === 'stir' ? props.section.name : selectSection(props);
   const template = sections[name];
   const _keys = keys(template.requirements);
   
@@ -64,41 +79,42 @@ function generateSection(section, theme, modifications) {
     const req = template.requirements[key];
 
     if(req.type === 'Group') {
-      return modifications === 'stir'
-        ? generateGroup(section.requirements[key], [], modifications)
-        : generateGroup(null, req.options, modifications);
+      return props.modifications === 'stir'
+        ? generateGroup({...props, group: props.section.requirements[key]})
+        : generateGroup({...props, options: req.options});
     } 
     return randomItem(req.options);
   }))
 
   return {
-    uuid: section.uuid,
+    uuid: props.section.uuid,
     name,
     requirements,
-    pallet: selectPallet(theme),
+    getGlobals: props.getGlobals,
+    themeVariation: props.modifications === 'stir' ? props.section.sectionTheme : selectThemeVariation(),
     overrides: {},
   }
 }
 
 
-function generateGroup(group, options, modifications) {
-  if(modifications === 'nudge') {
-    return {...group
+function generateGroup(props) {
+  if(props.modifications === 'nudge') {
+    return {...props.group
       // Pick rest of params
     };
   }
 
 
-  const name = modifications === 'stir' ? group.name : selectGroup(options);
+  const name = props.modifications === 'stir' ? props.group.name : selectGroup(props);
   const template = groups[name];
   const _keys = keys(template.requirements);
   
   const requirements = zipObject(_keys, _keys.map(key => {
     const req = template.requirements[key];
     if(req.type === 'Element') {
-      return modifications === 'stir'
-        ? generateElement(group.requirements[key], [], modifications)
-        : generateElement(null, req.options, modifications);
+      return props.modifications === 'stir'
+        ? generateElement({...props, element: props.group.requirements[key]})
+        : generateElement({...props, options: req.options});
     } else {
       return randomItem(req.options);
     }
@@ -107,19 +123,20 @@ function generateGroup(group, options, modifications) {
   return {
     name,
     requirements,
+    getGlobals: props.getGlobals,
     overrides: {},
   }
 }
 
-function generateElement(element, options, modifications) {
-  if(modifications === 'nudge') {
-    return {...element,
+function generateElement(props) {
+  if(props.modifications === 'nudge') {
+    return {...props.element,
       // Pick rest of params
     }
   }
 
 
-  const name = modifications === 'stir' ? element.name : selectElement(options);
+  const name = props.modifications === 'stir' ? props.element.name : selectElement(props);
   const template = elements[name];
 
   const _keys = keys(template.requirements);
@@ -127,7 +144,7 @@ function generateElement(element, options, modifications) {
     const req = template.requirements[key];
     if(req.consistent) {
       if(!memory[key]) {
-        memory[key] = modifications === 'stir' ? element.requirements[key] : randomItem(req.options);
+        memory[key] = props.modifications === 'stir' ? props.element.requirements[key] : randomItem(req.options);
       }
       return memory[key];
     }
@@ -138,25 +155,38 @@ function generateElement(element, options, modifications) {
   return {
     name,
     requirements,
+    getGlobals: props.getGlobals,
     overrides: {},
   }
 }
 
 
-function selectElement(options) {
-  const name = randomItem(options);
+function selectElement(props) {
+  const name = randomItem(props.options);
   return name;
 }
 
-function selectGroup(options) {
-  const _options = isEmpty(options) ? keys(groups) : options;
+
+const _genericGroups = pickBy(groups, group => !group.special);
+function selectGroup(props) {
+  const _options = isEmpty(props.options) ? keys(_genericGroups) : props.options;
   const name = randomItem(_options);
   return name;
 }
 
 
-function selectSection() {
-  const name = randomItem(keys(sections));
+function selectSection(props) {
+  const _sections = pickBy(sections, section => {
+    if(props.index === 0) {
+      return section.header;
+    }
+    if(props.index === (props.sections.length - 1)) {
+      return section.footer;
+    }
+    return !section.footer && !section.header;
+  })
+
+  const name = randomItem(keys(_sections));
   return name;
 }
 

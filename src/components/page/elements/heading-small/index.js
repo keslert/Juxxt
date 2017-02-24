@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
-const _Heading = styled.div`
+const _SmallHeading = styled.div`
   ${props => `
     font-size: ${props.fontSize}px;
     font-weight: ${props.fontWeight};
@@ -10,8 +10,8 @@ const _Heading = styled.div`
   `};
 `
 
-const Heading = ({
-  text = 'Heading',
+const SmallHeading = ({
+  text = 'SmallHeading',
   color,
   textTransform,
   fontWeight,
@@ -23,19 +23,19 @@ const Heading = ({
   const globals = getGlobals();
 
   const props = { 
-    fontSize: fontSize || globals.fontSize * globals.heading.multiplier, 
-    fontWeight: fontWeight || globals.heading.fontWeight,
-    textTransform: textTransform || globals.heading.textTransform,
+    fontSize: fontSize || globals.fontSize * globals.smallHeading.multiplier, 
+    fontWeight: fontWeight || globals.smallHeading.fontWeight,
+    textTransform: textTransform || globals.smallHeading.textTransform,
     color,
     ...overrides
   }
 
   return (
-    <_Heading {...props}>{text}</_Heading>
+    <_SmallHeading {...props}>{text}</_SmallHeading>
   )
 }
 
-export default Heading;
+export default SmallHeading;
 
 export const requirements = {
   // none

@@ -9,13 +9,13 @@ const _Wrap = styled.div`
 const HeadingSubheading = ({
   requirements,
   overrides,
-  pallet,
+  palette,
 }) => {
 
   return (
     <_Wrap>
-      <Element {...requirements.heading} color={pallet.textHighlight} />
-      <Element {...requirements.subheading} color={pallet.text} />
+      <Element {...requirements.heading} color={palette.textHighlight} />
+      <Element {...requirements.subheading} color={palette.text} />
     </_Wrap>
   )
 }

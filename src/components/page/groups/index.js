@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import groups from './all';
+import groups from './meta';
 
 const Group = (props) => {
   const Group = groups[props.name]

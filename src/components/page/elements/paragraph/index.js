@@ -2,19 +2,28 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
 const _Paragraph = styled.p`
-  color: ${props => props.color};
-  ${props => props.fontSize && `font-size: ${props.fontSize}`};
+  ${props => `
+    color: ${props.color};
+    font-size: ${props.fontSize};  
+  `}
+  
 `
 
 const Paragraph = ({
-  text = "",
+  text,
   color,
   fontSize,
-  requirements,
   overrides,
+  getGlobals,
 }) => {
 
-  const props = { color, fontSize, ...overrides };
+  const globals = getGlobals();
+
+  const props = {
+    color,
+    fontSize: fontSize || globals.fontSize, 
+    ...overrides
+  };
 
   return (
     <_Paragraph {...props}>
@@ -23,12 +32,11 @@ const Paragraph = ({
   )
 }
 
-export const requirements = {
-
-}
+export const requirements = {}
 
 export const params = {
-
+  color: true,
+  fontSize: true,
 }
 
 export default Paragraph;

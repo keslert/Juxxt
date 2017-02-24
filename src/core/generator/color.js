@@ -16,9 +16,21 @@ export function selectTheme() {
   return stripe;
 }
 
-export function selectPallet(theme) {
-  return randomItem([primaryLight, primaryDark, secondaryLight])(theme);
+export function selectThemeVariation() {
+  return {
+    luminosity: randomItem(['light', 'dark']),
+    variation: 0,
+  }
 }
+
+export function generatePalette(theme, scheme) {
+  if(scheme.luminosity === 'light') {
+    return primaryLight(theme);
+  } else {
+    return primaryDark(theme);
+  }
+}
+
 
 function primaryLight(theme) {
   return {

@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Header from './headers';
-import Footer from './footers';
 import Section from './sections';
 
 const _Page = styled.div`
@@ -10,17 +8,16 @@ const _Page = styled.div`
 `
 
 class Page extends React.Component {
+  
   render() {
 
-    const { header, footer, sections } = this.props;
+    const { globals, sections } = this.props;
 
     return (
       <_Page>
-        <Header />
         {sections.map((section, i) => (
-          <Section {...section} key={i} />
+          <Section key={i} {...section} globals={globals} />
         ))}
-        <Footer />
       </_Page>
     )
   }

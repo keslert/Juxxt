@@ -15,11 +15,11 @@ const _Margin = styled.div`
 const TripleDecker = ({
   requirements,
   overrides,
-  pallet,
+  palette,
 }) => {
 
 
-  const color = requirements.head.name === 'Icon' ? pallet.primary : pallet.textHighlight;
+  const color = requirements.head.name === 'Icon' ? palette.primary : palette.textHighlight;
 
   return (
     <_Wrap>
@@ -27,9 +27,9 @@ const TripleDecker = ({
         <Element {...requirements.head} color={color} />
       </_Margin>
       <_Margin>
-        <Element {...requirements.paragraph} color={pallet.text} />
+        <Element {...requirements.paragraph} color={palette.text} />
       </_Margin>
-      <Element {...requirements.foot} background={pallet.primary} color={'#fff'} />
+      <Element {...requirements.foot} background={palette.primary} color={'#fff'} />
     </_Wrap>
   )
 }
