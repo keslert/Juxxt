@@ -2,6 +2,13 @@ import * as types from './action-types';
 
 const InterfaceState = () => ({
   selected: [],
+  modifications: {
+    structure: true,
+    layout: true,
+    palette: true,
+    content: false,
+    globals: false,
+  },
 });
 
 export function interfaceReducer(state = InterfaceState(), {payload, type}) {
@@ -10,6 +17,7 @@ export function interfaceReducer(state = InterfaceState(), {payload, type}) {
       return Object.assign({}, state, {
         selected: payload,
       });
+    
 
     default: 
       return state;

@@ -2,60 +2,55 @@ import sections from '../../components/page/sections/meta';
 import groups from '../../components/page/groups/meta';
 import elements from '../../components/page/elements/meta';
 import { randomItem } from '../utils';
-import { keys, range, map, reduce, zipObject, isEmpty, includes, pickBy } from 'lodash';
+import { keys, range, map, reduce, mapValues, isEmpty, includes, pickBy } from 'lodash';
 import shortid from 'shortid';
 
-import { selectTheme, selectThemeVariation } from './color';
+import { selectSchema } from './colors';
+import { selectGlobals } from './globals';
 
-
-
-const globals = {
-  theme: selectTheme(),
-  fonts: ['Montserrat'],
-  buttonStyle: randomItem(['Rounded', 'Round', 'Square', 'Shadow']),
-  heading: {
-    multiplier: 2.0,
-    weight: 'bold',
-    transform: 'none',
-  },
-  smallHeading: {
-    multipler: 1.2,
-    weight: 'bold',
-    transform: 'none',
-  },
-  fontSize: 14,
-}
 
 
 export function init() {
-
   const meta = {
     uuid: shortid.generate(),
     sections: range(0, 5).map(_ => ({ uuid: shortid.generate() })),
   }
 
-  const page = generate(meta, 'shake', map(meta.sections, 'uuid'));
+  const modify = {
+    structure: true,
+    layout: true,
+    palette: true,
+    globals: true,
+  }
+
+  const page = generate(meta, modify, map(meta.sections, 'uuid'));
   const page2 = {...page,
     uuid: shortid.generate(),
   }
+
   return [page, page2];
 }
 
-let history = {}
-let memory = {};
-export function generate(page, modifications, selected) {
-  memory = {};
 
-  const getGlobals = () => globals;
+let _cache = {};
+export function generate(page, modify, selected) {
+  _cache = {};
+
+  const globals = selectGlobals(page, modify);
 
   const _page = {
     uuid: page.uuid,
     globals,
     sections: page.sections.map((section, index) => {
-      if(includes(selected, section.uuid)) {
-        return generateSection({index, section, sections: page.sections, modifications, getGlobals});
-      }
-      return section;
+      return generateSection({
+        getGlobals: () => globals, 
+        index, 
+        modify,
+        modifiable: includes(selected, section.uuid),
+        section, 
+        sections: page.sections,
+        selected,
+      });
     }),
   }
 
@@ -64,100 +59,118 @@ export function generate(page, modifications, selected) {
 }
 
 function generateSection(props) {
-  if(props.modifications === 'nudge') {
-    return {...props.section,
-      scheme: selectThemeVariation(),
-    }
+
+  const { modifiable, modify } = props;
+
+  const _section = {
+    uuid: shortid.generate(),
+    ...props.section,
+    getGlobals: props.getGlobals
+  };
+
+  if(modifiable && modify.palette) {
+    _section.schema = selectSchema(props.section);
   }
 
+  if(modifiable && modify.structure) {
+    _section.name = selectSection(props);
+  }
 
-  const name = props.modifications === 'stir' ? props.section.name : selectSection(props);
-  const template = sections[name];
-  const _keys = keys(template.requirements);
+  const template = sections[_section.name];
   
-  const requirements = zipObject(_keys, _keys.map(key => {
-    const req = template.requirements[key];
-
+  _section.requirements = mapValues(template.requirements, (req, key) => {
     if(req.type === 'Group') {
-      return props.modifications === 'stir'
-        ? generateGroup({...props, group: props.section.requirements[key]})
-        : generateGroup({...props, options: req.options});
-    } 
-    return randomItem(req.options);
-  }))
+      const group = (_section.requirements && _section.requirements[key]) || {};
+      return generateGroup({...props, 
+        options: req.options,
+        group,
+        modifiable: modifiable || includes(props.selected, group.uuid),
+      })
+    }
 
-  return {
-    uuid: props.section.uuid,
-    name,
-    requirements,
-    getGlobals: props.getGlobals,
-    themeVariation: props.modifications === 'stir' ? props.section.sectionTheme : selectThemeVariation(),
-    overrides: {},
-  }
+    if(modifiable && modify.layout) {
+      return randomItem(req.options);
+    }
+
+    return _section.requirements[key]; // By default we return the old requirement;
+  })
+
+  return _section;
 }
 
 
 function generateGroup(props) {
-  if(props.modifications === 'nudge') {
-    return {...props.group
-      // Pick rest of params
-    };
+
+  const { modifiable, modify } = props;
+
+  const _group = {
+    uuid: shortid.generate(),
+    ...props.group,
+    getGlobals: props.getGlobals,
   }
 
+  if(modifiable && modify.palette) {
+    // not sure...
+  }
 
-  const name = props.modifications === 'stir' ? props.group.name : selectGroup(props);
-  const template = groups[name];
-  const _keys = keys(template.requirements);
+  if(modifiable && modify.structure) {
+    _group.name = selectGroup(props);
+  }
+
+  const template = groups[_group.name];
   
-  const requirements = zipObject(_keys, _keys.map(key => {
-    const req = template.requirements[key];
+  _group.requirements = mapValues(template.requirements, (req, key) => {
     if(req.type === 'Element') {
-      return props.modifications === 'stir'
-        ? generateElement({...props, element: props.group.requirements[key]})
-        : generateElement({...props, options: req.options});
-    } else {
+      const element = (_group.requirements && _group.requirements[key]) || {};
+      return generateElement({...props,
+        element,
+        options: req.options,
+        modifiable: modifiable || includes(props.selected, element.uuid),
+      })
+    }
+
+    if(modifiable && modify.layout) {
       return randomItem(req.options);
     }
-  }))
 
-  return {
-    name,
-    requirements,
-    getGlobals: props.getGlobals,
-    overrides: {},
-  }
+    return _group.requirements[key]; 
+  })
+
+  return _group;
 }
 
 function generateElement(props) {
-  if(props.modifications === 'nudge') {
-    return {...props.element,
-      // Pick rest of params
-    }
+
+  const { modifiable, modify } = props;
+  const _element = {
+    uuid: shortid.generate(),
+    overrides: {},
+    ...props.element,
+    getGlobals: props.getGlobals,
   }
 
+  if(modifiable && modify.palette) {
+    // not sure....
+  }
 
-  const name = props.modifications === 'stir' ? props.element.name : selectElement(props);
-  const template = elements[name];
+  if(modifiable && modify.structure) {
+    _element.name = selectElement(props);
+  }
 
-  const _keys = keys(template.requirements);
-  const requirements = zipObject(_keys, _keys.map(key => {
-    const req = template.requirements[key];
+  const template = elements[_element.name];
+
+  const requirements = mapValues(template.requirements, (req, key) => {
     if(req.consistent) {
-      if(!memory[key]) {
-        memory[key] = props.modifications === 'stir' ? props.element.requirements[key] : randomItem(req.options);
+      if(!_cache[key]) {
+        _cache[key] = props.modify === 'stir' ? props.element.requirements[key] : randomItem(req.options);
       }
-      return memory[key];
+      return _cache[key];
     }
 
     return randomItem(req.options);
-  }))
+  })
 
-  return {
-    name,
-    requirements,
-    getGlobals: props.getGlobals,
-    overrides: {},
-  }
+  return _element;
 }
 
 
@@ -190,6 +203,7 @@ function selectSection(props) {
   return name;
 }
 
+let history = {}
 function pushHistory(page) {
   if(!history[page.uuid]) {
     history[page.uuid] = [];

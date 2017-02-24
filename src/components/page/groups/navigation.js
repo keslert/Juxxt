@@ -16,7 +16,7 @@ const _ProductNavigation = styled.div`
 
 const _Logo = styled.div`
   margin-right: 20px;
-  height: 60px;
+  width: 150px;
 `
 
 const _Link = styled.div`
@@ -36,7 +36,7 @@ const ProductNavigation = ({
   return (
     <_ProductNavigation {...props} >
       <_Logo>
-        <LogoSVG color={palette.primary} />
+        <LogoSVG color={palette.textHighlight} />
       </_Logo>
       <_DisplayFlex align="center" flex="1">
         <_DisplayFlex flex="1" justify={requirements.justify}>
@@ -44,7 +44,7 @@ const ProductNavigation = ({
             <_Link key={i}>Link {i}</_Link>
           ))}
         </_DisplayFlex>
-        <Element {...requirements.button} background={palette.primary} color={'#fff'} text="Sign Up" fontSize={12} padLR={24} />
+        <Element {...requirements.button} background={palette.primary} color={'#fff'} text="Sign Up" buttonStyle="Round" fontSize={12} padLR={24} />
       </_DisplayFlex>
     </_ProductNavigation>
   )

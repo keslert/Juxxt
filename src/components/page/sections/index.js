@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import sections from './meta';
 import { setSelected } from '../../../core/interface';
 import { includes } from 'lodash';
-import { generatePalette } from '../../../core/generator/color';
+import { generatePalette } from '../../../core/generator/colors';
 
 
 const fade = keyframes`
@@ -15,7 +15,7 @@ const fade = keyframes`
     opacity: 1;
   }
   100% {
-    opacity: 0;
+    opacity: 0.0;
   }
 `
 
@@ -36,7 +36,7 @@ const _Section = styled.div`
       border-right: 8px solid tomato;
       pointer-events: none;
       animation: ${fade} 1s;
-      opacity: 0;
+      opacity: 0.0;
     }
   `}
   &:hover:after {
@@ -57,7 +57,7 @@ const Section = (props) => {
   const { isSelected, setSelected, name, uuid } = props;
   
   const globals = props.getGlobals();
-  const palette = generatePalette(globals.theme, props.themeVariation);
+  const palette = generatePalette(globals.colors, props.schema);
   const Section = sections[name];
   return (
     <_Section onClick={() => setSelected([uuid])} selected={isSelected}>

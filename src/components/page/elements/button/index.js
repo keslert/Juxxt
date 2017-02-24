@@ -16,6 +16,7 @@ const _Button = styled.span`
     text-transform: ${props.textTransform};
     box-shadow: ${props.boxShadow};
     display: ${props.block ? 'block' : 'inline-block'};
+    borderBottom: ${props.borderBottom};
 
     ${props.width && `width: ${props.width}px;`};
   `};
@@ -25,7 +26,7 @@ const _Button = styled.span`
 `
 
 const getBorderRadius = (type, height) => {
-  if(type === 'Rounded' || type === 'Shadow') {
+  if(type === 'Rounded' || type === 'Raised') {
     return height / 6;
   } else if(type === 'Round') {
     return height / 2;
@@ -34,7 +35,7 @@ const getBorderRadius = (type, height) => {
 }
 
 const getBorderBottom = (type, background) => {
-  if(type === 'Shadow') {
+  if(type === 'Raised') {
     return `4px solid ${tinycolor(background).darken(20).toString()}`;
   }
   return 'none';
@@ -44,6 +45,7 @@ const Button = ({
   text = "Button",
   background,
   boxShadow,
+  buttonStyle,
   color,
   fontSize,
   minWidth,
@@ -55,13 +57,14 @@ const Button = ({
 
   const globals = getGlobals();
 
+  const _buttonStyle = buttonStyle || globals.buttonStyle;
   const _fontSize = fontSize || globals.fontSize;
   const _padTB = overrides.padTB || padTB || _fontSize;
   const _padLR = overrides.padLR || padLR || _fontSize * 4;
   const padding = `${_padTB}px ${_padLR}px`;
 
-  const borderBottom = getBorderBottom(globals.buttonStyle, background);
-  const borderRadius = getBorderRadius(globals.buttonStyle, _padTB * 2 + _fontSize);
+  const borderBottom = getBorderBottom(_buttonStyle, background);
+  const borderRadius = getBorderRadius(_buttonStyle, _padTB * 2 + _fontSize);
 
   const props = { 
     background,
@@ -108,4 +111,5 @@ export const params = {
   background: true,
   color: true,
   textTransform: true,
+  buttonStyle: ['Round', 'Rounded', 'Square', 'Raised']
 }

@@ -21,7 +21,8 @@ const Header = ({
 }) => {
 
   const props = {
-    background: `linear-gradient(to left, ${palette.background} , ${tinycolor(palette.background).darken(5).toString()})`,
+    // background: 'url(https://unsplash.it/1100/600?image=964)',
+    background: `linear-gradient(to left, ${palette.background} , ${tinycolor(palette.background).darken(7).toString()})`,
     margin,
     ...overrides,
   }

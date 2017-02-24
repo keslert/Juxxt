@@ -49,11 +49,13 @@ class App extends React.Component {
     // }, 3000);
 
     this.listener = new window.keypress.Listener();
-    this.listener.simple_combo('s', () => this.updatePage(this.state.pages[1], 'shake')) //
-    this.listener.simple_combo('t', () => this.updatePage(this.state.pages[1], 'stir')) //
-    this.listener.simple_combo('n', () => this.updatePage(this.state.pages[1], 'nudge')) //
+    this.listener.simple_combo('s', () => this.updatePage(this.state.pages[1], {structure: true}));
+    this.listener.simple_combo('l', () => this.updatePage(this.state.pages[1], {layout: true}));
+    this.listener.simple_combo('p', () => this.updatePage(this.state.pages[1], {palette: true}));
+    this.listener.simple_combo('c', () => this.updatePage(this.state.pages[1], {content: true}));
+    this.listener.simple_combo('g', () => this.updatePage(this.state.pages[1], {globals: true}));
 
-    this.listener.simple_combo('right', () => this.updatePage(this.state.pages[1], 'shake')) //
+    this.listener.simple_combo('right', () => this.updatePage(this.state.pages[1], {}));
 
   }
 
