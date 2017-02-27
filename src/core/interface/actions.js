@@ -8,3 +8,10 @@ export function setSelected(selected) {
     payload: selected
   };
 }
+
+export function setShiftDown(isDown) {
+  return {
+    type: types.SET_SHIFT_DOWN,
+    payload: isDown,
+  }
+}

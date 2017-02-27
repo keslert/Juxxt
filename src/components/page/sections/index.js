@@ -1,55 +1,37 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import sections from './meta';
 import { setSelected } from '../../../core/interface';
 import { includes } from 'lodash';
 import { generatePalette } from '../../../core/generator/colors';
+import { fade } from '../../common/styled-animations';
 
 
-const fade = keyframes`
-  0% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.0;
-  }
+
+const after = `
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0px;
+  right: 0px;
+  bottom: 0;
+  background: rgba(122,122,122,0.1);
+  border: 2px dashed rgb(122,122,122);
+  box-sizing: border-box;
+  pointer-events: none;
 `
-
-
 
 const _Section = styled.div`
   position: relative;
   margin-top: -1px;
   ${props => props.selected && `
     &:after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -8px;
-      right: -8px;
-      bottom: 0;
-      border-left: 8px solid tomato;
-      border-right: 8px solid tomato;
-      pointer-events: none;
-      animation: ${fade} 1s;
-      opacity: 0.0;
+      ${after}
     }
   `}
   &:hover:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -8px;
-    right: -8px;
-    bottom: 0;
-    border-left: 8px solid tomato;
-    border-right: 8px solid tomato;
-    pointer-events: none;
-    opacity: 1;
+    ${after}
   }
 `
 
@@ -60,14 +42,14 @@ const Section = (props) => {
   const palette = generatePalette(globals.colors, props.schema);
   const Section = sections[name];
   return (
-    <_Section onClick={() => setSelected([uuid])} selected={isSelected}>
+    <_Section onClick={() => setSelected(uuid)} selected={isSelected}>
       <Section.component {...props} margin="0 20px" palette={palette} />
     </_Section>
   )
 }
 
 const mapStateToProps = (state, props) => ({
-  isSelected: includes(state.interface.selected, props.uuid),
+  isSelected: state.interface.shiftDown && includes(state.interface.selected, props.uuid),
 });
 
 const mapDispatchToProps = Object.assign({setSelected});

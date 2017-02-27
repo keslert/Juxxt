@@ -1,1 +1,2 @@
 export const SET_SELECTED = 'SET_SELECTED';
+export const SET_SHIFT_DOWN = 'SET_SHIFT_DOWN';

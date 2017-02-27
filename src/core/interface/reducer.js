@@ -9,14 +9,20 @@ const InterfaceState = () => ({
     content: false,
     globals: false,
   },
+  shiftDown: false,
 });
 
 export function interfaceReducer(state = InterfaceState(), {payload, type}) {
   switch (type) {
     case types.SET_SELECTED:
       return Object.assign({}, state, {
-        selected: payload,
+        selected: state.shiftDown ? [...state.selected, payload] : [payload],
       });
+
+    case types.SET_SHIFT_DOWN:
+      return Object.assign({}, state, {
+        shiftDown: payload,
+      })
     
 
     default: 
