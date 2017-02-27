@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
 const _SmallHeading = styled.div`
+  user-select: none;
+  cursor: default;
   ${props => `
     font-size: ${props.fontSize}px;
     font-weight: ${props.fontWeight};

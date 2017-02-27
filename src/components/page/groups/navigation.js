@@ -41,7 +41,9 @@ const ProductNavigation = ({
       <_DisplayFlex align="center" flex="1">
         <_DisplayFlex flex="1" justify={requirements.justify}>
           {range(0, requirements.items).map(i => (
-            <_Link key={i}>Link {i}</_Link>
+            <_Link key={i}>
+              <Element {...requirements.link} />
+            </_Link>
           ))}
         </_DisplayFlex>
         <Element {...requirements.button} background={palette.primary} color={'#fff'} text="Sign Up" buttonStyle="Round" fontSize={12} padLR={24} />
@@ -59,6 +61,10 @@ export const requirements = {
   button: {
     type: 'Element',
     options: ['Button'],
+  },
+  link: {
+    type: 'Element',
+    options: ['Link'],
   },
   justify: {
     options: ['flex-end', 'flex-start'],

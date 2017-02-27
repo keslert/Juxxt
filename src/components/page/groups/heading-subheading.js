@@ -14,8 +14,12 @@ const HeadingSubheading = ({
 
   return (
     <_Wrap>
-      <Element {...requirements.heading} color={palette.textHighlight} />
-      <Element {...requirements.subheading} color={palette.text} />
+      <div>
+        <Element {...requirements.heading} color={palette.textHighlight} />
+      </div>
+      <div>
+        <Element {...requirements.subheading} color={palette.text} />
+      </div>
     </_Wrap>
   )
 }

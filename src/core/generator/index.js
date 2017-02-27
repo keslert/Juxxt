@@ -2,7 +2,7 @@ import sections from '../../components/page/sections/meta';
 import groups from '../../components/page/groups/meta';
 import elements from '../../components/page/elements/meta';
 import { randomItem } from '../utils';
-import { keys, range, map, reduce, mapValues, isEmpty, includes, pickBy } from 'lodash';
+import { keys, range, map, reduce, mapValues, isEmpty, includes, pickBy, random } from 'lodash';
 import shortid from 'shortid';
 
 import { selectSchema } from './colors';
@@ -13,13 +13,16 @@ import { selectGlobals } from './globals';
 export function init() {
   const meta = {
     uuid: shortid.generate(),
-    sections: range(0, 5).map(_ => ({ uuid: shortid.generate() })),
+    sections: range(0, 7).map(_ => ({ 
+      uuid: shortid.generate(),
+      schema: randomItem(range(0, 3)),
+    })),
   }
 
   const modify = {
     structure: true,
     layout: true,
-    palette: true,
+    palette: false,
     globals: true,
   }
 
@@ -69,7 +72,7 @@ function generateSection(props) {
   };
 
   if(modifiable && modify.palette) {
-    _section.schema = selectSchema(props.section);
+    _section.schema += random(1, props.selected.length);
   }
 
   if(modifiable && modify.structure) {

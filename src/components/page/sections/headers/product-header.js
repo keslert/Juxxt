@@ -58,5 +58,7 @@ export const requirements = {
 }
 
 export const params = {
-
+  background: true,
+  padTB: true,
+  padLR: true,
 }

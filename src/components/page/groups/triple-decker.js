@@ -20,11 +20,12 @@ const TripleDecker = ({
 
 
   const color = requirements.head.name === 'Icon' ? palette.primary : palette.textHighlight;
+  const fontSize = requirements.head.name === 'Icon' ? 50 : undefined;
 
   return (
     <_Wrap>
       <_Margin>
-        <Element {...requirements.head} color={color} />
+        <Element {...requirements.head} color={color} fontSize={fontSize} />
       </_Margin>
       <_Margin>
         <Element {...requirements.paragraph} color={palette.text} />

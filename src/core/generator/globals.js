@@ -5,18 +5,19 @@ import { selectColors } from './colors';
 function generateGlobals() {
   return {
     colors: selectColors(),
-    fonts: ['Montserrat'],
+    
     buttonStyle: randomItem(['Rounded', 'Round', 'Square', 'Raised']),
     heading: {
       multiplier: 2.0,
       weight: 'bold',
-      transform: 'none',
+      transform: randomItem(['none', 'uppercase']),
     },
     smallHeading: {
       multipler: 1.2,
       weight: 'bold',
-      transform: 'none',
+      transform: randomItem(['none', 'uppercase']),
     },
+    font: randomItem(['Montserrat', 'Roboto', 'Lato']),
     fontSize: 14,
   }
 }

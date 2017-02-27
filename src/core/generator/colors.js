@@ -1,60 +1,103 @@
 import { randomItem } from '../utils';
+import { filter, includes } from 'lodash';
 
 export function selectColors() {
   const stripe = {
     primary: '#3ECF8E',
     secondary: '#6772e5',
-    tertiary: '#F6A4EB',
     text: '#6b7c93',
-    invertedText: '#c4f0ff',
+    textOnDark: '#c4f0ff',
     dark: '#32325D',
     offDark: '#43458B',
     light: '#fff',
     offLight: '#F6F9FC',
   }
 
-  return stripe;
-}
-
-export function selectSchema() {
-  return {
-    luminosity: randomItem(['light', 'dark']),
-    variation: 0,
+  const scale = {
+    primary: '#FD87F1',
+    secondary: '#FCB357',
+    text: '6C6C6C',
+    textOnDark: 'rgba(255,255,255,0.7)',
+    dark: '#250f23',
+    offDark: '#331631',
+    light: '#fff',
+    offLight: '#F5F5F7',
   }
+
+  return randomItem([stripe, scale]);
 }
 
 export function generatePalette(colors, schema) {
-  if(schema.luminosity === 'light') {
-    return primaryLight(colors);
-  } else {
-    return primaryDark(colors);
-  }
+  const lights = lightBackgrounds(colors);
+  const darks = darkBackgrounds(colors);
+  const backgrounds = [...lights, ...darks];
+  
+  const background = backgrounds[schema % backgrounds.length];
+  const isLight = includes(lights, background);
+
+  return isLight
+    ? generateLightPalette(colors, background)
+    : generateDarkPalette(colors, background);
 }
 
-
-function primaryLight(colors) {
+function generateLightPalette(colors, background) {
   return {
-    background: colors.light,
+    background,
     primary: colors.primary,
     secondary: colors.secondary,
     text: colors.text,
     textHighlight: colors.dark,
+    buttonColors: buttonColorsOnLight(colors, background),
   }
 }
 
-function secondaryLight(colors) {
-  return Object.assign({
-    background: colors.offLight,
-  }, primaryLight(colors))
-}
-
-function primaryDark(colors) {
+function generateDarkPalette(colors, background) {
   return {
-    background: colors.dark,
+    background,
     primary: colors.primary,
-    secondary: colors.light,
-    text: colors.invertedText,
+    secondary: colors.secondary,
+    text: colors.textOnDark,
     textHighlight: colors.light,
-    links: colors.light,
+    buttonColors: buttonColorsOnDark(colors, background),
   }
+}
+
+
+function darkBackgrounds(colors) {
+  return [
+    colors.dark,
+    colors.offDark,
+    colors.primary,
+    colors.secondary,
+  ];
+}
+
+function lightBackgrounds(colors) {
+  return [
+    colors.light,
+    colors.offLight,
+  ];
+}
+
+function buttonColorsOnDark(colors, background) {
+  return filter([
+    {background: colors.primary, color: colors.light},
+    {background: colors.light, color: background},
+    {background: colors.light, color: colors.dark},
+    {background: colors.secondary, color: colors.light},
+    {background: colors.dark, color: colors.light},
+    {background: colors.offDark, color: colors.light},
+    {background: 'transparent', color: colors.light},
+    {background: 'transparent', color: colors.light, border: `2px solid ${colors.light}`},
+  ], c => c.background !== background);
+}
+
+function buttonColorsOnLight(colors, background) {
+  return [
+    {background: colors.primary, color: colors.light},
+    {background: colors.secondary, color: colors.light},
+    {background: colors.dark, color: colors.light},
+    {background: 'transparent', color: colors.primary, border: `2px solid ${colors.primary}`},
+    {background: 'transparent', color: colors.primary},
+  ]
 }

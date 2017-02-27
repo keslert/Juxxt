@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
 const _Paragraph = styled.p`
+  user-select: none;
+  cursor: default;
   ${props => `
     color: ${props.color};
     font-size: ${props.fontSize};  

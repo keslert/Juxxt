@@ -7,6 +7,7 @@ import { range } from 'lodash';
 
 import { randomItem } from '../core/utils';
 import { generate, init } from '../core/generator';
+import { setShiftDown } from '../core/interface';
 
 // https://land-book.com/
 
@@ -55,7 +56,13 @@ class App extends React.Component {
     this.listener.simple_combo('c', () => this.updatePage(this.state.pages[1], {content: true}));
     this.listener.simple_combo('g', () => this.updatePage(this.state.pages[1], {globals: true}));
 
-    this.listener.simple_combo('right', () => this.updatePage(this.state.pages[1], {}));
+    this.listener.simple_combo('right', () => this.updatePage(this.state.pages[1], this.props.modifications));
+
+    this.listener.register_combo({
+      keys: "shift",
+      on_keydown: () => this.props.setShiftDown(true),
+      on_keyup: () => this.props.setShiftDown(false),
+    })
 
   }
 
@@ -105,5 +112,7 @@ class App extends React.Component {
 
 const mapStateToProps = state => ({
   selected: state.interface.selected,
+  modifications: state.interface.modifications,
 })
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = Object.assign({setShiftDown});
+export default connect(mapStateToProps, mapDispatchToProps)(App);
