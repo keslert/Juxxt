@@ -42,7 +42,7 @@ const ProductNavigation = ({
         <_DisplayFlex flex="1" justify={requirements.justify}>
           {range(0, requirements.items).map(i => (
             <_Link key={i}>
-              <Element {...requirements.link} />
+              <Element {...requirements.link} uuid={requirements.link.uuid + i} />
             </_Link>
           ))}
         </_DisplayFlex>

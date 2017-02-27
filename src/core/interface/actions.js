@@ -15,3 +15,17 @@ export function setShiftDown(isDown) {
     payload: isDown,
   }
 }
+
+export function onHoverableMouseEnter(item) {
+  return {
+    type: types.ON_HOVERABLE_MOUSE_ENTER,
+    payload: item,
+  }
+}
+
+export function onHoverableMouseLeave(item) {
+  return {
+    type: types.ON_HOVERABLE_MOUSE_LEAVE,
+    payload: item,
+  }
+}
