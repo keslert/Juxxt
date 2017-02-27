@@ -15,9 +15,10 @@ const Icon = ({
   overrides,
   getGlobals,
 }) => {
+  
   const props = {
     color,
-    fontSize: fontSize || 'inherit',
+    fontSize: fontSize ? `${fontSize}px` : 'inherit',
   }
 
   return (
