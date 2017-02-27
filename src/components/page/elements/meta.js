@@ -3,6 +3,7 @@ import Heading, { requirements as headingRequirements, params as headingParams }
 import Icon, { requirements as iconRequirements, params as iconParams } from './icon';
 import Paragraph, { requirements as paragraphRequirements, params as paragraphParams } from './paragraph';
 import SmallHeading, { requirements as smallHeadingRequirements, params as smallHeadingParams } from './heading';
+import Link, { requirements as linkRequirements, params as linkParams } from './link';
 
 
 export default {
@@ -30,5 +31,10 @@ export default {
     component: Paragraph,
     requirements: paragraphRequirements,
     params: paragraphParams,
+  },
+  Link: {
+    component: Link,
+    requirements: linkRequirements,
+    params: linkParams,
   },
 }
