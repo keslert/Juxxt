@@ -13,10 +13,10 @@ const _Element = styled.span`
     &:after {
       content: '';
       position: absolute;
-      top: -5px;
-      left: -5px;
-      right: -5px;
-      bottom: -5px;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
       background: rgba(122,122,122,0.1);
       border: 2px dashed rgb(122,122,122);
       box-sizing: border-box;

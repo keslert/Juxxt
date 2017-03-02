@@ -12,10 +12,10 @@ const _Group = styled.div`
     &:after {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
       background: rgba(122,122,122,0.1);
       border: 2px dashed rgb(122,122,122);
       box-sizing: border-box;

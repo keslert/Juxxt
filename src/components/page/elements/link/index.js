@@ -6,15 +6,17 @@ const _Link = styled.p`
   cursor: pointer;
   ${props => `
     color: ${props.color};
-    font-size: ${props.fontSize};  
+    font-size: ${props.fontSize};
+    ${props.margin && `margin: ${props.margin};`};
+    ${props.padding && `padding: ${props.padding};`};
   `}
 `
 
 const Link = ({
   text,
   color,
-  fontSize,
   overrides,
+  userOverrides,
   getGlobals,
 }) => {
 
@@ -22,8 +24,9 @@ const Link = ({
 
   const props = {
     color,
-    fontSize: fontSize || globals.fontSize, 
-    ...overrides
+    fontSize: globals.fontSize, 
+    ...overrides,
+    ...userOverrides
   };
 
   return (

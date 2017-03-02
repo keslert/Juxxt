@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
+import { getSafeFromObjects } from '../../../../core/utils';
 
 const _Heading = styled.div`
   user-select: none;
@@ -9,27 +10,30 @@ const _Heading = styled.div`
     font-weight: ${props.fontWeight};
     text-transform: ${props.textTransform};
     color: ${props.color};
+    margin: ${props.margin};
+    ${props.padding && `padding: ${props.padding};`};
+    
   `};
 `
 
 const Heading = ({
   text = 'Heading',
   color,
-  textTransform,
-  fontWeight,
-  fontSize,
   overrides,
+  userOverrides,
   getGlobals,
 }) => {
 
   const globals = getGlobals();
 
   const props = { 
-    fontSize: getFontSize({fontSize, overrides}, globals), 
-    fontWeight: fontWeight || globals.heading.fontWeight,
-    textTransform: textTransform || globals.heading.textTransform,
+    fontSize: getFontSize({overrides, userOverrides}, globals),
+    fontWeight: globals.heading.fontWeight,
+    textTransform: globals.heading.textTransform,
+    margin: globals.heading.margin,
     color,
-    ...overrides
+    ...overrides,
+    ...userOverrides,
   }
 
   return (
@@ -39,9 +43,7 @@ const Heading = ({
 
 export default Heading;
 
-export const requirements = {
-  // none
-}
+export const requirements = {}
 
 export const params = {
   color: true,
@@ -51,7 +53,6 @@ export const params = {
 }
 
 export function getFontSize(props, globals) {
-  return props.overrides.fontSize || 
-         props.fontSize ||
-         (globals || props.getGlobals()).heading.fontSize;
+  const fontSize = getSafeFromObjects([props.userOverrides, props.overrides], 'fontSize', null)
+  return fontSize || (globals || props.getGlobals()).heading.fontSize;
 }

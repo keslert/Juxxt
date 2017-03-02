@@ -19,7 +19,7 @@ const _Section = styled.div`
       right: 0px;
       bottom: 0;
       background: rgba(122,122,122,0.1);
-      border: 2px dashed rgb(122,122,122);
+      border: 3px dashed rgb(122,122,122);
       box-sizing: border-box;
       pointer-events: none;
       animation: ${fadeIn} 0.3s;

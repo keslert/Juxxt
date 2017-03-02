@@ -1,36 +1,30 @@
 import React, { PropTypes } from 'react';
-import styled from 'styled-components';
 import Element from '../elements';
-
-const _Wrap = styled.div`
-  ${props => `
-    text-align: ${props.textAlign};
-    padding: ${props.padding};
-  `}
-`
+import { _Block } from '../../common/styled-base';
 
 const HeadingParagraph = ({
-  padding,
-  margin,
   requirements,
-  overrides,
+  sectionOverrides,
+  userOverrides,
   palette,
 }) => {
+  
   const props = {
-    padding, margin,
+    maxWidth: 600,
     textAlign: requirements.alignment,
-    ...overrides,
+    ...sectionOverrides,
+    ...userOverrides,
   }
 
   return (
-    <_Wrap {...props}>
+    <_Block {...props}>
       <div>
         <Element {...requirements.heading} color={palette.textHighlight} />
       </div>
       <div>
         <Element {...requirements.paragraph} color={palette.text} />
       </div>
-    </_Wrap>
+    </_Block>
   )
 }
 export default HeadingParagraph;
@@ -52,4 +46,5 @@ export const requirements = {
 
 export const params = {
   textAlign: true,
+  maxWidth: true,
 };

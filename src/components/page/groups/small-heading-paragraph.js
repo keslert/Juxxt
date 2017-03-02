@@ -1,19 +1,13 @@
 import React, { PropTypes } from 'react';
 import Element from '../elements';
-import { getFontSize } from '../elements/heading';
 import { _Block } from '../../common/styled-base';
 
-
-
-const HeadingSubheading = ({
+const SmallHeadingParagraph = ({
   requirements,
   sectionOverrides,
   userOverrides,
   palette,
 }) => {
-
-  const fontSize = getFontSize(requirements.heading);
-
   const props = {
     textAlign: requirements.alignment,
     ...sectionOverrides,
@@ -26,30 +20,31 @@ const HeadingSubheading = ({
         <Element {...requirements.heading} color={palette.textHighlight} />
       </div>
       <div>
-        <Element {...requirements.subheading} color={palette.text} overrides={{fontSize: fontSize * 0.75}} />
+        <Element {...requirements.paragraph} color={palette.text} />
       </div>
     </_Block>
   )
 }
-export default HeadingSubheading;
+export default SmallHeadingParagraph;
 
 
 export const requirements = {
   heading: {
     type: 'Element',
-    options: ['Heading'],
+    options: ['SmallHeading'],
   },
-  subheading: {
+  paragraph: {
     type: 'Element',
-    options: ['Heading'],
+    options: ['Paragraph'],
   },
   alignment: {
-    options: ['center'],
+    options: ['left', 'center'],
   }
 }
 
 export const params = {
   textAlign: true,
+  maxWidth: true,
   margin: true,
   padding: true,
 };

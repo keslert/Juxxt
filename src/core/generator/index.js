@@ -86,12 +86,13 @@ function generateSection(props) {
       const group = (_section.requirements && _section.requirements[key]) || {};
       return generateGroup({...props, 
         options: req.options,
+        restrictions: req.restrictions || {},
         group,
         modifiable: modifiable || includes(props.selected, group.uuid),
       })
     }
 
-    if(modifiable && modify.layout) {
+    if(modifiable && modify.layout || !_section.requirements || !_section.requirements[key]) {
       return randomItem(req.options);
     }
 
@@ -123,17 +124,20 @@ function generateGroup(props) {
   const template = groups[_group.name];
   
   _group.requirements = mapValues(template.requirements, (req, key) => {
+
+    const restrictions = props.restrictions[key];
+
     if(req.type === 'Element') {
       const element = (_group.requirements && _group.requirements[key]) || {};
       return generateElement({...props,
         element,
-        options: req.options,
+        options: restrictions || req.options,
         modifiable: modifiable || includes(props.selected, element.uuid),
       })
     }
 
-    if(modifiable && modify.layout) {
-      return randomItem(req.options);
+    if(modifiable && modify.layout || !props.group || props.group.name !== _group.name) {
+      return randomItem(restrictions || req.options);
     }
 
     return _group.requirements[key]; 
@@ -147,7 +151,7 @@ function generateElement(props) {
   const { modifiable, modify } = props;
   const _element = {
     uuid: shortid.generate(),
-    overrides: {},
+    userOverrides: {},
     ...props.element,
     getGlobals: props.getGlobals,
   }

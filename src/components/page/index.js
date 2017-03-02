@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Section from './sections';
 
 const _Page = styled.div`
-  width: 1100px;
+  width: 1170px;
 `
 
 class Page extends React.Component {

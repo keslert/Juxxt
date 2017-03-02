@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import tinycolor from 'tinycolor2';
+import { getSafeFromObjects } from '../../../../core/utils';
 
 const _Button = styled.span`
-  margin-top: -2px;
   box-sizing: border-box;
   cursor: pointer;
   text-align: center;
@@ -18,6 +18,7 @@ const _Button = styled.span`
     display: ${props.block ? 'block' : 'inline-block'};
     borderBottom: ${props.borderBottom};
 
+    ${props.margin && `margin: ${props.margin};`};
     ${props.width && `width: ${props.width}px;`};
   `};
   &:hover {
@@ -44,38 +45,26 @@ const getBorderBottom = (type, background) => {
 const Button = ({
   text = "Button",
   background,
-  boxShadow,
-  buttonStyle,
   color,
-  fontSize,
-  minWidth,
-  padTB,
-  padLR,
   overrides,
+  userOverrides,
   getGlobals,
 }) => {
 
   const globals = getGlobals();
 
-  const _buttonStyle = buttonStyle || globals.buttonStyle;
-  const _fontSize = fontSize || globals.fontSize;
-  const _padTB = overrides.padTB || padTB || _fontSize;
-  const _padLR = overrides.padLR || padLR || _fontSize * 4;
-  const padding = `${_padTB}px ${_padLR}px`;
-
-  const borderBottom = getBorderBottom(_buttonStyle, background);
-  const borderRadius = getBorderRadius(_buttonStyle, _padTB * 2 + _fontSize);
-
+  const buttonStyle = getSafeFromObjects([userOverrides, overrides], 'buttonStyle', globals.buttonStyle);
+  const fontSize = getSafeFromObjects([userOverrides, overrides], 'fontSize', globals.fontSize);
+  
   const props = { 
     background,
-    borderBottom,
-    borderRadius,
-    boxShadow,
+    borderBottom: getBorderBottom(buttonStyle, background),
+    borderRadius: getBorderRadius(buttonStyle, fontSize * 2),
     color,
-    fontSize: _fontSize, 
-    minWidth,
-    padding,
+    fontSize, 
+    padding: `${fontSize}px ${fontSize * 4}px`,
     ...overrides,
+    ...userOverrides,
   };
 
   
@@ -92,9 +81,8 @@ Button.propTypes = {
   color: PropTypes.string,
   fontSize: PropTypes.number,
   minWidth: PropTypes.number,
-  padTB: PropTypes.number,
-  padLR: PropTypes.number,
-  overrides: PropTypes.object,
+  padding: PropTypes.string,
+  userOverrides: PropTypes.object,
   getGlobals: PropTypes.func,
 }
 
@@ -104,8 +92,7 @@ export const requirements = {}
 
 export const params = {
   fontSize: true,
-  padTB: true,
-  padLR: true,
+  padding: true,
   boxShadow: true,
   minWidth: true,
   background: true,

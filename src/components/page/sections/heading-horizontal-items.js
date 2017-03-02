@@ -1,17 +1,58 @@
 import React from 'react';
 import styled from 'styled-components';
-import { _Flex, _DisplayFlex } from '../../common/styled-flex';
+import { _Flex, _DisplayFlex } from '../../common/styled-base';
 import Group from '../groups';
 import { range } from 'lodash';
+import SectionContainer from './section-container';
+
+
+const HeadingHorizontalItems = ({
+  palette, 
+  requirements, 
+  userOverrides,
+  getGlobals,
+}) => {
+
+
+  const globals = getGlobals();
+  const props = {
+    padding: globals.sectionPadding, 
+    background: palette.background,
+    justify: "center",
+    align: "center",
+    ...userOverrides
+  }
+
+  return (
+    <_DisplayFlex {...props}>
+      <SectionContainer {...{getGlobals, userOverrides}}>
+        <Group {...requirements.heading} palette={palette} sectionOverrides={{margin: '0 0 60px 0'}} />
+        <_DisplayFlex>
+          {range(0, requirements.items).map(i => (
+            <_Flex key={i}>
+              <Group {...requirements.item} palette={palette} sectionOverrides={{padding: '0 20px'}} />
+            </_Flex>
+          ))}
+        </_DisplayFlex>
+      </SectionContainer>
+    </_DisplayFlex>
+  )
+}
+
+export default HeadingHorizontalItems;
 
 export const requirements = {
   heading: {
     type: 'Group',
-    options: ['HeadingParagraph', 'HeadingSubheading', 'IconHeadingParagraph'],
+    options: ['HeadingParagraph', 'IconHeadingParagraph'],
+    restrictions: {
+      alignment: ['center'],
+      iconPosition: ['top'],
+    }
   },
   item: {
     type: 'Group',
-    options: ['HeadingParagraph']
+    options: ['SmallHeadingParagraph']
   },
   items: {
     options: [3,4]
@@ -22,36 +63,3 @@ export const params = {
   padding: true,
   background: true,
 }
-
-const _Section = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  ${props => `
-    background: ${props.background};
-    padding: ${props.padding};
-  `}
-`
-
-const HeadingHorizontalItems = ({requirements, palette, overrides}) => {
-
-  const padding = '40px';
-  const background = palette.background;
-  const props = { padding, background, ...overrides}
-
-  return (
-    <_Section {...props}>
-      <Group {...requirements.heading} palette={palette} margin="0 0 20px 0" />
-      <_DisplayFlex>
-        {range(0, requirements.items).map(i => (
-          <_Flex key={i}>
-            <Group {...requirements.item} palette={palette} padding="0 20px" />
-          </_Flex>
-        ))}
-      </_DisplayFlex>
-    </_Section>
-  )
-}
-
-export default HeadingHorizontalItems;

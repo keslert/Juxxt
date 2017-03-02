@@ -1,67 +1,68 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import Element from '../elements';
-import { _Flex, _DisplayFlex } from '../../common/styled-flex';
+import { _Flex, _DisplayFlex, _Block } from '../../common/styled-base';
 import { getFontSize } from '../elements/heading';
 
-const _Wrap = styled.div`
-  ${props => `
-    text-align: ${props.textAlign};
-    padding: ${props.padding || "0"};
-    flex-direction: ${props.direction};
-  `}
-`
+
 
 const IconHeadingParagraph = ({
   requirements,
-  overrides,
+  sectionOverrides,
+  userOverrides,
   palette,
 }) => {
   const props = {
+    maxWidth: 600,
     textAlign: requirements.alignment,
-    ...overrides,
+    ...sectionOverrides,
+    ...userOverrides,
   }
 
   if(requirements.iconPosition === 'left-heading') {
     return (
-      <_Wrap {...props} textAlign="left">
+      <_Block {...props} textAlign="left">
         <_DisplayFlex>
           <Element 
             {...requirements.icon} 
             color={palette.primary} 
-            fontSize={getFontSize(requirements.heading)} 
-            margin="0 10px 0 0"
+            overrides={{
+              fontSize: getFontSize(requirements.heading),
+              margin: "0 10px 0 0",
+            }}
             />
           <_Flex>
             <Element {...requirements.heading} color={palette.textHighlight} />
           </_Flex>
         </_DisplayFlex>
         <Element {...requirements.paragraph} color={palette.text} />
-      </_Wrap>
+      </_Block>
     )
   }
 
   if(requirements.iconPosition === 'left-column') {
     return (
-      <_Wrap {...props} textAlign="left">
+      <_Block {...props} textAlign="left">
         <_DisplayFlex>
           <Element 
             {...requirements.icon} 
             color={palette.primary} 
-            fontSize={getFontSize(requirements.heading)} 
-            margin="0 15px 0 0"
+            overrides={{
+              fontSize: getFontSize(requirements.heading),
+              margin: "0 15px 0 0",
+            }}
             />
           <_Flex>
             <div><Element {...requirements.heading} color={palette.textHighlight} /></div>
             <div><Element {...requirements.paragraph} color={palette.text} /></div>
           </_Flex>
         </_DisplayFlex>
-      </_Wrap>
+      </_Block>
     )
   }
 
   return (
-    <_Wrap {...props}>
+    <_Block {...props}>
       <div>
         <Element {...requirements.icon} color={palette.primary} />
       </div>
@@ -71,7 +72,7 @@ const IconHeadingParagraph = ({
       <div>
         <Element {...requirements.paragraph} color={palette.text} />
       </div>
-    </_Wrap>
+    </_Block>
   )
 }
 export default IconHeadingParagraph;
@@ -101,4 +102,5 @@ export const requirements = {
 export const params = {
   textAlign: true,
   padding: true,
+  margin: true,
 };

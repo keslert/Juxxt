@@ -2,9 +2,9 @@ import Button, { requirements as buttonRequirements, params as buttonParams } fr
 import Heading, { requirements as headingRequirements, params as headingParams } from './heading';
 import Icon, { requirements as iconRequirements, params as iconParams } from './icon';
 import Paragraph, { requirements as paragraphRequirements, params as paragraphParams } from './paragraph';
-import SmallHeading, { requirements as smallHeadingRequirements, params as smallHeadingParams } from './heading';
+import SmallHeading, { requirements as smallHeadingRequirements, params as smallHeadingParams } from './small-heading';
 import Link, { requirements as linkRequirements, params as linkParams } from './link';
-
+import Image, { requirements as imageRequirements, params as imageParams } from './image';
 
 export default {
   Button: {
@@ -37,4 +37,9 @@ export default {
     requirements: linkRequirements,
     params: linkParams,
   },
+  Image: {
+    component: Image,
+    requirements: imageRequirements,
+    params: imageParams,
+  }
 }

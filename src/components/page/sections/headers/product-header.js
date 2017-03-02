@@ -2,33 +2,25 @@ import React from 'react';
 import styled from 'styled-components';
 import Group from '../../groups';
 import tinycolor from 'tinycolor2';
-import { _DisplayFlex } from '../../../common/styled-flex';
+import { _DisplayFlex } from '../../../common/styled-base';
 
-const _Header = styled.div`
-  display: flex;
-  height: 600px;
-  ${props => `
-    background: ${props.background};
-    padding: ${props.margin};
-  `}
-`
+
 
 const Header = ({
-  margin,
   palette,
   requirements,
-  overrides,
+  userOverrides,
+  getGlobals,
 }) => {
 
   const props = {
-    // background: 'url(https://unsplash.it/1100/600?image=964)',
     background: `linear-gradient(to left, ${palette.background} , ${tinycolor(palette.background).darken(7).toString()})`,
-    margin,
-    ...overrides,
+    padding: '10px 40px 70px',
+    ...userOverrides,
   }
 
   return (
-    <_Header {...props}>
+    <_DisplayFlex {...props} style={{minHeight: '600px'}}>
       <_DisplayFlex direction="column" flex="1">
         <Group {...requirements.navigation} palette={palette} />
 
@@ -36,7 +28,7 @@ const Header = ({
           <Group {...requirements.intro} palette={palette} />
         </_DisplayFlex>
       </_DisplayFlex>
-    </_Header>
+    </_DisplayFlex>
   )
 }
 
@@ -54,11 +46,9 @@ export const requirements = {
   align: {
     options: ['flex-start', 'center', 'flex-end']
   }
-
 }
 
 export const params = {
   background: true,
-  padTB: true,
-  padLR: true,
+  padding: true,
 }

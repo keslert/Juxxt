@@ -1,7 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
-import { _Flex, _DisplayFlex } from '../../common/styled-flex';
+import { _Flex, _DisplayFlex } from '../../common/styled-base';
 import Group from '../groups';
+import SectionContainer from './section-container';
+
+const BasicSection = ({
+  requirements, 
+  palette, 
+  userOverrides,
+  getGlobals,
+}) => {
+  const globals = getGlobals();
+  const props = { 
+    justify: 'center',
+    padding: globals.sectionPadding, 
+    background: palette.background, 
+    ...userOverrides
+  }
+
+  return (
+    <_DisplayFlex {...props}>
+      <SectionContainer {...{getGlobals, userOverrides}}>
+        <Group {...requirements.group} palette={palette} />
+      </SectionContainer>
+    </_DisplayFlex>
+  )
+}
+export default BasicSection;
 
 export const requirements = {
   group: {
@@ -11,31 +36,6 @@ export const requirements = {
 }
 
 export const params = {
-  padTB: 40,
-  padLR: 20,
-  background: undefined,
+  padding: true,
+  background: true,
 }
-
-const _Section = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  ${props => `
-    background: ${props.background};
-    padding: ${props.padding};
-  `}
-`
-
-const BasicSection = ({requirements, palette, overrides}) => {
-
-  const padding = `${params.padTB}px ${params.padLR}px`;
-  const background = palette.background;
-  const props = { padding, background, ...overrides}
-
-  return (
-    <_Section {...props}>
-      <Group {...requirements.group} palette={palette} />
-    </_Section>
-  )
-}
-export default BasicSection;

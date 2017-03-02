@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import LogoSVG from '../../common/svg/logo';
 import Element from '../elements';
-import { _DisplayFlex } from '../../common/styled-flex';
+import { _DisplayFlex } from '../../common/styled-base';
 import { range } from 'lodash';
 
 
@@ -25,13 +25,13 @@ const _Link = styled.div`
 
 const ProductNavigation = ({
   requirements,
-  overrides,
+  userOverrides,
   palette,
 }) => {
 
   const color = palette.text;
 
-  const props = { color, ...overrides };
+  const props = { color, ...userOverrides };
 
   return (
     <_ProductNavigation {...props} >
@@ -41,12 +41,20 @@ const ProductNavigation = ({
       <_DisplayFlex align="center" flex="1">
         <_DisplayFlex flex="1" justify={requirements.justify}>
           {range(0, requirements.items).map(i => (
-            <_Link key={i}>
-              <Element {...requirements.link} uuid={requirements.link.uuid + i} />
-            </_Link>
+            <Element key={i} {...requirements.link} overrides={{margin: "0 10px 0 0"}} />
           ))}
         </_DisplayFlex>
-        <Element {...requirements.button} background={palette.primary} color={'#fff'} text="Sign Up" buttonStyle="Round" fontSize={12} padLR={24} />
+        <Element 
+          {...requirements.button} 
+          background={palette.primary} 
+          color={'#fff'} 
+          text='Sign Up'
+          overrides={{
+            buttonStyle: 'Round',
+            fontSize: 12, 
+            padding: '12px 24px'
+          }} 
+          />
       </_DisplayFlex>
     </_ProductNavigation>
   )

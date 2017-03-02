@@ -11,14 +11,18 @@ function generateGlobals() {
     iconSize: 64,
     heading: {
       fontSize: 36,
-      weight: 'bold',
-      transform: randomItem(['none', 'uppercase']),
+      fontWeight: randomItem(['bold', 'normal', 'lighter']),
+      textTransform: randomItem(['none', 'uppercase']),
+      margin: "0 0 10px",
     },
     smallHeading: {
       fontSize: 16,
-      weight: 'bold',
-      transform: randomItem(['none', 'uppercase']),
+      fontWeight: 'bold',
+      textTransform: randomItem(['none', 'uppercase']),
+      margin: "0 0 5px",
     },
+    maxPageWidth: 960,
+    sectionPadding: "80px 10px",
   }
 }
 

@@ -1,18 +1,17 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
-const _Icon = styled.span`
+const _Image = styled.span`
   ${props => `
-    color: ${props.color};  
-    fontSize: ${props.fontSize}px;
-    height: ${props.fontSize}px;
+    ${props.height && `height: ${props.height};`}
+    ${props.width && `width: ${props.width};`}
+    ${props.padding && `padding: ${props.padding};`}
     ${props.margin && `margin: ${props.margin};`}
   `}
 `
 
-const Icon = ({
-  color,
-  type = 'rocket',
+const Image = ({
+  src,
   overrides,
   userOverrides,
   getGlobals,
@@ -21,24 +20,24 @@ const Icon = ({
   const globals = getGlobals();
 
   const props = {
-    color,
-    fontSize: globals.iconSize,
     ...overrides,
     ...userOverrides,
   }
 
   return (
-    <_Icon {...props }>
-      <i className={`fa fa-${type}`}></i>
-    </_Icon>
+    <_Image {...props }>
+      <img src={src} />
+    </_Image>
   )
 }
 
 export const requirements = {}
 
 export const params = {
-  color: true,
-  fontSize: true,
+  width: true,
+  height: true,
+  padding: true,
+  margin: true,
 }
 
-export default Icon;
+export default Image;

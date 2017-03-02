@@ -7,15 +7,16 @@ const _Paragraph = styled.p`
   ${props => `
     color: ${props.color};
     font-size: ${props.fontSize};  
+    ${props.margin && `margin: ${props.margin};`};
+    ${props.padding && `padding: ${props.padding};`};
   `}
-  
 `
 
 const Paragraph = ({
   text,
   color,
-  fontSize,
   overrides,
+  userOverrides,
   getGlobals,
 }) => {
 
@@ -23,8 +24,9 @@ const Paragraph = ({
 
   const props = {
     color,
-    fontSize: fontSize || globals.fontSize, 
-    ...overrides
+    fontSize: globals.fontSize, 
+    ...overrides,
+    ...userOverrides
   };
 
   return (

@@ -1,28 +1,32 @@
 import React from 'react';
-import styled from 'styled-components';
 import Group from '../../groups';
 
-const _CopyrightFooter = styled.div`
-  ${props => `
-    background: ${props.background};
-  `}
-`
+import { _DisplayFlex } from '../../../common/styled-base';
+import SectionContainer from '../section-container';
+
 
 const CopyrightFooter = ({
   palette,
   requirements,
-  overrides,
+  userOverrides,
+  getGlobals,
 }) => {
 
+  const globals = getGlobals();
+
   const props = {
+    padding: globals.sectionPadding,
+    justify: 'center',
     background: palette.background,
-    ...overrides,
+    ...userOverrides,
   }
 
   return (
-    <_CopyrightFooter {...props}>
-      <Group {...requirements.heading} palette={palette} />
-    </_CopyrightFooter>
+    <_DisplayFlex {...props}>
+      <SectionContainer {...{getGlobals, userOverrides}}>
+        <Group {...requirements.heading} palette={palette} />
+      </SectionContainer>
+    </_DisplayFlex>
   )
 }
 

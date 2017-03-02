@@ -1,17 +1,10 @@
-import TripleDecker, { requirements as tripleDeckerReqs, params as tripleDeckerParams } from './triple-decker';
 import HeadingSubheading, { requirements as headingSubheadingReqs, params as headingSubheadingParams } from './heading-subheading';
 import HeadingParagraph, { requirements as headingParagraphReqs, params as headingParagraphParams } from './heading-paragraph';
 import IconHeadingParagraph, { requirements as iconHeadingParagraphReqs, params as iconHeadingParagraphParams } from './icon-heading-paragraph';
-
+import SmallHeadingParagraph, { requirements as smallHeadingParagraphReqs, params as smallHeadingParagraphParams } from './small-heading-paragraph';
 import Navigation, { requirements as navigationReqs, params as navigationParams } from './navigation';
 
-
 export default {
-  // TripleDecker: {
-  //   component: TripleDecker,
-  //   requirements: tripleDeckerReqs,
-  //   params: tripleDeckerParams,
-  // },
   HeadingSubheading: {
     component: HeadingSubheading,
     requirements: headingSubheadingReqs,
@@ -27,6 +20,15 @@ export default {
     requirements: iconHeadingParagraphReqs,
     params: iconHeadingParagraphParams,
   },
+
+  SmallHeadingParagraph: {
+    component: SmallHeadingParagraph,
+    requirements: smallHeadingParagraphReqs,
+    params: smallHeadingParagraphParams,
+    special: true,
+  },
+
+
   Navigation: {
     component: Navigation,
     requirements: navigationReqs,

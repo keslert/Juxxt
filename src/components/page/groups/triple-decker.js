@@ -14,7 +14,7 @@ const _Margin = styled.div`
 
 const TripleDecker = ({
   requirements,
-  overrides,
+  userOverrides,
   palette,
 }) => {
 

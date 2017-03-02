@@ -27,7 +27,7 @@ const _PageWrapper = styled.div`
 
 const _Scale = styled.div`
   transform-origin: 0px 0px;
-  transform: scale(${ width/1100 });
+  transform: scale(${ width/1170 });
 `
 
 class App extends React.Component {
