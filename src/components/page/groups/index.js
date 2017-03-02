@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import groups from './meta';
 import { interfaceActions } from '../../../core/interface';
 import { includes, last } from 'lodash';
+import { fadeIn } from '../../common/styled-animations';
 
 const _Group = styled.div`
   position: relative;
@@ -19,6 +20,7 @@ const _Group = styled.div`
       border: 2px dashed rgb(122,122,122);
       box-sizing: border-box;
       pointer-events: none;
+      animation: ${fadeIn} 0.3s;
     }
   `}
 `

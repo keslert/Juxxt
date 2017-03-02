@@ -25,7 +25,7 @@ const Heading = ({
   const globals = getGlobals();
 
   const props = { 
-    fontSize: fontSize || globals.fontSize * globals.heading.multiplier, 
+    fontSize: getFontSize({fontSize, overrides}, globals), 
     fontWeight: fontWeight || globals.heading.fontWeight,
     textTransform: textTransform || globals.heading.textTransform,
     color,
@@ -48,4 +48,10 @@ export const params = {
   textTransform: true,
   fontWeight: true,
   fontSize: true,
+}
+
+export function getFontSize(props, globals) {
+  return props.overrides.fontSize || 
+         props.fontSize ||
+         (globals || props.getGlobals()).heading.fontSize;
 }

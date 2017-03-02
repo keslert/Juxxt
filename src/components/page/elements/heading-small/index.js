@@ -49,3 +49,9 @@ export const params = {
   fontWeight: true,
   fontSize: true,
 }
+
+export function getFontSize(props, globals) {
+  return props.overrides.fontSize || 
+         props.fontSize ||
+         (globals || props.getGlobals()).smallHeading.fontSize;
+}

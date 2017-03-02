@@ -49,7 +49,7 @@ export const requirements = {
   },
   intro: {
     type: 'Group',
-    options: ['TripleDecker'],
+    options: [],
   },
   align: {
     options: ['flex-start', 'center', 'flex-end']

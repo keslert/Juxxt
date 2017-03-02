@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { interfaceActions } from '../../../core/interface';
 import { includes, last } from 'lodash';
+import { fadeIn } from '../../common/styled-animations';
 
 const _Element = styled.span`
   position: relative;
@@ -20,6 +21,7 @@ const _Element = styled.span`
       border: 2px dashed rgb(122,122,122);
       box-sizing: border-box;
       pointer-events: none;
+      animation: ${fadeIn} 0.3s;
     }
   `}
 `

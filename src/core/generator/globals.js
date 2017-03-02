@@ -4,21 +4,21 @@ import { selectColors } from './colors';
 
 function generateGlobals() {
   return {
-    colors: selectColors(),
-    
     buttonStyle: randomItem(['Rounded', 'Round', 'Square', 'Raised']),
+    colors: selectColors(),
+    font: randomItem(['Montserrat', 'Roboto', 'Lato']),
+    fontSize: 14,
+    iconSize: 64,
     heading: {
-      multiplier: 2.0,
+      fontSize: 36,
       weight: 'bold',
       transform: randomItem(['none', 'uppercase']),
     },
     smallHeading: {
-      multipler: 1.2,
+      fontSize: 16,
       weight: 'bold',
       transform: randomItem(['none', 'uppercase']),
     },
-    font: randomItem(['Montserrat', 'Roboto', 'Lato']),
-    fontSize: 14,
   }
 }
 

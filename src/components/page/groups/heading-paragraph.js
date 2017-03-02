@@ -3,27 +3,37 @@ import styled from 'styled-components';
 import Element from '../elements';
 
 const _Wrap = styled.div`
-  text-align: center;
+  ${props => `
+    text-align: ${props.textAlign};
+    padding: ${props.padding};
+  `}
 `
 
-const HeadingSubheading = ({
+const HeadingParagraph = ({
+  padding,
+  margin,
   requirements,
   overrides,
   palette,
 }) => {
+  const props = {
+    padding, margin,
+    textAlign: requirements.alignment,
+    ...overrides,
+  }
 
   return (
-    <_Wrap>
+    <_Wrap {...props}>
       <div>
         <Element {...requirements.heading} color={palette.textHighlight} />
       </div>
       <div>
-        <Element {...requirements.subheading} color={palette.text} fontSize={28} />
+        <Element {...requirements.paragraph} color={palette.text} />
       </div>
     </_Wrap>
   )
 }
-export default HeadingSubheading;
+export default HeadingParagraph;
 
 
 export const requirements = {
@@ -31,12 +41,15 @@ export const requirements = {
     type: 'Element',
     options: ['Heading'],
   },
-  subheading: {
+  paragraph: {
     type: 'Element',
-    options: ['Heading'],
+    options: ['Paragraph'],
   },
+  alignment: {
+    options: ['left', 'center'],
+  }
 }
 
 export const params = {
-  textAlign: 'center',
+  textAlign: true,
 };

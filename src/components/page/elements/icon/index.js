@@ -4,21 +4,28 @@ import styled from 'styled-components';
 const _Icon = styled.span`
   ${props => `
     color: ${props.color};  
-    fontSize: ${props.fontSize};
+    fontSize: ${props.fontSize}px;
+    height: ${props.fontSize}px;
+    margin: ${props.margin};
   `}
 `
 
 const Icon = ({
   color,
   fontSize,
+  margin,
   type = 'rocket',
   overrides,
   getGlobals,
 }) => {
   
+  const globals = getGlobals();
+
   const props = {
+    margin,
     color,
-    fontSize: fontSize ? `${fontSize}px` : 'inherit',
+    fontSize: fontSize || globals.iconSize, 
+    ...overrides,
   }
 
   return (

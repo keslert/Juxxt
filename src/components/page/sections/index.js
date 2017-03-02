@@ -5,6 +5,7 @@ import sections from './meta';
 import { interfaceActions } from '../../../core/interface';
 import { includes, last } from 'lodash';
 import { generatePalette } from '../../../core/generator/colors';
+import { fadeIn } from '../../common/styled-animations';
 
 const _Section = styled.div`
   position: relative;
@@ -21,6 +22,7 @@ const _Section = styled.div`
       border: 2px dashed rgb(122,122,122);
       box-sizing: border-box;
       pointer-events: none;
+      animation: ${fadeIn} 0.3s;
     }
   `}
 `
