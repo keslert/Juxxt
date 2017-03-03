@@ -27,7 +27,7 @@ const _PageWrapper = styled.div`
 
 const _Scale = styled.div`
   transform-origin: 0px 0px;
-  transform: scale(${ width/1170 });
+  transform: scale(${ width/1360 });
 `
 
 class App extends React.Component {
@@ -35,36 +35,35 @@ class App extends React.Component {
   constructor() {
     super();
 
+    const pages = init();
     this.state = {
-      pages: init(),
+      master: pages[0],
+      bot: pages[1],
     }
   }
 
   componentDidMount() {
     // setInterval(() => {
-    //   const { pages } = this.state;
-    //   this.setState({pages: [
-    //     this.generatePage(pages[0], 'shake'),
-    //     pages[1]
-    //   ]});
+    //   this.updateBot(this.props.modifications);
     // }, 3000);
 
     this.listener = new window.keypress.Listener();
-    this.listener.simple_combo('s', () => this.updatePage(this.state.pages[1], {structure: true}));
-    this.listener.simple_combo('l', () => this.updatePage(this.state.pages[1], {layout: true}));
-    this.listener.simple_combo('p', () => this.updatePage(this.state.pages[1], {palette: true}));
-    this.listener.simple_combo('c', () => this.updatePage(this.state.pages[1], {content: true}));
-    this.listener.simple_combo('g', () => this.updatePage(this.state.pages[1], {globals: true}));
+    this.listener.simple_combo('s', () => this.updateMaster({structure: true}));
+    this.listener.simple_combo('l', () => this.updateMaster({layout: true}));
+    this.listener.simple_combo('p', () => this.updateMaster({palette: true}));
+    this.listener.simple_combo('c', () => this.updateMaster({content: true}));
+    this.listener.simple_combo('g', () => this.updateMaster({globals: true}));
 
-    this.listener.simple_combo('right', () => this.updatePage(this.state.pages[1], this.props.modifications));
+    this.listener.simple_combo('right', () => this.updateMaster(this.props.modifications));
 
     this.listener.register_combo({
       keys: "shift",
       on_keydown: () => this.props.setShiftDown(true),
       on_keyup: () => this.props.setShiftDown(false),
     })
-
   }
+
+
 
   generatePage(page, type) {
     return generate(
@@ -74,30 +73,25 @@ class App extends React.Component {
     );
   }
 
-  updatePage(page, type) {
-    this.setState({
-      pages: this.state.pages.map(_page => 
-        _page.uuid !== page.uuid ? _page : this.generatePage(page, type)
-      )
-    })
+  updateBot(type) {
+    const bot = this.generatePage(this.state.bot, type);
+    this.setState({bot});
   }
 
-  updatePages(type) {
-    this.setState({
-      pages: this.state.pages.map(page => (
-        this.generatePage(page, type)
-      ))
-    })
+  updateMaster(type) {
+    const master = this.generatePage(this.state.master, type);
+    const bot = this.generatePage({...master, uuid: this.state.bot.uuid}, type);
+    this.setState({master, bot});
   }
 
 
   render() {
 
-    const { pages } = this.state;
+    const { master, bot } = this.state;
     return (
       <_App>
         <_Window>
-          {pages.map((page, i) => (
+          {[bot, master].map((page, i) => (
             <_PageWrapper key={i}>
               <_Scale>
                 <Page {...page} />

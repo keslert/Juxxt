@@ -26,7 +26,7 @@ const HeadingHorizontalItems = ({
   return (
     <_DisplayFlex {...props}>
       <SectionContainer {...{getGlobals, userOverrides}}>
-        <Group {...requirements.heading} palette={palette} overrides={{margin: '0 0 60px 0'}} />
+        <Group {...requirements.heading} palette={palette} overrides={{margin: '0 0 70px 0'}} />
         <_DisplayFlex>
           {range(0, requirements.items).map(i => (
             <_Flex key={i}>

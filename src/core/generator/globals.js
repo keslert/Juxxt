@@ -4,11 +4,14 @@ import { selectColors } from './colors';
 
 function generateGlobals() {
   return {
-    buttonStyle: randomItem(['Rounded', 'Round', 'Square', 'Raised']),
     colors: selectColors(),
     font: randomItem(['Montserrat', 'Roboto', 'Lato']),
     fontSize: 14,
     iconSize: 64,
+    button: {
+      type: randomItem(['Rounded', 'Round', 'Square', 'Raised']),
+      textTransform: randomItem(['none', 'uppercase']),
+    },
     heading: {
       fontSize: 36,
       fontWeight: randomItem(['bold', 'normal', 'lighter']),

@@ -50,7 +50,7 @@ const ProductNavigation = ({
           color={'#fff'} 
           text='Sign Up'
           overrides={{
-            buttonStyle: 'Round',
+            type: 'Round',
             fontSize: 12, 
             padding: '12px 24px'
           }} 

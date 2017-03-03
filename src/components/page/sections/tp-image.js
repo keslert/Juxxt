@@ -4,7 +4,7 @@ import { _DisplayFlex } from '../../common/styled-base';
 import Group from '../groups';
 import SectionContainer from './section-container';
 
-const FiftyFifty = ({
+const TPImage = ({
   palette,
   requirements, 
   userOverrides, 
@@ -32,23 +32,27 @@ const FiftyFifty = ({
       <SectionContainer {...{getGlobals, userOverrides}}>
         <_DisplayFlex>
           <_DisplayFlex {...innerProps}>
-            <Group {...requirements.group} palette={palette} />
+            <Group {...requirements.tp} palette={palette} />
           </_DisplayFlex>
           <_DisplayFlex {...innerProps}>
-            <Group {...requirements.group} palette={palette} />
+            <Group {...requirements.image} palette={palette} />
           </_DisplayFlex>
         </_DisplayFlex>
       </SectionContainer>
     </_DisplayFlex>
   )
 }
-export default FiftyFifty;
+export default TPImage;
 
 export const requirements = {
-  group: {
+  tp: {
     type: 'Group',
     options: ['IconHeadingParagraph'],
   },
+  image: {
+    type: 'Group',
+    options: ['BlockImage'],
+  }
 }
 
 export const params = {

@@ -1,5 +1,5 @@
 import BasicSection, { requirements as basicReqs, params as basicParams } from './basic';
-import FiftyFiftySection, { requirements as fiftyFiftyReqs, params as fiftyFiftyParams } from './fifty-fifty';
+import TPImage, { requirements as tpImageReqs, params as tpImageParams } from './tp-image';
 
 import ProductHeader, { requirements as productHeaderReqs, params as productHeaderParams } from './headers/product-header';
 
@@ -10,10 +10,10 @@ import CopyrightFooter, { requirements as copyrightFooterReqs, params as copyrig
 
 
 export default {
-  FiftyFiftySection: {
-    component: FiftyFiftySection,
-    requirements: fiftyFiftyReqs,
-    params: fiftyFiftyParams,
+  TPImage: {
+    component: TPImage,
+    requirements: tpImageReqs,
+    params: tpImageParams,
   },
   BasicSection: {
     component: BasicSection,

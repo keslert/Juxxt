@@ -6,6 +6,8 @@ import IconSmallHeadingParagraph, { requirements as iconSmallHeadingParagraphReq
 import SmallHeadingParagraph, { requirements as smallHeadingParagraphReqs, params as smallHeadingParagraphParams } from './small-heading-paragraph';
 import Navigation, { requirements as navigationReqs, params as navigationParams } from './navigation';
 
+import BlockImage, { requirements as blockImageReqs, params as blockImageParams } from './block-image';
+
 export default {
   HeadingSubheading: {
     component: HeadingSubheading,
@@ -32,6 +34,13 @@ export default {
     component: SmallHeadingParagraph,
     requirements: smallHeadingParagraphReqs,
     params: smallHeadingParagraphParams,
+    special: true,
+  },
+
+  BlockImage: {
+    component: BlockImage,
+    requirements: blockImageReqs,
+    params: blockImageParams,
     special: true,
   },
 

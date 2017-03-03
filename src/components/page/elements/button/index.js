@@ -53,13 +53,14 @@ const Button = ({
 
   const globals = getGlobals();
 
-  const buttonStyle = getSafeFromObjects([userOverrides, overrides], 'buttonStyle', globals.buttonStyle);
+  const type = getSafeFromObjects([userOverrides, overrides], 'type', globals.button.type);
   const fontSize = getSafeFromObjects([userOverrides, overrides], 'fontSize', globals.fontSize);
   
   const props = { 
     background,
-    borderBottom: getBorderBottom(buttonStyle, background),
-    borderRadius: getBorderRadius(buttonStyle, fontSize * 2),
+    borderBottom: getBorderBottom(type, background),
+    borderRadius: getBorderRadius(type, fontSize * 4),
+    textTransform: globals.button.textTransform,
     color,
     fontSize, 
     padding: `${fontSize}px ${fontSize * 4}px`,
@@ -98,5 +99,5 @@ export const params = {
   background: true,
   color: true,
   textTransform: true,
-  buttonStyle: ['Round', 'Rounded', 'Square', 'Raised']
+  type: ['Round', 'Rounded', 'Square', 'Raised'],
 }

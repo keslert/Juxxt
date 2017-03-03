@@ -1,11 +1,10 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
-const _Image = styled.span`
+const _Image = styled.img`
   ${props => `
     ${props.height && `height: ${props.height};`}
     ${props.width && `width: ${props.width};`}
-    ${props.padding && `padding: ${props.padding};`}
     ${props.margin && `margin: ${props.margin};`}
   `}
 `
@@ -20,14 +19,13 @@ const Image = ({
   const globals = getGlobals();
 
   const props = {
+    src,
     ...overrides,
     ...userOverrides,
   }
 
   return (
-    <_Image {...props }>
-      <img src={src} />
-    </_Image>
+    <_Image {...props } />
   )
 }
 
@@ -36,7 +34,6 @@ export const requirements = {}
 export const params = {
   width: true,
   height: true,
-  padding: true,
   margin: true,
 }
 
