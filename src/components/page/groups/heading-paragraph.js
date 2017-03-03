@@ -4,7 +4,7 @@ import { _Block } from '../../common/styled-base';
 
 const HeadingParagraph = ({
   requirements,
-  sectionOverrides,
+  overrides,
   userOverrides,
   palette,
 }) => {
@@ -12,7 +12,7 @@ const HeadingParagraph = ({
   const props = {
     maxWidth: 600,
     textAlign: requirements.alignment,
-    ...sectionOverrides,
+    ...overrides,
     ...userOverrides,
   }
 

@@ -26,11 +26,11 @@ const HeadingHorizontalItems = ({
   return (
     <_DisplayFlex {...props}>
       <SectionContainer {...{getGlobals, userOverrides}}>
-        <Group {...requirements.heading} palette={palette} sectionOverrides={{margin: '0 0 60px 0'}} />
+        <Group {...requirements.heading} palette={palette} overrides={{margin: '0 0 60px 0'}} />
         <_DisplayFlex>
           {range(0, requirements.items).map(i => (
             <_Flex key={i}>
-              <Group {...requirements.item} palette={palette} sectionOverrides={{padding: '0 20px'}} />
+              <Group {...requirements.item} palette={palette} overrides={{padding: '0 20px'}} />
             </_Flex>
           ))}
         </_DisplayFlex>
@@ -52,7 +52,7 @@ export const requirements = {
   },
   item: {
     type: 'Group',
-    options: ['SmallHeadingParagraph']
+    options: ['SmallHeadingParagraph', 'IconSmallHeadingParagraph'],
   },
   items: {
     options: [3,4]

@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
 const _Icon = styled.span`
+  display: inline-block;
   ${props => `
     color: ${props.color};  
     fontSize: ${props.fontSize}px;

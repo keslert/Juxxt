@@ -4,13 +4,13 @@ import { _Block } from '../../common/styled-base';
 
 const SmallHeadingParagraph = ({
   requirements,
-  sectionOverrides,
+  overrides,
   userOverrides,
   palette,
 }) => {
   const props = {
     textAlign: requirements.alignment,
-    ...sectionOverrides,
+    ...overrides,
     ...userOverrides,
   }
 

@@ -7,7 +7,7 @@ import { _Block } from '../../common/styled-base';
 
 const HeadingSubheading = ({
   requirements,
-  sectionOverrides,
+  overrides,
   userOverrides,
   palette,
 }) => {
@@ -16,7 +16,7 @@ const HeadingSubheading = ({
 
   const props = {
     textAlign: requirements.alignment,
-    ...sectionOverrides,
+    ...overrides,
     ...userOverrides,
   }
 

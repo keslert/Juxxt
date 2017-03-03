@@ -2,18 +2,17 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import Element from '../elements';
 import { _Flex, _DisplayFlex, _Block } from '../../common/styled-base';
-import { getFontSize } from '../elements/heading';
+import { getFontSize } from '../elements/small-heading';
 
 
 
-const IconHeadingParagraph = ({
+const IconSmallHeadingParagraph = ({
   requirements,
   overrides,
   userOverrides,
   palette,
 }) => {
   const props = {
-    maxWidth: 600,
     textAlign: requirements.alignment,
     ...overrides,
     ...userOverrides,
@@ -68,7 +67,8 @@ const IconHeadingParagraph = ({
           {...requirements.icon} 
           color={palette.primary} 
           overrides={{
-            margin: "0 0 25px 0",
+            fontSize: getFontSize(requirements.heading) * 2,
+            margin: "0 0 10px 0",
           }}
           />
       </div>
@@ -81,7 +81,7 @@ const IconHeadingParagraph = ({
     </_Block>
   )
 }
-export default IconHeadingParagraph;
+export default IconSmallHeadingParagraph;
 
 
 export const requirements = {
@@ -91,7 +91,7 @@ export const requirements = {
   },
   heading: {
     type: 'Element',
-    options: ['Heading'],
+    options: ['SmallHeading'],
   },
   paragraph: {
     type: 'Element',
