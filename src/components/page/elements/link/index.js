@@ -13,8 +13,8 @@ const _Link = styled.p`
 `
 
 const Link = ({
-  text,
   color,
+  content,
   overrides,
   userOverrides,
   getGlobals,
@@ -25,13 +25,14 @@ const Link = ({
   const props = {
     color,
     fontSize: globals.fontSize, 
+    ...content,
     ...overrides,
     ...userOverrides
   };
 
   return (
     <_Link {...props}>
-      Link
+      {props.text}
     </_Link>
   )
 }

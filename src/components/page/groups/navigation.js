@@ -48,8 +48,8 @@ const ProductNavigation = ({
           {...requirements.button} 
           background={palette.primary} 
           color={'#fff'} 
-          text='Sign Up'
           overrides={{
+            text: 'Sign Up',
             type: 'Round',
             fontSize: 12, 
             padding: '12px 24px'

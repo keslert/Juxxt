@@ -7,7 +7,7 @@ import shortid from 'shortid';
 
 import { selectSchema } from './colors';
 import { selectGlobals } from './globals';
-import { generateContent } from './content';
+import { generateContent, clearCacheForUUID } from './content';
 
 
 
@@ -163,6 +163,10 @@ function generateElement(props) {
 
   if(modifiable && modify.structure) {
     _element.name = selectElement(props);
+  }
+
+  if(modifiable && modify.content) {
+    clearCacheForUUID(_element.uuid);
   }
 
   const template = elements[_element.name];

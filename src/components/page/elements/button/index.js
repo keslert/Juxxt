@@ -43,9 +43,9 @@ const getBorderBottom = (type, background) => {
 }
 
 const Button = ({
-  text = "Button",
   background,
   color,
+  content,
   overrides,
   userOverrides,
   getGlobals,
@@ -64,6 +64,7 @@ const Button = ({
     color,
     fontSize, 
     padding: `${fontSize}px ${fontSize * 4}px`,
+    ...content,
     ...overrides,
     ...userOverrides,
   };
@@ -71,7 +72,7 @@ const Button = ({
   
   return (
     <_Button {...props} className="element">
-      {text}
+      {props.text}
     </_Button>
   )
 }

@@ -80,8 +80,8 @@ class App extends React.Component {
 
   updateMaster(type) {
     const master = this.generatePage(this.state.master, type);
-    const bot = this.generatePage({...master, uuid: this.state.bot.uuid}, type);
-    this.setState({master, bot});
+    // const bot = this.generatePage({...master, uuid: this.state.bot.uuid}, type);
+    this.setState({master});
   }
 
 
