@@ -7,6 +7,7 @@ import shortid from 'shortid';
 
 import { selectSchema } from './colors';
 import { selectGlobals } from './globals';
+import { generateContent } from './content';
 
 
 
@@ -176,6 +177,10 @@ function generateElement(props) {
 
     return randomItem(req.options);
   })
+
+  _element.groupName = props.group.name;
+  _element.sectionName = props.group.name;
+  _element.content = generateContent(_element);
 
   return _element;
 }

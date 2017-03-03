@@ -13,8 +13,8 @@ const _Paragraph = styled.p`
 `
 
 const Paragraph = ({
-  text,
   color,
+  content,
   overrides,
   userOverrides,
   getGlobals,
@@ -25,13 +25,14 @@ const Paragraph = ({
   const props = {
     color,
     fontSize: globals.fontSize, 
+    ...content,
     ...overrides,
     ...userOverrides
   };
 
   return (
     <_Paragraph {...props}>
-      Lorem ipsum dolor sit amet, sea erant civibus id, fugit putent adolescens ad eos. Reque expetendis mei ea. Pro modo saperet ea.
+      {props.text}
     </_Paragraph>
   )
 }

@@ -6,6 +6,7 @@ const _SmallHeading = styled.div`
   user-select: none;
   cursor: default;
   ${props => `
+    font-family: ${props.fontFamily};
     font-size: ${props.fontSize}px;
     font-weight: ${props.fontWeight};
     text-transform: ${props.textTransform};
@@ -16,8 +17,8 @@ const _SmallHeading = styled.div`
 `
 
 const SmallHeading = ({
-  text = 'Small Heading',
   color,
+  content,
   overrides,
   userOverrides,
   getGlobals,
@@ -26,17 +27,19 @@ const SmallHeading = ({
   const globals = getGlobals();
 
   const props = { 
+    fontFamily: globals.smallHeading.fontFamily,
     fontSize: getFontSize({overrides, userOverrides}, globals), 
     fontWeight: globals.smallHeading.fontWeight,
     textTransform: globals.smallHeading.textTransform,
     margin: globals.smallHeading.margin,
     color,
+    ...content,
     ...overrides,
     ...userOverrides
   }
 
   return (
-    <_SmallHeading {...props}>{text}</_SmallHeading>
+    <_SmallHeading {...props}>{props.text}</_SmallHeading>
   )
 }
 

@@ -19,7 +19,7 @@ const _Window = styled.div`
   padding: 40px;
 `
 
-const width = 600;
+const width = 700;
 const _PageWrapper = styled.div`
   margin: 15px;
   width: ${width}px;
@@ -91,7 +91,7 @@ class App extends React.Component {
     return (
       <_App>
         <_Window>
-          {[bot, master].map((page, i) => (
+          {[master].map((page, i) => (
             <_PageWrapper key={i}>
               <_Scale>
                 <Page {...page} />

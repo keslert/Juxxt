@@ -30,7 +30,7 @@ const HeadingHorizontalItems = ({
         <_DisplayFlex>
           {range(0, requirements.items).map(i => (
             <_Flex key={i}>
-              <Group {...requirements.item} palette={palette} overrides={{padding: '0 20px'}} />
+              <Group {...requirements.item} palette={palette} overrides={{padding: '0 20px'}} index={i} />
             </_Flex>
           ))}
         </_DisplayFlex>

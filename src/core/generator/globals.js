@@ -3,9 +3,13 @@ import { selectColors } from './colors';
 
 
 function generateGlobals() {
+
+  const fontFamily = randomItem(['Montserrat', 'Roboto', 'Lato']);
+  const headingFontFamily = fontFamily;
+
   return {
     colors: selectColors(),
-    font: randomItem(['Montserrat', 'Roboto', 'Lato']),
+    fontFamily,
     fontSize: 14,
     iconSize: 64,
     button: {
@@ -13,12 +17,14 @@ function generateGlobals() {
       textTransform: randomItem(['none', 'uppercase']),
     },
     heading: {
+      fontFamily: headingFontFamily,
       fontSize: 36,
       fontWeight: randomItem(['bold', 'normal', 'lighter']),
       textTransform: randomItem(['none', 'uppercase']),
       margin: "0 0 15px",
     },
     smallHeading: {
+      fontFamily: headingFontFamily,
       fontSize: 20,
       fontWeight: 'bold',
       textTransform: randomItem(['none', 'uppercase']),

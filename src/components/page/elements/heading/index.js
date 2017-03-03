@@ -6,6 +6,7 @@ const _Heading = styled.div`
   user-select: none;
   cursor: default;
   ${props => `
+    font-family: ${props.fontFamily};
     font-size: ${props.fontSize}px;
     font-weight: ${props.fontWeight};
     text-transform: ${props.textTransform};
@@ -17,8 +18,8 @@ const _Heading = styled.div`
 `
 
 const Heading = ({
-  text = 'Heading',
   color,
+  content,
   overrides,
   userOverrides,
   getGlobals,
@@ -27,17 +28,19 @@ const Heading = ({
   const globals = getGlobals();
 
   const props = { 
+    fontFamily: globals.heading.fontFamily,
     fontSize: getFontSize({overrides, userOverrides}, globals),
     fontWeight: globals.heading.fontWeight,
     textTransform: globals.heading.textTransform,
     margin: globals.heading.margin,
     color,
+    ...content,
     ...overrides,
     ...userOverrides,
   }
 
   return (
-    <_Heading {...props}>{text}</_Heading>
+    <_Heading {...props}>{props.text}</_Heading>
   )
 }
 

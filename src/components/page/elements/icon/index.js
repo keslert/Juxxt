@@ -14,8 +14,7 @@ const _Icon = styled.span`
 
 const Icon = ({
   color,
-  src = 'https://image.flaticon.com/icons/svg/138/138773.svg',
-  type = 'rocket',
+  content,
   overrides,
   userOverrides,
   getGlobals,
@@ -26,15 +25,16 @@ const Icon = ({
   const props = {
     color,
     fontSize: globals.iconSize,
+    ...content,
     ...overrides,
     ...userOverrides,
   }
 
   return (
     <_Icon {...props }>
-      {src
-        ? <img src={src} />
-        : <i className={`fa fa-${type}`}></i>
+      {props.src
+        ? <img src={props.src} />
+        : <i className={`fa fa-${props.type}`}></i>
       }
     </_Icon>
   )
@@ -46,6 +46,8 @@ export const params = {
   color: true,
   fontSize: true,
   margin: true,
+  src: true,
+  type: true,
 }
 
 export default Icon;

@@ -5,6 +5,8 @@ import groups from './meta';
 import { interfaceActions } from '../../../core/interface';
 import { includes, last } from 'lodash';
 import { fadeIn } from '../../common/styled-animations';
+import { isString, mapValues } from 'lodash';
+import { generateContent } from '../../../core/generator/content';
 
 const _Group = styled.div`
   position: relative;
@@ -34,7 +36,29 @@ const Group = (props) => {
     onHoverableMouseLeave,
     name, 
     uuid,
+    index,
   } = props;
+
+
+  let _props = props;
+  // Is this a repeating group? If so, we need new content.
+  if(index !== undefined) {
+    _props = {..._props,
+      requirements: mapValues(_props.requirements, req => {
+        if(isString(req)) { // not an element
+          return req;
+        }
+
+        return {
+          ...req, 
+          index, 
+          content: generateContent({...req, index})
+        };
+      })
+    }
+  }
+
+
 
   const Group = groups[name];
   return (
@@ -44,7 +68,7 @@ const Group = (props) => {
       onMouseEnter={() => onHoverableMouseEnter(uuid)}
       onMouseLeave={() => onHoverableMouseLeave(uuid)}
       >
-      <Group.component {...props} />
+      <Group.component {..._props} />
     </_Group>
   )
 }
