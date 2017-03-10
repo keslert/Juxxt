@@ -9,12 +9,10 @@ import { selectPalette } from './colors';
 import { selectGlobals } from './globals';
 import { getContent, clearCacheForItem } from './content';
 
-
-
 export function init() {
   const meta = {
     uuid: shortid.generate(),
-    sections: range(0, 1).map(_ => ({ 
+    sections: range(0, 5).map(_ => ({ 
       uuid: shortid.generate(),
       schema: randomItem(range(0, 3)),
     })),
@@ -34,8 +32,6 @@ export function init() {
 
   return [page, page2];
 }
-
-
 
 export function generate(page, modify, selected) {
   const globals = selectGlobals(page, modify);
@@ -59,8 +55,6 @@ export function generate(page, modify, selected) {
   pushHistory(_page);
   return _page;
 }
-
-
 
 /**********************************************************
  * Generate Section
@@ -247,6 +241,7 @@ function generateGroup(props) {
         modify: pick(props.modify, 'content'),
       })
     ))
+    return element;
   })
   
   group.props = {
@@ -310,12 +305,12 @@ function selectGroup(props) {
 
 function selectSection(props) {
   const _sections = pickBy(sections, section => {
-    // if(props.sectionIndex === 0) {
-    //   return section.header;
-    // }
-    // if(props.sectionIndex === (props.sections.length - 1)) {
-    //   return section.footer;
-    // }
+    if(props.sectionIndex === 0) {
+      return section.header;
+    }
+    if(props.sectionIndex === (props.sections.length - 1)) {
+      return section.footer;
+    }
     return !section.footer && !section.header;
   })
 

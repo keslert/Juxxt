@@ -33,11 +33,11 @@ const ProductNavigation = ({
   return (
     <_ProductNavigation {...props} >
       <_Logo>
-        <LogoSVG color={elements.links[0].props.color} />
+        <LogoSVG color={elements.link.clones[0].props.color} />
       </_Logo>
       <_DisplayFlex align="center" flex="1">
         <_DisplayFlex flex="1" justify={variation.justify}>
-          {elements.links.map(link => (
+          {elements.link.clones.map(link => (
             <Element key={link.uuid + link.index} {...link} />
           ))}
         </_DisplayFlex>
@@ -60,7 +60,7 @@ export const requirements = {
         padding: '12px 24px'
       })
     },
-    links: {
+    link: {
       element: 'Link',
       copies: range(1, 6),
       overrides: ({variation, elements}) => ({

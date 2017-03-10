@@ -38,7 +38,7 @@ export const defaultProps = ({palette, globals}, overrides) => {
   const fontSize = overrides.fontSize || globals.fontSize;
   return {
     background: palette.button.background,
-    borderBottom: getBorderBottom(type, palette.buttonBackground),
+    borderBottom: getBorderBottom(type, palette.button.background),
     borderRadius: getBorderRadius(type, fontSize * 4),
     textTransform: globals.button.textTransform,
     color: palette.button.color,

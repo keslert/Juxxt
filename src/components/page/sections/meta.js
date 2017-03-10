@@ -10,16 +10,16 @@ import CopyrightFooter, { requirements as copyrightFooterReqs, defaultProps as c
 
 
 export default {
-  // TPImage: {
-  //   component: TPImage,
-  //   requirements: tpImageReqs,
-  //   defaultProps: tpImageDefault,
-  // },
-  // BasicSection: {
-  //   component: BasicSection,
-  //   requirements: basicReqs,
-  //   defaultProps: basicDefault,
-  // },
+  TPImage: {
+    component: TPImage,
+    requirements: tpImageReqs,
+    defaultProps: tpImageDefault,
+  },
+  BasicSection: {
+    component: BasicSection,
+    requirements: basicReqs,
+    defaultProps: basicDefault,
+  },
   HeadingHorizontalItems: {
     component: HeadingHorizontalItems,
     requirements: headingHorizontalItemsReqs,
