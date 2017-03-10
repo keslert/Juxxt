@@ -20,37 +20,33 @@ class OverridePanel extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const { selected } = this.props;
-
-    if(!isEqual(selected, prevProps.selected)) {
-      // this.setState({params: this.getParams(selected)});
-    }
+  componentWillReceiveProps(nextProps) {
+    this.setState({params: this.getParams(nextProps.selected)});
   }
 
   getParams(selected) {
-    const first = selected[0] || {};
+    const _selected = selected[0] || {};
     let params = {};
-    if(first.isElement) {
-      params = elements[first.name].params;
-    } else if(first.isGroup) {
-      params = groups[first.name].params;
-    } else if(first.isSection) {
-      params = sections[first.name].params;
+    if(_selected.isElement) {
+      params = elements[_selected.name].modifiableProps;
+    } else if(_selected.isGroup) {
+      params = groups[_selected.name].modifiableProps;
+    } else if(_selected.isSection) {
+      params = sections[_selected.name].modifiableProps;
     }
 
-    return mapValues(params, param => ({
-      value: null,
+    return mapValues(params, (param, key) => ({
+      value: _selected.props[key],
       options: isArray(param) ? param : null,
     }));
   }
 
   render() {
-    const { params } = this.state;
+    const { params, top, left } = this.state;
     return (
-      <_Panel {...this.state}>
-        {map(params, (param, name) => (
-          <PanelItem key={name} name={name} {...param} />
+      <_Panel top={top} left={left}>
+        {map(params, (param, key) => (
+          <PanelItem key={key} name={key} {...param} />
         ))}
       </_Panel>
     )

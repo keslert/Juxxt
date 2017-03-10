@@ -14,7 +14,7 @@ const _Paragraph = styled.p`
 
 const Paragraph = (props) => (
   <_Paragraph {...props}>
-    {props.content.text}
+    {props.text}
   </_Paragraph>
 )
 export default Paragraph;
@@ -29,4 +29,5 @@ export const modifiableProps = {
   fontSize: true,
   margin: true,
   padding: true,
+  text: true,
 }

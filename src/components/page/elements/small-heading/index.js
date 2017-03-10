@@ -17,7 +17,7 @@ const _SmallHeading = styled.div`
 `
 
 const SmallHeading = (props) => ( 
-  <_SmallHeading {...props}>{props.content.text}</_SmallHeading>
+  <_SmallHeading {...props}>{props.text}</_SmallHeading>
 )
 export default SmallHeading;
 
@@ -37,6 +37,7 @@ export const modifiableProps = {
   margin: true,
   padding: true,
   textTransform: true,
+  text: true,
 }
 
 export function getFontSize({userOverrides}, globals) {

@@ -5,44 +5,58 @@ import LoremIpsum from 'lorem-ipsum';
 
 
 let memory = {};
-export function clearCacheForSubstring(uuid) {
+export function clearCacheForItem(item) {
+  let substr;
+  if(item.isSection) {
+    substr = item.uuid;
+  } else if(item.isGroup) {
+    substr = item.sectionUUID + item.uuid + (item.index || '');
+  } else {
+    substr = generateElementKey(item);
+  }
+
+
   memory = pickBy(memory, (_, key) => (
-    !key.startsWith(uuid)
+    !key.startsWith(substr)
   ))
 }
 
-export function getContent(props) {
-  const { uuid, index=0, groupUUID, groupIndex=0, sectionUUID } = props;
-  const contentID = sectionUUID + groupUUID + uuid + groupIndex + index;  
+function generateElementKey(element) {
+  return element.sectionUUID + element.groupUUID + (element.groupIndex || '') + element.uuid + (element.index || '');
+}
 
-  if(!memory[contentID]) {
+export function getContent(element) {
+
+  const key = generateElementKey(element);
+
+  if(!memory[key]) {
     let content;
-    switch(props.name) {
+    switch(element.name) {
       case 'Button':
-        content = getButtonContent(props);
+        content = getButtonContent(element);
         break;
       case 'Paragraph':
-        content = getParagraphContent(props);
+        content = getParagraphContent(element);
         break;
       case 'Icon':
-        content = getIconContent(props);
+        content = getIconContent(element);
         break;
       case 'Image':
-        content = getImageContent(props);
+        content = getImageContent(element);
         break;
       case 'Link':
-        content = getLinkContent(props);
+        content = getLinkContent(element);
         break;
       case 'Heading':
-        content = getHeadingContent(props);
+        content = getHeadingContent(element);
         break;
       case 'SmallHeading':
-        content = getSmallHeadingContent(props);
+        content = getSmallHeadingContent(element);
         break;
     }
-    memory[contentID] = content;
+    memory[key] = content;
   }
-  return memory[contentID];
+  return memory[key];
 }
 
 function getButtonContent(props) {

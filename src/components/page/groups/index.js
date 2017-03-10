@@ -28,7 +28,6 @@ const _Group = styled.div`
       background: rgba(0, 122,122,0.1);
     }
   `}
-  
 `
 
 const Group = (props) => {
@@ -40,22 +39,8 @@ const Group = (props) => {
     onHoverableMouseLeave,
     name, 
     uuid,
-    index,
     isGroup,
   } = props;
-
-  let _props = props;
-  
-  // Is this a repeating group? If so, we need new content.
-  if(index !== undefined) {
-    _props = {
-      ..._props,
-      elements: mapValues(_props.elements, element => ({
-        ...element,
-        groupIndex: index,
-      }))
-    }
-  }
 
   const Group = groups[name];
   return (
@@ -65,7 +50,7 @@ const Group = (props) => {
       onMouseEnter={() => onHoverableMouseEnter(uuid)}
       onMouseLeave={() => onHoverableMouseLeave(uuid)}
       >
-      <Group.component {..._props} />
+      <Group.component {...props} />
     </_Group>
   )
 }

@@ -2,19 +2,19 @@ import sections from '../../components/page/sections/meta';
 import groups from '../../components/page/groups/meta';
 import elements from '../../components/page/elements/meta';
 import { randomItem, getFirstIfList } from '../utils';
-import { keys, range, map, reduce, mapValues, isEmpty, includes, pickBy, random, intersection, filter, every, size, cloneDeep, max } from 'lodash';
+import { keys, range, map, mapValues, isEmpty, includes, pick, pickBy, random, intersection, filter, every, size, cloneDeep, max } from 'lodash';
 import shortid from 'shortid';
 
 import { selectPalette } from './colors';
 import { selectGlobals } from './globals';
-import { getContent, clearCacheForSubstring } from './content';
+import { getContent, clearCacheForItem } from './content';
 
 
 
 export function init() {
   const meta = {
     uuid: shortid.generate(),
-    sections: range(0, 5).map(_ => ({ 
+    sections: range(0, 1).map(_ => ({ 
       uuid: shortid.generate(),
       schema: randomItem(range(0, 3)),
     })),
@@ -97,7 +97,7 @@ function generateSection(props) {
       section.variation = getValidVariation(sectionTemplate.requirements.variations, {});
     }
     if(props.modify.content) {
-      clearCacheForSubstring(section.uuid);
+      clearCacheForItem(section);
     }
   }
 
@@ -133,6 +133,29 @@ function generateSection(props) {
     }
   })
 
+  // Handle Clones
+  section.groups = mapValues(sectionTemplate.requirements.groups, (groupReqs, key) => {
+    const group = section.groups[key];
+    if(!groupReqs.copies) {
+      return group;
+    }
+
+    const copies = props.modify.variation && isSelected || isNewSection
+                   ? randomItem(groupReqs.copies)
+                   : group.clones.length;
+
+    group.clones = range(0, copies).map(i => (
+      generateGroup({
+        ...props,
+        section,
+        group: Object.assign({}, group, {index: i}),
+        modify: pick(props.modify, 'content'),
+      })
+    ))
+
+    return group;
+  });
+
   section.props = {
     ...sectionTemplate.defaultProps({palette: section.palette, globals: props.globals, variation: section.variation}),
     ...props.overrides,
@@ -147,14 +170,14 @@ function generateSection(props) {
  *********************************************************/
 function generateGroup(props) {
   const isSelected = includes(props.selectedUUIDs, props.group.uuid);
-  const isNewGroup = isSelected && props.modify.compisition || !props.group.uuid;
+  const isNewGroup = isSelected && props.modify.compisition || !props.group.name;
 
   const group = {
     uuid: shortid.generate(),
-    groupUUID: shortid.generate(),
     isGroup: true,
     userOverrides: {},
     ...props.group,
+    sectionUUID: props.section.uuid,
   }
 
   if(isNewGroup) {
@@ -171,7 +194,7 @@ function generateGroup(props) {
       group.variation = getValidVariation(groupTemplate.requirements.variations, props.restrictions);
     }
     if(props.modify.content) {
-      clearCacheForSubstring(props.section.uuid + group.uuid);
+      clearCacheForItem(group);
     }
   }
 
@@ -216,13 +239,12 @@ function generateGroup(props) {
                    ? randomItem(elementReqs.copies)
                    : size(props.group.elements[key]);
 
-
-    return range(0, copies).map(i => (
+    element.clones = range(0, copies).map(i => (
       generateElement({
         ...props,
         group,
-        element: Object.assign({}, cloneDeep(element), {uuid: element.uuid + i}),
-        modify: {},
+        element: Object.assign({}, element, {index: i}),
+        modify: pick(props.modify, 'content'),
       })
     ))
   })
@@ -244,23 +266,27 @@ function generateElement(props) {
   
   const element = {
     uuid: shortid.generate(),
+    index: props.index,
     elementUUID: shortid.generate(),
     isElement: true,
-    groupUUID: props.group.uuid,
-    sectionUUID: props.section.uuid,
     userOverrides: {},
     props: {},
     ...props.element,
+    groupUUID: props.group.uuid,
+    groupIndex: props.group.index,
+    sectionUUID: props.section.uuid,
   }
 
+
   if(isSelected && props.modify.content) {
-    clearCacheForSubstring(props.section.uuid + props.group.uuid + element.uuid);
+    clearCacheForItem(element);
   }
 
   const elementTemplate = elements[element.name];
   element.props = {
     ...element.props,
     ...elementTemplate.defaultProps({palette: props.section.palette, globals: props.globals}, element.userOverrides),
+    ...getContent(element),
     ...element.userOverrides,
   }  
 
@@ -284,12 +310,12 @@ function selectGroup(props) {
 
 function selectSection(props) {
   const _sections = pickBy(sections, section => {
-    if(props.sectionIndex === 0) {
-      return section.header;
-    }
-    if(props.sectionIndex === (props.sections.length - 1)) {
-      return section.footer;
-    }
+    // if(props.sectionIndex === 0) {
+    //   return section.header;
+    // }
+    // if(props.sectionIndex === (props.sections.length - 1)) {
+    //   return section.footer;
+    // }
     return !section.footer && !section.header;
   })
 

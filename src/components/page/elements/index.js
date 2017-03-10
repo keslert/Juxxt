@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { interfaceActions } from '../../../core/interface';
 import { includes, last, map } from 'lodash';
 import { fadeIn } from '../../common/styled-animations';
-import { getContent } from '../../../core/generator/content';
 
 const _Element = styled.span`
   position: relative;
@@ -38,22 +37,21 @@ const Element = (props) => {
     onHoverableMouseEnter, 
     onHoverableMouseLeave,
     name, 
-    uuid, 
+    uuid,
+    index,
     isElement,
     registerItem,
   } = props;
   const Element = elements[props.name];
 
-  const content = getContent(props);
-
   return (
     <_Element 
       selected={isSelected || isHovered} 
-      onClick={(e) => { e.stopPropagation(); setSelected({uuid, name, isElement});}}
+      onClick={(e) => { e.stopPropagation(); setSelected(props);}}
       onMouseEnter={() => onHoverableMouseEnter(uuid)}
       onMouseLeave={() => onHoverableMouseLeave(uuid)}
       >
-      <Element.component {...props.props} content={content} />
+      <Element.component {...props.props} />
     </_Element>
   )
 }

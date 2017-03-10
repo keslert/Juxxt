@@ -16,7 +16,7 @@ const _Heading = styled.div`
 `
 
 const Heading = (props) => (
-  <_Heading {...props}>{props.content.text}</_Heading>
+  <_Heading {...props}>{props.text}</_Heading>
 )
 export default Heading;
 

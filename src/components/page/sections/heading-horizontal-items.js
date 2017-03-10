@@ -18,9 +18,9 @@ const HeadingHorizontalItems = ({
       <SectionContainer {...sectionContainer}>
         <Group {...groups.heading} />
         <_DisplayFlex>
-          {range(0, variation.items).map(i => (
-            <_Flex key={groups.item.uuid + i}>
-              <Group {...groups.item} index={i} />
+          {groups.item.clones.map(item => (
+            <_Flex key={item.uuid + item.index}>
+              <Group {...item} />
             </_Flex>
           ))}
         </_DisplayFlex>
@@ -47,7 +47,8 @@ export const requirements = {
       options: ['SmallHeadingParagraph', 'IconSmallHeadingParagraph'],
       overrides: ({variation}) => ({
         padding: '0 20px',
-      })
+      }),
+      copies: [3,4],
     },
   },
   variations: [{
