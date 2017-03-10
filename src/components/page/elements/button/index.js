@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import tinycolor from 'tinycolor2';
-import { getSafeFromObjects } from '../../../../core/utils';
+
 
 const _Button = styled.span`
   box-sizing: border-box;
@@ -19,12 +19,45 @@ const _Button = styled.span`
     borderBottom: ${props.borderBottom};
 
     ${props.margin && `margin: ${props.margin};`};
-    ${props.width && `width: ${props.width}px;`};
+    ${props.minWidth && `min-width: ${props.minWidth}px;`};
   `};
   &:hover {
     background: ${props => tinycolor(props.background).lighten(5).toString()};
   }
 `
+
+const Button = (props) => (
+  <_Button {...props} className="element">
+    {props.text}
+  </_Button>
+)
+export default Button;
+
+export const defaultProps = ({palette, globals}, overrides) => {
+  const type = overrides.type || globals.button.type;
+  const fontSize = overrides.fontSize || globals.fontSize;
+  return {
+    background: palette.button.background,
+    borderBottom: getBorderBottom(type, palette.buttonBackground),
+    borderRadius: getBorderRadius(type, fontSize * 4),
+    textTransform: globals.button.textTransform,
+    color: palette.button.color,
+    fontSize: globals.fontSize,
+    padding: `${fontSize}px ${fontSize * 4}px`,
+  }
+}
+
+
+export const modifiableProps = {
+  fontSize: true,
+  padding: true,
+  boxShadow: true,
+  minWidth: true,
+  background: true,
+  color: true,
+  textTransform: true,
+  type: ['Round', 'Rounded', 'Square', 'Raised'],
+}
 
 const getBorderRadius = (type, height) => {
   if(type === 'Rounded' || type === 'Raised') {
@@ -40,65 +73,4 @@ const getBorderBottom = (type, background) => {
     return `4px solid ${tinycolor(background).darken(20).toString()}`;
   }
   return 'none';
-}
-
-const Button = ({
-  background,
-  color,
-  content,
-  overrides,
-  userOverrides,
-  getGlobals,
-}) => {
-
-  const globals = getGlobals();
-
-  const type = getSafeFromObjects([userOverrides, overrides], 'type', globals.button.type);
-  const fontSize = getSafeFromObjects([userOverrides, overrides], 'fontSize', globals.fontSize);
-  
-  const props = { 
-    background,
-    borderBottom: getBorderBottom(type, background),
-    borderRadius: getBorderRadius(type, fontSize * 4),
-    textTransform: globals.button.textTransform,
-    color,
-    fontSize, 
-    padding: `${fontSize}px ${fontSize * 4}px`,
-    ...content,
-    ...overrides,
-    ...userOverrides,
-  };
-
-  
-  return (
-    <_Button {...props} className="element">
-      {props.text}
-    </_Button>
-  )
-}
-
-Button.propTypes = {
-  background: PropTypes.string,
-  boxShadow: PropTypes.string,
-  color: PropTypes.string,
-  fontSize: PropTypes.number,
-  minWidth: PropTypes.number,
-  padding: PropTypes.string,
-  userOverrides: PropTypes.object,
-  getGlobals: PropTypes.func,
-}
-
-export default Button;
-
-export const requirements = {}
-
-export const params = {
-  fontSize: true,
-  padding: true,
-  boxShadow: true,
-  minWidth: true,
-  background: true,
-  color: true,
-  textTransform: true,
-  type: ['Round', 'Rounded', 'Square', 'Raised'],
 }

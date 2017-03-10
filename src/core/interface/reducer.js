@@ -4,8 +4,8 @@ import { filter, includes } from 'lodash';
 const InterfaceState = () => ({
   selected: [],
   modifications: {
-    structure: true,
-    layout: true,
+    compisition: true,
+    variation: true,
     palette: true,
     content: false,
     globals: false,

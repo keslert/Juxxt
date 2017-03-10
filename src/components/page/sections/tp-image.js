@@ -5,37 +5,33 @@ import Group from '../groups';
 import SectionContainer from './section-container';
 
 const TPImage = ({
-  palette,
-  requirements, 
-  userOverrides, 
-  getGlobals,
+  sectionContainer,
+  groups,
+  variation,
+  props,
 }) => {
-
-  const globals = getGlobals();
-  const props = {
-    justify: 'center',
-    align: 'center',
-    background: palette.background,
-    padding: globals.sectionPadding,
-    ...userOverrides
-  }
-
   const innerProps = {
-    padding: '0 30px',
     justify: 'center',
     align: 'center',
     flex: 1,
   }
 
+  let left = groups.point;
+  let right = groups.image;
+  if(variation.imagePosition === 'left') {
+    left = groups.image;
+    right = groups.point;
+  }
+
   return (
     <_DisplayFlex {...props}>
-      <SectionContainer {...{getGlobals, userOverrides}}>
+      <SectionContainer {...sectionContainer}>
         <_DisplayFlex>
           <_DisplayFlex {...innerProps}>
-            <Group {...requirements.tp} palette={palette} />
+            <Group {...left} />
           </_DisplayFlex>
           <_DisplayFlex {...innerProps}>
-            <Group {...requirements.image} palette={palette} />
+            <Group {...right} />
           </_DisplayFlex>
         </_DisplayFlex>
       </SectionContainer>
@@ -45,16 +41,35 @@ const TPImage = ({
 export default TPImage;
 
 export const requirements = {
-  tp: {
-    type: 'Group',
-    options: ['IconHeadingParagraph'],
+  groups: {
+    point: {
+      type: 'Group',
+      options: ['IconHeadingParagraph'],
+      overrides: ({variation}) => ({
+        margin: variation.imagePosition === 'left' ? '0 0 0 30px' : '0 30px 0 0',
+      })
+    },
+    image: {
+      type: 'Group',
+      options: ['Device', 'BlockImage'],
+      consistent: true,
+      overrides: ({variation}) => ({
+        margin: variation.imagePosition === 'left' ? '0 30px 0 0' : '0 0 0 30px',
+      })
+    },
   },
-  image: {
-    type: 'Group',
-    options: ['BlockImage'],
-  }
+  variations: [{
+    imagePosition: ['left', 'right'],
+  }]
 }
 
-export const params = {
+export const defaultProps = ({palette, globals}) => ({
+  justify: 'center',
+  align: 'center',
+  background: palette.background,
+  padding: globals.section.padding,
+})
+
+export const modifiableProps = {
   padding: true,
 }

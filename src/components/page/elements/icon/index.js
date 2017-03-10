@@ -6,48 +6,32 @@ const _Icon = styled.span`
   ${props => `
     color: ${props.color};  
     fontSize: ${props.fontSize}px;
-    height: ${props.fontSize}px;
+    height: ${props.height || props.fontSize}px;
     ${props.margin && `margin: ${props.margin};`}
     img { height: 100% }; 
   `}
 `
 
-const Icon = ({
-  color,
-  content,
-  overrides,
-  userOverrides,
-  getGlobals,
-}) => {
-  
-  const globals = getGlobals();
+const Icon = (props) => ( 
+  <_Icon {...props} className="element">
+    {props.content.src
+      ? <img src={props.content.src} />
+      : <i className={`fa fa-${props.content.type}`}></i>
+    }
+  </_Icon>
+)
+export default Icon;
 
-  const props = {
-    color,
-    fontSize: globals.iconSize,
-    ...content,
-    ...overrides,
-    ...userOverrides,
-  }
+export const defaultProps = ({palette, globals}) => ({
+  color: palette.icon,
+  fontSize: globals.iconSize,
+})
 
-  return (
-    <_Icon {...props }>
-      {props.src
-        ? <img src={props.src} />
-        : <i className={`fa fa-${props.type}`}></i>
-      }
-    </_Icon>
-  )
-}
-
-export const requirements = {}
-
-export const params = {
+export const modifiableProps = {
   color: true,
   fontSize: true,
   margin: true,
   src: true,
   type: true,
+  height: true,
 }
-
-export default Icon;

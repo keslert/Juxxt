@@ -4,56 +4,34 @@ import Element from '../elements';
 import { _Flex, _DisplayFlex, _Block } from '../../common/styled-base';
 import { getFontSize } from '../elements/small-heading';
 
-
-
 const IconSmallHeadingParagraph = ({
-  requirements,
-  overrides,
-  userOverrides,
-  palette,
+  elements,
+  variation,
+  props,
 }) => {
-  const props = {
-    textAlign: requirements.alignment,
-    ...overrides,
-    ...userOverrides,
-  }
 
-  if(requirements.iconPosition === 'left-heading') {
+  if(variation.iconPosition === 'heading') {
     return (
       <_Block {...props} textAlign="left">
         <_DisplayFlex>
-          <Element 
-            {...requirements.icon} 
-            color={palette.primary} 
-            overrides={{
-              fontSize: getFontSize(requirements.heading),
-              margin: "0 10px 0 0",
-            }}
-            />
+          <Element {...elements.icon} />
           <_Flex>
-            <Element {...requirements.heading} color={palette.textHighlight} />
+            <Element {...elements.heading} />
           </_Flex>
         </_DisplayFlex>
-        <Element {...requirements.paragraph} color={palette.text} />
+        <Element {...elements.paragraph} />
       </_Block>
     )
   }
 
-  if(requirements.iconPosition === 'left-column') {
+  if(variation.iconPosition === 'column') {
     return (
       <_Block {...props} textAlign="left">
         <_DisplayFlex>
-          <Element 
-            {...requirements.icon} 
-            color={palette.primary} 
-            overrides={{
-              fontSize: getFontSize(requirements.heading),
-              margin: "0 15px 0 0",
-            }}
-            />
+          <Element {...elements.icon} />
           <_Flex>
-            <div><Element {...requirements.heading} color={palette.textHighlight} /></div>
-            <div><Element {...requirements.paragraph} color={palette.text} /></div>
+            <div><Element {...elements.heading} /></div>
+            <div><Element {...elements.paragraph} /></div>
           </_Flex>
         </_DisplayFlex>
       </_Block>
@@ -63,20 +41,13 @@ const IconSmallHeadingParagraph = ({
   return (
     <_Block {...props}>
       <div>
-        <Element 
-          {...requirements.icon} 
-          color={palette.primary} 
-          overrides={{
-            fontSize: getFontSize(requirements.heading) * 2,
-            margin: "0 0 10px 0",
-          }}
-          />
+        <Element {...elements.icon} />
       </div>
       <div>
-        <Element {...requirements.heading} color={palette.textHighlight} />
+        <Element {...elements.heading} />
       </div>
       <div>
-        <Element {...requirements.paragraph} color={palette.text} />
+        <Element {...elements.paragraph} />
       </div>
     </_Block>
   )
@@ -85,27 +56,52 @@ export default IconSmallHeadingParagraph;
 
 
 export const requirements = {
-  icon: {
-    type: 'Element',
-    options: ['Icon'],
-  },
-  heading: {
-    type: 'Element',
-    options: ['SmallHeading'],
-  },
-  paragraph: {
-    type: 'Element',
-    options: ['Paragraph'],
-  },
-  alignment: {
-    options: ['left', 'center'],
-  },
-  iconPosition: {
-    options: ['top', 'left-heading', 'left-column']
+  variations: [
+    {
+      iconPosition: ['top'],
+      alignment: ['left', 'center', 'right'],
+    },
+    {
+      iconPosition: ['inline', 'column'],
+      alignment: ['left'],
+    }
+  ],
+  elements: {
+    icon: {
+      element: 'Icon',
+      overrides: ({variation, elements, globals}) => {
+        const { iconPosition, alignment } = variation;
+        if(iconPosition === 'top') {
+          return {
+            margin: '0 0 15px 0',
+            fontSize: getFontSize(elements.heading, globals) * 2,
+          }
+        } else if(iconPosition === 'inline') {
+          return {
+            margin: alignment === 'left' ? '0 10px 0 0' : '0 0 0 10px',
+            fontSize: getFontSize(elements.heading, globals),
+          }
+        }
+        return {
+          margin: alignment === 'left' ? '0 15px 0 0' : '0 0 0 15px',
+          fontSize: getFontSize(elements.heading, globals),
+        }
+      }
+    },
+    heading: {
+      element: 'SmallHeading',
+    },
+    paragraph: {
+      element: 'Paragraph',
+    }
   }
 }
 
-export const params = {
+export const defaultProps = ({variation}) => ({
+  textAlign: variation.alignment,
+})
+
+export const modifiableProps = {
   textAlign: true,
   padding: true,
   margin: true,

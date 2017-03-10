@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import sections from './meta';
 import { interfaceActions } from '../../../core/interface';
-import { includes, last } from 'lodash';
+import { includes, last, map } from 'lodash';
 import { generatePalette } from '../../../core/generator/colors';
 import { fadeIn } from '../../common/styled-animations';
 
@@ -36,25 +36,24 @@ const Section = (props) => {
     onHoverableMouseLeave,
     name, 
     uuid,
+    isSection,
   } = props;
   
-  const globals = props.getGlobals();
-  const palette = generatePalette(globals.colors, props.schema);
   const Section = sections[name];
   return (
     <_Section
       selected={isSelected || isHovered} 
-      onClick={(e) => { e.stopPropagation(); setSelected(uuid); }}
+      onClick={(e) => { e.stopPropagation(); setSelected({uuid, name, isSection}); }}
       onMouseEnter={() => onHoverableMouseEnter(uuid)}
       onMouseLeave={() => onHoverableMouseLeave(uuid)}
       >
-      <Section.component {...props} margin="0 20px" palette={palette} />
+      <Section.component {...props} />
     </_Section>
   )
 }
 
 const mapStateToProps = (state, props) => ({
-  isSelected: state.interface.shiftDown && includes(state.interface.selected, props.uuid),
+  isSelected: state.interface.shiftDown && includes(map(state.interface.selected, 'uuid'), props.uuid),
   isHovered: last(state.interface.hovered) === props.uuid,
 });
 

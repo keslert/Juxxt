@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { connect } from 'react-redux';
 import Page from '../components/page';
+import OverridePanel from '../components/panels/override-panel';
 import { range } from 'lodash';
 
 import { randomItem } from '../core/utils';
@@ -11,12 +12,14 @@ import { setShiftDown } from '../core/interface';
 
 // https://land-book.com/
 
-const _App = styled.div``
+const _App = styled.div`
+  display: flex;
+`
 
 const _Window = styled.div`
   overflow: scroll;
   display: flex;
-  padding: 40px;
+  flex: 1;
 `
 
 const width = 700;
@@ -48,8 +51,8 @@ class App extends React.Component {
     // }, 3000);
 
     this.listener = new window.keypress.Listener();
-    this.listener.simple_combo('s', () => this.updateMaster({structure: true}));
-    this.listener.simple_combo('l', () => this.updateMaster({layout: true}));
+    this.listener.simple_combo('s', () => this.updateMaster({compisition: true}));
+    this.listener.simple_combo('l', () => this.updateMaster({variation: true}));
     this.listener.simple_combo('p', () => this.updateMaster({palette: true}));
     this.listener.simple_combo('c', () => this.updateMaster({content: true}));
     this.listener.simple_combo('g', () => this.updateMaster({globals: true}));
@@ -62,8 +65,6 @@ class App extends React.Component {
       on_keyup: () => this.props.setShiftDown(false),
     })
   }
-
-
 
   generatePage(page, type) {
     return generate(
@@ -99,6 +100,7 @@ class App extends React.Component {
             </_PageWrapper>
           ))}
         </_Window>
+        <OverridePanel />
       </_App>
     );
   }

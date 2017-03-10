@@ -1,45 +1,45 @@
-import Button, { requirements as buttonRequirements, params as buttonParams } from './button';
-import Heading, { requirements as headingRequirements, params as headingParams } from './heading';
-import Icon, { requirements as iconRequirements, params as iconParams } from './icon';
-import Paragraph, { requirements as paragraphRequirements, params as paragraphParams } from './paragraph';
-import SmallHeading, { requirements as smallHeadingRequirements, params as smallHeadingParams } from './small-heading';
-import Link, { requirements as linkRequirements, params as linkParams } from './link';
-import Image, { requirements as imageRequirements, params as imageParams } from './image';
+import Button, { defaultProps as buttonDefault, modifiableProps as buttonModifiable } from './button';
+import Heading, { defaultProps as headingDefault, modifiableProps as headingModifiable } from './heading';
+import Icon, { defaultProps as iconDefault, modifiableProps as iconModifiable } from './icon';
+import Paragraph, { defaultProps as paragraphDefault, modifiableProps as paragraphModifiable } from './paragraph';
+import SmallHeading, { defaultProps as smallHeadingDefault, modifiableProps as smallHeadingModifiable } from './small-heading';
+import Link, { defaultProps as linkDefault, modifiableProps as linkModifiable } from './link';
+import Image, { defaultProps as imageDefault, modifiableProps as imageModifiable } from './image';
 
 export default {
   Button: {
     component: Button,
-    requirements: buttonRequirements,
-    params: buttonParams,
+    defaultProps: buttonDefault,
+    modifiableProps: buttonModifiable,
   },
   Heading: {
     component: Heading,
-    requirements: headingRequirements,
-    params: headingParams,
+    defaultProps: headingDefault,
+    modifiableProps: headingModifiable,
   },
   SmallHeading: {
     component: SmallHeading,
-    requirements: smallHeadingRequirements,
-    params: smallHeadingParams,
+    defaultProps: smallHeadingDefault,
+    modifiableProps: smallHeadingModifiable,
   },
   Icon: {
     component: Icon,
-    requirements: iconRequirements,
-    params: iconParams,
+    defaultProps: iconDefault,
+    modifiableProps: iconModifiable,
   },
   Paragraph: {
     component: Paragraph,
-    requirements: paragraphRequirements,
-    params: paragraphParams,
+    defaultProps: paragraphDefault,
+    modifiableProps: paragraphModifiable,
   },
   Link: {
     component: Link,
-    requirements: linkRequirements,
-    params: linkParams,
+    defaultProps: linkDefault,
+    modifiableProps: linkModifiable,
   },
   Image: {
     component: Image,
-    requirements: imageRequirements,
-    params: imageParams,
+    defaultProps: imageDefault,
+    modifiableProps: imageModifiable,
   }
 }

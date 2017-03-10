@@ -16,47 +16,29 @@ const _SmallHeading = styled.div`
   `};
 `
 
-const SmallHeading = ({
-  color,
-  content,
-  overrides,
-  userOverrides,
-  getGlobals,
-}) => {
-
-  const globals = getGlobals();
-
-  const props = { 
-    fontFamily: globals.smallHeading.fontFamily,
-    fontSize: getFontSize({overrides, userOverrides}, globals), 
-    fontWeight: globals.smallHeading.fontWeight,
-    textTransform: globals.smallHeading.textTransform,
-    margin: globals.smallHeading.margin,
-    color,
-    ...content,
-    ...overrides,
-    ...userOverrides
-  }
-
-  return (
-    <_SmallHeading {...props}>{props.text}</_SmallHeading>
-  )
-}
-
+const SmallHeading = (props) => ( 
+  <_SmallHeading {...props}>{props.content.text}</_SmallHeading>
+)
 export default SmallHeading;
 
-export const requirements = {
-  // none
-}
+export const defaultProps = ({palette, globals}) => ({
+  color: palette.textHighlight,
+  fontFamily: globals.smallHeading.fontFamily,
+  fontSize: globals.smallHeading.fontSize,
+  fontWeight: globals.smallHeading.fontWeight,
+  textTransform: globals.smallHeading.textTransform,
+  margin: globals.smallHeading.margin,
+})
 
-export const params = {
+export const modifiableProps = {
   color: true,
-  textTransform: true,
   fontWeight: true,
   fontSize: true,
+  margin: true,
+  padding: true,
+  textTransform: true,
 }
 
-export function getFontSize(props, globals) {
-  const fontSize = getSafeFromObjects([props.userOverrides, props.overrides], 'fontSize', null)
-  return fontSize || (globals || props.getGlobals()).smallHeading.fontSize;
+export function getFontSize({userOverrides}, globals) {
+  return userOverrides.fontSize || globals.smallHeading.fontSize;
 }

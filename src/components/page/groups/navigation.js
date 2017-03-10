@@ -24,37 +24,24 @@ const _Link = styled.div`
 `
 
 const ProductNavigation = ({
-  requirements,
-  userOverrides,
-  palette,
+  elements,
+  variation,
+  props
 }) => {
 
-  const color = palette.text;
-
-  const props = { color, ...userOverrides };
 
   return (
     <_ProductNavigation {...props} >
       <_Logo>
-        <LogoSVG color={palette.textHighlight} />
+        <LogoSVG color={elements.links[0].props.color} />
       </_Logo>
       <_DisplayFlex align="center" flex="1">
-        <_DisplayFlex flex="1" justify={requirements.justify}>
-          {range(0, requirements.items).map(i => (
-            <Element key={i} {...requirements.link} overrides={{margin: "0 10px 0 0"}} />
+        <_DisplayFlex flex="1" justify={variation.justify}>
+          {elements.links.map(link => (
+            <Element key={link.uuid + link.index} {...link} />
           ))}
         </_DisplayFlex>
-        <Element 
-          {...requirements.button} 
-          background={palette.primary} 
-          color={'#fff'} 
-          overrides={{
-            text: 'Sign Up',
-            type: 'Round',
-            fontSize: 12, 
-            padding: '12px 24px'
-          }} 
-          />
+        <Element {...elements.button} />
       </_DisplayFlex>
     </_ProductNavigation>
   )
@@ -63,22 +50,33 @@ const ProductNavigation = ({
 export default ProductNavigation;
 
 export const requirements = {
-  items: {
-    options: range(1, 6),
+  elements: {
+    button: {
+      element: 'Button',
+      overrides: ({variation, elements}) => ({
+        text: 'Sign Up',
+        type: 'Round',
+        fontSize: 12, 
+        padding: '12px 24px'
+      })
+    },
+    links: {
+      element: 'Link',
+      copies: range(1, 6),
+      overrides: ({variation, elements}) => ({
+        margin: "0 10px 0 0",
+      })
+    },
   },
-  button: {
-    type: 'Element',
-    options: ['Button'],
-  },
-  link: {
-    type: 'Element',
-    options: ['Link'],
-  },
-  justify: {
-    options: ['flex-end', 'flex-start'],
-  }
+  variations: [{
+    justify: ['flex-end', 'flex-start'],
+  }]
 }
 
-export const params = {
+export const defaultProps = () => ({
+
+})
+
+export const modifiableProps = {
   
 }

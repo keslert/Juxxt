@@ -6,27 +6,18 @@ import { _Block } from '../../common/styled-base';
 
 
 const HeadingSubheading = ({
-  requirements,
-  overrides,
-  userOverrides,
-  palette,
+  elements,
+  variation,
+  props,
 }) => {
-
-  const fontSize = getFontSize(requirements.heading);
-
-  const props = {
-    textAlign: requirements.alignment,
-    ...overrides,
-    ...userOverrides,
-  }
 
   return (
     <_Block {...props}>
       <div>
-        <Element {...requirements.heading} color={palette.textHighlight} />
+        <Element {...elements.heading} />
       </div>
       <div>
-        <Element {...requirements.subheading} color={palette.text} overrides={{fontSize: fontSize * 0.75}} />
+        <Element {...elements.subheading} />
       </div>
     </_Block>
   )
@@ -35,21 +26,26 @@ export default HeadingSubheading;
 
 
 export const requirements = {
-  heading: {
-    type: 'Element',
-    options: ['Heading'],
-  },
-  subheading: {
-    type: 'Element',
-    options: ['Heading'],
-  },
-  alignment: {
-    options: ['center'],
+  elements: {
+    heading: {
+      element: 'Heading',
+    },
+    subheading: {
+      element: 'Heading',
+      overrides: ({elements, globals}) => ({
+        fontSize: getFontSize(elements.heading, globals) * .75
+      })
+    },
   }
 }
 
-export const params = {
+export const defaultProps = ({variation}) => ({
+  
+})
+
+export const modifiableProps = {
   textAlign: true,
   margin: true,
   padding: true,
+  minWidth: true,
 };

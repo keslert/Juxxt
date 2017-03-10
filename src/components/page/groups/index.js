@@ -3,28 +3,32 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import groups from './meta';
 import { interfaceActions } from '../../../core/interface';
-import { includes, last } from 'lodash';
+import { includes, last, map } from 'lodash';
 import { fadeIn } from '../../common/styled-animations';
-import { isString, mapValues } from 'lodash';
+import { mapValues } from 'lodash';
 import { generateContent } from '../../../core/generator/content';
 
 const _Group = styled.div`
   position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    box-sizing: border-box;
+  }
   ${props => props.selected && `
-    &:after {
-      content: '';
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      right: -5px;
-      bottom: -5px;
+    &:before {
       background: rgba(122,122,122,0.1);
-      border: 2px dashed rgb(122,122,122);
-      box-sizing: border-box;
-      pointer-events: none;
       animation: ${fadeIn} 0.3s;
     }
+    &:hover:before {
+      background: rgba(0, 122,122,0.1);
+    }
   `}
+  
 `
 
 const Group = (props) => {
@@ -37,34 +41,27 @@ const Group = (props) => {
     name, 
     uuid,
     index,
+    isGroup,
   } = props;
 
-
   let _props = props;
+  
   // Is this a repeating group? If so, we need new content.
   if(index !== undefined) {
-    _props = {..._props,
-      requirements: mapValues(_props.requirements, req => {
-        if(isString(req)) { // not an element
-          return req;
-        }
-
-        return {
-          ...req, 
-          index, 
-          content: generateContent({...req, index})
-        };
-      })
+    _props = {
+      ..._props,
+      elements: mapValues(_props.elements, element => ({
+        ...element,
+        groupIndex: index,
+      }))
     }
   }
-
-
 
   const Group = groups[name];
   return (
     <_Group 
       selected={isSelected || isHovered} 
-      onClick={(e) => { e.stopPropagation(); setSelected(uuid);}}
+      onClick={(e) => { e.stopPropagation(); setSelected({uuid, name, isGroup});}}
       onMouseEnter={() => onHoverableMouseEnter(uuid)}
       onMouseLeave={() => onHoverableMouseLeave(uuid)}
       >
@@ -74,7 +71,7 @@ const Group = (props) => {
 }
 
 const mapStateToProps = (state, props) => ({
-  isSelected: state.interface.shiftDown && includes(state.interface.selected, props.uuid),
+  isSelected: state.interface.shiftDown && includes(map(state.interface.selected, 'uuid'), props.uuid),
   isHovered: last(state.interface.hovered) === props.uuid,
 });
 

@@ -3,46 +3,41 @@ import Element from '../elements';
 import { _Block } from '../../common/styled-base';
 
 const SmallHeadingParagraph = ({
-  requirements,
-  overrides,
-  userOverrides,
-  palette,
-}) => {
-  const props = {
-    textAlign: requirements.alignment,
-    ...overrides,
-    ...userOverrides,
-  }
-
-  return (
-    <_Block {...props}>
-      <div>
-        <Element {...requirements.heading} color={palette.textHighlight} />
-      </div>
-      <div>
-        <Element {...requirements.paragraph} color={palette.text} />
-      </div>
-    </_Block>
-  )
-}
+  elements,
+  variation,
+  props,
+}) => (
+  <_Block {...props}>
+    <div>
+      <Element {...elements.heading} />
+    </div>
+    <div>
+      <Element {...elements.paragraph} />
+    </div>
+  </_Block>
+)
 export default SmallHeadingParagraph;
 
 
 export const requirements = {
-  heading: {
-    type: 'Element',
-    options: ['SmallHeading'],
+  elements: {
+    heading: {
+      element: 'SmallHeading',
+    },
+    paragraph: {
+      element: 'Paragraph',
+    },
   },
-  paragraph: {
-    type: 'Element',
-    options: ['Paragraph'],
-  },
-  alignment: {
-    options: ['left', 'center'],
-  }
+  variations: [{
+    alignment: ['left', 'center'],
+  }]
 }
 
-export const params = {
+export const defaultProps = ({variation}) => ({
+  textAlign: variation.alignment,
+})
+
+export const modifiableProps = {
   textAlign: true,
   maxWidth: true,
   margin: true,

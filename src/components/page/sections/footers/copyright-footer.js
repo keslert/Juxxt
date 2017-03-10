@@ -1,44 +1,39 @@
 import React from 'react';
 import Group from '../../groups';
-
 import { _DisplayFlex } from '../../../common/styled-base';
 import SectionContainer from '../section-container';
 
-
 const CopyrightFooter = ({
-  palette,
-  requirements,
-  userOverrides,
-  getGlobals,
+  sectionContainer,
+  groups,
+  variation,
+  props,
 }) => {
-
-  const globals = getGlobals();
-
-  const props = {
-    padding: globals.sectionPadding,
-    justify: 'center',
-    background: palette.background,
-    ...userOverrides,
-  }
 
   return (
     <_DisplayFlex {...props}>
-      <SectionContainer {...{getGlobals, userOverrides}}>
-        <Group {...requirements.heading} palette={palette} />
+      <SectionContainer {...sectionContainer}>
+        <Group {...groups.heading} />
       </SectionContainer>
     </_DisplayFlex>
   )
 }
-
 export default CopyrightFooter;
 
 export const requirements = {
-  heading: {
-    type: 'Group',
-    options: ['HeadingSubheading'],
-  },
+  groups: {
+    heading: {
+      options: ['HeadingSubheading'],
+    },
+  }
 }
 
-export const params = {
+export const defaultProps = ({palette, globals}) => ({
+  justify: 'center',
+  background: palette.background,
+  padding: globals.section.padding,
+})
+
+export const modifiableProps = {
 
 }

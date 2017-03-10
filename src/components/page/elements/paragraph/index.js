@@ -12,36 +12,21 @@ const _Paragraph = styled.p`
   `}
 `
 
-const Paragraph = ({
-  color,
-  content,
-  overrides,
-  userOverrides,
-  getGlobals,
-}) => {
+const Paragraph = (props) => (
+  <_Paragraph {...props}>
+    {props.content.text}
+  </_Paragraph>
+)
+export default Paragraph;
 
-  const globals = getGlobals();
+export const defaultProps = ({palette, globals}) => ({
+  color: palette.text,
+  fontSize: globals.fontSize,
+})
 
-  const props = {
-    color,
-    fontSize: globals.fontSize, 
-    ...content,
-    ...overrides,
-    ...userOverrides
-  };
-
-  return (
-    <_Paragraph {...props}>
-      {props.text}
-    </_Paragraph>
-  )
-}
-
-export const requirements = {}
-
-export const params = {
+export const modifiableProps = {
   color: true,
   fontSize: true,
+  margin: true,
+  padding: true,
 }
-
-export default Paragraph;

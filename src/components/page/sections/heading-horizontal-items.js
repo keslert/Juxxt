@@ -7,30 +7,20 @@ import SectionContainer from './section-container';
 
 
 const HeadingHorizontalItems = ({
-  palette, 
-  requirements, 
-  userOverrides,
-  getGlobals,
+  sectionContainer,
+  groups,
+  variation,
+  props,
 }) => {
-
-
-  const globals = getGlobals();
-  const props = {
-    padding: globals.sectionPadding, 
-    background: palette.background,
-    justify: "center",
-    align: "center",
-    ...userOverrides
-  }
 
   return (
     <_DisplayFlex {...props}>
-      <SectionContainer {...{getGlobals, userOverrides}}>
-        <Group {...requirements.heading} palette={palette} overrides={{margin: '0 0 70px 0'}} />
+      <SectionContainer {...sectionContainer}>
+        <Group {...groups.heading} />
         <_DisplayFlex>
-          {range(0, requirements.items).map(i => (
-            <_Flex key={i}>
-              <Group {...requirements.item} palette={palette} overrides={{padding: '0 20px'}} index={i} />
+          {range(0, variation.items).map(i => (
+            <_Flex key={groups.item.uuid + i}>
+              <Group {...groups.item} index={i} />
             </_Flex>
           ))}
         </_DisplayFlex>
@@ -42,24 +32,37 @@ const HeadingHorizontalItems = ({
 export default HeadingHorizontalItems;
 
 export const requirements = {
-  heading: {
-    type: 'Group',
-    options: ['HeadingParagraph', 'IconHeadingParagraph'],
-    restrictions: {
-      alignment: ['center'],
-      iconPosition: ['top'],
-    }
+  groups: {
+    heading: {
+      options: ['HeadingParagraph', 'IconHeadingParagraph'],
+      restrictions: {
+        alignment: ['center'],
+        iconPosition: ['top'],
+      },
+      overrides: ({variation}) => ({
+        margin: '0 0 70px 0',
+      })
+    },
+    item: {
+      options: ['SmallHeadingParagraph', 'IconSmallHeadingParagraph'],
+      overrides: ({variation}) => ({
+        padding: '0 20px',
+      })
+    },
   },
-  item: {
-    type: 'Group',
-    options: ['SmallHeadingParagraph', 'IconSmallHeadingParagraph'],
-  },
-  items: {
-    options: [3,4]
-  }
+  variations: [{
+    items: [3, 4],
+  }]
 }
 
-export const params = {
+export const defaultProps = ({palette, globals}) => ({
+  justify: 'center',
+  align: 'center',
+  background: palette.background,
+  padding: globals.section.padding,
+})
+
+export const modifiableProps = {
   padding: true,
   background: true,
 }

@@ -3,19 +3,13 @@ import Element from '../elements';
 import { _Block } from '../../common/styled-base';
 
 const BlockImage = ({
-  requirements,
-  overrides,
-  userOverrides,
-  palette,
+  elements,
+  variation,
+  props,
 }) => {
-  const props = {
-    ...overrides,
-    ...userOverrides,
-  }
-
   return (
     <_Block {...props}>
-      <Element {...requirements.image} src="http://placehold.it/600x400" />
+      <Element {...elements.image} />
     </_Block>
   )
 }
@@ -23,13 +17,18 @@ export default BlockImage;
 
 
 export const requirements = {
-  image: {
-    type: 'Element',
-    options: ['Image'],
+  elements: {
+    image: {
+      element: 'Image',
+    }
   },
 }
 
-export const params = {
+export const defaultProps = () => ({
+  
+})
+
+export const modifiableProps = {
   width: true,
   height: true,
   maxWidth: true,

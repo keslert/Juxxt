@@ -12,6 +12,7 @@ function generateGlobals() {
     fontFamily,
     fontSize: 14,
     iconSize: 64,
+    maxPageWidth: 960,
     button: {
       type: randomItem(['Rounded', 'Round', 'Square', 'Raised']),
       textTransform: randomItem(['none', 'uppercase']),
@@ -30,8 +31,9 @@ function generateGlobals() {
       textTransform: randomItem(['none', 'uppercase']),
       margin: "0 0 10px",
     },
-    maxPageWidth: 960,
-    sectionPadding: "80px 10px",
+    section: {
+      padding: "80px 10px",
+    }
   }
 }
 

@@ -3,31 +3,23 @@ import styled from 'styled-components';
 import Group from '../../groups';
 import tinycolor from 'tinycolor2';
 import { _DisplayFlex } from '../../../common/styled-base';
-
-
+import SectionContainer from '../section-container';
 
 const Header = ({
-  palette,
-  requirements,
-  userOverrides,
-  getGlobals,
+  sectionContainer,
+  groups,
+  variation,
+  props,
 }) => {
-
-  const props = {
-    background: `linear-gradient(to left, ${palette.background} , ${tinycolor(palette.background).darken(7).toString()})`,
-    padding: '10px 40px 70px',
-    ...userOverrides,
-  }
 
   return (
     <_DisplayFlex {...props} style={{minHeight: '600px'}}>
-      <_DisplayFlex direction="column" flex="1">
-        <Group {...requirements.navigation} palette={palette} />
-
-        <_DisplayFlex flex="1" direction="column" justify="center" align={requirements.align}>
-          <Group {...requirements.intro} palette={palette} />
+      <div style={{width: '100%'}}><Group {...groups.navigation} /></div>
+      <SectionContainer {...sectionContainer} align={variation.align}>
+        <_DisplayFlex flex="1" align="center">  
+          <Group {...groups.intro} />
         </_DisplayFlex>
-      </_DisplayFlex>
+      </SectionContainer>
     </_DisplayFlex>
   )
 }
@@ -35,20 +27,31 @@ const Header = ({
 export default Header;
 
 export const requirements = {
-  navigation: {
-    type: 'Group',
-    options: ['Navigation'],
+  groups: {
+    navigation: {
+      options: ['Navigation'],
+    },
+    intro: {
+      options: [],
+    },
   },
-  intro: {
-    type: 'Group',
-    options: [],
-  },
-  align: {
-    options: ['flex-start', 'center', 'flex-end']
-  }
+  variations: [{
+    align: ['flex-start', 'center', 'flex-end'],
+  }]
 }
 
-export const params = {
+export const defaultProps = ({palette}) => ({
+  minHeight: '600px',
+  justify: 'center',
+  align: 'center',
+  flexDirection: 'column',
+  flex: 1,
+  background: `linear-gradient(to left, ${palette.background} , ${tinycolor(palette.background).darken(7).toString()})`,
+  padding: '10px 40px 70px',
+})
+
+export const modifiableProps = {
   background: true,
   padding: true,
+  minHeight: true,
 }

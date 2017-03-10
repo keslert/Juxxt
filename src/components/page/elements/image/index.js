@@ -6,35 +6,27 @@ const _Image = styled.img`
     ${props.height && `height: ${props.height};`}
     ${props.width && `width: ${props.width};`}
     ${props.margin && `margin: ${props.margin};`}
+    ${props.borderRadius && `borderRadius: ${props.borderRadius};`}
+    ${props.boxShadow && `box-shadow: ${props.boxShadow};`}
   `}
 `
 
-const Image = ({
-  src,
-  overrides,
-  userOverrides,
-  getGlobals,
-}) => {
-  
-  const globals = getGlobals();
-
-  const props = {
-    src,
-    ...overrides,
-    ...userOverrides,
-  }
-
+const Image = (props) => {
   return (
-    <_Image {...props } />
+    <_Image {...props} src={props.content.src} />
   )
 }
 
-export const requirements = {}
+export const defaultProps = ({palette, globals}) => ({
+  
+})
 
-export const params = {
+export const modifiableProps = {
   width: true,
   height: true,
   margin: true,
+  borderRadius: true,
+  boxShadow: true,
 }
 
 export default Image;

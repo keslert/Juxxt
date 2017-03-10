@@ -1,0 +1,2 @@
+export const CLEAR_REGISTRY = 'CLEAR_REGISTRY';
+export const REGISTER_ITEM = 'REGISTER_ITEM';

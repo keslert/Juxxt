@@ -1,36 +1,36 @@
-import BasicSection, { requirements as basicReqs, params as basicParams } from './basic';
-import TPImage, { requirements as tpImageReqs, params as tpImageParams } from './tp-image';
+import BasicSection, { requirements as basicReqs, defaultProps as basicDefault } from './basic';
+import TPImage, { requirements as tpImageReqs, defaultProps as tpImageDefault } from './tp-image';
 
-import ProductHeader, { requirements as productHeaderReqs, params as productHeaderParams } from './headers/product-header';
+import ProductHeader, { requirements as productHeaderReqs, defaultProps as productHeaderDefault } from './headers/product-header';
 
 
-import HeadingHorizontalItems, { requirements as headingHorizontalItemsReqs, params as headingHorizontalItemsParams } from './heading-horizontal-items';
+import HeadingHorizontalItems, { requirements as headingHorizontalItemsReqs, defaultProps as headingHorizontalItemsDefault } from './heading-horizontal-items';
 
-import CopyrightFooter, { requirements as copyrightFooterReqs, params as copyrightFooterParams } from './footers/copyright-footer';
+import CopyrightFooter, { requirements as copyrightFooterReqs, defaultProps as copyrightFooterDefault } from './footers/copyright-footer';
 
 
 export default {
   TPImage: {
     component: TPImage,
     requirements: tpImageReqs,
-    params: tpImageParams,
+    defaultProps: tpImageDefault,
   },
   BasicSection: {
     component: BasicSection,
     requirements: basicReqs,
-    params: basicParams,
+    defaultProps: basicDefault,
   },
   HeadingHorizontalItems: {
     component: HeadingHorizontalItems,
     requirements: headingHorizontalItemsReqs,
-    params: headingHorizontalItemsParams,
+    defaultProps: headingHorizontalItemsDefault,
   },
   
   // Headers
   ProductHeaderSection: {
     component: ProductHeader,
     requirements: productHeaderReqs,
-    params: productHeaderParams,
+    defaultProps: productHeaderDefault,
     header: true,
   },
 
@@ -38,7 +38,7 @@ export default {
   CopyrightFooter: {
     component: CopyrightFooter,
     requirements: copyrightFooterReqs,
-    params: copyrightFooterParams,
+    defaultProps: copyrightFooterDefault,
     footer: true,
   }
 }

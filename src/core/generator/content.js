@@ -5,19 +5,19 @@ import LoremIpsum from 'lorem-ipsum';
 
 
 let memory = {};
-export function clearCacheForUUID(uuid) {
+export function clearCacheForSubstring(uuid) {
   memory = pickBy(memory, (_, key) => (
     !key.startsWith(uuid)
   ))
 }
 
-export function generateContent(props) {
-  const { uuid, name, index } = props;
-  const _uuid = `${uuid}-${index}`;
+export function getContent(props) {
+  const { uuid, index=0, groupUUID, groupIndex=0, sectionUUID } = props;
+  const contentID = sectionUUID + groupUUID + uuid + groupIndex + index;  
 
-  if(!memory[_uuid]) {
+  if(!memory[contentID]) {
     let content;
-    switch(name) {
+    switch(props.name) {
       case 'Button':
         content = getButtonContent(props);
         break;
@@ -40,9 +40,9 @@ export function generateContent(props) {
         content = getSmallHeadingContent(props);
         break;
     }
-    memory[_uuid] = content;
+    memory[contentID] = content;
   }
-  return memory[_uuid];
+  return memory[contentID];
 }
 
 function getButtonContent(props) {
@@ -54,7 +54,7 @@ function getButtonContent(props) {
 
 function getParagraphContent(props) {
   const text = LoremIpsum({
-    count: props.index !== undefined ? 2 : random(2, 4),
+    count: props.groupIndex !== undefined ? 2 : random(2, 4),
     units: 'sentences',
   });
   return { text };
@@ -77,7 +77,12 @@ function getIconContent(props) {
 
 function getImageContent(props) {
   return randomItem([
-    { src: 'https://placehold.it/500x400' },
+    { src: 'https://unsplash.it/400/600?random' },
+    { src: 'https://unsplash.it/400/601?random' },
+    { src: 'https://unsplash.it/400/602?random' },
+    { src: 'https://unsplash.it/600/400?random' },
+    { src: 'https://unsplash.it/601/400?random' },
+    { src: 'https://unsplash.it/602/400?random' },
   ]);
 }
 

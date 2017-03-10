@@ -1,54 +1,60 @@
-import HeadingSubheading, { requirements as headingSubheadingReqs, params as headingSubheadingParams } from './heading-subheading';
-import HeadingParagraph, { requirements as headingParagraphReqs, params as headingParagraphParams } from './heading-paragraph';
-import IconHeadingParagraph, { requirements as iconHeadingParagraphReqs, params as iconHeadingParagraphParams } from './icon-heading-paragraph';
+import HeadingSubheading, { requirements as headingSubheadingReqs, defaultProps as headingSubheadingDefault } from './heading-subheading';
+import HeadingParagraph, { requirements as headingParagraphReqs, defaultProps as headingParagraphDefault } from './heading-paragraph';
+import IconHeadingParagraph, { requirements as iconHeadingParagraphReqs, defaultProps as iconHeadingParagraphDefault } from './icon-heading-paragraph';
 
-import IconSmallHeadingParagraph, { requirements as iconSmallHeadingParagraphReqs, params as iconSmallHeadingParagraphParams } from './icon-small-heading-paragraph';
-import SmallHeadingParagraph, { requirements as smallHeadingParagraphReqs, params as smallHeadingParagraphParams } from './small-heading-paragraph';
-import Navigation, { requirements as navigationReqs, params as navigationParams } from './navigation';
+import IconSmallHeadingParagraph, { requirements as iconSmallHeadingParagraphReqs, defaultProps as iconSmallHeadingParagraphDefault } from './icon-small-heading-paragraph';
+import SmallHeadingParagraph, { requirements as smallHeadingParagraphReqs, defaultProps as smallHeadingParagraphDefault } from './small-heading-paragraph';
+import Navigation, { requirements as navigationReqs, defaultProps as navigationDefault } from './navigation';
 
-import BlockImage, { requirements as blockImageReqs, params as blockImageParams } from './block-image';
+import BlockImage, { requirements as blockImageReqs, defaultProps as blockImageDefault } from './block-image';
+import Device, { requirements as deviceReqs, defaultProps as deviceDefault } from './device';
 
 export default {
   HeadingSubheading: {
     component: HeadingSubheading,
     requirements: headingSubheadingReqs,
-    params: headingSubheadingParams,
+    defaultProps: headingSubheadingDefault,
   },
   HeadingParagraph: {
     component: HeadingParagraph,
     requirements: headingParagraphReqs,
-    params: headingParagraphParams,
+    defaultProps: headingParagraphDefault,
   },
   IconHeadingParagraph: {
     component: IconHeadingParagraph,
     requirements: iconHeadingParagraphReqs,
-    params: iconHeadingParagraphParams,
+    defaultProps: iconHeadingParagraphDefault,
   },
   
   IconSmallHeadingParagraph: {
     component: IconSmallHeadingParagraph,
     requirements: iconSmallHeadingParagraphReqs,
-    params: iconSmallHeadingParagraphParams,
+    defaultProps: iconSmallHeadingParagraphDefault,
   },
   SmallHeadingParagraph: {
     component: SmallHeadingParagraph,
     requirements: smallHeadingParagraphReqs,
-    params: smallHeadingParagraphParams,
+    defaultProps: smallHeadingParagraphDefault,
     special: true,
   },
 
   BlockImage: {
     component: BlockImage,
     requirements: blockImageReqs,
-    params: blockImageParams,
+    defaultProps: blockImageDefault,
     special: true,
   },
-
+  Device: {
+    component: Device,
+    requirements: deviceReqs,
+    defaultProps: deviceDefault,
+    special: true,
+  },
 
   Navigation: {
     component: Navigation,
     requirements: navigationReqs,
-    params: navigationParams,
+    defaultProps: navigationDefault,
     special: true,
   },
 

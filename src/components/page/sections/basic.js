@@ -5,23 +5,15 @@ import Group from '../groups';
 import SectionContainer from './section-container';
 
 const BasicSection = ({
-  requirements, 
-  palette, 
-  userOverrides,
-  getGlobals,
+  sectionContainer,
+  groups, 
+  variation,
+  props,
 }) => {
-  const globals = getGlobals();
-  const props = { 
-    justify: 'center',
-    padding: globals.sectionPadding, 
-    background: palette.background, 
-    ...userOverrides
-  }
-
   return (
     <_DisplayFlex {...props}>
-      <SectionContainer {...{getGlobals, userOverrides}}>
-        <Group {...requirements.group} palette={palette} />
+      <SectionContainer {...sectionContainer}>
+        <Group {...groups.group} />
       </SectionContainer>
     </_DisplayFlex>
   )
@@ -29,13 +21,20 @@ const BasicSection = ({
 export default BasicSection;
 
 export const requirements = {
-  group: {
-    type: 'Group',
-    options: [],
+  groups: {
+    group: {
+      options: [],
+    }
   }
 }
 
-export const params = {
+export const defaultProps = ({palette, globals}) => ({
+  justify: 'center',
+  background: palette.background,
+  padding: globals.section.padding,
+})
+
+export const modifiableProps = {
   padding: true,
   background: true,
 }

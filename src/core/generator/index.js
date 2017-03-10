@@ -1,33 +1,33 @@
 import sections from '../../components/page/sections/meta';
 import groups from '../../components/page/groups/meta';
 import elements from '../../components/page/elements/meta';
-import { randomItem } from '../utils';
-import { keys, range, map, reduce, mapValues, isEmpty, includes, pickBy, random } from 'lodash';
+import { randomItem, getFirstIfList } from '../utils';
+import { keys, range, map, reduce, mapValues, isEmpty, includes, pickBy, random, intersection, filter, every, size, cloneDeep, max } from 'lodash';
 import shortid from 'shortid';
 
-import { selectSchema } from './colors';
+import { selectPalette } from './colors';
 import { selectGlobals } from './globals';
-import { generateContent, clearCacheForUUID } from './content';
+import { getContent, clearCacheForSubstring } from './content';
 
 
 
 export function init() {
   const meta = {
     uuid: shortid.generate(),
-    sections: range(0, 7).map(_ => ({ 
+    sections: range(0, 5).map(_ => ({ 
       uuid: shortid.generate(),
       schema: randomItem(range(0, 3)),
     })),
   }
 
   const modify = {
-    structure: true,
-    layout: true,
-    palette: false,
+    compisition: true,
+    variation: true,
+    palette: true,
     globals: true,
   }
 
-  const page = generate(meta, modify, map(meta.sections, 'uuid'));
+  const page = generate(meta, modify, meta.sections);
   const page2 = {...page,
     uuid: shortid.generate(),
   }
@@ -36,10 +36,8 @@ export function init() {
 }
 
 
-let _cache = {};
-export function generate(page, modify, selected) {
-  _cache = {};
 
+export function generate(page, modify, selected) {
   const globals = selectGlobals(page, modify);
 
   const _page = {
@@ -47,13 +45,13 @@ export function generate(page, modify, selected) {
     globals,
     sections: page.sections.map((section, index) => {
       return generateSection({
-        getGlobals: () => globals, 
-        index, 
+        globals,
         modify,
-        modifiable: includes(selected, section.uuid),
-        section, 
+        section,
         sections: page.sections,
-        selected,
+        sectionIndex: index, 
+        selectedUUIDs: map(selected, 'uuid'),
+        selectedCloneIDs: map(selected, 'cloneID'),
       });
     }),
   }
@@ -62,131 +60,211 @@ export function generate(page, modify, selected) {
   return _page;
 }
 
+
+
+/**********************************************************
+ * Generate Section
+ *********************************************************/
 function generateSection(props) {
+  const isSelected = includes(props.selectedUUIDs, props.section.uuid);
+  const isNewSection = isSelected && props.modify.compisition || !props.section.uuid;
 
-  const { modifiable, modify } = props;
-
-  const _section = {
+  const section = {
     uuid: shortid.generate(),
-    ...props.section,
-    getGlobals: props.getGlobals
-  };
-
-  if(modifiable && modify.palette) {
-    _section.schema += random(1, props.selected.length);
-  }
-
-  if(modifiable && modify.structure) {
-    _section.name = selectSection(props);
-  }
-
-  const template = sections[_section.name];
-  
-  _section.requirements = mapValues(template.requirements, (req, key) => {
-    if(req.type === 'Group') {
-      const group = (_section.requirements && _section.requirements[key]) || {};
-      return generateGroup({...props, 
-        options: req.options,
-        restrictions: req.restrictions || {},
-        group,
-        modifiable: modifiable || includes(props.selected, group.uuid),
-      })
-    }
-
-    if(modifiable && modify.layout || !_section.requirements || !_section.requirements[key]) {
-      return randomItem(req.options);
-    }
-
-    return _section.requirements[key]; // By default we return the old requirement;
-  })
-
-  return _section;
-}
-
-
-function generateGroup(props) {
-
-  const { modifiable, modify } = props;
-
-  const _group = {
-    uuid: shortid.generate(),
-    ...props.group,
-    getGlobals: props.getGlobals,
-  }
-
-  if(modifiable && modify.palette) {
-    // not sure...
-  }
-
-  if(modifiable && modify.structure) {
-    _group.name = selectGroup(props);
-  }
-
-  const template = groups[_group.name];
-  
-  _group.requirements = mapValues(template.requirements, (req, key) => {
-
-    const restrictions = props.restrictions[key];
-
-    if(req.type === 'Element') {
-      const element = (_group.requirements && _group.requirements[key]) || {};
-      return generateElement({...props,
-        element,
-        options: restrictions || req.options,
-        modifiable: modifiable || includes(props.selected, element.uuid),
-      })
-    }
-
-    if(modifiable && modify.layout || !props.group || props.group.name !== _group.name) {
-      return randomItem(restrictions || req.options);
-    }
-
-    return _group.requirements[key]; 
-  })
-
-  return _group;
-}
-
-function generateElement(props) {
-
-  const { modifiable, modify } = props;
-  const _element = {
-    uuid: shortid.generate(),
+    isSection: true,
     userOverrides: {},
-    ...props.element,
-    getGlobals: props.getGlobals,
+    sectionContainer: {
+      maxWidth: props.globals.maxPageWidth,
+    },
+    ...props.section,
   }
 
-  if(modifiable && modify.palette) {
-    // not sure....
-  }
 
-  if(modifiable && modify.structure) {
-    _element.name = selectElement(props);
-  }
-
-  if(modifiable && modify.content) {
-    clearCacheForUUID(_element.uuid);
-  }
-
-  const template = elements[_element.name];
-
-  const requirements = mapValues(template.requirements, (req, key) => {
-    if(req.consistent) {
-      if(!_cache[key]) {
-        _cache[key] = props.modify === 'stir' ? props.element.requirements[key] : randomItem(req.options);
-      }
-      return _cache[key];
+  if(isNewSection) {
+    section.name = selectSection(props);
+    section.variation = getValidVariation(sections[section.name].requirements.variations, {});
+    section.groups = {};
+    section.props = {};
+    section.userOverrides = {};
+  } 
+  
+  const sectionTemplate = sections[section.name];
+  if(isSelected) {
+    if(props.modify.palette) {
+      section.palette = selectPalette(props);
     }
+    if(props.modify.variation && !isNewSection) {
+      section.variation = getValidVariation(sectionTemplate.requirements.variations, {});
+    }
+    if(props.modify.content) {
+      clearCacheForSubstring(section.uuid);
+    }
+  }
 
-    return randomItem(req.options);
+  const _groups = mapValues(sectionTemplate.requirements.groups, (groupReqs, key) => {
+    return generateGroup({
+      ...props,
+      section,
+      group: section.groups[key] || {},
+      options: groupReqs.options || [],
+      restrictions: groupReqs.restrictions || {},
+    })
   })
 
-  _element.groupName = props.group.name;
-  _element.sectionName = props.group.name;
-  _element.content = generateContent(_element);
 
-  return _element;
+  // Handle Overrides
+  section.groups = mapValues(sectionTemplate.requirements.groups, (groupReqs, key) => {
+    const group = _groups[key];
+    if(!groupReqs.overrides) {
+      return group;
+    }
+
+    return {
+      ...group,
+      props: {
+        ...group.props,
+        ...groupReqs.overrides({
+          groups: section.groups,
+          variation: section.variation,
+          globals: props.globals,
+        }),
+        ...group.userOverrides,
+      }
+    }
+  })
+
+  section.props = {
+    ...sectionTemplate.defaultProps({palette: section.palette, globals: props.globals, variation: section.variation}),
+    ...props.overrides,
+  }
+
+  return section;
+}
+
+
+/**********************************************************
+ * Generate Group
+ *********************************************************/
+function generateGroup(props) {
+  const isSelected = includes(props.selectedUUIDs, props.group.uuid);
+  const isNewGroup = isSelected && props.modify.compisition || !props.group.uuid;
+
+  const group = {
+    uuid: shortid.generate(),
+    groupUUID: shortid.generate(),
+    isGroup: true,
+    userOverrides: {},
+    ...props.group,
+  }
+
+  if(isNewGroup) {
+    group.name = selectGroup(props);
+    group.elements = {};
+    group.variation = getValidVariation(groups[group.name].requirements.variations, props.restrictions);
+    group.props = {};
+    group.userOverrides = {};
+  }
+
+  const groupTemplate = groups[group.name];
+  if(isSelected) {
+    if(props.modify.variation && !isNewGroup) {
+      group.variation = getValidVariation(groupTemplate.requirements.variations, props.restrictions);
+    }
+    if(props.modify.content) {
+      clearCacheForSubstring(props.section.uuid + group.uuid);
+    }
+  }
+
+  
+  group.elements = mapValues(groupTemplate.requirements.elements, (elementReqs, key) => {
+    return generateElement({
+      ...props,
+      group,
+      element: getFirstIfList(group.elements[key]) || {name: elementReqs.element},
+    })
+  })
+
+  // Handle Group Overrides
+  group.elements = mapValues(groupTemplate.requirements.elements, (elementReqs, key) => {
+    const element = group.elements[key];
+    if(!elementReqs.overrides) {
+      return element;
+    }
+    
+    return {
+      ...element,
+      props: {
+        ...element.props,
+        ...elementReqs.overrides({
+          elements: group.elements, 
+          variation: group.variation, 
+          globals: props.globals
+        }),
+        ...element.userOverrides,
+      }
+    }
+  })
+
+  // Handle Copies
+  group.elements = mapValues(groupTemplate.requirements.elements, (elementReqs, key) => {
+    const element = group.elements[key];
+    if(!elementReqs.copies) {
+      return element;
+    }
+
+    const copies = props.modify.variation && isSelected || isNewGroup
+                   ? randomItem(elementReqs.copies)
+                   : size(props.group.elements[key]);
+
+
+    return range(0, copies).map(i => (
+      generateElement({
+        ...props,
+        group,
+        element: Object.assign({}, cloneDeep(element), {uuid: element.uuid + i}),
+        modify: {},
+      })
+    ))
+  })
+  
+  group.props = {
+    ...group.props,
+    ...groupTemplate.defaultProps({palette: props.section.palette, globals: props.globals, variation: group.variation}),
+    ...group.userOverrides,
+  }
+  return group;
+}
+
+
+/**********************************************************
+ * Generate Element
+ *********************************************************/
+function generateElement(props) {
+  const isSelected = includes(props.selectedUUIDs, props.element.uuid);
+  
+  const element = {
+    uuid: shortid.generate(),
+    elementUUID: shortid.generate(),
+    isElement: true,
+    groupUUID: props.group.uuid,
+    sectionUUID: props.section.uuid,
+    userOverrides: {},
+    props: {},
+    ...props.element,
+  }
+
+  if(isSelected && props.modify.content) {
+    clearCacheForSubstring(props.section.uuid + props.group.uuid + element.uuid);
+  }
+
+  const elementTemplate = elements[element.name];
+  element.props = {
+    ...element.props,
+    ...elementTemplate.defaultProps({palette: props.section.palette, globals: props.globals}, element.userOverrides),
+    ...element.userOverrides,
+  }  
+
+  return element;
 }
 
 
@@ -206,10 +284,10 @@ function selectGroup(props) {
 
 function selectSection(props) {
   const _sections = pickBy(sections, section => {
-    if(props.index === 0) {
+    if(props.sectionIndex === 0) {
       return section.header;
     }
-    if(props.index === (props.sections.length - 1)) {
+    if(props.sectionIndex === (props.sections.length - 1)) {
       return section.footer;
     }
     return !section.footer && !section.header;
@@ -229,4 +307,22 @@ function pushHistory(page) {
    page,
    history[page.uuid].slice(0, 5), 
   ];
+}
+
+function getValidVariation(variations, restrictions) {
+  if(!variations)
+    return {};
+
+  const _variations = map(variations, variation => (
+    mapValues(variation, (values, key) => {
+      const restriction = restrictions[key];
+      return restriction ? intersection(values, restriction) : values;
+    })
+  ))
+  
+  const filtered = filter(_variations, variation => every(variation, values => !isEmpty(values)));
+
+  return isEmpty(filtered)
+         ? mapValues(randomItem(variations), randomItem)
+         : mapValues(randomItem(filtered), randomItem)
 }

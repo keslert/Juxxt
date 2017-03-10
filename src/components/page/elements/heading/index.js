@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import { getSafeFromObjects } from '../../../../core/utils';
 
 const _Heading = styled.div`
   user-select: none;
@@ -12,50 +11,33 @@ const _Heading = styled.div`
     text-transform: ${props.textTransform};
     color: ${props.color};
     margin: ${props.margin};
-    ${props.padding && `padding: ${props.padding};`};
-    
+    ${props.padding && `padding: ${props.padding};`}; 
   `};
 `
 
-const Heading = ({
-  color,
-  content,
-  overrides,
-  userOverrides,
-  getGlobals,
-}) => {
-
-  const globals = getGlobals();
-
-  const props = { 
-    fontFamily: globals.heading.fontFamily,
-    fontSize: getFontSize({overrides, userOverrides}, globals),
-    fontWeight: globals.heading.fontWeight,
-    textTransform: globals.heading.textTransform,
-    margin: globals.heading.margin,
-    color,
-    ...content,
-    ...overrides,
-    ...userOverrides,
-  }
-
-  return (
-    <_Heading {...props}>{props.text}</_Heading>
-  )
-}
-
+const Heading = (props) => (
+  <_Heading {...props}>{props.content.text}</_Heading>
+)
 export default Heading;
 
-export const requirements = {}
 
-export const params = {
+export const defaultProps = ({palette, globals}) => ({
+  color: palette.textHighlight,
+  fontFamily: globals.heading.fontFamily,
+  fontSize: globals.heading.fontSize,
+  fontWeight: globals.heading.fontWeight,
+  textTransform: globals.heading.textTransform,
+  margin: globals.heading.margin,
+})
+
+export const modifiableProps = {
   color: true,
   textTransform: true,
   fontWeight: true,
   fontSize: true,
+  text: true,
 }
 
-export function getFontSize(props, globals) {
-  const fontSize = getSafeFromObjects([props.userOverrides, props.overrides], 'fontSize', null)
-  return fontSize || (globals || props.getGlobals()).heading.fontSize;
+export function getFontSize({userOverrides}, globals) {
+  return userOverrides.fontSize || globals.heading.fontSize;
 }

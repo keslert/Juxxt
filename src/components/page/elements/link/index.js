@@ -12,36 +12,22 @@ const _Link = styled.p`
   `}
 `
 
-const Link = ({
-  color,
-  content,
-  overrides,
-  userOverrides,
-  getGlobals,
-}) => {
+const Link = (props) => (
+  <_Link {...props}>
+    {props.content.text}
+  </_Link>
+)
+export default Link;
 
-  const globals = getGlobals();
+export const defaultProps = ({palette, globals}) => ({
+  color: palette.link,
+  fontSize: globals.fontSize,
+})
 
-  const props = {
-    color,
-    fontSize: globals.fontSize, 
-    ...content,
-    ...overrides,
-    ...userOverrides
-  };
-
-  return (
-    <_Link {...props}>
-      {props.text}
-    </_Link>
-  )
-}
-
-export const requirements = {}
-
-export const params = {
+export const modifiableProps = {
   color: true,
   fontSize: true,
+  margin: true,
+  padding: true,
 }
 
-export default Link;

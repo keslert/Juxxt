@@ -7,55 +7,58 @@ import { getFontSize } from '../elements/heading';
 
 
 const IconHeadingParagraph = ({
-  requirements,
-  overrides,
-  userOverrides,
-  palette,
+  elements,
+  variation,
+  props,
 }) => {
-  const props = {
-    maxWidth: 600,
-    textAlign: requirements.alignment,
-    ...overrides,
-    ...userOverrides,
-  }
 
-  if(requirements.iconPosition === 'left-heading') {
+
+  let headingProps;
+  if(variation.alignment === 'left') {
+    headingProps = {
+      flex: 1,
+      justify: 'flex-start',
+      order: 3,
+      flexDirection: 'column',
+    }
+  } else {
+    headingProps = {
+      flex: 1,
+      justify: 'flex-end',
+      order: 1,
+      flexDirection: 'column',
+    }
+  }
+  
+  // TODO: Use alignment for ordering.
+  if(variation.iconPosition === 'inline') {
     return (
-      <_Block {...props} textAlign="left">
+      <_Block {...props}>
         <_DisplayFlex>
-          <Element 
-            {...requirements.icon} 
-            color={palette.primary} 
-            overrides={{
-              fontSize: getFontSize(requirements.heading),
-              margin: "0 10px 0 0",
-            }}
-            />
-          <_Flex>
-            <Element {...requirements.heading} color={palette.textHighlight} />
-          </_Flex>
+          <_DisplayFlex order={2}>
+            <Element {...elements.icon} />
+          </_DisplayFlex>
+          <_DisplayFlex {...headingProps}>
+            <Element {...elements.heading} />
+          </_DisplayFlex>
         </_DisplayFlex>
-        <Element {...requirements.paragraph} color={palette.text} />
+        <Element {...elements.paragraph} />
       </_Block>
     )
   }
 
-  if(requirements.iconPosition === 'left-column') {
+  // TODO: Use alignment for ordering.
+  if(variation.iconPosition === 'column') {
     return (
-      <_Block {...props} textAlign="left">
+      <_Block {...props}>
         <_DisplayFlex>
-          <Element 
-            {...requirements.icon} 
-            color={palette.primary} 
-            overrides={{
-              fontSize: getFontSize(requirements.heading),
-              margin: "0 15px 0 0",
-            }}
-            />
-          <_Flex>
-            <div><Element {...requirements.heading} color={palette.textHighlight} /></div>
-            <div><Element {...requirements.paragraph} color={palette.text} /></div>
-          </_Flex>
+          <_DisplayFlex order={2}>
+            <Element {...elements.icon} />
+          </_DisplayFlex>
+          <_DisplayFlex {...headingProps}>
+            <Element {...elements.heading} />
+            <Element {...elements.paragraph} />
+          </_DisplayFlex>
         </_DisplayFlex>
       </_Block>
     )
@@ -64,19 +67,13 @@ const IconHeadingParagraph = ({
   return (
     <_Block {...props}>
       <div>
-        <Element 
-          {...requirements.icon} 
-          color={palette.primary} 
-          overrides={{
-            margin: "0 0 25px 0",
-          }}
-          />
+        <Element {...elements.icon} />
       </div>
       <div>
-        <Element {...requirements.heading} color={palette.textHighlight} />
+        <Element {...elements.heading} />
       </div>
       <div>
-        <Element {...requirements.paragraph} color={palette.text} />
+        <Element {...elements.paragraph} />
       </div>
     </_Block>
   )
@@ -85,27 +82,52 @@ export default IconHeadingParagraph;
 
 
 export const requirements = {
-  icon: {
-    type: 'Element',
-    options: ['Icon'],
-  },
-  heading: {
-    type: 'Element',
-    options: ['Heading'],
-  },
-  paragraph: {
-    type: 'Element',
-    options: ['Paragraph'],
-  },
-  alignment: {
-    options: ['left', 'center'],
-  },
-  iconPosition: {
-    options: ['top', 'left-heading', 'left-column']
+  variations: [
+    {
+      iconPosition: ['top'],
+      alignment: ['left', 'center', 'right'],
+    },
+    {
+      iconPosition: ['inline', 'column'],
+      alignment: ['left', 'right'],
+    }
+  ],
+  elements: {
+    icon: {
+      element: 'Icon',
+      overrides: ({variation, elements, globals}) => {
+        const { iconPosition, alignment } = variation;
+        if(iconPosition === 'top') {
+          return {
+            margin: '0 0 15px 0',
+          }
+        } else if(iconPosition === 'inline') {
+          return {
+            margin: alignment === 'left' ? '0 10px 0 0' : '0 0 0 10px',
+            fontSize: getFontSize(elements.heading, globals),
+          }
+        }
+        return {
+          margin: alignment === 'left' ? '0 25px 0 0' : '0 0 0 25px',
+          fontSize: getFontSize(elements.heading, globals),
+        }
+      }
+    },
+    heading: {
+      element: 'Heading',
+    },
+    paragraph: {
+      element: 'Paragraph',
+    }
   }
 }
 
-export const params = {
+export const defaultProps = ({variation}) => ({
+  maxWidth: 600,
+  textAlign: variation.alignment,
+})
+
+export const modifiableProps = {
   textAlign: true,
   padding: true,
   margin: true,

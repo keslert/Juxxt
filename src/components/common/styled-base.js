@@ -7,12 +7,14 @@ export const _DisplayFlex = styled.div`
     ${props.justify && `justify-content: ${props.justify};`};
     ${props.align && `align-items: ${props.align};`};
     ${props.wrap && `flex-wrap: ${props.wrap};`};
-    ${props.direction && `flex-direction: ${props.direction};`};
+    ${props.flexDirection && `flex-direction: ${props.flexDirection};`};
     ${props.flex && `flex: ${props.flex};`};
     ${props.padding && `padding: ${props.padding};`};
     ${props.background && `background: ${props.background};`};
     ${props.width && `width: ${props.width}px;`};
+    ${props.widthPercentage && `width: ${props.widthPercentage}%;`};
     ${props.maxWidth && `maxWidth: ${props.maxWidth}px;`};
+    ${props.order && `order: ${props.order};`};
   `}
 `;
 

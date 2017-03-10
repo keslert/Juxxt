@@ -1,5 +1,5 @@
 import { randomItem } from '../utils';
-import { filter, includes } from 'lodash';
+import { filter, includes, random } from 'lodash';
 
 export function selectColors() {
   const stripe = {
@@ -14,8 +14,8 @@ export function selectColors() {
   }
 
   const scale = {
-    primary: '#FD87F1',
-    secondary: '#FCB357',
+    primary: '#ff9800',
+    secondary: '#03a9f4',
     text: '6C6C6C',
     textOnDark: 'rgba(255,255,255,0.7)',
     dark: '#250f23',
@@ -25,6 +25,10 @@ export function selectColors() {
   }
 
   return randomItem([stripe, scale]);
+}
+
+export function selectPalette(props) {
+  return generatePalette(props.globals.colors, random(0, 100));
 }
 
 export function generatePalette(colors, schema) {
@@ -47,7 +51,9 @@ function generateLightPalette(colors, background) {
     secondary: colors.secondary,
     text: colors.text,
     textHighlight: colors.dark,
-    buttonColors: buttonColorsOnLight(colors, background),
+    icon: colors.primary,
+    link: colors.text,
+    button: buttonColorsOnLight(colors, background)[0],
   }
 }
 
@@ -58,7 +64,9 @@ function generateDarkPalette(colors, background) {
     secondary: colors.secondary,
     text: colors.textOnDark,
     textHighlight: colors.light,
-    buttonColors: buttonColorsOnDark(colors, background),
+    icon: colors.primary,
+    link: colors.textOnDark,
+    button: buttonColorsOnDark(colors, background)[0],
   }
 }
 
