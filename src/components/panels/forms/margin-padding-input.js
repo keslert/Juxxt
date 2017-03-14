@@ -1,7 +1,8 @@
 import React from 'react';
-import { _DisplayFlex, _Flex } from '../../common/styled-base';
-import { _Label, _Input } from './styled-form';
-
+import { _DisplayFlex } from '../../common/styled-base';
+import { _Label } from './styled-form';
+import { capitalize } from 'lodash';
+import Input from './input';
 class MarginPaddingInput extends React.Component {
 
   onChange(changes) {
@@ -48,15 +49,15 @@ class MarginPaddingInput extends React.Component {
 
     return (
       <_DisplayFlex>
-        <_Label>{label}</_Label>
         {['top', 'right', 'bottom', 'left'].map(direction =>
-          <_Flex key={direction}>
-            <_Input 
+          <_DisplayFlex flex="1" key={direction} margin={direction === 'left' ? '0' : '0 10px 0 0'}>
+            <Input 
               type="number" 
-              value={parts[direction]} 
-              onChange={(e) => this.onChange({[direction]: e.target.value || 0})}
+              value={parts[direction]}
+              onChange={value => this.onChange({[direction]: value})}
+              label={capitalize(direction)}
               />
-          </_Flex>
+          </_DisplayFlex>
         )}
       </_DisplayFlex>
     )

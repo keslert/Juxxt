@@ -12,7 +12,7 @@ import { getContent, clearCacheForItem } from './content';
 export function init() {
   const meta = {
     uuid: shortid.generate(),
-    sections: range(0, 5).map(_ => ({ 
+    sections: range(0, 1).map(_ => ({ 
       uuid: shortid.generate(),
       schema: randomItem(range(0, 3)),
     })),
@@ -28,7 +28,7 @@ export function init() {
   return generate(meta, modify, meta.sections);
 }
 
-export function generate(page, modify, selected) {
+export function generate(page, modify, selected, userOverrides) {
   const globals = selectGlobals(page, modify);
 
   const _page = {
@@ -39,6 +39,7 @@ export function generate(page, modify, selected) {
         globals,
         modify,
         section,
+        userOverrides: userOverrides || {},
         sections: page.sections,
         sectionIndex: index, 
         selectedUUIDs: map(selected, 'uuid'),
@@ -89,6 +90,10 @@ function generateSection(props) {
     if(props.modify.content) {
       clearCacheForItem(section);
     }
+  }
+
+  if(props.userOverrides[section.uuid]) {
+    section.userOverrides = props.userOverrides[section.uuid];
   }
 
   const _groups = mapValues(sectionTemplate.requirements.groups, (groupReqs, key) => {
@@ -148,7 +153,7 @@ function generateSection(props) {
 
   section.props = {
     ...sectionTemplate.defaultProps({palette: section.palette, globals: props.globals, variation: section.variation}),
-    ...props.overrides,
+    ...section.userOverrides,
   }
 
   return section;
@@ -186,6 +191,10 @@ function generateGroup(props) {
     if(props.modify.content) {
       clearCacheForItem(group);
     }
+  }
+
+  if(props.userOverrides[group.uuid]) {
+    group.userOverrides = props.userOverrides[group.uuid];
   }
 
   
@@ -271,6 +280,10 @@ function generateElement(props) {
 
   if(isSelected && props.modify.content) {
     clearCacheForItem(element);
+  }
+  
+  if(props.userOverrides[element.uuid]) {
+    element.userOverrides = props.userOverrides[element.uuid];
   }
 
   const elementTemplate = elements[element.name];

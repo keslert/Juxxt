@@ -17,8 +17,8 @@ export function registerItem(item) {
   }
 }
 
-export function updateUserOverride(element, key, value) {
-  return updateMaster({}, [{element, key, value}]);
+export function updateUserOverride(uuid, key, value) {
+  return updateMaster({}, {[uuid]: {[key]: value}});
 }
 
 export function setMaster(page) {

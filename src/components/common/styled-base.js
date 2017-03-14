@@ -9,6 +9,7 @@ export const _DisplayFlex = styled.div`
     ${props.wrap && `flex-wrap: ${props.wrap};`};
     ${props.flexDirection && `flex-direction: ${props.flexDirection};`};
     ${props.flex && `flex: ${props.flex};`};
+    ${props.margin && `margin: ${props.margin};`};
     ${props.padding && `padding: ${props.padding};`};
     ${props.background && `background: ${props.background};`};
     ${props.width && `width: ${props.width}px;`};

@@ -1,9 +1,17 @@
 import React from 'react';
+import styled from 'styled-components';
 import Input from './forms/input';
 import MarginPaddingInput from './forms/margin-padding-input';
 
 import { _Flex, _DisplayFlex } from '../common/styled-base';
 import { _Label } from './forms/styled-form';
+import { lowerCamelCaseToRegular } from '../../core/utils';
+
+
+const _PanelItem = styled.div`
+  display: flex;
+  margin-bottom: 5px;
+`
 
 const PanelItem = ({
   value,
@@ -15,21 +23,25 @@ const PanelItem = ({
 
   const getItem = () => {
     switch(name) {
-      case 'text': 
-        return <Input value={value} onChange={onChange} label={name} />
+      case 'color':
+      case 'background':
+      case 'text':
+        return <Input value={value} onChange={onChange} label={lowerCamelCaseToRegular(name)} />
       case 'margin':
       case 'padding':
-        return <MarginPaddingInput value={value} onChange={onChange} label={name} />
+        return <MarginPaddingInput value={value} onChange={onChange} label={lowerCamelCaseToRegular(name)} />
+      case 'fontSize':
+        return <Input value={value} onChange={onChange} label='px' />
       default:
         return <div>Unknown Panel Item</div>
     }
   }
 
   return (
-    <_DisplayFlex>
-      <_Label>{name}</_Label>
+    <_PanelItem>
+      <_Label>{lowerCamelCaseToRegular(name)}</_Label>
       <_Flex>{getItem()}</_Flex>
-    </_DisplayFlex>
+    </_PanelItem>
   )
 
 

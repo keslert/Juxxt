@@ -7,6 +7,7 @@ import { map, mapValues, isArray, isEqual } from 'lodash';
 import elements from '../page/elements/meta';
 import groups from '../page/groups/meta';
 import sections from '../page/sections/meta';
+import { updateUserOverride } from '../../core/page';
 
 class OverridePanel extends React.Component {
 
@@ -41,22 +42,22 @@ class OverridePanel extends React.Component {
     }));
   }
 
-  overrideParam(key) {
-    
-
+  overrideParam(key, value) {
+    const { updateUserOverride, selected } = this.props;
+    const _selected = selected[0];
+    updateUserOverride(_selected.uuid, key, value);
   }
 
   updateParam(key, value) {
     const { params } = this.state;
     this.setState({
-      params: {
-        ...params,
-        [key]: {
-          ...params.key,
+      params: {...params,
+        [key]: {...params.key,
           value,
         }
       }
     })
+    this.overrideParam(key, value);
   }
 
   render() {
@@ -74,5 +75,6 @@ class OverridePanel extends React.Component {
 const mapStateToProps = state => ({
   selected: state.interface.selected,
 })
+const mapDispatchToProps = Object.assign({updateUserOverride});
 
-export default connect(mapStateToProps)(OverridePanel);
+export default connect(mapStateToProps, mapDispatchToProps)(OverridePanel);
