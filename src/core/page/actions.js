@@ -31,8 +31,10 @@ export function setMaster(page) {
 
 export function updateMaster(modifications, overrides) {
   return (dispatch, getState) => {
-    const master = getMaster(getState());
-    const page = generate(master, modifications, overrides);
+    const state = getState();
+    const master = getMaster(state);
+    const selected = state.interface.selected;
+    const page = generate(master, modifications, selected, overrides);
     dispatch(setMaster(page));
   }
 }

@@ -27,21 +27,24 @@ export function selectColors() {
   return randomItem([stripe, scale]);
 }
 
-export function selectPalette(props) {
-  return generatePalette(props.globals.colors, random(0, 100));
+export function selectPalette(props, version) {
+  return generatePalette(props.globals.colors, version || random(0, 100));
 }
 
-export function generatePalette(colors, schema) {
+export function generatePalette(colors, version) {
   const lights = lightBackgrounds(colors);
   const darks = darkBackgrounds(colors);
   const backgrounds = [...lights, ...darks];
   
-  const background = backgrounds[schema % backgrounds.length];
+  const background = backgrounds[version % backgrounds.length];
   const isLight = includes(lights, background);
-
-  return isLight
+  
+  const palette =  isLight
     ? generateLightPalette(colors, background)
     : generateDarkPalette(colors, background);
+  
+  palette.version = version;
+  return palette;
 }
 
 function generateLightPalette(colors, background) {

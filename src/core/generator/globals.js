@@ -41,5 +41,6 @@ export function selectGlobals(page, modifications) {
   if(modifications.globals) {
     return generateGlobals(page);
   }
+  
   return page.globals;
 }

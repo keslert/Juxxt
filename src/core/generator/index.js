@@ -66,6 +66,7 @@ function generateSection(props) {
       maxWidth: props.globals.maxPageWidth,
     },
     ...props.section,
+    palette: selectPalette(props, props.section.palette && props.section.palette.version),
   }
 
 
