@@ -7,8 +7,8 @@ import OverridePanel from '../components/panels/override-panel';
 import { range } from 'lodash';
 
 import { randomItem } from '../core/utils';
-import { generate, init } from '../core/generator';
 import { setShiftDown } from '../core/interface';
+import { updateMaster } from '../core/page';
 
 // https://land-book.com/
 
@@ -38,26 +38,19 @@ class App extends React.Component {
   constructor() {
     super();
 
-    const pages = init();
-    this.state = {
-      master: pages[0],
-      bot: pages[1],
-    }
   }
 
   componentDidMount() {
-    // setInterval(() => {
-    //   this.updateBot(this.props.modifications);
-    // }, 3000);
+    const { updateMaster } = this.props;
 
     this.listener = new window.keypress.Listener();
-    this.listener.simple_combo('s', () => this.updateMaster({compisition: true}));
-    this.listener.simple_combo('l', () => this.updateMaster({variation: true}));
-    this.listener.simple_combo('p', () => this.updateMaster({palette: true}));
-    this.listener.simple_combo('c', () => this.updateMaster({content: true}));
-    this.listener.simple_combo('g', () => this.updateMaster({globals: true}));
+    this.listener.simple_combo('s', () => updateMaster({compisition: true}));
+    this.listener.simple_combo('l', () => updateMaster({variation: true}));
+    this.listener.simple_combo('p', () => updateMaster({palette: true}));
+    this.listener.simple_combo('c', () => updateMaster({content: true}));
+    this.listener.simple_combo('g', () => updateMaster({globals: true}));
 
-    this.listener.simple_combo('right', () => this.updateMaster(this.props.modifications));
+    this.listener.simple_combo('right', () => updateMaster(this.props.modifications));
 
     this.listener.register_combo({
       keys: "shift",
@@ -66,29 +59,9 @@ class App extends React.Component {
     })
   }
 
-  generatePage(page, type) {
-    return generate(
-      page,
-      type,
-      this.props.selected
-    );
-  }
-
-  updateBot(type) {
-    const bot = this.generatePage(this.state.bot, type);
-    this.setState({bot});
-  }
-
-  updateMaster(type) {
-    const master = this.generatePage(this.state.master, type);
-    // const bot = this.generatePage({...master, uuid: this.state.bot.uuid}, type);
-    this.setState({master});
-  }
-
-
   render() {
 
-    const { master, bot } = this.state;
+    const { master } = this.props;
     return (
       <_App>
         <_Window>
@@ -109,6 +82,7 @@ class App extends React.Component {
 const mapStateToProps = state => ({
   selected: state.interface.selected,
   modifications: state.interface.modifications,
+  master: state.page.master,
 })
-const mapDispatchToProps = Object.assign({setShiftDown});
+const mapDispatchToProps = Object.assign({setShiftDown, updateMaster});
 export default connect(mapStateToProps, mapDispatchToProps)(App);

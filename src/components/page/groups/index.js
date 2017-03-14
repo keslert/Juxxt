@@ -25,7 +25,7 @@ const _Group = styled.div`
       animation: ${fadeIn} 0.3s;
     }
     &:hover:before {
-      background: rgba(0, 122,122,0.1);
+      background: rgba(122, 122,122,0.3);
     }
   `}
 `

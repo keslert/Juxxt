@@ -15,7 +15,6 @@ export function clearCacheForItem(item) {
     substr = generateElementKey(item);
   }
 
-
   memory = pickBy(memory, (_, key) => (
     !key.startsWith(substr)
   ))
@@ -23,6 +22,11 @@ export function clearCacheForItem(item) {
 
 function generateElementKey(element) {
   return element.sectionUUID + element.groupUUID + (element.groupIndex || '') + element.uuid + (element.index || '');
+}
+
+export function setCacheForElement(element, value) {
+  const key = generateElementKey(element);
+  memory[key] = value;
 }
 
 export function getContent(element) {

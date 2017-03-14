@@ -1,22 +1,15 @@
 import * as types from './action-types';
 import { filter, includes } from 'lodash';
+import { init } from '../generator';
 
 const PageState = () => ({
-  registry: {},
+  master: init(),
 });
 
 export function pageReducer(state = PageState(), {type, payload}) {
   switch (type) {
-    case types.CLEAR_REGISTRY:
-      return Object.assign({}, state, {
-        registry: {}
-      });
-
-    case types.REGISTER_ITEM:
-      const registry = Object.assign({}, state.registry,
-        {[payload.uuid]: payload.props}
-      )
-      return Object.assign({}, state, {registry});
+    case types.SET_MASTER:
+      return Object.assign({}, state, {master: payload});
     
     default: 
       return state;

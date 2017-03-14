@@ -41,12 +41,30 @@ class OverridePanel extends React.Component {
     }));
   }
 
+  overrideParam(key) {
+    
+
+  }
+
+  updateParam(key, value) {
+    const { params } = this.state;
+    this.setState({
+      params: {
+        ...params,
+        [key]: {
+          ...params.key,
+          value,
+        }
+      }
+    })
+  }
+
   render() {
     const { params, top, left } = this.state;
     return (
       <_Panel top={top} left={left}>
         {map(params, (param, key) => (
-          <PanelItem key={key} name={key} {...param} />
+          <PanelItem key={key} name={key} {...param} onChange={value => this.updateParam(key, value)} />
         ))}
       </_Panel>
     )

@@ -24,20 +24,15 @@ export function init() {
     palette: true,
     globals: true,
   }
-
-  const page = generate(meta, modify, meta.sections);
-  const page2 = {...page,
-    uuid: shortid.generate(),
-  }
-
-  return [page, page2];
+  
+  return generate(meta, modify, meta.sections);
 }
 
 export function generate(page, modify, selected) {
   const globals = selectGlobals(page, modify);
 
   const _page = {
-    uuid: page.uuid,
+    uuid: shortid.generate(),
     globals,
     sections: page.sections.map((section, index) => {
       return generateSection({

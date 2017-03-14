@@ -8,5 +8,5 @@ export const _Label = styled.label`
 `
 
 export const _Input = styled.input`
-  width: 100%;
+  width: 30px;
 `
