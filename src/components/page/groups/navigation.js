@@ -49,6 +49,8 @@ const ProductNavigation = ({
 
 export default ProductNavigation;
 
+
+
 export const requirements = {
   elements: {
     button: {

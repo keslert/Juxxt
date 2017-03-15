@@ -51,7 +51,7 @@ const Element = (props) => {
       onMouseEnter={() => onHoverableMouseEnter(uuid)}
       onMouseLeave={() => onHoverableMouseLeave(uuid)}
       >
-      <Element.component {...props.props} />
+      <Element.default {...props.props} />
     </_Element>
   )
 }

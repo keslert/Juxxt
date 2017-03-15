@@ -24,7 +24,6 @@ const HeadingSubheading = ({
 }
 export default HeadingSubheading;
 
-
 export const requirements = {
   elements: {
     heading: {

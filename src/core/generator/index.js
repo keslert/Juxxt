@@ -12,7 +12,7 @@ import { getContent, clearCacheForItem } from './content';
 export function init() {
   const meta = {
     uuid: shortid.generate(),
-    sections: range(0, 1).map(_ => ({ 
+    sections: range(0, 6).map(_ => ({ 
       uuid: shortid.generate(),
       schema: randomItem(range(0, 3)),
     })),
@@ -93,7 +93,7 @@ function generateSection(props) {
   }
 
   if(props.userOverrides[section.uuid]) {
-    section.userOverrides = props.userOverrides[section.uuid];
+    section.userOverrides = Object.assign({}, section.userOverrides, props.userOverrides[section.uuid]);
   }
 
   const _groups = mapValues(sectionTemplate.requirements.groups, (groupReqs, key) => {
@@ -178,6 +178,7 @@ function generateGroup(props) {
   if(isNewGroup) {
     group.name = selectGroup(props);
     group.elements = {};
+    const g = groups;
     group.variation = getValidVariation(groups[group.name].requirements.variations, props.restrictions);
     group.props = {};
     group.userOverrides = {};
@@ -194,7 +195,7 @@ function generateGroup(props) {
   }
 
   if(props.userOverrides[group.uuid]) {
-    group.userOverrides = props.userOverrides[group.uuid];
+    group.userOverrides = Object.assign({}, group.userOverrides, props.userOverrides[group.uuid]);
   }
 
   
@@ -283,7 +284,7 @@ function generateElement(props) {
   }
   
   if(props.userOverrides[element.uuid]) {
-    element.userOverrides = props.userOverrides[element.uuid];
+    element.userOverrides = Object.assign({}, element.userOverrides, props.userOverrides[element.uuid]);
   }
 
   const elementTemplate = elements[element.name];

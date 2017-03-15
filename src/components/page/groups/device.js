@@ -28,7 +28,6 @@ const Device = ({
 )
 export default Device;
 
-
 export const requirements = {
   elements: {
     image: {

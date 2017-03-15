@@ -47,7 +47,7 @@ const Section = (props) => {
       onMouseEnter={() => onHoverableMouseEnter(uuid)}
       onMouseLeave={() => onHoverableMouseLeave(uuid)}
       >
-      <Section.component {...props} />
+      <Section.default {...props} />
     </_Section>
   )
 }

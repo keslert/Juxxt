@@ -80,7 +80,6 @@ const IconHeadingParagraph = ({
 }
 export default IconHeadingParagraph;
 
-
 export const requirements = {
   variations: [
     {

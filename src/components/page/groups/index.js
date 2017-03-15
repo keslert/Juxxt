@@ -46,11 +46,11 @@ const Group = (props) => {
   return (
     <_Group 
       selected={isSelected || isHovered} 
-      onClick={(e) => { e.stopPropagation(); setSelected({uuid, name, isGroup});}}
+      onClick={(e) => { e.stopPropagation(); setSelected(props);}}
       onMouseEnter={() => onHoverableMouseEnter(uuid)}
       onMouseLeave={() => onHoverableMouseLeave(uuid)}
       >
-      <Group.component {...props} />
+      <Group.default {...props} />
     </_Group>
   )
 }

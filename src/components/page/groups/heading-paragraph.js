@@ -21,7 +21,6 @@ const HeadingParagraph = ({
 }
 export default HeadingParagraph;
 
-
 export const requirements = {
   elements: {
     heading: {

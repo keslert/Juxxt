@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Element from '../elements';
 import { _Block } from '../../common/styled-base';
 
-const SmallHeadingParagraph = ({
+const SmallHeadingLinkList = ({
   elements,
   variation,
   props,
@@ -12,23 +12,26 @@ const SmallHeadingParagraph = ({
       <Element {...elements.heading} />
     </div>
     <div>
-      <Element {...elements.paragraph} />
+      {elements.link.clones.map(link => (
+        <Element {...elements.paragraph} key={link.uuid + link.index} />
+      ))}
     </div>
   </_Block>
 )
-export default SmallHeadingParagraph;
+export default SmallHeadingLinkList;
 
 export const requirements = {
   elements: {
     heading: {
       element: 'SmallHeading',
     },
-    paragraph: {
-      element: 'Paragraph',
+    link: {
+      element: 'Link',
+      copies: [2,3,4,5,6],
     },
   },
   variations: [{
-    alignment: ['left', 'center'],
+    alignment: ['left', 'center', 'right'],
   }]
 }
 
