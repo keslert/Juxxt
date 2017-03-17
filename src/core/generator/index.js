@@ -2,7 +2,7 @@ import sections from '../../components/page/sections/meta';
 import groups from '../../components/page/groups/meta';
 import elements from '../../components/page/elements/meta';
 import { randomItem, getFirstIfList } from '../utils';
-import { keys, range, map, mapValues, isEmpty, includes, pick, pickBy, random, intersection, filter, every, cloneDeep, max, omit } from 'lodash';
+import { keys, range, map, mapValues, isEmpty, zipObject, pick, pickBy, random, intersection, filter, every, cloneDeep, max, omit, size } from 'lodash';
 import shortid from 'shortid';
 
 import { selectPalette } from './colors';
@@ -42,14 +42,13 @@ export function generate(page, modify={}, selected, userOverwrites) {
         userOverwrites: userOverwrites || {},
         sections: page.sections,
         sectionIndex: index + 1, 
-        selectedUUIDs: map(selected, 'uuid'),
-        selectedFamilyIDs: map(selected, 'familyID'),
+        selectedUUIDs: zipObject(map(selected, 'uuid'), map(selected, _ => true)),
+        selectedFamilyIDs: zipObject(map(selected, 'familyID'), map(selected, _ => true)),
       });
     }),
   }
 
   pushHistory(_page);
-  console.log(_page);
   return _page;
 }
 
@@ -57,7 +56,7 @@ export function generate(page, modify={}, selected, userOverwrites) {
  * Generate Section
  *********************************************************/
 function generateSection(props) {
-  const isSelected = includes(props.selectedUUIDs, props.section.uuid);
+  const isSelected = props.selectedUUIDs[props.section.uuid];
   const isNewSection = isSelected && props.modify.compisition || !props.section.uuid;
 
   const section = {
@@ -83,7 +82,7 @@ function generateSection(props) {
   const sectionTemplate = sections[section.name];
   if(isSelected) {
     if(props.modify.palette) {
-      section.palette = selectPalette(props);
+      section.palette = selectPalette(props, props.section.palette && props.section.palette.version + random(size(props.selectedUUIDS)) + 1);
     }
     if(props.modify.variation && !isNewSection) {
       section.variation = getValidVariation(sectionTemplate.requirements.variations, {});
@@ -162,7 +161,7 @@ function generateSection(props) {
  * Generate Group
  *********************************************************/
 function generateGroup(props) {
-  const isSelected = includes(props.selectedFamilyIDs, props.group.familyID);
+  const isSelected = props.selectedFamilyIDs[props.group.familyID];
   const isNewGroup = isSelected && props.modify.compisition || !props.group.name;
 
   const group = {
@@ -258,7 +257,7 @@ function generateGroup(props) {
  * Generate Element
  *********************************************************/
 function generateElement(props) {
-  const isSelected = includes(props.selectedUUIDs, props.element.uuid);
+  const isSelected = props.selectedUUIDs[props.element.uuid];
   
   const element = {
     uuid: shortid.generate(),
@@ -269,8 +268,8 @@ function generateElement(props) {
     ...props.element,
   }
 
-  const groupSelected = includes(props.selectedUUIDs, props.group.uuid);
-  const sectionSelected = includes(props.selectedUUIDs, props.section.uuid);
+  const groupSelected = props.selectedUUIDs[props.group.uuid];
+  const sectionSelected = props.selectedUUIDs[props.section.uuid];
   if(props.modify.content && (isSelected || groupSelected || sectionSelected)) {
     clearCacheForElement(element);
   }

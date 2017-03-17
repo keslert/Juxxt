@@ -28,7 +28,7 @@ export function selectColors() {
 }
 
 export function selectPalette(props, version) {
-  return generatePalette(props.globals.colors, version || random(0, 100));
+  return generatePalette(props.globals.colors, version || random(0, 3));
 }
 
 export function generatePalette(colors, version) {
