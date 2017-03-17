@@ -16,7 +16,7 @@ export function selectColors() {
   const scale = {
     primary: '#ff9800',
     secondary: '#03a9f4',
-    text: '6C6C6C',
+    text: '#6C6C6C',
     textOnDark: 'rgba(255,255,255,0.7)',
     dark: '#250f23',
     offDark: '#331631',

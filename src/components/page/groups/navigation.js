@@ -38,7 +38,7 @@ const ProductNavigation = ({
       <_DisplayFlex align="center" flex="1">
         <_DisplayFlex flex="1" justify={variation.justify}>
           {elements.link.clones.map(link => (
-            <Element key={link.uuid + link.index} {...link} />
+            <Element key={link.uuid} {...link} />
           ))}
         </_DisplayFlex>
         <Element {...elements.button} />
@@ -55,7 +55,7 @@ export const requirements = {
   elements: {
     button: {
       element: 'Button',
-      overrides: ({variation, elements}) => ({
+      overwrites: ({variation, elements}) => ({
         text: 'Sign Up',
         type: 'Round',
         fontSize: 12, 
@@ -65,7 +65,7 @@ export const requirements = {
     link: {
       element: 'Link',
       copies: range(1, 6),
-      overrides: ({variation, elements}) => ({
+      overwrites: ({variation, elements}) => ({
         margin: "0 10px 0 0",
       })
     },

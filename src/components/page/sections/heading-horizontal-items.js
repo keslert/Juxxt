@@ -19,7 +19,7 @@ const HeadingHorizontalItems = ({
         <Group {...groups.heading} />
         <_DisplayFlex>
           {groups.item.clones.map(item => (
-            <_Flex key={item.uuid + item.index}>
+            <_Flex key={item.uuid}>
               <Group {...item} />
             </_Flex>
           ))}
@@ -39,21 +39,18 @@ export const requirements = {
         alignment: ['center'],
         iconPosition: ['top'],
       },
-      overrides: ({variation}) => ({
+      overwrites: ({variation}) => ({
         margin: '0 0 70px 0',
       })
     },
     item: {
       options: ['SmallHeadingParagraph', 'IconSmallHeadingParagraph'],
-      overrides: ({variation}) => ({
+      overwrites: ({variation}) => ({
         padding: '0 20px',
       }),
       copies: [3,4],
     },
   },
-  variations: [{
-    items: [3, 4],
-  }]
 }
 
 export const defaultProps = ({palette, globals}) => ({

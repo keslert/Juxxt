@@ -94,7 +94,7 @@ export const requirements = {
   elements: {
     icon: {
       element: 'Icon',
-      overrides: ({variation, elements, globals}) => {
+      overwrites: ({variation, elements, globals}) => {
         const { iconPosition, alignment } = variation;
         if(iconPosition === 'top') {
           return {

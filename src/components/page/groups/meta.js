@@ -12,7 +12,11 @@ export default {
   HeadingSubheading,
   HeadingParagraph,
   IconHeadingParagraph,
-  IconSmallHeadingParagraph,
+  
+  IconSmallHeadingParagraph: {
+    ...IconSmallHeadingParagraph,
+    special: true,
+  },
   SmallHeadingParagraph: {
     ...SmallHeadingParagraph,
     special: true,

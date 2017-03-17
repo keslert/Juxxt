@@ -1,4 +1,4 @@
-import { random, find, isArray, first } from 'lodash';
+import { random, find, isArray, first, forEach } from 'lodash';
 
 export function randomItem(arr) {
   return arr[random(arr.length - 1)];
@@ -15,4 +15,16 @@ export function getFirstIfList(arr) {
 
 export function lowerCamelCaseToRegular(camelCase) {
   return camelCase.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+}
+
+export function flattenPage(page) {
+  const flattened = {};
+  const flatten = (item) => {
+    flattened[item.uuid] = item;
+    ['sections', 'groups', 'elements', 'clones'].forEach(key => {
+      item[key] && forEach(item[key], flatten)
+    })
+  }
+  flatten(page);
+  return flattened;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import Group from '../../groups';
-import { _DisplayFlex } from '../../../common/styled-base';
+import { _DisplayFlex, _Flex } from '../../../common/styled-base';
 import SectionContainer from '../section-container';
 
 const LinkFooter = ({
@@ -13,7 +13,13 @@ const LinkFooter = ({
   return (
     <_DisplayFlex {...props}>
       <SectionContainer {...sectionContainer}>
-        <Group {...groups.heading} />
+        <_DisplayFlex widthPercentage='100' justify='space-between'>
+          {groups.list.clones.map(list => 
+            <_Flex key={list.uuid}>
+              <Group {...list} />
+            </_Flex>
+          )}
+        </_DisplayFlex>
       </SectionContainer>
     </_DisplayFlex>
   )
@@ -23,7 +29,11 @@ export default LinkFooter;
 export const requirements = {
   groups: {
     list: {
-      options: ['HeadingSubheading'],
+      options: ['SmallHeadingLinkList'],
+      overwrites: ({variation, globals}) => ({
+        padding: '0 20px',
+      }),
+      copies: [3,4],
     },
   },
   variations: [{

@@ -16,8 +16,8 @@ const _SmallHeading = styled.div`
   `};
 `
 
-const SmallHeading = (props) => ( 
-  <_SmallHeading {...props}>{props.text}</_SmallHeading>
+const SmallHeading = ({props, content}) => ( 
+  <_SmallHeading {...props}>{content.text}</_SmallHeading>
 )
 export default SmallHeading;
 
@@ -40,6 +40,6 @@ export const modifiableProps = {
   text: true,
 }
 
-export function getFontSize({userOverrides}, globals) {
-  return userOverrides.fontSize || globals.smallHeading.fontSize;
+export function getFontSize({userOverwrites}, globals) {
+  return userOverwrites.fontSize || globals.smallHeading.fontSize;
 }

@@ -5,34 +5,16 @@ import LoremIpsum from 'lorem-ipsum';
 
 
 let memory = {};
-export function clearCacheForItem(item) {
-  let substr;
-  if(item.isSection) {
-    substr = item.uuid;
-  } else if(item.isGroup) {
-    substr = item.sectionUUID + item.uuid + (item.index || '');
-  } else {
-    substr = generateElementKey(item);
-  }
-
-  memory = pickBy(memory, (_, key) => (
-    !key.startsWith(substr)
-  ))
-}
-
-function generateElementKey(element) {
-  return element.sectionUUID + element.groupUUID + (element.groupIndex || '') + element.uuid + (element.index || '');
+export function clearCacheForElement(element) {
+  delete memory[element.uuid];
 }
 
 export function setCacheForElement(element, value) {
-  const key = generateElementKey(element);
-  memory[key] = value;
+  memory[element.uuid] = value;
 }
 
 export function getContent(element) {
-
-  const key = generateElementKey(element);
-
+  const key = element.uuid;
   if(!memory[key]) {
     let content;
     switch(element.name) {
@@ -72,7 +54,7 @@ function getButtonContent(props) {
 
 function getParagraphContent(props) {
   const text = LoremIpsum({
-    count: props.groupIndex !== undefined ? 2 : random(2, 4),
+    count: random(2, 4),
     units: 'sentences',
   });
   return { text };

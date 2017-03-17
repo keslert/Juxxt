@@ -38,7 +38,7 @@ const Element = (props) => {
     onHoverableMouseLeave,
     name, 
     uuid,
-    index,
+    familyID,
     isElement,
     registerItem,
   } = props;
@@ -47,17 +47,17 @@ const Element = (props) => {
   return (
     <_Element 
       selected={isSelected || isHovered} 
-      onClick={(e) => { e.stopPropagation(); setSelected(props);}}
+      onClick={(e) => { e.stopPropagation(); setSelected({uuid, familyID, name, isElement});}}
       onMouseEnter={() => onHoverableMouseEnter(uuid)}
       onMouseLeave={() => onHoverableMouseLeave(uuid)}
       >
-      <Element.default {...props.props} />
+      <Element.default {...props} />
     </_Element>
   )
 }
 
 const mapStateToProps = (state, props) => ({
-  isSelected: state.interface.shiftDown && includes(map(state.interface.selected, 'uuid'), props.uuid),
+  isSelected: state.interface.shiftDown && includes(map(state.interface.selected, 'familyID'), props.familyID),
   isHovered: last(state.interface.hovered) === props.uuid,
 });
 const mapDispatchToProps = Object.assign({}, interfaceActions);

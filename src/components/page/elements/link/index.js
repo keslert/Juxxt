@@ -12,9 +12,9 @@ const _Link = styled.p`
   `}
 `
 
-const Link = (props) => (
+const Link = ({props, content}) => (
   <_Link {...props}>
-    {props.text}
+    {content.text}
   </_Link>
 )
 export default Link;

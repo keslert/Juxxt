@@ -15,8 +15,8 @@ const _Heading = styled.div`
   `};
 `
 
-const Heading = (props) => (
-  <_Heading {...props}>{props.text}</_Heading>
+const Heading = ({props, content}) => (
+  <_Heading {...props}>{content.text}</_Heading>
 )
 export default Heading;
 
@@ -38,6 +38,6 @@ export const modifiableProps = {
   text: true,
 }
 
-export function getFontSize({userOverrides}, globals) {
-  return userOverrides.fontSize || globals.heading.fontSize;
+export function getFontSize({userOverwrites}, globals) {
+  return userOverwrites.fontSize || globals.heading.fontSize;
 }

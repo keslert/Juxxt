@@ -3,12 +3,12 @@ import styled from 'styled-components';
 
 import { connect } from 'react-redux';
 import Page from '../components/page';
-import OverridePanel from '../components/panels/override-panel';
 import { range } from 'lodash';
 
 import { randomItem } from '../core/utils';
 import { setShiftDown } from '../core/interface';
 import { updateMaster } from '../core/page';
+import Sidebar from '../components/sidebar';
 
 // https://land-book.com/
 
@@ -20,6 +20,12 @@ const _Window = styled.div`
   overflow: scroll;
   display: flex;
   flex: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 250px;
+  bottom: 0;
+  box-sizing: border-box;
 `
 
 const width = 700;
@@ -73,7 +79,7 @@ class App extends React.Component {
             </_PageWrapper>
           ))}
         </_Window>
-        <OverridePanel />
+        <Sidebar />
       </_App>
     );
   }

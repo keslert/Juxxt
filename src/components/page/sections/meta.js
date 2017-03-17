@@ -3,6 +3,7 @@ import * as TPImage from './tp-image';
 import * as ProductHeader from './headers/product-header';
 import * as HeadingHorizontalItems from './heading-horizontal-items';
 import * as CopyrightFooter from './footers/copyright-footer';
+import * as LinkFooter from './footers/link-footer';
 
 export default {
   TPImage,
@@ -15,6 +16,10 @@ export default {
   },
   CopyrightFooter: {
     ...CopyrightFooter,
+    footer: true,
+  },
+  LinkFooter: {
+    ...LinkFooter,
     footer: true,
   }
 }

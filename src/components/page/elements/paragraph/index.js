@@ -6,15 +6,15 @@ const _Paragraph = styled.p`
   cursor: default;
   ${props => `
     color: ${props.color};
-    font-size: ${props.fontSize};  
+    font-size: ${props.fontSize}px;  
     ${props.margin && `margin: ${props.margin};`};
     ${props.padding && `padding: ${props.padding};`};
   `}
 `
 
-const Paragraph = (props) => (
+const Paragraph = ({props, content}) => (
   <_Paragraph {...props}>
-    {props.text}
+    {content.text}
   </_Paragraph>
 )
 export default Paragraph;

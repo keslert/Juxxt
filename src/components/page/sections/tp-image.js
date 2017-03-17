@@ -45,7 +45,7 @@ export const requirements = {
     point: {
       type: 'Group',
       options: ['IconHeadingParagraph'],
-      overrides: ({variation}) => ({
+      overwrites: ({variation}) => ({
         margin: variation.imagePosition === 'left' ? '0 0 0 30px' : '0 30px 0 0',
       })
     },
@@ -53,7 +53,7 @@ export const requirements = {
       type: 'Group',
       options: ['Device', 'BlockImage'],
       consistent: true,
-      overrides: ({variation}) => ({
+      overwrites: ({variation}) => ({
         margin: variation.imagePosition === 'left' ? '0 30px 0 0' : '0 0 0 30px',
       })
     },

@@ -13,7 +13,9 @@ const SmallHeadingLinkList = ({
     </div>
     <div>
       {elements.link.clones.map(link => (
-        <Element {...elements.paragraph} key={link.uuid + link.index} />
+        <div key={link.uuid}>
+          <Element {...link} />
+        </div>
       ))}
     </div>
   </_Block>
@@ -27,11 +29,11 @@ export const requirements = {
     },
     link: {
       element: 'Link',
-      copies: [2,3,4,5,6],
+      copies: [2,3,4],
     },
   },
   variations: [{
-    alignment: ['left', 'center', 'right'],
+    alignment: ['left', 'center'],
   }]
 }
 

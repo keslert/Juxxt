@@ -4,4 +4,4 @@ export { interfaceActions };
 export * from './action-types';
 export * from './actions';
 export { interfaceReducer } from './reducer';
- 
+export * from './selectors';

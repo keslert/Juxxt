@@ -31,7 +31,7 @@ export const requirements = {
     },
     subheading: {
       element: 'Heading',
-      overrides: ({elements, globals}) => ({
+      overwrites: ({elements, globals}) => ({
         fontSize: getFontSize(elements.heading, globals) * .75
       })
     },

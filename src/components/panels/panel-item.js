@@ -25,6 +25,7 @@ const PanelItem = ({
     switch(name) {
       case 'color':
       case 'background':
+      case 'type':
       case 'text':
         return <Input value={value} onChange={onChange} label={lowerCamelCaseToRegular(name)} />
       case 'margin':

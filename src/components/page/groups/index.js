@@ -39,6 +39,7 @@ const Group = (props) => {
     onHoverableMouseLeave,
     name, 
     uuid,
+    familyID,
     isGroup,
   } = props;
 
@@ -46,7 +47,7 @@ const Group = (props) => {
   return (
     <_Group 
       selected={isSelected || isHovered} 
-      onClick={(e) => { e.stopPropagation(); setSelected(props);}}
+      onClick={(e) => { e.stopPropagation(); setSelected({uuid, familyID, name, isGroup});}}
       onMouseEnter={() => onHoverableMouseEnter(uuid)}
       onMouseLeave={() => onHoverableMouseLeave(uuid)}
       >
@@ -56,7 +57,7 @@ const Group = (props) => {
 }
 
 const mapStateToProps = (state, props) => ({
-  isSelected: state.interface.shiftDown && includes(map(state.interface.selected, 'uuid'), props.uuid),
+  isSelected: state.interface.shiftDown && includes(map(state.interface.selected, 'familyID'), props.familyID),
   isHovered: last(state.interface.hovered) === props.uuid,
 });
 

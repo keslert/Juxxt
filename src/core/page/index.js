@@ -4,4 +4,4 @@ export { pageActions };
 export * from './action-types';
 export * from './actions';
 export { pageReducer } from './reducer';
- 
+export * from './selectors';

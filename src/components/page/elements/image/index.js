@@ -11,9 +11,9 @@ const _Image = styled.img`
   `}
 `
 
-const Image = (props) => {
+const Image = ({props, content}) => {
   return (
-    <_Image {...props} src={props.src} />
+    <_Image {...props} src={content.src} />
   )
 }
 

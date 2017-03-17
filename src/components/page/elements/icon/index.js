@@ -12,11 +12,11 @@ const _Icon = styled.span`
   `}
 `
 
-const Icon = (props) => ( 
+const Icon = ({props, content}) => ( 
   <_Icon {...props} className="element">
-    {props.src
-      ? <img src={props.src} />
-      : <i className={`fa fa-${props.type}`}></i>
+    {content.src
+      ? <img src={content.src} />
+      : <i className={`fa fa-${content.type}`}></i>
     }
   </_Icon>
 )

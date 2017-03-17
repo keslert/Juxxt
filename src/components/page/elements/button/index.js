@@ -26,16 +26,16 @@ const _Button = styled.span`
   }
 `
 
-const Button = (props) => (
+const Button = ({props, content}) => (
   <_Button {...props} className="element">
-    {props.text}
+    {content.text}
   </_Button>
 )
 export default Button;
 
-export const defaultProps = ({palette, globals}, overrides) => {
-  const type = overrides.type || globals.button.type;
-  const fontSize = overrides.fontSize || globals.fontSize;
+export const defaultProps = ({palette, globals}, overwrites) => {
+  const type = overwrites.type || globals.button.type;
+  const fontSize = overwrites.fontSize || globals.fontSize;
   return {
     background: palette.button.background,
     borderBottom: getBorderBottom(type, palette.button.background),
