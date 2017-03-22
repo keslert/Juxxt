@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+
 export const _DisplayFlex = styled.div`
   display: flex;
   box-sizing: border-box;
@@ -12,6 +13,8 @@ export const _DisplayFlex = styled.div`
     ${props.margin && `margin: ${props.margin};`};
     ${props.padding && `padding: ${props.padding};`};
     ${props.background && `background: ${props.background};`};
+    ${props.backgroundSize && `background-size: ${props.backgroundSize};`};
+    ${props.backgroundPosition && `background-position: ${props.backgroundPosition};`};
     ${props.width && `width: ${props.width}px;`};
     ${props.widthPercentage && `width: ${props.widthPercentage}%;`};
     ${props.maxWidth && `maxWidth: ${props.maxWidth}px;`};

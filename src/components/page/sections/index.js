@@ -18,8 +18,10 @@ const _Section = styled.div`
       left: 0px;
       right: 0px;
       bottom: 0;
-      background: rgba(122,122,122,0.1);
-      border: 3px dashed rgb(122,122,122);
+      // background: rgba(122,122,122,0.1);
+      // border: 3px dashed rgb(122,122,122);
+      border-left: 5px solid tomato;
+      border-right: 5px solid tomato;
       box-sizing: border-box;
       pointer-events: none;
       animation: ${fadeIn} 0.3s;

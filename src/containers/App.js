@@ -2,41 +2,48 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { connect } from 'react-redux';
-import Page from '../components/page';
+
 import { range } from 'lodash';
 
 import { randomItem } from '../core/utils';
 import { setShiftDown } from '../core/interface';
 import { updateMaster } from '../core/page';
+import Page from '../components/page';
 import Sidebar from '../components/sidebar';
+import AutoScale from 'react-auto-scale';
+import Suggestions from '../components/suggestions';
 
-// https://land-book.com/
+
+
+const width = 680;
 
 const _App = styled.div`
   display: flex;
 `
 
 const _Window = styled.div`
-  overflow: scroll;
   display: flex;
   flex: 1;
   position: fixed;
   top: 0;
   left: 0;
-  right: 250px;
+  right: 0;
   bottom: 0;
   box-sizing: border-box;
 `
 
-const width = 700;
+const _Column = styled.div`
+  width: ${width}px;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 15px;
+  box-sizing: border-box;
+`
+
+
 const _PageWrapper = styled.div`
   margin: 15px;
   width: ${width}px;
-`
-
-const _Scale = styled.div`
-  transform-origin: 0px 0px;
-  transform: scale(${ width/1360 });
 `
 
 class App extends React.Component {
@@ -71,13 +78,14 @@ class App extends React.Component {
     return (
       <_App>
         <_Window>
-          {[master].map((page, i) => (
-            <_PageWrapper key={i}>
-              <_Scale>
-                <Page {...page} />
-              </_Scale>
-            </_PageWrapper>
-          ))}
+          <_Column>
+            <AutoScale>
+              <Page {...master} />
+            </AutoScale>
+          </_Column>
+
+          <Suggestions page={master} width={width} />
+
         </_Window>
         <Sidebar />
       </_App>

@@ -12,7 +12,6 @@ export function selectColors() {
     light: '#fff',
     offLight: '#F6F9FC',
   }
-
   const scale = {
     primary: '#ff9800',
     secondary: '#03a9f4',
@@ -24,7 +23,18 @@ export function selectColors() {
     offLight: '#F5F5F7',
   }
 
-  return randomItem([stripe, scale]);
+  const quartzy = {
+    primary: '#F35919',
+    secondary: '#1EA9E3',
+    text: '#515359',
+    textOnDark:'rgba(255,255,255,0.7)',
+    dark: '#1D1412',
+    offDark: '#78665C',
+    light: '#fff',
+    offLight: '#F5F5F7',
+  }
+
+  return randomItem([stripe, scale, quartzy]);
 }
 
 export function selectPalette(props, version) {

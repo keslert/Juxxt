@@ -7,7 +7,7 @@ import PropsPanel from '../panels/props-panel';
 const _Sidebar = styled.div`
   position: fixed;
   top: 0;
-  right: 0;
+  right: -250px;
   bottom: 0;
   width: 250px;
   background: #f1f1f1;

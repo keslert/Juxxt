@@ -63,10 +63,10 @@ export const requirements = {
   }]
 }
 
-export const defaultProps = ({palette, globals}) => ({
+export const defaultProps = ({section, globals}) => ({
   justify: 'center',
   align: 'center',
-  background: palette.background,
+  background: section.palette.background,
   padding: globals.section.padding,
 })
 
