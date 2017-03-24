@@ -1,5 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+
+import { getAlternatives } from '../../core/page';
 import Suggestion from './suggestion';
 import Section from '../page/sections';
 import AutoScale from 'react-auto-scale';
@@ -13,33 +17,30 @@ const _Suggestions = styled.div`
   flex-direction: column;
   width: ${props => props.width}px;
   box-sizing: border-box;
-  padding-bottom: 15px;
   position: relative;
 `
-
-
 
 const _Content = styled.div`
   height: 100vh;
   flex: 1;
   overflow-y: auto;
   box-sizing: border-box;
-  padding-top: 60px;
+  padding-top: 62px;
+  padding-bottom: 5px;
 `
 
 
 class Suggestions extends React.Component {
 
-
   render() {
-    const { page, width } = this.props;
+    const { alternatives=[], width } = this.props;
     return (
       <_Suggestions width={width}>
         <SmartBar />
         
         <_Content>
-          {page.sections.map(section => (
-            <Suggestion onFavorite={() => null} onDelete={() => null} key={section.uuid}>
+          {alternatives.map((section, i) => (
+            <Suggestion onFavorite={() => null} onDelete={() => null} key={section.uuid + i}>
               <AutoScale>
                 <div style={{width: 1360}}>
                   <Section {...section} />
@@ -53,4 +54,11 @@ class Suggestions extends React.Component {
   }
 }
 
-export default Suggestions;
+const mapStateToProps = createSelector(
+  getAlternatives,
+  (alternatives) => ({
+    alternatives,
+  })
+)
+
+export default connect(mapStateToProps)(Suggestions);

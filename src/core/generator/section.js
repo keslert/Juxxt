@@ -9,48 +9,41 @@ import { getValidVariation } from './index';
 
 
 export function generateSection(props) {
-  const isSelected = props.selectedUUIDs[props.section.uuid];
-  const isNewSection = isSelected && props.modify.compisition || !props.section.uuid;
+  // const isSelected = props.selectedUUIDs[props.section.uuid];
+  // const isNewSection = isSelected && props.modify.composition || !props.section.uuid;
 
   const section = {
     uuid: shortid.generate(),
     isSection: true,
     userOverwrites: {},
+    props: {},
     sectionContainer: {
       maxWidth: props.globals.maxPageWidth,
     },
+    groups: {},
     ...props.section,
-    palette: selectPalette(props, props.section.palette && props.section.palette.version),
+    name: props.sectionTemplate.name,
+    palette: props.sectionTemplate.palette,
+    variation: props.sectionTemplate.variation,
+    // palette: selectPalette(props, props.section.palette && props.section.palette.version),
   }
 
 
-  if(isNewSection) {
-    section.name = selectSection(props);
-    section.variation = getValidVariation(sections[section.name].requirements.variations, {});
-    section.groups = {};
-    section.props = {};
-    section.userOverwrites = {};
-  } 
+  // if(isNewSection) {
+  //   section.name = randomItem(getSectionOptions(section));
+  //   section.variation = getValidVariation(sections[section.name].requirements.variations, {});
+  //   section.groups = {};
+  //   section.props = {};
+  //   section.userOverwrites = {};
+  // }
   
   const sectionTemplate = sections[section.name];
-  if(isSelected) {
-    if(props.modify.palette) {
-      section.palette = selectPalette(props, props.section.palette && props.section.palette.version + random(size(props.selectedUUIDS)) + 1);
-    }
-    if(props.modify.variation && !isNewSection) {
-      section.variation = getValidVariation(sectionTemplate.requirements.variations, {});
-    }
-  }
 
-  if(sectionTemplate.requirements.backgroundImage) {
-
-    if(isNewSection || isSelected && props.modify.content) {
-      section.backgroundImage = getBackgroundImage(section, props);
-    }
-    // if(isSelected && props.modify.variation) {
-    //   section.backgroundImage.filter = getFilter(section, props);
-    // }
-  }
+  // if(sectionTemplate.requirements.backgroundImage) {
+  //   if(isNewSection || isSelected && props.modify.content) {
+  //     section.backgroundImage = getBackgroundImage(section, props);
+  //   }
+  // }
 
   if(props.userOverwrites[section.uuid]) {
     section.userOverwrites = Object.assign({}, section.userOverwrites, props.userOverwrites[section.uuid]);
@@ -95,7 +88,7 @@ export function generateSection(props) {
       return group;
     }
 
-    const copies = ((props.modify.variation && isSelected) || isNewSection) ? randomItem(groupReqs.copies) : group.clones.length;
+    const copies = randomItem(groupReqs.copies);
 
     group.clones = range(0, copies).map(i => ({
       ...generateGroup({
@@ -119,20 +112,19 @@ export function generateSection(props) {
   return section;
 }
 
-
-
-
-function selectSection(props) {
+export function getSectionOptions({isHeader, isFooter}) {
   const _sections = pickBy(sections, section => {
-    if(props.sectionIndex === 1) {
+    if(isHeader) {
       return section.header;
     }
-    if(props.sectionIndex === (props.sections.length)) {
+    if(isFooter) {
       return section.footer;
     }
     return !section.footer && !section.header;
   })
+  return keys(_sections);
+}
 
-  const name = randomItem(keys(_sections));
-  return name;
+export function getSectionTemplate(name) {
+  return sections[name];
 }

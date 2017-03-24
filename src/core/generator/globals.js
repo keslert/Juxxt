@@ -2,7 +2,7 @@ import { randomItem } from '../utils';
 import { selectColors } from './colors';
 
 
-function generateGlobals() {
+export function generateGlobals() {
 
   const fontFamily = randomItem(['Montserrat', 'Roboto', 'Lato']);
   const headingFontFamily = fontFamily;
@@ -35,12 +35,4 @@ function generateGlobals() {
       padding: "80px 10px",
     }
   }
-}
-
-export function selectGlobals(page, modifications) {
-  if(modifications.globals) {
-    return generateGlobals(page);
-  }
-  
-  return page.globals;
 }

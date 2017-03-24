@@ -11,6 +11,10 @@ export function getMaster(state) {
   return getPage(state).master;
 }
 
+export function getAlternatives(state) {
+  return getPage(state).alternatives;
+}
+
 
 export const getSelectedDetails = createSelector(
   getSelected,

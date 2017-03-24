@@ -77,13 +77,13 @@ function getIconContent(props) {
 
 function getImageContent(props) {
   return randomItem([
-    { src: 'https://unsplash.it/400/600?random' },
-    { src: 'https://unsplash.it/400/601?random' },
-    { src: 'https://unsplash.it/400/602?random' },
-    { src: 'https://unsplash.it/600/400?random' },
-    { src: 'https://unsplash.it/601/400?random' },
-    { src: 'https://unsplash.it/602/400?random' },
-    { src: 'http://placehold.it/350x150'},
+    // { src: 'https://unsplash.it/400/600?random' },
+    // { src: 'https://unsplash.it/400/601?random' },
+    // { src: 'https://unsplash.it/400/602?random' },
+    // { src: 'https://unsplash.it/600/400?random' },
+    // { src: 'https://unsplash.it/601/400?random' },
+    // { src: 'https://unsplash.it/602/400?random' },
+    { src: 'http://placehold.it/600x400'},
   ]);
 }
 

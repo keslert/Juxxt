@@ -7,8 +7,8 @@ import { getValidVariation } from './index';
 
 
 export function generateGroup(props) {
-  const isSelected = props.selectedFamilyIDs[props.group.familyID];
-  const isNewGroup = isSelected && props.modify.compisition || !props.group.name;
+  const isSelected = false; // props.selectedFamilyIDs[props.group.familyID];
+  const isNewGroup = isSelected && props.modify.composition || !props.group.name;
 
   const group = {
     uuid: shortid.generate(),
@@ -30,11 +30,11 @@ export function generateGroup(props) {
   }
 
   const groupTemplate = groups[group.name];
-  if(isSelected) {
-    if(props.modify.variation && !isNewGroup) {
-      group.variation = getValidVariation(groupTemplate.requirements.variations, props.restrictions);
-    }
-  }
+  // if(isSelected) {
+  //   if(props.modify.variation && !isNewGroup) {
+  //     group.variation = getValidVariation(groupTemplate.requirements.variations, props.restrictions);
+  //   }
+  // }
 
   if(props.userOverwrites[group.uuid]) {
     group.userOverwrites = Object.assign({}, group.userOverwrites, props.userOverwrites[group.uuid]);
@@ -77,7 +77,7 @@ export function generateGroup(props) {
       return element;
     }
 
-    const copies = props.modify.variation && isSelected || isNewGroup ? randomItem(elementReqs.copies) : element.clones.length;
+    const copies = randomItem(elementReqs.copies); // : element.clones.length;
 
     element.clones = range(0, copies).map(i => ({
       ...generateElement({

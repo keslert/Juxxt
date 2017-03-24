@@ -4,7 +4,7 @@ import { getContent, clearCacheForElement } from './content';
 import shortid from 'shortid';
 
 export function generateElement(props) {
-  const isSelected = props.selectedUUIDs[props.element.uuid];
+  const isSelected = false; // props.selectedUUIDs[props.element.uuid];
   
   const element = {
     uuid: shortid.generate(),
@@ -15,11 +15,11 @@ export function generateElement(props) {
     ...props.element,
   }
 
-  const groupSelected = props.selectedUUIDs[props.group.uuid];
-  const sectionSelected = props.selectedUUIDs[props.section.uuid];
-  if(props.modify.content && (isSelected || groupSelected || sectionSelected)) {
-    clearCacheForElement(element);
-  }
+  const groupSelected = false; // props.selectedUUIDs[props.group.uuid];
+  const sectionSelected = false; // props.selectedUUIDs[props.section.uuid];
+  // if(props.modify.content && (isSelected || groupSelected || sectionSelected)) {
+  //   clearCacheForElement(element);
+  // }
   
   if(props.userOverwrites[element.uuid]) {
     element.userOverwrites = Object.assign({}, element.userOverwrites, props.userOverwrites[element.uuid]);

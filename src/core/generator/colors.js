@@ -41,6 +41,18 @@ export function selectPalette(props, version) {
   return generatePalette(props.globals.colors, version || random(0, 3));
 }
 
+export function generateAllPalettes(colors) {
+  const lights = lightBackgrounds(colors);
+  const darks = darkBackgrounds(colors);
+  const backgrounds = [...lights, ...darks];
+
+  return backgrounds.map(background => (
+    includes(lights, background)
+    ? generateLightPalette(colors, background)
+    : generateDarkPalette(colors, background)
+  ))
+}
+
 export function generatePalette(colors, version) {
   const lights = lightBackgrounds(colors);
   const darks = darkBackgrounds(colors);

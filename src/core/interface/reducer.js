@@ -4,9 +4,9 @@ import { filter, includes } from 'lodash';
 const InterfaceState = () => ({
   selected: [],
   modifications: {
-    compisition: true,
-    variation: true,
-    palette: true,
+    composition: true,
+    variation: false,
+    palette: false,
     content: false,
     globals: false,
   },
@@ -35,6 +35,11 @@ export function interfaceReducer(state = InterfaceState(), {payload, type}) {
     case types.ON_HOVERABLE_MOUSE_LEAVE:
       return Object.assign({}, state, {
         hovered: filter(state.hovered, uuid => uuid !== payload),
+      })
+
+    case types.SET_MODIFICATIONS:
+      return Object.assign({}, state, {
+        modifications: payload,
       })
     
 
