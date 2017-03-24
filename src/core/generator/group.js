@@ -13,6 +13,7 @@ export function generateGroup(props) {
   const group = {
     uuid: shortid.generate(),
     familyID: shortid.generate(),
+    groupKey: props.groupKey,
     isGroup: true,
     userOverwrites: {},
     elements: {},
@@ -22,19 +23,21 @@ export function generateGroup(props) {
   }
 
   if(isNewGroup) {
-    group.name = selectGroup(props);
+    group.name = randomItem(isEmpty(props.options) ? getGroupOptions() : props.options);
     group.elements = {};
     group.variation = getValidVariation(groups[group.name].requirements.variations, props.restrictions);
     group.props = {};
     group.userOverwrites = {};
   }
+  
+  if(group.groupTemplate) {
+    group.name = group.groupTemplate.name;
+    group.variation = group.groupTemplate.variation;
+  }
+
 
   const groupTemplate = groups[group.name];
-  // if(isSelected) {
-  //   if(props.modify.variation && !isNewGroup) {
-  //     group.variation = getValidVariation(groupTemplate.requirements.variations, props.restrictions);
-  //   }
-  // }
+
 
   if(props.userOverwrites[group.uuid]) {
     group.userOverwrites = Object.assign({}, group.userOverwrites, props.userOverwrites[group.uuid]);
@@ -101,8 +104,10 @@ export function generateGroup(props) {
 
 
 const _genericGroups = pickBy(groups, group => !group.special);
-function selectGroup(props) {
-  const _options = isEmpty(props.options) ? keys(_genericGroups) : props.options;
-  const name = randomItem(_options);
-  return name;
+export function getGroupOptions(props) {
+  return keys(_genericGroups);
+}
+
+export function getGroupTemplate(name) {
+  return groups[name];
 }

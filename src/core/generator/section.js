@@ -54,6 +54,7 @@ export function generateSection(props) {
       ...props,
       section,
       group: section.groups[key] || {},
+      groupKey: key,
       options: groupReqs.options || [],
       restrictions: groupReqs.restrictions || {},
     })

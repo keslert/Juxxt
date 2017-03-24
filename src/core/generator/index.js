@@ -15,13 +15,15 @@ import {
   uniqBy,
   reduce,
   find,
+  cloneDeep,
 } from 'lodash';
 
 import shortid from 'shortid';
 
 import { generateGlobals } from './globals';
 import { generateSection, getSectionOptions, getSectionTemplate } from './section';
-import { generateAllPalettes } from './colors';
+import { generatePalettes, generatePaletteAlternatives } from './colors';
+import { getGroupTemplate, getGroupOptions } from './group';
 
 export function init() {
   const globals = generateGlobals();
@@ -35,7 +37,7 @@ export function init() {
         isFooter: i === 4,
       }
       section.name = randomItem(getSectionOptions(section));
-      section.palette = randomItem(generateAllPalettes(globals.colors));
+      section.palette = randomItem(generatePalettes(globals.colors));
       const sectionTemplate = randomItem(generateSectionAlternatives(section, {variation: true}, globals));
       return generateSection({section, sectionTemplate, globals, userOverwrites: {}})
     }),
@@ -76,21 +78,34 @@ export function generateAlternatives(page, modify={}, selected) {
     const sections = sectionAlternatives.map(sectionTemplate => generateSection({section, sectionTemplate, globals, userOverwrites:{}}));
     return sections;
   }
+
+  if(_selected.isGroup) {
+    const section = find(page.sections, section => section.uuid === _selected.sectionUUID);
+    const sectionTemplate = generateSectionAlternatives(section, {}, globals)[0];
+    const groupAlternatives = generateGroupAlternatives(section, _selected.groupKey, modify, globals);
+    
+    const sections = groupAlternatives.map(groupTemplate => {
+      const _section = cloneDeep(section);
+      _section.groups[_selected.groupKey].groupTemplate = groupTemplate;
+      _section.palette = groupTemplate.palette;
+      return generateSection({section: _section, sectionTemplate, globals, userOverwrites:{}})
+    })
+    return sections;
+  }
 }
 
 function generateSectionAlternatives(section, modify, globals) {
   let sectionOptions = [section.name];
   let variationOptions = [section.variation || {}];
   let paletteOptions = [section.palette];
-  // let groupsOptions = [section.groups];
 
+  if(modify.palette) {
+    paletteOptions = generatePalettes(globals.colors);
+  }
   if(modify.composition) {
     sectionOptions = getSectionOptions(section), option => option.name !== section.name;
   }
-  if(modify.palette) {
-    paletteOptions = generateAllPalettes(globals.colors);
-  }
-  if(modify.variation) {
+  if(modify.variation) { // TODO: If modify.composition, this should get variations for all of that? That could be huge though...
     const variations = getSectionTemplate(section.name).requirements.variations || [{}];
     variationOptions = chain(variations).map(getCombinations).flatten().uniqBy(JSON.stringify).value();
   }
@@ -99,7 +114,34 @@ function generateSectionAlternatives(section, modify, globals) {
     name: sectionOptions, 
     variation: variationOptions, 
     palette: paletteOptions,
-    // groups: groupsOptions,
+  });
+  return alternatives;
+}
+
+function generateGroupAlternatives(section, groupKey, modify, globals) {
+  const group = section.groups[groupKey];
+  let groupOptions = [group.name];
+  let paletteOptions = [section.palette];
+  let variationOptions = [group.variation];
+  
+  if(modify.palette) {
+    paletteOptions = generatePaletteAlternatives(globals.colors, section.palette);
+  }
+  if(modify.composition) {
+    groupOptions = getSectionTemplate(section.name).requirements.groups[groupKey].options;
+    if(isEmpty(groupOptions)) {
+      groupOptions = getGroupOptions();
+    }
+  }
+  if(modify.variation) {
+    const variations = getGroupTemplate(group.name).requirements.variations || [{}];
+    variationOptions = chain(variations).map(getCombinations).flatten().uniqBy(JSON.stringify).value();
+  }
+
+  const alternatives = getCombinations({
+    name: groupOptions, 
+    variation: variationOptions, 
+    palette: paletteOptions,
   });
   return alternatives;
 }

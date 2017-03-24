@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import groups from './meta';
 import { interfaceActions } from '../../../core/interface';
-import { includes, last, map } from 'lodash';
+import { includes, last, map, pick } from 'lodash';
 import { fadeIn } from '../../common/styled-animations';
 import { mapValues } from 'lodash';
 import { generateContent } from '../../../core/generator/content';
@@ -39,15 +39,16 @@ const Group = (props) => {
     onHoverableMouseLeave,
     name, 
     uuid,
-    familyID,
-    isGroup,
   } = props;
+
+
+  const selectedProps = pick(props, ['uuid', 'familyID', 'name', 'groupKey', 'sectionUUID', 'isGroup']);
 
   const Group = groups[name];
   return (
     <_Group 
       selected={isSelected || isHovered} 
-      onClick={(e) => { e.stopPropagation(); setSelected({uuid, familyID, name, isGroup});}}
+      onClick={(e) => { e.stopPropagation(); setSelected(selectedProps);}}
       onMouseEnter={() => onHoverableMouseEnter(uuid)}
       onMouseLeave={() => onHoverableMouseLeave(uuid)}
       >
