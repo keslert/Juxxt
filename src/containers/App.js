@@ -4,14 +4,17 @@ import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 
 import { range, isEqual } from 'lodash';
+import flow from 'lodash/flow';
 
 import { randomItem } from '../core/utils';
 import { setShiftDown, getModifications, getSelected } from '../core/interface';
 import { updateMaster, getMaster, updateAlternatives } from '../core/page';
 import Page from '../components/page';
 import Sidebar from '../components/sidebar';
-import AutoScale from 'react-auto-scale';
 import Suggestions from '../components/suggestions';
+
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 
 
@@ -87,9 +90,7 @@ class App extends React.Component {
       <_App>
         <_Window>
           <_Column>
-            <AutoScale>
-              <Page {...master} />
-            </AutoScale>
+            <Page {...master} />
           </_Column>
 
           <Suggestions width={width} />
@@ -112,4 +113,7 @@ const mapStateToProps = createSelector(
   })
 )
 const mapDispatchToProps = Object.assign({setShiftDown, updateMaster, updateAlternatives});
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default flow(
+  connect(mapStateToProps, mapDispatchToProps),
+  DragDropContext(HTML5Backend)
+)(App);

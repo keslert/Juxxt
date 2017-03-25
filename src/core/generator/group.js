@@ -35,6 +35,9 @@ export function generateGroup(props) {
     group.variation = group.groupTemplate.variation;
   }
 
+  
+
+
 
   const groupTemplate = groups[group.name];
 

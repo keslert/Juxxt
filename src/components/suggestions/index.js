@@ -6,7 +6,6 @@ import { createSelector } from 'reselect';
 import { getAlternatives } from '../../core/page';
 import Suggestion from './suggestion';
 import Section from '../page/sections';
-import AutoScale from 'react-auto-scale';
 import Page from '../page';
 import { _DisplayFlex, _Flex } from '../common/styled-base';
 
@@ -41,11 +40,7 @@ class Suggestions extends React.Component {
         <_Content>
           {alternatives.map((section, i) => (
             <Suggestion onFavorite={() => null} onDelete={() => null} key={section.uuid + i}>
-              <AutoScale>
-                <div style={{width: 1360}}>
-                  <Section {...section} />
-                </div>
-              </AutoScale>
+              <Section {...section} />
             </Suggestion>
           ))}
         </_Content>

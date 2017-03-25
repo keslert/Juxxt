@@ -5,7 +5,7 @@ import Section from './sections';
 
 const _Page = styled.div`
   font-family: ${props => props.fontFamily};
-  width: 1360px;
+  width: 660px;
 `
 
 class Page extends React.Component {
@@ -21,7 +21,7 @@ class Page extends React.Component {
     return (
       <_Page {...props}>
         {sections.map((section, i) => (
-          <Section key={i} {...section} globals={globals} />
+          <Section key={i} {...section} globals={globals} master />
         ))}
       </_Page>
     )
