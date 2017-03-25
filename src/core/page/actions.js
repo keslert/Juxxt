@@ -54,3 +54,11 @@ export function updateAlternatives(modifications) {
     dispatch(setAlternatives(alternatives));
   }
 }
+
+export function overrideSection(section, sectionToOverride) {
+
+}
+
+export function insertSection(section, index) {
+
+}

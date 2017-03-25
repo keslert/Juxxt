@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Section from './sections';
+import InsertionTarget from './insertion-target';
+import last from 'lodash/last';
 
 const _Page = styled.div`
   font-family: ${props => props.fontFamily};
@@ -18,10 +20,14 @@ class Page extends React.Component {
       fontFamily: globals.fontFamily,
     }
 
+    const last = sections.length - 1;
     return (
       <_Page {...props}>
         {sections.map((section, i) => (
-          <Section key={i} {...section} globals={globals} master />
+          <div key={i}>
+            <Section {...section} globals={globals} master />
+            {i !== last ? <InsertionTarget index={i} /> : null}
+          </div>
         ))}
       </_Page>
     )

@@ -56,7 +56,7 @@ const targetSpec = {
     return props.master && props.uuid !== monitor.getItem().uuid;
   },
   drop(props) {
-    debugger;
+    
   }
 }
 
