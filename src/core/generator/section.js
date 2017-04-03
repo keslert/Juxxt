@@ -7,11 +7,10 @@ import { randomItem } from '../utils';
 import { random, mapValues, range, keys, omit, pickBy, size } from 'lodash';
 import { getValidVariation } from './index';
 
+import { getContent } from './content';
+
 
 export function generateSection(props) {
-  // const isSelected = props.selectedUUIDs[props.section.uuid];
-  // const isNewSection = isSelected && props.modify.composition || !props.section.uuid;
-
   const section = {
     uuid: shortid.generate(),
     isSection: true,
@@ -21,30 +20,15 @@ export function generateSection(props) {
       maxWidth: props.globals.maxPageWidth,
     },
     groups: {},
+    contentStore: [],
     ...props.section,
+    elements: [],
     name: props.sectionTemplate.name,
     palette: props.sectionTemplate.palette,
     variation: props.sectionTemplate.variation,
-    // palette: selectPalette(props, props.section.palette && props.section.palette.version),
   }
 
-
-  // if(isNewSection) {
-  //   section.name = randomItem(getSectionOptions(section));
-  //   section.variation = getValidVariation(sections[section.name].requirements.variations, {});
-  //   section.groups = {};
-  //   section.props = {};
-  //   section.userOverwrites = {};
-  // }
-  
   const sectionTemplate = sections[section.name];
-
-  // if(sectionTemplate.requirements.backgroundImage) {
-  //   if(isNewSection || isSelected && props.modify.content) {
-  //     section.backgroundImage = getBackgroundImage(section, props);
-  //   }
-  // }
-
   if(props.userOverwrites[section.uuid]) {
     section.userOverwrites = Object.assign({}, section.userOverwrites, props.userOverwrites[section.uuid]);
   }
@@ -64,13 +48,8 @@ export function generateSection(props) {
   // Handle Overrides
   section.groups = mapValues(sectionTemplate.requirements.groups, (groupReqs, key) => {
     const group = _groups[key];
-    if(!groupReqs.overwrites) {
-      return group;
-    }
-
-    return {
-      ...group,
-      props: {
+    if(groupReqs.overwrites) {
+      group.props = {
         ...group.props,
         ...groupReqs.overwrites({
           groups: section.groups,
@@ -80,6 +59,7 @@ export function generateSection(props) {
         ...group.userOverwrites,
       }
     }
+    return group;
   })
 
   // Handle Clones
@@ -88,20 +68,18 @@ export function generateSection(props) {
     if(!groupReqs.copies) {
       return group;
     }
-
-    const copies = randomItem(groupReqs.copies);
-
-    group.clones = range(0, copies).map(i => ({
-      ...generateGroup({
+    const copies = section.variation[groupReqs.copies];
+    group.clones = range(0, copies).map(i => {
+      const clone = generateGroup({
         ...props,
         section,
         group: (group.clones && group.clones[i]) || omit(group, ['uuid', 'name']),
         restrictions: mapValues(group.variation, value => [value]),
         options: [group.name],
-      }),
-      props: group.props,
-    }))
-
+      });
+      clone.props = group.props;
+      return clone;
+    })
     return group;
   });
 
@@ -110,7 +88,49 @@ export function generateSection(props) {
     ...section.userOverwrites,
   }
 
+  matchContent(section);
   return section;
+}
+
+function matchContent(section) {
+  const contentStore = section.contentStore.map(content => ({
+    ...content,
+    matched: false,
+  }))
+
+  // ID matching
+  section.elements.forEach(element => {
+    const content = contentStore.find(content => content.elementId === element.uuid);
+    if(content) {
+      element.content = content;
+      content.matched = true;
+    } else {
+      element.content = null;
+    }
+  })
+
+  // Best match
+  section.elements.forEach(element => {
+    if(!element.content) {
+      const content = contentStore.find(content => !content.matched && content.elementName === element.name);
+      if(content) {
+        element.content = content;
+        content.matched = true;
+        content.elementId = element.uuid;
+        content.groupId = element.groupId;
+      } else {
+        const content = getContent(element);
+        element.content = content;
+        content.matched = true;
+        content.elementId = element.uuid;
+        content.groupId = element.groupId;
+        content.elementName = element.name;
+        contentStore.push(content);
+      }
+    }
+  })
+
+  section.contentStore = contentStore;
 }
 
 export function getSectionOptions({isHeader, isFooter}) {

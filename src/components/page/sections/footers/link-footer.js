@@ -33,11 +33,11 @@ export const requirements = {
       overwrites: ({variation, globals}) => ({
         padding: '0 20px',
       }),
-      copies: [3,4],
+      copies: 'lists',
     },
   },
   variations: [{
-
+    lists: [3,4],
   }]
 }
 

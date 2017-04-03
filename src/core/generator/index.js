@@ -47,28 +47,6 @@ export function init() {
   return { master, alternatives };
 }
 
-export function generate(page, modify={}, selected, userOverwrites) {
-  // const globals = selectGlobals(page, modify);
-
-  // const _page = {
-  //   uuid: shortid.generate(),
-  //   globals,
-  //   sections: page.sections.map((section, index) => {
-  //     return generateSection({
-  //       globals,
-  //       modify,
-  //       section,
-  //       userOverwrites: userOverwrites || {},
-  //       sections: page.sections,
-  //       // selectedUUIDs: zipObject(map(selected, 'uuid'), map(selected, _ => true)),
-  //       // selectedFamilyIDs: zipObject(map(selected, 'familyID'), map(selected, _ => true)),
-  //     });
-  //   }),
-  // }
-
-  // return _page;
-}
-
 export function generateAlternatives(page, modify={}, selected) {
   const _selected = selected[0];
   const globals = page.globals;

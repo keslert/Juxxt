@@ -25,7 +25,7 @@ class Page extends React.Component {
       <_Page {...props}>
         {sections.map((section, i) => (
           <div key={i}>
-            <Section {...section} globals={globals} master />
+            <Section {...section} globals={globals} master index={i} />
             {i !== last ? <InsertionTarget index={i} /> : null}
           </div>
         ))}

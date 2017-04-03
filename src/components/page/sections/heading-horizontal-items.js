@@ -19,9 +19,9 @@ const HeadingHorizontalItems = ({
         <Group {...groups.heading} />
         <_DisplayFlex>
           
-          {range(0, variation.items).map(i => (
+          {groups.item.clones.map((item, i) => (
             <_Flex key={i}>
-              <Group {...groups.item} index={i} />
+              <Group {...item} index={i} />
             </_Flex>
           ))}
         </_DisplayFlex>
@@ -49,6 +49,7 @@ export const requirements = {
       overwrites: ({variation}) => ({
         padding: '0 20px',
       }),
+      copies: 'items',
     },
   },
   variations: [{

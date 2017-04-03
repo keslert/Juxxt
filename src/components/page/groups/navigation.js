@@ -64,14 +64,15 @@ export const requirements = {
     },
     link: {
       element: 'Link',
-      copies: range(1, 6),
       overwrites: ({variation, elements}) => ({
         margin: "0 10px 0 0",
-      })
+      }),
+      copies: 'links',
     },
   },
   variations: [{
     justify: ['flex-end', 'flex-start'],
+    links: range(1, 6),
   }]
 }
 

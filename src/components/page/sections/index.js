@@ -47,13 +47,17 @@ const sourceSpec = {
   beginDrag(props) {
     return {
       uuid: props.uuid,
+      isFromMaster: props.master,
+      index: props.index,
     };
   }
 };
 
 const targetSpec = {
   canDrop(props, monitor) {
-    return props.master && props.uuid !== monitor.getItem().uuid;
+    const { master, uuid } = props;
+    const item = monitor.getItem();
+    return master && !item.isFromMaster && uuid !== item.uuid;
   },
   drop(props) {
     

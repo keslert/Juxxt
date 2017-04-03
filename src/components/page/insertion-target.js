@@ -12,7 +12,9 @@ import { insertSection } from '../../core/page';
 
 const targetSpec = {
   canDrop(props, monitor) {
-    return true;
+    const item = monitor.getItem();
+    const { index } = props;
+    return index !== item.index && index !== (item.index - 1);
   },
   drop(props) {
     

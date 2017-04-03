@@ -58,13 +58,8 @@ export function generateGroup(props) {
   // Handle Group Overrides
   group.elements = mapValues(groupTemplate.requirements.elements, (elementReqs, key) => {
     const element = group.elements[key];
-    if(!elementReqs.overwrites) {
-      return element;
-    }
-    
-    return {
-      ...element,
-      props: {
+    if(elementReqs.overwrites) {
+      element.props = {
         ...element.props,
         ...elementReqs.overwrites({
           elements: group.elements, 
@@ -74,6 +69,8 @@ export function generateGroup(props) {
         ...element.userOverwrites,
       }
     }
+
+    return element;
   })
 
   // Handle Copies
@@ -83,16 +80,16 @@ export function generateGroup(props) {
       return element;
     }
 
-    const copies = randomItem(elementReqs.copies); // : element.clones.length;
-
-    element.clones = range(0, copies).map(i => ({
-      ...generateElement({
+    const copies = group.variation[elementReqs.copies];
+    element.clones = range(0, copies).map(i => {
+      const clone = generateElement({
         ...props,
         group,
         element: (element.clones && element.clones[i]) || omit(element, ['uuid']),
-      }),
-      props: element.props,
-    }))
+      });
+      clone.props = element.props;
+      return clone;
+    })
     return element;
   })
   

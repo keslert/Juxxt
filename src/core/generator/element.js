@@ -13,6 +13,8 @@ export function generateElement(props) {
     userOverwrites: {},
     props: {},
     ...props.element,
+    groupId: props.group.uuid,
+    sectionId: props.section.uuid,
   }
 
   const groupSelected = false; // props.selectedUUIDs[props.group.uuid];
@@ -31,7 +33,7 @@ export function generateElement(props) {
     ...elementTemplate.defaultProps({palette: props.section.palette, globals: props.globals}, element.userOverwrites),
     ...element.userOverwrites,
   }  
-  element.content = getContent(element);
+  props.section.elements.push(element);
 
   return element;
 }
