@@ -20,6 +20,20 @@ const _Section = styled.div`
   width: 1360px;
 
   ${props => `
+    ${props.selected && `
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0px;
+        right: 0px;
+        bottom: 0;
+        background: rgba(122,122,122,0.1);
+        border: 3px dashed rgb(122,122,122);
+        box-sizing: border-box;
+        pointer-events: none;
+      }
+    `};
     ${props.showDrop && `
       &:after {
         content: '';
@@ -28,11 +42,7 @@ const _Section = styled.div`
         left: 0px;
         right: 0px;
         bottom: 0;
-        // background: rgba(122,122,122,0.1);
         background: hsla(120, 72%, 80%, 0.63);
-        // border: 3px dashed rgb(122,122,122);
-        // border-left: 5px solid tomato;
-        // border-right: 5px solid tomato;
         box-sizing: border-box;
         pointer-events: none;
         animation: ${fadeIn} 0.3s;
