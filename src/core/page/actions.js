@@ -1,7 +1,10 @@
 import * as types from './action-types';
 import { init, generate, generateAlternatives } from '../../core/generator';
 import { setCacheForElement } from '../../core/generator/content';
-import { getMaster } from './selectors';
+import { getMaster, getAlternatives } from './selectors';
+
+import { setSelected } from '../interface';
+import { find, pick } from 'lodash';
 
 
 export function clearRegistry() {
@@ -55,10 +58,37 @@ export function updateAlternatives(modifications) {
   }
 }
 
-export function overrideSection(section, sectionToOverride) {
-
+export function overrideSectionWithAlternative(alternativeUUID, sectionUUID) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const master = getMaster(state);
+    const alternatives = getAlternatives(state);
+    const alternative = find(alternatives, a => a.uuid === alternativeUUID);
+    
+    const page = {...master,
+      sections: master.sections.map(section => 
+        section.uuid !== sectionUUID ? section : alternative,
+      )
+    }
+    dispatch(setMaster(page));
+    dispatch(setSelected(pick(alternative, ['name', 'uuid', 'isSection'])));
+  }
 }
 
-export function insertSection(section, index) {
-
+export function insertAlternative(uuid, index) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const master = getMaster(state);
+    const alternatives = getAlternatives(state);
+    const alternative = find(alternatives, a => a.uuid === uuid);
+    
+    const page = {...master,
+      sections: [
+        ...master.sections.slice(0, index),
+        alternative,
+        ...master.sections.slice(index),
+      ]
+    }
+    dispatch(setMaster(page));
+  }
 }

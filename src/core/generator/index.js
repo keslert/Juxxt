@@ -53,7 +53,7 @@ export function generateAlternatives(page, modify={}, selected) {
   if(_selected.isSection) {
     const section = find(page.sections, section => section.uuid === _selected.uuid);
     const sectionAlternatives = generateSectionAlternatives(section, modify, globals);
-    const sections = sectionAlternatives.map(sectionTemplate => generateSection({section, sectionTemplate, globals, userOverwrites:{}}));
+    const sections = sectionAlternatives.map(sectionTemplate => generateSection({section: omit(section, ['uuid']), sectionTemplate, globals, userOverwrites:{}}));
     return sections;
   }
 
@@ -66,7 +66,7 @@ export function generateAlternatives(page, modify={}, selected) {
       const _section = cloneDeep(section);
       _section.groups[_selected.groupKey].groupTemplate = groupTemplate;
       _section.palette = groupTemplate.palette;
-      return generateSection({section: _section, sectionTemplate, globals, userOverwrites:{}})
+      return generateSection({section: omit(_section, ['uuid']), sectionTemplate, globals, userOverwrites:{}})
     })
     return sections;
   }

@@ -28,6 +28,10 @@ class PropsPanel extends React.Component {
   getParams(selected) {
     const item = selected[0] || {};
 
+    if(!item.props) {
+      return {};
+    }
+
     let params;
     if(item.isElement) {
       params = elements[item.name].modifiableProps;
@@ -36,6 +40,8 @@ class PropsPanel extends React.Component {
     } else if(item.isSection) {
       params = sections[item.name].modifiableProps;
     }
+
+
 
     return mapValues(params, (param, key) => ({
       value: item.props[key],

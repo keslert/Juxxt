@@ -4,45 +4,32 @@ import LoremIpsum from 'lorem-ipsum';
 
 
 
-let memory = {};
-export function clearCacheForElement(element) {
-  delete memory[element.uuid];
-}
+// let memory = {};
+// export function clearCacheForElement(element) {
+//   delete memory[element.uuid];
+// }
 
-export function setCacheForElement(element, value) {
-  memory[element.uuid] = value;
-}
+// export function setCacheForElement(element, value) {
+//   memory[element.uuid] = value;
+// }
 
 export function getContent(element) {
-  const key = element.uuid;
-  if(!memory[key]) {
-    let content;
-    switch(element.name) {
-      case 'Button':
-        content = getButtonContent(element);
-        break;
-      case 'Paragraph':
-        content = getParagraphContent(element);
-        break;
-      case 'Icon':
-        content = getIconContent(element);
-        break;
-      case 'Image':
-        content = getImageContent(element);
-        break;
-      case 'Link':
-        content = getLinkContent(element);
-        break;
-      case 'Heading':
-        content = getHeadingContent(element);
-        break;
-      case 'SmallHeading':
-        content = getSmallHeadingContent(element);
-        break;
-    }
-    memory[key] = content;
+  switch(element.name) {
+    case 'Button':
+      return getButtonContent(element);
+    case 'Paragraph':
+      return getParagraphContent(element);
+    case 'Icon':
+      return getIconContent(element);
+    case 'Image':
+      return getImageContent(element);
+    case 'Link':
+      return getLinkContent(element);
+    case 'Heading':
+      return getHeadingContent(element);
+    case 'SmallHeading':
+      return getSmallHeadingContent(element);
   }
-  return memory[key];
 }
 
 function getButtonContent(props) {

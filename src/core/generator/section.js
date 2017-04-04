@@ -4,7 +4,7 @@ import { selectPalette } from './colors';
 import { getBackgroundImage, getFilter } from './background-image';
 import shortid from 'shortid';
 import { randomItem } from '../utils';
-import { random, mapValues, range, keys, omit, pickBy, size } from 'lodash';
+import { random, mapValues, range, keys, omit, pickBy, pick, size } from 'lodash';
 import { getValidVariation } from './index';
 
 import { getContent } from './content';
@@ -70,12 +70,14 @@ export function generateSection(props) {
     }
     const copies = section.variation[groupReqs.copies];
     group.clones = range(0, copies).map(i => {
+
+      const _group = (group.clones && group.clones[i]) || omit(group, ['uuid', 'name']);
+      _group.groupTemplate = pick(group, ['name', 'variation']);
       const clone = generateGroup({
         ...props,
         section,
-        group: (group.clones && group.clones[i]) || omit(group, ['uuid', 'name']),
-        restrictions: mapValues(group.variation, value => [value]),
-        options: [group.name],
+        group: _group,
+        restrictions: {},
       });
       clone.props = group.props;
       return clone;

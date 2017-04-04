@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import sections from './meta';
+import { overrideSectionWithAlternative } from '../../../core/page';
 import { interfaceActions } from '../../../core/interface';
 import { includes, last, map, pick } from 'lodash';
 import flow from 'lodash/flow';
@@ -59,8 +60,10 @@ const targetSpec = {
     const item = monitor.getItem();
     return master && !item.isFromMaster && uuid !== item.uuid;
   },
-  drop(props) {
-    
+  drop(props, monitor) {
+    const item = monitor.getItem();
+    const { overrideSectionWithAlternative, uuid } = props;
+    overrideSectionWithAlternative(item.uuid, uuid);
   }
 }
 
@@ -111,7 +114,7 @@ const Section = (props) => {
               canDrop={canDrop}
               isDragging={isDragging}
               selected={isSelected || isHovered} 
-              onClick={(e) => { e.stopPropagation(); setSelected(selectedProps); }}
+              onClick={(e) => { e.stopPropagation(); master && setSelected(selectedProps); }}
               onMouseEnter={() => onHoverableMouseEnter(uuid)}
               onMouseLeave={() => onHoverableMouseLeave(uuid)}
               >
@@ -129,9 +132,9 @@ const mapStateToProps = (state, props) => ({
   isHovered: last(state.interface.hovered) === props.uuid,
 });
 
-const mapDispatchToProps = Object.assign({}, interfaceActions);
+const mapDispatchToProps = Object.assign({overrideSectionWithAlternative}, interfaceActions);
 export default flow(
-  connect(mapStateToProps, mapDispatchToProps),
   DragSource('section', sourceSpec, sourceCollect),
-  DropTarget('section', targetSpec, targetCollect)
+  DropTarget('section', targetSpec, targetCollect),
+  connect(mapStateToProps, mapDispatchToProps)
 )(Section);

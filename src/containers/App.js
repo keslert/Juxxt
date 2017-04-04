@@ -84,9 +84,7 @@ class App extends React.Component {
   }
 
   render() {
-
     const { master } = this.props;
-    console.log(master);
     return (
       <_App>
         <_Window>

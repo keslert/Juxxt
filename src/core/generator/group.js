@@ -1,7 +1,7 @@
 import groups from '../../components/page/groups/meta';
 import { generateElement } from './element';
 import { randomItem } from '../utils';
-import { random, mapValues, range, keys, omit, pickBy, isEmpty } from 'lodash';
+import { random, mapValues, range, keys, omit, pickBy, pick, isEmpty } from 'lodash';
 import shortid from 'shortid';
 import { getValidVariation } from './index';
 
