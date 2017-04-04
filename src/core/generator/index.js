@@ -93,8 +93,6 @@ function generateSectionAlternatives(section, modify, globals) {
     const variationOptions = chain(variations).map(getCombinations).flatten().uniqBy(JSON.stringify).value();
     return { sectionName, variationOptions }
   })
-  
-
 
   const alternatives = flatten(sectionVariationPairings.map(({sectionName, variationOptions}) => 
     getCombinations({
@@ -109,29 +107,38 @@ function generateSectionAlternatives(section, modify, globals) {
 
 function generateGroupAlternatives(section, groupKey, modify, globals) {
   const group = section.groups[groupKey];
-  let groupOptions = [group.name];
-  let paletteOptions = [section.palette];
-  let variationOptions = [group.variation];
-  
-  if(modify.palette) {
-    paletteOptions = generatePaletteAlternatives(globals.colors, section.palette);
-  }
+
+  const paletteOptions = modify.palette
+    ? generatePaletteAlternatives(globals.colors, section.palette)
+    : [section.palette]
+
+  let groupOptions = [group.name];  
   if(modify.composition) {
     groupOptions = getSectionTemplate(section.name).requirements.groups[groupKey].options;
     if(isEmpty(groupOptions)) {
       groupOptions = getGroupOptions();
     }
   }
-  if(modify.variation) {
-    const variations = getGroupTemplate(group.name).requirements.variations || [{}];
-    variationOptions = chain(variations).map(getCombinations).flatten().uniqBy(JSON.stringify).value();
-  }
 
-  const alternatives = getCombinations({
-    name: groupOptions, 
-    variation: variationOptions, 
-    palette: paletteOptions,
-  });
+  const groupVariationPairings = groupOptions.map(groupName => {
+    let variations = [mapValues(group.variation, value => [value])];
+    if(modify.variation) {
+      variations = getGroupTemplate(groupName).requirements.variations || [{}];
+    } else if(modify.composition) {
+      const templateVariations = randomItem(getGroupTemplate(groupName).requirements.variations || [{}]);
+      variations = [mapValues(templateVariations, values => [randomItem(values)])];
+    }
+    const variationOptions = chain(variations).map(getCombinations).flatten().uniqBy(JSON.stringify).value();
+    return { groupName, variationOptions };
+  })
+
+  const alternatives = flatten(groupVariationPairings.map(({groupName, variationOptions}) => 
+    getCombinations({
+      name: [groupName], 
+      variation: variationOptions, 
+      palette: paletteOptions,
+    })
+  ))
   return alternatives;
 }
 
