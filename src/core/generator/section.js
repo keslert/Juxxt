@@ -23,10 +23,17 @@ export function generateSection(props) {
     contentStore: [],
     ...props.section,
     elements: [],
-    name: props.sectionTemplate.name,
-    palette: props.sectionTemplate.palette,
-    variation: props.sectionTemplate.variation,
   }
+
+  if(props.sectionTemplate) {
+    if(section.name !== props.sectionTemplate.name) {
+      section.groups = {};
+    }
+    section.name =  props.sectionTemplate.name;
+    section.palette =  props.sectionTemplate.palette;
+    section.variation =  props.sectionTemplate.variation;
+  }
+
 
   const sectionTemplate = sections[section.name];
   if(props.userOverwrites[section.uuid]) {

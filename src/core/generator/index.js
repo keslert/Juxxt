@@ -73,26 +73,37 @@ export function generateAlternatives(page, modify={}, selected) {
 }
 
 function generateSectionAlternatives(section, modify, globals) {
-  let sectionOptions = [section.name];
-  let variationOptions = [section.variation || {}];
-  let paletteOptions = [section.palette];
+  
+  const paletteOptions = modify.palette 
+    ? generatePalettes(globals.colors) 
+    : [section.palette];
+  
+  const sectionOptions = modify.composition 
+    ? getSectionOptions(section) 
+    : [section.name];
+  
+  const sectionVariationPairings = sectionOptions.map(sectionName => {
+    let variations = [mapValues(section.variation, value => [value]) || {}];
+    if(modify.variation) {
+      variations = getSectionTemplate(sectionName).requirements.variations || [{}];
+    } else if(modify.composition && sectionName !== section.name) {
+      const templateVariations = randomItem(getSectionTemplate(sectionName).requirements.variations || [{}]);
+      variations = [mapValues(templateVariations, values => [randomItem(values)])];
+    }
+    const variationOptions = chain(variations).map(getCombinations).flatten().uniqBy(JSON.stringify).value();
+    return { sectionName, variationOptions }
+  })
+  
 
-  if(modify.palette) {
-    paletteOptions = generatePalettes(globals.colors);
-  }
-  if(modify.composition) {
-    sectionOptions = getSectionOptions(section), option => option.name !== section.name;
-  }
-  if(modify.variation) { // TODO: If modify.composition, this should get variations for all of that? That could be huge though...
-    const variations = getSectionTemplate(section.name).requirements.variations || [{}];
-    variationOptions = chain(variations).map(getCombinations).flatten().uniqBy(JSON.stringify).value();
-  }
 
-  const alternatives = getCombinations({
-    name: sectionOptions, 
-    variation: variationOptions, 
-    palette: paletteOptions,
-  });
+  const alternatives = flatten(sectionVariationPairings.map(({sectionName, variationOptions}) => 
+    getCombinations({
+      name: [sectionName],
+      variation: variationOptions, 
+      palette: paletteOptions,
+    })
+  ))
+
   return alternatives;
 }
 
