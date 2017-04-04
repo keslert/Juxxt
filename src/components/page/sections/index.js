@@ -16,9 +16,8 @@ import { DragSource, DropTarget } from 'react-dnd';
 
 const _Section = styled.div`
   position: relative;
-  // margin-top: -1px;
   width: 1360px;
-
+  
   ${props => `
     ${props.selected && `
       &:after {

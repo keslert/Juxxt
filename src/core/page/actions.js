@@ -4,7 +4,7 @@ import { setCacheForElement } from '../../core/generator/content';
 import { getMaster, getAlternatives } from './selectors';
 
 import { setSelected } from '../interface';
-import { find, pick } from 'lodash';
+import { find, pick, sortBy } from 'lodash';
 
 
 export function clearRegistry() {
@@ -72,6 +72,20 @@ export function overrideSectionWithAlternative(alternativeUUID, sectionUUID) {
     }
     dispatch(setMaster(page));
     dispatch(setSelected(pick(alternative, ['name', 'uuid', 'isSection'])));
+  }
+}
+
+export function moveSectionToIndex(uuid, index) {
+  return (dispatch, getState) => {
+    const master = getMaster(getState());
+    
+    const indexedSections = master.sections.map((section, i) => ({section, i}))
+    const page = {...master,
+      sections: sortBy(indexedSections, ({section, i}) => (
+        section.uuid !== uuid ? i : index + .1
+      )).map(({section}) => section)
+    }
+    dispatch(setMaster(page));
   }
 }
 

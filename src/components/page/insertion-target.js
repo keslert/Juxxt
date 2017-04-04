@@ -7,7 +7,7 @@ import flow from 'lodash/flow';
 import { fadeIn } from '../common/styled-animations';
 
 import { DropTarget } from 'react-dnd';
-import { insertAlternative } from '../../core/page';
+import { insertAlternative, moveSectionToIndex } from '../../core/page';
 
 
 const targetSpec = {
@@ -18,11 +18,10 @@ const targetSpec = {
   },
   drop(props, monitor) {
     const item = monitor.getItem();
-    const { insertAlternative, index } = props;
     if(item.isFromMaster) {
-      // rearrange
+      props.moveSectionToIndex(item.uuid, props.index);
     } else {
-      insertAlternative(item.uuid, index);
+      props.insertAlternative(item.uuid, props.index + 1);
     }
   }
 }
@@ -71,7 +70,7 @@ const mapStateToProps = (state) => ({
 
 })
 
-const mapDispatchToProps = Object.assign({insertAlternative});
+const mapDispatchToProps = Object.assign({insertAlternative, moveSectionToIndex});
 
 export default flow(  
   DropTarget('section', targetSpec, targetCollect),

@@ -26,7 +26,7 @@ class Page extends React.Component {
         {sections.map((section, i) => (
           <div key={i} style={{marginTop: -1}}>
             <Section {...section} globals={globals} master index={i} />
-            {i !== last ? <InsertionTarget index={i + 1} /> : null}
+            {i !== last ? <InsertionTarget index={i} /> : null}
           </div>
         ))}
       </_Page>
