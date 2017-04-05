@@ -38,6 +38,8 @@ const Element = (props) => {
     onHoverableMouseLeave,
     name, 
     uuid,
+    sectionId,
+    groupId,
     familyID,
     isElement,
     registerItem,
@@ -47,7 +49,7 @@ const Element = (props) => {
   return (
     <_Element 
       selected={isSelected || isHovered} 
-      onClick={(e) => { e.stopPropagation(); setSelected({uuid, familyID, name, isElement});}}
+      onClick={(e) => { e.stopPropagation(); setSelected({uuid, sectionId, groupId, familyID, name, isElement});}}
       onMouseEnter={() => onHoverableMouseEnter(uuid)}
       onMouseLeave={() => onHoverableMouseLeave(uuid)}
       >

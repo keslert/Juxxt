@@ -42,7 +42,7 @@ const Group = (props) => {
   } = props;
 
 
-  const selectedProps = pick(props, ['uuid', 'familyID', 'name', 'groupKey', 'sectionUUID', 'isGroup']);
+  const selectedProps = pick(props, ['uuid', 'familyID', 'name', 'groupKey', 'sectionId', 'isGroup']);
 
   const Group = groups[name];
   return (

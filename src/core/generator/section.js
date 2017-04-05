@@ -34,8 +34,8 @@ export function generateSection(props) {
     section.variation =  props.sectionTemplate.variation;
   }
 
-
   const sectionTemplate = sections[section.name];
+
   if(props.userOverwrites[section.uuid]) {
     section.userOverwrites = Object.assign({}, section.userOverwrites, props.userOverwrites[section.uuid]);
   }

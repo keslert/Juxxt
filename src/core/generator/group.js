@@ -19,7 +19,7 @@ export function generateGroup(props) {
     elements: {},
     variation: {},
     ...props.group,
-    sectionUUID: props.section.uuid,
+    sectionId: props.section.uuid,
   }
 
   if(isNewGroup) {
