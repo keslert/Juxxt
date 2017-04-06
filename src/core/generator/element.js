@@ -13,8 +13,7 @@ export function generateElement(props) {
     userOverwrites: {},
     props: {},
     ...props.element,
-    groupId: props.group.uuid,
-    sectionId: props.section.uuid,
+    group: props.group,
   }
 
   const groupSelected = false; // props.selectedUUIDs[props.group.uuid];

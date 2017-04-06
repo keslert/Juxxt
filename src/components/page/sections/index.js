@@ -108,7 +108,6 @@ const Section = (props) => {
     master,
   } = props;
 
-  const selectedProps = pick(props, ['name', 'uuid', 'isSection']);
   
   const Section = sections[name];
 
@@ -123,7 +122,7 @@ const Section = (props) => {
               canDrop={canDrop}
               isDragging={isDragging}
               selected={isSelected || isHovered} 
-              onClick={(e) => { e.stopPropagation(); master && setSelected(selectedProps); }}
+              onClick={(e) => { e.stopPropagation(); setSelected(props); }}
               onMouseEnter={() => onHoverableMouseEnter(uuid)}
               onMouseLeave={() => onHoverableMouseLeave(uuid)}
               >

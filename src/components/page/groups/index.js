@@ -41,14 +41,11 @@ const Group = (props) => {
     uuid,
   } = props;
 
-
-  const selectedProps = pick(props, ['uuid', 'familyID', 'name', 'groupKey', 'sectionId', 'isGroup']);
-
   const Group = groups[name];
   return (
     <_Group 
       selected={isSelected || isHovered} 
-      onClick={(e) => { e.stopPropagation(); setSelected(selectedProps);}}
+      onClick={(e) => { e.stopPropagation(); setSelected(props);}}
       onMouseEnter={() => onHoverableMouseEnter(uuid)}
       onMouseLeave={() => onHoverableMouseLeave(uuid)}
       >

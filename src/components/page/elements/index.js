@@ -49,7 +49,7 @@ const Element = (props) => {
   return (
     <_Element 
       selected={isSelected || isHovered} 
-      onClick={(e) => { e.stopPropagation(); setSelected({uuid, sectionId, groupId, familyID, name, isElement});}}
+      onClick={(e) => { e.stopPropagation(); setSelected(props);}}
       onMouseEnter={() => onHoverableMouseEnter(uuid)}
       onMouseLeave={() => onHoverableMouseLeave(uuid)}
       >

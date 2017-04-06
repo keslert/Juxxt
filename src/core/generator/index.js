@@ -49,9 +49,11 @@ export function init() {
 
 function getSection(page, selected) {
   if(selected.isSection) {
-    return find(page.sections, section => section.uuid === selected.uuid);
+    return selected;
+  } else if(selected.isGroup) {
+    return selected.section;
   }
-  return find(page.sections, section => section.uuid === selected.sectionId);
+  return selected.group.section;
 }
 
 export function generateAlternatives(page, modify={}, selected) {
@@ -62,20 +64,14 @@ export function generateAlternatives(page, modify={}, selected) {
   const globals = page.globals;
 
   let section = omit(getSection(page, _selected), ['uuid']);
+  let sections = [];
+
   const sectionProps = {
     globals, 
     section,
     sectionTemplate: section.sectionTemplate,
     userOverwrites: {}
   };
-
-
-
-
-
-
-
-
 
 
   if(_selected.isSection) {
@@ -87,8 +83,7 @@ export function generateAlternatives(page, modify={}, selected) {
     }
     
     const sectionAlternatives = generateSectionAlternatives(section, modify, globals);
-    const sections = sectionAlternatives.map(sectionTemplate => generateSection({...sectionProps, sectionTemplate}));
-    return sections;
+    sections = sectionAlternatives.map(sectionTemplate => generateSection({...sectionProps, sectionTemplate}));
   }
 
   if(_selected.isGroup) {
@@ -102,25 +97,24 @@ export function generateAlternatives(page, modify={}, selected) {
 
 
     const groupAlternatives = generateGroupAlternatives(section, _selected.groupKey, modify, globals);    
-    const sections = groupAlternatives.map(groupTemplate => {
+    sections = groupAlternatives.map(groupTemplate => {
       const _section = cloneDeep(section);
       _section.groups[_selected.groupKey].groupTemplate = groupTemplate;
       _section.palette = groupTemplate.palette;
       return generateSection({...sectionProps, section: _section})
     })
-    return sections;
   }
 
   if(_selected.isElement) {
     if(modify.content) {
-      return range(0, 10).map(i => (
+      sections= range(0, 10).map(i => (
         generateSection({...sectionProps, section: {...section,
           contentStore: section.contentStore.filter(content => content.elementId !== _selected.uuid)
         }})
       ))
     }
   }
-
+  return [section, ...sections];
 }
 
 function generateSectionAlternatives(section, modify, globals) {
