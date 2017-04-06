@@ -71,6 +71,9 @@ function getImageContent(props) {
     { src: 'https://unsplash.it/601/400?random' },
     { src: 'https://unsplash.it/602/400?random' },
     // { src: 'http://placehold.it/600x400'},
+    // { src: 'http://placehold.it/500x400'},
+    // { src: 'http://placehold.it/300x400'},
+    // { src: 'http://placehold.it/200x400'},
   ]);
 }
 

@@ -58,44 +58,36 @@ export function updateAlternatives(modifications) {
   }
 }
 
-export function overrideSectionWithAlternative(alternativeUUID, sectionUUID) {
+export function overrideSectionWithAlternative(section, alternative) {
   return (dispatch, getState) => {
-    const state = getState();
-    const master = getMaster(state);
-    const alternatives = getAlternatives(state);
-    const alternative = find(alternatives, a => a.uuid === alternativeUUID);
-    
+    const master = getMaster(getState());
     const page = {...master,
-      sections: master.sections.map(section => 
-        section.uuid !== sectionUUID ? section : alternative,
+      sections: master.sections.map(_section => 
+        _section.uuid !== section.uuid ? _section : alternative,
       )
     }
     dispatch(setMaster(page));
-    dispatch(setSelected(pick(alternative, ['name', 'uuid', 'isSection'])));
+    // dispatch(setSelected(alternative));
   }
 }
 
-export function moveSectionToIndex(uuid, index) {
+export function moveSectionToIndex(section, index) {
   return (dispatch, getState) => {
     const master = getMaster(getState());
     
-    const indexedSections = master.sections.map((section, i) => ({section, i}))
+    const indexedSections = master.sections.map((_section, i) => ({_section, i}))
     const page = {...master,
-      sections: sortBy(indexedSections, ({section, i}) => (
-        section.uuid !== uuid ? i : index + .1
-      )).map(({section}) => section)
+      sections: sortBy(indexedSections, ({_section, i}) => (
+        _section.uuid !== section.uuid ? i : index + .1
+      )).map(({_section}) => _section)
     }
     dispatch(setMaster(page));
   }
 }
 
-export function insertAlternative(uuid, index) {
+export function insertAlternative(alternative, index) {
   return (dispatch, getState) => {
-    const state = getState();
-    const master = getMaster(state);
-    const alternatives = getAlternatives(state);
-    const alternative = find(alternatives, a => a.uuid === uuid);
-    
+    const master = getMaster(getState());
     const page = {...master,
       sections: [
         ...master.sections.slice(0, index),

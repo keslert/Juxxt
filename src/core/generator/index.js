@@ -47,7 +47,7 @@ export function init() {
   return { master, alternatives };
 }
 
-function getSection(page, selected) {
+function getSection(selected) {
   if(selected.isSection) {
     return selected;
   } else if(selected.isGroup) {
@@ -63,7 +63,7 @@ export function generateAlternatives(page, modify={}, selected) {
   }
   const globals = page.globals;
 
-  let section = omit(getSection(page, _selected), ['uuid']);
+  let section = omit(getSection(_selected), ['uuid']);
   let sections = [];
 
   const sectionProps = {
@@ -77,37 +77,36 @@ export function generateAlternatives(page, modify={}, selected) {
   if(_selected.isSection) {
   
     if(modify.content) {
-      return range(0, 10).map(i => (
+      sections = range(0, 10).map(i => (
         generateSection({...sectionProps, section: omit(section, ['contentStore'])})
       ))
+    } else {
+      const sectionAlternatives = generateSectionAlternatives(section, modify, globals);
+      sections = sectionAlternatives.map(sectionTemplate => generateSection({...sectionProps, sectionTemplate}));
     }
-    
-    const sectionAlternatives = generateSectionAlternatives(section, modify, globals);
-    sections = sectionAlternatives.map(sectionTemplate => generateSection({...sectionProps, sectionTemplate}));
   }
 
   if(_selected.isGroup) {
     if(modify.content) {
-      return range(0, 10).map(i => (
+      sections = range(0, 10).map(i => (
         generateSection({...sectionProps, section: {...section,
           contentStore: section.contentStore.filter(content => content.groupId !== _selected.uuid)
         }})
       ))
+    } else {
+      const groupAlternatives = generateGroupAlternatives(section, _selected.groupKey, modify, globals);    
+      sections = groupAlternatives.map(groupTemplate => {
+        const _section = cloneDeep(section);
+        _section.groups[_selected.groupKey].groupTemplate = groupTemplate;
+        _section.palette = groupTemplate.palette;
+        return generateSection({...sectionProps, section: _section})
+      })
     }
-
-
-    const groupAlternatives = generateGroupAlternatives(section, _selected.groupKey, modify, globals);    
-    sections = groupAlternatives.map(groupTemplate => {
-      const _section = cloneDeep(section);
-      _section.groups[_selected.groupKey].groupTemplate = groupTemplate;
-      _section.palette = groupTemplate.palette;
-      return generateSection({...sectionProps, section: _section})
-    })
   }
 
   if(_selected.isElement) {
     if(modify.content) {
-      sections= range(0, 10).map(i => (
+      sections = range(0, 10).map(i => (
         generateSection({...sectionProps, section: {...section,
           contentStore: section.contentStore.filter(content => content.elementId !== _selected.uuid)
         }})

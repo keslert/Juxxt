@@ -12,16 +12,16 @@ import { insertAlternative, moveSectionToIndex } from '../../core/page';
 
 const targetSpec = {
   canDrop(props, monitor) {
-    const item = monitor.getItem();
+    const section = monitor.getItem();
     const { index } = props;
-    return index !== item.index && index !== (item.index - 1);
+    return index !== section.index && index !== (section.index - 1);
   },
   drop(props, monitor) {
-    const item = monitor.getItem();
-    if(item.isFromMaster) {
-      props.moveSectionToIndex(item.uuid, props.index);
+    const section = monitor.getItem();
+    if(section.master) {
+      props.moveSectionToIndex(section, props.index);
     } else {
-      props.insertAlternative(item.uuid, props.index + 1);
+      props.insertAlternative(section, props.index + 1);
     }
   }
 }

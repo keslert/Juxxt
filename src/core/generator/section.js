@@ -126,13 +126,13 @@ function matchContent(section) {
         element.content = content;
         content.matched = true;
         content.elementId = element.uuid;
-        content.groupId = element.groupId;
+        content.groupId = element.group.uuid;
       } else {
         const content = getContent(element);
         element.content = content;
         content.matched = true;
         content.elementId = element.uuid;
-        content.groupId = element.groupId;
+        content.groupId = element.group.uuid;
         content.elementName = element.name;
         contentStore.push(content);
       }

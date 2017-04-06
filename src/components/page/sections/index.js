@@ -55,24 +55,20 @@ const _Section = styled.div`
 
 const sourceSpec = {
   beginDrag(props) {
-    return {
-      uuid: props.uuid,
-      isFromMaster: props.master,
-      index: props.index,
-    };
+    return props;
   }
 };
 
 const targetSpec = {
   canDrop(props, monitor) {
     const { master, uuid } = props;
-    const item = monitor.getItem();
-    return master && !item.isFromMaster && uuid !== item.uuid;
+    const section = monitor.getItem();
+    return master && !section.master;
   },
   drop(props, monitor) {
-    const item = monitor.getItem();
-    const { overrideSectionWithAlternative, uuid } = props;
-    overrideSectionWithAlternative(item.uuid, uuid);
+    const alternative = monitor.getItem();
+    const { overrideSectionWithAlternative } = props;
+    overrideSectionWithAlternative(props, alternative);
   }
 }
 

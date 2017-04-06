@@ -38,11 +38,6 @@ const Element = (props) => {
     onHoverableMouseLeave,
     name, 
     uuid,
-    sectionId,
-    groupId,
-    familyID,
-    isElement,
-    registerItem,
   } = props;
   const Element = elements[props.name];
 

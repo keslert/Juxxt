@@ -40,7 +40,7 @@ class Suggestions extends React.Component {
         <_Content>
           {alternatives.map((section, i) => (
             <Suggestion onFavorite={() => null} onDelete={() => null} key={section.uuid + i}>
-              <Section {...section} master={false} />
+              <Section {...section} master={false} index={-1} />
             </Suggestion>
           ))}
         </_Content>
