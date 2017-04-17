@@ -28,17 +28,17 @@ export const _Flex = styled.div`
 
 export const _Spacer = styled.div`
   ${props => `
-    ${props.padding && `padding: ${props.padding};`}
-    ${props.paddingTop && `padding-top: ${props.paddingTop};`}
-    ${props.paddingLeft && `padding-left: ${props.paddingLeft};`}
-    ${props.paddingBottom && `padding-bottom: ${props.paddingBottom};`}
-    ${props.paddingRight && `padding-right: ${props.paddingRight};`}
+    ${props.padding && `padding: ${props.padding};`};
+    ${props.paddingTop && `padding-top: ${props.paddingTop};`};
+    ${props.paddingLeft && `padding-left: ${props.paddingLeft};`};
+    ${props.paddingBottom && `padding-bottom: ${props.paddingBottom};`};
+    ${props.paddingRight && `padding-right: ${props.paddingRight};`};
 
-    ${props.margin && `margin: ${props.margin};`}
-    ${props.marginTop && `margin-top: ${props.marginTop};`}
-    ${props.marginLeft && `margin-left: ${props.marginLeft};`}
-    ${props.marginBottom && `margin-bottom: ${props.marginBottom};`}
-    ${props.marginRight && `margin-right: ${props.marginRight};`}
+    ${props.margin && `margin: ${props.margin};`};
+    ${props.marginTop && `margin-top: ${props.marginTop};`};
+    ${props.marginLeft && `margin-left: ${props.marginLeft};`};
+    ${props.marginBottom && `margin-bottom: ${props.marginBottom};`};
+    ${props.marginRight && `margin-right: ${props.marginRight};`};
   `}
 `
 

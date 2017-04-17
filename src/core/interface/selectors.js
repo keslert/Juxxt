@@ -13,3 +13,7 @@ export function getModifications(state) {
 export function getSelected(state) {
   return getInterface(state).selected;
 }
+
+export function getZoomLevel(state) {
+  return getInterface(state).zoomLevel;
+}

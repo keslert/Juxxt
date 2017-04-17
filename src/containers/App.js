@@ -39,7 +39,7 @@ const _Column = styled.div`
   width: ${width}px;
   height: 100vh;
   overflow-y: auto;
-  padding: 15px;
+  // padding: 15px;
   box-sizing: border-box;
 `
 

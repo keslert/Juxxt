@@ -3,12 +3,14 @@ import styled from 'styled-components';
 
 const _SearchBar = styled.div`
   display: flex;
-  background: rgba(255,255,255,0.8);
+  background: #1d1d1d;
   border-radius: 14px;
   padding: 5px 12px;
   color: #727272;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.3);
   input {
     flex: 1;
+    color: #727272;
     background: transparent;
     outline: none;
     border: none;

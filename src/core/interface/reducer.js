@@ -12,6 +12,7 @@ const InterfaceState = () => ({
   },
   hovered: [],
   shiftDown: false,
+  zoomLevel: 1,
 });
 
 export function interfaceReducer(state = InterfaceState(), {payload, type}) {
@@ -41,7 +42,11 @@ export function interfaceReducer(state = InterfaceState(), {payload, type}) {
       return Object.assign({}, state, {
         modifications: payload,
       })
-    
+
+    case types.SET_ZOOM_LEVEL:
+      return Object.assign({}, state, {
+        zoomLevel: payload,
+      })
 
     default: 
       return state;

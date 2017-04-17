@@ -2,10 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { getModifications, turnOnModification } from '../../core/interface';
+import { 
+  getModifications, 
+  turnOnModification, 
+  setZoomLevel, 
+  getZoomLevel,
+} from '../../core/interface';
 
+import Stepper from '../common/stepper';
 import SearchBar from '../common/search-bar';
-import { _Flex } from '../common/styled-base';
+import { _Flex, _Spacer } from '../common/styled-base';
 
 
 const _SmartBar = styled.div`
@@ -25,7 +31,7 @@ const _SmartBar = styled.div`
 class SmartBar extends React.Component {
 
   render() {
-    const { modifications, turnOnModification } = this.props;
+    const { modifications, turnOnModification, setZoomLevel, zoomLevel } = this.props;
     const buttons = [
       {label: 'Structure', key: 'composition'},
       {label: 'Layout', key: 'variation'},
@@ -40,13 +46,21 @@ class SmartBar extends React.Component {
           <SearchBar />
         </_Flex>
 
+        <_Spacer marginLeft="5px">
+          <Stepper 
+            label={`${zoomLevel}x`}
+            onIncrement={() => setZoomLevel(zoomLevel + 1)}
+            onDecrement={() => setZoomLevel(zoomLevel - 1)} />
+        </_Spacer>
+
         {buttons.map(({label, key}) => (
-          <Button 
-            key={key} 
-            text={label} 
-            active={modifications[key]} 
-            onClick={() => turnOnModification(key)}
-            />
+          <_Spacer marginLeft="5px" key={key}>
+            <Button 
+              text={label} 
+              active={modifications[key]} 
+              onClick={() => turnOnModification(key)}
+              />
+          </_Spacer>
         ))}
         
       </_SmartBar>
@@ -56,23 +70,24 @@ class SmartBar extends React.Component {
 
 const mapStateToProps = createSelector(
   getModifications,
-  (modifications) => ({
+  getZoomLevel,
+  (modifications, zoomLevel) => ({
     modifications,
+    zoomLevel,
   })
 )
 
-const mapDispatchToProps = Object.assign({turnOnModification});
+const mapDispatchToProps = Object.assign({turnOnModification, setZoomLevel});
 export default connect(mapStateToProps, mapDispatchToProps)(SmartBar);
 
 
 const _Button = styled.div`
-  padding: 9px 8px;
+  padding: 7px 8px;
   background: #1d1d1d;
   border-radius: 2px;
-  margin-left: 5px;
   box-shadow: inset 0 1px 4px rgba(255,255,255,0.05);
   cursor: pointer;
-  color: #ccc;
+  color: #727272;
   user-select: none;
   font-size: 12px;
   &:hover {

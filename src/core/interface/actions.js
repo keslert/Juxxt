@@ -37,6 +37,13 @@ export function setModifications(modifications) {
   }
 }
 
+export function setZoomLevel(level) {
+  return {
+    type: types.SET_ZOOM_LEVEL,
+    payload: Math.min(Math.max(1, level), 4),
+  }
+}
+
 export function turnOnModification(modification) {
   return (dispatch, getState) => {
     const state = getState();
