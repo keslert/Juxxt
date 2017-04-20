@@ -56,6 +56,9 @@ const _Section = styled.div`
 const sourceSpec = {
   beginDrag(props) {
     return props;
+  },
+  canDrag(props) {
+    return true;
   }
 };
 

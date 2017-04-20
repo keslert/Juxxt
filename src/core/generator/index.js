@@ -29,6 +29,7 @@ export function init() {
   const globals = generateGlobals();
   const master = {
     uuid: shortid.generate(),
+    isPage: true,
     globals,
     sections: range(0, 5).map(i => {
       const section = {
@@ -43,7 +44,7 @@ export function init() {
     }),
   }
   
-  const alternatives = generateAlternatives(master, {variation: true, palette: true}, [master.sections[0]])
+  const alternatives = generateAlternatives(master, {variation: true}, [master.sections[0]])
   return { master, alternatives };
 }
 
@@ -77,7 +78,7 @@ export function generateAlternatives(page, modify={}, selected) {
   if(_selected.isSection) {
   
     if(modify.content) {
-      sections = range(0, 10).map(i => (
+      sections = range(0, 12).map(i => (
         generateSection({...sectionProps, section: omit(section, ['contentStore'])})
       ))
     } else {
@@ -106,7 +107,7 @@ export function generateAlternatives(page, modify={}, selected) {
 
   if(_selected.isElement) {
     if(modify.content) {
-      sections = range(0, 10).map(i => (
+      sections = range(0, 12).map(i => (
         generateSection({...sectionProps, section: {...section,
           contentStore: section.contentStore.filter(content => content.elementId !== _selected.uuid)
         }})

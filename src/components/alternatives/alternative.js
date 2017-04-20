@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import IconButton from '../common/icon-button';
 
-const _Suggestion = styled.div`
+const _Alternative = styled.div`
   margin-bottom: 10px;
 `
 
@@ -12,21 +12,21 @@ const _IconBar = styled.div`
   margin-bottom: 2px;
 `
 
-const Suggestion = ({
+const Alternative = ({
   children,
   onFavorite,
   onDelete,
 }) => {
 
   return (
-    <_Suggestion>
+    <_Alternative>
       <_IconBar>
         <IconButton type="heart" onClick={onFavorite} />
         <IconButton type="trash-o" onClick={onDelete} />
       </_IconBar>
       {children}
-    </_Suggestion>
+    </_Alternative>
   )
 }
 
-export default Suggestion;
+export default Alternative;

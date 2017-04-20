@@ -33,11 +33,11 @@ class SmartBar extends React.Component {
   render() {
     const { modifications, turnOnModification, setZoomLevel, zoomLevel } = this.props;
     const buttons = [
-      {label: 'Structure', key: 'composition'},
-      {label: 'Layout', key: 'variation'},
+      {label: 'Major', key: 'composition'},
+      {label: 'Minor', key: 'variation'},
       {label: 'Palette', key: 'palette'},
       {label: 'Content', key: 'content'},
-      {label: 'Theme', key: 'globals'}, 
+      {label: 'Theme', key: 'globals'},
     ]
 
     return (
@@ -48,9 +48,9 @@ class SmartBar extends React.Component {
 
         <_Spacer marginLeft="5px">
           <Stepper 
-            label={`${zoomLevel}x`}
-            onIncrement={() => setZoomLevel(zoomLevel + 1)}
-            onDecrement={() => setZoomLevel(zoomLevel - 1)} />
+            label={`${Math.floor(100 / zoomLevel)}%`}
+            onIncrement={() => setZoomLevel(zoomLevel - 1)}
+            onDecrement={() => setZoomLevel(zoomLevel + 1)} />
         </_Spacer>
 
         {buttons.map(({label, key}) => (
@@ -85,7 +85,7 @@ const _Button = styled.div`
   padding: 7px 8px;
   background: #1d1d1d;
   border-radius: 2px;
-  box-shadow: inset 0 1px 4px rgba(255,255,255,0.05);
+  // box-shadow: inset 0 1px 4px rgba(255,255,255,0.05);
   cursor: pointer;
   color: #727272;
   user-select: none;

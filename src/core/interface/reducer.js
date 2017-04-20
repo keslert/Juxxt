@@ -12,7 +12,7 @@ const InterfaceState = () => ({
   },
   hovered: [],
   shiftDown: false,
-  zoomLevel: 1,
+  zoomLevel: 2,
 });
 
 export function interfaceReducer(state = InterfaceState(), {payload, type}) {

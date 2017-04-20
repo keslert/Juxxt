@@ -6,6 +6,8 @@ import App from './containers/App';
 
 // styles
 import '../node_modules/normalize.css/normalize.css';
+import 'react-select/dist/react-select.css';
+import './styles/react-select.css'; 
 import './styles/main.css'; 
 
 

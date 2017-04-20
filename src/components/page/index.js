@@ -6,26 +6,21 @@ import InsertionTarget from './insertion-target';
 import last from 'lodash/last';
 
 const _Page = styled.div`
-  font-family: ${props => props.fontFamily};
-  width: 660px;
+  
 `
 
 class Page extends React.Component {
   
   render() {
 
-    const { globals, sections } = this.props;
-
-    const props = {
-      fontFamily: globals.fontFamily,
-    }
+    const { sections, master } = this.props;
 
     const last = sections.length - 1;
     return (
-      <_Page {...props}>
+      <_Page>
         {sections.map((section, i) => (
           <div key={i} style={{marginTop: -1}}>
-            <Section {...section} globals={globals} master index={i} />
+            <Section {...section} master={master} index={i} />
             {i !== last ? <InsertionTarget index={i} /> : null}
           </div>
         ))}

@@ -11,14 +11,14 @@ import { setShiftDown, getModifications, getSelected } from '../core/interface';
 import { updateMaster, getMaster, updateAlternatives } from '../core/page';
 import Page from '../components/page';
 import Sidebar from '../components/sidebar';
-import Suggestions from '../components/suggestions';
+import Alternatives from '../components/alternatives';
 
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
 
 
-const width = 700;
+
 
 const _App = styled.div`
   display: flex;
@@ -36,17 +36,11 @@ const _Window = styled.div`
 `
 
 const _Column = styled.div`
-  width: ${width}px;
+  width: ${props => props.width}px;
+  padding-right: 20px;
   height: 100vh;
   overflow-y: auto;
-  // padding: 15px;
   box-sizing: border-box;
-`
-
-
-const _PageWrapper = styled.div`
-  margin: 15px;
-  width: ${width}px;
 `
 
 class App extends React.Component {
@@ -87,14 +81,14 @@ class App extends React.Component {
     const { master } = this.props;
     return (
       <_App>
-        <_Window>
-          <_Column>
-            <Page {...master} />
-          </_Column>
-
-          <Suggestions width={width} />
-
-        </_Window>
+        { false && 
+          <_Window>
+            <_Column width={450}>
+              <Page {...master} master />
+            </_Column>
+            <Alternatives width={700} />
+          </_Window>
+        }
         <Sidebar />
       </_App>
     );

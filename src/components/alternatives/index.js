@@ -5,14 +5,14 @@ import { createSelector } from 'reselect';
 
 import { getZoomLevel } from '../../core/interface';
 import { getAlternatives } from '../../core/page';
-import Suggestion from './suggestion';
+import Alternative from './alternative';
 import Section from '../page/sections';
 import Page from '../page';
 import { _DisplayFlex, _Flex } from '../common/styled-base';
 
 import SmartBar from './smart-bar';
 
-const _Suggestions = styled.div`
+const _Alternatives = styled.div`
   display: flex;
   flex-direction: column;
   width: ${props => props.width}px;
@@ -21,7 +21,7 @@ const _Suggestions = styled.div`
 `;
 
 const _Content = styled.div`
-  height: 100vh;
+  max-height: 100vh;
   flex: 1;
   display: flex;
   flex-wrap: wrap;
@@ -37,23 +37,23 @@ const StyledWrapper = styled.div`
   box-sizing: border-box;
 `;
 
-class Suggestions extends React.Component {
+class Alternatives extends React.Component {
 
   render() {
     const { alternatives=[], width, zoomLevel } = this.props;
     return (
-      <_Suggestions width={width}>
+      <_Alternatives width={width}>
         <SmartBar />
         <_Content>
           {alternatives.map((section, i) => (
             <StyledWrapper key={section.uuid + i} width={width / zoomLevel}>
-              <Suggestion onFavorite={() => null} onDelete={() => null}>
-                <Section {...section} master={false} index={-1} />
-              </Suggestion>
+              <Alternative onFavorite={() => null} onDelete={() => null}>
+                <Page sections={[section]} master={false} />
+              </Alternative>
             </StyledWrapper>
           ))}
         </_Content>
-      </_Suggestions>
+      </_Alternatives>
     )
   }
 }
@@ -67,4 +67,4 @@ const mapStateToProps = createSelector(
   })
 )
 
-export default connect(mapStateToProps)(Suggestions);
+export default connect(mapStateToProps)(Alternatives);

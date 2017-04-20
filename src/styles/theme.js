@@ -1,3 +1,3 @@
-export const theme = {
-  // light, dark
+export default {
+  black: '#1d1d1d',
 }

@@ -1,16 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
+import theme from '../../styles/theme';
+// import ContentPanel from '../panels/content-panel';
+// import PropsPanel from '../panels/props-panel';
 
-import ContentPanel from '../panels/content-panel';
-import PropsPanel from '../panels/props-panel';
+import ThemeSidebar from './theme-sidebar';
 
 const _Sidebar = styled.div`
   position: fixed;
   top: 0;
-  right: -250px;
+  right: 0;
   bottom: 0;
-  width: 250px;
-  background: #f1f1f1;
+  width: 280px;
+  padding: 10px;
+  background: ${theme.black};
+  box-sizing: border-box;
 `
 
 const Sidebar = ({
@@ -18,8 +22,7 @@ const Sidebar = ({
 }) => {
   return (
     <_Sidebar>
-      <ContentPanel />
-      <PropsPanel />
+      <ThemeSidebar />
     </_Sidebar>
   )
 }
