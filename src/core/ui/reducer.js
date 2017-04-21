@@ -1,7 +1,7 @@
 import * as types from './action-types';
 import { filter, includes } from 'lodash';
 
-const InterfaceState = () => ({
+const uiState = () => ({
   selected: [],
   modifications: {
     composition: true,
@@ -15,7 +15,7 @@ const InterfaceState = () => ({
   zoomLevel: 2,
 });
 
-export function interfaceReducer(state = InterfaceState(), {payload, type}) {
+export function uiReducer(state = uiState(), {payload, type}) {
   switch (type) {
     case types.SET_SELECTED:
       return Object.assign({}, state, {

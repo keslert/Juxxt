@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { getSelected } from '../interface';
+import { getSelected } from '../ui';
 
 import { flattenPage } from '../utils';
 

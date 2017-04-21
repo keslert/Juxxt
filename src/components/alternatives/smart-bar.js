@@ -7,7 +7,7 @@ import {
   turnOnModification, 
   setZoomLevel, 
   getZoomLevel,
-} from '../../core/interface';
+} from '../../core/ui';
 
 import Stepper from '../common/stepper';
 import SearchBar from '../common/search-bar';

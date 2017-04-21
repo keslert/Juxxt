@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
-import { getZoomLevel } from '../../core/interface';
+import { getZoomLevel } from '../../core/ui';
 import { getAlternatives } from '../../core/page';
 import Alternative from './alternative';
 import Section from '../page/sections';

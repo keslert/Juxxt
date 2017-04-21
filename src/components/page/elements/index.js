@@ -2,7 +2,7 @@ import React from 'react';
 import elements from './meta';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { interfaceActions } from '../../../core/interface';
+import { uiActions } from '../../../core/ui';
 import { includes, last, map } from 'lodash';
 import { fadeIn } from '../../common/styled-animations';
 
@@ -54,8 +54,8 @@ const Element = (props) => {
 }
 
 const mapStateToProps = (state, props) => ({
-  isSelected: state.interface.shiftDown && includes(map(state.interface.selected, 'familyID'), props.familyID),
-  isHovered: last(state.interface.hovered) === props.uuid,
+  isSelected: state.ui.shiftDown && includes(map(state.ui.selected, 'familyID'), props.familyID),
+  isHovered: last(state.ui.hovered) === props.uuid,
 });
-const mapDispatchToProps = Object.assign({}, interfaceActions);
+const mapDispatchToProps = Object.assign({}, uiActions);
 export default connect(mapStateToProps, mapDispatchToProps)(Element);

@@ -7,7 +7,7 @@ import { range, isEqual } from 'lodash';
 import flow from 'lodash/flow';
 
 import { randomItem } from '../core/utils';
-import { setShiftDown, getModifications, getSelected } from '../core/interface';
+import { setShiftDown, getModifications, getSelected } from '../core/ui';
 import { updateMaster, getMaster, updateAlternatives } from '../core/page';
 import Page from '../components/page';
 import Sidebar from '../components/sidebar';

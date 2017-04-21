@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import { interfaceReducer } from './interface';
+import { uiReducer } from './ui';
 import { pageReducer } from './page';
 
 const rootReducer = combineReducers({
-  interface: interfaceReducer,
+  ui: uiReducer,
   page: pageReducer,
 });
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import sections from './meta';
 import { overrideSectionWithAlternative } from '../../../core/page';
-import { interfaceActions } from '../../../core/interface';
+import { uiActions } from '../../../core/ui';
 import { includes, last, map, pick } from 'lodash';
 import flow from 'lodash/flow';
 
@@ -135,11 +135,11 @@ const Section = (props) => {
 }
 
 const mapStateToProps = (state, props) => ({
-  isSelected: state.interface.shiftDown && includes(map(state.interface.selected, 'uuid'), props.uuid),
-  isHovered: last(state.interface.hovered) === props.uuid,
+  isSelected: state.ui.shiftDown && includes(map(state.ui.selected, 'uuid'), props.uuid),
+  isHovered: last(state.ui.hovered) === props.uuid,
 });
 
-const mapDispatchToProps = Object.assign({overrideSectionWithAlternative}, interfaceActions);
+const mapDispatchToProps = Object.assign({overrideSectionWithAlternative}, uiActions);
 export default flow(
   DragSource('section', sourceSpec, sourceCollect),
   DropTarget('section', targetSpec, targetCollect),

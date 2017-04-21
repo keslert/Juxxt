@@ -3,7 +3,7 @@ import { init, generate, generateAlternatives } from '../../core/generator';
 import { setCacheForElement } from '../../core/generator/content';
 import { getMaster, getAlternatives } from './selectors';
 
-import { setSelected } from '../interface';
+import { setSelected } from '../ui';
 import { find, pick, sortBy } from 'lodash';
 
 
@@ -42,7 +42,7 @@ export function updateMaster(modifications, overwrites) {
   return (dispatch, getState) => {
     const state = getState();
     const master = getMaster(state);
-    const selected = state.interface.selected;
+    const selected = state.ui.selected;
     const page = generate(master, modifications, selected, overwrites);
     dispatch(setMaster(page));
   }
@@ -52,7 +52,7 @@ export function updateAlternatives(modifications) {
   return (dispatch, getState) => {
     const state = getState();
     const master = getMaster(state);
-    const selected = state.interface.selected;
+    const selected = state.ui.selected;
     const alternatives = generateAlternatives(master, modifications, selected);
     dispatch(setAlternatives(alternatives));
   }
