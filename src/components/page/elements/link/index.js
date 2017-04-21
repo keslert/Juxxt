@@ -21,7 +21,7 @@ export default Link;
 
 export const defaultProps = ({palette, globals}) => ({
   color: palette.link,
-  fontSize: globals.fontSize,
+  fontSize: globals.text.fontSize,
 })
 
 export const modifiableProps = {

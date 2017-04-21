@@ -34,15 +34,15 @@ const Button = ({props, content}) => (
 export default Button;
 
 export const defaultProps = ({palette, globals}, overwrites) => {
-  const type = overwrites.type || globals.button.type;
-  const fontSize = overwrites.fontSize || globals.fontSize;
+  const type = overwrites.type || globals.buttons.type;
+  const fontSize = overwrites.fontSize || globals.text.fontSize;
   return {
     background: palette.button.background,
     borderBottom: getBorderBottom(type, palette.button.background),
     borderRadius: getBorderRadius(type, fontSize * 4),
-    textTransform: globals.button.textTransform,
+    textTransform: globals.buttons.textTransform,
     color: palette.button.color,
-    fontSize: globals.fontSize,
+    fontSize: globals.text.fontSize,
     padding: `${fontSize}px ${fontSize * 4}px`,
   }
 }

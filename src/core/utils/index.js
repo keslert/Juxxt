@@ -39,6 +39,6 @@ export function flattenPage(page) {
 
 export function toggleListItem(list, item) {
   return includes(list, item)
-         ? filter(list, listItem => listItem === item)
+         ? filter(list, listItem => listItem !== item)
          : [...list, item];
 }

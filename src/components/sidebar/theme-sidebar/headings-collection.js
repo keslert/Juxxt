@@ -2,8 +2,11 @@ import React from 'react';
 import Collection from '../common/collection';
 import Select from '../common/select';
 
-const HeadingCollection = ({
+const HeadingsCollection = ({
   open,
+  onToggleOpen,
+  locked,
+  onToggleLocked,
 }) => {
   const fontOptions = [
     {value: 'montserrat', label: 'Montserrat'},
@@ -15,7 +18,7 @@ const HeadingCollection = ({
   ];
 
   return (
-    <Collection heading={"Heading"} open={open}>
+    <Collection heading={"Heading"} open={open} onToggleOpen={onToggleOpen} locked={locked} onToggleLocked={onToggleLocked}>
       <Select 
         name="text-font-family"
         label="Font Family"
@@ -34,4 +37,4 @@ const HeadingCollection = ({
     </Collection>
   )
 }
-export default HeadingCollection;
+export default HeadingsCollection;

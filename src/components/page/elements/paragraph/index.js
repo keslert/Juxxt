@@ -21,7 +21,7 @@ export default Paragraph;
 
 export const defaultProps = ({palette, globals}) => ({
   color: palette.text,
-  fontSize: globals.fontSize,
+  fontSize: globals.text.fontSize,
 })
 
 export const modifiableProps = {

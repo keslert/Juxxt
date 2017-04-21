@@ -4,6 +4,9 @@ import Select from '../common/select';
 
 const TextCollection = ({
   open,
+  onToggleOpen,
+  locked,
+  onToggleLocked,
 }) => {
   const textOptions = [
     {value: 'montserrat', label: 'Montserrat'},
@@ -16,7 +19,7 @@ const TextCollection = ({
   ];
 
   return (
-    <Collection heading={"Text"} open={open}>
+    <Collection heading={"Text"} open={open} onToggleOpen={onToggleOpen} locked={locked} onToggleLocked={onToggleLocked}>
       <Select 
         name="text-font-family"
         label="Font Family"

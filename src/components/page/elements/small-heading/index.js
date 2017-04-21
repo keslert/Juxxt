@@ -23,11 +23,11 @@ export default SmallHeading;
 
 export const defaultProps = ({palette, globals}) => ({
   color: palette.textHighlight,
-  fontFamily: globals.smallHeading.fontFamily,
-  fontSize: globals.smallHeading.fontSize,
-  fontWeight: globals.smallHeading.fontWeight,
-  textTransform: globals.smallHeading.textTransform,
-  margin: globals.smallHeading.margin,
+  fontFamily: globals.smallHeadings.fontFamily,
+  fontSize: globals.smallHeadings.fontSize,
+  fontWeight: globals.smallHeadings.fontWeight,
+  textTransform: globals.smallHeadings.textTransform,
+  margin: globals.smallHeadings.margin,
 })
 
 export const modifiableProps = {
@@ -41,5 +41,5 @@ export const modifiableProps = {
 }
 
 export function getFontSize({userOverwrites}, globals) {
-  return userOverwrites.fontSize || globals.smallHeading.fontSize;
+  return userOverwrites.fontSize || globals.smallHeadings.fontSize;
 }

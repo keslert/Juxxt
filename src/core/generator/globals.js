@@ -9,29 +9,32 @@ export function generateGlobals() {
 
   return {
     colors: selectColors(),
-    fontFamily,
     fontSize: 14,
     iconSize: 64,
     maxPageWidth: 960,
-    button: {
+    buttons: {
       type: randomItem(['Rounded', 'Round', 'Square', 'Raised']),
       textTransform: randomItem(['none', 'uppercase']),
     },
-    heading: {
+    text: {
+      fontSize: 14,
+      fontFamily: fontFamily,
+    },
+    headings: {
       fontFamily: headingFontFamily,
       fontSize: 36,
       fontWeight: randomItem(['bold', 'normal', 'lighter']),
       textTransform: randomItem(['none', 'uppercase']),
       margin: "0 0 15px",
     },
-    smallHeading: {
+    smallHeadings: {
       fontFamily: headingFontFamily,
       fontSize: 20,
       fontWeight: 'bold',
       textTransform: randomItem(['none', 'uppercase']),
       margin: "0 0 10px",
     },
-    section: {
+    sections: {
       padding: "80px 10px",
     }
   }

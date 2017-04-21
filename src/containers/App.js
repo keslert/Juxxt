@@ -81,7 +81,7 @@ class App extends React.Component {
     const { master } = this.props;
     return (
       <_App>
-        { false && 
+        { true && 
           <_Window>
             <_Column width={400}>
               <Page {...master} master />

@@ -41,6 +41,9 @@ function renderColumn(colors) {
 
 const BrandColorsCollection = ({
   open,
+  onToggleOpen,
+  locked,
+  onToggleLocked
 }) => {
   const colors = [
     {key: 'primary', value: '#3ECF8E'},
@@ -54,7 +57,7 @@ const BrandColorsCollection = ({
   ];
   const half = Math.ceil(colors.length / 2);
   return (
-    <Collection heading={"Brand Colors"} open={open}>
+    <Collection heading={"Brand Colors"} open={open} onToggleOpen={onToggleOpen} locked={locked} onToggleLocked={onToggleLocked}>
       <div>
         {renderColumn(colors.slice(0, half))}
         {renderColumn(colors.slice(half))}

@@ -23,11 +23,11 @@ export default Heading;
 
 export const defaultProps = ({palette, globals}) => ({
   color: palette.textHighlight,
-  fontFamily: globals.heading.fontFamily,
-  fontSize: globals.heading.fontSize,
-  fontWeight: globals.heading.fontWeight,
-  textTransform: globals.heading.textTransform,
-  margin: globals.heading.margin,
+  fontFamily: globals.headings.fontFamily,
+  fontSize: globals.headings.fontSize,
+  fontWeight: globals.headings.fontWeight,
+  textTransform: globals.headings.textTransform,
+  margin: globals.headings.margin,
 })
 
 export const modifiableProps = {
@@ -39,5 +39,5 @@ export const modifiableProps = {
 }
 
 export function getFontSize({userOverwrites}, globals) {
-  return userOverwrites.fontSize || globals.heading.fontSize;
+  return userOverwrites.fontSize || globals.headings.fontSize;
 }

@@ -1,11 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
+import { themeActions, getOpen, getLocked, getFocus } from '../../../core/theme';
+
 import Select from '../common/select';
 import { StyledWrap } from '../common/styled';
 
 import TextCollection from './text-collection';
-import HeadingCollection from './heading-collection';
+import HeadingsCollection from './headings-collection';
 import BrandColorsCollection from './brand-colors-collection';
+import { zipObject } from 'lodash';
 
 const StyledHeading = styled.div`
   font-size: 16px;
@@ -18,12 +23,34 @@ class ThemeSidebar extends React.Component {
 
   render() {
 
+    const { 
+      open, 
+      toggleOpen, 
+      locked, 
+      toggleLocked,
+      focus, 
+      setFocus 
+    } = this.props;
+
     const focusOptions = [
-      {value: 'brand-colors', label: 'Brand Colors'},
-      {value: 'fonts', label: 'Fonts'},
+      {value: 'brandColors', label: 'Brand Colors'},
+      {value: 'text', label: 'Text'},
       {value: 'headings', label: 'Headings'},
-      {value: 'small-headings', label: 'Small Headings'},
+      {value: 'smallHeadings', label: 'Small Headings'},
     ];
+
+    const collections = [
+      {
+        key: 'brandColors',
+        Component: BrandColorsCollection,
+      },{
+        key: 'text',
+        Component: TextCollection,
+      },{
+        key: 'headings',
+        Component: HeadingsCollection,
+      },
+    ]
 
     return (
       <div>
@@ -34,25 +61,40 @@ class ThemeSidebar extends React.Component {
             name="focus"
             label="Choose your focus"
             options={focusOptions}
-            value={focusOptions[0].value}
-            onChange={() => null}
+            value={focus}
+            onChange={setFocus}
             />
         </StyledWrap>
 
-        <StyledWrap background>
-          <BrandColorsCollection />
-        </StyledWrap>
-
-        <StyledWrap background>
-          <TextCollection />
-        </StyledWrap>
-
-        <StyledWrap background>
-          <HeadingCollection />
-        </StyledWrap>
-
+        {collections.map(({key, Component}) => (
+          <StyledWrap background key={key}>
+            <Component
+              open={open[key]} 
+              onToggleOpen={() => toggleOpen(key)}
+              locked={locked[key]} 
+              onToggleLocked={(e) => {
+                toggleLocked(key);
+                e.stopPropagation();
+              }}
+              />
+          </StyledWrap>
+        ))}
+        
       </div>
     )
   }
 }
-export default ThemeSidebar;
+
+const mapStateToProps = createSelector(
+  getOpen,
+  getLocked,
+  getFocus,
+  (open, locked, focus) => ({
+    open: zipObject(open, open.map(_ => true)),
+    locked: zipObject(locked, locked.map(_ => true)),
+    focus,
+  })
+)
+
+const mapDispatchToProps = Object.assign({}, themeActions);
+export default connect(mapStateToProps, mapDispatchToProps)(ThemeSidebar);

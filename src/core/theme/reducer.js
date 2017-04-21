@@ -4,7 +4,7 @@ import { toggleListItem } from '../utils';
 const themeState = () => ({
   open: [],
   locked: [],
-  focus: 'brand-colors',
+  focus: 'brandColors',
 });
 
 export function themeReducer(state = themeState(), {payload, type}) {

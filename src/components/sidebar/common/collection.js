@@ -20,7 +20,7 @@ const StyledHeading = styled.div`
     position: absolute;
     top: 0;
     left: -10px;
-    transition: transform 0.3s;
+    transition: transform 0.2s ease-out;
     ${props => `
       ${props.open && 'transform: rotateZ(90deg)'};
     `};
@@ -53,12 +53,12 @@ const StyledContent = styled.div`
 
 class Collection extends React.PureComponent {
   render() {
-    const { heading, open, children } = this.props;
+    const { heading, open, locked, children, onToggleOpen, onToggleLocked } = this.props;
     return (
       <StyledCollection>
-        <StyledHeading open={open}>
+        <StyledHeading open={open} onClick={onToggleOpen}>
           {heading}
-          <i className="fa fa-unlock"></i>
+          <i className={`fa fa-${locked ? 'lock' :  'unlock'}`} onClick={onToggleLocked}></i>
         </StyledHeading>
         <StyledContent open={open}>
           {children}

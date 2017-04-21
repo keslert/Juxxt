@@ -67,7 +67,7 @@ export const defaultProps = ({section, globals}) => ({
   justify: 'center',
   align: 'center',
   background: section.palette.background,
-  padding: globals.section.padding,
+  padding: globals.sections.padding,
 })
 
 export const modifiableProps = {
