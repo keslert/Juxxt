@@ -31,6 +31,7 @@ const StyledHeading = styled.div`
     right: -4px;
     padding: 4px;
     border-radius: 2px;
+    color: rgba(255,255,255, 0.15);
     cursor: pointer;
     &:hover {
       background: rgba(255,255,255,0.05);

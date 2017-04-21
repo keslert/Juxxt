@@ -5,7 +5,10 @@ import styled from 'styled-components';
 export const StyledWrap = styled.div`
   padding: 10px;
   margin-bottom: 10px;
-  ${props => props.background && 'background: rgba(255,255,255,0.05)'};
+  ${props => props.inset && `
+    background: rgba(255,255,255,0.05)
+    box-shadow: inset 0 2px 2px rgba(0,0,0,0.1);
+  `};
 `
 
 export const StyledField = styled.div`

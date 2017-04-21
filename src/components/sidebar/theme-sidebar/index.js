@@ -56,7 +56,7 @@ class ThemeSidebar extends React.Component {
       <div>
         <StyledHeading>Theme Settings</StyledHeading>
 
-        <StyledWrap background>
+        <StyledWrap inset>
           <Select 
             name="focus"
             label="Choose your focus"
@@ -67,7 +67,7 @@ class ThemeSidebar extends React.Component {
         </StyledWrap>
 
         {collections.map(({key, Component}) => (
-          <StyledWrap background key={key}>
+          <StyledWrap inset key={key}>
             <Component
               open={open[key]} 
               onToggleOpen={() => toggleOpen(key)}

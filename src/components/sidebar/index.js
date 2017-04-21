@@ -14,6 +14,8 @@ const _Sidebar = styled.div`
   width: 280px;
   background: ${theme.black};
   box-sizing: border-box;
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.5);
+  border-left: 2px solid #222;
 `
 
 const Sidebar = ({
