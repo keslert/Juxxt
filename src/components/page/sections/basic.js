@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { _Flex, _DisplayFlex } from '../../common/styled-base';
+import { StyledFlex, StyledDisplayFlex } from '../../common/styled-base';
 import Group from '../groups';
 import SectionContainer from './section-container';
 
@@ -11,11 +11,11 @@ const BasicSection = ({
   props,
 }) => {
   return (
-    <_DisplayFlex {...props}>
+    <StyledDisplayFlex {...props}>
       <SectionContainer {...sectionContainer}>
         <Group {...groups.group} />
       </SectionContainer>
-    </_DisplayFlex>
+    </StyledDisplayFlex>
   )
 }
 export default BasicSection;

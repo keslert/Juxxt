@@ -83,7 +83,7 @@ class App extends React.Component {
       <_App>
         { false && 
           <_Window>
-            <_Column width={450}>
+            <_Column width={400}>
               <Page {...master} master />
             </_Column>
             <Alternatives width={700} />

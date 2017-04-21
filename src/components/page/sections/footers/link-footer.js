@@ -1,6 +1,6 @@
 import React from 'react';
 import Group from '../../groups';
-import { _DisplayFlex, _Flex } from '../../../common/styled-base';
+import { StyledDisplayFlex, StyledFlex } from '../../../common/styled-base';
 import SectionContainer from '../section-container';
 
 const LinkFooter = ({
@@ -11,17 +11,17 @@ const LinkFooter = ({
 }) => {
 
   return (
-    <_DisplayFlex {...props}>
+    <StyledDisplayFlex {...props}>
       <SectionContainer {...sectionContainer}>
-        <_DisplayFlex widthPercentage='100' justify='space-between'>
+        <StyledDisplayFlex widthPercentage='100' justify='space-between'>
           {groups.list.clones.map(list => 
-            <_Flex key={list.uuid}>
+            <StyledFlex key={list.uuid}>
               <Group {...list} />
-            </_Flex>
+            </StyledFlex>
           )}
-        </_DisplayFlex>
+        </StyledDisplayFlex>
       </SectionContainer>
-    </_DisplayFlex>
+    </StyledDisplayFlex>
   )
 }
 export default LinkFooter;

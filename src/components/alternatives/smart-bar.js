@@ -11,7 +11,7 @@ import {
 
 import Stepper from '../common/stepper';
 import SearchBar from '../common/search-bar';
-import { _Flex, _Spacer } from '../common/styled-base';
+import { StyledFlex, StyledSpacer } from '../common/styled-base';
 
 
 const _SmartBar = styled.div`
@@ -33,8 +33,8 @@ class SmartBar extends React.Component {
   render() {
     const { modifications, turnOnModification, setZoomLevel, zoomLevel } = this.props;
     const buttons = [
-      {label: 'Major', key: 'composition'},
-      {label: 'Minor', key: 'variation'},
+      {label: 'Design', key: 'composition'},
+      {label: 'Variation', key: 'variation'},
       {label: 'Palette', key: 'palette'},
       {label: 'Content', key: 'content'},
       {label: 'Theme', key: 'globals'},
@@ -42,25 +42,25 @@ class SmartBar extends React.Component {
 
     return (
       <_SmartBar>
-        <_Flex>
+        <StyledFlex>
           <SearchBar />
-        </_Flex>
+        </StyledFlex>
 
-        <_Spacer marginLeft="5px">
+        <StyledSpacer marginLeft="5px">
           <Stepper 
             label={`${Math.floor(100 / zoomLevel)}%`}
             onIncrement={() => setZoomLevel(zoomLevel - 1)}
             onDecrement={() => setZoomLevel(zoomLevel + 1)} />
-        </_Spacer>
+        </StyledSpacer>
 
         {buttons.map(({label, key}) => (
-          <_Spacer marginLeft="5px" key={key}>
+          <StyledSpacer marginLeft="5px" key={key}>
             <Button 
               text={label} 
               active={modifications[key]} 
               onClick={() => turnOnModification(key)}
               />
-          </_Spacer>
+          </StyledSpacer>
         ))}
         
       </_SmartBar>

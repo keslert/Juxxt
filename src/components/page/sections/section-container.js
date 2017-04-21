@@ -1,5 +1,5 @@
 import React from 'react';
-import { _DisplayFlex } from '../../common/styled-base';
+import { StyledDisplayFlex } from '../../common/styled-base';
 const SectionContainer = ({
   align = 'center',
   justify = 'center',
@@ -17,9 +17,9 @@ const SectionContainer = ({
   }
 
   return (
-    <_DisplayFlex {...props} className="section-container">
+    <StyledDisplayFlex {...props} className="section-container">
       {children}
-    </_DisplayFlex>
+    </StyledDisplayFlex>
   )
 }
 export default SectionContainer;

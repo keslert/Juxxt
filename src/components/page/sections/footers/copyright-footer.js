@@ -1,6 +1,6 @@
 import React from 'react';
 import Group from '../../groups';
-import { _DisplayFlex } from '../../../common/styled-base';
+import { StyledDisplayFlex } from '../../../common/styled-base';
 import SectionContainer from '../section-container';
 
 const CopyrightFooter = ({
@@ -11,11 +11,11 @@ const CopyrightFooter = ({
 }) => {
 
   return (
-    <_DisplayFlex {...props}>
+    <StyledDisplayFlex {...props}>
       <SectionContainer {...sectionContainer}>
         <Group {...groups.heading} />
       </SectionContainer>
-    </_DisplayFlex>
+    </StyledDisplayFlex>
   )
 }
 export default CopyrightFooter;

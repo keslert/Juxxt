@@ -12,7 +12,13 @@ const Select = ({
   <StyledField>
     <label>{label}</label>
     <StyledInputWrapper>
-      <RSelect name={name} value={value} options={options} onChange={onChange} clearable={false} />
+      <RSelect 
+        name={name} 
+        value={value} 
+        options={options} 
+        onChange={onChange} 
+        clearable={false}
+        searchable={false} />
     </StyledInputWrapper>
   </StyledField>
 )

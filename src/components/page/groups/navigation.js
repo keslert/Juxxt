@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import LogoSVG from '../../common/svg/logo';
 import Element from '../elements';
-import { _DisplayFlex } from '../../common/styled-base';
+import { StyledDisplayFlex } from '../../common/styled-base';
 import { range } from 'lodash';
 
 
@@ -35,14 +35,14 @@ const ProductNavigation = ({
       <_Logo>
         <LogoSVG color={elements.link.clones[0].props.color} />
       </_Logo>
-      <_DisplayFlex align="center" flex="1">
-        <_DisplayFlex flex="1" justify={variation.justify}>
+      <StyledDisplayFlex align="center" flex="1">
+        <StyledDisplayFlex flex="1" justify={variation.justify}>
           {elements.link.clones.map(link => (
             <Element key={link.uuid} {...link} />
           ))}
-        </_DisplayFlex>
+        </StyledDisplayFlex>
         <Element {...elements.button} />
-      </_DisplayFlex>
+      </StyledDisplayFlex>
     </_ProductNavigation>
   )
 }

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import Element from '../elements';
-import { _Flex, _DisplayFlex, _Block } from '../../common/styled-base';
+import { StyledFlex, StyledDisplayFlex, _Block } from '../../common/styled-base';
 import { getFontSize } from '../elements/small-heading';
 
 const IconSmallHeadingParagraph = ({
@@ -13,12 +13,12 @@ const IconSmallHeadingParagraph = ({
   if(variation.iconPosition === 'heading') {
     return (
       <_Block {...props} textAlign="left">
-        <_DisplayFlex>
+        <StyledDisplayFlex>
           <Element {...elements.icon} />
-          <_Flex>
+          <StyledFlex>
             <Element {...elements.heading} />
-          </_Flex>
-        </_DisplayFlex>
+          </StyledFlex>
+        </StyledDisplayFlex>
         <Element {...elements.paragraph} />
       </_Block>
     )
@@ -27,13 +27,13 @@ const IconSmallHeadingParagraph = ({
   if(variation.iconPosition === 'column') {
     return (
       <_Block {...props} textAlign="left">
-        <_DisplayFlex>
+        <StyledDisplayFlex>
           <Element {...elements.icon} />
-          <_Flex>
+          <StyledFlex>
             <div><Element {...elements.heading} /></div>
             <div><Element {...elements.paragraph} /></div>
-          </_Flex>
-        </_DisplayFlex>
+          </StyledFlex>
+        </StyledDisplayFlex>
       </_Block>
     )
   }

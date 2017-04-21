@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { _DisplayFlex } from '../../common/styled-base';
+import { StyledDisplayFlex } from '../../common/styled-base';
 import Group from '../groups';
 import SectionContainer from './section-container';
 
@@ -24,18 +24,18 @@ const TPImage = ({
   }
 
   return (
-    <_DisplayFlex {...props}>
+    <StyledDisplayFlex {...props}>
       <SectionContainer {...sectionContainer}>
-        <_DisplayFlex>
-          <_DisplayFlex {...innerProps}>
+        <StyledDisplayFlex>
+          <StyledDisplayFlex {...innerProps}>
             <Group {...left} />
-          </_DisplayFlex>
-          <_DisplayFlex {...innerProps}>
+          </StyledDisplayFlex>
+          <StyledDisplayFlex {...innerProps}>
             <Group {...right} />
-          </_DisplayFlex>
-        </_DisplayFlex>
+          </StyledDisplayFlex>
+        </StyledDisplayFlex>
       </SectionContainer>
-    </_DisplayFlex>
+    </StyledDisplayFlex>
   )
 }
 export default TPImage;

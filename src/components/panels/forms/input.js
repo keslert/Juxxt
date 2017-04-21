@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { _DisplayFlex, _Flex } from '../../common/styled-base';
+import { StyledDisplayFlex, StyledFlex } from '../../common/styled-base';
 import { _Subscript, _Input } from './styled-form';
 
 const Input = ({
@@ -9,10 +9,10 @@ const Input = ({
   value='',
   onChange,
 }) => (
-  <_DisplayFlex flexDirection="column" align="center">
+  <StyledDisplayFlex flexDirection="column" align="center">
     <_Input type={type} value={value} onChange={(e) => onChange(e.target.value)} />
     <_Subscript>{label}</_Subscript>
-  </_DisplayFlex>
+  </StyledDisplayFlex>
 )
 
 export default Input;

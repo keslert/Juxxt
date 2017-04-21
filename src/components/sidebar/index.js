@@ -9,10 +9,9 @@ import ThemeSidebar from './theme-sidebar';
 const _Sidebar = styled.div`
   position: fixed;
   top: 0;
-  right: 0;
+  right: 0px;
   bottom: 0;
   width: 280px;
-  padding: 10px;
   background: ${theme.black};
   box-sizing: border-box;
 `

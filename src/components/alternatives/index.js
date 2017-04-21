@@ -8,7 +8,7 @@ import { getAlternatives } from '../../core/page';
 import Alternative from './alternative';
 import Section from '../page/sections';
 import Page from '../page';
-import { _DisplayFlex, _Flex } from '../common/styled-base';
+import { StyledDisplayFlex, StyledFlex } from '../common/styled-base';
 
 import SmartBar from './smart-bar';
 

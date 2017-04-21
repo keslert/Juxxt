@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 
-export const _DisplayFlex = styled.div`
+export const StyledDisplayFlex = styled.div`
   display: flex;
   box-sizing: border-box;
   ${props => `
@@ -22,11 +22,11 @@ export const _DisplayFlex = styled.div`
   `}
 `;
 
-export const _Flex = styled.div`
+export const StyledFlex = styled.div`
   flex: ${props => props.flex ? props.flex : 1}
 `;
 
-export const _Spacer = styled.div`
+export const StyledSpacer = styled.div`
   ${props => `
     ${props.padding && `padding: ${props.padding};`};
     ${props.paddingTop && `padding-top: ${props.paddingTop};`};

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { _Flex, _DisplayFlex } from '../../common/styled-base';
+import { StyledFlex, StyledDisplayFlex } from '../../common/styled-base';
 import Group from '../groups';
 import { range } from 'lodash';
 import SectionContainer from './section-container';
@@ -14,19 +14,18 @@ const HeadingHorizontalItems = ({
 }) => {
 
   return (
-    <_DisplayFlex {...props}>
+    <StyledDisplayFlex {...props}>
       <SectionContainer {...sectionContainer}>
         <Group {...groups.heading} />
-        <_DisplayFlex>
-          
+        <StyledDisplayFlex>
           {groups.item.clones.map((item, i) => (
-            <_Flex key={i}>
+            <StyledFlex key={i}>
               <Group {...item} index={i} />
-            </_Flex>
+            </StyledFlex>
           ))}
-        </_DisplayFlex>
+        </StyledDisplayFlex>
       </SectionContainer>
-    </_DisplayFlex>
+    </StyledDisplayFlex>
   )
 }
 

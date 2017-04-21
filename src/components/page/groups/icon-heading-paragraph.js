@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import Element from '../elements';
-import { _Flex, _DisplayFlex, _Block } from '../../common/styled-base';
+import { StyledFlex, StyledDisplayFlex, _Block } from '../../common/styled-base';
 import { getFontSize } from '../elements/heading';
 
 
@@ -34,14 +34,14 @@ const IconHeadingParagraph = ({
   if(variation.iconPosition === 'inline') {
     return (
       <_Block {...props}>
-        <_DisplayFlex>
-          <_DisplayFlex order={2}>
+        <StyledDisplayFlex>
+          <StyledDisplayFlex order={2}>
             <Element {...elements.icon} />
-          </_DisplayFlex>
-          <_DisplayFlex {...headingProps}>
+          </StyledDisplayFlex>
+          <StyledDisplayFlex {...headingProps}>
             <Element {...elements.heading} />
-          </_DisplayFlex>
-        </_DisplayFlex>
+          </StyledDisplayFlex>
+        </StyledDisplayFlex>
         <Element {...elements.paragraph} />
       </_Block>
     )
@@ -51,15 +51,15 @@ const IconHeadingParagraph = ({
   if(variation.iconPosition === 'column') {
     return (
       <_Block {...props}>
-        <_DisplayFlex>
-          <_DisplayFlex order={2}>
+        <StyledDisplayFlex>
+          <StyledDisplayFlex order={2}>
             <Element {...elements.icon} />
-          </_DisplayFlex>
-          <_DisplayFlex {...headingProps}>
+          </StyledDisplayFlex>
+          <StyledDisplayFlex {...headingProps}>
             <Element {...elements.heading} />
             <Element {...elements.paragraph} />
-          </_DisplayFlex>
-        </_DisplayFlex>
+          </StyledDisplayFlex>
+        </StyledDisplayFlex>
       </_Block>
     )
   }

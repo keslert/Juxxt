@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Input from './forms/input';
 import MarginPaddingInput from './forms/margin-padding-input';
 
-import { _Flex, _DisplayFlex } from '../common/styled-base';
+import { StyledFlex, StyledDisplayFlex } from '../common/styled-base';
 import { _Label } from './forms/styled-form';
 import { lowerCamelCaseToRegular } from '../../core/utils';
 
@@ -41,7 +41,7 @@ const PanelItem = ({
   return (
     <_PanelItem>
       <_Label>{lowerCamelCaseToRegular(name)}</_Label>
-      <_Flex>{getItem()}</_Flex>
+      <StyledFlex>{getItem()}</StyledFlex>
     </_PanelItem>
   )
 

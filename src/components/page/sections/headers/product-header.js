@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Group from '../../groups';
 import tinycolor from 'tinycolor2';
-import { _DisplayFlex } from '../../../common/styled-base';
+import { StyledDisplayFlex } from '../../../common/styled-base';
 import SectionContainer from '../section-container';
 
 const Header = ({
@@ -13,14 +13,14 @@ const Header = ({
 }) => {
 
   return (
-    <_DisplayFlex {...props} style={{minHeight: '600px'}}>
+    <StyledDisplayFlex {...props} style={{minHeight: '600px'}}>
       <div style={{width: '100%'}}><Group {...groups.navigation} /></div>
       <SectionContainer {...sectionContainer} align={variation.align}>
-        <_DisplayFlex flex="1" align="center">  
+        <StyledDisplayFlex flex="1" align="center">  
           <Group {...groups.intro} />
-        </_DisplayFlex>
+        </StyledDisplayFlex>
       </SectionContainer>
-    </_DisplayFlex>
+    </StyledDisplayFlex>
   )
 }
 
