@@ -1,4 +1,12 @@
-import { random, find, isArray, first, forEach } from 'lodash';
+import { 
+  random, 
+  find, 
+  isArray, 
+  first, 
+  forEach,
+  includes,
+  filter
+} from 'lodash';
 
 export function randomItem(arr) {
   return arr[random(arr.length - 1)];
@@ -27,4 +35,10 @@ export function flattenPage(page) {
   }
   flatten(page);
   return flattened;
+}
+
+export function toggleListItem(list, item) {
+  return includes(list, item)
+         ? filter(list, listItem => listItem === item)
+         : [...list, item];
 }

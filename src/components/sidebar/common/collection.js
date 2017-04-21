@@ -13,6 +13,7 @@ const StyledHeading = styled.div`
   color: rgba(255,255,255,0.7);
   margin-left: 10px;
   position: relative;
+  cursor: pointer;
   &:after {
     content: '\\f0da';
     font-family: 'FontAwesome';
@@ -25,7 +26,15 @@ const StyledHeading = styled.div`
     `};
   }
   i {
-    float: right;
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    padding: 4px;
+    border-radius: 2px;
+    cursor: pointer;
+    &:hover {
+      background: rgba(255,255,255,0.05);
+    }
   }
 `;
 
@@ -49,7 +58,7 @@ class Collection extends React.PureComponent {
       <StyledCollection>
         <StyledHeading open={open}>
           {heading}
-          <i className="fa fa-lock"></i>
+          <i className="fa fa-unlock"></i>
         </StyledHeading>
         <StyledContent open={open}>
           {children}

@@ -29,7 +29,7 @@ class ThemeSidebar extends React.Component {
       <div>
         <StyledHeading>Theme Settings</StyledHeading>
 
-        <StyledWrap>
+        <StyledWrap background>
           <Select 
             name="focus"
             label="Choose your focus"
@@ -40,11 +40,11 @@ class ThemeSidebar extends React.Component {
         </StyledWrap>
 
         <StyledWrap background>
-          <BrandColorsCollection open />
+          <BrandColorsCollection />
         </StyledWrap>
 
         <StyledWrap background>
-          <TextCollection open />
+          <TextCollection />
         </StyledWrap>
 
         <StyledWrap background>

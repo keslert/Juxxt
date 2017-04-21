@@ -1,6 +1,6 @@
 import * as types from './action-types';
 import { filter, includes } from 'lodash';
-
+import { toggleListItem } from '../utils';
 const uiState = () => ({
   selected: [],
   modifications: {
@@ -13,6 +13,7 @@ const uiState = () => ({
   hovered: [],
   shiftDown: false,
   zoomLevel: 2,
+  panelOpen: 'theme',
 });
 
 export function uiReducer(state = uiState(), {payload, type}) {
@@ -20,7 +21,7 @@ export function uiReducer(state = uiState(), {payload, type}) {
     case types.SET_SELECTED:
       return Object.assign({}, state, {
         selected: state.shiftDown 
-          ? includes(state.selected, payload) ? filter(state.selected, uuid => uuid !== payload) : [...state.selected, payload]
+          ? toggleListItem(state.selected, payload)
           : [payload],
       });
 
