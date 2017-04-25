@@ -1,4 +1,4 @@
-import { randomItem } from '../utils';
+import { randomItem, getCombinations, getValidVariation } from '../utils';
 import { 
   range, 
   map,
@@ -20,13 +20,13 @@ import {
 
 import shortid from 'shortid';
 
-import { generateGlobals } from './globals';
+import { initGlobals, generateGlobalsAlternatives } from './globals';
 import { generateSection, getSectionOptions, getSectionTemplate } from './section';
 import { generatePalettes, generatePaletteAlternatives } from './colors';
 import { getGroupTemplate, getGroupOptions } from './group';
 
 export function init() {
-  const globals = generateGlobals();
+  const globals = initGlobals();
   const master = {
     uuid: shortid.generate(),
     isPage: true,
@@ -62,6 +62,7 @@ export function generateAlternatives(page, modify={}, selected) {
   if(!_selected) {
     return [];
   }
+
   const globals = page.globals;
 
   let section = omit(getSection(_selected), ['uuid']);
@@ -115,6 +116,22 @@ export function generateAlternatives(page, modify={}, selected) {
     }
   }
   return [section, ...sections];
+}
+
+export function generateThemeAlternatives(page, focus) {
+  const globalsAlternatives = generateGlobalsAlternatives(page.globals, focus);
+
+  const pages = globalsAlternatives.map(globals => ({
+    uuid: shortid.generate(),
+    isPage: true,
+    globals,
+    sections: page.sections.map(section => {
+      const _section = {...section, palette: randomItem(generatePalettes(globals.colors))}
+      return generateSection({section: _section, globals, sectionTemplate: section.template, userOverwrites: {}})
+    })
+  }))
+
+  return pages;
 }
 
 function generateSectionAlternatives(section, modify, globals) {
@@ -187,30 +204,3 @@ function generateGroupAlternatives(section, groupKey, modify, globals) {
   return alternatives;
 }
 
-
-export function getCombinations(hashMap) {
-  return reduce(hashMap, (combinations, list, key) => (
-    flatten(combinations.map(combination => (
-      list.map(item => ({...combination, [key]: item}))
-    )))
-  ), [{}]);
-}
-
-
-export function getValidVariation(variations, restrictions) {
-  if(!variations)
-    return {};
-
-  const _variations = map(variations, variation => (
-    mapValues(variation, (values, key) => {
-      const restriction = restrictions[key];
-      return restriction ? intersection(values, restriction) : values;
-    })
-  ))
-  
-  const filtered = filter(_variations, variation => every(variation, values => !isEmpty(values)));
-
-  return isEmpty(filtered)
-         ? mapValues(randomItem(variations), randomItem)
-         : mapValues(randomItem(filtered), randomItem)
-}

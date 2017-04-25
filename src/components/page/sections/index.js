@@ -58,7 +58,7 @@ const sourceSpec = {
     return props;
   },
   canDrag(props) {
-    return true;
+    return props.draggable;
   }
 };
 
@@ -116,7 +116,7 @@ const Section = (props) => {
       {connectDragSource(
         <div>
           <AutoScale>
-            <_Section
+            <_Section className="section"
               showDrop={master && isOver}
               canDrop={canDrop}
               isDragging={isDragging}

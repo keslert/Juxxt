@@ -37,7 +37,7 @@ class SmartBar extends React.Component {
       {label: 'Variation', key: 'variation'},
       {label: 'Palette', key: 'palette'},
       {label: 'Content', key: 'content'},
-      {label: 'Theme', key: 'globals'},
+      {label: 'Theme', key: 'theme'},
     ]
 
     return (

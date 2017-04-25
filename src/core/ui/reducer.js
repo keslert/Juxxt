@@ -8,7 +8,7 @@ const uiState = () => ({
     variation: false,
     palette: false,
     content: false,
-    globals: false,
+    theme: false,
   },
   hovered: [],
   shiftDown: false,

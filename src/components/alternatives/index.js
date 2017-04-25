@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import { getZoomLevel } from '../../core/ui';
-import { getAlternatives } from '../../core/page';
+import { getAlternatives, setMaster } from '../../core/page';
 import Alternative from './alternative';
 import Section from '../page/sections';
 import Page from '../page';
@@ -40,15 +40,19 @@ const StyledWrapper = styled.div`
 class Alternatives extends React.Component {
 
   render() {
-    const { alternatives=[], width, zoomLevel } = this.props;
+    const { alternatives=[], width, zoomLevel, setMaster } = this.props;
     return (
       <_Alternatives width={width}>
         <SmartBar />
         <_Content>
-          {alternatives.map((section, i) => (
-            <StyledWrapper key={section.uuid + i} width={width / zoomLevel}>
+          {alternatives.map((alternative, i) => (
+            <StyledWrapper key={alternative.uuid + i} width={width / zoomLevel}>
               <Alternative onFavorite={() => null} onDelete={() => null}>
-                <Page sections={[section]} master={false} />
+                <Page 
+                  onClick={alternative.isPage ? () => setMaster(alternative) : undefined}
+                  sections={alternative.isPage ? alternative.sections : [alternative]} 
+                  sectionsDraggable={alternative.isSection}
+                  master={false} />
               </Alternative>
             </StyledWrapper>
           ))}
@@ -67,4 +71,8 @@ const mapStateToProps = createSelector(
   })
 )
 
-export default connect(mapStateToProps)(Alternatives);
+const mapDispatchToProps = {
+  setMaster
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Alternatives);

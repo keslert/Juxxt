@@ -3,7 +3,7 @@ import { generateElement } from './element';
 import { randomItem } from '../utils';
 import { random, mapValues, range, keys, omit, pickBy, pick, isEmpty } from 'lodash';
 import shortid from 'shortid';
-import { getValidVariation } from './index';
+import { getValidVariation } from '../utils';
 
 
 export function generateGroup(props) {

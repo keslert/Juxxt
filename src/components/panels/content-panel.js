@@ -39,7 +39,7 @@ class ContentPanel extends React.Component {
     const { updateMaster, selected } = this.props;
     const item = selected[0];
     setCacheForElement(item, content);
-    updateMaster();
+    // updateMaster();
   }
 
   updateContent(key, value) {

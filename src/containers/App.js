@@ -8,7 +8,7 @@ import flow from 'lodash/flow';
 
 import { randomItem } from '../core/utils';
 import { setShiftDown, getModifications, getSelected } from '../core/ui';
-import { updateMaster, getMaster, updateAlternatives } from '../core/page';
+import { getMaster, updateAlternatives } from '../core/page';
 import Page from '../components/page';
 import Sidebar from '../components/sidebar';
 import Alternatives from '../components/alternatives';
@@ -51,21 +51,15 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const { updateAlternatives } = this.props;
+    const { updateAlternatives, setShiftDown } = this.props;
 
     this.listener = new window.keypress.Listener();
-    // this.listener.simple_combo('s', () => updateMaster({composition: true}));
-    // this.listener.simple_combo('l', () => updateMaster({variation: true}));
-    // this.listener.simple_combo('p', () => updateMaster({palette: true}));
-    // this.listener.simple_combo('c', () => updateMaster({content: true}));
-    // this.listener.simple_combo('g', () => updateMaster({globals: true}));
-
     this.listener.simple_combo('right', () => updateAlternatives(this.props.modifications));
 
     this.listener.register_combo({
       keys: "shift",
-      on_keydown: () => this.props.setShiftDown(true),
-      on_keyup: () => this.props.setShiftDown(false),
+      on_keydown: () => setShiftDown(true),
+      on_keyup: () => setShiftDown(false),
     })
   }
 
@@ -73,7 +67,6 @@ class App extends React.Component {
     const { modifications, selected, updateAlternatives } = this.props;
     if(!isEqual(modifications, newProps.modifications) || !isEqual(selected, newProps.selected)) {
       updateAlternatives(newProps.modifications);
-      // updateMaster(newProps.modifications);
     }
   }
 
@@ -84,7 +77,7 @@ class App extends React.Component {
         { true && 
           <_Window>
             <_Column width={400}>
-              <Page {...master} master />
+              <Page {...master} master sectionsDraggable />
             </_Column>
             <Alternatives width={700} />
           </_Window>
@@ -105,7 +98,7 @@ const mapStateToProps = createSelector(
     selected,
   })
 )
-const mapDispatchToProps = Object.assign({setShiftDown, updateMaster, updateAlternatives});
+const mapDispatchToProps = Object.assign({setShiftDown, updateAlternatives});
 export default flow(
   connect(mapStateToProps, mapDispatchToProps),
   DragDropContext(HTML5Backend)

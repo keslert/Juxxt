@@ -33,10 +33,10 @@ class ThemeSidebar extends React.Component {
     } = this.props;
 
     const focusOptions = [
-      {value: 'brandColors', label: 'Brand Colors'},
+      {value: 'brand-colors', label: 'Brand Colors'},
       {value: 'text', label: 'Text'},
       {value: 'headings', label: 'Headings'},
-      {value: 'smallHeadings', label: 'Small Headings'},
+      {value: 'small-headings', label: 'Small Headings'},
     ];
 
     const collections = [

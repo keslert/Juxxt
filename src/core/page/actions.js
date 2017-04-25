@@ -1,7 +1,8 @@
 import * as types from './action-types';
-import { init, generate, generateAlternatives } from '../../core/generator';
+import { init, generate, generateAlternatives, generateThemeAlternatives } from '../../core/generator';
 import { setCacheForElement } from '../../core/generator/content';
 import { getMaster, getAlternatives } from './selectors';
+import { getFocus } from '../theme';
 
 import { setSelected } from '../ui';
 import { find, pick, sortBy } from 'lodash';
@@ -53,8 +54,15 @@ export function updateAlternatives(modifications) {
     const state = getState();
     const master = getMaster(state);
     const selected = state.ui.selected;
-    const alternatives = generateAlternatives(master, modifications, selected);
-    dispatch(setAlternatives(alternatives));
+
+    if(modifications.theme) {
+      const focus = getFocus(state);
+      const alternatives = generateThemeAlternatives(master, focus);
+      dispatch(setAlternatives(alternatives));
+    } else {
+      const alternatives = generateAlternatives(master, modifications, selected);
+      dispatch(setAlternatives(alternatives));
+    }
   }
 }
 

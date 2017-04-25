@@ -5,7 +5,7 @@ import { getBackgroundImage, getFilter } from './background-image';
 import shortid from 'shortid';
 import { randomItem } from '../utils';
 import { random, mapValues, range, keys, omit, pickBy, pick, size } from 'lodash';
-import { getValidVariation } from './index';
+import { getValidVariation } from '../utils';
 
 import { getContent } from './content';
 

@@ -1,7 +1,8 @@
 import { randomItem } from '../utils';
 import { filter, includes, random } from 'lodash';
 
-export function selectColors() {
+
+export function generateColorsAlternatives() {
   const stripe = {
     primary: '#3ECF8E',
     secondary: '#6772e5',
@@ -33,9 +34,10 @@ export function selectColors() {
     light: '#fff',
     offLight: '#F5F5F7',
   }
-
-  return randomItem([stripe, scale, quartzy]);
+  
+  return [stripe, scale, quartzy];
 }
+
 
 export function selectPalette(props, version) {
   return generatePalette(props.globals.colors, version || random(0, 3));

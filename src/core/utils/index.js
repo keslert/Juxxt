@@ -5,7 +5,14 @@ import {
   first, 
   forEach,
   includes,
-  filter
+  filter,
+  mapValues,
+  isEmpty,
+  intersection,
+  every,
+  map,
+  reduce,
+  flatten,
 } from 'lodash';
 
 export function randomItem(arr) {
@@ -41,4 +48,30 @@ export function toggleListItem(list, item) {
   return includes(list, item)
          ? filter(list, listItem => listItem !== item)
          : [...list, item];
+}
+
+export function getCombinations(hashMap) {
+  return reduce(hashMap, (combinations, list, key) => (
+    flatten(combinations.map(combination => (
+      list.map(item => ({...combination, [key]: item}))
+    )))
+  ), [{}]);
+}
+
+export function getValidVariation(variations, restrictions) {
+  if(!variations)
+    return {};
+
+  const _variations = map(variations, variation => (
+    mapValues(variation, (values, key) => {
+      const restriction = restrictions[key];
+      return restriction ? intersection(values, restriction) : values;
+    })
+  ))
+  
+  const filtered = filter(_variations, variation => every(variation, values => !isEmpty(values)));
+
+  return isEmpty(filtered)
+         ? mapValues(randomItem(variations), randomItem)
+         : mapValues(randomItem(filtered), randomItem)
 }

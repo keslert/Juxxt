@@ -1,20 +1,19 @@
-import { randomItem } from '../utils';
-import { selectColors } from './colors';
+import { randomItem, getCombinations } from '../utils';
+import { generateColorsAlternatives } from './colors';
 
+export function initGlobals() {
 
-export function generateGlobals() {
-
-  const fontFamily = randomItem(['Montserrat', 'Roboto', 'Lato']);
+  const fontFamily = randomItem(generateFonts());
   const headingFontFamily = fontFamily;
 
   return {
-    colors: selectColors(),
+    colors: randomItem(generateColorsAlternatives()),
     fontSize: 14,
     iconSize: 64,
     maxPageWidth: 960,
     buttons: {
-      type: randomItem(['Rounded', 'Round', 'Square', 'Raised']),
-      textTransform: randomItem(['none', 'uppercase']),
+      type: randomItem(generateButtonTypeAlternatives),
+      textTransform: randomItem(generateTextTransformAlternatives),
     },
     text: {
       fontSize: 14,
@@ -38,4 +37,34 @@ export function generateGlobals() {
       padding: "80px 10px",
     }
   }
+}
+
+
+export function generateGlobalsAlternatives(globals, focus) {
+  let colors = [globals.colors];
+
+  if(focus === 'brand-colors') {
+    colors = generateColorsAlternatives();
+  }
+
+  return colors.map(brandColors => ({
+    ...globals,
+    colors: brandColors,
+  }));
+}
+
+function generateFonts() {
+  return ['Montserrat', 'Roboto', 'Lato'];
+}
+
+function generateTextFontSizes() {
+  return [14, 15, 18];
+}
+
+function generateButtonTypeAlternatives() {
+  return ['Rounded', 'Round', 'Square', 'Raised']
+}
+
+function generateTextTransformAlternatives() {
+  return ['none', 'uppercase'];
 }
