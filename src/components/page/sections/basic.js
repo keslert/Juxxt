@@ -6,14 +6,14 @@ import SectionContainer from './section-container';
 
 const BasicSection = ({
   sectionContainer,
-  groups, 
+  groups,
   variation,
   props,
 }) => {
   return (
     <StyledDisplayFlex {...props}>
       <SectionContainer {...sectionContainer}>
-        <Group {...groups.group} />
+        <Group {...groups.item} />
       </SectionContainer>
     </StyledDisplayFlex>
   )
@@ -22,7 +22,7 @@ export default BasicSection;
 
 export const requirements = {
   groups: {
-    group: {
+    item: {
       options: [],
     }
   }

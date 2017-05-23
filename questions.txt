@@ -1,0 +1,8 @@
+Where do you change backgrounds?
+Where do you put overrides?
+
+
+Where do you put the types of components available?
+
+Where to put the preview button?
+Where to put undo/redo?

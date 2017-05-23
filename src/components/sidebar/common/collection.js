@@ -7,7 +7,7 @@ const StyledCollection = styled.div`
 `
 
 const StyledHeading = styled.div`
-  font-size: 12px;
+  font-size: 10px;
   text-transform: uppercase;
   font-weight: 600;
   color: rgba(255,255,255,0.7);

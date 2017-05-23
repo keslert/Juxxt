@@ -18,8 +18,8 @@ const StyledColumn = styled.div`
 
 const StyledPixel = styled.div`
   border-radius: 2px;
-  background: ${props => props.color};
-  box-shadow: inset 0 -2px 3px rgba(0,0,0,.5);
+  // background: ${props => props.color};
+  // box-shadow: inset 0 -2px 3px rgba(0,0,0,.5);
   width: 28px;
   height: 14px;
 `;
@@ -31,7 +31,7 @@ function renderColumn(colors) {
         <StyledSpacer key={color.key} marginBottom="5px">
           <StyledField>
             <label>{lowerCamelCaseToRegular(color.key)}</label>
-            <StyledPixel color={color.value} />
+            <StyledPixel style={{background:color.value}} />
           </StyledField>
         </StyledSpacer>
       ))}

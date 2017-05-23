@@ -16,7 +16,7 @@ import Alternatives from '../components/alternatives';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-
+import SplitPane from 'react-split-pane';
 
 
 
@@ -25,22 +25,15 @@ const _App = styled.div`
 `
 
 const _Window = styled.div`
+  position: relative;
   display: flex;
   flex: 1;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  box-sizing: border-box;
 `
 
 const _Column = styled.div`
-  width: ${props => props.width}px;
-  padding-right: 20px;
+  width: ${props => props.width}%;
   height: 100vh;
   overflow-y: auto;
-  box-sizing: border-box;
 `
 
 class App extends React.Component {
@@ -74,14 +67,14 @@ class App extends React.Component {
     const { master } = this.props;
     return (
       <_App>
-        { true && 
-          <_Window>
-            <_Column width={400}>
+        <_Window>
+          <SplitPane minSize={300} split="vertical">
+            <_Column>
               <Page {...master} master sectionsDraggable />
             </_Column>
-            <Alternatives width={700} />
-          </_Window>
-        }
+            <Alternatives />
+          </SplitPane>
+        </_Window>
         <Sidebar />
       </_App>
     );

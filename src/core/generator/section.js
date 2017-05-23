@@ -12,7 +12,6 @@ import { getContent } from './content';
 
 export function generateSection(props) {
   const section = {
-    uuid: shortid.generate(),
     isSection: true,
     userOverwrites: {},
     props: {},
@@ -22,6 +21,7 @@ export function generateSection(props) {
     groups: {},
     contentStore: [],
     ...props.section,
+    uuid: shortid.generate(),
     elements: [],
   }
 

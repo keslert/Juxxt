@@ -7,12 +7,12 @@ export function generateElement(props) {
   const isSelected = false; // props.selectedUUIDs[props.element.uuid];
   
   const element = {
-    uuid: shortid.generate(),
     familyID: shortid.generate(),
     isElement: true,
     userOverwrites: {},
     props: {},
     ...props.element,
+    uuid: shortid.generate(),
     group: props.group,
   }
 

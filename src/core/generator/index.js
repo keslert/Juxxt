@@ -121,7 +121,7 @@ export function generateAlternatives(page, modify={}, selected) {
 export function generateThemeAlternatives(page, focus) {
   const globalsAlternatives = generateGlobalsAlternatives(page.globals, focus);
 
-  const pages = globalsAlternatives.map(globals => ({
+  const pages = flatten(range(0, 3).map(_ => globalsAlternatives.map(globals => ({
     uuid: shortid.generate(),
     isPage: true,
     globals,
@@ -129,7 +129,7 @@ export function generateThemeAlternatives(page, focus) {
       const _section = {...section, palette: randomItem(generatePalettes(globals.colors))}
       return generateSection({section: _section, globals, sectionTemplate: section.template, userOverwrites: {}})
     })
-  }))
+  }))))
 
   return pages;
 }

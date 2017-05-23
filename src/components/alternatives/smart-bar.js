@@ -16,13 +16,8 @@ import { StyledFlex, StyledSpacer } from '../common/styled-base';
 
 const _SmartBar = styled.div`
   display: flex;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
   font-size: 14px;
-  padding: 15px 0;
+  padding: 10px 0;
   background: rgba(51, 51, 51, 1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   align-items: center;
@@ -33,7 +28,7 @@ class SmartBar extends React.Component {
   render() {
     const { modifications, turnOnModification, setZoomLevel, zoomLevel } = this.props;
     const buttons = [
-      {label: 'Design', key: 'composition'},
+      {label: 'Component', key: 'composition'},
       {label: 'Variation', key: 'variation'},
       {label: 'Palette', key: 'palette'},
       {label: 'Content', key: 'content'},
@@ -85,25 +80,22 @@ const _Button = styled.div`
   padding: 7px 8px;
   background: #1d1d1d;
   border-radius: 2px;
-  // box-shadow: inset 0 1px 4px rgba(255,255,255,0.05);
   cursor: pointer;
   color: #727272;
   user-select: none;
   font-size: 12px;
-  &:hover {
-    background: #202020;
-  }
 
-  i {
-    margin-right: 6px;
-    color: ${props => props.active ? '#fff' : '#9e9e9e' };
-  }
-  border-left: 3px solid #1d1d1d;
+  // i {
+  //   margin-right: 6px;
+  //   color: ${props => props.active ? '#fff' : '#9e9e9e' };
+  // }
+
+  // border-left: 3px solid #1d1d1d;
 
   ${props => `
     ${props.active && `
-      color: #fff;
-      border-color: #fff;
+      color: #202020;
+      background: #fff;
     `}
   `}
 `
@@ -114,7 +106,6 @@ const Button = ({
   active,
 }) => (
   <_Button active={active} onClick={onClick}>
-    <i className="fa fa-lightbulb-o"></i>
     {text}
   </_Button>
 )

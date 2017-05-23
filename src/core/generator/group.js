@@ -11,7 +11,6 @@ export function generateGroup(props) {
   const isNewGroup = isSelected && props.modify.composition || !props.group.name;
 
   const group = {
-    uuid: shortid.generate(),
     familyID: shortid.generate(),
     groupKey: props.groupKey,
     isGroup: true,
@@ -19,6 +18,7 @@ export function generateGroup(props) {
     elements: {},
     variation: {},
     ...props.group,
+    uuid: shortid.generate(),
     section: props.section,
   }
 

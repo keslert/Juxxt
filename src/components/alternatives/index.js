@@ -15,26 +15,23 @@ import SmartBar from './smart-bar';
 const _Alternatives = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${props => props.width}px;
-  box-sizing: border-box;
+  width: ${props => props.width}%;
   position: relative;
+  padding: 0 10px;
 `;
 
 const _Content = styled.div`
   max-height: 100vh;
-  flex: 1;
   display: flex;
   flex-wrap: wrap;
   overflow-y: auto;
-  box-sizing: border-box;
-  padding-top: 62px;
   padding-bottom: 5px;
+  margin-left: -5px;
+  margin-right: -5px;
 `;
 
 const StyledWrapper = styled.div`
-  width: ${props => props.width}px;
   padding: 5px;
-  box-sizing: border-box;
 `;
 
 class Alternatives extends React.Component {
@@ -46,7 +43,7 @@ class Alternatives extends React.Component {
         <SmartBar />
         <_Content>
           {alternatives.map((alternative, i) => (
-            <StyledWrapper key={alternative.uuid + i} width={width / zoomLevel}>
+            <StyledWrapper key={alternative.uuid + i} style={{width: `${100 / zoomLevel}%`}}>
               <Alternative onFavorite={() => null} onDelete={() => null}>
                 <Page 
                   onClick={alternative.isPage ? () => setMaster(alternative) : undefined}

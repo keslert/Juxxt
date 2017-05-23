@@ -7,15 +7,13 @@ import theme from '../../styles/theme';
 import ThemeSidebar from './theme-sidebar';
 
 const _Sidebar = styled.div`
-  position: fixed;
-  top: 0;
-  right: 0px;
-  bottom: 0;
-  width: 280px;
+  position: relative;
+  width: 250px;
+  height: 100vh;
   background: ${theme.black};
   box-sizing: border-box;
   box-shadow: inset 0 0 3px rgba(0,0,0,0.5);
-  border-left: 2px solid #222;
+  border-left: 1px solid #222;
 `
 
 const Sidebar = ({

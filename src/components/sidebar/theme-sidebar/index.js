@@ -59,7 +59,7 @@ class ThemeSidebar extends React.Component {
         <StyledWrap inset>
           <Select 
             name="focus"
-            label="Choose your focus"
+            label="Choose a focus"
             options={focusOptions}
             value={focus}
             onChange={setFocus}

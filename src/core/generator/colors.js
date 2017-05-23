@@ -34,8 +34,19 @@ export function generateColorsAlternatives() {
     light: '#fff',
     offLight: '#F5F5F7',
   }
+
+  const zendesk = {
+    primary: '#30AABC',
+    secondary: '#7CB108',
+    text: '#464646',
+    textOnDark:'#FFFFFF',
+    dark: '#04363D',
+    offDark: '#04363D',
+    light: '#fff',
+    offLight: '#fafafa',
+  }
   
-  return [stripe, scale, quartzy];
+  return [stripe, scale, quartzy, zendesk];
 }
 
 
