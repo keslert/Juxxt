@@ -16,6 +16,7 @@ import { StyledFlex, StyledSpacer } from '../common/styled-base';
 
 const _SmartBar = styled.div`
   display: flex;
+  flex-wrap: wrap;
   font-size: 14px;
   padding: 10px 0;
   background: rgba(51, 51, 51, 1);

@@ -68,7 +68,7 @@ class App extends React.Component {
     return (
       <_App>
         <_Window>
-          <SplitPane minSize={300} split="vertical">
+          <SplitPane minSize={200} defaultSize='45%' split="vertical">
             <_Column>
               <Page {...master} master sectionsDraggable />
             </_Column>

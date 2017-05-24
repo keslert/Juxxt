@@ -24,7 +24,7 @@ const SearchBar = ({
   onSubmit,
 }) => (
   <_SearchBar>
-    <input value={value} placeholder={placeholder} />
+    <input value={value} placeholder={placeholder} size="3" />
     <i className="fa fa-search"></i>
   </_SearchBar>
 )
