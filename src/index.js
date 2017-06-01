@@ -9,6 +9,7 @@ import '../node_modules/normalize.css/normalize.css';
 import 'react-select/dist/react-select.css';
 import './styles/react-select.css'; 
 import './styles/react-split-pane.css';
+import './styles/tachyons.css';  
 import './styles/main.css'; 
 
 

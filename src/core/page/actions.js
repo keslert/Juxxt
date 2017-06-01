@@ -1,6 +1,6 @@
 import * as types from './action-types';
-import { init, generate, generateAlternatives, generateThemeAlternatives } from '../../core/generator';
-import { setCacheForElement } from '../../core/generator/content';
+import { generate, generateThemeAlternatives } from '../../core/generator';
+import { generateAlternatives } from '../../core/generator/alternatives';
 import { getMaster, getAlternatives } from './selectors';
 import { getFocus } from '../theme';
 
@@ -55,14 +55,14 @@ export function updateAlternatives(modifications) {
     const master = getMaster(state);
     const selected = state.ui.selected;
 
+    let alternatives;
     if(modifications.theme) {
       const focus = getFocus(state);
-      const alternatives = generateThemeAlternatives(master, focus);
-      dispatch(setAlternatives(alternatives));
+      alternatives = generateThemeAlternatives(master, focus);
     } else {
-      const alternatives = generateAlternatives(master, modifications, selected);
-      dispatch(setAlternatives(alternatives));
+      alternatives = generateAlternatives(master, modifications, selected);
     }
+    dispatch(setAlternatives(alternatives));
   }
 }
 
@@ -75,7 +75,6 @@ export function overrideSectionWithAlternative(section, alternative) {
       )
     }
     dispatch(setMaster(page));
-    // dispatch(setSelected(alternative));
   }
 }
 

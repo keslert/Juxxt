@@ -22,16 +22,16 @@ const Icon = ({props, content}) => (
 )
 export default Icon;
 
-export const defaultProps = ({palette, globals}) => ({
-  color: palette.icon,
-  fontSize: globals.iconSize,
-})
+// export const defaultProps = ({palette, globals}) => ({
+//   color: palette.icon,
+//   fontSize: globals.iconSize,
+// })
 
-export const modifiableProps = {
-  color: true,
-  fontSize: true,
-  margin: true,
-  src: true,
-  type: true,
-  height: true,
-}
+// export const modifiableProps = {
+//   color: true,
+//   fontSize: true,
+//   margin: true,
+//   src: true,
+//   type: true,
+//   height: true,
+// }

@@ -1,5 +1,6 @@
 import React from 'react';
-import elements from './meta';
+import elements from './_components';
+import * as types from './_types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { uiActions } from '../../../core/ui';
@@ -39,7 +40,7 @@ const Element = (props) => {
     name, 
     uuid,
   } = props;
-  const Element = elements[props.name];
+  const ElementComponent = elements[types[props.name].is];
 
   return (
     <_Element 
@@ -48,7 +49,7 @@ const Element = (props) => {
       onMouseEnter={() => onHoverableMouseEnter(uuid)}
       onMouseLeave={() => onHoverableMouseLeave(uuid)}
       >
-      <Element.default {...props} />
+      <ElementComponent {...props} />
     </_Element>
   )
 }

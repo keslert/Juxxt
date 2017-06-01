@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import groups from './meta';
+import groups from './_components';
 import { uiActions } from '../../../core/ui';
 import { includes, last, map, pick } from 'lodash';
 import { fadeIn } from '../../common/styled-animations';
 import { mapValues } from 'lodash';
-import { generateContent } from '../../../core/generator/content';
 
 const _Group = styled.div`
   position: relative;
@@ -41,7 +40,7 @@ const Group = (props) => {
     uuid,
   } = props;
 
-  const Group = groups[name];
+  const GroupComponent = groups[name];
   return (
     <_Group 
       selected={isSelected || isHovered} 
@@ -49,7 +48,7 @@ const Group = (props) => {
       onMouseEnter={() => onHoverableMouseEnter(uuid)}
       onMouseLeave={() => onHoverableMouseLeave(uuid)}
       >
-      <Group.default {...props} />
+      <GroupComponent {...props} />
     </_Group>
   )
 }

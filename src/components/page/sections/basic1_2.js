@@ -2,7 +2,7 @@ import React from 'react';
 import Group from '../groups';
 import Box from '../../common/box';
 
-const Basic = ({
+const Basic1_2 = ({
   groups,
   variation,
   styles,
@@ -12,29 +12,43 @@ const Basic = ({
     ...styles,
     display: "flex",
     align: "center",
-    justify: "center",
+    marginHorizontal: `-${styles.gutter}`,
+  }
+
+  const innerBoxStyles = {
+    flex: 1,
+    paddingHorizontal: styles.gutter,
   }
 
   return (
     <Box background={styles.sectionBackground}>
       <Box {...boxStyles}>
-        <Group {...groups.item} />
+        <Box {...innerBoxStyles} order={variation.order}>
+          <Group {...groups.tp} />
+        </Box>
+        <Box {...innerBoxStyles} order={2}>
+          <Group {...groups.media} />
+        </Box>
       </Box>
     </Box>
   )
 }
-
-export default Basic;
+export default Basic1_2;
 
 export const blueprint = {
   sharedStyles: ['BasicSection'],
   styles: {},
   requirements: {
     groups: {
-      item: {
+      tp: {
+        options: ['HeadingParagraph'],
+      },
+      media: {
         options: ['HeadingParagraph'],
       },
     },
-    variants: []
+    variants: [{
+      order: [1, 3],
+    }]
   },
 }

@@ -1,19 +1,10 @@
-import { randomItem } from '../utils';
+import { randomItem } from '../../utils';
 import { random, pickBy } from 'lodash';
 import LoremIpsum from 'lorem-ipsum';
 
 
+export function generateContent(element) {
 
-// let memory = {};
-// export function clearCacheForElement(element) {
-//   delete memory[element.uuid];
-// }
-
-// export function setCacheForElement(element, value) {
-//   memory[element.uuid] = value;
-// }
-
-export function getContent(element) {
   switch(element.name) {
     case 'Button':
       return getButtonContent(element);
@@ -29,6 +20,21 @@ export function getContent(element) {
       return getHeadingContent(element);
     case 'SmallHeading':
       return getSmallHeadingContent(element);
+    default: 
+      return getGenericContent(element)
+  }
+}
+
+function getGenericContent(element) {
+  switch(element.is) {
+    case 'Text':
+      return { text: "Generic Text" };
+    case 'Link':
+      return { text: "Link" };
+    case 'Image':
+      return { src: 'http://placehold.it/600x400' };
+    default:
+      return { badContent: true };
   }
 }
 

@@ -18,7 +18,9 @@ export default BlockImage;
 export const requirements = {
   elements: {
     image: {
-      element: 'Image',
+      element: 'media',
+      family: 'image',
+      type: 'block',
     }
   },
 }

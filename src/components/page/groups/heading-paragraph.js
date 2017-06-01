@@ -1,46 +1,34 @@
-import React, { PropTypes } from 'react';
-import Element from '../elements';
-import { _Block } from '../../common/styled-base';
+import React from 'react';
+import TalkingPoint from './common/talking-point';
+import { BasicHeading, BasicParagraph } from '../elements/_types';
 
 const HeadingParagraph = ({
   elements,
   variation,
-  props,
+  styles,
 }) => {
 
   return (
-    <_Block {...props}>
-      <div>
-        <Element {...elements.heading} />
-      </div>
-      <div>
-        <Element {...elements.paragraph} />
-      </div>
-    </_Block>
+    <TalkingPoint
+      styles={styles}
+      elements={elements}
+      variation={variation} />
   )
 }
 export default HeadingParagraph;
 
-export const requirements = {
-  elements: {
-    heading: {
-      element: 'Heading',
+export const blueprint = {
+  sharedStyles: ['TalkingPoint'],
+  styles: {},
+  requirements: {
+    elements: {
+      heading: {
+        name: BasicHeading.name,
+      },
+      paragraph: {
+        name: BasicParagraph.name,
+      },
     },
-    paragraph: {
-      element: 'Paragraph',
-    },
-  },
-  variations: [{
-    alignment: ['left', 'center'],
-  }]
+    variants: [],
+  }
 }
-
-export const defaultProps = ({variation}) => ({
-  maxWidth: 600,
-  textAlign: variation.alignment,
-})
-
-export const modifiableProps = {
-  textAlign: true,
-  maxWidth: true,
-};

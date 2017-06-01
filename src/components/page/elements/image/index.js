@@ -22,11 +22,13 @@ export const defaultProps = ({palette, globals}) => ({
 })
 
 export const modifiableProps = {
-  width: true,
-  height: true,
-  margin: true,
   borderRadius: true,
   boxShadow: true,
+  aspectRatio: [
+    'Auto', '1x1', 
+    '16x9', '9x16', 
+    '4x3', '3x4'
+  ]
 }
 
 export default Image;

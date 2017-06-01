@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import sections from './meta';
+import sections from './_components';
 import { overrideSectionWithAlternative } from '../../../core/page';
 import { uiActions } from '../../../core/ui';
 import { includes, last, map, pick } from 'lodash';
 import flow from 'lodash/flow';
 
-import { generatePalette } from '../../../core/generator/colors';
 import { fadeIn } from '../../common/styled-animations';
 
 import AutoScale from 'react-auto-scale';
@@ -64,7 +63,7 @@ const sourceSpec = {
 
 const targetSpec = {
   canDrop(props, monitor) {
-    const { master, uuid } = props;
+    const { master, id } = props;
     const section = monitor.getItem();
     return master && !section.master;
   },
@@ -92,24 +91,23 @@ function targetCollect(connect, monitor) {
 
 const Section = (props) => {
   const { 
+    name, 
+    id,
+    master,
     isSelected,
     setSelected,
     isHovered, 
     onHoverableMouseEnter, 
     onHoverableMouseLeave,
-    name, 
-    uuid,
     connectDragSource,
     connectDropTarget, 
     isDragging,
     isOver,
     canDrop,
-    master,
   } = props;
 
   
-  const Section = sections[name];
-
+  const SectionComponent = sections[name];
   
   return connectDropTarget(
     <div>
@@ -122,10 +120,10 @@ const Section = (props) => {
               isDragging={isDragging}
               selected={isSelected || isHovered} 
               onClick={(e) => { e.stopPropagation(); setSelected(props); }}
-              onMouseEnter={() => onHoverableMouseEnter(uuid)}
-              onMouseLeave={() => onHoverableMouseLeave(uuid)}
+              onMouseEnter={() => onHoverableMouseEnter(id)}
+              onMouseLeave={() => onHoverableMouseLeave(id)}
               >
-              <Section.default {...props} />
+              <SectionComponent {...props} />
             </_Section>
           </AutoScale>
         </div>
@@ -135,8 +133,8 @@ const Section = (props) => {
 }
 
 const mapStateToProps = (state, props) => ({
-  isSelected: state.ui.shiftDown && includes(map(state.ui.selected, 'uuid'), props.uuid),
-  isHovered: last(state.ui.hovered) === props.uuid,
+  isSelected: state.ui.shiftDown && includes(map(state.ui.selected, 'id'), props.id),
+  isHovered: last(state.ui.hovered) === props.id,
 });
 
 const mapDispatchToProps = Object.assign({overrideSectionWithAlternative}, uiActions);
