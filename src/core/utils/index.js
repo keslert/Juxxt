@@ -13,6 +13,7 @@ import {
   map,
   reduce,
   flatten,
+  maxBy,
 } from 'lodash';
 
 export function randomItem(arr) {
@@ -74,4 +75,13 @@ export function getValidVariation(variations, restrictions) {
   return isEmpty(filtered)
          ? mapValues(randomItem(variations), randomItem)
          : mapValues(randomItem(filtered), randomItem)
+}
+
+export function getMode(list) {
+  const items = reduce(list, (res, key) => {
+    res[key] = (res[key] || 0) + 1;
+    return res;
+  }, {});
+
+  return maxBy(Object.keys(items), key =>  items[key])
 }

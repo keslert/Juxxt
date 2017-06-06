@@ -2,8 +2,9 @@ import { randomItem } from '../utils';
 import { filter, includes, random } from 'lodash';
 
 
-export function generateColorsAlternatives() {
-  const stripe = {
+
+export const brandColors = {
+  stripe: {
     primary: '#3ECF8E',
     secondary: '#6772e5',
     text: '#6b7c93',
@@ -12,8 +13,8 @@ export function generateColorsAlternatives() {
     offDark: '#43458B',
     light: '#fff',
     offLight: '#F6F9FC',
-  }
-  const scale = {
+  },
+  scale: {
     primary: '#ff9800',
     secondary: '#03a9f4',
     text: '#6C6C6C',
@@ -22,9 +23,8 @@ export function generateColorsAlternatives() {
     offDark: '#331631',
     light: '#fff',
     offLight: '#F5F5F7',
-  }
-
-  const quartzy = {
+  },
+  quartzy: {
     primary: '#F35919',
     secondary: '#1EA9E3',
     text: '#515359',
@@ -33,9 +33,8 @@ export function generateColorsAlternatives() {
     offDark: '#78665C',
     light: '#fff',
     offLight: '#F5F5F7',
-  }
-
-  const zendesk = {
+  },
+  zendesk: {
     primary: '#30AABC',
     secondary: '#7CB108',
     text: '#464646',
@@ -45,8 +44,6 @@ export function generateColorsAlternatives() {
     light: '#fff',
     offLight: '#fafafa',
   }
-  
-  return [stripe, scale, quartzy, zendesk];
 }
 
 

@@ -12,12 +12,12 @@ export function buildGroupFromSkeleton(skeleton) {
     isGroup: true,
     id: skeleton.id || shortid.generate(),
     name: skeleton.name,
-    variation: skeleton.variation,
+    variant: skeleton.variant,
   }
 
   const blueprint = getGroupBlueprint(skeleton.name);
 
-  group.elements = mapValues(blueprint.requirements.elements, (elementReqs, key) => {
+  group.elements = mapValues(blueprint.elements, (elementReqs, key) => {
     const element = buildElementFromSkeleton(skeleton.elements[key]);
     element.group = group;
     element.groupKey = key;
@@ -26,104 +26,6 @@ export function buildGroupFromSkeleton(skeleton) {
 
   return group;
 }
-
-
-// export function generateGroup(props) {
-//   const isSelected = false; // props.selectedFamilyIDs[props.group.familyID];
-//   const isNewGroup = isSelected && props.modify.composition || !props.group.name;
-
-//   const group = {
-//     familyID: shortid.generate(),
-//     groupKey: props.groupKey,
-//     isGroup: true,
-//     userOverwrites: {},
-//     elements: {},
-//     variation: {},
-//     ...props.group,
-//     uuid: shortid.generate(),
-//     section: props.section,
-//   }
-
-//   if(isNewGroup) {
-//     group.name = randomItem(isEmpty(props.options) ? getGroupOptions() : props.options);
-//     group.elements = {};
-//     group.variation = getValidVariation(groups[group.name].requirements.variations, props.restrictions);
-//     group.props = {};
-//     group.userOverwrites = {};
-//   }
-  
-//   if(group.groupTemplate) {
-//     group.name = group.groupTemplate.name;
-//     group.variation = group.groupTemplate.variation;
-//   }
-
-  
-
-
-
-//   const groupTemplate = groups[group.name];
-
-
-//   if(props.userOverwrites[group.uuid]) {
-//     group.userOverwrites = Object.assign({}, group.userOverwrites, props.userOverwrites[group.uuid]);
-//   }
-
-  
-//   group.elements = mapValues(groupTemplate.requirements.elements, (elementReqs, key) => {
-//     return generateElement({
-//       ...props,
-//       group,
-//       element: group.elements[key] || {name: elementReqs.element},
-//     })
-//   })
-
-//   // Handle Group Overrides
-//   group.elements = mapValues(groupTemplate.requirements.elements, (elementReqs, key) => {
-//     const element = group.elements[key];
-//     if(elementReqs.overwrites) {
-//       element.props = {
-//         ...element.props,
-//         ...elementReqs.overwrites({
-//           elements: group.elements, 
-//           variation: group.variation, 
-//           globals: props.globals
-//         }),
-//         ...element.userOverwrites,
-//       }
-//     }
-
-//     return element;
-//   })
-
-//   // Handle Copies
-//   group.elements = mapValues(groupTemplate.requirements.elements, (elementReqs, key) => {
-//     const element = group.elements[key];
-//     if(!elementReqs.copies) {
-//       return element;
-//     }
-
-//     const copies = group.variation[elementReqs.copies];
-//     element.clones = range(0, copies).map(i => {
-//       const clone = generateElement({
-//         ...props,
-//         group,
-//         element: (element.clones && element.clones[i]) || omit(element, ['uuid']),
-//       });
-//       clone.props = element.props;
-//       return clone;
-//     })
-//     return element;
-//   })
-  
-//   group.props = {
-//     ...group.props,
-//     ...groupTemplate.defaultProps({palette: props.section.palette, globals: props.globals, variation: group.variation}),
-//     ...group.userOverwrites,
-//   }
-//   return group;
-// }
-
-
 
 const _genericGroups = pickBy(blueprints, group => !group.special);
 export function getGroupOptions(props) {

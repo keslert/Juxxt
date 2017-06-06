@@ -15,7 +15,7 @@ import { DragSource, DropTarget } from 'react-dnd';
 
 const _Section = styled.div`
   position: relative;
-  width: 1360px;
+  width: 1440px;
   
   ${props => `
     ${props.selected && `

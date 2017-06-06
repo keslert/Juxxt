@@ -4,12 +4,12 @@ import { getClosestVariant } from './utils';
 import { mapValues } from 'lodash';
 
 export function generateGroupSkeleton(name, variant) {
-  const reqs = blueprints[name].requirements;
+  const blueprint = blueprints[name];
 
   return {
     name,
-    variant: getClosestVariant(variant, reqs.variants),
-    elements: mapValues(reqs.elements, element => (
+    variant: getClosestVariant(variant, blueprint.variants),
+    elements: mapValues(blueprint.elements, element => (
       generateElementSkeleton(element.name)
     )),
   }

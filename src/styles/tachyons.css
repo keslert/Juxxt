@@ -454,41 +454,41 @@ img { max-width: 100%; }
 .mh7 { margin-left: 16rem; margin-right: 16rem; }
 
 /* Negative Margins */
-.n1 { margin: -.25rem; }
-.n2 { margin: -.5rem; }
-.n3 { margin: -1rem; }
-.n4 { margin: -2rem; }
-.n5 { margin: -4rem; }
-.n6 { margin: -8rem; }
-.n7 { margin: -16rem; }
-.nl1 { margin-left: -.25rem; }
-.nl2 { margin-left: -.5rem; }
-.nl3 { margin-left: -1rem; }
-.nl4 { margin-left: -2rem; }
-.nl5 { margin-left: -4rem; }
-.nl6 { margin-left: -8rem; }
-.nl7 { margin-left: -16rem; }
-.nr1 { margin-right: -.25rem; }
-.nr2 { margin-right: -.5rem; }
-.nr3 { margin-right: -1rem; }
-.nr4 { margin-right: -2rem; }
-.nr5 { margin-right: -4rem; }
-.nr6 { margin-right: -8rem; }
-.nr7 { margin-right: -16rem; }
-.nb1 { margin-bottom: -.25rem; }
-.nb2 { margin-bottom: -.5rem; }
-.nb3 { margin-bottom: -1rem; }
-.nb4 { margin-bottom: -2rem; }
-.nb5 { margin-bottom: -4rem; }
-.nb6 { margin-bottom: -8rem; }
-.nb7 { margin-bottom: -16rem; }
-.nt1 { margin-top: -.25rem; }
-.nt2 { margin-top: -.5rem; }
-.nt3 { margin-top: -1rem; }
-.nt4 { margin-top: -2rem; }
-.nt5 { margin-top: -4rem; }
-.nt6 { margin-top: -8rem; }
-.nt7 { margin-top: -16rem; }
+.m-1 { margin: -.25rem; }
+.m-2 { margin: -.5rem; }
+.m-3 { margin: -1rem; }
+.m-4 { margin: -2rem; }
+.m-5 { margin: -4rem; }
+.m-6 { margin: -8rem; }
+.m-7 { margin: -16rem; }
+.ml-1 { margin-left: -.25rem; }
+.ml-2 { margin-left: -.5rem; }
+.ml-3 { margin-left: -1rem; }
+.ml-4 { margin-left: -2rem; }
+.ml-5 { margin-left: -4rem; }
+.ml-6 { margin-left: -8rem; }
+.ml-7 { margin-left: -16rem; }
+.mr-1 { margin-right: -.25rem; }
+.mr-2 { margin-right: -.5rem; }
+.mr-3 { margin-right: -1rem; }
+.mr-4 { margin-right: -2rem; }
+.mr-5 { margin-right: -4rem; }
+.mr-6 { margin-right: -8rem; }
+.mr-7 { margin-right: -16rem; }
+.mb-1 { margin-bottom: -.25rem; }
+.mb-2 { margin-bottom: -.5rem; }
+.mb-3 { margin-bottom: -1rem; }
+.mb-4 { margin-bottom: -2rem; }
+.mb-5 { margin-bottom: -4rem; }
+.mb-6 { margin-bottom: -8rem; }
+.mb-7 { margin-bottom: -16rem; }
+.mt-1 { margin-top: -.25rem; }
+.mt-2 { margin-top: -.5rem; }
+.mt-3 { margin-top: -1rem; }
+.mt-4 { margin-top: -2rem; }
+.mt-5 { margin-top: -4rem; }
+.mt-6 { margin-top: -8rem; }
+.mt-7 { margin-top: -16rem; }
 
 .w-10 { width: 10%; }
 .w-20 { width: 20%; }
@@ -516,5 +516,13 @@ img { max-width: 100%; }
 .flex-row { -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; }
 
 
-
-
+.fs1 { font-size: .75em; }
+.fs2 { font-size: 1em; }
+.fs3 { font-size: 1.25em; }
+.fs4 { font-size: 1.5em; }
+.fs5 { font-size: 2.0em; }
+.fs6 { font-size: 3.0em; }
+.fs7 { font-size: 4.0em; }
+.fs8 { font-size: 5.0em; }
+.fs9 { font-size: 7.0em; }
+.fs10 { font-size: 9.0em; }

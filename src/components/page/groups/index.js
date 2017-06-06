@@ -31,13 +31,13 @@ const _Group = styled.div`
 
 const Group = (props) => {
   const { 
+    name, 
+    id,
     isSelected,
     setSelected,
     isHovered, 
     onHoverableMouseEnter, 
     onHoverableMouseLeave,
-    name, 
-    uuid,
   } = props;
 
   const GroupComponent = groups[name];
@@ -45,8 +45,8 @@ const Group = (props) => {
     <_Group 
       selected={isSelected || isHovered} 
       onClick={(e) => { e.stopPropagation(); setSelected(props);}}
-      onMouseEnter={() => onHoverableMouseEnter(uuid)}
-      onMouseLeave={() => onHoverableMouseLeave(uuid)}
+      onMouseEnter={() => onHoverableMouseEnter(id)}
+      onMouseLeave={() => onHoverableMouseLeave(id)}
       >
       <GroupComponent {...props} />
     </_Group>
@@ -55,7 +55,7 @@ const Group = (props) => {
 
 const mapStateToProps = (state, props) => ({
   isSelected: state.ui.shiftDown && includes(map(state.ui.selected, 'familyID'), props.familyID),
-  isHovered: last(state.ui.hovered) === props.uuid,
+  isHovered: last(state.ui.hovered) === props.id,
 });
 
 const mapDispatchToProps = Object.assign({}, uiActions);

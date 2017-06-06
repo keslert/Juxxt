@@ -17,6 +17,12 @@ const _Page = styled.div`
         pointer-events: none;
       }
     `};
+
+    .c-primary { color: ${props.color.primary}};
+    .c-text { color: ${props.color.text}};
+    
+    .bg-dark { background: ${props.color.dark.background}};
+    .bg-light { background: ${props.color.light.background}};
   `};
 `;
 
@@ -24,13 +30,13 @@ class Page extends React.PureComponent {
   
   render() {
 
-    const { sections, master, onClick } = this.props;
+    const { sections, master, onClick, id, brandColors } = this.props;
 
     const last = sections.length - 1;
 
     const clickable= isFunction(onClick);
     return (
-      <_Page onClick={onClick} clickable={clickable}>
+      <_Page onClick={onClick} clickable={clickable} className={'page-'+id} color={brandColors}>
         {sections.map((section, i) => (
           <div key={i} style={{marginTop: -1}}>
             <Section {...section} master={master} index={i} draggable={!clickable} />

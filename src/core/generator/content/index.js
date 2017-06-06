@@ -1,17 +1,15 @@
 import { generateContent } from './generate';
 import { flatMap } from 'lodash';
 
-export function matchContent(section) {
-  const contentStore = section.contentStore.map(content => ({
+export function assignContent(section, contentStore) {
+  const store = contentStore.map(content => ({
     ...content,
     matched: false,
   }))
 
-  const elements = getElementsFromSection(section);
-
   // ID matching
-  elements.forEach(element => {
-    const content = contentStore.find(content => content.elementId === element.uuid);
+  section.elements.forEach(element => {
+    const content = store.find(content => content.elementId === element.uuid);
     if(content) {
       element.content = content;
       content.matched = true;
@@ -21,9 +19,9 @@ export function matchContent(section) {
   })
 
   // Best match or generate new content
-  elements.forEach(element => {
+  section.elements.forEach(element => {
     if(!element.content) { 
-      const content = contentStore.find(content => !content.matched && content.elementName === element.name);
+      const content = store.find(content => !content.matched && content.elementName === element.name);
       if(content) { // Best match
         element.content = content;
         content.matched = true;
@@ -37,16 +35,11 @@ export function matchContent(section) {
         content.groupId = element.group.id;
         content.elementName = element.name;
         content.elementIs = element.is;
-        contentStore.push(content);
+        store.push(content);
       }
     }
   })
 
-  section.contentStore = contentStore;
+  section.contentStore = store;
 }
 
-function getElementsFromSection(section) {
-  return flatMap(section.groups, group => 
-    flatMap(group.elements, element => element)
-  )
-}

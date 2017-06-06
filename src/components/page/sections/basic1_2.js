@@ -4,29 +4,29 @@ import Box from '../../common/box';
 
 const Basic1_2 = ({
   groups,
-  variation,
-  styles,
+  variant,
+  style,
 }) => {
 
-  const boxStyles = {
-    ...styles,
+  const boxStyle = {
+    ...style,
     display: "flex",
     align: "center",
-    marginHorizontal: `-${styles.gutter}`,
+    marginHorizontal: `-${style.gutter}`,
   }
 
-  const innerBoxStyles = {
+  const innerBoxStyle = {
     flex: 1,
-    paddingHorizontal: styles.gutter,
+    paddingHorizontal: style.gutter,
   }
 
   return (
-    <Box background={styles.sectionBackground}>
-      <Box {...boxStyles}>
-        <Box {...innerBoxStyles} order={variation.order}>
+    <Box background={style.sectionBackground}>
+      <Box {...boxStyle}>
+        <Box {...innerBoxStyle} order={variant.order}>
           <Group {...groups.tp} />
         </Box>
-        <Box {...innerBoxStyles} order={2}>
+        <Box {...innerBoxStyle} order={2}>
           <Group {...groups.media} />
         </Box>
       </Box>
@@ -36,19 +36,17 @@ const Basic1_2 = ({
 export default Basic1_2;
 
 export const blueprint = {
-  sharedStyles: ['BasicSection'],
-  styles: {},
-  requirements: {
-    groups: {
-      tp: {
-        options: ['HeadingParagraph'],
-      },
-      media: {
-        options: ['HeadingParagraph'],
-      },
+  inherits: ['BasicSection'],
+  style: {},
+  groups: {
+    tp: {
+      options: ['HeadingParagraph'],
     },
-    variants: [{
-      order: [1, 3],
-    }]
+    media: {
+      options: ['HeadingParagraph'],
+    },
   },
+  variants: [{
+    order: [1, 3],
+  }]
 }

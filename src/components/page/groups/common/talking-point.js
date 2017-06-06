@@ -6,21 +6,23 @@ class TalkingPoint extends React.Component {
 
   render() {
     const { 
-      variation: { alignment },
-      kicker,
-      heading,
-      subheading,
-      paragraph,
-      links,
+      variant,
+      elements: {
+        kicker,
+        heading,
+        subheading,
+        paragraph,
+        links,
+      }
     } = this.props;
+
+    const alignment = 'center';
 
     return (
       <Box alignment={alignment}>
         {kicker && <Element {...kicker} />}
-        {this.renderHeading()}
-        {this.renderSubheading()}
-        {this.renderParagraph()}
-        {this.renderLinks()}
+        {heading && <div><Element {...heading} /></div>}
+        {paragraph && <div><Element {...paragraph} /></div>}
       </Box>
     )
   }

@@ -1,22 +1,28 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
+import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
+import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
+
 
 const _Text = styled.p`
-  user-select: none;
-  cursor: default;
-  ${props => `
-    color: ${props.color};
-    font-size: ${props.fontSize}px;  
-    ${props.margin && `margin: ${props.margin};`};
-    ${props.padding && `padding: ${props.padding};`};
-  `}
+
 `
 
-const Text = ({props, content}) => (
-  <_Text {...props}>
-    {content.text}
-  </_Text>
-)
+const Text = ({
+  style, 
+  color, 
+  content
+}) => {
+
+  const styleClassNames = convertStyleToAtomic(style);
+  const colorClassNames = convertColorToAtomic(color);
+
+  return (
+    <_Text className={styleClassNames + ' ' + colorClassNames}>
+      {content.text}
+    </_Text>
+  );
+}
 export default Text;
 
 // export const defaultProps = ({palette, globals}) => ({

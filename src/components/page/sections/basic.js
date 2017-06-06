@@ -1,23 +1,28 @@
 import React from 'react';
 import Group from '../groups';
 import Box from '../../common/box';
+import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
+import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 
 const Basic = ({
   groups,
-  variation,
-  styles,
+  variant,
+  style,
+  color,
 }) => {
 
-  const boxStyles = {
-    ...styles,
+  const boxStyle = {
+    ...style,
     display: "flex",
     align: "center",
     justify: "center",
   }
+  const styleClassNames = convertStyleToAtomic(boxStyle);
+  const colorClassNames = convertColorToAtomic(color);
 
   return (
-    <Box background={styles.sectionBackground}>
-      <Box {...boxStyles}>
+    <Box background={style.sectionBackground}>
+      <Box className={styleClassNames + ' ' + colorClassNames}>
         <Group {...groups.item} />
       </Box>
     </Box>
@@ -27,14 +32,12 @@ const Basic = ({
 export default Basic;
 
 export const blueprint = {
-  sharedStyles: ['BasicSection'],
-  styles: {},
-  requirements: {
-    groups: {
-      item: {
-        options: ['HeadingParagraph'],
-      },
+  inherits: ['BasicSection'],
+  style: {},
+  groups: {
+    item: {
+      options: ['HeadingParagraph'],
     },
-    variants: []
   },
+  variants: []
 }

@@ -1,6 +1,5 @@
-import { range } from 'lodash';
 
-export const sharedStyles = {
+export const styles = {
   'TalkingPoint': {
     textAlign: {
       default: 'center',

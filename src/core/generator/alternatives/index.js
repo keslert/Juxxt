@@ -1,30 +1,43 @@
 import { 
-  generateSectionComponentAlternatives 
+  generateSectionComponentAlternatives,
+  generateSectionContentAlternatives,
+  generateSectionColorAlternatives,
 } from './section'
 import { 
-  generateGroupComponentAlternatives 
+  generateGroupComponentAlternatives,
+  generateGroupContentAlternatives,
+  generateGroupColorAlternatives,
 } from './group'
 import { 
-  generateElementComponentAlternatives 
+  generateElementComponentAlternatives,
+  generateElementContentAlternatives,
+  generateElementColorAlternatives,
 } from './element'
 
 import { buildSectionFromSkeleton } from '../builder/section';
-
 import { extractSkeletonFromSection } from '../skeletons/utils';
+
+import { assignContent } from '../content';
+import { assignStyles } from '../style';
+import { assignColor } from '../color';
+
 import { mapValues } from 'lodash';
 
 /* Returns page skeletons */
 export function generateAlternatives(page, modify, selected) {
-  let skeletons = [];
+  let sections = [];
   if(modify.component) {
-    skeletons = generateComponentAlternatives(page, selected);
+    sections = generateComponentAlternatives(page, selected);
+  } else if(modify.color) {
+    sections = generateColorAlternatives(page, selected);
+  } else if(modify.content) {
+    sections = generateContentAlternatives(page, selected);
   }
 
-  const sections = skeletons.map(s => buildSectionFromSkeleton(s));
   return sections;
 }
 
-export function generateComponentAlternatives(page, selected) {
+ function generateComponentAlternatives(page, selected) {
   const section = getSectionFromItem(selected)
   const masterSkeleton = extractSkeletonFromSection(section);
   
@@ -36,9 +49,55 @@ export function generateComponentAlternatives(page, selected) {
   } else {
     skeletons = generateElementComponentAlternatives(selected, masterSkeleton);
   }
+  
+  const sections = skeletons.map(skeleton => {
+    const _section = buildSectionFromSkeleton(skeleton)
+    assignColor(_section, section, page);
+    assignContent(_section, section.contentStore);
+    assignStyles(_section, page);
+    return _section;
+  })
 
-  return skeletons;
+  return sections;
 }
+
+function generateColorAlternatives(page, selected) {
+  const section = getSectionFromItem(selected)
+  const skeleton = extractSkeletonFromSection(section);
+  const _section = buildSectionFromSkeleton(skeleton);
+  assignContent(_section, section.contentStore);
+  assignStyles(_section);
+
+  let sections;
+  if(selected.isSection) {
+    sections = generateSectionColorAlternatives(_section);
+  } else if(selected.isGroup) {
+
+  }
+
+  return sections;
+}
+
+function generateContentAlternatives(page, selected) {
+  const section = getSectionFromItem(selected);
+  const skeleton = extractSkeletonFromSection(section);
+  const _section = buildSectionFromSkeleton(skeleton);
+  assignColor(_section);
+  assignStyles(_section);
+
+  let sections;
+  if(selected.isSection) {
+    sections = generateSectionContentAlternatives(_section, section.contentStore);
+  } else if(selected.isGroup) {
+    sections = generateGroupContentAlternatives(_section, selected, section.contentStore);
+  } else if(selected.isElement) {
+    sections = generateElementContentAlternatives(_section, selected, section.contentStore);
+  }
+
+  return sections;
+}
+
+
 
 function getSectionFromItem(item) {
   if(item.isSection) {

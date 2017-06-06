@@ -1,6 +1,7 @@
 import React from 'react';
-import TalkingPoint from './common/talking-point';
-import { BasicHeading, BasicParagraph } from '../elements/_types';
+import TalkingPointComponent from './common/talking-point';
+import { BasicHeading, BasicParagraph } from '../elements/_blueprints';
+import { TalkingPoint } from './_inherits';
 
 const HeadingParagraph = ({
   elements,
@@ -9,7 +10,7 @@ const HeadingParagraph = ({
 }) => {
 
   return (
-    <TalkingPoint
+    <TalkingPointComponent
       styles={styles}
       elements={elements}
       variation={variation} />
@@ -18,17 +19,16 @@ const HeadingParagraph = ({
 export default HeadingParagraph;
 
 export const blueprint = {
-  sharedStyles: ['TalkingPoint'],
-  styles: {},
-  requirements: {
-    elements: {
-      heading: {
-        name: BasicHeading.name,
-      },
-      paragraph: {
-        name: BasicParagraph.name,
-      },
+  inherits: [TalkingPoint],
+  style: {},
+  color: {},
+  elements: {
+    heading: {
+      name: BasicHeading.name,
     },
-    variants: [],
-  }
+    paragraph: {
+      name: BasicParagraph.name,
+    },
+  },
+  variants: [],
 }

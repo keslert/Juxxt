@@ -5,13 +5,13 @@ import { randomItem } from '../../utils';
 import { mapValues } from 'lodash';
 
 export function generateSectionSkeleton(name, variant) {
-  const reqs = blueprints[name].requirements;
+  const blueprint = blueprints[name];
 
   return {
     name,
-    variant: getClosestVariant(variant, reqs.variants),
-    groups: mapValues(reqs.groups, (groupReqs, key) => (
-      generateGroupSkeleton(randomItem(groupReqs.options))
+    variant: getClosestVariant(variant, blueprint.variants),
+    groups: mapValues(blueprint.groups, (reqs, key) => (
+      generateGroupSkeleton(randomItem(reqs.options))
     )),
   }
 }

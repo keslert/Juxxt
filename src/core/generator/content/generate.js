@@ -2,7 +2,6 @@ import { randomItem } from '../../utils';
 import { random, pickBy } from 'lodash';
 import LoremIpsum from 'lorem-ipsum';
 
-
 export function generateContent(element) {
 
   switch(element.name) {

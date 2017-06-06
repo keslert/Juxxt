@@ -3,10 +3,8 @@ import styled from 'styled-components';
 import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 
-import { range, isEqual } from 'lodash';
+import { isEqual } from 'lodash';
 import flow from 'lodash/flow';
-
-import { randomItem } from '../core/utils';
 import { setShiftDown, getModifications, getSelected } from '../core/ui';
 import { getMaster, updateAlternatives } from '../core/page';
 import Page from '../components/page';
@@ -20,28 +18,23 @@ import SplitPane from 'react-split-pane';
 
 
 
-const _App = styled.div`
+const StyledApp = styled.div`
   display: flex;
 `
 
-const _Window = styled.div`
+const StyledWindow = styled.div`
   position: relative;
   display: flex;
   flex: 1;
 `
 
-const _Column = styled.div`
+const StyledColumn = styled.div`
   width: ${props => props.width}%;
   height: 100vh;
   overflow-y: auto;
 `
 
 class App extends React.Component {
-
-  constructor() {
-    super();
-
-  }
 
   componentDidMount() {
     const { updateAlternatives, setShiftDown } = this.props;
@@ -66,17 +59,17 @@ class App extends React.Component {
   render() {
     const { master } = this.props;
     return (
-      <_App>
-        <_Window>
+      <StyledApp>
+        <StyledWindow>
           <SplitPane minSize={200} defaultSize='45%' split="vertical">
-            <_Column>
+            <StyledColumn>
               <Page {...master} master sectionsDraggable />
-            </_Column>
+            </StyledColumn>
             <Alternatives />
           </SplitPane>
-        </_Window>
+        </StyledWindow>
         <Sidebar />
-      </_App>
+      </StyledApp>
     );
   }
 }

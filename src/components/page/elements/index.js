@@ -1,6 +1,5 @@
 import React from 'react';
 import elements from './_components';
-import * as types from './_types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { uiActions } from '../../../core/ui';
@@ -32,22 +31,24 @@ const _Element = styled.span`
 const Element = (props) => {
   
   const { 
+    name, 
+    id,
+    is,
     isSelected,
     setSelected,
     isHovered, 
     onHoverableMouseEnter, 
     onHoverableMouseLeave,
-    name, 
-    uuid,
+    
   } = props;
-  const ElementComponent = elements[types[props.name].is];
+  const ElementComponent = elements[is];
 
   return (
     <_Element 
       selected={isSelected || isHovered} 
       onClick={(e) => { e.stopPropagation(); setSelected(props);}}
-      onMouseEnter={() => onHoverableMouseEnter(uuid)}
-      onMouseLeave={() => onHoverableMouseLeave(uuid)}
+      onMouseEnter={() => onHoverableMouseEnter(id)}
+      onMouseLeave={() => onHoverableMouseLeave(id)}
       >
       <ElementComponent {...props} />
     </_Element>
@@ -56,7 +57,7 @@ const Element = (props) => {
 
 const mapStateToProps = (state, props) => ({
   isSelected: state.ui.shiftDown && includes(map(state.ui.selected, 'familyID'), props.familyID),
-  isHovered: last(state.ui.hovered) === props.uuid,
+  isHovered: last(state.ui.hovered) === props.id,
 });
 const mapDispatchToProps = Object.assign({}, uiActions);
 export default connect(mapStateToProps, mapDispatchToProps)(Element);
