@@ -7,6 +7,7 @@ export const names = {
 export const styles = {
   [names.BasicSection]: {
     paddingVertical: {
+      default: 4,
       options: range(1, 6),
     },
     sectionBackground: {
@@ -14,11 +15,14 @@ export const styles = {
       options: ['solid', 'image', 'gradient'], 
     },
     gutter: {
-      options: [1, 4]
+      options: range(3, 4),
     },
     maxWidth: {
-      options: [900, 1024, 1170],
+      options: ['900px', '1024px', '1170px'],
       priority: 999, // Need a way to say this shouldn't change that often...
+    },
+    margin: {
+      options: ['auto'],
     }
   }
 }

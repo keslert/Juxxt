@@ -1,4 +1,4 @@
-import { reduce, maxBy, filter, some, find, includes, difference, values, map } from 'lodash';
+import { reduce, maxBy, filter, some, find, includes, difference, values, map, forEach } from 'lodash';
 import { randomItem, getMode } from '../../utils';
 
 export const ph0 = {
@@ -58,38 +58,27 @@ export function styleItem(item, items, rules, blueprint) {
   }
 }
 
-function styleItemByBlueprint(item, items, blueprint) {
-  const combinedStyle = Object.assign({}, ...values(blueprint.sharedStyles), blueprint.style);
-  let keys = Object.keys(combinedStyle);
-
-  // Get defaults
-  keys.forEach(key => {
-    if(blueprint.style[key] && blueprint.style[key].default) {
-      item.style[key] = blueprint.style[key].default;
-    }
+function styleItemByBlueprint(item, items, blueprint) {  
+  Object.keys(blueprint.style).forEach(key => {
+    item.style[key] = blueprint.style[key].default || randomItem(blueprint.style[key].options);
   })
-  keys = difference(keys, Object.keys(item.style));
 
-  // Get shared styles
   item.inherits.forEach(name => {
     const matches = filter(items, i => includes(i.inherits, name));
     if(matches.length) {
-      const sharedStyle = blueprint.sharedStyles[name];
-      const styles = matches.map(i => i.style);
-
-      // TODO: If blueprint.style has this key, only include the union
-      keys.forEach(key => {
-        if(sharedStyle[key] !== undefined) {
-          item.style[key] = getMode(map(styles, key));
+      Object.keys(blueprint.sharedStyles[name]).forEach(key => {
+        if(item.style[key] === undefined) {
+          item.style[key] = getMode(map(matches, i => i.style[key]));
         }
       })
-      keys = difference(keys, Object.keys(item.style));
     }
   })
 
-  // Fill in remaining
-  keys.forEach(key => {
-    item.style[key] = randomItem(combinedStyle[key].options)
+  const combinedStyle = Object.assign({}, ...values(blueprint.sharedStyles));
+  forEach(combinedStyle, (_style, key) => {
+    if(item.style[key] === undefined) {
+      item.style[key] = _style.default || randomItem(_style.options);
+    }
   })
 }
 

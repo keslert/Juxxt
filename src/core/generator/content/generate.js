@@ -27,7 +27,7 @@ export function generateContent(element) {
 function getGenericContent(element) {
   switch(element.is) {
     case 'Text':
-      return { text: "Generic Text" };
+      return { text: 'I am a ' + element.name };
     case 'Link':
       return { text: "Link" };
     case 'Image':

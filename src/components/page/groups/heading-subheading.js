@@ -1,50 +1,37 @@
 import React, { PropTypes } from 'react';
-import Element from '../elements';
-import { getFontSize } from '../elements/heading';
-import { _Block } from '../../common/styled-base';
 
+import TalkingPointComponent from './common/talking-point';
+import { TalkingPoint } from './_inherits';
+import { BasicSubheading, BasicHeading } from '../elements/_blueprints';
 
 
 const HeadingSubheading = ({
   elements,
-  variation,
-  props,
+  variant,
+  style,
+  color,
 }) => {
 
   return (
-    <_Block {...props}>
-      <div>
-        <Element {...elements.heading} />
-      </div>
-      <div>
-        <Element {...elements.subheading} />
-      </div>
-    </_Block>
+    <TalkingPointComponent
+      style={style}
+      color={color}
+      elements={elements}
+      variant={variant} />
   )
 }
 export default HeadingSubheading;
 
-export const requirements = {
+export const blueprint = {
+  color: {},
+  inherits: [TalkingPoint],
+  style: {},
   elements: {
     heading: {
-      element: 'Heading',
+      name: BasicHeading.name,
     },
     subheading: {
-      element: 'Heading',
-      overwrites: ({elements, globals}) => ({
-        fontSize: getFontSize(elements.heading, globals) * .75
-      })
+      name: BasicSubheading.name,
     },
   }
 }
-
-export const defaultProps = ({variation}) => ({
-  
-})
-
-export const modifiableProps = {
-  textAlign: true,
-  margin: true,
-  padding: true,
-  minWidth: true,
-};

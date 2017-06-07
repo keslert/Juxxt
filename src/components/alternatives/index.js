@@ -46,9 +46,10 @@ class Alternatives extends React.Component {
             <StyledWrapper key={alternative.uuid + i} style={{width: `${100 / zoomLevel}%`}}>
               <Alternative onFavorite={() => null} onDelete={() => null}>
                 <Page 
-                  onClick={alternative.isPage ? () => setMaster(alternative) : undefined}
-                  sections={alternative.isPage ? alternative.sections : [alternative]} 
+                  onClick={alternative.sections.length > 1 ? () => setMaster(alternative) : undefined}
+                  sections={alternative.sections}
                   sectionsDraggable={alternative.isSection}
+                  brandColors={alternative.brandColors}
                   master={false} />
               </Alternative>
             </StyledWrapper>

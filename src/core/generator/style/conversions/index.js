@@ -4,11 +4,13 @@ import margin from './margin';
 import padding from './padding';
 import display from './display';
 import fontSize from './font-size';
+import width from './width';
 const conversions = {
   ...margin,
   ...padding,
   ...display,
   ...fontSize,
+  ...width,
 }
 
 

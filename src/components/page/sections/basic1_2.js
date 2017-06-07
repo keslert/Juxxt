@@ -1,32 +1,42 @@
 import React from 'react';
 import Group from '../groups';
 import Box from '../../common/box';
+import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
+import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 
 const Basic1_2 = ({
   groups,
   variant,
   style,
+  color,
 }) => {
 
   const boxStyle = {
     ...style,
     display: "flex",
-    align: "center",
+    flexWrap: "wrap",
     marginHorizontal: `-${style.gutter}`,
   }
 
   const innerBoxStyle = {
-    flex: 1,
     paddingHorizontal: style.gutter,
+    width: '50P',
+    display: "flex",
+    justify: "center",
+    align: "center",
   }
 
+  const colorClassNames = convertColorToAtomic(color);
+  const boxClassNames = convertStyleToAtomic(boxStyle)
+  const innerClassNames = convertStyleToAtomic(innerBoxStyle);
+
   return (
-    <Box background={style.sectionBackground}>
-      <Box {...boxStyle}>
-        <Box {...innerBoxStyle} order={variant.order}>
+    <Box className={colorClassNames}>
+      <Box className={boxClassNames}>
+        <Box order={variant.order} className={innerClassNames}>
           <Group {...groups.tp} />
         </Box>
-        <Box {...innerBoxStyle} order={2}>
+        <Box order={2} className={innerClassNames}>
           <Group {...groups.media} />
         </Box>
       </Box>
@@ -38,12 +48,13 @@ export default Basic1_2;
 export const blueprint = {
   inherits: ['BasicSection'],
   style: {},
+  color: {},
   groups: {
     tp: {
       options: ['HeadingParagraph'],
     },
     media: {
-      options: ['HeadingParagraph'],
+      options: ['BlockImage'],
     },
   },
   variants: [{

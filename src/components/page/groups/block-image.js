@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import Element from '../elements';
 import { _Block } from '../../common/styled-base';
+import { BasicImage } from '../elements/_blueprints';
 
 const BlockImage = ({
   elements,
@@ -15,24 +16,14 @@ const BlockImage = ({
 }
 export default BlockImage;
 
-export const requirements = {
+export const blueprint = {
+  inherits: [],
+  style: {},
+  color: {},
   elements: {
     image: {
-      element: 'media',
-      family: 'image',
-      type: 'block',
+      name: BasicImage.name,
     }
   },
+  variants: [],
 }
-
-export const defaultProps = () => ({
-  
-})
-
-export const modifiableProps = {
-  width: true,
-  height: true,
-  maxWidth: true,
-  margin: true,
-  padding: true,
-};

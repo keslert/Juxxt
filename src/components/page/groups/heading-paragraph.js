@@ -5,15 +5,17 @@ import { TalkingPoint } from './_inherits';
 
 const HeadingParagraph = ({
   elements,
-  variation,
-  styles,
+  variant,
+  style,
+  color,
 }) => {
 
   return (
     <TalkingPointComponent
-      styles={styles}
+      style={style}
+      color={color}
       elements={elements}
-      variation={variation} />
+      variant={variant} />
   )
 }
 export default HeadingParagraph;

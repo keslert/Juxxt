@@ -34,7 +34,10 @@ export function generateAlternatives(page, modify, selected) {
     sections = generateContentAlternatives(page, selected);
   }
 
-  return sections;
+  return sections.map(section => ({
+    ...page,
+    sections: [section],
+  }))
 }
 
  function generateComponentAlternatives(page, selected) {

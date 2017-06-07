@@ -21,8 +21,8 @@ const Basic = ({
   const colorClassNames = convertColorToAtomic(color);
 
   return (
-    <Box background={style.sectionBackground}>
-      <Box className={styleClassNames + ' ' + colorClassNames}>
+    <Box className={colorClassNames}>
+      <Box className={styleClassNames}>
         <Group {...groups.item} />
       </Box>
     </Box>
@@ -34,9 +34,10 @@ export default Basic;
 export const blueprint = {
   inherits: ['BasicSection'],
   style: {},
+  color: {},
   groups: {
     item: {
-      options: ['HeadingParagraph'],
+      options: ['HeadingParagraph', 'HeadingSubheading'],
     },
   },
   variants: []

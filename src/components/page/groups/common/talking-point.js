@@ -22,6 +22,7 @@ class TalkingPoint extends React.Component {
       <Box alignment={alignment}>
         {kicker && <Element {...kicker} />}
         {heading && <div><Element {...heading} /></div>}
+        {subheading && <div><Element {...subheading} /></div>}
         {paragraph && <div><Element {...paragraph} /></div>}
       </Box>
     )

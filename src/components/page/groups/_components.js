@@ -1,16 +1,17 @@
-// import * as HeadingSubheading from './heading-subheading';
+import HeadingSubheading from './heading-subheading';
 import HeadingParagraph from './heading-paragraph';
 // import * as IconHeadingParagraph from './icon-heading-paragraph';
 // import * as IconSmallHeadingParagraph from './icon-small-heading-paragraph';
 // import * as SmallHeadingParagraph from './small-heading-paragraph';
 // import * as SmallHeadingLinkList from './small-heading-link-list';
 // import * as Navigation from './navigation';
-// import * as BlockImage from './block-image';
+import BlockImage from './block-image';
 // import * as Device from './device';
 
 export default {
-  // HeadingSubheading,
+  HeadingSubheading,
   HeadingParagraph,
+  BlockImage,
   // IconHeadingParagraph,
   
   // IconSmallHeadingParagraph: {
