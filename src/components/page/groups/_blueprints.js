@@ -1,5 +1,6 @@
 import { blueprint as HeadingSubheading } from './heading-subheading';
 import { blueprint as HeadingParagraph } from './heading-paragraph';
+import { blueprint as KickerHeadingParagraph} from './kicker-heading-paragraph';
 // import * as IconHeadingParagraph from './icon-heading-paragraph';
 // import * as IconSmallHeadingParagraph from './icon-small-heading-paragraph';
 // import * as SmallHeadingParagraph from './small-heading-paragraph';
@@ -11,6 +12,8 @@ import { blueprint as BlockImage } from './block-image';
 export default {
   HeadingSubheading,
   HeadingParagraph,
+  KickerHeadingParagraph,
+
   // IconHeadingParagraph,
   
   // IconSmallHeadingParagraph: {
