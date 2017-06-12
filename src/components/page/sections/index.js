@@ -124,11 +124,11 @@ class Section extends React.Component {
                 canDrop={canDrop}
                 isDragging={isDragging}
                 selected={isSelected || isHovered} 
-                onClick={(e) => { e.stopPropagation(); setSelected(props); }}
+                onClick={(e) => { e.stopPropagation(); setSelected(this.props); }}
                 onMouseEnter={() => onHoverableMouseEnter(id)}
                 onMouseLeave={() => onHoverableMouseLeave(id)}
                 >
-                <SectionComponent {...props} />
+                <SectionComponent {...this.props} />
               </StyledSection>
             </AutoScale>
           </div>
