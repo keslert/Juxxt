@@ -38,8 +38,12 @@ export const blueprint = {
   color: {},
   groups: {
     item: {
-      options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph'],
+      options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink'],
     },
   },
   variants: []
 }
+
+
+
+

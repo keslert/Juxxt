@@ -4,9 +4,7 @@ import { convertStyleToAtomic } from '../../../../core/generator/style/conversio
 import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
 
 
-const _Text = styled.p`
-
-`
+const _Text = styled.p``
 
 const Text = ({
   style, 

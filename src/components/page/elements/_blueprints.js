@@ -102,3 +102,16 @@ export const BasicButton = {
     },
   },
 };
+
+/** Links **/
+export const BasicLink = {
+  name: 'BasicLink',
+  is: 'Link',
+  inherits: [inherits.Link],
+  color: {
+    text: 'text-0',
+    background: 'highlight',
+  },
+  style: {}
+};
+

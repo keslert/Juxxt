@@ -32,6 +32,7 @@ class TalkingPoint extends React.Component {
         {heading && <div><Element {...heading} /></div>}
         {subheading && <div><Element {...subheading} /></div>}
         {paragraph && <div><Element {...paragraph} /></div>}
+        {links && <div><Element {...links}/></div>}
       </Box>
     )
   }
