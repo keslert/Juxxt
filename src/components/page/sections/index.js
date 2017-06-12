@@ -13,7 +13,7 @@ import AutoScale from 'react-auto-scale';
 
 import { DragSource, DropTarget } from 'react-dnd';
 
-const _Section = styled.div`
+const StyledSection = styled.div`
   position: relative;
   width: 1440px;
   
@@ -89,47 +89,53 @@ function targetCollect(connect, monitor) {
   }
 }
 
-const Section = (props) => {
-  const { 
-    name, 
-    id,
-    master,
-    isSelected,
-    setSelected,
-    isHovered, 
-    onHoverableMouseEnter, 
-    onHoverableMouseLeave,
-    connectDragSource,
-    connectDropTarget, 
-    isDragging,
-    isOver,
-    canDrop,
-  } = props;
+
+
+class Section extends React.Component {
+
+  render() {
+
+    const { 
+      name, 
+      id,
+      master,
+      isSelected,
+      setSelected,
+      isHovered, 
+      onHoverableMouseEnter, 
+      onHoverableMouseLeave,
+      connectDragSource,
+      connectDropTarget, 
+      isDragging,
+      isOver,
+      canDrop,
+    } = this.props;
 
   
-  const SectionComponent = sections[name];
-  
-  return connectDropTarget(
-    <div>
-      {connectDragSource(
-        <div>
-          <AutoScale>
-            <_Section className="section"
-              showDrop={master && isOver}
-              canDrop={canDrop}
-              isDragging={isDragging}
-              selected={isSelected || isHovered} 
-              onClick={(e) => { e.stopPropagation(); setSelected(props); }}
-              onMouseEnter={() => onHoverableMouseEnter(id)}
-              onMouseLeave={() => onHoverableMouseLeave(id)}
-              >
-              <SectionComponent {...props} />
-            </_Section>
-          </AutoScale>
-        </div>
-      )}
-    </div>
-  )
+    const SectionComponent = sections[name];
+    
+    return connectDropTarget(
+      <div>
+        {connectDragSource(
+          <div>
+            <AutoScale>
+              <StyledSection className="section"
+                showDrop={master && isOver}
+                canDrop={canDrop}
+                isDragging={isDragging}
+                selected={isSelected || isHovered} 
+                onClick={(e) => { e.stopPropagation(); setSelected(props); }}
+                onMouseEnter={() => onHoverableMouseEnter(id)}
+                onMouseLeave={() => onHoverableMouseLeave(id)}
+                >
+                <SectionComponent {...props} />
+              </StyledSection>
+            </AutoScale>
+          </div>
+        )}
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = (state, props) => ({

@@ -9,9 +9,9 @@ const BlockImage = ({
   props,
 }) => {
   return (
-    <_Block {...props}>
+    <div {...props}>
       <Element {...elements.image} />
-    </_Block>
+    </div>
   )
 }
 export default BlockImage;

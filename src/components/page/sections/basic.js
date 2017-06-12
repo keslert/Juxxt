@@ -4,29 +4,30 @@ import Box from '../../common/box';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 
-const Basic = ({
-  groups,
-  variant,
-  style,
-  color,
-}) => {
 
-  const boxStyle = {
-    ...style,
-    display: "flex",
-    align: "center",
-    justify: "center",
+
+
+class Basic extends React.PureComponent {
+  render () {
+    const { groups, variant, style, color } = this.props;
+
+    const boxStyle = {
+      ...style,
+      display: "flex",
+      align: "center",
+      justify: "center",
+    }
+    const styleClassNames = convertStyleToAtomic(boxStyle);
+    const colorClassNames = convertColorToAtomic(color);
+
+    return (
+      <div className={colorClassNames + ' Basic'}>
+        <div className={styleClassNames}>
+          <Group {...groups.item} />
+        </div>
+      </div>
+    )
   }
-  const styleClassNames = convertStyleToAtomic(boxStyle);
-  const colorClassNames = convertColorToAtomic(color);
-
-  return (
-    <Box className={colorClassNames}>
-      <Box className={styleClassNames}>
-        <Group {...groups.item} />
-      </Box>
-    </Box>
-  )
 }
 
 export default Basic;

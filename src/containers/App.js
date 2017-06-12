@@ -58,19 +58,20 @@ class App extends React.Component {
 
   render() {
     const { master } = this.props;
+    
     return (
       <StyledApp>
         <StyledWindow>
           <SplitPane minSize={200} defaultSize='55%' split="vertical">
             <StyledColumn>
-              <Page {...master} master sectionsDraggable />
+              <Page {...master} master={true} sectionsDraggable />
             </StyledColumn>
             <Alternatives />
           </SplitPane>
         </StyledWindow>
         <Sidebar />
       </StyledApp>
-    );
+    ); 
   }
 }
 
