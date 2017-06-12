@@ -7,7 +7,7 @@ import { includes, last, map, pick } from 'lodash';
 import { fadeIn } from '../../common/styled-animations';
 import { mapValues } from 'lodash';
 
-const _Group = styled.div`
+const StyledGroup = styled.div`
   position: relative;
   &:before {
     content: '';
@@ -42,7 +42,7 @@ const Group = (props) => {
 
   const GroupComponent = groups[name];
   return (
-    <_Group 
+    <StyledGroup 
       selected={isSelected || isHovered} 
       onClick={(e) => { e.stopPropagation(); setSelected(props);}}
       onMouseEnter={() => onHoverableMouseEnter(id)}
@@ -50,7 +50,7 @@ const Group = (props) => {
       className="w-100P"
       >
       <GroupComponent {...props} />
-    </_Group>
+    </StyledGroup>
   )
 }
 

@@ -5,7 +5,7 @@ import Section from './sections';
 import InsertionTarget from './insertion-target';
 import { last, isFunction, flatMap } from 'lodash';
 
-const _Page = styled.div`
+const StyledPage = styled.div`
   ${props => `
     ${props.clickable && `
       cursor: pointer;
@@ -40,14 +40,14 @@ class Page extends React.PureComponent {
 
     const clickable= isFunction(onClick);
     return (
-      <_Page onClick={onClick} clickable={clickable} className={id} pageColors={pageColors}>
+      <StyledPage onClick={onClick} clickable={clickable} className={id} pageColors={pageColors}>
         {sections.map((section, i) => (
           <div key={i} style={{marginTop: -1}}>
             <Section {...section} master={master} index={i} draggable={!clickable} />
             {master && i !== last ? <InsertionTarget index={i} /> : null}
           </div>
         ))}
-      </_Page>
+      </StyledPage>
     )
   }
 }

@@ -6,7 +6,7 @@ import { uiActions } from '../../../core/ui';
 import { includes, last, map } from 'lodash';
 import { fadeIn } from '../../common/styled-animations';
 
-const _Element = styled.div`
+const StyledElement = styled.div`
   position: relative;
   ${props => props.selected && `
     &:after {
@@ -43,14 +43,14 @@ const Element = (props) => {
   const ElementComponent = elements[is];
 
   return (
-    <_Element 
+    <StyledElement 
       selected={isSelected || isHovered} 
       onClick={(e) => { e.stopPropagation(); setSelected(props);}}
       onMouseEnter={() => onHoverableMouseEnter(id)}
       onMouseLeave={() => onHoverableMouseLeave(id)}
       >
       <ElementComponent {...props} />
-    </_Element>
+    </StyledElement>
   )
 }
 
