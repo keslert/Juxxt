@@ -15,7 +15,7 @@ const HeadingParagraph = ({
       style={style}
       color={color}
       elements={elements}
-      variant={variant} />
+      align={variant.align} />
   )
 }
 export default HeadingParagraph;
@@ -32,5 +32,10 @@ export const blueprint = {
       name: BasicParagraph.name,
     },
   },
-  variants: [],
+  variants: [{
+    align: {
+      _default: 'center',
+      options: ['left', 'center', 'right'],
+    }
+  }],
 }

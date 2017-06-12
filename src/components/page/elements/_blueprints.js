@@ -25,9 +25,7 @@ export const BasicHeading = {
   is: 'Text',
   inherits: [inherits.Heading],
   color: {
-    text: {
-      options: ['primary'],
-    }
+    text: 'highlight',
   },
   style: {
     fontSize: {
@@ -40,10 +38,12 @@ export const BasicSubheading = {
   name: 'BasicSubheading', 
   is: 'Text',
   inherits: [inherits.Heading],
-  color: {},
+  color: {
+    text: 'text',
+  },
   style: {
     textTransform: {
-      default: 'none',
+      _default: 'none',
       options: ['none', 'uppercase'],
     },
     fontSize: {
@@ -59,9 +59,7 @@ export const BasicParagraph = {
   is: 'Text',
   inherits: [inherits.Paragraph],
   color: {
-    text: {
-      options: ['text'],
-    }
+    text: 'text'
   },
   style: {}
 };
@@ -94,7 +92,9 @@ export const BasicButton = {
   name: 'BasicButton', 
   is: 'Text',
   inherits: [inherits.Button],
-  color: {},
+  color: {
+    background: 'highlight',
+  },
   style: {
     fontSize: {
       default: 2,

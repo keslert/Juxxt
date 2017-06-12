@@ -7,4 +7,5 @@
 
 export default {
   fontSize: v => 'fs' + v,
+  textAlign: v => 't' + v[0],
 }

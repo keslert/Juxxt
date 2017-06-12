@@ -1,15 +1,18 @@
 import { 
   generateSectionComponentAlternatives,
+  generateSectionVariantAlternatives,
   generateSectionContentAlternatives,
   generateSectionColorAlternatives,
 } from './section'
 import { 
   generateGroupComponentAlternatives,
+  generateGroupVariantAlternatives,
   generateGroupContentAlternatives,
   generateGroupColorAlternatives,
 } from './group'
 import { 
   generateElementComponentAlternatives,
+  generateElementVariantAlternatives,
   generateElementContentAlternatives,
   generateElementColorAlternatives,
 } from './element'
@@ -25,13 +28,19 @@ import { mapValues } from 'lodash';
 
 /* Returns page skeletons */
 export function generateAlternatives(page, modify, selected) {
+    
+  const _selected = selected[0];
+  const _page = {...page, sections: [getSectionFromItem(_selected), ...page.sections]};
+
   let sections = [];
   if(modify.component) {
-    sections = generateComponentAlternatives(page, selected);
+    sections = generateComponentAlternatives(page, _selected);
+  } else if(modify.variant) {
+    sections = generateVariantAlternatives(page, _selected);
   } else if(modify.color) {
-    sections = generateColorAlternatives(page, selected);
+    sections = generateColorAlternatives(page, _selected);
   } else if(modify.content) {
-    sections = generateContentAlternatives(page, selected);
+    sections = generateContentAlternatives(page, _selected);
   }
 
   return sections.map(section => ({
@@ -55,7 +64,32 @@ export function generateAlternatives(page, modify, selected) {
   
   const sections = skeletons.map(skeleton => {
     const _section = buildSectionFromSkeleton(skeleton)
-    assignColor(_section, section, page);
+    assignColor(_section, page);
+    assignContent(_section, section.contentStore);
+    assignStyles(_section, page);
+    return _section;
+  })
+
+  return sections;
+}
+
+
+function generateVariantAlternatives(page, selected) {
+  const section = getSectionFromItem(selected);
+  const masterSkeleton = extractSkeletonFromSection(section);
+  
+  let skeletons;
+  if(selected.isSection) {
+    skeletons = generateSectionVariantAlternatives(selected, masterSkeleton);
+  } else if(selected.isGroup) {
+    skeletons = generateGroupVariantAlternatives(selected, masterSkeleton);
+  } else {
+    skeletons = generateElementVariantAlternatives(selected, masterSkeleton);
+  }
+  
+  const sections = skeletons.map(skeleton => {
+    const _section = buildSectionFromSkeleton(skeleton)
+    assignColor(_section, page);
     assignContent(_section, section.contentStore);
     assignStyles(_section, page);
     return _section;

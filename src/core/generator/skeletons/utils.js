@@ -1,38 +1,38 @@
 import { omit, mapValues, map, includes, forEach, sortBy, isEmpty } from 'lodash';
 import { randomItem } from '../../utils';
 
-export function getClosestVariant(variant={}, options) {
-  if(isEmpty(options)) {
+export function getClosestVariant(variantToMatch={}, variants) {
+  if(isEmpty(variants)) {
     return {};
   }
 
-  const randomizedOptions = sortBy(options, _ => Math.random());
-  const variantsWithScores = map(randomizedOptions, option => {
+  const randomizedVariants = sortBy(variants, _ => Math.random());
+  const variantsWithScores = map(randomizedVariants, variant => {
     const _variant = { score: 0 };
-    forEach(option, (variantOptions, key) => {
-      if(variant[key] !== undefined && includes(variantOptions, variant[key])) {
-        _variant[key] = variant[key];
+    forEach(variant, ({options, _default}, key) => {
+      if(variantToMatch[key] !== undefined && includes(options, variantToMatch[key])) {
+        _variant[key] = variantToMatch[key];
         _variant.score++;
       } else {
-        _variant[key] = randomItem(variantOptions);
+        _variant[key] = _default || randomItem(options);
       }
     })
     return _variant;
   })
 
-  const variants = sortBy(variantsWithScores, variant => -variant.score);
-  return omit(variants[0], ['score']);
+  const sorted = sortBy(variantsWithScores, variant => -variant.score);
+  return omit(sorted[0], ['score']);
 }
 
 export function extractSkeletonFromSection(section) {
   return {
     id: section.id,
     name: section.name,
-    variation: section.variation,
+    variant: section.variant,
     groups: mapValues(section.groups, group => ({
       id: group.id,
       name: group.name,
-      variation: group.variation,
+      variant: group.variant,
       elements: mapValues(group.elements, element => ({
         id: element.id,
         name: element.name

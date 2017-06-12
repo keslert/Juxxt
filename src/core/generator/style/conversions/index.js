@@ -3,14 +3,17 @@ import { map } from 'lodash';
 import margin from './margin';
 import padding from './padding';
 import display from './display';
-import fontSize from './font-size';
+import text from './text';
 import width from './width';
+import aspect from './aspect';
+
 const conversions = {
   ...margin,
   ...padding,
   ...display,
-  ...fontSize,
+  ...text,
   ...width,
+  ...aspect,
 }
 
 

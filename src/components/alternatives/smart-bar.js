@@ -29,11 +29,12 @@ class SmartBar extends React.Component {
   render() {
     const { modifications, turnOnModification, setZoomLevel, zoomLevel } = this.props;
     const buttons = [
-      {label: 'Component', key: 'composition'},
-      {label: 'Variation', key: 'variation'},
-      {label: 'Palette', key: 'palette'},
+      {label: 'Component', key: 'component'},
+      {label: 'Variant', key: 'variant'},
+      {label: 'Color', key: 'color'},
+      {label: 'Style', key: 'style'},
       {label: 'Content', key: 'content'},
-      {label: 'Theme', key: 'theme'},
+      // {label: 'Theme', key: 'theme'},
     ]
 
     return (

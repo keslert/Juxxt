@@ -47,6 +47,7 @@ const Group = (props) => {
       onClick={(e) => { e.stopPropagation(); setSelected(props);}}
       onMouseEnter={() => onHoverableMouseEnter(id)}
       onMouseLeave={() => onHoverableMouseLeave(id)}
+      className="w-100P"
       >
       <GroupComponent {...props} />
     </_Group>

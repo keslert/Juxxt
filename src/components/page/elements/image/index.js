@@ -1,19 +1,33 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
+import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
+import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
+
 const _Image = styled.img`
-  ${props => `
-    ${props.height && `height: ${props.height};`}
-    ${props.width && `width: ${props.width};`}
-    ${props.margin && `margin: ${props.margin};`}
-    ${props.borderRadius && `borderRadius: ${props.borderRadius};`}
-    ${props.boxShadow && `box-shadow: ${props.boxShadow};`}
-  `}
+  
 `
 
-const Image = ({props, content}) => {
+const BGImage = styled.span`
+  background: url(${props => props.src});
+
+`
+
+const Image = ({
+  content,
+  style, 
+  color,
+}) => {
+
+  const classNames = convertStyleToAtomic(style);
+
+  if(style.aspectRatio !== 'auto') {
+    return <div className={classNames + ' bg-center cover w-100P'}
+                style={{backgroundImage: `url(${content.src})`}} />
+  }
+
   return (
-    <_Image {...props} src={content.src} />
+    <img src={content.src} className={classNames} />
   )
 }
 
@@ -25,7 +39,7 @@ export const modifiableProps = {
   borderRadius: true,
   boxShadow: true,
   aspectRatio: [
-    'Auto', '1x1', 
+    'Auto', '1x1',
     '16x9', '9x16', 
     '4x3', '3x4'
   ]

@@ -1,7 +1,9 @@
 import sectionBlueprints from '../../../components/page/sections/_blueprints';
+import blueprints from '../../../components/page/groups/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
-import { filter, range } from 'lodash';
+import { filter, range, uniqBy, flatMap, mapValues } from 'lodash';
+import { getCombinations } from '../../utils';
 
 
 export function generateGroupComponentAlternatives(group, masterSkeleton) {
@@ -12,7 +14,29 @@ export function generateGroupComponentAlternatives(group, masterSkeleton) {
   const skeletons = validGroups.map(groupName => ({
     ...masterSkeleton,
     groups: {...masterSkeleton.groups,
-      [group.sectionKey]: generateGroupSkeleton(groupName, group.variant)
+      [group.sectionKey]: {
+        id: group.id,
+        ...generateGroupSkeleton(groupName, group.variant),
+      }
+    }
+  }))
+
+  return skeletons;
+}
+
+export function generateGroupVariantAlternatives(group, skeleton) {
+  const variants = blueprints[group.name].variants;
+  
+  const combinations = flatMap(variants, variant => getCombinations(
+    mapValues(variant, ({options}) => options)
+  ))
+  const unique = uniqBy(combinations, JSON.stringify);
+
+  const skeletons = unique.map(variant => ({...skeleton,
+    groups: {...skeleton.groups,
+      [group.sectionKey]: {...skeleton.groups[group.sectionKey],
+        variant
+      }
     }
   }))
 

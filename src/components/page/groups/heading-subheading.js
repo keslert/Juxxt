@@ -1,9 +1,7 @@
-import React, { PropTypes } from 'react';
-
+import React from 'react';
 import TalkingPointComponent from './common/talking-point';
 import { TalkingPoint } from './_inherits';
 import { BasicSubheading, BasicHeading } from '../elements/_blueprints';
-
 
 const HeadingSubheading = ({
   elements,
@@ -17,7 +15,7 @@ const HeadingSubheading = ({
       style={style}
       color={color}
       elements={elements}
-      variant={variant} />
+      align={variant.align} />
   )
 }
 export default HeadingSubheading;
@@ -33,5 +31,11 @@ export const blueprint = {
     subheading: {
       name: BasicSubheading.name,
     },
-  }
+  },
+  variants: [{
+    align: {
+      _default: 'center',
+      options: ['left', 'center', 'right'],
+    }
+  }]
 }

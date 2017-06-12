@@ -1,8 +1,7 @@
 import sectionBlueprints from '../../../components/page/sections/_blueprints';
 import { buildGroupFromSkeleton } from './group';
-import shortid from 'shortid';
 
-import { mapValues } from 'lodash';
+import { mapValues, uniqueId } from 'lodash';
 import { getElementsFromSection } from './utils';
 
 
@@ -10,7 +9,7 @@ import { getElementsFromSection } from './utils';
 export function buildSectionFromSkeleton(skeleton) {
   const section = {
     isSection: true,
-    id: skeleton.id || shortid.generate(),
+    id: skeleton.id || ('section_' + uniqueId()),
     name: skeleton.name,
     variant: skeleton.variant,
   }

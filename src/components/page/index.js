@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Section from './sections';
 import InsertionTarget from './insertion-target';
-import { last, isFunction } from 'lodash';
+import { last, isFunction, flatMap } from 'lodash';
 
 const _Page = styled.div`
   ${props => `
@@ -18,11 +18,7 @@ const _Page = styled.div`
       }
     `};
 
-    .c-primary { color: ${props.color.primary}};
-    .c-text { color: ${props.color.text}};
-    
-    .bg-dark { background: ${props.color.dark.background}};
-    .bg-light { background: ${props.color.light.background}};
+    ${props.pageColors}
   `};
 `;
 
@@ -34,13 +30,21 @@ class Page extends React.PureComponent {
 
     const last = sections.length - 1;
 
+    const pageColors = [
+      ...brandColors.highlight.map((color, i) => `.c-highlight-${i} { color: ${color}; }\n.bg-highlight-${i} { background: ${color}; }`),
+      ...brandColors.light.text.map((color, i) => `.c-light-text-${i} { color: ${color}; }`),
+      ...brandColors.light.background.map((color, i) => `.bg-light-background-${i} { background: ${color}; }`),
+      ...brandColors.dark.text.map((color, i) => `.c-dark-text-${i} { color: ${color}; }`),
+      ...brandColors.dark.background.map((color, i) => `.bg-dark-background-${i} { background: ${color}; }`),
+    ].join('\n');
+
     const clickable= isFunction(onClick);
     return (
-      <_Page onClick={onClick} clickable={clickable} className={'page-'+id} color={brandColors}>
+      <_Page onClick={onClick} clickable={clickable} className={id} pageColors={pageColors}>
         {sections.map((section, i) => (
           <div key={i} style={{marginTop: -1}}>
             <Section {...section} master={master} index={i} draggable={!clickable} />
-            {i !== last ? <InsertionTarget index={i} /> : null}
+            {master && i !== last ? <InsertionTarget index={i} /> : null}
           </div>
         ))}
       </_Page>

@@ -33,10 +33,10 @@ const _InsertionTarget = styled.div`
   &:after {
     content: '';
     position: absolute;
-    top: -15px;
+    top: -10px;
     left: 0;
     right: 0;
-    height: 30px;
+    height: 20px;
     z-index: 30;
     ${props => props.show && 'background: hsla(120, 72%, 80%, 0.63);'};
   }

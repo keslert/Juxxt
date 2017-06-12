@@ -6,9 +6,8 @@ import { uiActions } from '../../../core/ui';
 import { includes, last, map } from 'lodash';
 import { fadeIn } from '../../common/styled-animations';
 
-const _Element = styled.span`
+const _Element = styled.div`
   position: relative;
-  display: inline-block;
   ${props => props.selected && `
     &:after {
       content: '';

@@ -4,16 +4,15 @@ import { toggleListItem } from '../utils';
 const uiState = () => ({
   selected: [],
   modifications: {
-    composition: true,
-    variation: false,
-    palette: false,
+    component: true,
+    variant: false,
+    color: false,
     content: false,
     theme: false,
   },
   hovered: [],
   shiftDown: false,
-  zoomLevel: 2,
-  panelOpen: 'theme',
+  zoomLevel: 1,
 });
 
 export function uiReducer(state = uiState(), {payload, type}) {

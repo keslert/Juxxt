@@ -1,8 +1,9 @@
 import sectionBlueprints from '../../../components/page/sections/_blueprints';
 import groupBlueprints from '../../../components/page/groups/_blueprints';
+import * as blueprints from '../../../components/page/elements/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
-import { map, uniq, union, filter, range } from 'lodash';
+import { map, uniq, intersection, filter, range } from 'lodash';
 
 export function generateElementComponentAlternatives(element, masterSkeleton) {
   const elementsInGroup = uniq(map(element.group.elements, 'name'));
@@ -12,8 +13,8 @@ export function generateElementComponentAlternatives(element, masterSkeleton) {
   const possibleGroups = sectionBlueprint.groups[element.group.sectionKey].options;
 
   const validGroups = filter(possibleGroups, groupName => {
-    const elements = map(groupBlueprints[groupName].requirement.elements, 'name');
-    return otherElements.length === union(otherElements, elements).length &&
+    const elements = map(groupBlueprints[groupName].elements, 'name');
+    return otherElements.length === intersection(otherElements, elements).length &&
            groupName !== element.group.name;
   })
 
@@ -25,6 +26,10 @@ export function generateElementComponentAlternatives(element, masterSkeleton) {
   }))
 
   return skeletons;
+}
+
+export function generateElementVariantAlternatives(element, skeleton) {
+  const blueprint = blueprints[element.name];
 }
 
 export function generateElementColorAlternatives(section, element) {

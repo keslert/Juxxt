@@ -2,7 +2,7 @@
 export const styles = {
   'TalkingPoint': {
     textAlign: {
-      default: 'center',
+      _default: 'center',
       options: ['center', 'right', 'left'],
     },
     maxWidth: {

@@ -1,8 +1,7 @@
 import blueprints from '../../../components/page/groups/_blueprints';
 import { buildElementFromSkeleton } from './element';
 
-import { mapValues, pickBy } from 'lodash';
-import shortid from 'shortid';
+import { mapValues, pickBy, uniqueId } from 'lodash';
 import { getValidVariation } from '../../utils';
 
 
@@ -10,7 +9,7 @@ import { getValidVariation } from '../../utils';
 export function buildGroupFromSkeleton(skeleton) {
   const group = {
     isGroup: true,
-    id: skeleton.id || shortid.generate(),
+    id: skeleton.id || uniqueId(),
     name: skeleton.name,
     variant: skeleton.variant,
   }

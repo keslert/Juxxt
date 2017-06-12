@@ -43,7 +43,7 @@ class Alternatives extends React.Component {
         <SmartBar />
         <_Content>
           {alternatives.map((alternative, i) => (
-            <StyledWrapper key={alternative.uuid + i} style={{width: `${100 / zoomLevel}%`}}>
+            <StyledWrapper key={i} style={{width: `${100 / zoomLevel}%`}}>
               <Alternative onFavorite={() => null} onDelete={() => null}>
                 <Page 
                   onClick={alternative.sections.length > 1 ? () => setMaster(alternative) : undefined}

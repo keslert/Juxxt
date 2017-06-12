@@ -60,7 +60,7 @@ export function styleItem(item, items, rules, blueprint) {
 
 function styleItemByBlueprint(item, items, blueprint) {  
   Object.keys(blueprint.style).forEach(key => {
-    item.style[key] = blueprint.style[key].default || randomItem(blueprint.style[key].options);
+    item.style[key] = blueprint.style[key]._default || randomItem(blueprint.style[key].options);
   })
 
   item.inherits.forEach(name => {
@@ -75,9 +75,9 @@ function styleItemByBlueprint(item, items, blueprint) {
   })
 
   const combinedStyle = Object.assign({}, ...values(blueprint.sharedStyles));
-  forEach(combinedStyle, (_style, key) => {
+  forEach(combinedStyle, ({options, _default}, key) => {
     if(item.style[key] === undefined) {
-      item.style[key] = _style.default || randomItem(_style.options);
+      item.style[key] = _default || randomItem(options);
     }
   })
 }

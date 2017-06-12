@@ -11,11 +11,14 @@ const Basic1_2 = ({
   color,
 }) => {
 
-  const boxStyle = {
+  const containerStyle = {
     ...style,
+  }
+
+  const wrapStyle = {
+    marginHorizontal: `-${style.gutter}`,
     display: "flex",
     flexWrap: "wrap",
-    marginHorizontal: `-${style.gutter}`,
   }
 
   const innerBoxStyle = {
@@ -27,17 +30,18 @@ const Basic1_2 = ({
   }
 
   const colorClassNames = convertColorToAtomic(color);
-  const boxClassNames = convertStyleToAtomic(boxStyle)
   const innerClassNames = convertStyleToAtomic(innerBoxStyle);
 
   return (
     <Box className={colorClassNames}>
-      <Box className={boxClassNames}>
-        <Box order={variant.order} className={innerClassNames}>
-          <Group {...groups.tp} />
-        </Box>
-        <Box order={2} className={innerClassNames}>
-          <Group {...groups.media} />
+      <Box className={convertStyleToAtomic(containerStyle)}>
+        <Box className={convertStyleToAtomic(wrapStyle)}>
+          <Box order={variant.order} className={innerClassNames}>
+            <Group {...groups.tp} />
+          </Box>
+          <Box order={2} className={innerClassNames}>
+            <Group {...groups.media} />
+          </Box>
         </Box>
       </Box>
     </Box>
@@ -51,13 +55,15 @@ export const blueprint = {
   color: {},
   groups: {
     tp: {
-      options: ['HeadingParagraph'],
+      options: ['HeadingParagraph', 'HeadingSubheading'],
     },
     media: {
       options: ['BlockImage'],
     },
   },
   variants: [{
-    order: [1, 3],
+    order: {
+      options: [1, 3],
+    }
   }]
 }
