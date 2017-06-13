@@ -2,7 +2,7 @@ import sectionBlueprints from '../../../components/page/sections/_blueprints';
 import blueprints from '../../../components/page/groups/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
-import { filter, range, uniqBy, flatMap, mapValues } from 'lodash';
+import { filter, range, uniqBy, flatMap, mapValues, cloneDeep } from 'lodash';
 import { getCombinations } from '../../utils';
 
 
@@ -50,7 +50,7 @@ export function generateGroupColorAlternatives(section, element) {
 export function generateGroupContentAlternatives(section, group, contentStore) {
   const store = filter(contentStore, content => content.groupId !== group.id);
 
-  const sections = range(0, 6).map({...section});
+  const sections = range(0, 6).map(() => cloneDeep(section));
   sections.forEach(s => assignContent(s, store));
   
   return sections;

@@ -1,6 +1,6 @@
 import sectionBlueprints from '../../../components/page/sections/_blueprints';
 import { generateSectionSkeleton } from '../skeletons/section';
-import { filter, range, map, mapValues, uniqBy, flatMap } from 'lodash';
+import { filter, range, map, mapValues, uniqBy, flatMap, cloneDeep } from 'lodash';
 import { assignColor } from '../color';
 import { assignContent } from '../content';
 import { getCombinations } from '../../utils';
@@ -43,8 +43,7 @@ export function generateSectionColorAlternatives(section, page) {
 
 export function generateSectionContentAlternatives(section, contentStore) {
   const store = [];
-  const sections = range(0, 6).map({...section});
+  const sections = range(0, 6).map(() => cloneDeep(section));
   sections.forEach(s => assignContent(s, store));
-  
   return sections;
 }

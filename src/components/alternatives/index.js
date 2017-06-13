@@ -25,7 +25,7 @@ const _Content = styled.div`
   display: flex;
   flex-wrap: wrap;
   overflow-y: auto;
-  padding-bottom: 5px;
+  padding-bottom: 55px;
   margin-left: -5px;
   margin-right: -5px;
 `;

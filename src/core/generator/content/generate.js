@@ -5,6 +5,8 @@ import LoremIpsum from 'lorem-ipsum';
 export function generateContent(element) {
 
   switch(element.name) {
+    case 'BasicHeading':
+      return {text: LoremIpsum({count: random(4, 8), units: 'words'})};
     case 'Button':
       return getButtonContent(element);
     case 'Paragraph':
@@ -27,9 +29,8 @@ export function generateContent(element) {
 function getGenericContent(element) {
   switch(element.is) {
     case 'Text':
-      return { text: 'I am a ' + element.name };
     case 'Link':
-      return { text: "Link" };
+      return { text: 'I am a ' + element.name };
     case 'Image':
       return { src: 'http://placehold.it/600x400' };
     default:

@@ -109,7 +109,12 @@ export function insertAlternative(alternative, index) {
 function duplicateSection(section) {
   const _section = cloneDeep(section);
   _section.id = 's_' + uniqueId();
+  _section.contentStore = [];
   forEach(_section.groups, g => g.id = 'g_' + uniqueId());
-  forEach(_section.elements, e => e.id = 'e_' + uniqueId());
+  forEach(_section.elements, e => {
+    e.id = 'e_' + uniqueId();
+    _section.contentStore.push(e.content);
+  });
+
   return _section;
 }

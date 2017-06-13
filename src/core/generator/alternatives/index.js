@@ -119,8 +119,8 @@ function generateContentAlternatives(page, selected) {
   const section = getSectionFromItem(selected);
   const skeleton = extractSkeletonFromSection(section);
   const _section = buildSectionFromSkeleton(skeleton);
-  assignColor(_section);
-  assignStyles(_section);
+  assignColor(_section, page);
+  assignStyles(_section, page);
 
   let sections;
   if(selected.isSection) {

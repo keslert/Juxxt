@@ -3,7 +3,7 @@ import groupBlueprints from '../../../components/page/groups/_blueprints';
 import * as blueprints from '../../../components/page/elements/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
-import { map, uniq, intersection, filter, range } from 'lodash';
+import { map, uniq, intersection, filter, range, cloneDeep } from 'lodash';
 
 export function generateElementComponentAlternatives(element, masterSkeleton) {
   const elementsInGroup = uniq(map(element.group.elements, 'name'));
@@ -39,7 +39,7 @@ export function generateElementColorAlternatives(section, element) {
 export function generateElementContentAlternatives(section, element, contentStore) {
   const store = filter(contentStore, content => content.elementId !== element.id);
 
-  const sections = range(0, 6).map({...section});
+  const sections = range(0, 6).map(() => cloneDeep(section));
   sections.forEach(s => assignContent(s, store));
   
   return sections;

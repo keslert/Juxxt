@@ -8,7 +8,7 @@ import ThemeSidebar from './theme-sidebar';
 
 const _Sidebar = styled.div`
   position: relative;
-  width: 250px;
+  width: 0;
   height: 100vh;
   background: ${theme.black};
   box-sizing: border-box;
