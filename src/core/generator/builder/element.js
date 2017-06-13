@@ -4,7 +4,7 @@ import { uniqueId } from 'lodash';
 export function buildElementFromSkeleton(skeleton) {
   const element = {
     isElement: true,
-    id: skeleton.id || ('element_' + uniqueId()),
+    id: skeleton.id || ('e_' + uniqueId()),
     name: skeleton.name,
   }
   const blueprint = blueprints[element.name];

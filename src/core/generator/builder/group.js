@@ -9,7 +9,7 @@ import { getValidVariation } from '../../utils';
 export function buildGroupFromSkeleton(skeleton) {
   const group = {
     isGroup: true,
-    id: skeleton.id || uniqueId(),
+    id: skeleton.id || ('g_' + uniqueId()),
     name: skeleton.name,
     variant: skeleton.variant,
   }

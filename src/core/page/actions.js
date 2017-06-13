@@ -5,7 +5,7 @@ import { getMaster, getAlternatives } from './selectors';
 import { getFocus } from '../theme';
 
 import { setSelected } from '../ui';
-import { find, pick, sortBy } from 'lodash';
+import { find, pick, sortBy, cloneDeep, uniqueId, forEach } from 'lodash';
 
 
 export function clearRegistry() {
@@ -21,8 +21,8 @@ export function registerItem(item) {
   }
 }
 
-export function updateUserOverride(uuid, key, value) {
-  return updateMaster({}, {[uuid]: {[key]: value}});
+export function updateUserOverride(id, key, value) {
+  return updateMaster({}, {[id]: {[key]: value}});
 }
 
 export function setMaster(page) {
@@ -71,7 +71,7 @@ export function overrideSectionWithAlternative(section, alternative) {
     const master = getMaster(getState());
     const page = {...master,
       sections: master.sections.map(_section => 
-        _section.uuid !== section.uuid ? _section : alternative,
+        _section.id !== section.id ? _section : duplicateSection(alternative),
       )
     }
     dispatch(setMaster(page));
@@ -85,7 +85,7 @@ export function moveSectionToIndex(section, index) {
     const indexedSections = master.sections.map((_section, i) => ({_section, i}))
     const page = {...master,
       sections: sortBy(indexedSections, ({_section, i}) => (
-        _section.uuid !== section.uuid ? i : index + .1
+        _section.id !== section.id ? i : index + .1
       )).map(({_section}) => _section)
     }
     dispatch(setMaster(page));
@@ -98,10 +98,18 @@ export function insertAlternative(alternative, index) {
     const page = {...master,
       sections: [
         ...master.sections.slice(0, index),
-        alternative,
+        duplicateSection(alternative),
         ...master.sections.slice(index),
       ]
     }
     dispatch(setMaster(page));
   }
+}
+
+function duplicateSection(section) {
+  const _section = cloneDeep(section);
+  _section.id = 's_' + uniqueId();
+  forEach(_section.groups, g => g.id = 'g_' + uniqueId());
+  forEach(_section.elements, e => e.id = 'e_' + uniqueId());
+  return _section;
 }
