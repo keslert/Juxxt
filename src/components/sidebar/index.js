@@ -6,7 +6,7 @@ import theme from '../../styles/theme';
 
 import ThemeSidebar from './theme-sidebar';
 
-const _Sidebar = styled.div`
+const StyledSidebar = styled.div`
   position: relative;
   width: 0;
   height: 100vh;
@@ -16,13 +16,11 @@ const _Sidebar = styled.div`
   border-left: 1px solid #222;
 `
 
-const Sidebar = ({
-
-}) => {
+const Sidebar = () => {
   return (
-    <_Sidebar>
+    <StyledSidebar>
       <ThemeSidebar />
-    </_Sidebar>
+    </StyledSidebar>
   )
 }
 

@@ -6,13 +6,11 @@ import { createSelector } from 'reselect';
 import { getZoomLevel } from '../../core/ui';
 import { getAlternatives, setMaster } from '../../core/page';
 import Alternative from './alternative';
-import Section from '../page/sections';
 import Page from '../page';
-import { StyledDisplayFlex, StyledFlex } from '../common/styled-base';
 
 import SmartBar from './smart-bar';
 
-const _Alternatives = styled.div`
+const StyledAlternatives = styled.div`
   display: flex;
   flex-direction: column;
   width: ${props => props.width}%;
@@ -20,7 +18,7 @@ const _Alternatives = styled.div`
   padding: 0 10px;
 `;
 
-const _Content = styled.div`
+const StyledContent = styled.div`
   max-height: 100vh;
   display: flex;
   flex-wrap: wrap;
@@ -39,9 +37,9 @@ class Alternatives extends React.Component {
   render() {
     const { alternatives=[], width, zoomLevel, setMaster } = this.props;
     return (
-      <_Alternatives width={width}>
+      <StyledAlternatives width={width}>
         <SmartBar />
-        <_Content>
+        <StyledContent>
           {alternatives.map((alternative, i) => (
             <StyledWrapper key={i} style={{width: `${100 / zoomLevel}%`}}>
               <Alternative onFavorite={() => null} onDelete={() => null}>
@@ -54,8 +52,8 @@ class Alternatives extends React.Component {
               </Alternative>
             </StyledWrapper>
           ))}
-        </_Content>
-      </_Alternatives>
+        </StyledContent>
+      </StyledAlternatives>
     )
   }
 }

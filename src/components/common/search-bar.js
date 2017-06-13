@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const _SearchBar = styled.div`
+const StyledSearchBar = styled.div`
   display: flex;
   background: #1d1d1d;
   border-radius: 14px;
@@ -23,10 +23,10 @@ const SearchBar = ({
   onChange,
   onSubmit,
 }) => (
-  <_SearchBar>
+  <StyledSearchBar>
     <input value={value} placeholder={placeholder} size="3" />
     <i className="fa fa-search"></i>
-  </_SearchBar>
+  </StyledSearchBar>
 )
 
 export default SearchBar;

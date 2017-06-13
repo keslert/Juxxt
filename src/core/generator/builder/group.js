@@ -2,9 +2,6 @@ import blueprints from '../../../components/page/groups/_blueprints';
 import { buildElementFromSkeleton } from './element';
 
 import { mapValues, pickBy, uniqueId } from 'lodash';
-import { getValidVariation } from '../../utils';
-
-
 
 export function buildGroupFromSkeleton(skeleton) {
   const group = {

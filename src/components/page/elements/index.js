@@ -30,7 +30,6 @@ const StyledElement = styled.div`
 const Element = (props) => {
   
   const { 
-    name, 
     id,
     is,
     isSelected,
@@ -38,7 +37,6 @@ const Element = (props) => {
     isHovered, 
     onHoverableMouseEnter, 
     onHoverableMouseLeave,
-    
   } = props;
   const ElementComponent = elements[is];
 

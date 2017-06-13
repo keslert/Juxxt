@@ -4,8 +4,6 @@ import styled from 'styled-components';
 
 import flow from 'lodash/flow';
 
-import { fadeIn } from '../common/styled-animations';
-
 import { DropTarget } from 'react-dnd';
 import { insertAlternative, moveSectionToIndex } from '../../core/page';
 
@@ -26,7 +24,7 @@ const targetSpec = {
   }
 }
 
-const _InsertionTarget = styled.div`
+const StyledInsertionTarget = styled.div`
   height: 0;
   width: 100%;
   position: relative;
@@ -51,17 +49,11 @@ function targetCollect(connect, monitor) {
 }
 
 const InsertionTarget = (props) => {
-  const {
-    index,
-    connectDropTarget, 
-    isDragging,
-    isOver,
-    canDrop,
-  } = props;
+  const { connectDropTarget, isOver, canDrop } = props;
   
   return connectDropTarget(
     <div>
-      <_InsertionTarget show={isOver && canDrop} />
+      <StyledInsertionTarget show={isOver && canDrop} />
     </div>
   )
 }

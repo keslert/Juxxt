@@ -1,5 +1,5 @@
 import { filter, find, some, map } from 'lodash';
-import { randomItem, getMode } from '../../utils';
+import { getMode } from '../../utils';
 
 export function colorItem(item, items, rules, blueprint) {
   item.color = {};
@@ -35,9 +35,10 @@ export function getPossibleTextColors(color) {
     case 'dark':
     case 'offDark':
       return ['light', 'offLight', 'textOnDark']
-    
     case 'light':
     case 'offLight':
+    default: 
       return ['text', 'dark', 'primary', 'secondary', 'tertiary']
+    
   }
 }

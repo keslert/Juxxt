@@ -1,4 +1,4 @@
-import { filter, forEach } from 'lodash';
+import { forEach } from 'lodash';
 
 import { colorSection } from './section';
 import { colorGroup } from './group';

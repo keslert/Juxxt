@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import sections from './_components';
 import { overrideSectionWithAlternative } from '../../../core/page';
 import { uiActions } from '../../../core/ui';
-import { includes, last, map, pick } from 'lodash';
+import { includes, last, map } from 'lodash';
 import flow from 'lodash/flow';
 
 import { fadeIn } from '../../common/styled-animations';
@@ -63,7 +63,7 @@ const sourceSpec = {
 
 const targetSpec = {
   canDrop(props, monitor) {
-    const { master, id } = props;
+    const { master } = props;
     const section = monitor.getItem();
     return master && !section.master;
   },

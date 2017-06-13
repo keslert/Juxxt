@@ -1,5 +1,4 @@
 import * as types from './action-types';
-import { filter, includes } from 'lodash';
 import { init } from '../generator';
 
 const _init = init();

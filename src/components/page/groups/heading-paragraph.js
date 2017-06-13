@@ -3,21 +3,21 @@ import TalkingPointComponent from './common/talking-point';
 import { BasicHeading, BasicParagraph } from '../elements/_blueprints';
 import { TalkingPoint } from './_inherits';
 
-const HeadingParagraph = ({
-  elements,
-  variant,
-  style,
-  color,
-}) => {
 
-  return (
-    <TalkingPointComponent
-      style={style}
-      color={color}
-      elements={elements}
-      align={variant.align} />
-  )
+class HeadingParagraph extends React.Component {
+  render() {
+    const { elements, variant, style, color } = this.props;
+
+    return (
+      <TalkingPointComponent
+        style={style}
+        color={color}
+        elements={elements}
+        align={variant.align} />
+    )
+  }
 }
+
 export default HeadingParagraph;
 
 export const blueprint = {

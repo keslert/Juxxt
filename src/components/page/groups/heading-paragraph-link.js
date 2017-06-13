@@ -10,7 +10,7 @@ class HeadingParagraphLink extends React.PureComponent {
 				style={this.props.style}
 				color={this.props.color}
 				elements={this.props.elements}
-				align ={this.props.variant.align}
+				align={this.props.variant.align}
 			/>
 		)
 	}

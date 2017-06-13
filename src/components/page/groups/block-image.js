@@ -1,18 +1,16 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import Element from '../elements';
-import { _Block } from '../../common/styled-base';
 import { BasicImage } from '../elements/_blueprints';
 
-const BlockImage = ({
-  elements,
-  variation,
-  props,
-}) => {
-  return (
-    <div {...props}>
-      <Element {...elements.image} />
-    </div>
-  )
+class BlockImage extends React.Component {
+  render() {
+    const { elements } = this.props;
+    return (
+      <div>
+        <Element {...elements.image} />
+      </div>
+    )
+  }
 }
 export default BlockImage;
 

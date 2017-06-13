@@ -3,13 +3,11 @@ import Element from '../../elements';
 import Box from '../../../common/box';
 
 import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
-import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
 
 class TalkingPoint extends React.Component {
 
   render() {
     const { 
-      variant,
       style,
       align,
       elements: {

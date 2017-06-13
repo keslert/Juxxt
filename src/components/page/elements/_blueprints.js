@@ -114,10 +114,10 @@ export const BasicLink = {
   },
   style: {
     paddingHorizontal: {
-      options: range(1, 3),
+      options: range(3, 4),
     },
     paddingVertical: {
-      options: range(1, 2),
+      options: range(2, 3),
     },
     borderRadius: {
       options: range(0, 2),

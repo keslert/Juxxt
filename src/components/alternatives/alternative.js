@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import IconButton from '../common/icon-button';
 
-const _Alternative = styled.div`
+const StyledAlternative = styled.div`
   margin-bottom: 10px;
 `
 
-const _IconBar = styled.div`
+const StyledIconBar = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-bottom: 2px;
@@ -19,13 +19,13 @@ const Alternative = ({
 }) => {
 
   return (
-    <_Alternative>
-      <_IconBar>
+    <StyledAlternative>
+      <StyledIconBar>
         <IconButton type="heart" onClick={onFavorite} />
         <IconButton type="trash-o" onClick={onDelete} />
-      </_IconBar>
+      </StyledIconBar>
       {children}
-    </_Alternative>
+    </StyledAlternative>
   )
 }
 

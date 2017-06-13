@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { StyledField } from './styled';
 
 const StyledCollection = styled.div`
 

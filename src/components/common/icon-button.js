@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const _IconButton = styled.span`
+const StyledIconButton = styled.span`
   cursor: pointer;
   i:first-child {
     color: transparent;
@@ -18,9 +18,9 @@ const IconButton = ({
   type,
   onClick,
 }) => (
-  <_IconButton onClick={onClick} className="fa-stack">
+  <StyledIconButton onClick={onClick} className="fa-stack">
     <i className="fa fa-circle fa-stack-2x"></i>
     <i className={`fa fa-${type} fa-stack-1x fa-inverse`}></i>
-  </_IconButton>
+  </StyledIconButton>
 )
 export default IconButton;

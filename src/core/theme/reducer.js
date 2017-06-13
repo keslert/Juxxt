@@ -1,6 +1,6 @@
 import * as types from './action-types';
-import { filter, includes } from 'lodash';
 import { toggleListItem } from '../utils';
+
 const themeState = () => ({
   open: [],
   locked: [],

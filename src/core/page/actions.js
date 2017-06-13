@@ -1,11 +1,9 @@
 import * as types from './action-types';
 import { generate, generateThemeAlternatives } from '../../core/generator';
 import { generateAlternatives } from '../../core/generator/alternatives';
-import { getMaster, getAlternatives } from './selectors';
+import { getMaster } from './selectors';
 import { getFocus } from '../theme';
-
-import { setSelected } from '../ui';
-import { find, pick, sortBy, cloneDeep, uniqueId, forEach } from 'lodash';
+import { sortBy, cloneDeep, uniqueId, forEach } from 'lodash';
 
 
 export function clearRegistry() {

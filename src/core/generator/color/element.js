@@ -30,7 +30,6 @@ export function colorElement(element, sections) {
   if(blueprint.color.text) {
     const valid = filter(elements, e => (e.group.color.background || e.group.section.color.background) === background);
     const fna = find(rules, fn => some(valid, fn));
-    console.log(fna);
     if(fna) {
       const matches = filter(valid, fna);
       element.color.text = getMode(matches.map(e => e.color.text));

@@ -1,5 +1,4 @@
-import React, { PropTypes } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
 

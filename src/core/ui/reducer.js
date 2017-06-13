@@ -1,5 +1,5 @@
 import * as types from './action-types';
-import { filter, includes } from 'lodash';
+import { filter } from 'lodash';
 import { toggleListItem } from '../utils';
 const uiState = () => ({
   selected: [],
@@ -8,11 +8,12 @@ const uiState = () => ({
     variant: false,
     color: false,
     content: false,
+    style: false,
     theme: false,
   },
   hovered: [],
   shiftDown: false,
-  zoomLevel: 1,
+  zoomLevel: 2,
 });
 
 export function uiReducer(state = uiState(), {payload, type}) {

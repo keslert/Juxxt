@@ -1,6 +1,6 @@
 import sectionBlueprints from '../../../components/page/sections/_blueprints';
 import { generateSectionSkeleton } from '../skeletons/section';
-import { filter, range, map, mapValues, uniqBy, flatMap, cloneDeep } from 'lodash';
+import { filter, range, mapValues, uniqBy, flatMap, cloneDeep } from 'lodash';
 import { assignColor } from '../color';
 import { assignContent } from '../content';
 import { getCombinations } from '../../utils';

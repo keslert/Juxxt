@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import groups from './_components';
 import { uiActions } from '../../../core/ui';
-import { includes, last, map, pick } from 'lodash';
+import { includes, last, map } from 'lodash';
 import { fadeIn } from '../../common/styled-animations';
-import { mapValues } from 'lodash';
 
 const StyledGroup = styled.div`
   position: relative;

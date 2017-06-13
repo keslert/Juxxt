@@ -14,7 +14,7 @@ import SearchBar from '../common/search-bar';
 import { StyledFlex, StyledSpacer } from '../common/styled-base';
 
 
-const _SmartBar = styled.div`
+const StyledSmartBar = styled.div`
   display: flex;
   flex-wrap: wrap;
   font-size: 14px;
@@ -38,7 +38,7 @@ class SmartBar extends React.Component {
     ]
 
     return (
-      <_SmartBar>
+      <StyledSmartBar>
         <StyledFlex>
           <SearchBar />
         </StyledFlex>
@@ -60,7 +60,7 @@ class SmartBar extends React.Component {
           </StyledSpacer>
         ))}
         
-      </_SmartBar>
+      </StyledSmartBar>
     )
   }
 }
@@ -78,7 +78,7 @@ const mapDispatchToProps = Object.assign({turnOnModification, setZoomLevel});
 export default connect(mapStateToProps, mapDispatchToProps)(SmartBar);
 
 
-const _Button = styled.div`
+const StyledButton = styled.div`
   padding: 7px 8px;
   background: #1d1d1d;
   border-radius: 2px;
@@ -86,13 +86,6 @@ const _Button = styled.div`
   color: #727272;
   user-select: none;
   font-size: 12px;
-
-  // i {
-  //   margin-right: 6px;
-  //   color: ${props => props.active ? '#fff' : '#9e9e9e' };
-  // }
-
-  // border-left: 3px solid #1d1d1d;
 
   ${props => `
     ${props.active && `
@@ -107,7 +100,7 @@ const Button = ({
   text,
   active,
 }) => (
-  <_Button active={active} onClick={onClick}>
+  <StyledButton active={active} onClick={onClick}>
     {text}
-  </_Button>
+  </StyledButton>
 )

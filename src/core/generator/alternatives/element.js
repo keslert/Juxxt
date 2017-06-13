@@ -1,6 +1,6 @@
 import sectionBlueprints from '../../../components/page/sections/_blueprints';
 import groupBlueprints from '../../../components/page/groups/_blueprints';
-import * as blueprints from '../../../components/page/elements/_blueprints';
+// import * as blueprints from '../../../components/page/elements/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
 import { map, uniq, intersection, filter, range, cloneDeep } from 'lodash';
@@ -29,7 +29,9 @@ export function generateElementComponentAlternatives(element, masterSkeleton) {
 }
 
 export function generateElementVariantAlternatives(element, skeleton) {
-  const blueprint = blueprints[element.name];
+  // const blueprint = blueprints[element.name];
+
+  return [];
 }
 
 export function generateElementColorAlternatives(section, element) {

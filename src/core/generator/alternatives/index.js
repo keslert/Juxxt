@@ -24,13 +24,9 @@ import { assignContent } from '../content';
 import { assignStyles } from '../style';
 import { assignColor } from '../color';
 
-import { mapValues } from 'lodash';
-
 /* Returns page skeletons */
 export function generateAlternatives(page, modify, selected) {
-    
   const _selected = selected[0];
-  const _page = {...page, sections: [getSectionFromItem(_selected), ...page.sections]};
 
   let sections = [];
   if(modify.component) {
@@ -41,6 +37,8 @@ export function generateAlternatives(page, modify, selected) {
     sections = generateColorAlternatives(page, _selected);
   } else if(modify.content) {
     sections = generateContentAlternatives(page, _selected);
+  } else if(modify.style) {
+
   }
 
   return sections.map(section => ({
@@ -49,10 +47,10 @@ export function generateAlternatives(page, modify, selected) {
   }))
 }
 
- function generateComponentAlternatives(page, selected) {
+function generateComponentAlternatives(page, selected) {
   const section = getSectionFromItem(selected)
   const masterSkeleton = extractSkeletonFromSection(section);
-  
+
   let skeletons;
   if(selected.isSection) {
     skeletons = generateSectionComponentAlternatives(selected, masterSkeleton);
@@ -61,7 +59,7 @@ export function generateAlternatives(page, modify, selected) {
   } else {
     skeletons = generateElementComponentAlternatives(selected, masterSkeleton);
   }
-  
+
   const sections = skeletons.map(skeleton => {
     const _section = buildSectionFromSkeleton(skeleton)
     assignColor(_section, page);
@@ -109,7 +107,9 @@ function generateColorAlternatives(page, selected) {
   if(selected.isSection) {
     sections = generateSectionColorAlternatives(_section);
   } else if(selected.isGroup) {
-
+    sections = generateGroupColorAlternatives(_section);
+  } else {
+    sections = generateElementColorAlternatives(_section);
   }
 
   return sections;

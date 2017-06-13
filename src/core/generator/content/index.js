@@ -1,5 +1,4 @@
 import { generateContent } from './generate';
-import { flatMap } from 'lodash';
 
 export function assignContent(section, contentStore) {
   const store = contentStore.map(content => ({

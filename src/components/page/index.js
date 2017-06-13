@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Section from './sections';
 import InsertionTarget from './insertion-target';
-import { last, isFunction, flatMap } from 'lodash';
+import { isFunction } from 'lodash';
 
 const StyledPage = styled.div`
   ${props => `

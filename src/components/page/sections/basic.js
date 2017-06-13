@@ -1,6 +1,5 @@
 import React from 'react';
 import Group from '../groups';
-import Box from '../../common/box';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 
@@ -9,7 +8,7 @@ import { convertColorToAtomic } from '../../../core/generator/color/conversions'
 
 class Basic extends React.PureComponent {
   render () {
-    const { groups, variant, style, color } = this.props;
+    const { groups, style, color } = this.props;
 
     const boxStyle = {
       ...style,
