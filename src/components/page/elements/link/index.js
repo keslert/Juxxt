@@ -1,17 +1,19 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-
-const _Link = styled.a``
+import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
+import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
 
 class Link extends React.PureComponent {
  
   render() {
-    const { content } = this.props;
+    const { style, color, content } = this.props;
+    const styleClassNames = convertStyleToAtomic(style);
+    const colorClassNames = convertColorToAtomic(color);
 
     return(
-      <_Link>
+      <a className={styleClassNames + ' dib ' + colorClassNames}>
         {content.text}
-      </_Link>
+      </a>
     )
   }
 }

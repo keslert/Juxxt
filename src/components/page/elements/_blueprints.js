@@ -112,6 +112,16 @@ export const BasicLink = {
     text: 'text-0',
     background: 'highlight',
   },
-  style: {}
+  style: {
+    paddingHorizontal: {
+      options: range(1, 3),
+    },
+    paddingVertical: {
+      options: range(1, 2),
+    },
+    borderRadius: {
+      options: range(0, 2),
+    }
+  }
 };
 

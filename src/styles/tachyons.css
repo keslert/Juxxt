@@ -585,3 +585,28 @@ img { max-width: 100%; }
 .ttl { text-transform: lowercase; }
 .ttu { text-transform: uppercase; }
 .ttn { text-transform: none; }
+
+.br0 { border-radius: 0; }
+.br1 { border-radius: .125em; }
+.br2 { border-radius: .25em; }
+.br3 { border-radius: .5em; }
+.br4 { border-radius: 1em; }
+.br-100 { border-radius: 100%; }
+.br-pill { border-radius: 9999px; }
+.br--bottom { border-top-left-radius: 0; border-top-right-radius: 0; }
+.br--top { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.br--right { border-top-left-radius: 0; border-bottom-left-radius: 0; }
+.br--left { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+
+
+.dn { display: none; }
+.di { display: inline; }
+.db { display: block; }
+.dib { display: inline-block; }
+.dit { display: inline-table; }
+.dt { display: table; }
+.dtc { display: table-cell; }
+.dt-row { display: table-row; }
+.dt-row-group { display: table-row-group; }
+.dt-column { display: table-column; }
+.dt-column-group { display: table-column-group; }

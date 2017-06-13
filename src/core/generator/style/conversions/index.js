@@ -14,6 +14,7 @@ const conversions = {
   ...text,
   ...width,
   ...aspect,
+  borderRadius: v => 'br' + v,
 }
 
 
