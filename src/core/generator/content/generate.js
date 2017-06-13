@@ -7,6 +7,8 @@ export function generateContent(element) {
   switch(element.name) {
     case 'BasicHeading':
       return {text: LoremIpsum({count: random(4, 8), units: 'words'})};
+    case 'BasicParagraph':
+      return {text: LoremIpsum({count: random(2, 4), units: 'sentences'})};
     case 'Button':
       return getButtonContent(element);
     case 'Paragraph':
