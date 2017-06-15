@@ -32,12 +32,15 @@ export function generateSectionVariantAlternatives(section, skeleton) {
 }
 
 export function generateSectionColorAlternatives(section, page) {
-  const possible = [...page.brandColors.background, ...page.brandColors.highlight];
+
+  section["color"] = {background:null};
+  
+  const possible = [...page.brandColors.dark.background, ...page.brandColors.highlight];
   const valid = filter(possible, color => color !== section.color.background);
 
   const sections = valid.map(color => ({...section, color}));
   sections.forEach(s => assignColor(s, page));
-
+  debugger;
   return sections;
 }
 

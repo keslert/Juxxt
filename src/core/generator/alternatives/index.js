@@ -101,11 +101,11 @@ function generateColorAlternatives(page, selected) {
   const skeleton = extractSkeletonFromSection(section);
   const _section = buildSectionFromSkeleton(skeleton);
   assignContent(_section, section.contentStore);
-  assignStyles(_section);
+  assignStyles(_section,page);
 
   let sections;
   if(selected.isSection) {
-    sections = generateSectionColorAlternatives(_section);
+    sections = generateSectionColorAlternatives(_section,page);
   } else if(selected.isGroup) {
     sections = generateGroupColorAlternatives(_section);
   } else {
