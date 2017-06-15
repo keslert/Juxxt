@@ -47,7 +47,7 @@ class Alternatives extends React.Component {
                   onClick={alternative.sections.length > 1 ? () => setMaster(alternative) : undefined}
                   sections={alternative.sections}
                   sectionsDraggable={alternative.isSection}
-                  brandColors={alternative.brandColors}
+                  websiteColors={alternative.websiteColors}
                   master={false} />
               </Alternative>
             </StyledWrapper>

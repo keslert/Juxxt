@@ -36,21 +36,61 @@ function okTextOnBackground(bgcolor,arr) {
 }
 
 
-function okSectionColors(okBackgrounds,websiteColors) {
+function okSectionColors(okBackgrounds,websiteColors,palette) {
   var okPayload = {};
   for(var i=0;i<okBackgrounds.length;i++) {
-    okPayload[okBackgrounds[i]] = {text:okTextOnBackground(okBackgrounds[i],websiteColors)}; 
+    okPayload[okBackgrounds[i]] = {
+      text:okTextOnBackground(okBackgrounds[i],websiteColors),
+      solid:okTextOnBackground(okBackgrounds[i],palette)
+    };
+
+    
   }
   return okPayload;
 }
+/*
+helper for getPrimary
+*/
+function  invertDiff(arr,target) {
+  return arr.map((value)=> 1 - Math.abs(value-target));
+}
+
+/**
+Returns the best primary color in hex string given a palette
+*/
+function getPrimary(palette) {
+  const LUM_TARGET = 0.5;
+  const SAT_TARGET = 1;
+  const LUM_WEIGHT = 6;
+  const SAT_WEIGHT = 4;
+
+  let lumArr = palette.map((color)=> (tinycolor(color).getLuminance()));
+  let saturationArr = palette.map((color)=> (tinycolor(color).toHsv()['s']));
+  var a = invertDiff(lumArr,LUM_TARGET).map((value)=>value * LUM_WEIGHT);
+  var b = invertDiff(saturationArr,SAT_TARGET).map((value)=> value * SAT_WEIGHT);
+  var finalArr = []
+  for(var i=0;i<palette.length;i++) {
+    finalArr.push(( a[i] + b[i] )/ 2);
+  }
+  return palette[finalArr.indexOf(Math.max(...finalArr))];
+}
+
+function getGray(primary,color) {
+   var newcolor = tinycolor(color).toHsv()
+   newcolor['h'] = tinycolor(primary).toHsv()['h']
+   return tinycolor(newcolor).toHexString();
+}
+
+
 
 export function init() {
-  //usegen
-  var palette = ["#C33C54","#254E70","#37718E","#8EE3EF","#AEF3E7"];
+  var palette = ["#342E44","#615356","#CE799B","#E6988F","#E5D097"]; //fixed palette: temporary
   var websiteColors = palette.slice()
-  websiteColors.push("#303030","#afafaf","#fff");
   
 
+  let primary = getPrimary(palette);
+  websiteColors.push(getGray(primary,"#f2f3f4"),getGray(primary,"#fcfcfc"));
+  let NUM_OF_PAGES = 10;
   const master = {
     id: 'p_' + uniqueId(),
     palette: palette,
@@ -65,17 +105,23 @@ export function init() {
         background: ['#32325D', '#43458B'],
       }
     },
-    backgroundBlueprint: okSectionColors(okBackgroundColors(palette),websiteColors),
-    websiteColors:{},
+    websiteColors: websiteColors,
+    backgroundBlueprint: okSectionColors(okBackgroundColors(palette),websiteColors,palette.concat("#FFF")),
     isPage: true,
-    sections: reduce(range(0, 5), (sections, i) => {
+    sections: reduce(range(0, NUM_OF_PAGES), (sections, i) => {
       const skeletons = generateSectionComponentAlternatives({});
       const skeleton = randomItem(skeletons);
-
       const page = {sections}
       const section = buildSectionFromSkeleton(skeleton, page);
+
+      if(i ==0 | i == NUM_OF_PAGES-1) {
+        section.color = {background: primary.replace("#","")}
+      } else if((i%2) == 1) {
+        section.color = {background: getGray(primary,"#f2f3f4").replace("#","")}
+      } else {
+        section.color = {background: getGray(primary,"#fcfcfc").replace("#","")}
+      }
       
-      section.color = { background: 'light-background-' + i % 2 };
       forEach(section.groups, group => colorGroup(group, page.sections))
       forEach(section.elements, element => colorElement(element, page.sections))
       
@@ -85,6 +131,7 @@ export function init() {
       return [...sections, section];
     }, [])
   }
+
   const alternatives = generateAlternatives(master, {component: true}, [master.sections[0]]);  
   return { master, alternatives };
 }

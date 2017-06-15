@@ -26,19 +26,10 @@ class Page extends React.PureComponent {
   
   render() {
 
-    const { sections, master, onClick, id, brandColors } = this.props;
-
+    const { sections, master, onClick, id, brandColors, backgroundBlueprint , websiteColors } = this.props;
     const last = sections.length - 1;
-
-    const pageColors = [
-      ...brandColors.highlight.map((color, i) => `.c-highlight-${i} { color: ${color}; }\n.bg-highlight-${i} { background: ${color}; }`),
-      ...brandColors.light.text.map((color, i) => `.c-light-text-${i} { color: ${color}; }`),
-      ...brandColors.light.background.map((color, i) => `.bg-light-background-${i} { background: ${color}; }`),
-      ...brandColors.dark.text.map((color, i) => `.c-dark-text-${i} { color: ${color}; }`),
-      ...brandColors.dark.background.map((color, i) => `.bg-dark-background-${i} { background: ${color}; }`),
-    ].join('\n');
-
-    const clickable= isFunction(onClick);
+    let pageColors = websiteColors.map((color)=> `.bg-${color.replace("#","")}{ background: ${color}; }\n.c-${color.replace("#","")}{ color: ${color}; }`).join('\n');
+    const clickable = isFunction(onClick);
     return (
       <StyledPage onClick={onClick} clickable={clickable} className={id} pageColors={pageColors}>
         {sections.map((section, i) => (

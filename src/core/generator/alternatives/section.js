@@ -40,7 +40,6 @@ export function generateSectionColorAlternatives(section, page) {
 
   const sections = valid.map(color => ({...section, color}));
   sections.forEach(s => assignColor(s, page));
-  debugger;
   return sections;
 }
 
