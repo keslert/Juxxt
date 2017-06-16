@@ -1,7 +1,6 @@
 import sectionBlueprints from '../../../components/page/sections/_blueprints';
 import { generateSectionSkeleton } from '../skeletons/section';
 import { filter, range, mapValues, uniqBy, flatMap, cloneDeep } from 'lodash';
-import { assignColor } from '../color';
 import { assignContent } from '../content';
 import { getCombinations } from '../../utils';
 
@@ -33,19 +32,18 @@ export function generateSectionVariantAlternatives(section, skeleton) {
 
 
 function shallowCopy(sections) {
-  var clone = {};
-  var keys = Object.keys(sections);
-  for(var i=0;i<keys.length;i++) {
+  const clone = {};
+  const keys = Object.keys(sections);
+  for(let i=0; i<keys.length; i++) {
     clone[keys[i]] = sections[keys[i]];
   }
   return clone;
 }
 
 export function generateSectionColorAlternatives(section, page) {
-  
   const validBgColors = Object.keys(page.backgroundBlueprint);
-  var sections = []
-  for(var i=0;i<validBgColors.length;i++) {
+  const sections = []
+  for(let i=0; i<validBgColors.length; i++) {
     sections.push(shallowCopy(section));
     sections[i]['color'] = {
       background: validBgColors[i].replace("#",""),
