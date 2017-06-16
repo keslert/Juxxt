@@ -59,6 +59,7 @@ function  invertDiff(arr,target) {
 Returns the best primary color in hex string given a palette
 */
 function getPrimary(palette) {
+
   const LUM_TARGET = 0.5;
   const SAT_TARGET = 1;
   const LUM_WEIGHT = 6;
@@ -90,7 +91,8 @@ export function init() {
 
   let primary = getPrimary(palette);
   websiteColors.push(getGray(primary,"#f2f3f4"),getGray(primary,"#fcfcfc"));
-  let NUM_OF_PAGES = 10;
+
+  let NUM_OF_PAGES = 5;
   const master = {
     id: 'p_' + uniqueId(),
     palette: palette,
@@ -106,7 +108,7 @@ export function init() {
       }
     },
     websiteColors: websiteColors,
-    backgroundBlueprint: okSectionColors(okBackgroundColors(palette),websiteColors,palette.concat("#FFF")),
+    backgroundBlueprint: okSectionColors(okBackgroundColors(websiteColors),websiteColors,palette.concat("#FFF")),
     isPage: true,
     sections: reduce(range(0, NUM_OF_PAGES), (sections, i) => {
       const skeletons = generateSectionComponentAlternatives({});
@@ -131,7 +133,6 @@ export function init() {
       return [...sections, section];
     }, [])
   }
-
   const alternatives = generateAlternatives(master, {component: true}, [master.sections[0]]);  
   return { master, alternatives };
 }

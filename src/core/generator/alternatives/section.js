@@ -31,15 +31,27 @@ export function generateSectionVariantAlternatives(section, skeleton) {
   return skeletons;
 }
 
+
+function shallowCopy(sections) {
+  var clone = {};
+  var keys = Object.keys(sections);
+  for(var i=0;i<keys.length;i++) {
+    clone[keys[i]] = sections[keys[i]];
+  }
+  return clone;
+}
+
 export function generateSectionColorAlternatives(section, page) {
-
-  section["color"] = {background:null};
   
-  const possible = [...page.brandColors.dark.background, ...page.brandColors.highlight];
-  const valid = filter(possible, color => color !== section.color.background);
-
-  const sections = valid.map(color => ({...section, color}));
-  sections.forEach(s => assignColor(s, page));
+  const validBgColors = Object.keys(page.backgroundBlueprint);
+  var sections = []
+  for(var i=0;i<validBgColors.length;i++) {
+    sections.push(shallowCopy(section));
+    sections[i]['color'] = {
+      background: validBgColors[i].replace("#",""),
+      text: page.backgroundBlueprint[validBgColors[i]]['text'][0].replace("#",""),
+    };
+  }
   return sections;
 }
 
