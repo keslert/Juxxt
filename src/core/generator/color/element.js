@@ -1,5 +1,5 @@
 import * as blueprints from '../../../components/page/elements/_blueprints';
-import { find, filter, flatMap, startsWith, some } from 'lodash';
+import { find, filter, flatMap, startsWith, some, isFunction } from 'lodash';
 import { getMode } from '../../utils';
 
 export function colorElement(element, sections) {
@@ -14,35 +14,46 @@ export function colorElement(element, sections) {
     e => true,
   ]
   
-  let background = element.group.color.background || element.group.section.color.background;
+  let background = getGroupOrSectionBackground(element);
   if(blueprint.color.background) {
-    const valid = filter(elements, e => e.name === element.name && e.color.background);
+    const valid = filter(elements, e => 
+      e.name === element.name && 
+      e.color.background && 
+      getGroupOrSectionBackground(e) === background
+    );
+    
     const fn = find(rules, fn => some(valid, fn));
-    if(fn) {
+    if(isFunction(fn)) {
       const matches = filter(valid, fn);
       element.color.background = getMode(matches.map(e => e.color.background));
     } else {
-      element.color.background = blueprint.color.background + '-0';
+      element.color.background = blueprint.color.background;
     }
     background = element.color.background;
   } 
   
   if(blueprint.color.text) {
-    const valid = filter(elements, e => (e.group.color.background || e.group.section.color.background) === background);
-    const fna = find(rules, fn => some(valid, fn));
-    if(fna) {
+    const valid = filter(elements, e => 
+      e.name === element.name &&
+      e.color.text && 
+      getElementBackground(e) === background
+    )
+
+    const fn = find(rules, fn => some(valid, fn));
+    if(isFunction(fn)) {
       const matches = filter(valid, fna);
       element.color.text = getMode(matches.map(e => e.color.text));
     } else {
-      element.color.text = blueprint.color.text + '-0';
+      element.color.text = blueprint.color.text;
     }
   }
-  const prefix = startsWith(background, 'light') ? 'light' : 'dark';
-  
-  if(blueprint.color.text === 'text-0') {
-    blueprint.color.text = prefix + '-text-0';
-  }
-  if(blueprint.color.background === 'background-0') {
-    blueprint.color.background = prefix + '-background-0';
-  }
+}
+
+function getGroupOrSectionBackground(element) {
+  return element.group.color.background || 
+         element.group.section.color.background;
+}
+
+function getElementGroupOrSectionBackground(element) {
+  return element.color.background || getGroupOrSectionBackground(element);
 }
