@@ -1,8 +1,8 @@
 import { map } from 'lodash';
 
 const conversions = {
-  background: v => 'bg-' + v,
-  text: v => 'c-' + v,
+  background: v => 'bg-' + v.substr(1),
+  text: v => 'c-' + v.substr(1),
 }
 
 export function convertColorToAtomic(color) {

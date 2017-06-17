@@ -1,12 +1,12 @@
 import * as blueprints from '../../../components/page/elements/_blueprints';
-import { find, filter, flatMap, startsWith, some, isFunction } from 'lodash';
+import { find, filter, flatMap, some, isFunction } from 'lodash';
 import { getMode } from '../../utils';
+import { getMostVibrantReadableColor } from './utils';
 
-export function colorElement(element, sections) {
+export function colorElement(element, page) {
   element.color = {};
   const blueprint = blueprints[element.name];
-  const elements = flatMap(sections, s => s.elements);
-
+  const elements = flatMap(page.sections, s => s.elements);
   const rules = [
     e => e.id === element.id,
     e => e.group.section.id === element.group.section.id,
@@ -36,15 +36,16 @@ export function colorElement(element, sections) {
     const valid = filter(elements, e => 
       e.name === element.name &&
       e.color.text && 
-      getElementBackground(e) === background
+      getElementGroupOrSectionBackground(e) === background
     )
 
     const fn = find(rules, fn => some(valid, fn));
     if(isFunction(fn)) {
-      const matches = filter(valid, fna);
+      const matches = filter(valid, fn);
       element.color.text = getMode(matches.map(e => e.color.text));
     } else {
-      element.color.text = blueprint.color.text;
+      const bgBlueprint = find(page.backgroundBlueprint, blueprint => blueprint.color === background)
+      element.color.text = getMostVibrantReadableColor(bgBlueprint.text)
     }
   }
 }
