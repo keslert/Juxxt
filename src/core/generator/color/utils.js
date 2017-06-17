@@ -1,10 +1,6 @@
-import { filter, find, some, map, reverse, sortBy, max } from 'lodash';
+import { filter, find, some, map, reverse, sortBy } from 'lodash';
 import { getMode } from '../../utils';
 import tinycolor from 'tinycolor2';
-
-export function getMostVibrantReadableColor(colors) {
-  return getPrimary(colors);
-}
 
 export function colorItem(item, items, rules, blueprint) {
   item.color = {};
@@ -29,20 +25,16 @@ export function getOkBackgroundColors(arr) {
   return okBackgrounds;
 }
 
-export function getOkTextOnBackground(bgColor, arr) {
+export function getOkTextOnBackground(bgcolor, arr) {
   const okTexts = [];
   for(let i=0; i<arr.length; i++) {
-    const readability = tinycolor.readability(arr[i], bgColor);
-
-    if(readability > 2) {
-      okTexts.push({
-        color:arr[i],
-        readability: readability,
-      });
-    }
+    okTexts.push({
+      color:arr[i],
+      readability: tinycolor.readability(arr[i], bgcolor)
+    });
   }
-  const sortedArr = sortBy(okTexts, t => -t.readability);
-  return map(sortedArr, 'color');
+  const sortedArr = reverse(sortBy(okTexts, t => (t.readability)));
+  return map(sortedArr,'color');
 }
 
 
@@ -50,12 +42,11 @@ export function getOkSectionColors(okBackgrounds, websiteColors, palette) {
   const okPayload = {};
   for(let i=0; i<okBackgrounds.length; i++) {
     okPayload[okBackgrounds[i]] = {
-      color: okBackgrounds[i],
       text: getOkTextOnBackground(okBackgrounds[i], websiteColors),
       solid: getOkTextOnBackground(okBackgrounds[i], palette)
     };
 
-    console.log(okPayload[okBackgrounds[i]]);
+    
   }
   return okPayload;
 }
@@ -85,7 +76,7 @@ export function getPrimary(palette) {
   for(let i=0; i<palette.length; i++) {
     finalArr.push(( diffLum[i] + diffSat[i] )/ 2);
   }
-  return palette[finalArr.indexOf(max(finalArr))];
+  return palette[finalArr.indexOf(Math.max(...finalArr))];
 }
 
 export function tintColor(base, color) {

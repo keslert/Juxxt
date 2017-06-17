@@ -58,7 +58,9 @@ export const BasicParagraph = {
   name: 'BasicParagraph', 
   is: 'Text',
   inherits: [inherits.Paragraph],
-  color: {},
+  color: {
+    text: 'text'
+  },
   style: {}
 };
 
@@ -91,7 +93,7 @@ export const BasicButton = {
   is: 'Text',
   inherits: [inherits.Button],
   color: {
-    // background: 'highlight',
+    background: 'highlight',
   },
   style: {
     fontSize: {
@@ -108,7 +110,7 @@ export const BasicLink = {
   inherits: [inherits.Link],
   color: {
     text: 'text-0',
-    // background: 'highlight',
+    background: 'highlight',
   },
   style: {
     paddingHorizontal: {

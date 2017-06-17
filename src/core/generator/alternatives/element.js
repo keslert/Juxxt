@@ -24,7 +24,7 @@ export function generateElementComponentAlternatives(element, masterSkeleton) {
       [element.group.sectionKey]: generateGroupSkeleton(groupName, element.group.variant)
     }
   }))
-  
+
   return skeletons;
 }
 

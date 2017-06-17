@@ -1,10 +1,8 @@
 import sectionBlueprints from '../../../components/page/sections/_blueprints';
 import { generateSectionSkeleton } from '../skeletons/section';
-import { filter, range, mapValues, uniqBy, flatMap, cloneDeep, forEach } from 'lodash';
+import { filter, range, mapValues, uniqBy, flatMap, cloneDeep } from 'lodash';
 import { assignContent } from '../content';
 import { getCombinations } from '../../utils';
-import { colorElement } from '../color/element';
-import { getMostVibrantReadableColor } from '../color/utils';
 
 export function generateSectionComponentAlternatives(section) {
   const possibleSections = Object.keys(sectionBlueprints);
@@ -46,15 +44,12 @@ export function generateSectionColorAlternatives(section, page) {
   const validBgColors = Object.keys(page.backgroundBlueprint);
   const sections = []
   for(let i=0; i<validBgColors.length; i++) {
-    sections.push(cloneDeep(section));
+    sections.push(shallowCopy(section));
     sections[i]['color'] = {
-      background: validBgColors[i],
-      text: page.backgroundBlueprint[validBgColors[i]].text[0],
+      background: validBgColors[i].replace("#",""),
+      text: page.backgroundBlueprint[validBgColors[i]]['text'][0].replace("#",""),
     };
-
-    forEach(sections[i].elements, e => colorElement(e, page));
   }
-  
   return sections;
 }
 
