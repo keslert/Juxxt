@@ -10,10 +10,10 @@ import { randomItem } from '../utils';
 import { range, reduce, uniqueId, forEach } from 'lodash';
 
 export function init() {
-
-  const palette = ["#331631", '#088cc7']; //fixed palette: temporary
+  const palette = ["#ede9ce", '#c7ad88','#64706c','#935347']; // fixed palette: temporary
   const primary = getPrimary(palette);
-  const websiteColors = [...palette, tintColor('#f5f6f7', primary, 20), tintColor("#fff", primary, 2)];
+  const websiteColors = [...palette, tintColor("#211b1a",primary,20), tintColor('#f5f6f7', primary, 20), tintColor("#fff", primary, 2)];
+  console.log("GRAYS: " + tintColor('#f5f6f7', primary, 20) +" " + tintColor("#fff", primary, 2))
   const backgroundBlueprint = getOkSectionColors(getOkBackgroundColors(websiteColors), websiteColors, [...palette, "#FFF"]);
   const NUM_OF_SECTIONS = 5;
   const master = {

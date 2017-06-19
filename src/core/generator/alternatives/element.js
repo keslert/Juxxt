@@ -3,7 +3,8 @@ import groupBlueprints from '../../../components/page/groups/_blueprints';
 // import * as blueprints from '../../../components/page/elements/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
-import { map, uniq, intersection, filter, range, cloneDeep } from 'lodash';
+import { map, uniq, intersection, filter, range, cloneDeep, findIndex } from 'lodash';
+//import { getOkTextOnBackaground } from './color/utils';
 
 export function generateElementComponentAlternatives(element, masterSkeleton) {
   const elementsInGroup = uniq(map(element.group.elements, 'name'));
@@ -30,12 +31,18 @@ export function generateElementComponentAlternatives(element, masterSkeleton) {
 
 export function generateElementVariantAlternatives(element, skeleton) {
   // const blueprint = blueprints[element.name];
-
   return [];
 }
 
-export function generateElementColorAlternatives(section, element) {
-  return [];
+export function generateElementColorAlternatives(section, element, page) {
+  const sections = [];
+  const index = findIndex(section.elements, e => e.id === element.id);
+  for(let i=0; i<page.backgroundBlueprint[section.color.background].text.length; i++) {
+    const copy = cloneDeep(section);
+    copy.elements[index].color = {text: page.backgroundBlueprint[section.color.background].text[i]};
+    sections.push(copy)
+  }
+  return sections;
 }
 
 export function generateElementContentAlternatives(section, element, contentStore) {

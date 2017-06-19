@@ -108,7 +108,7 @@ function generateColorAlternatives(page, selected) {
   } else if(selected.isGroup) {
     sections = generateGroupColorAlternatives(_section);
   } else {
-    sections = generateElementColorAlternatives(_section);
+    sections = generateElementColorAlternatives(_section,selected,page);
   }
 
   return sections;

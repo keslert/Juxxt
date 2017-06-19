@@ -4,7 +4,6 @@ import { filter, range, mapValues, uniqBy, flatMap, cloneDeep, forEach } from 'l
 import { assignContent } from '../content';
 import { getCombinations } from '../../utils';
 import { colorElement } from '../color/element';
-import { getMostVibrantReadableColor } from '../color/utils';
 
 export function generateSectionComponentAlternatives(section) {
   const possibleSections = Object.keys(sectionBlueprints);
@@ -32,16 +31,6 @@ export function generateSectionVariantAlternatives(section, skeleton) {
   return skeletons;
 }
 
-
-function shallowCopy(sections) {
-  const clone = {};
-  const keys = Object.keys(sections);
-  for(let i=0; i<keys.length; i++) {
-    clone[keys[i]] = sections[keys[i]];
-  }
-  return clone;
-}
-
 export function generateSectionColorAlternatives(section, page) {
   const validBgColors = Object.keys(page.backgroundBlueprint);
   const sections = []
@@ -51,7 +40,6 @@ export function generateSectionColorAlternatives(section, page) {
       background: validBgColors[i],
       text: page.backgroundBlueprint[validBgColors[i]].text[0],
     };
-
     forEach(sections[i].elements, e => colorElement(e, page));
   }
   

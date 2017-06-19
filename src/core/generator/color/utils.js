@@ -1,4 +1,4 @@
-import { filter, find, some, map, reverse, sortBy, max } from 'lodash';
+import { filter, find, some, map, sortBy, max } from 'lodash';
 import { getMode } from '../../utils';
 import tinycolor from 'tinycolor2';
 
@@ -33,7 +33,6 @@ export function getOkTextOnBackground(bgColor, arr) {
   const okTexts = [];
   for(let i=0; i<arr.length; i++) {
     const readability = tinycolor.readability(arr[i], bgColor);
-
     if(readability > 1.8) {
       okTexts.push({
         color:arr[i],
@@ -54,8 +53,6 @@ export function getOkSectionColors(okBackgrounds, websiteColors, palette) {
       text: getOkTextOnBackground(okBackgrounds[i], websiteColors),
       solid: getOkTextOnBackground(okBackgrounds[i], palette)
     };
-
-    console.log(okPayload[okBackgrounds[i]]);
   }
   return okPayload;
 }
