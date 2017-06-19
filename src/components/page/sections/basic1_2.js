@@ -36,10 +36,10 @@ const Basic1_2 = ({
     <Box className={colorClassNames}>
       <Box className={convertStyleToAtomic(containerStyle)}>
         <Box className={convertStyleToAtomic(wrapStyle)}>
-          <Box order={variant.order} className={innerClassNames}>
+          <Box className={innerClassNames + ' order-' + variant.order}>
             <Group {...groups.tp} />
           </Box>
-          <Box order={2} className={innerClassNames}>
+          <Box className={innerClassNames + ' order-2'}>
             <Group {...groups.media} />
           </Box>
         </Box>

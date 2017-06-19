@@ -12,11 +12,8 @@ export const BasicKicker = {
       _default: 3,
       options: range(1, 3)
     },
-    paddingTop: {
-      options: range(0, 3),
-    },
-    paddingBottom: {
-      options: range(0, 3),
+    marginBottom: {
+      options: range(0, 2),
     }
   },
 };

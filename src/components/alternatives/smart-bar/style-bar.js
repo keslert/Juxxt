@@ -4,19 +4,20 @@ import { createSelector } from 'reselect';
 import Box from '../../common/box';
 import { getSelected } from '../../../core/ui';
 import { lowerCamelCaseToRegular } from '../../../core/utils';
-import { map, uniq } from 'lodash';
+import { map, uniq, sortBy } from 'lodash';
+import { StyledSelectableText } from '../../common/styled-selectable-text';
 
 class StyleBar extends React.Component {
 
   render() {
     const { selected } = this.props;
-    const keys = uniq(map(Object.keys(selected.style), mapStyleKeys));
+    const keys = sortBy(uniq(map(Object.keys(selected.style), mapStyleKeys)));
     
     return (
-      <Box>
+      <Box marginTop="10px">
         {keys.map(key => 
-          <Box display="inline-block" key={key}>
-            {lowerCamelCaseToRegular(key)}
+          <Box display="inline-block" key={key} margin="0 10px">
+            <StyledSelectableText>{lowerCamelCaseToRegular(key)}</StyledSelectableText>
           </Box>
         )}
       </Box>

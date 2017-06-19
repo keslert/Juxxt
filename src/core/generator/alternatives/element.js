@@ -1,10 +1,11 @@
 import sectionBlueprints from '../../../components/page/sections/_blueprints';
 import groupBlueprints from '../../../components/page/groups/_blueprints';
-// import * as blueprints from '../../../components/page/elements/_blueprints';
+import * as blueprints from '../../../components/page/elements/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
-import { map, uniq, intersection, filter, range, cloneDeep, findIndex } from 'lodash';
-//import { getOkTextOnBackaground } from './color/utils';
+import { map, uniq, intersection, filter, range, cloneDeep, flatMap, findIndex } from 'lodash';
+import { getCombinations } from '../../utils';
+import { styles } from '../style/element/shared-styles';
 
 export function generateElementComponentAlternatives(element, masterSkeleton) {
   const elementsInGroup = uniq(map(element.group.elements, 'name'));
@@ -51,5 +52,34 @@ export function generateElementContentAlternatives(section, element, contentStor
   const sections = range(0, 6).map(() => cloneDeep(section));
   sections.forEach(s => assignContent(s, store));
   
+  return sections;
+}
+
+export function generateElementStyleAlternatives(section, element) {
+  const blueprint = blueprints[element.name];
+  const sharedStyles = blueprint.inherits.map(name => styles[name]);
+  const style = Object.assign({}, ...sharedStyles, blueprint.style);
+  
+  const possibleStyles = flatMap(style, ({options}, key) => options.map(value => ({
+    ...element.style,
+    [key]: value,
+  })))
+
+
+  const sections = possibleStyles.map(style => {
+    const _section = {...section,
+      groups: {...section.groups,
+        [element.group.sectionKey]: {...section.groups[element.group.sectionKey],
+          elements: {...section.groups[element.group.sectionKey].elements,
+            [element.groupKey]: { ...section.groups[element.group.sectionKey].elements[element.groupKey],
+              style,
+            }
+          }
+        }
+      }
+    }
+    return _section;
+  })
+
   return sections;
 }

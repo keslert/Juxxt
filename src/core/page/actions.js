@@ -108,11 +108,15 @@ function duplicateSection(section) {
   const _section = cloneDeep(section);
   _section.id = 's_' + uniqueId();
   _section.contentStore = [];
-  forEach(_section.groups, g => g.id = 'g_' + uniqueId());
-  forEach(_section.elements, e => {
-    e.id = 'e_' + uniqueId();
-    _section.contentStore.push(e.content);
+  forEach(_section.groups, group => {
+    group.id = 'g_' + uniqueId();
+    group.section = _section;
+    forEach(group.elements, element => {
+      element.id = 'e_' + uniqueId();
+      element.group = group;
+      _section.contentStore.push(element.content);
+    })
   });
-
+  
   return _section;
 }

@@ -610,3 +610,7 @@ img { max-width: 100%; }
 .dt-row-group { display: table-row-group; }
 .dt-column { display: table-column; }
 .dt-column-group { display: table-column-group; }
+
+.order-1 { order: 1; }
+.order-2 { order: 2; }
+.order-3 { order: 3; }

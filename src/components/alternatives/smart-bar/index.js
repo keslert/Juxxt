@@ -18,7 +18,7 @@ import StyleBar from './style-bar';
 
 
 const StyledSmartBar = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   padding: 10px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   align-items: center;
@@ -82,13 +82,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(SmartBar);
 
 
 const StyledButton = styled.div`
-  padding: 7px 8px;
+  padding: 6px 8px;
   background: #1d1d1d;
   border-radius: 2px;
   cursor: pointer;
   color: #727272;
   user-select: none;
-  font-size: 12px;
 
   ${props => `
     ${props.active && `

@@ -4,6 +4,7 @@ import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
 import { filter, range, uniqBy, flatMap, mapValues, cloneDeep } from 'lodash';
 import { getCombinations } from '../../utils';
+import { styles } from '../style/group/shared-styles';
 
 
 export function generateGroupComponentAlternatives(group, masterSkeleton) {
@@ -53,5 +54,26 @@ export function generateGroupContentAlternatives(section, group, contentStore) {
   const sections = range(0, 6).map(() => cloneDeep(section));
   sections.forEach(s => assignContent(s, store));
   
+  return sections;
+}
+
+export function generateGroupStyleAlternatives(section, group) {
+  const blueprint = blueprints[group.name];
+  const sharedStyles = blueprint.inherits.map(name => styles[name]);
+  const style = Object.assign({}, ...sharedStyles, blueprint.style);
+  const _style = mapValues(style, s => s.options);
+  
+  const combinations = getCombinations(_style);
+  const sections = combinations.map(style => {
+    const _section = {...section,
+      groups: {...section.groups,
+        [group.sectionKey]: {...sections.groups[group.sectionKey],
+          style
+        }
+      }
+    };
+    return _section;
+  })
+
   return sections;
 }

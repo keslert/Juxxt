@@ -15,10 +15,11 @@ export const styles = {
       options: ['solid', 'image', 'gradient'], 
     },
     gutter: {
-      options: range(3, 4),
+      options: [4],
     },
     maxWidth: {
-      options: ['900px', '1024px', '1170px'],
+      options: ['1024px'],
+      // options: ['900px', '1024px', '1170px'],
       priority: 999, // Need a way to say this shouldn't change that often...
     },
     margin: {

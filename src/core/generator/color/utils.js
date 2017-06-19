@@ -121,6 +121,5 @@ export function getPossibleTextColors(color) {
     case 'offLight':
     default: 
       return ['text', 'dark', 'primary', 'secondary', 'tertiary']
-    
   }
 }

@@ -21,6 +21,8 @@ export function init() {
     palette: palette,
     websiteColors: websiteColors,
     backgroundBlueprint: backgroundBlueprint,
+    fontFamily: 'Helvetica Neue',
+    fontSize: '16px',
     isPage: true,
     sections: reduce(range(0, NUM_OF_SECTIONS), (sections, i) => {
       const skeletons = generateSectionComponentAlternatives({});

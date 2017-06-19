@@ -9,4 +9,5 @@ export default {
   fontSize: v => 'fs' + v,
   textAlign: v => 't' + v[0],
   textTransform: v => 'tt' + v[0],
+  fontFamily: v => v.toLowerCase().replace(/ /g, '-'),
 }

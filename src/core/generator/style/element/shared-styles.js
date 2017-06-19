@@ -21,9 +21,6 @@ export const styles = {
     },
     ...p0,
     ...mh0,
-    marginTop: {
-      options: range(0, 4),
-    },
     marginBottom: {
       options: range(0, 4),
     },

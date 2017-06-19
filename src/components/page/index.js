@@ -17,7 +17,7 @@ const StyledPage = styled.div`
         pointer-events: none;
       }
     `};
-
+    
     ${props.pageColors}
   `};
 `;
