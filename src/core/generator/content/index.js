@@ -38,7 +38,6 @@ export function assignContent(section, contentStore) {
       }
     }
   })
-
   section.contentStore = store;
 }
 

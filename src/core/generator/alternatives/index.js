@@ -67,7 +67,6 @@ function generateComponentAlternatives(page, selected) {
     assignStyles(_section, page);
     return _section;
   })
-
   return sections;
 }
 
@@ -102,7 +101,7 @@ function generateColorAlternatives(page, selected) {
   const _section = buildSectionFromSkeleton(skeleton);
   assignContent(_section, section.contentStore);
   assignStyles(_section,page);
-
+  assignColor(_section,page);
   let sections;
   if(selected.isSection) {
     sections = generateSectionColorAlternatives(_section,page);
