@@ -4,6 +4,7 @@ import { generateAlternatives } from '../../core/generator/alternatives';
 import { getMaster } from './selectors';
 import { getFocus } from '../theme';
 import { sortBy, cloneDeep, uniqueId, forEach } from 'lodash';
+import { setSelected } from '../ui';
 
 
 export function clearRegistry() {
@@ -67,12 +68,14 @@ export function updateAlternatives(modifications) {
 export function overrideSectionWithAlternative(section, alternative) {
   return (dispatch, getState) => {
     const master = getMaster(getState());
+    const duplicated = duplicateSection(alternative);
     const page = {...master,
       sections: master.sections.map(_section => 
-        _section.id !== section.id ? _section : duplicateSection(alternative),
+        _section.id !== section.id ? _section : duplicated,
       )
     }
     dispatch(setMaster(page));
+    dispatch(setSelected(duplicated));
   }
 }
 
@@ -93,14 +96,16 @@ export function moveSectionToIndex(section, index) {
 export function insertAlternative(alternative, index) {
   return (dispatch, getState) => {
     const master = getMaster(getState());
+    const duplicated = duplicateSection(alternative);
     const page = {...master,
       sections: [
         ...master.sections.slice(0, index),
-        duplicateSection(alternative),
+        duplicated,
         ...master.sections.slice(index),
       ]
     }
     dispatch(setMaster(page));
+    dispatch(setSelected(duplicated));
   }
 }
 
