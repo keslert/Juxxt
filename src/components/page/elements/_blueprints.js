@@ -9,6 +9,7 @@ export const BasicKicker = {
   color: {},
   style: {
     fontSize: {
+      _default: 3,
       options: range(1, 3)
     },
     paddingTop: {
@@ -29,6 +30,7 @@ export const BasicHeading = {
   },
   style: {
     fontSize: {
+      _default: 5,
       options: range(3, 6),
     }
   }
@@ -45,6 +47,7 @@ export const BasicSubheading = {
       options: ['none', 'uppercase'],
     },
     fontSize: {
+      _default: 4,
       options: range(3, 5),
     }
   },
