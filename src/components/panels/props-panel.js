@@ -26,7 +26,7 @@ class PropsPanel extends React.Component {
   }
 
   getParams(selected) {
-    const item = selected[0] || {};
+    const item = selected || {};
 
     if(!item.props) {
       return {};
@@ -51,7 +51,7 @@ class PropsPanel extends React.Component {
 
   overrideParam(key, value) {
     const { updateUserOverride, selected } = this.props;
-    const item = selected[0];
+    const item = selected;
     updateUserOverride(item.uuid, key, value);
   }
 

@@ -24,7 +24,7 @@ class ContentPanel extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const item = nextProps.selected[0];
+    const item = nextProps.selected;
     if(item && item.isElement) {
       this.setState({
         open: true,
@@ -37,7 +37,7 @@ class ContentPanel extends React.Component {
 
   overrideContent(content) {
     const { updateMaster, selected } = this.props;
-    const item = selected[0];
+    const item = selected;
     setCacheForElement(item, content);
     // updateMaster();
   }

@@ -4,7 +4,6 @@ import * as blueprints from '../../../components/page/elements/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
 import { map, uniq, intersection, filter, range, cloneDeep, flatMap, findIndex } from 'lodash';
-import { getCombinations } from '../../utils';
 import { styles } from '../style/element/shared-styles';
 
 export function generateElementComponentAlternatives(element, masterSkeleton) {

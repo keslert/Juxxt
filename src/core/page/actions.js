@@ -1,9 +1,8 @@
 import * as types from './action-types';
-import { generate, generateThemeAlternatives } from '../../core/generator';
+import { generate } from '../../core/generator';
 import { generateAlternatives } from '../../core/generator/alternatives';
 import { getMaster } from './selectors';
-import { getFocus } from '../theme';
-import { sortBy, cloneDeep, uniqueId, forEach } from 'lodash';
+import { sortBy, cloneDeep, uniqueId, forEach, findIndex } from 'lodash';
 import { setSelected } from '../ui';
 
 
@@ -53,14 +52,20 @@ export function updateAlternatives(modifications) {
     const state = getState();
     const master = getMaster(state);
     const selected = state.ui.selected;
+    const section = selected.isSection ? selected : selected.section || selected.group.section;
 
-    let alternatives;
-    if(modifications.theme) {
-      const focus = getFocus(state);
-      alternatives = generateThemeAlternatives(master, focus);
-    } else {
-      alternatives = generateAlternatives(master, modifications, selected);
+    
+    const index = findIndex(master.sections, s => s.id === section.id);
+
+    const page = {...master,
+      sections: [
+        ...master.sections.slice(0, index),
+        section,
+        ...master.sections.slice(index + 1),
+      ]
     }
+
+    const alternatives = generateAlternatives(page, modifications, selected);
     dispatch(setAlternatives(alternatives));
   }
 }

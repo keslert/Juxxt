@@ -2,10 +2,8 @@ import blueprints from '../../../components/page/sections/_blueprints';
 import { generateSectionSkeleton } from '../skeletons/section';
 import { filter, range, mapValues, uniqBy, flatMap, cloneDeep, forEach } from 'lodash';
 import { assignContent } from '../content';
-import { assignStyles } from '../style';
 import { getCombinations } from '../../utils';
 import { colorElement } from '../color/element';
-import { getMostVibrantReadableColor } from '../color/utils';
 import { styles } from '../style/section/shared-styles';
 
 export function generateSectionComponentAlternatives(section) {

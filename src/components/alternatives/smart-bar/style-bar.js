@@ -28,7 +28,7 @@ class StyleBar extends React.Component {
 const mapStateToProps = createSelector(
   getSelected,
   (selected) => ({
-    selected: selected && selected[0]
+    selected
   })
 )
 

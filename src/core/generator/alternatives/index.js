@@ -29,19 +29,17 @@ import { assignColor } from '../color';
 
 /* Returns page skeletons */
 export function generateAlternatives(page, modify, selected) {
-  const _selected = selected[0];
-
   let sections = [];
   if(modify.component) {
-    sections = generateComponentAlternatives(page, _selected);
+    sections = generateComponentAlternatives(page, selected);
   } else if(modify.variant) {
-    sections = generateVariantAlternatives(page, _selected);
+    sections = generateVariantAlternatives(page, selected);
   } else if(modify.color) {
-    sections = generateColorAlternatives(page, _selected);
+    sections = generateColorAlternatives(page, selected);
   } else if(modify.content) {
-    sections = generateContentAlternatives(page, _selected);
+    sections = generateContentAlternatives(page, selected);
   } else if(modify.style) {
-    sections = generateStyleAlternatives(page, _selected);
+    sections = generateStyleAlternatives(page, selected);
   }
 
   return sections.map(section => ({
