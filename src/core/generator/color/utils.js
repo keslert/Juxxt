@@ -34,7 +34,7 @@ export function getOkTextOnBackground(bgColor, arr) {
   for(let i=0; i<arr.length; i++) {
     const readability = tinycolor.readability(arr[i], bgColor);
 
-    if(readability > 2) {
+    if(readability > 1.8) {
       okTexts.push({
         color:arr[i],
         readability: readability,

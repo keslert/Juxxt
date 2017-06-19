@@ -38,9 +38,7 @@ export const BasicSubheading = {
   name: 'BasicSubheading', 
   is: 'Text',
   inherits: [inherits.Heading],
-  color: {
-    text: 'text',
-  },
+  color: {},
   style: {
     textTransform: {
       _default: 'none',

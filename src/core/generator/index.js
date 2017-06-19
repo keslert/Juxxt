@@ -11,7 +11,7 @@ import { range, reduce, uniqueId, forEach } from 'lodash';
 
 export function init() {
 
-  const palette = ["#04c6c6","#615356"]; //fixed palette: temporary
+  const palette = ["#331631", '#5D335A']; //fixed palette: temporary
   const primary = getPrimary(palette);
   const websiteColors = [...palette, tintColor('#f5f6f7', primary, 20), tintColor("#fff", primary, 2)];
   const backgroundBlueprint = getOkSectionColors(getOkBackgroundColors(websiteColors), websiteColors, [...palette, "#FFF"]);
@@ -28,16 +28,20 @@ export function init() {
       const page = {sections, backgroundBlueprint};
       const section = buildSectionFromSkeleton(skeleton, page);
 
+      let background;
       if(i === 0 | i === NUM_OF_SECTIONS-1) {
-        section.color = {background: getPrimary(Object.keys(backgroundBlueprint))}
+        background = getPrimary(Object.keys(backgroundBlueprint));
       } else if((i%2) === 1) {
-        section.color = {background: websiteColors[websiteColors.length - 2]}
+        background = websiteColors[websiteColors.length - 2];
       } else {
-        section.color = {background: websiteColors[websiteColors.length - 1]}
+        background = websiteColors[websiteColors.length - 1];
       }
+      section.color = { background, text: backgroundBlueprint[background].text[0] }
       
-      forEach(section.groups, group => colorGroup(group, page.sections))
-      forEach(section.elements, element => colorElement(element, page))
+      const page2 = {...page, sections: [...page.sections, section]}
+      forEach(section.groups, group => colorGroup(group, page2.sections))
+      forEach(section.elements, element => colorElement(element, page2))
+
       assignContent(section, []);
       assignStyles(section, page);
       return [...sections, section];
