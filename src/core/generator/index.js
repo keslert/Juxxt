@@ -11,7 +11,7 @@ import { range, reduce, uniqueId, forEach } from 'lodash';
 
 export function init() {
 
-  const palette = ["#331631", '#5D335A']; //fixed palette: temporary
+  const palette = ["#331631", '#088cc7']; //fixed palette: temporary
   const primary = getPrimary(palette);
   const websiteColors = [...palette, tintColor('#f5f6f7', primary, 20), tintColor("#fff", primary, 2)];
   const backgroundBlueprint = getOkSectionColors(getOkBackgroundColors(websiteColors), websiteColors, [...palette, "#FFF"]);
