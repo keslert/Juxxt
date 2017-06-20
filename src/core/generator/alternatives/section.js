@@ -5,7 +5,6 @@ import { assignContent } from '../content';
 import { getCombinations } from '../../utils';
 import { colorElement } from '../color/element';
 import { styles } from '../style/section/shared-styles';
-import { getPattern, getGradient } from '../color/utils';
 
 export function generateSectionComponentAlternatives(section) {
   const possibleSections = Object.keys(blueprints);
@@ -38,7 +37,7 @@ export function generateSectionColorAlternatives(section, page) {
   const sections = []
 
   for(let i=0; i<(validBgColors.length); i++) {
-    /*push the patterns*/
+    //push the patterns
     sections.push(cloneDeep(section));
     sections[sections.length-1]['color'] = {
       background: validBgColors[i],
@@ -56,7 +55,6 @@ export function generateSectionColorAlternatives(section, page) {
       pattern: null,
       gradient: null
     };
-
     forEach(sections[sections.length-1].elements, e => colorElement(e, page));
 
     //push the gradients
@@ -67,9 +65,7 @@ export function generateSectionColorAlternatives(section, page) {
       pattern: null,
       gradient: validBgColors[i]
     };
-
     forEach(sections[sections.length-1].elements, e => colorElement(e, page));
-    
   }
   
 

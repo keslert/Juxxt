@@ -36,6 +36,7 @@ class Page extends React.PureComponent {
     }\n
     .ptrn-${color.replace("#","")} {
      background: ${backgroundBlueprint[color].pattern};
+     background-size: 75%;
     }\n
     .grd-${color.replace("#","")} {
       background: ${getGradient(color)};

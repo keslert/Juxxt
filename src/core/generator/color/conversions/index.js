@@ -1,5 +1,4 @@
 import { map } from 'lodash';
-import { getPattern } from '../utils';
 
 
 const pattern_conversions = {

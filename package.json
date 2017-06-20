@@ -26,7 +26,6 @@
     "reselect": "^2.5.4",
     "styled-components": "^1.4.3",
     "tinycolor2": "^1.4.1",
-    "tinygradient": "^0.3.1",
     "toastr": "^2.1.2"
   },
   "scripts": {

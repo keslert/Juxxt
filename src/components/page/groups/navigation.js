@@ -1,5 +1,5 @@
 import React from 'react';
-import { BasicHeading, BasicLink } from '../elements/_blueprints';
+import { BasicHeading } from '../elements/_blueprints';
 import TalkingPointComponent from './common/talking-point';
 
 class ProductNavigation extends React.PureComponent {
