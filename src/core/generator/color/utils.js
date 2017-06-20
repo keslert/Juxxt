@@ -1,9 +1,17 @@
 import { filter, find, some, map, sortBy, max } from 'lodash';
 import { getMode } from '../../utils';
 import tinycolor from 'tinycolor2';
+import geopattern from 'geopattern';
 
-export function getMostVibrantReadableColor(colors) {
-  return getPrimary(colors);
+export function getGradient(color) {
+  const _color = tinycolor(color).toHsv();
+
+  _color.s = (tinycolor(color).toHsv().s - 30);
+  return "linear-gradient(" + tinycolor(_color).toHexString() +", "+ color +")";
+}
+
+export function getPattern(color) {
+  return geopattern.generate(Math.random().toString(36).substring(7),{color:color}).toDataUrl();
 }
 
 export function colorItem(item, items, rules, blueprint) {
@@ -51,7 +59,8 @@ export function getOkSectionColors(okBackgrounds, websiteColors, palette) {
     okPayload[okBackgrounds[i]] = {
       color: okBackgrounds[i],
       text: getOkTextOnBackground(okBackgrounds[i], websiteColors),
-      solid: getOkTextOnBackground(okBackgrounds[i], palette)
+      solid: getOkTextOnBackground(okBackgrounds[i], palette),
+      pattern: getPattern(okBackgrounds[i])
     };
   }
   return okPayload;
@@ -72,8 +81,6 @@ const LUM_WEIGHT = 6;
 const SAT_WEIGHT = 4;
 
 export function getPrimary(palette) {
-
-
   let lumArr = palette.map((color)=> (tinycolor(color).getLuminance()));
   let saturationArr = palette.map((color)=> (tinycolor(color).toHsv()['s']));
   const diffLum = getInvertDiff(lumArr,LUM_TARGET).map((value)=>value * LUM_WEIGHT);

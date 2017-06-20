@@ -6,7 +6,7 @@ import { convertColorToAtomic } from '../../../core/generator/color/conversions'
 
 
 
-class Basic extends React.PureComponent {
+class Navigation extends React.PureComponent {
   render () {
     const { groups, style, color } = this.props;
 
@@ -29,15 +29,16 @@ class Basic extends React.PureComponent {
   }
 }
 
-export default Basic;
+export default Navigation;
 
 export const blueprint = {
-  inherits: ['BasicSection'],
+  inherits: [],
   style: {},
-  color: {},
+  color: {
+  },
   groups: {
     item: {
-      options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','ProductNavigation'],
+      options: ['ProductNavigation'],
     },
   },
   variants: []

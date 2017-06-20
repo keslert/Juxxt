@@ -18,12 +18,14 @@ export function buildGroupFromSkeleton(skeleton) {
     element.group = group;
     element.groupKey = key;
     return element;
-  })
-
+  })  
   return group;
 }
 
+console.log(blueprints);
 const _genericGroups = pickBy(blueprints, group => !group.special);
+
+
 export function getGroupOptions(props) {
   return Object.keys(_genericGroups);
 }

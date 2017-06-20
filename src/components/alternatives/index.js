@@ -48,6 +48,7 @@ class Alternatives extends React.Component {
                   sections={alternative.sections}
                   sectionsDraggable={alternative.isSection}
                   websiteColors={alternative.websiteColors}
+                  backgroundBlueprint={alternative.backgroundBlueprint}
                   master={false} />
               </Alternative>
             </StyledWrapper>

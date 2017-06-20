@@ -2,6 +2,7 @@ import HeadingSubheading from './heading-subheading';
 import HeadingParagraph from './heading-paragraph';
 import KickerHeadingParagraph from './kicker-heading-paragraph';
 import HeadingParagraphLink from './heading-paragraph-link';
+import ProductNavigation from './navigation'
 // import * as IconHeadingParagraph from './icon-heading-paragraph';
 // import * as IconSmallHeadingParagraph from './icon-small-heading-paragraph';
 // import * as SmallHeadingParagraph from './small-heading-paragraph';
@@ -16,6 +17,7 @@ export default {
   BlockImage,
   KickerHeadingParagraph,
   HeadingParagraphLink,
+  ProductNavigation,
   // IconHeadingParagraph,
   
   // IconSmallHeadingParagraph: {

@@ -1,85 +1,39 @@
 import React from 'react';
-import styled from 'styled-components';
-import LogoSVG from '../../common/svg/logo';
-import Element from '../elements';
-import { StyledDisplayFlex } from '../../common/styled-base';
-import { range } from 'lodash';
+import { BasicHeading, BasicLink } from '../elements/_blueprints';
+import TalkingPointComponent from './common/talking-point';
 
-
-const _ProductNavigation = styled.div`
-  display: flex;
-  padding: 10px 0px;
-  ${props => `
-    color: ${props.color};
-  `}
-`
-
-const _Logo = styled.div`
-  margin-right: 20px;
-  width: 150px;
-`
-
-const _Link = styled.div`
-  margin-right: 10px;
-`
-
-const ProductNavigation = ({
-  elements,
-  variation,
-  props
-}) => {
-
-
-  return (
-    <_ProductNavigation {...props} >
-      <_Logo>
-        <LogoSVG color={elements.link.clones[0].props.color} />
-      </_Logo>
-      <StyledDisplayFlex align="center" flex="1">
-        <StyledDisplayFlex flex="1" justify={variation.justify}>
-          {elements.link.clones.map(link => (
-            <Element key={link.uuid} {...link} />
-          ))}
-        </StyledDisplayFlex>
-        <Element {...elements.button} />
-      </StyledDisplayFlex>
-    </_ProductNavigation>
-  )
+class ProductNavigation extends React.PureComponent {
+  render() {
+    const { elements, variant, style, color } = this.props;
+    return(
+      <TalkingPointComponent
+      style={style}
+      variant={variant}
+      elements={elements}
+      align={variant.align}
+      color={color}
+      />
+    );
+  }
 }
 
 export default ProductNavigation;
 
-
-
-export const requirements = {
-  elements: {
-    button: {
-      element: 'Button',
-      overwrites: ({variation, elements}) => ({
-        text: 'Sign Up',
-        type: 'Round',
-        fontSize: 12, 
-        padding: '12px 24px'
-      })
-    },
-    link: {
-      element: 'Link',
-      overwrites: ({variation, elements}) => ({
-        margin: "0 10px 0 0",
-      }),
-      copies: 'links',
-    },
+export const blueprint = {
+  inherits: [],
+  style: {},
+  color: {
+    background: "#64706c",
   },
-  variations: [{
-    justify: ['flex-end', 'flex-start'],
-    links: range(1, 6),
-  }]
-}
-
-export const defaultProps = () => ({
-
-})
-
-export const modifiableProps = {
-  
+  elements: {
+    heading: {
+      name: BasicHeading.name,
+    }
+  },
+  variants: [{
+    align: {
+      _default: 'center',
+      options: ['left', 'center', 'right'],
+    }
+  }],
 }

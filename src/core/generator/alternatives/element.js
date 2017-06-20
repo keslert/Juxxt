@@ -30,7 +30,6 @@ export function generateElementComponentAlternatives(element, masterSkeleton) {
 }
 
 export function generateElementVariantAlternatives(element, skeleton) {
-  // const blueprint = blueprints[element.name];
   return [];
 }
 

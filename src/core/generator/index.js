@@ -5,16 +5,17 @@ import { assignContent } from './content';
 import { assignStyles } from './style';
 import { colorGroup } from './color/group';
 import { colorElement } from './color/element';
-import { tintColor, getPrimary, getOkSectionColors, getOkBackgroundColors} from './color/utils';
+import { tintColor, getPrimary, getOkSectionColors, getOkBackgroundColors } from './color/utils';
 import { randomItem } from '../utils';
 import { range, reduce, uniqueId, forEach } from 'lodash';
 
 export function init() {
-  const palette = ["#ede9ce", '#c7ad88','#64706c','#935347']; // fixed palette: temporary
+  const palette = ["#BFBDC1","#6D6A75","#37323E","#DEB841","#DE9E36"]; // fixed palette: temporary
   const primary = getPrimary(palette);
   const websiteColors = [...palette, tintColor("#211b1a",primary,20), tintColor('#f5f6f7', primary, 20), tintColor("#fff", primary, 2)];
   const backgroundBlueprint = getOkSectionColors(getOkBackgroundColors(websiteColors), websiteColors, [...palette, "#FFF"]);
   const NUM_OF_SECTIONS = 5;
+
   const master = {
     id: 'p_' + uniqueId(),
     palette: palette,
@@ -28,7 +29,6 @@ export function init() {
       const skeleton = randomItem(skeletons);
       const page = {sections, backgroundBlueprint};
       const section = buildSectionFromSkeleton(skeleton, page);
-
       let background;
       if(i === 0 | i === NUM_OF_SECTIONS-1) {
         background = getPrimary(Object.keys(backgroundBlueprint));
@@ -42,7 +42,6 @@ export function init() {
       const page2 = {...page, sections: [...page.sections, section]}
       forEach(section.groups, group => colorGroup(group, page2.sections))
       forEach(section.elements, element => colorElement(element, page2))
-
       assignContent(section, []);
       assignStyles(section, page);
       return [...sections, section];

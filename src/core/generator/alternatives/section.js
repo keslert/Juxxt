@@ -5,6 +5,7 @@ import { assignContent } from '../content';
 import { getCombinations } from '../../utils';
 import { colorElement } from '../color/element';
 import { styles } from '../style/section/shared-styles';
+import { getPattern, getGradient } from '../color/utils';
 
 export function generateSectionComponentAlternatives(section) {
   const possibleSections = Object.keys(blueprints);
@@ -35,15 +36,44 @@ export function generateSectionVariantAlternatives(section, skeleton) {
 export function generateSectionColorAlternatives(section, page) {
   const validBgColors = Object.keys(page.backgroundBlueprint);
   const sections = []
-  for(let i=0; i<validBgColors.length; i++) {
+
+  for(let i=0; i<(validBgColors.length); i++) {
+    /*push the patterns*/
     sections.push(cloneDeep(section));
-    sections[i]['color'] = {
+    sections[sections.length-1]['color'] = {
       background: validBgColors[i],
       text: page.backgroundBlueprint[validBgColors[i]].text[0],
+      pattern: page.backgroundBlueprint[validBgColors[i]].pattern,
+      gradient: null,
     };
-    forEach(sections[i].elements, e => colorElement(e, page));
+    forEach(sections[sections.length-1].elements, e => colorElement(e, page));
+
+    //push the solid colors
+    sections.push(cloneDeep(section));
+    sections[sections.length-1]['color'] = {
+      background: validBgColors[i],
+      text: page.backgroundBlueprint[validBgColors[i]].text[0],
+      pattern: null,
+      gradient: null
+    };
+
+    forEach(sections[sections.length-1].elements, e => colorElement(e, page));
+
+    //push the gradients
+    sections.push(cloneDeep(section));
+    sections[sections.length-1]['color'] = {
+      background: validBgColors[i],
+      text: page.backgroundBlueprint[validBgColors[i]].text[0],
+      pattern: null,
+      gradient: validBgColors[i]
+    };
+
+    forEach(sections[sections.length-1].elements, e => colorElement(e, page));
+    
   }
   
+
+
   return sections;
 }
 

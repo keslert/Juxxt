@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { getGradient } from '../../core/generator/color/utils';
 import Section from './sections';
 import InsertionTarget from './insertion-target';
 import { isFunction } from 'lodash';
@@ -25,10 +25,21 @@ const StyledPage = styled.div`
 class Page extends React.PureComponent {
   
   render() {
-
-    const { sections, master, onClick, id, websiteColors } = this.props;
+    
+    const { sections, master, onClick, id, websiteColors, backgroundBlueprint } = this.props;
     const last = sections.length - 1;
-    const pageColors = websiteColors.map((color)=> `.bg-${color.replace("#","")}{ background: ${color}; }\n.c-${color.replace("#","")}{ color: ${color}; }`).join('\n');
+    const pageColors = websiteColors.map((color) => `.bg-${color.replace("#","")} { 
+      background: ${color}; 
+    }\n
+    .c-${color.replace("#","")} { 
+      color: ${color}; 
+    }\n
+    .ptrn-${color.replace("#","")} {
+     background: ${backgroundBlueprint[color].pattern};
+    }\n
+    .grd-${color.replace("#","")} {
+      background: ${getGradient(color)};
+    }`).join('\n');
     const clickable = isFunction(onClick);
     return (
       <StyledPage onClick={onClick} clickable={clickable} className={id} pageColors={pageColors}>
