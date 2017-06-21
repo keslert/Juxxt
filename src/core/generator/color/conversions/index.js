@@ -19,6 +19,7 @@ const gradient_conversions = {
 
 
 export function convertColorToAtomic(color) {
+  console.log(color);
   if(color['gradient'] != null) {
   	return map(color, (value, key) => (
 	    gradient_conversions[key] && gradient_conversions[key](value)

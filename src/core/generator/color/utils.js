@@ -36,6 +36,18 @@ export function getOkBackgroundColors(arr) {
   }
   return okBackgrounds;
 }
+export function getOkSolids(base, arr){
+  let okSolids = [];
+
+  for(let i=0; i<arr.length; i++) {
+    if(tinycolor(arr[i]).toHsv()['v'] > 0.2 && base != arr[i]) {
+      okSolids.push(arr[i])
+    }
+  }
+  okSolids = sortBy(okSolids,t=> -tinycolor.readability(t,base));
+  return okSolids;
+
+}
 
 export function getOkTextOnBackground(bgColor, arr) {
   const okTexts = [];
@@ -59,7 +71,7 @@ export function getOkSectionColors(okBackgrounds, websiteColors, palette) {
     okPayload[okBackgrounds[i]] = {
       color: okBackgrounds[i],
       text: getOkTextOnBackground(okBackgrounds[i], websiteColors),
-      solid: getOkTextOnBackground(okBackgrounds[i], palette),
+      solid: getOkSolids(okBackgrounds[i], palette),
       pattern: getPattern(okBackgrounds[i])
     };
   }

@@ -13,7 +13,7 @@ export function init() {
   const palette = ["#0B0C10","#1F2833","#C5C6C7","#66FCF1","#45A29E"]; // fixed palette: temporary
   const primary = getPrimary(palette);
   const websiteColors = [...palette, tintColor("#211b1a",primary,20), tintColor('#f5f6f7', primary, 20), tintColor("#fff", primary, 2)];
-  const backgroundBlueprint = getOkSectionColors(getOkBackgroundColors(websiteColors), websiteColors, [...palette, "#FFF"]);
+  const backgroundBlueprint = getOkSectionColors(getOkBackgroundColors(websiteColors), websiteColors, [...palette, "#ffffff"]);
   const NUM_OF_SECTIONS = 5;
 
   const master = {
@@ -38,7 +38,6 @@ export function init() {
         background = websiteColors[websiteColors.length - 1];
       }
       section.color = { background, text: backgroundBlueprint[background].text[0] }
-      
       const page2 = {...page, sections: [...page.sections, section]}
       forEach(section.groups, group => colorGroup(group, page2.sections))
       forEach(section.elements, element => colorElement(element, page2))

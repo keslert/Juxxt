@@ -86,12 +86,20 @@ export const SmallProfileImage = {
 
 export const BasicButton = { 
   name: 'BasicButton', 
-  is: 'Text',
+  is: 'Button',
   inherits: [inherits.Button],
   color: {
-    // background: 'highlight',
+    text: 'text-0',
   },
   style: {
+    paddingVertical: {
+      default: 5,
+      options: range(3,4),
+    },
+    paddingHorizontal: {
+      default: 5,
+      options: range(5,6),
+    },
     fontSize: {
       default: 2,
       options: range(2, 3),

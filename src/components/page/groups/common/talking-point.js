@@ -16,6 +16,7 @@ class TalkingPoint extends React.Component {
         subheading,
         paragraph,
         links,
+        button,
       }
     } = this.props;
 
@@ -31,6 +32,7 @@ class TalkingPoint extends React.Component {
         {subheading && <div><Element {...subheading} /></div>}
         {paragraph && <div><Element {...paragraph} /></div>}
         {links && <div><Element {...links}/></div>}
+        {button && <div><Element {...button}/></div>}
       </Box>
     )
   }

@@ -36,10 +36,18 @@ export function generateElementVariantAlternatives(element, skeleton) {
 export function generateElementColorAlternatives(section, element, page) {
   const sections = [];
   const index = findIndex(section.elements, e => e.id === element.id);
-  for(let i=0; i<page.backgroundBlueprint[section.color.background].text.length; i++) {
-    const copy = cloneDeep(section);
-    copy.elements[index].color = {text: page.backgroundBlueprint[section.color.background].text[i]};
-    sections.push(copy)
+  if(element.is === "Text") {
+    for(let i=0; i<page.backgroundBlueprint[section.color.background].text.length; i++) {
+      const copy = cloneDeep(section);
+      copy.elements[index].color = {text: page.backgroundBlueprint[section.color.background].text[i]};
+      sections.push(copy)
+    }
+  } else if (element.is === "Button") {
+    for(let i=0; i<page.backgroundBlueprint[section.color.background].solid.length; i++) {
+      const copy = cloneDeep(section);
+      copy.elements[index].color = {background: page.backgroundBlueprint[section.color.background].solid[i], text: "#000000"};
+      sections.push(copy);
+    }
   }
   return sections;
 }

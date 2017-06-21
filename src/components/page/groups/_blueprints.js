@@ -3,6 +3,7 @@ import { blueprint as HeadingParagraph } from './heading-paragraph';
 import { blueprint as KickerHeadingParagraph } from './kicker-heading-paragraph';
 import { blueprint as HeadingParagraphLink } from './heading-paragraph-link';
 import { blueprint as ProductNavigation } from './navigation';
+import { blueprint as HeadingButton } from './heading-button';
 // import * as IconHeadingParagraph from './icon-heading-paragraph';
 // import * as IconSmallHeadingParagraph from './icon-small-heading-paragraph';
 // import * as SmallHeadingParagraph from './small-heading-paragraph';
@@ -17,6 +18,7 @@ export default {
   HeadingParagraph,
   KickerHeadingParagraph,
   ProductNavigation,
+  HeadingButton,
   // IconHeadingParagraph,
   
   // IconSmallHeadingParagraph: {

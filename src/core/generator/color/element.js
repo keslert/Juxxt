@@ -4,6 +4,7 @@ import { getMode } from '../../utils';
 import { getPrimary } from './utils';
 
 export function colorElement(element, page) {
+
   element.color = {};
   const blueprint = blueprints[element.name];
   const elements = flatMap(page.sections, s => s.elements);
@@ -51,6 +52,11 @@ export function colorElement(element, page) {
         element.color.text = getPrimary(bgBlueprint.text);
      }
     }
+  }
+  //bg for defaults 4 button!
+  if(element.is == "Button") {
+    element.color.background = page.backgroundBlueprint[background].solid[0]
+    element.color.text = page.backgroundBlueprint[element.color.background].text[0]
   }
 }
 
