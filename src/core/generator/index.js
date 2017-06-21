@@ -10,7 +10,7 @@ import { randomItem } from '../utils';
 import { range, reduce, uniqueId, forEach } from 'lodash';
 
 export function init() {
-  const palette = ["#0B0C10","#1F2833","#C5C6C7","#66FCF1","#45A29E"]; // fixed palette: temporary
+  const palette = ["#0B0C10","#1F2833","#66FCF1","#45A29E"]; // fixed palette: temporary
   const primary = getPrimary(palette);
   const websiteColors = [...palette, tintColor("#211b1a",primary,20), tintColor('#f5f6f7', primary, 20), tintColor("#fff", primary, 2)];
   const backgroundBlueprint = getOkSectionColors(getOkBackgroundColors(websiteColors), websiteColors, [...palette, "#ffffff"]);
@@ -25,12 +25,21 @@ export function init() {
     fontSize: '16px',
     isPage: true,
     sections: reduce(range(0, NUM_OF_SECTIONS), (sections, i) => {
-      const skeletons = generateSectionComponentAlternatives({});
-      const skeleton = randomItem(skeletons);
       const page = {sections, backgroundBlueprint};
-      const section = buildSectionFromSkeleton(skeleton, page);
       let background;
-      if(i === 0 | i === NUM_OF_SECTIONS-1) {
+      let section;
+      if(i==0) {
+        const skeletons = generateSectionComponentAlternatives({})
+        section = buildSectionFromSkeleton(skeletons[2],page)
+        section.color = { background: getPrimary(Object.keys(page.backgroundBlueprint)), 
+          text: page.backgroundBlueprint[getPrimary(Object.keys(page.backgroundBlueprint))].text[0]
+        };
+      } else {
+        const skeletons = generateSectionComponentAlternatives({name:"Header"});
+        const skeleton = randomItem(skeletons);
+        section = buildSectionFromSkeleton(skeleton, page);
+      }
+      if(i==0 || i === NUM_OF_SECTIONS-1) {
         background = getPrimary(Object.keys(backgroundBlueprint));
       } else if((i%2) === 1) {
         background = websiteColors[websiteColors.length - 2];
@@ -46,6 +55,14 @@ export function init() {
       return [...sections, section];
     }, [])
   }
+
+
+
+
+
+
+
+
   const alternatives = generateAlternatives(master, {component: true}, master.sections[0]);
   return { master, alternatives };
 }

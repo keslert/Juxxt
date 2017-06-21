@@ -32,8 +32,9 @@ export function colorElement(element, page) {
     }
     background = element.color.background;
   } 
-  
+  console.log(blueprint)
   if(blueprint.color.text) {
+
     const valid = filter(elements, e => 
       e.name === element.name &&
       e.color.text && 

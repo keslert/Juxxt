@@ -13,6 +13,7 @@ class Navigation extends React.PureComponent {
     const boxStyle = {
       ...style,
       display: "flex",
+      paddingVertical: '50',
       align: "center",
       justify: "center",
     }

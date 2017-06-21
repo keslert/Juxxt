@@ -15,12 +15,13 @@ class Header extends React.PureComponent {
       display: "flex",
       align: "center",
       justify: "center",
+      paddingVertical: '7'
     }
     const styleClassNames = convertStyleToAtomic(boxStyle);
     const colorClassNames = convertColorToAtomic(color);
 
     return (
-      <div className={colorClassNames + ' Basic'}>
+      <div className={colorClassNames + ' Header'}>
         <div className={styleClassNames}>
           <Group {...groups.item} />
         </div>

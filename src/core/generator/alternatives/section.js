@@ -9,7 +9,6 @@ import { styles } from '../style/section/shared-styles';
 export function generateSectionComponentAlternatives(section) {
   const possibleSections = Object.keys(blueprints);
   const validSections = filter(possibleSections, sectionName => sectionName !== section.name);
-
   const skeletons = validSections.map(sectionName => {
     const skeleton = generateSectionSkeleton(sectionName, section.variant)
     skeleton.id = section.id;
