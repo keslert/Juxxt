@@ -37,7 +37,7 @@ export const blueprint = {
   color: {},
   groups: {
     item: {
-      options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','ProductNavigation','HeadingButton'],
+      options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','ProductNavigation','HeadingSubheadingButton'],
     },
   },
   variants: []

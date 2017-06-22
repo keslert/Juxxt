@@ -4,7 +4,7 @@ import { BasicButton, BasicSubheading, BasicHeading } from '../elements/_bluepri
 import { TalkingPoint } from './_inherits';
 
 
-class HeadingButton extends React.Component {
+class HeadingSubheadingButton extends React.Component {
   render() {
     const { elements, variant, style, color } = this.props;
     return (
@@ -17,7 +17,7 @@ class HeadingButton extends React.Component {
   }
 }
 
-export default HeadingButton;
+export default HeadingSubheadingButton;
 
 export const blueprint = {
   inherits: [TalkingPoint],

@@ -28,13 +28,13 @@ export function colorElement(element, page) {
       const matches = filter(valid, fn);
       element.color.background = getMode(matches.map(e => e.color.background));
     } else {
-      element.color.background = blueprint.color.background;
+      const colorBlueprint = page.backgroundBlueprint[background];
+      element.color.background = getPreferredColor(colorBlueprint.solid, blueprint.color.background);
     }
     background = element.color.background;
   } 
   
   if(blueprint.color.text) {
-
     const valid = filter(elements, e => 
       e.name === element.name &&
       e.color.text && 
@@ -46,15 +46,11 @@ export function colorElement(element, page) {
       const matches = filter(valid, fn);
       element.color.text = getMode(matches.map(e => e.color.text));
     } else {
-      const bgBlueprint = find(page.backgroundBlueprint, blueprint => blueprint.color === background)
-      element.color.text = getPrimary(bgBlueprint.text);
+      const colorBlueprint = page.backgroundBlueprint[background];
+      element.color.text = getPreferredColor(colorBlueprint.text, blueprint.color.text);
     }
   }
-  //bg for defaults 4 button!
-  if(element.is == "Button") {
-    element.color.background = page.backgroundBlueprint[background].solid[0]
-    element.color.text = page.backgroundBlueprint[element.color.background].text[0]
-  }
+
 }
 
 function getGroupOrSectionBackground(element) {
@@ -64,4 +60,11 @@ function getGroupOrSectionBackground(element) {
 
 function getElementGroupOrSectionBackground(element) {
   return element.color.background || getGroupOrSectionBackground(element);
+}
+
+function getPreferredColor(colors, preference) {
+  if(preference === 'vibrant') {
+    return getPrimary(colors);
+  }
+  return colors[0];
 }

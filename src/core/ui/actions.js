@@ -1,5 +1,5 @@
 import * as types from './action-types';
-import { getModifications, getShiftDown } from './selectors';
+import { getSelected } from './selectors';
 import { mapValues } from 'lodash';
 
 export function setSelected(selected) {
@@ -47,14 +47,10 @@ export function setZoomLevel(level) {
 export function turnOnModification(modification) {
   return (dispatch, getState) => {
     const state = getState();
-    const modifications = getModifications(state);
-    const shiftDown = getShiftDown(state);
-
-    const _modifications = mapValues(modifications, (value, key) => (
-      shiftDown ? key === modification || value 
-                : key === modification
-    ))
-    dispatch(setModifications(_modifications));
+    const selected = getSelected(state);
+    
+    const modifications = { [modification]: true };
+    dispatch(setModifications(modifications));
 
   }
 }

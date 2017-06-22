@@ -23,7 +23,7 @@ export const BasicHeading = {
   is: 'Text',
   inherits: [inherits.Heading],
   color: {
-    text: 'highlight',
+    text: 'vibrant',
   },
   style: {
     fontSize: {
@@ -86,22 +86,23 @@ export const SmallProfileImage = {
 
 export const BasicButton = { 
   name: 'BasicButton', 
-  is: 'Button',
+  is: 'Link',
   inherits: [inherits.Button],
   color: {
-    text: 'text-0',
+    text: 'readable',
+    background: 'vibrant',
   },
   style: {
     paddingVertical: {
-      default: 5,
+      _default: 2,
       options: range(3,4),
     },
     paddingHorizontal: {
-      default: 5,
+      _default: 3,
       options: range(5,6),
     },
     fontSize: {
-      default: 2,
+      _default: 2,
       options: range(2, 3),
     },
   },
@@ -113,8 +114,7 @@ export const BasicLink = {
   is: 'Link',
   inherits: [inherits.Link],
   color: {
-    text: 'text-0',
-    // background: 'highlight',
+    text: 'vibrant',
   },
   style: {
     paddingHorizontal: {
@@ -128,6 +128,3 @@ export const BasicLink = {
     }
   }
 };
-
-
-

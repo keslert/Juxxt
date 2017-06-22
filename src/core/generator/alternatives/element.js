@@ -30,24 +30,30 @@ export function generateElementComponentAlternatives(element, masterSkeleton) {
 }
 
 export function generateElementVariantAlternatives(element, skeleton) {
+  // const blueprint = blueprints[element.name];
   return [];
 }
 
 export function generateElementColorAlternatives(section, element, page) {
-  const sections = [];
-  const index = findIndex(section.elements, e => e.id === element.id);
-  if(element.is === "Text") {
-    for(let i=0; i<page.backgroundBlueprint[section.color.background].text.length; i++) {
-      const copy = cloneDeep(section);
-      copy.elements[index].color = {text: page.backgroundBlueprint[section.color.background].text[i]};
-      sections.push(copy)
-    }
-  } else if (element.is === "Button") {
-    for(let i=0; i<page.backgroundBlueprint[section.color.background].solid.length; i++) {
-      const copy = cloneDeep(section);
-      copy.elements[index].color = {background: page.backgroundBlueprint[section.color.background].solid[i], text: "#000000"};
-      sections.push(copy);
-    }
+  const elementIndex = findIndex(section.elements, e => e.id === element.id);
+  const background = element.group.color.background || section.color.background;
+  
+  let sections;
+  if(element.color.background) {
+    sections = map(page.backgroundBlueprint[background].solid, background => {
+      const _section = cloneDeep(section);
+      _section.elements[elementIndex].color = {
+        background,
+        text: page.backgroundBlueprint[background].text[0],
+      }
+      return _section;
+    });
+  } else {
+    sections = map(page.backgroundBlueprint[background].text, text => {
+      const _section = cloneDeep(section);
+      _section.elements[elementIndex].color = { text }
+      return _section;
+    });
   }
   return sections;
 }

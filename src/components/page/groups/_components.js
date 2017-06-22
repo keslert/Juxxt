@@ -3,7 +3,7 @@ import HeadingParagraph from './heading-paragraph';
 import KickerHeadingParagraph from './kicker-heading-paragraph';
 import HeadingParagraphLink from './heading-paragraph-link';
 import ProductNavigation from './navigation';
-import HeadingButton from './heading-button';
+import HeadingSubheadingButton from './heading-subheading-button';
 // import * as IconHeadingParagraph from './icon-heading-paragraph';
 // import * as IconSmallHeadingParagraph from './icon-small-heading-paragraph';
 // import * as SmallHeadingParagraph from './small-heading-paragraph';
@@ -19,7 +19,7 @@ export default {
   KickerHeadingParagraph,
   HeadingParagraphLink,
   ProductNavigation,
-  HeadingButton,
+  HeadingSubheadingButton,
   // IconHeadingParagraph,
   
   // IconSmallHeadingParagraph: {
