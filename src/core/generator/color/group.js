@@ -13,6 +13,7 @@ export function colorGroup(group, sections) {
     g => g.section.id === group.section.id, // Name match in same section
     g => true,
   ]
+  group.color = {};
 
-  colorItem(group, groups, rules, blueprint);
+  // colorItem(group, groups, rules, blueprint);
 }

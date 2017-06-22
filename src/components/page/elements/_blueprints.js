@@ -94,12 +94,20 @@ export const BasicButton = {
   },
   style: {
     paddingVertical: {
-      _default: 2,
+      _default: 3,
       options: range(3,4),
     },
     paddingHorizontal: {
-      _default: 3,
-      options: range(5,6),
+      _default: 4,
+      options: range(3,6),
+    },
+    borderRadius: {
+      _default: 2,
+      options: range(0, 2),
+    },
+    textTransform: {
+      _default: 'uppercase',
+      options: ['none', 'uppercase'],
     },
     fontSize: {
       _default: 2,
