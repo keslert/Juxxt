@@ -10,10 +10,10 @@ export const styles = {
       _default: 5,
       options: range(1, 7),
     },
-    sectionBackground: {
-      _default: 'solid',
-      options: ['solid', 'image', 'gradient'], 
-    },
+    // sectionBackground: {
+    //   _default: 'solid',
+    //   options: ['solid', 'image', 'gradient'], 
+    // },
     gutter: {
       options: [4],
     },

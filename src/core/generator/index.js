@@ -58,13 +58,5 @@ export function init() {
     }, [])
   }
 
-
-
-
-
-
-
-
-  const alternatives = generateAlternatives(master, {component: true}, master.sections[0]);
-  return { master, alternatives };
+  return { master, alternatives: [] };
 }

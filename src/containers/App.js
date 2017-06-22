@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { isEqual } from 'lodash';
 import flow from 'lodash/flow';
-import { setShiftDown, getModifications, getSelected } from '../core/ui';
+import { setShiftDown, getModifications, getSelected, setSelected } from '../core/ui';
 import { getMaster, updateAlternatives } from '../core/page';
 import Page from '../components/page';
 import Sidebar from '../components/sidebar';
@@ -37,7 +37,7 @@ const StyledColumn = styled.div`
 class App extends React.Component {
 
   componentDidMount() {
-    const { updateAlternatives, setShiftDown } = this.props;
+    const { updateAlternatives, setShiftDown, master, setSelected } = this.props;
 
     this.listener = new window.keypress.Listener();
     this.listener.simple_combo('right', () => updateAlternatives(this.props.modifications));
@@ -47,6 +47,8 @@ class App extends React.Component {
       on_keydown: () => setShiftDown(true),
       on_keyup: () => setShiftDown(false),
     })
+
+    setSelected(master.sections[0]);
   }
 
   componentWillReceiveProps(newProps) {
@@ -85,7 +87,7 @@ const mapStateToProps = createSelector(
     selected,
   })
 )
-const mapDispatchToProps = Object.assign({setShiftDown, updateAlternatives});
+const mapDispatchToProps = Object.assign({setShiftDown, updateAlternatives, setSelected});
 export default flow(
   connect(mapStateToProps, mapDispatchToProps),
   DragDropContext(HTML5Backend)

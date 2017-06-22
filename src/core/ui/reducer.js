@@ -3,9 +3,9 @@ import { filter } from 'lodash';
 const uiState = () => ({
   selected: {},
   modifications: {
-    component: true,
+    component: false,
     variant: false,
-    color: false,
+    color: true,
     content: false,
     style: false,
     theme: false,

@@ -34,7 +34,7 @@ function getGenericContent(element) {
     case 'Link':
       return { text: 'I am a ' + element.name };
     case 'Image':
-      return { src: getImageContent()['src'] };
+      return getImageContent();
     default:
       return { badContent: true };
   }
