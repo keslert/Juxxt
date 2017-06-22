@@ -1,37 +1,14 @@
-import { map } from 'lodash';
+import { map, isString } from 'lodash';
 
-
-const pattern_conversions = {
-	background: v=> 'ptrn-' + v.substr(1),
-	text: v => 'c-' + v.substr(1),
-}
-
-const color_conversions = {
+const conversions = {
+  pattern: v => 'ptrn-' + v.substr(1),
+  gradient: v => 'grd-' + v.substr(1),
   background: v => 'bg-' + v.substr(1),
   text: v => 'c-' + v.substr(1),
 }
 
-const gradient_conversions = {
-	background: v=> 'grd-' + v.substr(1),
-	text: v => 'c-' + v.substr(1),
-}
-
-
-
 export function convertColorToAtomic(color) {
-  console.log(color);
-  if(color['gradient'] != null) {
-  	return map(color, (value, key) => (
-	    gradient_conversions[key] && gradient_conversions[key](value)
-	  )).join(' ');
-  }
-  else if(color['pattern'] !=null) {
-	return map(color, (value, key) => (
-	    pattern_conversions[key] && pattern_conversions[key](value)
-	  )).join(' ');
-  } else {
   return map(color, (value, key) => (
-    color_conversions[key] && color_conversions[key](value)
+    conversions[key] && isString(value) && conversions[key](value)
   )).join(' ');
-  }
 }

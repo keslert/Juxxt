@@ -31,8 +31,10 @@ export function init() {
       if(i==0) {
         const skeletons = generateSectionComponentAlternatives({})
         section = buildSectionFromSkeleton(skeletons[2],page)
-        section.color = { background: getPrimary(Object.keys(page.backgroundBlueprint)), 
-          text: page.backgroundBlueprint[getPrimary(Object.keys(page.backgroundBlueprint))].text[0]
+        const background = getPrimary(Object.keys(page.backgroundBlueprint));
+        section.color = { 
+          background: background,
+          text: page.backgroundBlueprint[background].text[0],
         };
       } else {
         const skeletons = generateSectionComponentAlternatives({name:"Header"});

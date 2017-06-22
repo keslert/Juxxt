@@ -32,7 +32,7 @@ export function colorElement(element, page) {
     }
     background = element.color.background;
   } 
-  console.log(blueprint)
+  
   if(blueprint.color.text) {
 
     const valid = filter(elements, e => 
@@ -47,11 +47,7 @@ export function colorElement(element, page) {
       element.color.text = getMode(matches.map(e => e.color.text));
     } else {
       const bgBlueprint = find(page.backgroundBlueprint, blueprint => blueprint.color === background)
-      if(bgBlueprint == null) {
-        element.color.text = getPrimary([find(page.backgroundBlueprint,{'pattern':background})]);
-      } else {
-        element.color.text = getPrimary(bgBlueprint.text);
-     }
+      element.color.text = getPrimary(bgBlueprint.text);
     }
   }
   //bg for defaults 4 button!

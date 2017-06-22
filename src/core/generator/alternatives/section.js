@@ -36,35 +36,35 @@ export function generateSectionColorAlternatives(section, page) {
   const sections = []
 
   for(let i=0; i<(validBgColors.length); i++) {
-    //push the patterns
-    sections.push(cloneDeep(section));
-    sections[sections.length-1]['color'] = {
-      background: validBgColors[i],
-      text: page.backgroundBlueprint[validBgColors[i]].text[0],
-      pattern: page.backgroundBlueprint[validBgColors[i]].pattern,
-      gradient: null,
+    const background = validBgColors[i];
+    const text = page.backgroundBlueprint[background].text[0];
+    
+    const solidSection = cloneDeep(section);
+    solidSection.color = {
+      background,
+      text,
     };
-    forEach(sections[sections.length-1].elements, e => colorElement(e, page));
+    forEach(solidSection.elements, e => colorElement(e, page));
+    sections.push(solidSection);
 
-    //push the solid colors
-    sections.push(cloneDeep(section));
-    sections[sections.length-1]['color'] = {
-      background: validBgColors[i],
-      text: page.backgroundBlueprint[validBgColors[i]].text[0],
-      pattern: null,
-      gradient: null
+    const patternSection = cloneDeep(section);
+    patternSection.color = {
+      background,
+      text,
+      pattern: background,
+      _pattern: page.backgroundBlueprint[background].pattern,
     };
-    forEach(sections[sections.length-1].elements, e => colorElement(e, page));
+    forEach(patternSection.elements, e => colorElement(e, page));
+    sections.push(patternSection);
 
-    //push the gradients
-    sections.push(cloneDeep(section));
-    sections[sections.length-1]['color'] = {
-      background: validBgColors[i],
-      text: page.backgroundBlueprint[validBgColors[i]].text[0],
-      pattern: null,
-      gradient: validBgColors[i]
+    const gradientSection = cloneDeep(section);
+    gradientSection.color = {
+      background,
+      text,
+      gradient: background
     };
-    forEach(sections[sections.length-1].elements, e => colorElement(e, page));
+    forEach(gradientSection.elements, e => colorElement(e, page));
+    sections.push(gradientSection);
   }
   
 

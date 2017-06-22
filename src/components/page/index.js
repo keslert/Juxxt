@@ -18,7 +18,7 @@ const StyledPage = styled.div`
       }
     `};
     
-    ${props.pageColors}
+    ${props.extraRules}
   `};
 `;
 
@@ -28,22 +28,29 @@ class Page extends React.PureComponent {
     
     const { sections, master, onClick, id, websiteColors, backgroundBlueprint } = this.props;
     const last = sections.length - 1;
-    const pageColors = websiteColors.map((color) => `.bg-${color.replace("#","")} { 
+    const pageColors = websiteColors.map((color) => `.bg-${color.replace("#","")} {
       background: ${color}; 
     }\n
     .c-${color.replace("#","")} { 
       color: ${color}; 
     }\n
-    .ptrn-${color.replace("#","")} {
-     background: ${backgroundBlueprint[color].pattern};
-     background-size: 75%;
-    }\n
     .grd-${color.replace("#","")} {
       background: ${getGradient(color)};
     }`).join('\n');
+    
+    const patternColors = sections.map(section => section.color.pattern && `
+      .ptrn-${section.color.pattern.substr(1)} {
+        background: ${section.color._pattern};
+        background-size: 75%;
+      }\n
+    `).join('\n');
+
+    const extraRules = [pageColors, patternColors].join('\n');
+
+
     const clickable = isFunction(onClick);
     return (
-      <StyledPage onClick={onClick} clickable={clickable} className={id} pageColors={pageColors}>
+      <StyledPage onClick={onClick} clickable={clickable} className={id} extraRules={extraRules}>
         {sections.map((section, i) => (
           <div key={i} style={{marginTop: -1}}>
             <Section {...section} master={master} index={i} draggable={!clickable} />
