@@ -37,11 +37,12 @@ const Group = (props) => {
     isHovered, 
     onHoverableMouseEnter, 
     onHoverableMouseLeave,
+    style,
   } = props;
-
   const GroupComponent = groups[name];
+  
   return (
-    <StyledGroup 
+    <StyledGroup
       selected={isSelected || isHovered} 
       onClick={(e) => { e.stopPropagation(); setSelected(props);}}
       onMouseEnter={() => onHoverableMouseEnter(id)}

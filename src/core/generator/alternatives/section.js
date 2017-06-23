@@ -8,7 +8,13 @@ import { styles } from '../style/section/shared-styles';
 
 export function generateSectionComponentAlternatives(section) {
   const possibleSections = Object.keys(blueprints);
-  const validSections = filter(possibleSections, sectionName => sectionName !== section.name);
+  let validSections = possibleSections;
+  if(section.name) {
+    validSections = filter(possibleSections, sectionName => sectionName !== section.name[0]);
+    for(let i=1; i<section.name.length; i++) {
+      validSections = filter(validSections, sectionName => sectionName !== section.name[i]);
+    }
+  }
   const skeletons = validSections.map(sectionName => {
     const skeleton = generateSectionSkeleton(sectionName, section.variant)
     skeleton.id = section.id;

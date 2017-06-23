@@ -2,8 +2,11 @@ import HeadingSubheading from './heading-subheading';
 import HeadingParagraph from './heading-paragraph';
 import KickerHeadingParagraph from './kicker-heading-paragraph';
 import HeadingParagraphLink from './heading-paragraph-link';
-import ProductNavigation from './navigation';
 import HeadingSubheadingButton from './heading-subheading-button';
+import Hlist from './hlist';
+import Button1 from './button1g';
+import Logo from './logo';
+import Button2 from './button2g';
 // import * as IconHeadingParagraph from './icon-heading-paragraph';
 // import * as IconSmallHeadingParagraph from './icon-small-heading-paragraph';
 // import * as SmallHeadingParagraph from './small-heading-paragraph';
@@ -14,11 +17,14 @@ import BlockImage from './block-image';
 
 export default {
   HeadingSubheading,
+  Hlist,
+  Button1,
+  Button2,
   HeadingParagraph,
   BlockImage,
+  Logo,
   KickerHeadingParagraph,
   HeadingParagraphLink,
-  ProductNavigation,
   HeadingSubheadingButton,
   // IconHeadingParagraph,
   

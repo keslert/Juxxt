@@ -602,7 +602,7 @@ img { max-width: 100%; }
 .dn { display: none; }
 .di { display: inline; }
 .db { display: block; }
-.dib { display: inline-block; }
+.dib { display: -webkit-inline-box; }
 .dit { display: inline-table; }
 .dt { display: table; }
 .dtc { display: table-cell; }
@@ -614,3 +614,10 @@ img { max-width: 100%; }
 .order-1 { order: 1; }
 .order-2 { order: 2; }
 .order-3 { order: 3; }
+
+
+.h-50 { height: 50px; }
+
+.fr {float:right;}
+.fl {float:left;}
+

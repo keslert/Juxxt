@@ -14,7 +14,7 @@ export function init() {
   const primary = getPrimary(palette);
   const websiteColors = [...palette, tintColor("#211b1a",primary,20), tintColor('#f5f6f7', primary, 20), tintColor("#fff", primary, 2)];
   const backgroundBlueprint = getOkSectionColors(getOkBackgroundColors(websiteColors), websiteColors, [...palette, "#ffffff"]);
-  const NUM_OF_SECTIONS = 5;
+  const NUM_OF_SECTIONS = 6;
 
   const master = {
     id: 'p_' + uniqueId(),
@@ -28,20 +28,32 @@ export function init() {
       const page = {sections, backgroundBlueprint};
       let background;
       let section;
-      if(i==0) {
+      if(i==1) {
         const skeletons = generateSectionComponentAlternatives({})
+
         section = buildSectionFromSkeleton(skeletons[2],page)
         const background = getPrimary(Object.keys(page.backgroundBlueprint));
         section.color = { 
           background: background,
           text: page.backgroundBlueprint[background].text[0],
         };
-      } else {
-        const skeletons = generateSectionComponentAlternatives({name:"Header"});
+      } else if(i==0) {
+        const skeletons = generateSectionComponentAlternatives({})
+
+        section = buildSectionFromSkeleton(skeletons[3],page)
+        const background = '#ffffff';
+        section.color = { 
+          background: background,
+          text: page.backgroundBlueprint[background].text[0],
+        };
+
+      }
+      else {
+        const skeletons = generateSectionComponentAlternatives({name: ["Header", "Navbar1"]});
         const skeleton = randomItem(skeletons);
         section = buildSectionFromSkeleton(skeleton, page);
       }
-      if(i==0 || i === NUM_OF_SECTIONS-1) {
+      if(i==1 || i === NUM_OF_SECTIONS-1) {
         background = getPrimary(Object.keys(backgroundBlueprint));
       } else if((i%2) === 1) {
         background = websiteColors[websiteColors.length - 2];
