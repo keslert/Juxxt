@@ -1,20 +1,16 @@
 import blueprints from '../../../components/page/sections/_blueprints';
 import { generateSectionSkeleton } from '../skeletons/section';
-import { filter, range, mapValues, uniqBy, flatMap, cloneDeep, forEach } from 'lodash';
+import { filter, range, mapValues, uniqBy, flatMap, cloneDeep, forEach, includes } from 'lodash';
 import { assignContent } from '../content';
 import { getCombinations } from '../../utils';
 import { colorElement } from '../color/element';
 import { styles } from '../style/section/shared-styles';
 
-export function generateSectionComponentAlternatives(section) {
+export function generateSectionComponentAlternatives(section, blacklist=[]) {
   const possibleSections = Object.keys(blueprints);
-  let validSections = possibleSections;
-  if(section.name) {
-    validSections = filter(possibleSections, sectionName => sectionName !== section.name[0]);
-    for(let i=1; i<section.name.length; i++) {
-      validSections = filter(validSections, sectionName => sectionName !== section.name[i]);
-    }
-  }
+  const validSections = filter(possibleSections, name => 
+    name !== section.name && !includes(blacklist, name)
+  );
   const skeletons = validSections.map(sectionName => {
     const skeleton = generateSectionSkeleton(sectionName, section.variant)
     skeleton.id = section.id;

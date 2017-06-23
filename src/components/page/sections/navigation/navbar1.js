@@ -20,9 +20,15 @@ class Navbar1 extends React.PureComponent {
     return (
       <div className={ colorClassNames + ' Navbar1'}>
         <div className={styleClassNames}>
-          <Group {...groups.logo} />
-          <Group {...groups.links} />
-          <Group {...groups.button} />
+          <div>
+            <Group {...groups.logo} />
+          </div>
+          <div className="flex-auto">
+            <Group {...groups.links} />
+          </div>
+          <div>
+            <Group {...groups.button} />
+          </div>
         </div>
       </div>
     )

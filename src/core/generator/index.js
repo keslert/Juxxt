@@ -49,7 +49,7 @@ export function init() {
 
       }
       else {
-        const skeletons = generateSectionComponentAlternatives({name: ["Header", "Navbar1"]});
+        const skeletons = generateSectionComponentAlternatives({}, ["Header", "Navbar1"]);
         const skeleton = randomItem(skeletons);
         section = buildSectionFromSkeleton(skeleton, page);
       }

@@ -17,7 +17,7 @@ export default Logo;
 export const blueprint = {
   inherits: [],
   style: {
-
+    
   },
   color: {},
   elements: {
