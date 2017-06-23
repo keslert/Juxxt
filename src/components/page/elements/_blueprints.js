@@ -84,6 +84,27 @@ export const SmallProfileImage = {
   }
 };
 
+/** Links **/
+export const BasicLink = {
+  name: 'BasicLink',
+  is: 'Link',
+  inherits: [inherits.Link],
+  color: {
+    text: 'vibrant',
+  },
+  style: {
+    paddingHorizontal: {
+      options: range(3, 4),
+    },
+    paddingVertical: {
+      options: range(2, 3),
+    },
+    borderRadius: {
+      options: range(0, 2),
+    }
+  }
+};
+
 export const BasicButton = { 
   name: 'BasicButton', 
   is: 'Link',
@@ -114,25 +135,4 @@ export const BasicButton = {
       options: range(2, 3),
     },
   },
-};
-
-/** Links **/
-export const BasicLink = {
-  name: 'BasicLink',
-  is: 'Link',
-  inherits: [inherits.Link],
-  color: {
-    text: 'vibrant',
-  },
-  style: {
-    paddingHorizontal: {
-      options: range(3, 4),
-    },
-    paddingVertical: {
-      options: range(2, 3),
-    },
-    borderRadius: {
-      options: range(0, 2),
-    }
-  }
 };

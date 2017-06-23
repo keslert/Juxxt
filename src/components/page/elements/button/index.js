@@ -5,7 +5,7 @@ import { convertColorToAtomic } from '../../../../core/generator/color/conversio
 class Button extends React.PureComponent {
  
   render() {
-    let { style, color, content } = this.props;
+    let { style, color } = this.props;
     
     const colorClassNames = convertColorToAtomic(color);
     

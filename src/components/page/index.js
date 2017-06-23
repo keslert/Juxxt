@@ -26,7 +26,7 @@ class Page extends React.PureComponent {
   
   render() {
     
-    const { sections, master, onClick, id, websiteColors, backgroundBlueprint } = this.props;
+    const { sections, master, onClick, id, websiteColors } = this.props;
     const last = sections.length - 1;
     const pageColors = websiteColors.map((color) => `.bg-${color.replace("#","")} {
       background: ${color}; 

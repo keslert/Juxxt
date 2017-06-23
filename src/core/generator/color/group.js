@@ -1,8 +1,8 @@
-import blueprints from '../../../components/page/groups/_blueprints';
-import { colorItem } from './utils';
-import { flatMap, filter, values } from 'lodash';
+//import blueprints from '../../../components/page/groups/_blueprints';
+//import { flatMap, filter, values } from 'lodash';
 
 export function colorGroup(group, sections) {
+  /*
   const blueprint = blueprints[group.name];
 
   const validSections = filter(sections, s => s.color.background === group.section.color.background);
@@ -13,7 +13,9 @@ export function colorGroup(group, sections) {
     g => g.section.id === group.section.id, // Name match in same section
     g => true,
   ]
+  */
+
   group.color = {};
 
-  // colorItem(group, groups, rules, blueprint);
+  //colorItem(group, groups, rules, blueprint);
 }

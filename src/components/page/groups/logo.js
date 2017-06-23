@@ -1,6 +1,5 @@
 import React from 'react';
 import Element from '../elements';
-import { range } from 'lodash';
 import { BasicImage } from '../elements/_blueprints';
 
 class Logo extends React.Component {

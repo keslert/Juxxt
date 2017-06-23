@@ -1,4 +1,3 @@
-import { generateAlternatives } from './alternatives';
 import { generateSectionComponentAlternatives } from './alternatives/section';
 import { buildSectionFromSkeleton } from './builder/section';
 import { assignContent } from './content';
@@ -28,7 +27,7 @@ export function init() {
       const page = {sections, backgroundBlueprint};
       let background;
       let section;
-      if(i==1) {
+      if(i===1) {
         const skeletons = generateSectionComponentAlternatives({})
 
         section = buildSectionFromSkeleton(skeletons[2],page)
@@ -37,10 +36,10 @@ export function init() {
           background: background,
           text: page.backgroundBlueprint[background].text[0],
         };
-      } else if(i==0) {
-        const skeletons = generateSectionComponentAlternatives({})
+      } else if(i===0) {
+        const skeletons = generateSectionComponentAlternatives({},["Header","Basic","Basic1_2"])
 
-        section = buildSectionFromSkeleton(skeletons[3],page)
+        section = buildSectionFromSkeleton(randomItem(skeletons))
         const background = '#ffffff';
         section.color = { 
           background: background,
@@ -49,11 +48,11 @@ export function init() {
 
       }
       else {
-        const skeletons = generateSectionComponentAlternatives({}, ["Header", "Navbar1"]);
+        const skeletons = generateSectionComponentAlternatives({}, ["Header", "Navbar1", "Navbar2"]);
         const skeleton = randomItem(skeletons);
         section = buildSectionFromSkeleton(skeleton, page);
       }
-      if(i==1 || i === NUM_OF_SECTIONS-1) {
+      if(i===1 || i === NUM_OF_SECTIONS-1) {
         background = getPrimary(Object.keys(backgroundBlueprint));
       } else if((i%2) === 1) {
         background = websiteColors[websiteColors.length - 2];

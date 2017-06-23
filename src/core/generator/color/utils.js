@@ -40,7 +40,7 @@ export function getOkSolids(base, arr){
   let okSolids = [];
 
   for(let i=0; i<arr.length; i++) {
-    if(tinycolor(arr[i]).toHsv()['v'] > 0.2 && base != arr[i]) {
+    if(tinycolor(arr[i]).toHsv()['v'] > 0.2 && base !== arr[i]) {
       okSolids.push(arr[i])
     }
   }

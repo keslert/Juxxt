@@ -5,7 +5,7 @@ import { BasicButton } from '../elements/_blueprints';
 
 class Button1 extends React.Component {
   render() {
-    const { elements, variant, style, color } = this.props;
+    const { elements } = this.props;
     return (
       <div className="fr mr4">
         <Element {...elements.button} />

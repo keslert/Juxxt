@@ -5,7 +5,7 @@ import Element from '../elements';
 
 class Button2 extends React.Component {
   render() {
-    const { elements, variant, style, color } = this.props;
+    const { elements } = this.props;
     return (
     	<div className="dib mr4">
         <Element {...elements.button} />

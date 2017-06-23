@@ -3,7 +3,7 @@ import Group from '../../groups';
 import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
 
-class Navbar1 extends React.PureComponent {
+class Navbar2 extends React.PureComponent {
   render () {
     const { groups, style, color } = this.props;
     const boxStyle = {
@@ -17,15 +17,12 @@ class Navbar1 extends React.PureComponent {
     const colorClassNames = convertColorToAtomic(color);
 
     return (
-      <div className={ colorClassNames + ' Navbar1'}>
+      <div className={ colorClassNames + ' Navbar2'}>
         <div className={styleClassNames}>
           <div>
             <Group {...groups.logo} />
           </div>
-          <div className="flex-auto">
-            <Group {...groups.links} />
-          </div>
-          <div>
+          <div className="mla">
             <Group {...groups.button} />
           </div>
         </div>
@@ -34,7 +31,7 @@ class Navbar1 extends React.PureComponent {
   }
 }
 
-export default Navbar1;
+export default Navbar2;
 
 export const blueprint = {
   inherits: [],
@@ -47,9 +44,6 @@ export const blueprint = {
     button: {
       options: ['Button2','Button1'],
     },
-    links: {
-      options: ['Hlist']
-    }
   },
   variants: []
 }

@@ -36,8 +36,7 @@ const Group = (props) => {
     setSelected,
     isHovered, 
     onHoverableMouseEnter, 
-    onHoverableMouseLeave,
-    style,
+    onHoverableMouseLeave
   } = props;
   const GroupComponent = groups[name];
   

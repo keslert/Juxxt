@@ -421,6 +421,7 @@ img { max-width: 100%; }
 .m5 { margin: 4em; }
 .m6 { margin: 8em; }
 .m7 { margin: 16em; }
+.mla { margin-left: auto; }
 .ml0 { margin-left: 0; }
 .ml1 { margin-left: .25em; }
 .ml2 { margin-left: .5em; }

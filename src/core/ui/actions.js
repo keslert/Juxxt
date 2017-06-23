@@ -1,6 +1,5 @@
 import * as types from './action-types';
-import { getSelected } from './selectors';
-import { mapValues } from 'lodash';
+//import { getSelected } from './selectors';
 
 export function setSelected(selected) {
   return {
@@ -46,8 +45,8 @@ export function setZoomLevel(level) {
 
 export function turnOnModification(modification) {
   return (dispatch, getState) => {
-    const state = getState();
-    const selected = getSelected(state);
+    //const state = getState();
+    //const selected = getSelected(state);
     
     const modifications = { [modification]: true };
     dispatch(setModifications(modifications));
