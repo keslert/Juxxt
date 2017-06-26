@@ -9,6 +9,7 @@ import SingleButton from './singles/SingleButton';
 import Logo from './singles/logo';
 import DoubleButton from './DoubleButton';
 import ParagraphOnly from './singles/paragraph';
+import VerticalList from './Vertical-List';
 // import * as IconHeadingParagraph from './icon-heading-paragraph';
 // import * as IconSmallHeadingParagraph from './icon-small-heading-paragraph';
 // import * as SmallHeadingParagraph from './small-heading-paragraph';
@@ -26,6 +27,7 @@ export default {
   HeadingParagraphButton,
   BlockImage,
   Logo,
+  VerticalList,
   KickerHeadingParagraph,
   HeadingParagraphLink,
   HeadingSubheadingButton,

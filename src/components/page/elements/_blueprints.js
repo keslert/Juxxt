@@ -67,6 +67,31 @@ export const Copyright = {
   },
 };
 
+export const ListTitle = { 
+  name: 'ListTitle', 
+  is: 'Text',
+  inherits: [],
+  color: {},
+  style: {
+    textTransform: {
+      _default: 'none',
+      options: ['none', 'uppercase'],
+    },
+    fontSize: {
+      _default: 2,
+      options: range(2, 2),
+    },
+    paddingHorizontal: {
+      options: range(3, 4),
+    },
+    paddingVertical: {
+       options: range(2, 3),
+     },
+  },
+};
+
+
+
 /** Text */
 export const BasicParagraph = { 
   name: 'BasicParagraph', 

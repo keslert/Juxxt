@@ -28,7 +28,7 @@ export function init() {
       let background;
       let section;
       if( i===1 ) {
-        const skeletons = generateSectionComponentAlternatives({},["Basic","Basic1_2","Navbar2","Navbar1","Footer1","Footer2"])
+        const skeletons = generateSectionComponentAlternatives({},["Basic","Basic1_2","Navbar2","Navbar1","Footer1","Footer2","FooterVerticalList"])
         
         section = buildSectionFromSkeleton(randomItem(skeletons));
         const background = getPrimary(Object.keys(page.backgroundBlueprint));
@@ -37,7 +37,7 @@ export function init() {
           text: page.backgroundBlueprint[background].text[0],
         };
       } else if( i===0 ) {
-        const skeletons = generateSectionComponentAlternatives({},["Header","Basic","Basic1_2","Header1_2","Footer1","Footer2"])
+        const skeletons = generateSectionComponentAlternatives({},["Header","Basic","Basic1_2","Header1_2","Footer1","Footer2","FooterVerticalList"])
 
         section = buildSectionFromSkeleton(randomItem(skeletons))
         const background = '#ffffff';
@@ -57,7 +57,7 @@ export function init() {
         }; 
       }
       else {
-        const skeletons = generateSectionComponentAlternatives({}, ["Header", "Navbar1", "Navbar2","Header1_2","Footer1","Footer2"]);
+        const skeletons = generateSectionComponentAlternatives({}, ["Header", "Navbar1", "Navbar2","Header1_2","Footer1","Footer2","FooterVerticalList"]);
         const skeleton = randomItem(skeletons);
         section = buildSectionFromSkeleton(skeleton, page);
       }
