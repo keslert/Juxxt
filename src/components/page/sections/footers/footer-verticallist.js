@@ -9,14 +9,14 @@ class FooterVerticalList extends React.PureComponent {
     const boxStyle = {
       ...style,
       display: "flex",
-      align: "center",
+      align: "start",
       justify: "center",
       height: 60,
     }
     const styleClassNames = convertStyleToAtomic(boxStyle);
     const colorClassNames = convertColorToAtomic(color);
     return (
-      <div className={ colorClassNames + ' ml2 pl6 pr6 vmiddle pt6 pb6 FooterVerticalList ' + boxStyle}>
+      <div className={ colorClassNames + ' pl6 pr6 pt6 pb6 FooterVerticalList'}>
         <div className={styleClassNames}>   
         	<Group {...groups.logo} />
             <Group {...groups.verticallist} />
