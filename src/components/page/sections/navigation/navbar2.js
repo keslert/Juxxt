@@ -17,7 +17,7 @@ class Navbar2 extends React.PureComponent {
     const colorClassNames = convertColorToAtomic(color);
 
     return (
-      <div className={ colorClassNames + ' Navbar2'}>
+      <div className={ colorClassNames + ' pt3 pb3 Navbar2'}>
         <div className={styleClassNames}>
           <div>
             <Group {...groups.logo} />
@@ -42,7 +42,7 @@ export const blueprint = {
       options: ['Logo']
     },
     button: {
-      options: ['Button2','Button1'],
+      options: ['DoubleButton','SingleButton'],
     },
   },
   variants: []

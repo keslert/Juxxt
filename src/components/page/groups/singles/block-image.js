@@ -1,6 +1,6 @@
 import React from 'react';
-import Element from '../elements';
-import { BasicImage } from '../elements/_blueprints';
+import Element from '../../elements';
+import { BasicImage } from '../../elements/_blueprints';
 
 class BlockImage extends React.Component {
   render() {

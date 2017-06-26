@@ -2,7 +2,7 @@ import React from 'react';
 import Element from '../elements';
 import { BasicLink } from '../elements/_blueprints';
 
-class Hlist extends React.Component {
+class HorizontalList extends React.Component {
   render() {
     const { elements } = this.props;
     return (
@@ -14,7 +14,7 @@ class Hlist extends React.Component {
     )
   }
 }
-export default Hlist;
+export default HorizontalList;
 
 export const blueprint = {
   inherits: [],

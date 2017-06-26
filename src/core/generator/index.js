@@ -27,17 +27,17 @@ export function init() {
       const page = {sections, backgroundBlueprint};
       let background;
       let section;
-      if(i===1) {
-        const skeletons = generateSectionComponentAlternatives({})
-
-        section = buildSectionFromSkeleton(skeletons[2],page)
+      if( i===1 ) {
+        const skeletons = generateSectionComponentAlternatives({},["Basic","Basic1_2","Navbar2","Navbar1","Footer1","Footer2"])
+        
+        section = buildSectionFromSkeleton(randomItem(skeletons));
         const background = getPrimary(Object.keys(page.backgroundBlueprint));
         section.color = { 
           background: background,
           text: page.backgroundBlueprint[background].text[0],
         };
-      } else if(i===0) {
-        const skeletons = generateSectionComponentAlternatives({},["Header","Basic","Basic1_2"])
+      } else if( i===0 ) {
+        const skeletons = generateSectionComponentAlternatives({},["Header","Basic","Basic1_2","Header1_2","Footer1","Footer2"])
 
         section = buildSectionFromSkeleton(randomItem(skeletons))
         const background = '#ffffff';
@@ -46,13 +46,22 @@ export function init() {
           text: page.backgroundBlueprint[background].text[0],
         };
 
+      } else if(i===(NUM_OF_SECTIONS-1)) {
+        const skeletons = generateSectionComponentAlternatives({},["Header","Basic","Basic1_2","Header1_2","Basic","Basic1_2","Navbar1","Navbar2"])
+
+        section = buildSectionFromSkeleton(randomItem(skeletons))
+        const background = '#ffffff';
+        section.color = { 
+          background: background,
+          text: page.backgroundBlueprint[background].text[0],
+        }; 
       }
       else {
-        const skeletons = generateSectionComponentAlternatives({}, ["Header", "Navbar1", "Navbar2"]);
+        const skeletons = generateSectionComponentAlternatives({}, ["Header", "Navbar1", "Navbar2","Header1_2","Footer1","Footer2"]);
         const skeleton = randomItem(skeletons);
         section = buildSectionFromSkeleton(skeleton, page);
       }
-      if(i===1 || i === NUM_OF_SECTIONS-1) {
+      if( i===1 || i === NUM_OF_SECTIONS-1 ) {
         background = getPrimary(Object.keys(backgroundBlueprint));
       } else if((i%2) === 1) {
         background = websiteColors[websiteColors.length - 2];

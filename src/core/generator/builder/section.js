@@ -22,7 +22,6 @@ export function buildSectionFromSkeleton(skeleton) {
     group.sectionKey = key;
     return group;
   })
-
   section.elements = getElementsFromSection(section);
   return section;
 }

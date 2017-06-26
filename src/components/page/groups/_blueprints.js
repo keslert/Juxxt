@@ -3,16 +3,19 @@ import { blueprint as HeadingParagraph } from './heading-paragraph';
 import { blueprint as KickerHeadingParagraph } from './kicker-heading-paragraph';
 import { blueprint as HeadingParagraphLink } from './heading-paragraph-link';
 import { blueprint as HeadingSubheadingButton } from './heading-subheading-button';
-import { blueprint as Button1 } from './button1g';
-import { blueprint as Button2 } from './button2g';
-import { blueprint as Hlist } from './hlist';
-import { blueprint as Logo } from './logo';
+import { blueprint as DoubleButton } from './DoubleButton';
+import { blueprint as HorizontalList } from './Horizontal-List';
+import { blueprint as HeadingParagraphButton } from './heading-paragraph-button';
+import { blueprint as Logo } from './singles/logo';
+import { blueprint as SingleButton } from './singles/SingleButton';
+import { blueprint as ParagraphOnly } from './singles/paragraph';
+
 // import * as IconHeadingParagraph from './icon-heading-paragraph';
 // import * as IconSmallHeadingParagraph from './icon-small-heading-paragraph';
 // import * as SmallHeadingParagraph from './small-heading-paragraph';
 // import * as SmallHeadingLinkList from './small-heading-link-list';
 // import * as Navigation from './navigation';
-import { blueprint as BlockImage } from './block-image';
+import { blueprint as BlockImage } from './singles/block-image';
 // import * as Device from './device';
 
 export default {
@@ -20,11 +23,13 @@ export default {
   HeadingParagraphLink,
   Logo,
   HeadingParagraph,
+  HeadingParagraphButton,
   KickerHeadingParagraph,
   HeadingSubheadingButton,
-  Button1,
-  Button2,
-  Hlist,
+  SingleButton,
+  DoubleButton,
+  HorizontalList,
+  ParagraphOnly,
   // IconHeadingParagraph,
   
   // IconSmallHeadingParagraph: {

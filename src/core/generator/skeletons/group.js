@@ -5,7 +5,6 @@ import { mapValues } from 'lodash';
 
 export function generateGroupSkeleton(name, variant) {
   const blueprint = blueprints[name];
-
   return {
     name,
     variant: getClosestVariant(variant, blueprint.variants),

@@ -3,19 +3,21 @@ import { BasicButton } from '../elements/_blueprints';
 import Element from '../elements';
 
 
-class Button2 extends React.Component {
+class DoubleButton extends React.Component {
   render() {
     const { elements } = this.props;
     return (
-    	<div className="dib mr4">
+    	<div className=" dib mr4">
+      <div className="pr3">
         <Element {...elements.button} />
+      </div>
         <Element {...elements.button} />
       </div>
     )
   }
 }
 
-export default Button2;
+export default DoubleButton;
 
 export const blueprint = {
   inherits: [],

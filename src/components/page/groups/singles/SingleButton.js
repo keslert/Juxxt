@@ -1,9 +1,9 @@
 import React from 'react';
-import Element from '../elements';
-import { BasicButton } from '../elements/_blueprints';
+import Element from '../../elements';
+import { BasicButton } from '../../elements/_blueprints';
 
 
-class Button1 extends React.Component {
+class SingleButton extends React.Component {
   render() {
     const { elements } = this.props;
     return (
@@ -14,7 +14,7 @@ class Button1 extends React.Component {
   }
 }
 
-export default Button1
+export default SingleButton
 
 export const blueprint = {
   inherits: [],

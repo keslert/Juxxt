@@ -45,10 +45,26 @@ export const BasicSubheading = {
     },
     fontSize: {
       _default: 4,
-      options: range(3, 5),
+      options: range(4, 4),
     }
   },
-  
+};
+
+export const Copyright = { 
+  name: 'Copyright', 
+  is: 'Text',
+  inherits: [],
+  color: {},
+  style: {
+    textTransform: {
+      _default: 'none',
+      options: ['none', 'uppercase'],
+    },
+    fontSize: {
+      _default: 3,
+      options: range(3, 3),
+    }
+  },
 };
 
 /** Text */
@@ -97,8 +113,8 @@ export const BasicLink = {
       options: range(3, 4),
     },
     paddingVertical: {
-      options: range(2, 3),
-    },
+       options: range(2, 3),
+     },
     borderRadius: {
       options: range(0, 2),
     }

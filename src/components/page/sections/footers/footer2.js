@@ -3,7 +3,7 @@ import Group from '../../groups';
 import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
 
-class Navbar1 extends React.PureComponent {
+class Footer2 extends React.PureComponent {
   render () {
     const { groups, style, color } = this.props;
     const boxStyle = {
@@ -15,18 +15,14 @@ class Navbar1 extends React.PureComponent {
     }
     const styleClassNames = convertStyleToAtomic(boxStyle);
     const colorClassNames = convertColorToAtomic(color);
-
     return (
-      <div className={ colorClassNames + ' pt3 pb3 Navbar1'}>
-        <div className={styleClassNames}>
-          <div>
-            <Group {...groups.logo} />
-          </div>
-          <div className="flex-auto tr">
+      <div className={ colorClassNames + '  pl6 pr6 pt5 pb5 justify-between Footer2'}>
+        <div className={styleClassNames + ' flex align-center'}>
+          <div className={styleClassNames + 'tr'}>
             <Group {...groups.links} />
           </div>
           <div>
-            <Group {...groups.button} />
+            <Group {...groups.text} />
           </div>
         </div>
       </div>
@@ -34,18 +30,15 @@ class Navbar1 extends React.PureComponent {
   }
 }
 
-export default Navbar1;
+export default Footer2;
 
 export const blueprint = {
   inherits: [],
   style: {},
   color: {},
   groups: {
-    logo: {
-      options: ['Logo']
-    },
-    button: {
-      options: ['DoubleButton','SingleButton'],
+    text: {
+      options: ['ParagraphOnly']
     },
     links: {
       options: ['HorizontalList']

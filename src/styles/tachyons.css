@@ -619,7 +619,10 @@ img { max-width: 100%; }
 
 
 .h-50 { height: 50px; }
-
+.h-40e { height: 40em; }
+.h-32e { height: 32em; }
 .fr {float:right;}
 .fl {float:left;}
+
+.vmiddle { vertical-align:middle; }
 

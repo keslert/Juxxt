@@ -21,7 +21,7 @@ class Header extends React.PureComponent {
     const colorClassNames = convertColorToAtomic(color);
 
     return (
-      <div className={colorClassNames + ' Header'}>
+      <div className={colorClassNames + ' h-40e Header'}>
         <div className={styleClassNames}>
           <Group {...groups.item} />
         </div>
@@ -41,5 +41,9 @@ export const blueprint = {
       options: ['HeadingSubheadingButton'],
     },
   },
-  variants: []
+  variants: [{
+    order: {
+      options: [1, 3],
+    }
+  }]
 }

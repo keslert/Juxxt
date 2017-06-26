@@ -3,29 +3,33 @@ import HeadingParagraph from './heading-paragraph';
 import KickerHeadingParagraph from './kicker-heading-paragraph';
 import HeadingParagraphLink from './heading-paragraph-link';
 import HeadingSubheadingButton from './heading-subheading-button';
-import Hlist from './hlist';
-import Button1 from './button1g';
-import Logo from './logo';
-import Button2 from './button2g';
+import HeadingParagraphButton from './heading-paragraph-button';
+import HorizontalList from './Horizontal-List';
+import SingleButton from './singles/SingleButton';
+import Logo from './singles/logo';
+import DoubleButton from './DoubleButton';
+import ParagraphOnly from './singles/paragraph';
 // import * as IconHeadingParagraph from './icon-heading-paragraph';
 // import * as IconSmallHeadingParagraph from './icon-small-heading-paragraph';
 // import * as SmallHeadingParagraph from './small-heading-paragraph';
 // import * as SmallHeadingLinkList from './small-heading-link-list';
 // import * as Navigation from './navigation';
-import BlockImage from './block-image';
+import BlockImage from './singles/block-image';
 // import * as Device from './device';
 
 export default {
   HeadingSubheading,
-  Hlist,
-  Button1,
-  Button2,
+  HorizontalList,
+  SingleButton,
+  DoubleButton,
   HeadingParagraph,
+  HeadingParagraphButton,
   BlockImage,
   Logo,
   KickerHeadingParagraph,
   HeadingParagraphLink,
   HeadingSubheadingButton,
+  ParagraphOnly,
   // IconHeadingParagraph,
   
   // IconSmallHeadingParagraph: {
