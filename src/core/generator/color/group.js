@@ -16,6 +16,4 @@ export function colorGroup(group, sections) {
   */
 
   group.color = {};
-
-  //colorItem(group, groups, rules, blueprint);
 }

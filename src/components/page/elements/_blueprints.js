@@ -29,6 +29,10 @@ export const BasicHeading = {
     fontSize: {
       _default: 5,
       options: range(3, 6),
+    },
+    fontWeight: {
+      _default: 6,
+      options: [2,4,6,8],
     }
   }
 };
@@ -168,7 +172,7 @@ export const BasicButton = {
       options: range(0, 2),
     },
     textTransform: {
-      _default: 'uppercase',
+      _default: 'none',
       options: ['none', 'uppercase'],
     },
     fontSize: {

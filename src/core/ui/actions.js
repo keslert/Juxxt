@@ -1,11 +1,23 @@
 import * as types from './action-types';
-//import { getSelected } from './selectors';
+import { getSelected, getModifications, getSelectedModification } from './selectors';
+import { mapValues, filter, zipObject, intersection, sortBy, includes, isEmpty, uniq } from 'lodash';
+import { getStyleRoot } from '../generator/style/utils';
 
-export function setSelected(selected) {
+
+function _setSelected(selected) {
   return {
     type: types.SET_SELECTED,
     payload: selected
   };
+}
+
+export function setSelected(selected) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const modification = getSelectedModification(state);
+    resolveModifications(dispatch, state, modification, selected);
+    dispatch(_setSelected(selected));
+  }
 }
 
 export function setShiftDown(isDown) {
@@ -29,10 +41,17 @@ export function onHoverableMouseLeave(item) {
   }
 }
 
-export function setModifications(modifications) {
+export function setModification(key, value) {
   return {
-    type: types.SET_MODIFICATIONS,
-    payload: modifications,
+    type: types.SET_MODIFICATION,
+    payload: { key, value },
+  }
+}
+
+export function setSelectedModification(modification) {
+  return {
+    type: types.SET_SELECTED_MODIFICATION,
+    payload: modification,
   }
 }
 
@@ -43,13 +62,45 @@ export function setZoomLevel(level) {
   }
 }
 
-export function turnOnModification(modification) {
+export function turnOnModification(key) {
   return (dispatch, getState) => {
-    //const state = getState();
-    //const selected = getSelected(state);
-    
-    const modifications = { [modification]: true };
-    dispatch(setModifications(modifications));
-
+    const state = getState();
+    const selected = getSelected(state);
+    resolveModifications(dispatch, state, key, selected);
+    dispatch(setSelectedModification(key));
   }
+}
+
+function resolveModifications(dispatch, state, modification, selected) {
+  switch(modification) {
+    case 'style': resolveStyleModification(dispatch, state, selected);
+    case 'color': resolveColorModification(dispatch, state, selected);
+    default: console.log('Hm... should not be here');
+  }
+}
+
+function resolveColorModification(dispatch, state, selected) {
+  let keys = ['solid'];
+  if(selected.color.background) {
+    keys = keys.concat(['gradient', 'pattern', 'image']);
+  }
+  
+  resolveModificationSelection(dispatch, state, keys, 'color');
+}
+
+function resolveStyleModification(dispatch, state, selected) {
+  const keys = uniq(Object.keys(selected.style).map(key => getStyleRoot(key)));
+  resolveModificationSelection(dispatch, state, keys, 'style');
+}
+
+function resolveModificationSelection(dispatch, state, keys, modification) {
+  const oldModification = getModifications(state)[modification];
+  const oldKeys = Object.keys(oldModification);
+  const oldSelectedKeys = filter(oldKeys, key => oldModification[key]);
+  
+  const overlap = intersection(keys, oldSelectedKeys);
+  const selectedKeys = !isEmpty(overlap) ? overlap : sortBy(keys).slice(0, 1)
+
+  const value = zipObject(keys, keys.map(key => includes(selectedKeys, key)));
+  dispatch(setModification(modification, value));
 }

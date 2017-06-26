@@ -10,6 +10,10 @@ export function getModifications(state) {
   return getUI(state).modifications;
 }
 
+export function getSelectedModification(state) {
+  return getUI(state).selectedModification;
+}
+
 export function getSelected(state) {
   return getUI(state).selected;
 }

@@ -15,7 +15,6 @@ class Header extends React.PureComponent {
       display: "flex",
       align: "center",
       justify: "center",
-      paddingVertical: '7'
     }
     const styleClassNames = convertStyleToAtomic(boxStyle);
     const colorClassNames = convertColorToAtomic(color);
@@ -33,8 +32,13 @@ class Header extends React.PureComponent {
 export default Header;
 
 export const blueprint = {
-  inherits: ['BasicSection'],
-  style: {},
+  inherits: [],
+  style: {
+    paddingVertical: {
+      _default: 7,
+      options: [4,5,6,7,8],
+    }
+  },
   color: {},
   groups: {
     item: {

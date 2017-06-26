@@ -5,6 +5,7 @@ import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
 import { map, uniq, intersection, filter, range, cloneDeep, flatMap, findIndex } from 'lodash';
 import { styles } from '../style/element/shared-styles';
+import { filterStyle } from '../style/utils';
 
 export function generateElementComponentAlternatives(element, masterSkeleton) {
   const elementsInGroup = uniq(map(element.group.elements, 'name'));
@@ -67,10 +68,11 @@ export function generateElementContentAlternatives(section, element, contentStor
   return sections;
 }
 
-export function generateElementStyleAlternatives(section, element) {
+export function generateElementStyleAlternatives(modify, section, element) {
   const blueprint = blueprints[element.name];
+  const keys = filter(Object.keys(modify), key => modify[key]);
   const sharedStyles = blueprint.inherits.map(name => styles[name]);
-  const style = Object.assign({}, ...sharedStyles, blueprint.style);
+  const style = filterStyle(Object.assign({}, ...sharedStyles, blueprint.style), keys);
   
   const possibleStyles = flatMap(style, ({options}, key) => options.map(value => ({
     ...element.style,

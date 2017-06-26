@@ -17,11 +17,12 @@ export const styles = {
       options: ['none', 'uppercase']
     },
     fontWeight: {
-      options: range(1, 9),
+      options: [2,4,6,8],
     },
     ...p0,
     ...mh0,
     marginBottom: {
+      _default: 2,
       options: range(0, 4),
     },
     fontFamily: {

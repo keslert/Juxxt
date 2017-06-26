@@ -54,7 +54,7 @@ const Element = (props) => {
 }
 
 const mapStateToProps = (state, props) => ({
-  isSelected: state.ui.shiftDown && includes(map(state.ui.selected, 'familyID'), props.familyID),
+  isSelected: state.ui.shiftDown && includes(map(state.ui.selected, 'id'), props.id),
   isHovered: last(state.ui.hovered) === props.id,
 });
 const mapDispatchToProps = Object.assign({}, uiActions);

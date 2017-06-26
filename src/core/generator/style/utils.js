@@ -1,4 +1,4 @@
-import { filter, some, find, includes, values, map, forEach } from 'lodash';
+import { filter, some, find, includes, values, map, forEach, zipObject, pick } from 'lodash';
 import { randomItem, getMode } from '../../utils';
 
 export const ph0 = {
@@ -90,3 +90,30 @@ function styleItemLikeItems(item, items, rules) {
   })
 }
 
+export function getStyleRoot(key) {
+  switch(key) {
+    case 'paddingLeft':
+    case 'paddingRight':
+    case 'paddingBottom':
+    case 'paddingTop':
+    case 'paddingVertical':
+    case 'paddingHorizontal':
+      return 'padding';
+    
+    case 'marginLeft':
+    case 'marginRight':
+    case 'marginBottom':
+    case 'marginTop':
+    case 'marginVertical':
+    case 'marginHorizontal':
+      return 'margin';
+
+    default:
+      return key;
+  }
+}
+
+export function filterStyle(style, whitelist) {
+  const keys = filter(Object.keys(style), key => includes(whitelist, getStyleRoot(key)))
+  return pick(style, keys);
+}

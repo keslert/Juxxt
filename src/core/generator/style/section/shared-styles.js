@@ -8,7 +8,7 @@ export const styles = {
   [names.BasicSection]: {
     paddingVertical: {
       _default: 5,
-      options: range(1, 7),
+      options: [8,7,6,5,4,3,2,1,0],
     },
     // sectionBackground: {
     //   _default: 'solid',

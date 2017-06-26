@@ -9,7 +9,7 @@ import { randomItem } from '../utils';
 import { range, reduce, uniqueId, forEach } from 'lodash';
 
 export function init() {
-  const palette = ["#374140","#1E1E20","#D9CB9E"]; // fixed palette: temporary
+  const palette = ["#374140","#1E1E20","#D9CB9E"];
   const primary = getPrimary(palette);
   const websiteColors = [...palette, tintColor("#211b1a",primary,20), tintColor('#f5f6f7', primary, 20), tintColor("#fff", primary, 2)];
   const backgroundBlueprint = getOkSectionColors(getOkBackgroundColors(websiteColors), websiteColors, [...palette, "#ffffff"]);
@@ -27,9 +27,9 @@ export function init() {
       const page = {sections, backgroundBlueprint};
       let background;
       let section;
+
       if( i===1 ) {
         const skeletons = generateSectionComponentAlternatives({},["Basic","Basic1_2","Navbar2","Navbar1","Footer1","Footer2","FooterVerticalList"])
-        
         section = buildSectionFromSkeleton(randomItem(skeletons));
         const background = getPrimary(Object.keys(page.backgroundBlueprint));
         section.color = { 
@@ -61,14 +61,15 @@ export function init() {
         const skeleton = randomItem(skeletons);
         section = buildSectionFromSkeleton(skeleton, page);
       }
-      if( i===1 || i === NUM_OF_SECTIONS-1 ) {
+
+      if(i === 1 || i === NUM_OF_SECTIONS - 1) {
         background = getPrimary(Object.keys(backgroundBlueprint));
-      } else if((i%2) === 1) {
+      } else if((i % 2) === 1) {
         background = websiteColors[websiteColors.length - 2];
       } else {
         background = websiteColors[websiteColors.length - 1];
       }
-      section.color = { background, text: backgroundBlueprint[background].text[0] }
+      section.color = { background, text: backgroundBlueprint[background].text[0], gradient: background }
       const page2 = {...page, sections: [...page.sections, section]}
       forEach(section.groups, group => colorGroup(group, page2.sections))
       forEach(section.elements, element => colorElement(element, page2))

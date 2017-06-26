@@ -5,7 +5,14 @@ import { connect } from 'react-redux';
 
 import { isEqual } from 'lodash';
 import flow from 'lodash/flow';
-import { setShiftDown, getModifications, getSelected, setSelected } from '../core/ui';
+import { 
+  setShiftDown, 
+  getSelected, 
+  setSelected, 
+  getSelectedModification,
+  turnOnModification, 
+  getModifications 
+} from '../core/ui';
 import { getMaster, updateAlternatives } from '../core/page';
 import Page from '../components/page';
 import Sidebar from '../components/sidebar';
@@ -37,10 +44,10 @@ const StyledColumn = styled.div`
 class App extends React.Component {
 
   componentDidMount() {
-    const { updateAlternatives, setShiftDown, master, setSelected } = this.props;
+    const { updateAlternatives, setShiftDown, master, setSelected, turnOnModification } = this.props;
 
     this.listener = new window.keypress.Listener();
-    this.listener.simple_combo('right', () => updateAlternatives(this.props.modifications));
+    this.listener.simple_combo('right', () => updateAlternatives());
 
     this.listener.register_combo({
       keys: "shift",
@@ -48,13 +55,19 @@ class App extends React.Component {
       on_keyup: () => setShiftDown(false),
     })
 
-    setSelected(master.sections[0]);
+    setSelected(master.sections[1]);
+    turnOnModification('style');
   }
 
   componentWillReceiveProps(newProps) {
-    const { modifications, selected, updateAlternatives } = this.props;
-    if(!isEqual(modifications, newProps.modifications) || !isEqual(selected, newProps.selected)) {
-      updateAlternatives(newProps.modifications);
+    const { selectedModification, selected, updateAlternatives, modifications } = this.props;
+    if(
+      selectedModification !== newProps.selectedModification || 
+      !isEqual(selected, newProps.selected) ||
+      !isEqual(modifications, newProps.modifications)
+    ) {
+      console.log('estamos aqui');
+      updateAlternatives();
     }
   }
 
@@ -79,15 +92,17 @@ class App extends React.Component {
 
 const mapStateToProps = createSelector(
   getMaster,
-  getModifications,
+  getSelectedModification,
   getSelected,
-  (master, modifications, selected) => ({
+  getModifications,
+  (master, selectedModification, selected, modifications) => ({
     master,
+    selectedModification,
     modifications,
     selected,
   })
 )
-const mapDispatchToProps = Object.assign({setShiftDown, updateAlternatives, setSelected});
+const mapDispatchToProps = Object.assign({setShiftDown, updateAlternatives, setSelected, turnOnModification});
 export default flow(
   connect(mapStateToProps, mapDispatchToProps),
   DragDropContext(HTML5Backend)

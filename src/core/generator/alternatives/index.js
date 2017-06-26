@@ -35,11 +35,11 @@ export function generateAlternatives(page, modify, selected) {
   } else if(modify.variant) {
     sections = generateVariantAlternatives(page, selected);
   } else if(modify.color) {
-    sections = generateColorAlternatives(page, selected);
+    sections = generateColorAlternatives(page, modify.color, selected);
   } else if(modify.content) {
     sections = generateContentAlternatives(page, selected);
   } else if(modify.style) {
-    sections = generateStyleAlternatives(page, selected);
+    sections = generateStyleAlternatives(page, modify.style, selected);
   }
 
   return sections.map(section => ({
@@ -96,7 +96,7 @@ function generateVariantAlternatives(page, selected) {
   return sections;
 }
 
-function generateColorAlternatives(page, selected) {
+function generateColorAlternatives(page, modify, selected) {
   const section = getSectionFromItem(selected)
   const skeleton = extractSkeletonFromSection(section);
   const _section = buildSectionFromSkeleton(skeleton);
@@ -105,11 +105,11 @@ function generateColorAlternatives(page, selected) {
   assignColor(_section,page);
   let sections;
   if(selected.isSection) {
-    sections = generateSectionColorAlternatives(_section,page);
+    sections = generateSectionColorAlternatives(_section, modify, page);
   } else if(selected.isGroup) {
-    sections = generateGroupColorAlternatives(_section);
+    sections = generateGroupColorAlternatives(_section, modify);
   } else {
-    sections = generateElementColorAlternatives(_section,selected,page);
+    sections = generateElementColorAlternatives(_section, modify, selected, page);
   }
 
   return sections;
@@ -134,7 +134,7 @@ function generateContentAlternatives(page, selected) {
   return sections;
 }
 
-function generateStyleAlternatives(page, selected) {
+function generateStyleAlternatives(page, modify, selected) {
   const section = getSectionFromItem(selected);
   const skeleton = extractSkeletonFromSection(section);
   const _section = buildSectionFromSkeleton(skeleton);
@@ -144,11 +144,11 @@ function generateStyleAlternatives(page, selected) {
   assignStyles(_section, page);
   let sections;
   if(selected.isSection) {
-    sections = generateSectionStyleAlternatives(_section, page);
+    sections = generateSectionStyleAlternatives(modify, _section, page);
   } else if(selected.isGroup) {
-    sections = generateGroupStyleAlternatives(_section, selected);
+    sections = generateGroupStyleAlternatives(modify, _section, selected);
   } else if(selected.isElement) {
-    sections = generateElementStyleAlternatives(_section, selected);
+    sections = generateElementStyleAlternatives(modify, _section, selected);
   }
 
   return sections;

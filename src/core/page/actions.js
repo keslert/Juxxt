@@ -2,8 +2,8 @@ import * as types from './action-types';
 import { generate } from '../../core/generator';
 import { generateAlternatives } from '../../core/generator/alternatives';
 import { getMaster } from './selectors';
-import { sortBy, cloneDeep, uniqueId, forEach, findIndex } from 'lodash';
-import { setSelected } from '../ui';
+import { sortBy, cloneDeep, uniqueId, forEach, findIndex, pick } from 'lodash';
+import { setSelected, getModifications, getSelectedModification } from '../ui';
 
 
 export function clearRegistry() {
@@ -47,14 +47,14 @@ export function updateMaster(modifications, overwrites) {
   }
 }
 
-export function updateAlternatives(modifications) {
+export function updateAlternatives() {
   return (dispatch, getState) => {
     const state = getState();
     const master = getMaster(state);
+    const modifications = getModifications(state);
+    const selectedModification = getSelectedModification(state);
     const selected = state.ui.selected;
     const section = selected.isSection ? selected : selected.section || selected.group.section;
-
-    
     const index = findIndex(master.sections, s => s.id === section.id);
 
     const page = {...master,
@@ -65,7 +65,7 @@ export function updateAlternatives(modifications) {
       ]
     }
 
-    const alternatives = generateAlternatives(page, modifications, selected);
+    const alternatives = generateAlternatives(page, pick(modifications, [selectedModification]), selected);
     dispatch(setAlternatives(alternatives));
   }
 }

@@ -4,10 +4,7 @@ import tinycolor from 'tinycolor2';
 import geopattern from 'geopattern';
 
 export function getGradient(color) {
-  const _color = tinycolor(color).toHsv();
-
-  _color.s = (tinycolor(color).toHsv().s - 30);
-  return "linear-gradient(" + tinycolor(_color).toHexString() +", "+ color +")";
+  return `linear-gradient(to right, ${tinycolor(color).darken(15).toString()}, ${color});`;
 }
 
 export function getPattern(color) {

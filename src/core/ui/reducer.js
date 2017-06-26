@@ -3,13 +3,13 @@ import { filter } from 'lodash';
 const uiState = () => ({
   selected: {},
   modifications: {
-    component: false,
-    variant: false,
-    color: true,
-    content: false,
-    style: false,
-    theme: false,
+    component: {},
+    variant: {},
+    color: {},
+    content: {},
+    style: {},
   },
+  selectedModification: 'component',
   hovered: [],
   shiftDown: false,
   zoomLevel: 2,
@@ -29,6 +29,18 @@ export function uiReducer(state = uiState(), {payload, type}) {
       return Object.assign({}, state, {
         shiftDown: payload,
       })
+    
+    case types.SET_SELECTED_MODIFICATION:
+      return Object.assign({}, state, { 
+        selectedModification: payload,
+      });
+
+    case types.SET_MODIFICATION:
+      return Object.assign({}, state, {
+        modifications: {...state.modifications,
+          [payload.key]: payload.value,
+        }
+      })
 
     case types.ON_HOVERABLE_MOUSE_ENTER:
       return Object.assign({}, state, {
@@ -37,11 +49,6 @@ export function uiReducer(state = uiState(), {payload, type}) {
     case types.ON_HOVERABLE_MOUSE_LEAVE:
       return Object.assign({}, state, {
         hovered: filter(state.hovered, uuid => uuid !== payload),
-      })
-
-    case types.SET_MODIFICATIONS:
-      return Object.assign({}, state, {
-        modifications: payload,
       })
 
     case types.SET_ZOOM_LEVEL:

@@ -1,10 +1,11 @@
 import blueprints from '../../../components/page/sections/_blueprints';
 import { generateSectionSkeleton } from '../skeletons/section';
-import { filter, range, mapValues, uniqBy, flatMap, cloneDeep, forEach, includes } from 'lodash';
+import { filter, range, mapValues, uniqBy, flatMap, cloneDeep, includes, map } from 'lodash';
 import { assignContent } from '../content';
 import { getCombinations } from '../../utils';
 import { colorElement } from '../color/element';
 import { styles } from '../style/section/shared-styles';
+import { filterStyle } from '../style/utils';
 
 export function generateSectionComponentAlternatives(section, blacklist=[]) {
   const possibleSections = Object.keys(blueprints);
@@ -33,46 +34,57 @@ export function generateSectionVariantAlternatives(section, skeleton) {
   return skeletons;
 }
 
-export function generateSectionColorAlternatives(section, page) {
-  const validBgColors = Object.keys(page.backgroundBlueprint);
-  const sections = []
-
-  for(let i=0; i<(validBgColors.length); i++) {
-    const background = validBgColors[i];
-    const text = page.backgroundBlueprint[background].text[0];
-    
-    const solidSection = cloneDeep(section);
-    solidSection.color = {
-      background,
-      text,
-    };
-    forEach(solidSection.elements, e => colorElement(e, page));
-    sections.push(solidSection);
-
-    const patternSection = cloneDeep(section);
-    patternSection.color = {
-      background,
-      text,
-      pattern: background,
-      _pattern: page.backgroundBlueprint[background].pattern,
-    };
-    forEach(patternSection.elements, e => colorElement(e, page));
-    sections.push(patternSection);
-
-    const gradientSection = cloneDeep(section);
-    gradientSection.color = {
-      background,
-      text,
-      gradient: background
-    };
-    forEach(gradientSection.elements, e => colorElement(e, page));
-    sections.push(gradientSection);
+export function generateSectionColorAlternatives(section, modify, page) {
+  let sections = [];
+  if(modify.solid) {
+    sections = generateSectionColorSolidsBackground(section, page);
+  } else if(modify.pattern) {
+    sections = generateSectionColorPatternsBackground(section, page);
+  } else if(modify.gradient) {
+    sections = generateSectionColorGradientsBackground(section, page);
   }
-  
-
-
   return sections;
 }
+
+function generateSectionColorSolidsBackground(section, page) {
+  const sections = map(page.backgroundBlueprint, blueprint => {
+    const _section = cloneDeep(section);
+    _section.color = {
+      background: blueprint.color,
+      text: blueprint.text[0]
+    }
+    return _section;
+  })
+  return sections;
+}
+
+function generateSectionColorPatternsBackground(section, page) {
+  const sections = map(page.backgroundBlueprint, blueprint => {
+    const _section = cloneDeep(section);
+    _section.color = {
+      background: blueprint.color,
+      text: blueprint.text[0],
+      pattern: blueprint.color,
+      _pattern: blueprint.pattern,
+    }
+    return _section;
+  })
+  return sections;
+}
+
+function generateSectionColorGradientsBackground(section, page) {
+  const sections = map(page.backgroundBlueprint, blueprint => {
+    const _section = cloneDeep(section);
+    _section.color = {
+      background: blueprint.color,
+      text: blueprint.text[0],
+      gradient: blueprint.color,
+    }
+    return _section;
+  })
+  return sections;
+}
+
 
 export function generateSectionContentAlternatives(section, contentStore) {
   const store = [];
@@ -81,15 +93,19 @@ export function generateSectionContentAlternatives(section, contentStore) {
   return sections;
 }
 
-export function generateSectionStyleAlternatives(section) {
+export function generateSectionStyleAlternatives(modify, section) {
   const blueprint = blueprints[section.name];
+  const keys = filter(Object.keys(modify), key => modify[key]);
   const sharedStyles = blueprint.inherits.map(name => styles[name]);
-  const style = Object.assign({}, ...sharedStyles, blueprint.style);
+  const style = filterStyle(Object.assign({}, ...sharedStyles, blueprint.style), keys);
   const _style = mapValues(style, s => s.options);
   
   const combinations = getCombinations(_style);
   const sections = combinations.map(style => {
-    const _section = {...section, style};
+    const _section = {
+      ...section,
+      style: { ...section.style, ...style }
+    };
     return _section;
   })
 

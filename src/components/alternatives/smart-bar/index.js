@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { 
-  getModifications, 
+  getSelectedModification, 
   turnOnModification, 
   setZoomLevel, 
   getZoomLevel,
@@ -14,7 +14,7 @@ import Stepper from '../../common/stepper';
 import SearchBar from '../../common/search-bar';
 import { StyledFlex, StyledSpacer } from '../../common/styled-base';
 import Box from '../../common/box';
-import StyleBar from './style-bar';
+import ModificationBar from './modification-bar';
 
 
 const StyledSmartBar = styled.div`
@@ -27,7 +27,7 @@ const StyledSmartBar = styled.div`
 class SmartBar extends React.Component {
 
   render() {
-    const { modifications, turnOnModification, setZoomLevel, zoomLevel } = this.props;
+    const { modification, turnOnModification, setZoomLevel, zoomLevel } = this.props;
     const buttons = [
       {label: 'Component', key: 'component'},
       {label: 'Variant', key: 'variant'},
@@ -38,7 +38,7 @@ class SmartBar extends React.Component {
 
     return (
       <StyledSmartBar>
-        <Box display="flex" flexWrap="wrap" width="100%">
+        <Box display="flex" flexWrap="wrap" width="100%" marginBottom="10px">
           <StyledFlex>
             <SearchBar />
           </StyledFlex>
@@ -54,24 +54,24 @@ class SmartBar extends React.Component {
             <StyledSpacer marginLeft="5px" key={key}>
               <Button 
                 text={label} 
-                active={modifications[key]} 
+                active={key === modification} 
                 onClick={() => turnOnModification(key)}
                 />
             </StyledSpacer>
           ))}
         </Box>
-        { modifications.style && <StyleBar /> }
+        <ModificationBar />
       </StyledSmartBar>
     )
   }
 }
 
 const mapStateToProps = createSelector(
-  getModifications,
+  getSelectedModification,
   getZoomLevel,
   getSelected,
-  (modifications, zoomLevel, selected) => ({
-    modifications,
+  (modification, zoomLevel, selected) => ({
+    modification,
     zoomLevel,
     selected,
   })
