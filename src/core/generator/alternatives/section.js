@@ -59,30 +59,56 @@ function generateSectionColorSolidsBackground(section, page) {
 }
 
 function generateSectionColorPatternsBackground(section, page) {
-  const sections = map(page.backgroundBlueprint, blueprint => {
-    const _section = cloneDeep(section);
+
+  const sections = [];
+  for(let i=0; i < page.backgroundBlueprint[section.color.background].pattern.length; i++) {
+    const _section = cloneDeep(section);  
     _section.color = {
-      background: blueprint.color,
-      text: blueprint.text[0],
-      pattern: blueprint.color,
-      _pattern: blueprint.pattern,
+      background: section.color.background,
+      text: page.backgroundBlueprint[section.color.background].text[0],
+      pattern: section.color.background,
+      _pattern: page.backgroundBlueprint[section.color.background].pattern[i]
     }
-    return _section;
-  })
+    sections.push(_section);
+  }
   return sections;
+  // const sections = map(page.backgroundBlueprint, blueprint => {
+  //   const _section = cloneDeep(section);
+  //   _section.color = {
+  //     background: blueprint.color,
+  //     text: blueprint.text[0],
+  //     pattern: blueprint.color,
+  //     _pattern: blueprint.pattern,
+  //   }
+  //   return _section;
+  // })
+  // return sections;
+  
 }
 
 function generateSectionColorGradientsBackground(section, page) {
-  const sections = map(page.backgroundBlueprint, blueprint => {
+  const gradient_array = page.backgroundBlueprint[section.color.background].gradient;
+  const sections = [];
+  for(let i=0; i<gradient_array.length; i++) {
     const _section = cloneDeep(section);
     _section.color = {
-      background: blueprint.color,
-      text: blueprint.text[0],
-      gradient: blueprint.color,
+      //background: section.color.background,
+      text: page.backgroundBlueprint[section.color.background].text[0],
+      gradient: section.color.background + '-' + gradient_array[i].end.substr(1) +'-' + gradient_array[i].direction.replace(/\s+/g, '')
     }
-    return _section;
-  })
+    sections.push(_section);
+  }
   return sections;
+  // const sections = map(page.backgroundBlueprint, blueprint => {
+  //   const _section = cloneDeep(section);
+  //   _section.color = {
+  //     background: blueprint.color,
+  //     text: blueprint.text[0],
+  //     gradient: blueprint.color,
+  //   }
+  //   return _section;
+  // })
+  // return sections;
 }
 
 

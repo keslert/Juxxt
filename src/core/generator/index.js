@@ -12,7 +12,9 @@ export function init() {
   const palette = ["#374140","#1E1E20","#D9CB9E"];
   const primary = getPrimary(palette);
   const websiteColors = [...palette, tintColor("#211b1a",primary,20), tintColor('#f5f6f7', primary, 20), tintColor("#fff", primary, 2)];
+  
   const backgroundBlueprint = getOkSectionColors(getOkBackgroundColors(websiteColors), websiteColors, [...palette, "#ffffff"]);
+  
   const NUM_OF_SECTIONS = 6;
 
   const master = {
@@ -27,7 +29,6 @@ export function init() {
       const page = {sections, backgroundBlueprint};
       let background;
       let section;
-
       if( i===1 ) {
         const skeletons = generateSectionComponentAlternatives({},["Basic","Basic1_2","Navbar2","Navbar1","Footer1","Footer2","FooterVerticalList"])
         section = buildSectionFromSkeleton(randomItem(skeletons));
@@ -69,15 +70,15 @@ export function init() {
       } else {
         background = websiteColors[websiteColors.length - 1];
       }
-      section.color = { background, text: backgroundBlueprint[background].text[0], gradient: background }
+      section.color = { background, text: backgroundBlueprint[background].text[0]}
       const page2 = {...page, sections: [...page.sections, section]}
       forEach(section.groups, group => colorGroup(group, page2.sections))
-      forEach(section.elements, element => colorElement(element, page2))
+      forEach(section.elements, element => colorElement(element, page2));
       assignContent(section, []);
       assignStyles(section, page);
       return [...sections, section];
     }, [])
   }
-
+  
   return { master, alternatives: [] };
 }

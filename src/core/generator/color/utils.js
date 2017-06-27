@@ -1,14 +1,57 @@
-import { filter, find, some, map, sortBy, max } from 'lodash';
-import { getMode } from '../../utils';
+import { filter, find, some, map, sortBy, max, clone, forEach } from 'lodash';
+import { getMode, randomItem } from '../../utils';
 import tinycolor from 'tinycolor2';
 import geopattern from 'geopattern';
 
-export function getGradient(color) {
-  return `linear-gradient(to right, ${tinycolor(color).darken(15).toString()}, ${color});`;
+
+function isSimilarHue(color1,color2) {
+  const DIFFERENCE = 50;
+  return (Math.abs(tinycolor(color1)['h'] - tinycolor(color2)['h']) <= DIFFERENCE);
 }
 
+export function getGradient(color, okBackgrounds) {
+  const gradient_list = [];
+  const GRADIENT_DIRECTIONS = ['to left top', 'to right top', 'to left', 'to right', ' to left bottom', 'to right bottom', 'to top', 'to bottom'];
+  let _gradient = {};
+  /*
+  Add similar hue gradients with different gradient directions
+  */
+  for(let i=0;i<okBackgrounds.length;i++) {
+    if(isSimilarHue(color,okBackgrounds[i])) {
+        for(let j=0;j<GRADIENT_DIRECTIONS.length;j++) {
+          _gradient = {
+            start: color,
+            end: okBackgrounds[i],
+            direction: GRADIENT_DIRECTIONS[j],
+          }
+          gradient_list.push(clone(_gradient));
+        }
+    }
+  }
+  /*
+  Add gradient directions to darkened color
+  */
+  for(let j=0;j<GRADIENT_DIRECTIONS.length;j++) {
+    _gradient = {
+      start: color,
+      end: tinycolor(color).darken(15).toString(),
+      direction: GRADIENT_DIRECTIONS[j],
+    }
+    gradient_list.push(clone(_gradient));
+  }
+
+  return gradient_list;
+}
+
+const PATTERNS = ['chevrons','octogons','overlappingCircles','plusSigns','xes','sineWaves','hexagons','overlappingRings','plaid','triangles','squares','nestedSquares','mosaicSquares','concentricCircles','diamonds','tessellation']
 export function getPattern(color) {
-  return geopattern.generate(Math.random().toString(36).substring(7),{color:color}).toDataUrl();
+  const patternArr = [];
+  forEach(PATTERNS, pattern=>
+    patternArr.push(
+      geopattern.generate(Math.random().toString(36).substring(7),{color:color,generator: randomItem(PATTERNS)}).toDataUrl()
+    )
+  );
+  return patternArr;
 }
 
 export function colorItem(item, items, rules, blueprint) {
@@ -61,7 +104,6 @@ export function getOkTextOnBackground(bgColor, arr) {
   return map(sortedArr, 'color');
 }
 
-
 export function getOkSectionColors(okBackgrounds, websiteColors, palette) {
   const okPayload = {};
   for(let i=0; i<okBackgrounds.length; i++) {
@@ -69,6 +111,7 @@ export function getOkSectionColors(okBackgrounds, websiteColors, palette) {
       color: okBackgrounds[i],
       text: getOkTextOnBackground(okBackgrounds[i], websiteColors),
       solid: getOkSolids(okBackgrounds[i], palette),
+      gradient: getGradient(okBackgrounds[i], okBackgrounds),
       pattern: getPattern(okBackgrounds[i])
     };
   }
@@ -123,19 +166,4 @@ function colorItemLikeItems(item, items, rules) {
   Object.keys(colors[0]).forEach(key => {
     item.color[key] = getMode(map(colors, key));
   })
-}
-
-export function getPossibleTextColors(color) {
-  switch(color) {
-    case 'primary':
-    case 'seconary':
-    case 'tertiary':
-    case 'dark':
-    case 'offDark':
-      return ['light', 'offLight', 'textOnDark']
-    case 'light':
-    case 'offLight':
-    default: 
-      return ['text', 'dark', 'primary', 'secondary', 'tertiary']
-  }
 }

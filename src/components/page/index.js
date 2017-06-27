@@ -25,18 +25,28 @@ const StyledPage = styled.div`
 class Page extends React.PureComponent {
   
   render() {
-    
-    const { sections, master, onClick, id, websiteColors } = this.props;
+    const { sections, master, onClick, id, websiteColors, backgroundBlueprint } = this.props;
     const last = sections.length - 1;
+
+    const gradientColors = Object.keys(backgroundBlueprint).map(color => 
+      backgroundBlueprint[color].gradient.map(gradObj=>
+        `
+        .grd-${gradObj.start.substr(1)}-${gradObj.end.substr(1)}-${gradObj.direction.replace(/\s+/g, '')} {
+          background: linear-gradient(${gradObj.direction}, ${gradObj.start}, ${gradObj.end});
+        }\n
+        `
+      )
+    ).join('\n');
+
+    console.log(gradientColors);
+
     const pageColors = websiteColors.map((color) => `.bg-${color.replace("#","")} {
       background: ${color}; 
     }\n
     .c-${color.replace("#","")} { 
       color: ${color}; 
     }\n
-    .grd-${color.replace("#","")} {
-      background: ${getGradient(color)};
-    }`).join('\n');
+    `).join('\n');
     
     const patternColors = sections.map(section => section.color.pattern && `
       .ptrn-${section.color.pattern.substr(1)} {
@@ -44,8 +54,7 @@ class Page extends React.PureComponent {
         background-size: 75%;
       }\n
     `).join('\n');
-
-    const extraRules = [pageColors, patternColors].join('\n');
+    const extraRules = [gradientColors, pageColors, patternColors].join('\n');
 
 
     const clickable = isFunction(onClick);
