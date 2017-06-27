@@ -114,6 +114,14 @@ export const BasicImage = {
   style: {},
 };
 
+export const LogoImage = {
+  name: 'LogoImage',
+  is: 'Image',
+  inherits: ['Media'],
+  color: {},
+  style: {},
+}
+
 export const SmallProfileImage = { 
   name: 'SmallProfileImage', 
   is: 'Image',

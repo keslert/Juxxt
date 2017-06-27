@@ -15,8 +15,8 @@ export function generateContent(element) {
       return getParagraphContent(element);
     case 'Icon':
       return getIconContent(element);
-    case 'Image':
-      return getImageContent(element);
+    case 'LogoImage':
+      return {src: 'http://acmelogos.com/images/logo-8.svg'};
     case 'Link':
       return getLinkContent(element);
     case 'Heading':

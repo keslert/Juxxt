@@ -1,6 +1,6 @@
 import React from 'react';
 import Element from '../../elements';
-import { BasicImage } from '../../elements/_blueprints';
+import { LogoImage } from '../../elements/_blueprints';
 
 class Logo extends React.Component {
   render() {
@@ -21,7 +21,7 @@ export const blueprint = {
   color: {},
   elements: {
     image: {
-      name: BasicImage.name,
+      name: LogoImage.name,
     }
   },
   variants: [],
