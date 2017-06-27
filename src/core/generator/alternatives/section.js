@@ -1,6 +1,6 @@
 import blueprints from '../../../components/page/sections/_blueprints';
 import { generateSectionSkeleton } from '../skeletons/section';
-import { filter, range, mapValues, uniqBy, flatMap, cloneDeep, includes, map } from 'lodash';
+import { filter, range, mapValues, uniqBy, flatMap, cloneDeep, forEach, includes, map } from 'lodash';
 import { assignContent } from '../content';
 import { getCombinations } from '../../utils';
 import { colorElement } from '../color/element';
@@ -43,6 +43,9 @@ export function generateSectionColorAlternatives(section, modify, page) {
   } else if(modify.gradient) {
     sections = generateSectionColorGradientsBackground(section, page);
   }
+
+  forEach(sections, s => s.elements.forEach(e => colorElement(e, page)));
+
   return sections;
 }
 
