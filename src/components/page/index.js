@@ -6,6 +6,7 @@ import InsertionTarget from './insertion-target';
 import { isFunction } from 'lodash';
 
 const StyledPage = styled.div`
+  background: #fff;
   ${props => `
     ${props.clickable && `
       cursor: pointer;

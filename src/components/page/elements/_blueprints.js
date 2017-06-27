@@ -114,6 +114,14 @@ export const BasicImage = {
   style: {},
 };
 
+export const LogoImage = {
+  name: 'LogoImage',
+  is: 'Image',
+  inherits: ['Media'],
+  color: {},
+  style: {},
+}
+
 export const SmallProfileImage = { 
   name: 'SmallProfileImage', 
   is: 'Image',
@@ -168,8 +176,8 @@ export const BasicButton = {
       options: range(3,6),
     },
     borderRadius: {
-      _default: 2,
-      options: range(0, 2),
+      _default: '-pill',
+      options: [0,1,2,3,4,'-pill'],
     },
     textTransform: {
       _default: 'none',
