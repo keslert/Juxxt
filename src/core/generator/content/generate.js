@@ -9,8 +9,8 @@ export function generateContent(element) {
       return {text: LoremIpsum({count: random(3, 8), units: 'words'})};
     case 'BasicParagraph':
       return {text: LoremIpsum({count: random(2, 4), units: 'sentences'})};
-    case 'Button':
-      return getButtonContent(element);
+    case 'BasicButton':
+      return getButtonContent();
     case 'Paragraph':
       return getParagraphContent(element);
     case 'Icon':
@@ -40,14 +40,14 @@ function getGenericContent(element) {
   }
 }
 
-function getButtonContent(props) {
+function getButtonContent() {
   return randomItem([
     { text: 'Get Started' },
     { text: 'Learn More' },
   ]);
 }
 
-function getParagraphContent(props) {
+function getParagraphContent() {
   const text = LoremIpsum({
     count: random(2, 4),
     units: 'sentences',
@@ -55,7 +55,7 @@ function getParagraphContent(props) {
   return { text };
 }
 
-function getIconContent(props) {
+function getIconContent() {
   return randomItem([
     { type: 'rocket' },
     { type: 'plane' },
