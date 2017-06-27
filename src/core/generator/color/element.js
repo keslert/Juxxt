@@ -16,6 +16,7 @@ export function colorElement(element, page) {
   ]
   
   let background = getGroupOrSectionBackground(element);
+
   if(blueprint.color.background) {
     const valid = filter(elements, e => 
       e.name === element.name && 
@@ -33,7 +34,7 @@ export function colorElement(element, page) {
     }
     background = element.color.background;
   } 
-  
+
   if(blueprint.color.text) {
     const valid = filter(elements, e => 
       e.name === element.name &&

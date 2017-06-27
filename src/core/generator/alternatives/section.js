@@ -95,7 +95,7 @@ function generateSectionColorGradientsBackground(section, page) {
   for(let i=0; i<gradient_array.length; i++) {
     const _section = cloneDeep(section);
     _section.color = {
-      //background: section.color.background,
+      background: section.color.background,
       text: page.backgroundBlueprint[section.color.background].text[0],
       gradient: section.color.background + '-' + gradient_array[i].end.substr(1) +'-' + gradient_array[i].direction.replace(/\s+/g, '')
     }
