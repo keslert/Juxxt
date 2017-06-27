@@ -34,13 +34,13 @@ class Header1_2 extends React.PureComponent {
   const innerClassNames = convertStyleToAtomic(innerBoxStyle);
 
   return (
-    <Box className={colorClassNames + " h-40e tl"}>
+    <Box className={colorClassNames + "tl"}>
       <Box className={convertStyleToAtomic(containerStyle) }>
         <Box className={convertStyleToAtomic(wrapStyle) }>
-          <Box className={innerClassNames + ' tl order-' + variant.order}>
+          <Box className={innerClassNames + ' order-' + variant.order}>
             <Group {...groups.tp} />
           </Box>
-          <Box className={innerClassNames + ' h-32e order-2'}>
+          <Box className={innerClassNames + ' order-2'}>
             <Group {...groups.media} />
           </Box>
         </Box>
@@ -54,7 +54,12 @@ export default Header1_2;
 
 export const blueprint = {
   inherits: ['BasicSection'],
-  style: {},
+  style: {
+    paddingVertical: {
+      _default: 5,
+      options: [4,5,6,7,8],
+    }
+  },
   color: {},
   groups: {
     tp: {
