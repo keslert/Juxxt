@@ -23,7 +23,6 @@ export const blueprint = {
   inherits: [TalkingPoint],
   style: {},
   color: {
-    text: 'black',
   },
   elements: {
     heading: {

@@ -34,13 +34,13 @@ class Header1_2 extends React.PureComponent {
   const innerClassNames = convertStyleToAtomic(innerBoxStyle);
 
   return (
-    <Box className={colorClassNames + " tl"}>
+    <Box className={colorClassNames + " h-40e tl"}>
       <Box className={convertStyleToAtomic(containerStyle) }>
         <Box className={convertStyleToAtomic(wrapStyle) }>
           <Box className={innerClassNames + ' order-' + variant.order}>
             <Group {...groups.tp} />
           </Box>
-          <Box className={innerClassNames + ' order-2'}>
+          <Box className={innerClassNames + ' h-32e order-2'}>
             <Group {...groups.media} />
           </Box>
         </Box>

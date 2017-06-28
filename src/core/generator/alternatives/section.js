@@ -41,10 +41,31 @@ export function generateSectionColorAlternatives(section, modify, page) {
     sections = generateSectionColorPatternsBackground(section, page);
   } else if(modify.gradient) {
     sections = generateSectionColorGradientsBackground(section, page);
+  } else if(modify.image) {
+    sections = generateSectionColorImagesBackground(section, page);
   }
 
   forEach(sections, s => s.elements.forEach(e => colorElement(e, page)));
 
+  return sections;
+}
+
+
+const NUM_OF_IMAGES = 1;
+
+function generateSectionColorImagesBackground(section, page) {
+
+  const sections = [];
+  
+  for(let i =0; i< NUM_OF_IMAGES ; i++) {
+    const _section = cloneDeep(section);
+    _section.color = {
+      text: '#ffffff',
+      background: section.color.background, 
+      backgroundImage: 'randomBgImage',
+    }
+    sections.push(_section)
+  }
   return sections;
 }
 

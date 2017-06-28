@@ -15,7 +15,7 @@ const conversions = {
   ...width,
   ...aspect,
   borderRadius: v => 'br' + v,
-  height: v => 'h-' + v,
+  height: v => 'h-' + v
 }
 
 
