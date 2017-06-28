@@ -48,7 +48,7 @@ export function getPattern(color) {
   const patternArr = [];
   forEach(PATTERNS, pattern=>
     patternArr.push(
-      geopattern.generate(Math.random().toString(36).substring(7),{color:color,generator: randomItem(PATTERNS)}).toDataUrl()
+      geopattern.generate(Math.random().toString(36).substring(7),{color:color,generator: pattern}).toDataUrl()
     )
   );
   return patternArr;

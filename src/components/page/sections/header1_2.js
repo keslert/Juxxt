@@ -34,7 +34,7 @@ class Header1_2 extends React.PureComponent {
   const innerClassNames = convertStyleToAtomic(innerBoxStyle);
 
   return (
-    <Box className={colorClassNames + "tl"}>
+    <Box className={colorClassNames + " tl"}>
       <Box className={convertStyleToAtomic(containerStyle) }>
         <Box className={convertStyleToAtomic(wrapStyle) }>
           <Box className={innerClassNames + ' order-' + variant.order}>

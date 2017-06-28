@@ -55,7 +55,7 @@ class Page extends React.PureComponent {
         background-size: 75%;
       }\n
     `).join('\n');
-    const extraRules = [gradientColors, pageColors, patternColors].join('\n');
+    const extraRules = [ pageColors, gradientColors, patternColors].join('\n');
 
 
     const clickable = isFunction(onClick);
