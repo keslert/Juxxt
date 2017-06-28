@@ -5,7 +5,7 @@ import { convertColorToAtomic } from '../../../../core/generator/color/conversio
 
 class Footer2 extends React.PureComponent {
   render () {
-    const { groups, style, color } = this.props;
+    const { groups, style, color, variant } = this.props;
     const boxStyle = {
       ...style,
       display: "flex",
@@ -18,10 +18,10 @@ class Footer2 extends React.PureComponent {
     return (
       <div className={ colorClassNames + '  pl6 pr6 pt5 pb5 justify-between Footer2'}>
         <div className={styleClassNames + ' flex align-center'}>
-          <div className={styleClassNames + 'tr'}>
+          <div className={styleClassNames + 'tr order-' + variant.order}>
             <Group {...groups.links} />
           </div>
-          <div>
+          <div className={'order-2'}>
             <Group {...groups.text} />
           </div>
         </div>
@@ -44,5 +44,9 @@ export const blueprint = {
       options: ['HorizontalList']
     }
   },
-  variants: []
+  variants: [{
+    order: {
+      options: [1,3],
+    }
+  }]
 }

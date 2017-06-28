@@ -23,7 +23,7 @@ class Header1_2 extends React.PureComponent {
 
   const innerBoxStyle = {
     paddingHorizontal: style.gutter,
-    width: '50P',
+    maxWidth: '50P',
     display: "flex",
     justify: "center",
     align: "center",
@@ -69,5 +69,12 @@ export const blueprint = {
       options: ['BlockImage']
     }
   },
-  variants: []
+  variants: [
+  {
+    order: {
+      options:[1,3],
+    }
+  }
+
+  ]
 }

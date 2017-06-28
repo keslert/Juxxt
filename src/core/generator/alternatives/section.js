@@ -17,13 +17,12 @@ export function generateSectionComponentAlternatives(section, blacklist=[]) {
     skeleton.id = section.id;
     return skeleton;
   })
-  
   return skeletons;
 }
 
 export function generateSectionVariantAlternatives(section, skeleton) {
   const variants = blueprints[section.name].variants;
-  
+
   const combinations = flatMap(variants, variant => getCombinations(
     mapValues(variant, ({options}) => options)
   ))
@@ -75,17 +74,6 @@ function generateSectionColorPatternsBackground(section, page) {
     sections.push(_section);
   }
   return sections;
-  // const sections = map(page.backgroundBlueprint, blueprint => {
-  //   const _section = cloneDeep(section);
-  //   _section.color = {
-  //     background: blueprint.color,
-  //     text: blueprint.text[0],
-  //     pattern: blueprint.color,
-  //     _pattern: blueprint.pattern,
-  //   }
-  //   return _section;
-  // })
-  // return sections;
   
 }
 
@@ -102,16 +90,6 @@ function generateSectionColorGradientsBackground(section, page) {
     sections.push(_section);
   }
   return sections;
-  // const sections = map(page.backgroundBlueprint, blueprint => {
-  //   const _section = cloneDeep(section);
-  //   _section.color = {
-  //     background: blueprint.color,
-  //     text: blueprint.text[0],
-  //     gradient: blueprint.color,
-  //   }
-  //   return _section;
-  // })
-  // return sections;
 }
 
 
