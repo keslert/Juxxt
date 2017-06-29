@@ -1,7 +1,7 @@
 import * as blueprints from '../../../components/page/elements/_blueprints';
 import { find, filter, flatMap, some, isFunction } from 'lodash';
 import { getMode } from '../../utils';
-import { getPrimary, getTint } from './utils';
+import { getSortedByPrimary, getTint } from './utils';
 
 export function colorElement(element, page) {
 
@@ -36,13 +36,11 @@ export function colorElement(element, page) {
   } 
 
   if(blueprint.color.text) {
-
     const valid = filter(elements, e => 
       e.name === element.name &&
       e.color.text && 
       getElementGroupOrSectionBackground(e, page) === background
     )
-
     const fn = find(rules, fn => some(valid, fn));
     if(isFunction(fn)) {
       if(element.group.section.color.backgroundImage !=  null) {
@@ -53,7 +51,6 @@ export function colorElement(element, page) {
       }
     } else {
       const colorBlueprint = page.backgroundBlueprint[background];
-
       element.color.text = getPreferredColor(colorBlueprint.text, blueprint.color.text);
     }
   }
@@ -70,16 +67,12 @@ function getGroupOrSectionBackground(element, page) {
 }
 
 function getElementGroupOrSectionBackground(element, page) {
-
-  if(element.group.section.color.backgroundImage != null) {
-    return page.websiteColors[page.websiteColors.length-2];
-  }
   return element.color.background || getGroupOrSectionBackground(element, page);
 }
 
 function getPreferredColor(colors, preference) {
   if(preference === 'vibrant') {
-    return getPrimary(colors);
+    return getSortedByPrimary(colors)[Object.keys(getSortedByPrimary(colors))[0]];
   }
   return colors[0];
 }

@@ -23,7 +23,7 @@ class Header1_2 extends React.PureComponent {
 
   const innerBoxStyle = {
     paddingHorizontal: style.gutter,
-    maxWidth: '50P',
+    width: '50P',
     display: "flex",
     justify: "center",
     align: "center",

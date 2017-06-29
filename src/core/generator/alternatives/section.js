@@ -1,11 +1,13 @@
 import blueprints from '../../../components/page/sections/_blueprints';
 import { generateSectionSkeleton } from '../skeletons/section';
-import { filter, range, mapValues, uniqBy, flatMap, cloneDeep, forEach, includes, map } from 'lodash';
+import { filter, range, toPairs, fromPairs, sortBy, mapValues, uniqBy, flatMap, cloneDeep, forEach, includes, map } from 'lodash';
 import { assignContent } from '../content';
 import { getCombinations } from '../../utils';
 import { colorElement } from '../color/element';
 import { styles } from '../style/section/shared-styles';
 import { filterStyle } from '../style/utils';
+import { getSortedByPrimary, getPrimaryScores } from '../color/utils';
+import tinycolor from 'tinycolor2';
 
 export function generateSectionComponentAlternatives(section, blacklist=[]) {
   const possibleSections = Object.keys(blueprints);
@@ -69,12 +71,38 @@ function generateSectionColorImagesBackground(section, page) {
   return sections;
 }
 
+
+function getSortedNormalSectionColors(colors) {
+
+  let sortedDict = getPrimaryScores(colors);
+
+
+
+  for(let i=0; i < Object.keys(sortedDict).length; i++) {
+    const _color = Object.keys(sortedDict)[i];
+
+    if(sortedDict[_color] === 0 && tinycolor(_color).toHsv()['s'] > 0.1) {
+
+      sortedDict[_color] = Number.MAX_VALUE;
+    }
+  }
+  return fromPairs(sortBy(toPairs(sortedDict), a => a[1] ));
+}
+
+
+const SPECIAL = ["Header","Header1_2","Footer1","Footer2","FooterVerticalList"];
+
 function generateSectionColorSolidsBackground(section, page) {
-  const sections = map(page.backgroundBlueprint, blueprint => {
+  let bgColors = [];
+  if( SPECIAL.indexOf(section.name) > -1 )
+    bgColors = getSortedByPrimary(Object.keys(page.backgroundBlueprint));
+  else
+    bgColors = Object.keys(getSortedNormalSectionColors(Object.keys(page.backgroundBlueprint)));
+  const sections = map(bgColors, clr => {
     const _section = cloneDeep(section);
     _section.color = {
-      background: blueprint.color,
-      text: blueprint.text[0]
+      background: clr,
+      text: page.backgroundBlueprint[clr].text[0]
     }
     return _section;
   })

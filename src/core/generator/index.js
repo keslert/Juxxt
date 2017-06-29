@@ -4,17 +4,17 @@ import { assignContent } from './content';
 import { assignStyles } from './style';
 import { colorGroup } from './color/group';
 import { colorElement } from './color/element';
-import { tintColor, getPrimary, getOkSectionColors, getOkBackgroundColors } from './color/utils';
+import { tintColor, getSortedByPrimary, getOkSectionColors, getOkBackgroundColors } from './color/utils';
 import { randomItem } from '../utils';
-import { range, reduce, uniqueId, forEach } from 'lodash';
+import { range, reduce, uniqueId, forEach, clone, sortBy, map, fromPairs, toPairs, max, some, filter } from 'lodash';
+
 
 export function init() {
-  const palette = ["#374140","#1E1E20","#D9CB9E"];
-  const primary = getPrimary(palette);
+  const palette = ["#48F6F9","#052F54","#ffcc00","#910000"]
+  //const palette = ["#374140","#1E1E20","#D9CB9E"];
+  const primary = getSortedByPrimary(palette)[Object.keys(getSortedByPrimary(palette))[0]];
   const websiteColors = [...palette, tintColor("#211b1a",primary,20), tintColor('#f5f6f7', primary, 20), tintColor("#fff", primary, 2)];
-  
   const backgroundBlueprint = getOkSectionColors(getOkBackgroundColors(websiteColors), websiteColors, [...palette, "#ffffff"]);
-  
   const NUM_OF_SECTIONS = 6;
 
   const master = {
@@ -32,7 +32,7 @@ export function init() {
       if( i===1 ) {
         const skeletons = generateSectionComponentAlternatives({},["Basic","Basic1_2","Navbar2","Navbar1","Footer1","Footer2","FooterVerticalList"])
         section = buildSectionFromSkeleton(randomItem(skeletons));
-        const background = getPrimary(Object.keys(page.backgroundBlueprint));
+        const background = getSortedByPrimary(palette)[Object.keys(getSortedByPrimary(Object.keys(backgroundBlueprint)))[0]]
         section.color = { 
           background: background,
           text: page.backgroundBlueprint[background].text[0],
@@ -64,15 +64,16 @@ export function init() {
       }
 
       if(i === 1 || i === NUM_OF_SECTIONS - 1) {
-        background = getPrimary(Object.keys(backgroundBlueprint));
+
+        background = getSortedByPrimary(palette)[Object.keys(getSortedByPrimary(Object.keys(backgroundBlueprint)))[0]];
       } else if((i % 2) === 1) {
         background = websiteColors[websiteColors.length - 2];
       } else {
         background = websiteColors[websiteColors.length - 1];
       }
-      section.color = { background, text: backgroundBlueprint[background].text[0]}
-      const page2 = {...page, sections: [...page.sections, section]}
-      forEach(section.groups, group => colorGroup(group, page2.sections))
+      section.color = { background, text: backgroundBlueprint[background].text[0]};
+      const page2 = {...page, sections: [...page.sections, section]};
+      forEach(section.groups, group => colorGroup(group, page2.sections));
       forEach(section.elements, element => colorElement(element, page2));
       assignContent(section, []);
       assignStyles(section, page);

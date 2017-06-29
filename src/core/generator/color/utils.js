@@ -1,7 +1,8 @@
-import { filter, find, some, map, sortBy, max, clone, forEach } from 'lodash';
 import { getMode, randomItem } from '../../utils';
 import tinycolor from 'tinycolor2';
 import geopattern from 'geopattern';
+import { range, reduce, uniqueId, forEach, clone, sortBy, map, fromPairs, toPairs, max, some, filter } from 'lodash';
+
 
 
 function isSimilarHue(color1,color2) {
@@ -117,11 +118,32 @@ export function getOkSectionColors(okBackgrounds, websiteColors, palette) {
   }
   return okPayload;
 }
+
 /*
 helper for getPrimary
 */
 export function getInvertDiff(arr,target) {
   return arr.map((value)=> 1 - Math.abs(value-target));
+}
+
+export function getPrimaryScores(palette) {
+  let lumArr = palette.map((color)=> (tinycolor(color).getLuminance()));
+  let saturationArr = palette.map((color)=> (tinycolor(color).toHsv()['s']));
+  const diffLum = getInvertDiff(lumArr,LUM_TARGET).map((value)=>value * LUM_WEIGHT);
+  const diffSat = getInvertDiff(saturationArr,SAT_TARGET).map((value)=> value * SAT_WEIGHT);
+  const finalArr = []
+  for(let i=0; i<palette.length; i++) {
+    if(!tinycolor.isReadable(palette[i],"#FFFFFF"))
+      finalArr.push(0);
+    else
+      finalArr.push(( diffLum[i] + diffSat[i] )/ 2);
+  }
+
+  let copyPalette= {};
+  for(let i=0 ;i<finalArr.length; i++){
+    copyPalette[palette[i]] = finalArr[i];
+  }
+  return copyPalette
 }
 
 /**
@@ -132,16 +154,10 @@ const SAT_TARGET = 1;
 const LUM_WEIGHT = 6;
 const SAT_WEIGHT = 4;
 
-export function getPrimary(palette) {
-  let lumArr = palette.map((color)=> (tinycolor(color).getLuminance()));
-  let saturationArr = palette.map((color)=> (tinycolor(color).toHsv()['s']));
-  const diffLum = getInvertDiff(lumArr,LUM_TARGET).map((value)=>value * LUM_WEIGHT);
-  const diffSat = getInvertDiff(saturationArr,SAT_TARGET).map((value)=> value * SAT_WEIGHT);
-  const finalArr = []
-  for(let i=0; i<palette.length; i++) {
-    finalArr.push(( diffLum[i] + diffSat[i] )/ 2);
-  }
-  return palette[finalArr.indexOf(max(finalArr))];
+export function getSortedByPrimary(palette) {
+  let copyPalette = getPrimaryScores(palette);
+  copyPalette = fromPairs(sortBy(toPairs(copyPalette), a=> a[1]).reverse())
+  return Object.keys(copyPalette);
 }
 
 export function tintColor(base, color) {
