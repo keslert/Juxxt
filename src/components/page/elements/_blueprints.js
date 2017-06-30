@@ -204,5 +204,14 @@ export const BasicIcon = {
   is: 'Icon',
   inherits: [],
   color: {},
-  style: {},
+  style: {
+    fontSize: {
+      _default: 5,
+      options: range(2, 6),
+    },
+    marginHorizontal: {
+      _default: 3,
+      options: range(0, 4),
+    }
+  },
 }

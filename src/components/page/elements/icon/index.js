@@ -1,10 +1,15 @@
 import React from 'react';
+import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
+import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
 
 class Icon extends React.PureComponent {
   render() {
-    const { content } = this.props;
+    const { style, color, content } = this.props;
+
+    const colorClassNames = convertColorToAtomic(color);
+    const styleClassNames = convertStyleToAtomic(style);
     return (
-      <i className={`fa fa-${content.type} fs6`}></i>
+      <i className={`fa fa-${content.type} ${colorClassNames} ${styleClassNames}`} />
     )
   }
 }

@@ -8,8 +8,6 @@ class Button extends React.PureComponent {
     let { style, color } = this.props;
     
     const colorClassNames = convertColorToAtomic(color);
-    
-
     const styleClassNames = convertStyleToAtomic(style);
     return(
       <button className={styleClassNames + ' dib ' + colorClassNames}>
