@@ -66,7 +66,6 @@ class App extends React.Component {
       !isEqual(selected, newProps.selected) ||
       !isEqual(modifications, newProps.modifications)
     ) {
-      console.log('estamos aqui');
       updateAlternatives();
     }
   }

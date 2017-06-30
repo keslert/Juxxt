@@ -80,7 +80,7 @@ function resolveModifications(dispatch, state, modification, selected) {
 }
 
 function resolveColorModification(dispatch, state, selected) {
-  let keys = ['solid'];
+  let keys = ['color'];
   if(selected.color.background) {
     keys = keys.concat(['gradient', 'pattern', 'image']);
   }

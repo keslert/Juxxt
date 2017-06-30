@@ -37,7 +37,7 @@ export function generateSectionVariantAlternatives(section, skeleton) {
 
 export function generateSectionColorAlternatives(section, modify, page) {
   let sections = [];
-  if(modify.solid) {
+  if(modify.color) {
     sections = generateSectionColorSolidsBackground(section, page);
   } else if(modify.pattern) {
     sections = generateSectionColorPatternsBackground(section, page);

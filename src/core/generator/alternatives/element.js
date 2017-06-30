@@ -61,7 +61,6 @@ export function generateElementColorAlternatives(section, element, page) {
 
 export function generateElementContentAlternatives(section, element, contentStore) {
   const store = filter(contentStore, content => content.elementId !== element.id);
-
   const sections = range(0, 6).map(() => cloneDeep(section));
   sections.forEach(s => assignContent(s, store));
   
