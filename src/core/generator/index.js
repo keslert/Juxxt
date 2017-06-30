@@ -10,7 +10,11 @@ import { range, reduce, uniqueId, forEach, clone, sortBy, map, fromPairs, toPair
 
 
 export function init() {
-  const palette = ["#DC3522", "#374140"];
+  //const palette = ["#DC3522", "#374140"];
+  //const palette = ["#48F6F9","#052F54","#ffcc00","#910000"]
+  //const palette = ["#374140","#1E1E20","#D9CB9E"];
+  //const palette = ["#5AFF15","#AAFFE5","#9D75CB","#A657AE", "#8C1A6A"];
+  const palette = ["#BBBE64","#93A8AC","#8E5572","#F2F7F2", "#443850"];
   const primary = getSortedByPrimary(palette)[Object.keys(getSortedByPrimary(palette))[0]];
   const websiteColors = [...palette, tintColor("#211b1a",primary,20), tintColor('#f5f6f7', primary, 20), tintColor("#fff", primary, 2)];
   const backgroundBlueprint = getOkSectionColors(getOkBackgroundColors(websiteColors), websiteColors, [...palette, "#ffffff"]);
