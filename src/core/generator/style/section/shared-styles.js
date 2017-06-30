@@ -45,7 +45,7 @@ export const styles = {
       options: [1,2,3,4,5],
     },
     paddingVertical: {
-      _default: 3,
+      _default: 2,
       options: [1,2,3],
     }
   }
