@@ -17,7 +17,7 @@ class Navbar1 extends React.PureComponent {
     const colorClassNames = convertColorToAtomic(color);
 
     return (
-      <div className={ colorClassNames + ' pt3 pb3 Navbar1'}>
+      <div className={ colorClassNames + ' Navbar1'}>
         <div className={styleClassNames}>
           <div>
             <Group {...groups.logo} />
@@ -38,7 +38,7 @@ export default Navbar1;
 
 export const blueprint = {
   type: 'navigation',
-  inherits: [],
+  inherits: ['NavigationSection'],
   style: {},
   color: {},
   groups: {

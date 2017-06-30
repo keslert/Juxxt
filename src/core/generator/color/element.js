@@ -20,7 +20,7 @@ export function colorElement(element, page) {
   if(blueprint.color.background) {
     const valid = filter(elements, e => 
       e.name === element.name && 
-      e.color.background && 
+      e.color && e.color.background && 
       getGroupOrSectionBackground(e,page) === background
     );
     
@@ -38,7 +38,7 @@ export function colorElement(element, page) {
   if(blueprint.color.text) {
     const valid = filter(elements, e => 
       e.name === element.name &&
-      e.color.text && 
+      e.color && e.color.text && 
       getElementGroupOrSectionBackground(e, page) === background
     )
     const fn = find(rules, fn => some(valid, fn));

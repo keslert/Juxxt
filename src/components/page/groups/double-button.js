@@ -7,11 +7,11 @@ class DoubleButton extends React.Component {
   render() {
     const { elements } = this.props;
     return (
-    	<div className=" dib mr4">
-      <div className="pr3">
-        <Element {...elements.button} />
-      </div>
-        <Element {...elements.button} />
+    	<div className="dib">
+        <div className="mr3">
+          <Element {...elements.button} />
+        </div>
+        <Element {...elements.secondaryButton} />
       </div>
     )
   }
@@ -25,6 +25,9 @@ export const blueprint = {
   color: {},
   elements: {
     button: {
+      name: BasicButton.name,
+    },
+    secondaryButton: {
       name: BasicButton.name,
     }
   },

@@ -12,7 +12,7 @@ const uiState = () => ({
   selectedModification: 'component',
   hovered: [],
   shiftDown: false,
-  zoomLevel: 2,
+  zoomLevel: 1,
 });
 
 export function uiReducer(state = uiState(), {payload, type}) {

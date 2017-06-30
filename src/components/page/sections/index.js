@@ -98,6 +98,7 @@ class Section extends React.Component {
     const { 
       name, 
       id,
+      uuid,
       master,
       isSelected,
       setSelected,
@@ -115,7 +116,7 @@ class Section extends React.Component {
     const SectionComponent = sections[name];
     
     return connectDropTarget(
-      <div>
+      <div key={uuid}>
         {connectDragSource(
           <div>
             <AutoScale>

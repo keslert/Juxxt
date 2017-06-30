@@ -3,6 +3,7 @@ import { range } from 'lodash';
 export const names = {
   BasicSection: 'BasicSection',
   HeaderSection: 'HeaderSection',
+  NavigationSection: 'NavigationSection',
 }
 
 export const styles = {
@@ -36,6 +37,16 @@ export const styles = {
     },
     margin: {
       options: ['auto'],
+    }
+  },
+  [names.NavigationSection]: {
+    paddingHorizontal: {
+      _default: 3,
+      options: [1,2,3,4,5],
+    },
+    paddingVertical: {
+      _default: 2,
+      options: [1,2,3],
     }
   }
 }

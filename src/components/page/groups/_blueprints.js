@@ -3,7 +3,7 @@ import { blueprint as HeadingParagraph } from './heading-paragraph';
 import { blueprint as KickerHeadingParagraph } from './kicker-heading-paragraph';
 import { blueprint as HeadingParagraphLink } from './heading-paragraph-link';
 import { blueprint as HeadingSubheadingButton } from './heading-subheading-button';
-import { blueprint as DoubleButton } from './DoubleButton';
+import { blueprint as DoubleButton } from './double-button';
 import { blueprint as HorizontalList } from './Horizontal-List';
 import { blueprint as HeadingParagraphButton } from './heading-paragraph-button';
 import { blueprint as Logo } from './singles/logo';

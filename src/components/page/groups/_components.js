@@ -7,7 +7,7 @@ import HeadingParagraphButton from './heading-paragraph-button';
 import HorizontalList from './Horizontal-List';
 import SingleButton from './singles/SingleButton';
 import Logo from './singles/logo';
-import DoubleButton from './DoubleButton';
+import DoubleButton from './double-button';
 import ParagraphOnly from './singles/paragraph';
 import VerticalList from './Vertical-List';
 import IconHeadingParagraph from './icon-heading-paragraph';
