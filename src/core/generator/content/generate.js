@@ -6,7 +6,7 @@ export function generateContent(element) {
 
   switch(element.name) {
     case 'BasicHeading':
-      return {text: LoremIpsum({count: random(3, 8), units: 'words'})};
+      return getHeaderContent();
     case 'BasicParagraph':
       return {text: LoremIpsum({count: random(2, 4), units: 'sentences'})};
     case 'BasicButton':
@@ -22,7 +22,9 @@ export function generateContent(element) {
     case 'Heading':
       return getHeadingContent(element);
     case 'SmallHeading':
-      return getSmallHeadingContent(element);
+      return getSubheaderContent(element);
+    case 'BasicSubheading':
+      return getSubheaderContent(element);
     default: 
       return getGenericContent(element)
   }
@@ -53,6 +55,36 @@ function getParagraphContent() {
     units: 'sentences',
   });
   return { text };
+}
+function getSubheaderContent() {
+  return randomItem([
+    {text: "Oval is creating a platform that helps everyone be money wise."},
+    {text: "Business Oriented. Gamer Driven."},
+    {text: "Borrow specialized talent or add revenue by sharing your roster."},
+    {text: "From Dog Walkers and Babysitters, to Hairstylists and Personal Trainers, to ...."},
+    {text: "Fully automated invoicing directly from your CRM."},
+    {text: "Upload images from your webapp directly to Amazon S3"},
+    {text: "Zendesk builds software for better customer relationships"},
+    {text: "The new way to interact with empolyees and vendors"},
+    {text: "Serve fast maps from your infrastructure"},
+    {text: "Stay ahead of the curve and make smarter decisions with the most advanced app analytics"},
+  ])
+}
+
+function getHeaderContent() {
+  return randomItem([
+    {text: "SmartThings is the easy way to turn your home into a smart home."},
+    {text: "Track, learn, Save, Invest automatically"},
+    {text: "The Ultimate Guide to Xsolla Services and Products"},
+    {text: "Easily Customize WordPress Themes, Live."},
+    {text: "Short-term empolyee leasing between like-minded startups"},
+    {text: "Litmus makes your email better."},
+    {text: "Professionals You Need, From People You Know."},
+    {text: "The digital  Assistant for cost optimization"},
+    {text: "Convert your deals into invoices."},
+    {text: "Try out a fresh look for YouTube"},
+    {text: "Meet pixel. Phone by Google."}
+  ])
 }
 
 function getIconContent() {
