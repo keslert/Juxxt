@@ -7,6 +7,7 @@ export function buildGroupFromSkeleton(skeleton) {
   const group = {
     isGroup: true,
     id: skeleton.id || ('g_' + uniqueId()),
+    uid: 'guid_' + uniqueId(),
     name: skeleton.name,
     variant: skeleton.variant,
   }
