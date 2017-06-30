@@ -35,12 +35,12 @@ export function generateElementVariantAlternatives(element, skeleton) {
   return [];
 }
 
-export function generateElementColorAlternatives(section, element, page) {
+export function generateElementColorAlternatives(section, modify, element, page) {
   const elementIndex = findIndex(section.elements, e => e.id === element.id);
-  const background = element.group.color.background || section.color.background;
   
   let sections;
-  if(element.color.background) {
+  if(element.color.background && modify.background) {
+    const background = element.group.color.background || section.color.background;
     sections = map(page.backgroundBlueprint[background].solid, background => {
       const _section = cloneDeep(section);
       _section.elements[elementIndex].color = {
@@ -50,9 +50,10 @@ export function generateElementColorAlternatives(section, element, page) {
       return _section;
     });
   } else {
+    const background = element.color.background || element.group.color.background || section.color.background;
     sections = map(page.backgroundBlueprint[background].text, text => {
       const _section = cloneDeep(section);
-      _section.elements[elementIndex].color = { text }
+      _section.elements[elementIndex].color = { text, background: element.color.background }
       return _section;
     });
   }
