@@ -9,10 +9,12 @@ import { filterStyle } from '../style/utils';
 import { getSortedByPrimary, getPrimaryScores } from '../color/utils';
 import tinycolor from 'tinycolor2';
 
-export function generateSectionComponentAlternatives(section, blacklist=[]) {
+export function generateSectionComponentAlternatives(section, modify) {
   const possibleSections = Object.keys(blueprints);
+
   const validSections = filter(possibleSections, name => 
-    name !== section.name && !includes(blacklist, name)
+    name !== section.name && 
+    modify[blueprints[name].type]
   );
   const skeletons = validSections.map(sectionName => {
     const skeleton = generateSectionSkeleton(sectionName, section.variant)

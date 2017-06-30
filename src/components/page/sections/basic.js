@@ -32,13 +32,13 @@ class Basic extends React.PureComponent {
 export default Basic;
 
 export const blueprint = {
+  type: 'basic',
   inherits: ['BasicSection'],
   style: {},
   color: {},
   groups: {
     item: {
       options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','IconHeadingParagraph'],
-      options: ['IconHeadingParagraph'],
     },
   },
   variants: []

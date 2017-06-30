@@ -1,6 +1,6 @@
 import React from 'react';
 import Element from '../elements';
-import { BasicLink } from '../elements/_blueprints';
+import { ReadableLink } from '../elements/_blueprints';
 
 class HorizontalList extends React.Component {
   render() {
@@ -22,7 +22,7 @@ export const blueprint = {
   color: {},
   elements: {
     link: {
-      name: BasicLink.name,
+      name: ReadableLink.name,
     }
   },
   variants: [],

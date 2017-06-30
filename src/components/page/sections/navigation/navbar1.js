@@ -37,6 +37,7 @@ class Navbar1 extends React.PureComponent {
 export default Navbar1;
 
 export const blueprint = {
+  type: 'navigation',
   inherits: [],
   style: {},
   color: {},

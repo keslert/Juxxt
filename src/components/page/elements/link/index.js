@@ -5,11 +5,8 @@ import { convertColorToAtomic } from '../../../../core/generator/color/conversio
 class Link extends React.PureComponent {
  
   render() {
-    let { style, color, content } = this.props;
-    //debugger;
-    if(this.props.group.name === "Button1" || this.props.group.name === "Button2") {
-      style = {...style, marginLeft: 2, marginRight: 2 ,marginTop: 3, marginBottom:3}
-    }
+    const { style, color, content } = this.props;
+        
     const styleClassNames = convertStyleToAtomic(style);
     const colorClassNames = convertColorToAtomic(color);
 

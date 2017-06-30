@@ -15,7 +15,7 @@ export function setSelected(selected) {
   return (dispatch, getState) => {
     const state = getState();
     const modification = getSelectedModification(state);
-    resolveModifications(dispatch, state, modification, selected);
+    resolveModifications(dispatch, state, modification, selected, 'selection');
     dispatch(_setSelected(selected));
   }
 }
@@ -66,15 +66,16 @@ export function turnOnModification(key) {
   return (dispatch, getState) => {
     const state = getState();
     const selected = getSelected(state);
-    resolveModifications(dispatch, state, key, selected);
+    resolveModifications(dispatch, state, key, selected, 'modification');
     dispatch(setSelectedModification(key));
   }
 }
 
-function resolveModifications(dispatch, state, modification, selected) {
+function resolveModifications(dispatch, state, modification, selected, callPath) {
   switch(modification) {
     case 'style': resolveStyleModification(dispatch, state, selected);
     case 'color': resolveColorModification(dispatch, state, selected);
+    case 'component': resolveComponentModification(dispatch, state, selected, callPath);
     default: console.log('Hm... should not be here');
   }
 }
@@ -86,6 +87,15 @@ function resolveColorModification(dispatch, state, selected) {
   }
   
   resolveModificationSelection(dispatch, state, keys, 'color');
+}
+
+function resolveComponentModification(dispatch, state, selected, callPath) {
+  let modification = {};
+  if(selected.isSection) {
+    const keys = ['basic', 'header', 'footer', 'navigation'];
+    modification = zipObject(keys, keys.map(key => key === selected.type))
+  }
+  dispatch(setModification('component', modification));
 }
 
 function resolveStyleModification(dispatch, state, selected) {

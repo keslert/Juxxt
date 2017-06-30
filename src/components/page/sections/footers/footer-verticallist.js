@@ -31,6 +31,7 @@ class FooterVerticalList extends React.PureComponent {
 export default FooterVerticalList;
 
 export const blueprint = {
+  type: 'footer',
   inherits: [],
   style: {},
   color: {},

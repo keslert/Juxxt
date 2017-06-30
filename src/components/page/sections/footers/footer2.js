@@ -33,6 +33,7 @@ class Footer2 extends React.PureComponent {
 export default Footer2;
 
 export const blueprint = {
+  type: 'footer',
   inherits: [],
   style: {},
   color: {},

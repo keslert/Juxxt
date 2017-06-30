@@ -78,19 +78,17 @@ export const ListTitle = {
   color: {},
   style: {
     textTransform: {
-      _default: 'none',
+      _default: 'uppercase',
       options: ['none', 'uppercase'],
     },
     fontSize: {
       _default: 2,
-      options: range(2, 2),
+      options: [2,3,4],
     },
-    paddingHorizontal: {
-      options: range(3, 4),
+    fontWeight: {
+      _default: 6,
+      options: [4,6,8],
     },
-    paddingVertical: {
-       options: range(2, 3),
-     },
   },
 };
 
@@ -145,17 +143,22 @@ export const BasicLink = {
   color: {
     text: 'vibrant',
   },
+  style: {},
+};
+
+export const ReadableLink = {
+  name: 'ReadableLink',
+  is: 'Link',
+  inherits: [inherits.Link],
+  color: {
+    text: 'readable',
+  },
   style: {
-    paddingHorizontal: {
-      options: range(3, 4),
-    },
-    paddingVertical: {
-       options: range(2, 3),
-     },
-    borderRadius: {
-      options: range(0, 2),
+    margin: {
+      _default: 2,
+      options: [0,1,2,3,4],
     }
-  }
+  },
 };
 
 export const BasicButton = { 

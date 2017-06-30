@@ -50,6 +50,7 @@ const Basic1_2 = ({
 export default Basic1_2;
 
 export const blueprint = {
+  type: 'basic',
   inherits: ['BasicSection'],
   style: {},
   color: {},

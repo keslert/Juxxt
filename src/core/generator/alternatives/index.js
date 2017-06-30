@@ -31,7 +31,7 @@ import { assignColor } from '../color';
 export function generateAlternatives(page, modify, selected) {
   let sections = [];
   if(modify.component) {
-    sections = generateComponentAlternatives(page, selected);
+    sections = generateComponentAlternatives(page, modify.component, selected);
   } else if(modify.variant) {
     sections = generateVariantAlternatives(page, selected);
   } else if(modify.color) {
@@ -48,13 +48,13 @@ export function generateAlternatives(page, modify, selected) {
   }))
 }
 
-function generateComponentAlternatives(page, selected) {
+function generateComponentAlternatives(page, modify, selected) {
   const section = getSectionFromItem(selected)
   const masterSkeleton = extractSkeletonFromSection(section);
 
   let skeletons;
   if(selected.isSection) {
-    skeletons = generateSectionComponentAlternatives(selected, masterSkeleton);
+    skeletons = generateSectionComponentAlternatives(selected, modify);
   } else if(selected.isGroup) {
     skeletons = generateGroupComponentAlternatives(selected, masterSkeleton);
   } else {

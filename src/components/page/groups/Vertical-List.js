@@ -1,6 +1,6 @@
 import React from 'react';
 import Element from '../elements';
-import { BasicLink, ListTitle } from '../elements/_blueprints';
+import { ReadableLink, ListTitle } from '../elements/_blueprints';
 
 class VerticalList extends React.Component {
   render() {
@@ -29,7 +29,7 @@ export const blueprint = {
   		name: ListTitle.name,
   	},
     link: {
-      name: BasicLink.name,
+      name: ReadableLink.name,
     }
   },
   variants: [],

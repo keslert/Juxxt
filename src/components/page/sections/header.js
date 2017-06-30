@@ -32,6 +32,7 @@ class Header extends React.PureComponent {
 export default Header;
 
 export const blueprint = {
+  type: 'header',
   inherits: ['HeaderSection'],
   style: {},
   color: {},

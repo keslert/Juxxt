@@ -16,6 +16,7 @@ export function buildSectionFromSkeleton(skeleton) {
 
   const blueprint = getSectionBlueprint(skeleton.name);
 
+  section.type = blueprint.type;
   section.groups = mapValues(blueprint.groups, (groupReqs, key) => {
     const group = buildGroupFromSkeleton(skeleton.groups[key])
     group.section = section;

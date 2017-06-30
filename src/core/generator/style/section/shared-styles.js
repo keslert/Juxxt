@@ -11,10 +11,6 @@ export const styles = {
       _default: 5,
       options: [8,7,6,5,4,3,2,1,0],
     },
-    // sectionBackground: {
-    //   _default: 'solid',
-    //   options: ['solid', 'image', 'gradient'], 
-    // },
     gutter: {
       options: [4],
     },
@@ -28,6 +24,9 @@ export const styles = {
     }
   },
   [names.HeaderSection]: {
+    gutter: {
+      options: [4],
+    },
     maxWidth: {
       options: ['1024px'],
     },

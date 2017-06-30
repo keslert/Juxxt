@@ -1,15 +1,10 @@
 import { range } from 'lodash';
+import * as names from '../../../../components/page/elements/_inherits';
 
 import { 
   mh0,
   p0,
 } from '../utils';
-
-export const names = {
-  Heading: 'Heading',
-  Paragraph: 'Paragraph',
-  Media: 'Media',
-}
 
 export const styles = {
   [names.Heading]: {
@@ -32,6 +27,7 @@ export const styles = {
   [names.Paragraph]: {
     ...p0,
     marginBottom: {
+      _default: 2,
       options: range(0, 4),
     }
   },
@@ -40,5 +36,11 @@ export const styles = {
       _default: 'auto',
       options: ['auto', '1x1', '16x9', '9x16', '4x3', '3x4', '6x4', '4x6', '8x5', '5x8', '7x5', '5x7']
     }
-  }
+  },
+  [names.Link]: {
+
+  },
+  [names.Button]: {
+
+  },
 }
