@@ -2,6 +2,7 @@ import { range } from 'lodash';
 
 export const names = {
   BasicSection: 'BasicSection',
+  HeaderSection: 'HeaderSection',
 }
 
 export const styles = {
@@ -21,6 +22,18 @@ export const styles = {
       options: ['1024px'],
       // options: ['900px', '1024px', '1170px'],
       priority: 999, // Need a way to say this shouldn't change that often...
+    },
+    margin: {
+      options: ['auto'],
+    }
+  },
+  [names.HeaderSection]: {
+    maxWidth: {
+      options: ['1024px'],
+    },
+    paddingVertical: {
+      _default: 7,
+      options: [4,5,6,7,8],
     },
     margin: {
       options: ['auto'],
