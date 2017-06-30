@@ -6,12 +6,13 @@ import { BasicIcon, BasicHeading, BasicParagraph } from '../elements/_blueprints
 class IconHeadingParagraph extends React.Component {
   render() {
     const { elements, style, color, variant } = this.props;
+
     return (
       <TalkingPointIconComponent
         style={style}
         color={color}
         elements={elements}
-        align={variant.align} />
+        variant={variant} />
     )
   }
 }
@@ -32,5 +33,15 @@ export const blueprint = {
       name: BasicParagraph.name,
     },
   },
-  variants: [],
+
+  variants: [{
+    textAlign: {
+      _default: 'tl',
+      options:['tl','tr','tc']
+    },
+    iconPosition: {
+      _default: 'inline',
+      options: ['','column','inline'],
+    },
+  }]
 }

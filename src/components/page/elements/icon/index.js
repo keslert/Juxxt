@@ -4,7 +4,7 @@ class Icon extends React.PureComponent {
   render() {
     const { content } = this.props;
     return (
-      <i className={`fa fa-${content.type}`}></i>
+      <i className={`fa fa-${content.type} fs6`}></i>
     )
   }
 }

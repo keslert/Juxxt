@@ -6,20 +6,43 @@ import { convertStyleToAtomic } from '../../../../core/generator/style/conversio
 
 class TalkingPointIcon extends React.Component {
 
-  renderColumn() {
-
+  renderColumn(_style, icon, heading, paragraph, align) {
+    let order = 0;
+    let padding = "pr3";
+    if(align === "tr")
+      order=1;
+      padding = "pl3";
+    
+    return (
+      <Box className={ "flex flex-row " + convertStyleToAtomic(_style) + " " + align}>
+        <div className={"flex order-" + order}>
+          {icon && <div className={"fs3 " + padding}><Element {...icon} /> </div>}
+        </div>
+        <div className="flex pt1 flex-column">
+          {heading && <div><Element {...heading} /></div>}
+          {paragraph && <div><Element {...paragraph}/></div>}
+        </div>
+      </Box>
+    )
   }
 
-  renderAbove() {
-  }
-
-  renderInline() {
+  renderInline(_style, icon, heading, paragraph, align) {
+    return (
+      <Box className={ "flex flex-column " + convertStyleToAtomic(_style)+ " " + align}>
+        <div className="flex flex-row">
+          {icon && <div className="pr3"><Element {...icon} /> </div>}
+          {heading && <div><Element {...heading} /></div>}
+        </div>
+        <div className="flex pt1">
+          {paragraph && <div><Element {...paragraph}/></div>}
+        </div>
+      </Box>
+    )
   }
 
   render() {
     const { 
       style,
-      align,
       variant,
       elements: {
         kicker,
@@ -36,16 +59,14 @@ class TalkingPointIcon extends React.Component {
       ...style,
       // textAlign: align,
     }
+    if (variant.iconPosition === "column") {
+       return this.renderColumn(style, icon, heading, paragraph, variant.textAlign);
+    } else if (variant.iconPosition === "inline") {
+       return this.renderInline(style, icon, heading, paragraph, variant.textAlign);
+    }
 
-    // if(variant.iconPosition === "inline") {
-    //   return this.renderInline();
-    // } else if (variant.iconPosition === "above") {
-    //   return this.renderAbove();
-    // } else if (variant.iconPosition === "column") {
-    //   return this.renderColumn();
-    // }
       return (
-        <Box className={convertStyleToAtomic(_style)}>
+        <Box className={convertStyleToAtomic(_style) + " " + variant.textAlign}>
           {icon && <div><Element {...icon} /> </div>}
           {heading && <div><Element {...heading} /></div>}
           {paragraph && <div><Element {...paragraph} /></div>}
