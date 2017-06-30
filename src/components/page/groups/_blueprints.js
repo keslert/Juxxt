@@ -10,8 +10,7 @@ import { blueprint as Logo } from './singles/logo';
 import { blueprint as SingleButton } from './singles/SingleButton';
 import { blueprint as ParagraphOnly } from './singles/paragraph';
 import { blueprint as VerticalList } from './Vertical-List';
-
-// import * as IconHeadingParagraph from './icon-heading-paragraph';
+import { blueprint as IconHeadingParagraph } from './icon-heading-paragraph';
 // import * as IconSmallHeadingParagraph from './icon-small-heading-paragraph';
 // import * as SmallHeadingParagraph from './small-heading-paragraph';
 // import * as SmallHeadingLinkList from './small-heading-link-list';
@@ -32,7 +31,7 @@ export default {
   HorizontalList,
   VerticalList,
   ParagraphOnly,
-  // IconHeadingParagraph,
+  IconHeadingParagraph,
   
   // IconSmallHeadingParagraph: {
   //   ...IconSmallHeadingParagraph,

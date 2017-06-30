@@ -39,8 +39,6 @@ class Page extends React.PureComponent {
       )
     ).join('\n');
 
-    console.log(gradientColors);
-
     const pageColors = websiteColors.map((color) => `.bg-${color.replace("#","")} {
       background: ${color}; 
     }\n

@@ -189,3 +189,11 @@ export const BasicButton = {
     },
   },
 };
+
+export const BasicIcon = {
+  name: 'BasicIcon',
+  is: 'Icon',
+  inherits: [],
+  color: {},
+  style: {},
+}

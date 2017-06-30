@@ -13,8 +13,8 @@ export function generateContent(element) {
       return getButtonContent();
     case 'Paragraph':
       return getParagraphContent(element);
-    case 'Icon':
-      return getIconContent(element);
+    case 'BasicIcon':
+      return getIconContent();
     case 'LogoImage':
       return {src: 'http://acmelogos.com/images/logo-8.svg'};
     case 'Link':

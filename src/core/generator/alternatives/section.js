@@ -71,24 +71,16 @@ function generateSectionColorImagesBackground(section, page) {
   return sections;
 }
 
-
 function getSortedNormalSectionColors(colors) {
-
   let sortedDict = getPrimaryScores(colors);
-
-
-
   for(let i=0; i < Object.keys(sortedDict).length; i++) {
     const _color = Object.keys(sortedDict)[i];
-
     if(sortedDict[_color] === 0 && tinycolor(_color).toHsv()['s'] > 0.1) {
-
       sortedDict[_color] = Number.MAX_VALUE;
     }
   }
-  return fromPairs(sortBy(toPairs(sortedDict), a => a[1] ));
+  return sortBy(colors, color => sortedDict[color]);
 }
-
 
 const SPECIAL = ["Header","Header1_2","Footer1","Footer2","FooterVerticalList"];
 
@@ -97,7 +89,7 @@ function generateSectionColorSolidsBackground(section, page) {
   if( SPECIAL.indexOf(section.name) > -1 )
     bgColors = getSortedByPrimary(Object.keys(page.backgroundBlueprint));
   else
-    bgColors = Object.keys(getSortedNormalSectionColors(Object.keys(page.backgroundBlueprint)));
+    bgColors = getSortedNormalSectionColors(Object.keys(page.backgroundBlueprint));
   const sections = map(bgColors, clr => {
     const _section = cloneDeep(section);
     _section.color = {
