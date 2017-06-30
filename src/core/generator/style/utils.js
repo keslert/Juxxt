@@ -25,19 +25,19 @@ export const p0 = {
 }
 
 export const mh0 = {
-  paddingLeft: {
+  marginLeft: {
     options: [0],
   },
-  paddingRight: {
+  marginRight: {
     options: [0],
   }
 }
 
 export const mv0 = {
-  paddingTop: {
+  marginTop: {
     options: [0],
   },
-  paddingBottom: {
+  marginBottom: {
     options: [0],
   }
 }

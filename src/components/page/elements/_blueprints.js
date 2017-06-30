@@ -117,7 +117,9 @@ export const LogoImage = {
   is: 'Image',
   inherits: ['Media'],
   color: {},
-  style: {},
+  style: {
+
+  },
 }
 
 export const SmallProfileImage = { 
@@ -170,6 +172,10 @@ export const BasicButton = {
     background: 'vibrant',
   },
   style: {
+    marginVertical: {
+      _default: 2,
+      options: range(0, 3),
+    },
     paddingVertical: {
       _default: 3,
       options: range(3,4),

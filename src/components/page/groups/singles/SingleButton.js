@@ -7,7 +7,7 @@ class SingleButton extends React.Component {
   render() {
     const { elements } = this.props;
     return (
-      <div className="fr mr4">
+      <div>
         <Element {...elements.button} />
       </div>
     )

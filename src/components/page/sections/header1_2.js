@@ -57,7 +57,7 @@ export const blueprint = {
   inherits: ['HeaderSection'],
   style: {
     paddingVertical: {
-      _default: 5,
+      _default: 6,
       options: [4,5,6,7,8],
     }
   },

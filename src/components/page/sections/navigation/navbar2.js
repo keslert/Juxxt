@@ -35,7 +35,7 @@ export default Navbar2;
 
 export const blueprint = {
   type: 'navigation',
-  inherits: [],
+  inherits: ['NavigationSection'],
   style: {},
   color: {},
   groups: {

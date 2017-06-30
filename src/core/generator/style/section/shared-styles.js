@@ -41,11 +41,11 @@ export const styles = {
   },
   [names.NavigationSection]: {
     paddingHorizontal: {
-      _default: 3,
+      _default: 4,
       options: [1,2,3,4,5],
     },
     paddingVertical: {
-      _default: 2,
+      _default: 3,
       options: [1,2,3],
     }
   }

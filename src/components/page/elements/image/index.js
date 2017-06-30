@@ -4,10 +4,8 @@ import { convertStyleToAtomic } from '../../../../core/generator/style/conversio
 class Image extends React.PureComponent {
 
   render() {
-    let { content, style } = this.props;
-    if(this.props.group.name === "Logo") {
-      style = {...style, height: 50, paddingLeft: 4, width:50};
-    }
+    const { content, style } = this.props;
+
     const classNames = convertStyleToAtomic(style);
 
     if(style.aspectRatio !== 'auto') {
