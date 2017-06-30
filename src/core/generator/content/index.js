@@ -8,7 +8,7 @@ export function assignContent(section, contentStore) {
 
   // ID matching
   section.elements.forEach(element => {
-    const content = store.find(content => content.elementId === element.uuid);
+    const content = store.find(content => content.elementId === element.id);
     if(content) {
       element.content = content;
       content.matched = true;

@@ -10,6 +10,7 @@ export function styleSection(section, page) {
   const sharedStyles = zipObject(section.inherits, section.inherits.map(name => styles[name]));
 
   const rules = [
+    s => s.id === section.id,
     s => isEqual(s.variant, section.variant),
     s => true,
   ]

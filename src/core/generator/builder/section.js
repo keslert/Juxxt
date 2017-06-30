@@ -10,7 +10,7 @@ export function buildSectionFromSkeleton(skeleton) {
   const section = {
     isSection: true,
     id: skeleton.id || ('section_' + uniqueId()),
-    uuid: 'suid_' + uniqueId(),
+    uid: 'suid_' + uniqueId(),
     name: skeleton.name,
     variant: skeleton.variant,
   }

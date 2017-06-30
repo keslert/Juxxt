@@ -6,6 +6,7 @@ export function buildElementFromSkeleton(skeleton) {
     isElement: true,
     id: skeleton.id || ('e_' + uniqueId()),
     name: skeleton.name,
+    uid: 'euid_' + uniqueId(),
   }
 
   const blueprint = blueprints[element.name];

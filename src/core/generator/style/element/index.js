@@ -10,6 +10,7 @@ export function styleElement(element, page) {
   const elements = flatMap(page.sections, section => section.elements);
 
   const rules = [
+    e => e.id === element.id,
     e => isEqual(e.variant, element.variant) &&
          e.group.name === element.group.name && isEqual(e.group.variant, element.group.variant) &&
          e.group.section.name === element.group.section.name && isEqual(e.group.section.variant, element.group.section.variant),
