@@ -47,7 +47,7 @@ class App extends React.Component {
     const { updateAlternatives, setShiftDown, master, setSelected, turnOnModification } = this.props;
 
     this.listener = new window.keypress.Listener();
-    this.listener.simple_combo('right', () => updateAlternatives());
+    // this.listener.simple_combo('right', () => updateAlternatives());
 
     this.listener.register_combo({
       keys: "shift",
@@ -55,7 +55,7 @@ class App extends React.Component {
       on_keyup: () => setShiftDown(false),
     })
 
-    setSelected(master.sections[1]);
+    setSelected(master.sections[1].elements[0]);
     turnOnModification('color');
   }
 

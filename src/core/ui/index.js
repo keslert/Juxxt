@@ -1,6 +1,7 @@
 import {
   setSelected,
   setShiftDown,
+  setSidebarOpen,
   onHoverableMouseEnter,
   onHoverableMouseLeave,
   setModification,
@@ -16,6 +17,7 @@ export * from './selectors';
 export const uiActions = {
   setSelected,
   setShiftDown,
+  setSidebarOpen,
   onHoverableMouseEnter,
   onHoverableMouseLeave,
   setModification,
@@ -27,6 +29,7 @@ export const uiActions = {
 export {
   setSelected,
   setShiftDown,
+  setSidebarOpen,
   onHoverableMouseEnter,
   onHoverableMouseLeave,
   setModification,

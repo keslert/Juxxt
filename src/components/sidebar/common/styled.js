@@ -13,7 +13,6 @@ export const StyledWrap = styled.div`
 
 export const StyledField = styled.div`
   display: flex;
-  align-items: center;
   label {
     font-size: 12px;
     color: rgba(255,255,255,0.4);
@@ -22,7 +21,7 @@ export const StyledField = styled.div`
 `
 
 export const StyledInputWrapper = styled.div`
-  width: 120px;
+  width: 180px;
 `
 
 export const StyledHeading = styled.div`

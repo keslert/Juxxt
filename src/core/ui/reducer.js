@@ -9,6 +9,7 @@ const uiState = () => ({
     content: {},
     style: {},
   },
+  sidebarOpen: true,
   selectedModification: 'component',
   hovered: [],
   shiftDown: false,
@@ -17,6 +18,9 @@ const uiState = () => ({
 
 export function uiReducer(state = uiState(), {payload, type}) {
   switch (type) {
+    case types.SET_SIDEBAR_OPEN: 
+      return Object.assign({}, state, { sidebarOpen: payload });
+      
     case types.SET_SELECTED:
       return Object.assign({}, state, { selected: payload });
       // return Object.assign({}, state, {

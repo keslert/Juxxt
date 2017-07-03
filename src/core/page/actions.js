@@ -130,6 +130,10 @@ function insertSection(dispatch, state, section, index) {
   dispatch(setSelected(duplicated));
 }
 
+function setElementContent(element, content) {
+
+}
+
 function duplicateSection(section) {
   const _section = cloneDeep(section);
   _section.id = 's_' + uniqueId();

@@ -39,8 +39,7 @@ const StyledHeading = styled.div`
 `;
 
 const StyledContent = styled.div`
-  padding-left: 15px;
-  margin-top: 5px;
+  margin-top: 10px;
   transition: height 0.3s;
   ${props => `
     ${!props.open && `

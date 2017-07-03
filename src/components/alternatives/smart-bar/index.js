@@ -8,6 +8,7 @@ import {
   setZoomLevel, 
   getZoomLevel,
   getSelected,
+  setSidebarOpen,
 } from '../../../core/ui';
 
 import Stepper from '../../common/stepper';
@@ -27,7 +28,7 @@ const StyledSmartBar = styled.div`
 class SmartBar extends React.Component {
 
   render() {
-    const { modification, turnOnModification, setZoomLevel, zoomLevel } = this.props;
+    const { modification, turnOnModification, setZoomLevel, zoomLevel, setSidebarOpen } = this.props;
     const buttons = [
       {label: 'Component', key: 'component'},
       {label: 'Variant', key: 'variant'},
@@ -56,6 +57,10 @@ class SmartBar extends React.Component {
                 text={label} 
                 active={key === modification} 
                 onClick={() => turnOnModification(key)}
+                onDoubleClick={() => {
+                  debugger;
+                  console.log('doubled')
+                }}
                 />
             </StyledSpacer>
           ))}
@@ -77,7 +82,7 @@ const mapStateToProps = createSelector(
   })
 )
 
-const mapDispatchToProps = Object.assign({turnOnModification, setZoomLevel});
+const mapDispatchToProps = Object.assign({turnOnModification, setZoomLevel, setSidebarOpen});
 export default connect(mapStateToProps, mapDispatchToProps)(SmartBar);
 
 
@@ -88,7 +93,6 @@ const StyledButton = styled.div`
   cursor: pointer;
   color: #727272;
   user-select: none;
-
   ${props => `
     ${props.active && `
       color: #202020;

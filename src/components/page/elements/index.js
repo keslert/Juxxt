@@ -34,6 +34,7 @@ const Element = (props) => {
     is,
     isSelected,
     setSelected,
+    setSidebarOpen,
     isHovered, 
     onHoverableMouseEnter, 
     onHoverableMouseLeave,
@@ -45,6 +46,7 @@ const Element = (props) => {
     <StyledElement 
       selected={isSelected || isHovered} 
       onClick={(e) => { e.stopPropagation(); setSelected(props);}}
+      onDoubleClick={(e) => { e.stopPropagation(); setSidebarOpen(true); }}
       onMouseEnter={() => onHoverableMouseEnter(id)}
       onMouseLeave={() => onHoverableMouseLeave(id)}
       >

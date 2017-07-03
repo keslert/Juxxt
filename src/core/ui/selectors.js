@@ -21,3 +21,7 @@ export function getSelected(state) {
 export function getZoomLevel(state) {
   return getUI(state).zoomLevel;
 }
+
+export function getSidebarOpen(state) {
+  return getUI(state).sidebarOpen;
+}

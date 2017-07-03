@@ -1,4 +1,5 @@
 import { generateContent } from './generate';
+import { pick } from 'lodash';
 
 export function assignContent(section, contentStore) {
   const store = contentStore.map(content => ({
@@ -22,13 +23,13 @@ export function assignContent(section, contentStore) {
     if(!element.content) { 
       const content = store.find(content => !content.matched && content.elementName === element.name);
       if(content) { // Best match
-        element.content = content;
+        element.content = pick(content, ['text', 'src', 'href']);
         content.matched = true;
         content.elementId = element.id;
         content.groupId = element.group.id;
       } else { // Generate new content
         const content = generateContent(element);
-        element.content = content;
+        element.content = {...content};
         content.matched = true;
         content.elementId = element.id;
         content.groupId = element.group.id;

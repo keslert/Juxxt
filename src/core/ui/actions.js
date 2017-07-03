@@ -20,6 +20,13 @@ export function setSelected(selected) {
   }
 }
 
+export function setSidebarOpen(open) {
+  return {
+    type: types.SET_SIDEBAR_OPEN,
+    payload: open,
+  }
+}
+
 export function setShiftDown(isDown) {
   return {
     type: types.SET_SHIFT_DOWN,

@@ -44,8 +44,8 @@ function getGenericContent(element) {
 
 function getButtonContent() {
   return randomItem([
-    { text: 'Get Started' },
-    { text: 'Learn More' },
+    { text: 'Get Started', href: '#' },
+    { text: 'Learn More', href: '#' },
   ]);
 }
 
@@ -104,15 +104,15 @@ function getIconContent() {
 
 function getImageContent(props) {
   return randomItem([
-    { src: 'https://unsplash.it/400/600?random' },
-    { src: 'https://unsplash.it/400/601?random' },
-    { src: 'https://unsplash.it/400/602?random' },
-    { src: 'https://unsplash.it/600/400?random' },
-    { src: 'https://unsplash.it/601/400?random' },
-    { src: 'https://unsplash.it/602/400?random' },
-    // { src: 'http://placehold.it/600x400'},
-    // { src: 'http://placehold.it/500x400'},
-    // { src: 'http://placehold.it/300x400'},
+    // { src: 'https://unsplash.it/400/600?random' },
+    // { src: 'https://unsplash.it/400/601?random' },
+    // { src: 'https://unsplash.it/400/602?random' },
+    // { src: 'https://unsplash.it/600/400?random' },
+    // { src: 'https://unsplash.it/601/400?random' },
+    // { src: 'https://unsplash.it/602/400?random' },
+    { src: 'http://placehold.it/600x400'},
+    { src: 'http://placehold.it/500x400'},
+    { src: 'http://placehold.it/300x400'},
   ]);
 }
 
@@ -121,7 +121,7 @@ function getLinkContent(props) {
     count: 1,
     units: 'words',
   });
-  return { text };
+  return { text, href: '#' };
 }
 
 function getHeadingContent(props) {
