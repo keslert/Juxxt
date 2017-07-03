@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import flow from 'lodash/flow';
 
 import { DropTarget } from 'react-dnd';
-import { insertAlternative, moveSectionToIndex } from '../../core/page';
+import { insertAlternative, moveSectionToIndex, insertBest } from '../../core/page';
 
 
 const targetSpec = {
@@ -28,16 +28,28 @@ const StyledInsertionTarget = styled.div`
   height: 0;
   width: 100%;
   position: relative;
+  opacity: ${props => props.show ? 1 : 0};
+  transition: opacity 0.3s ease-in;
+  z-index: 999;
   &:after {
-    content: '';
+    content: 'Insert Section';
     position: absolute;
-    top: -10px;
+    top: -20px;
     left: 0;
     right: 0;
-    height: 20px;
-    z-index: 30;
-    ${props => props.show && 'background: hsla(120, 72%, 80%, 0.63);'};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    background: #8bc34a;
+    color: #fff;
   }
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+  
+
 `
 
 function targetCollect(connect, monitor) {
@@ -49,11 +61,11 @@ function targetCollect(connect, monitor) {
 }
 
 const InsertionTarget = (props) => {
-  const { connectDropTarget, isOver, canDrop } = props;
+  const { connectDropTarget, isOver, canDrop, insertBest, index } = props;
   
   return connectDropTarget(
     <div>
-      <StyledInsertionTarget show={isOver && canDrop} />
+      <StyledInsertionTarget show={isOver && canDrop} onClick={() => insertBest(index)} />
     </div>
   )
 }
@@ -62,7 +74,7 @@ const mapStateToProps = (state) => ({
 
 })
 
-const mapDispatchToProps = Object.assign({insertAlternative, moveSectionToIndex});
+const mapDispatchToProps = Object.assign({insertAlternative, insertBest, moveSectionToIndex});
 
 export default flow(  
   DropTarget('section', targetSpec, targetCollect),

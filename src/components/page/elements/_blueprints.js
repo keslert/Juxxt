@@ -203,7 +203,9 @@ export const BasicIcon = {
   name: 'BasicIcon',
   is: 'Icon',
   inherits: [],
-  color: {},
+  color: {
+    text: 'vibrant',
+  },
   style: {
     fontSize: {
       _default: 5,

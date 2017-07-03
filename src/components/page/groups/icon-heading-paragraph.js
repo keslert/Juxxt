@@ -36,11 +36,11 @@ export const blueprint = {
 
   variants: [{
     textAlign: {
-      _default: 'tc',
+      _default: 'tl',
       options:['tl','tr','tc']
     },
     iconPosition: {
-      _default: 'above',
+      _default: 'column',
       options: ['above', 'column', 'inline'],
     },
   }]

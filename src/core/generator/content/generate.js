@@ -113,7 +113,6 @@ function getImageContent(props) {
     // { src: 'http://placehold.it/600x400'},
     // { src: 'http://placehold.it/500x400'},
     // { src: 'http://placehold.it/300x400'},
-    // { src: 'http://placehold.it/200x400'},
   ]);
 }
 

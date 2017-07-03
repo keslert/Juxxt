@@ -13,7 +13,7 @@ class TalkingPointIcon extends React.Component {
       elements: { icon, heading, paragraph } 
     } = this.props;
 
-    const order = variant.align === 'tr' ? 3 : 1;
+    const order = variant.textAlign === 'tr' ? 3 : 1;
     const _style = { ...style, textAlign: variant.textAlign }
     
     return (
@@ -21,7 +21,7 @@ class TalkingPointIcon extends React.Component {
         <div className={"flex order-" + order}>
           <Element {...icon} />
         </div>
-        <div className="flex flex-column">
+        <div className="flex flex-column order-2">
           {heading && <div><Element {...heading} /></div>}
           {paragraph && <div><Element {...paragraph}/></div>}
         </div>
@@ -36,7 +36,7 @@ class TalkingPointIcon extends React.Component {
       elements: { icon, heading, paragraph } 
     } = this.props;
 
-    const order = variant.align === 'tr' ? 3 : 1;
+    const order = variant.textAlign === 'tr' ? 3 : 1;
     const _style = { ...style, textAlign: variant.textAlign }
 
     return (

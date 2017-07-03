@@ -43,12 +43,8 @@ export function colorElement(element, page) {
     )
     const fn = find(rules, fn => some(valid, fn));
     if(isFunction(fn)) {
-      if(element.group.section.color.backgroundImage !=  null) {
-        element.color.text = "#FFFFFF";
-      } else {
-        const matches = filter(valid, fn);
-        element.color.text = getMode(matches.map(e => e.color.text));
-      }
+      const matches = filter(valid, fn);
+      element.color.text = getMode(matches.map(e => e.color.text));
     } else {
       const colorBlueprint = page.backgroundBlueprint[background];
       element.color.text = getPreferredColor(colorBlueprint.text, blueprint.color.text);

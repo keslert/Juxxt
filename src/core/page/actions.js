@@ -3,7 +3,7 @@ import { generate } from '../../core/generator';
 import { generateAlternatives } from '../../core/generator/alternatives';
 import { getMaster } from './selectors';
 import { sortBy, cloneDeep, uniqueId, forEach, findIndex, pick } from 'lodash';
-import { setSelected, getModifications, getSelectedModification } from '../ui';
+import { setSelected, getModifications, getSelectedModification, setSelectedModification } from '../ui';
 
 
 export function clearRegistry() {
@@ -98,20 +98,36 @@ export function moveSectionToIndex(section, index) {
   }
 }
 
+export function insertBest(index) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const master = getMaster(state);
+    const modifications = getModifications(state);
+    
+    const alternatives = generateAlternatives(master, {component: {basic: true}}, master.sections[0]);
+    insertSection(dispatch, state, alternatives[0].sections[0], index + 1);
+    dispatch(setSelectedModification('component'));
+  }
+}
+
 export function insertAlternative(alternative, index) {
   return (dispatch, getState) => {
-    const master = getMaster(getState());
-    const duplicated = duplicateSection(alternative);
-    const page = {...master,
-      sections: [
-        ...master.sections.slice(0, index),
-        duplicated,
-        ...master.sections.slice(index),
-      ]
-    }
-    dispatch(setMaster(page));
-    dispatch(setSelected(duplicated));
+    insertSection(dispatch, getState(), alternative, index);
   }
+}
+
+function insertSection(dispatch, state, section, index) {
+  const master = getMaster(state);
+  const duplicated = duplicateSection(section);
+  const page = {...master,
+    sections: [
+      ...master.sections.slice(0, index),
+      duplicated,
+      ...master.sections.slice(index),
+    ]
+  }
+  dispatch(setMaster(page));
+  dispatch(setSelected(duplicated));
 }
 
 function duplicateSection(section) {
