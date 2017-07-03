@@ -1,8 +1,8 @@
 import * as types from './action-types';
-import { generate } from '../../core/generator';
+import { overrideElementContent } from '../../core/generator';
 import { generateAlternatives } from '../../core/generator/alternatives';
 import { getMaster } from './selectors';
-import { sortBy, cloneDeep, uniqueId, forEach, findIndex, pick } from 'lodash';
+import { sortBy, cloneDeep, uniqueId, forEach, findIndex, pick, find } from 'lodash';
 import { setSelected, getModifications, getSelectedModification, setSelectedModification } from '../ui';
 
 
@@ -19,10 +19,6 @@ export function registerItem(item) {
   }
 }
 
-export function updateUserOverride(id, key, value) {
-  return updateMaster({}, {[id]: {[key]: value}});
-}
-
 export function setMaster(page) {
   return {
     type: types.SET_MASTER,
@@ -34,16 +30,6 @@ export function setAlternatives(alternatives) {
   return {
     type: types.SET_ALTERNATIVES,
     payload: alternatives,
-  }
-}
-
-export function updateMaster(modifications, overwrites) {
-  return (dispatch, getState) => {
-    const state = getState();
-    const master = getMaster(state);
-    const selected = state.ui.selected;
-    const page = generate(master, modifications, selected, overwrites);
-    dispatch(setMaster(page));
   }
 }
 
@@ -72,14 +58,8 @@ export function updateAlternatives() {
 
 export function overrideSectionWithAlternative(section, alternative) {
   return (dispatch, getState) => {
-    const master = getMaster(getState());
     const duplicated = duplicateSection(alternative);
-    const page = {...master,
-      sections: master.sections.map(_section => 
-        _section.id !== section.id ? _section : duplicated,
-      )
-    }
-    dispatch(setMaster(page));
+    replaceSection(dispatch, getState(), section, duplicated);
     dispatch(setSelected(duplicated));
   }
 }
@@ -130,8 +110,26 @@ function insertSection(dispatch, state, section, index) {
   dispatch(setSelected(duplicated));
 }
 
-function setElementContent(element, content) {
+function replaceSection(dispatch, state, section, newSection) {
+  const master = getMaster(state);
+  const page = {...master,
+    sections: master.sections.map(s => 
+      s.id !== section.id ? s : newSection,
+    )
+  }
+  dispatch(setMaster(page));
+}
 
+export function setElementContent(element, content) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const master = getMaster(state);
+    const section = overrideElementContent(element, content, master);
+    const _element = find(section.elements, e => e.id === element.id);
+
+    replaceSection(dispatch, state, element.group.section, section);
+    dispatch(setSelected(_element));
+  }
 }
 
 function duplicateSection(section) {

@@ -22,8 +22,10 @@ class ContentPanel extends React.Component {
   }
 
   updateContent(key, value) {
-    const { content } = this.state;
-    this.setState({content: {...content, [key]: value }});
+    const { element, setElementContent } = this.props;
+    const content = {...this.state.content, [key]: value };
+    this.setState({content});
+    setElementContent(element, content);
   }
 
   render() {

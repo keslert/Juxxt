@@ -11,7 +11,7 @@ export function assignContent(section, contentStore) {
   section.elements.forEach(element => {
     const content = store.find(content => content.elementId === element.id);
     if(content) {
-      element.content = content;
+      element.content = pick(content, ['text', 'src', 'href']);
       content.matched = true;
     } else {
       element.content = null;

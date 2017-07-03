@@ -1,7 +1,9 @@
 import { generateSectionComponentAlternatives } from './alternatives/section';
 import { buildSectionFromSkeleton } from './builder/section';
+import { extractSkeletonFromSection } from './skeletons/utils';
 import { assignContent } from './content';
 import { assignStyles } from './style';
+import { assignColor } from './color';
 import { colorGroup } from './color/group';
 import { colorElement } from './color/element';
 import { tintColor, getSortedByPrimary, getOkSectionColors, getOkBackgroundColors } from './color/utils';
@@ -85,4 +87,18 @@ export function init() {
   }
   
   return { master, alternatives: [] };
+}
+
+export function overrideElementContent(element, content, page) {
+  const store = element.group.section.contentStore.map(item => 
+    item.elementId !== element.id ? item : {...item, ...content}
+  );
+
+  const skeleton = extractSkeletonFromSection(element.group.section);
+  const section = buildSectionFromSkeleton(skeleton);
+  assignContent(section, store);
+  assignStyles(section, page);
+  assignColor(section, page);
+
+  return section;
 }
