@@ -53,10 +53,7 @@ class Sidebar extends React.PureComponent {
       <StyledSidebar open={open}>
         <CloseButton onClick={() => setSidebarOpen(false)}><i className="fa fa-times"></i></CloseButton>
         <StyledHeading>{itemType} Settings</StyledHeading>
-
-        {<ContentPanel element={selected} hidden={!selected.isElement} />}
-        <ThemeSidebar />
-
+        <ContentPanel element={selected} hidden={!selected.isElement} />
       </StyledSidebar>
     )
   }
