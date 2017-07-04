@@ -11,7 +11,7 @@ export function assignContent(section, contentStore) {
   section.elements.forEach(element => {
     const content = store.find(content => content.elementId === element.id);
     if(content) {
-      element.content = pick(content, ['text', 'src', 'href']);
+      element.content = pick(content, ['text', 'src', 'href', 'type']);
       content.matched = true;
     } else {
       element.content = null;
@@ -23,7 +23,7 @@ export function assignContent(section, contentStore) {
     if(!element.content) { 
       const content = store.find(content => !content.matched && content.elementName === element.name);
       if(content) { // Best match
-        element.content = pick(content, ['text', 'src', 'href']);
+        element.content = pick(content, ['text', 'src', 'href', 'type']);
         content.matched = true;
         content.elementId = element.id;
         content.groupId = element.group.id;

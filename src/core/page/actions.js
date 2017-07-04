@@ -135,14 +135,15 @@ export function setElementContent(element, content) {
 function duplicateSection(section) {
   const _section = cloneDeep(section);
   _section.id = 's_' + uniqueId();
-  _section.contentStore = [];
   forEach(_section.groups, group => {
     group.id = 'g_' + uniqueId();
     group.section = _section;
     forEach(group.elements, element => {
+      const content = find(_section.contentStore, item => item.elementId === element.id);
       element.id = 'e_' + uniqueId();
       element.group = group;
-      _section.contentStore.push(element.content);
+      content.elementId = element.id;
+      content.groupId = group.id;
     })
   });
   

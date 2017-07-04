@@ -17,7 +17,7 @@ class Navbar2 extends React.PureComponent {
     const colorClassNames = convertColorToAtomic(color);
 
     return (
-      <div className={ colorClassNames + ' pt3 pb3 Navbar2'}>
+      <div className={ colorClassNames + ' Navbar2'}>
         <div className={styleClassNames}>
           <div>
             <Group {...groups.logo} />

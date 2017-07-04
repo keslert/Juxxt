@@ -28,7 +28,12 @@ const TextArea = ({
     <label>{label}</label>
     <StyledInputWrapper>
       <StyledTextArea>
-        <Textarea name={name} onChange={(e) => onChange(e.target.value)} value={value} />
+        <Textarea 
+          name={name} 
+          value={value} 
+          maxRows={5}
+          onChange={(e) => onChange(e.target.value)} 
+          />
       </StyledTextArea>
     </StyledInputWrapper>
   </StyledField>

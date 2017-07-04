@@ -9,7 +9,7 @@ const uiState = () => ({
     content: {},
     style: {},
   },
-  sidebarOpen: true,
+  sidebarOpen: false,
   selectedModification: 'component',
   hovered: [],
   shiftDown: false,

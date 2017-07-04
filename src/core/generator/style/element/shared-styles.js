@@ -36,6 +36,10 @@ export const styles = {
       _default: 'auto',
       options: ['auto', '1x1', '16x9', '9x16', '4x3', '3x4', '6x4', '4x6', '8x5', '5x8', '7x5', '5x7']
     },
+    borderRadius: {
+      _default: 0,
+      options: [0,1,2,3,4,'-pill'],
+    },
     margin: {
       _default: 'auto',
       options: ['auto', '1x1', '16x9', '9x16', '4x3', '3x4', '6x4', '4x6', '8x5', '5x8', '7x5', '5x7']

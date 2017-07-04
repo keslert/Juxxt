@@ -34,13 +34,13 @@ const StyledInsertionTarget = styled.div`
   &:after {
     content: 'Insert Section';
     position: absolute;
-    top: -20px;
+    top: -15px;
     left: 0;
     right: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40px;
+    height: 30px;
     background: #8bc34a;
     color: #fff;
   }
