@@ -29,3 +29,18 @@ export const StyledHeading = styled.div`
   text-transform: uppercase;
   color: rgba(255,255,255,0.5);
 `;
+
+export const StyledButton = styled.div`
+  padding: 4px 8px;
+  background: ${props => props.background || '#1d1d1d'};
+  border-radius: 2px;
+  cursor: pointer;
+  color: #727272;
+  display: inline-block;
+  font-size: 11px;
+  margin-left: 2px;
+  user-select: none;
+  &:hover {
+    color: #aaa;
+  }
+`;
