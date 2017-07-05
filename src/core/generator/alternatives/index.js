@@ -149,7 +149,6 @@ function generateStyleAlternatives(page, modify, selected) {
   const _section = buildSectionFromSkeleton(skeleton);
   assignColor(_section, page);
   assignContent(_section, section.contentStore);
-
   assignStyles(_section, page);
   let sections;
   if(selected.isSection) {

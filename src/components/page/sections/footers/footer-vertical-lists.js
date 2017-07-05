@@ -3,7 +3,7 @@ import Group from '../../groups';
 import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
 
-class FooterVerticalList extends React.PureComponent {
+class FooterVerticalLists extends React.PureComponent {
   render () {
     const { groups, style, color } = this.props;
     const boxStyle = {
@@ -16,7 +16,7 @@ class FooterVerticalList extends React.PureComponent {
     const styleClassNames = convertStyleToAtomic(boxStyle);
     const colorClassNames = convertColorToAtomic(color);
     return (
-      <div className={ colorClassNames + ' pl6 pr6 pt6 pb6 FooterVerticalList'}>
+      <div className={ colorClassNames + ' pl6 pr6 pt6 pb6 FooterVerticalLists'}>
         <div className={styleClassNames}>   
         	<Group {...groups.logo} />
             <Group {...groups.verticallist} />
@@ -28,7 +28,7 @@ class FooterVerticalList extends React.PureComponent {
   }
 }
 
-export default FooterVerticalList;
+export default FooterVerticalLists;
 
 export const blueprint = {
   type: 'footer',

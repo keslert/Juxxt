@@ -34,13 +34,11 @@ export function generateGroupVariantAlternatives(group, skeleton) {
   ))
   const unique = uniqBy(combinations, JSON.stringify);
 
-  const skeletons = unique.map(variant => ({...skeleton,
-    groups: {...skeleton.groups,
-      [group.sectionKey]: {...skeleton.groups[group.sectionKey],
-        variant
-      }
-    }
-  }))
+  const skeletons = unique.map(variant => {
+    const _skeleton = cloneDeep(skeleton);
+    _skeleton.groups[group.sectionKey].variant = variant;
+    return _skeleton;
+  })
 
   return skeletons;
 }
@@ -63,17 +61,16 @@ export function generateGroupStyleAlternatives(modify, section, group) {
   const keys = filter(Object.keys(modify), key => modify[key]);
   const sharedStyles = blueprint.inherits.map(name => styles[name]);
   const style = filterStyle(Object.assign({}, ...sharedStyles, blueprint.style), keys);
-  const _style = mapValues(style, s => s.options);
   
-  const combinations = getCombinations(_style);
-  const sections = combinations.map(style => {
-    const _section = {...section,
-      groups: {...section.groups,
-        [group.sectionKey]: {...sections.groups[group.sectionKey],
-          style
-        }
-      }
-    };
+  const possibleStyles = flatMap(style, ({options}, key) => options.map(value => ({
+    [key]: value,
+  })))
+  
+  const sections = possibleStyles.map(style => {
+    const _section = cloneDeep(section);
+    const _group = _section.groups[group.sectionKey];
+    _group.style = {...group.style, ...style}
+    _section.changes = style;
     return _section;
   })
 

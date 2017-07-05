@@ -28,7 +28,7 @@ export const BasicHeading = {
   style: {
     fontSize: {
       _default: 5,
-      options: range(3, 6),
+      options: range(3, 9),
     },
     fontWeight: {
       _default: 6,
@@ -157,7 +157,7 @@ export const ReadableLink = {
   },
   style: {
     margin: {
-      _default: 2,
+      _default: '0',
       options: [0,1,2,3,4],
     }
   },
