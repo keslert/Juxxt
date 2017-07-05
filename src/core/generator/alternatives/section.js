@@ -6,6 +6,7 @@ import { getCombinations } from '../../utils';
 import { colorElement } from '../color/element';
 import { styles } from '../style/section/shared-styles';
 import { filterStyle } from '../style/utils';
+import { generateGroupVariantAlternatives } from './group';
 import { getSortedByPrimary, getPrimaryScores } from '../color/utils';
 import tinycolor from 'tinycolor2';
 
@@ -22,17 +23,19 @@ export function generateSectionComponentAlternatives(section, modify) {
     return skeleton;
   })
   return skeletons;
+
 }
 
+const OPTIONS = [1,3];
 export function generateSectionVariantAlternatives(section, skeleton) {
-  const variants = blueprints[section.name].variants;
-
-  const combinations = flatMap(variants, variant => getCombinations(
-    mapValues(variant, ({options}) => options)
-  ))
-  
-  const unique = uniqBy(combinations, JSON.stringify)
-  const skeletons = unique.map(variant => ({...skeleton, variant}))
+  let skeletons = [];
+  for(let i=0; i<Object.keys(section.groups).length;i++) {
+    let _alt = generateGroupVariantAlternatives(section.groups[Object.keys(section.groups)[0]],skeleton);
+    for(let j =0; j<_alt.length; j++) {
+      _alt[j].variant.order = OPTIONS[i];
+    }
+    skeletons = [...cloneDeep(skeletons), ...cloneDeep(_alt)];
+  }
 
   return skeletons;
 }
