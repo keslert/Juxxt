@@ -2,7 +2,7 @@ import * as types from './action-types';
 import { overrideElementContent } from '../../core/generator';
 import { generateAlternatives } from '../../core/generator/alternatives';
 import { getMaster } from './selectors';
-import { sortBy, cloneDeep, uniqueId, forEach, findIndex, pick, find } from 'lodash';
+import { sortBy, cloneDeep, uniqueId, forEach, findIndex, pick, find, filter } from 'lodash';
 import { setSelected, getModifications, getSelectedModification, setSelectedModification } from '../ui';
 
 
@@ -118,6 +118,16 @@ function replaceSection(dispatch, state, section, newSection) {
     )
   }
   dispatch(setMaster(page));
+}
+
+export function deleteSection(section) {
+  return (dispatch, getState) => {
+    const master = getMaster(getState());
+    const page = {...master,
+      sections: filter(master.sections, s => s.id !== section.id)
+    }
+    dispatch(setMaster(page));
+  }
 }
 
 export function setElementContent(element, content) {

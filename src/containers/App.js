@@ -16,6 +16,7 @@ import {
 import { getMaster, updateAlternatives } from '../core/page';
 import Page from '../components/page';
 import Sidebar from '../components/sidebar';
+import Trashbar from '../components/trashbar';
 import Alternatives from '../components/alternatives';
 
 import { DragDropContext } from 'react-dnd';
@@ -84,6 +85,7 @@ class App extends React.Component {
           </SplitPane>
         </StyledWindow>
         <Sidebar />
+        <Trashbar />
       </StyledApp>
     ); 
   }
