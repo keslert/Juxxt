@@ -58,7 +58,7 @@ class SmartBar extends React.Component {
                 active={key === modification} 
                 onClick={() => turnOnModification(key)}
                 onDoubleClick={() => {
-                  debugger;
+          
                   console.log('doubled')
                 }}
                 />

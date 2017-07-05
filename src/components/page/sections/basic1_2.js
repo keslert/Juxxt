@@ -50,13 +50,12 @@ const Basic1_2 = ({
 export default Basic1_2;
 
 export const blueprint = {
-  type: 'basic',
   inherits: ['BasicSection'],
   style: {},
   color: {},
   groups: {
     tp: {
-      options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','IconHeadingParagraph']
+      options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton']
     },
     media: {
       options: ['BlockImage'],

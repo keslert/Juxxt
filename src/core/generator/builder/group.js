@@ -21,7 +21,7 @@ export function buildGroupFromSkeleton(skeleton) {
     return element;
   })  
   return group;
-}
+};
 
 const _genericGroups = pickBy(blueprints, group => !group.special);
 

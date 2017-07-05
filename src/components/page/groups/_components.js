@@ -11,6 +11,7 @@ import DoubleButton from './double-button';
 import ParagraphOnly from './singles/paragraph';
 import VerticalList from './Vertical-List';
 import IconHeadingParagraph from './icon-heading-paragraph';
+import HeadingParagraph2Buttons from './heading-paragraph-2buttons';
 // import * as IconHeadingParagraph from './icon-heading-paragraph';
 // import * as IconSmallHeadingParagraph from './icon-small-heading-paragraph';
 // import * as SmallHeadingParagraph from './small-heading-paragraph';
@@ -34,6 +35,7 @@ export default {
   HeadingSubheadingButton,
   ParagraphOnly,
   IconHeadingParagraph,
+  HeadingParagraph2Buttons,
   // IconHeadingParagraph,
   
   // IconSmallHeadingParagraph: {

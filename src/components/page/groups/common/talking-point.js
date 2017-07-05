@@ -7,6 +7,13 @@ import { convertStyleToAtomic } from '../../../../core/generator/style/conversio
 class TalkingPoint extends React.Component {
 
   render() {
+     const boxStyle = {
+      ...style,
+      display: "flex",
+      align: "start",
+      justify: "center",
+      height: 60,
+    }
     const { 
       style,
       align,
@@ -17,6 +24,8 @@ class TalkingPoint extends React.Component {
         paragraph,
         links,
         button,
+        secondaryButton,
+        
       }
     } = this.props;
 
@@ -25,6 +34,12 @@ class TalkingPoint extends React.Component {
       textAlign: align,
     }
 
+
+
+    const styleClassNames = convertStyleToAtomic(boxStyle);
+ 
+
+
     return (
       <Box className={convertStyleToAtomic(_style)}>
         {kicker && <Element {...kicker} />}
@@ -32,7 +47,10 @@ class TalkingPoint extends React.Component {
         {subheading && <div><Element {...subheading} /></div>}
         {paragraph && <div><Element {...paragraph} /></div>}
         {links && <div><Element {...links}/></div>}
-        {button && <div><Element {...button}/></div>}
+        <div className={ styleClassNames + 'dib justify-center'}>
+        {button && <div className = 'mh3'><Element {...button}/></div>}
+        {secondaryButton && <div className = 'mh3'><Element {...secondaryButton}/></div>}
+        </div>
       </Box>
     )
   }
