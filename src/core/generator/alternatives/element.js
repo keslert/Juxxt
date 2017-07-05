@@ -76,23 +76,14 @@ export function generateElementStyleAlternatives(modify, section, element) {
   const sharedStyles = blueprint.inherits.map(name => styles[name]);
   const style = filterStyle(Object.assign({}, ...sharedStyles, blueprint.style), keys);
   
-  const possibleStyles = flatMap(style, ({options}, key) => options.map(value => ({
-    [key]: value,
-  })))
-
+  const possibleStyles = flatMap(style, ({options}, key) => 
+    options.map(value => ({[key]: value})
+  ))
 
   const sections = possibleStyles.map(style => {
-    const _section = {...section,
-      groups: {...section.groups,
-        [element.group.sectionKey]: {...section.groups[element.group.sectionKey],
-          elements: {...section.groups[element.group.sectionKey].elements,
-            [element.groupKey]: { ...section.groups[element.group.sectionKey].elements[element.groupKey],
-              style: {...element.style, ...style}
-            }
-          }
-        }
-      }
-    }
+    const _section = cloneDeep(section);
+    const _element = _section.groups[element.group.sectionKey].elements[element.groupKey];
+    _element.style = {...element.style, ...style};
     _section.changes = style;
     return _section;
   })

@@ -1,15 +1,28 @@
 import React from 'react';
 import Element from '../elements';
 import { ReadableLink } from '../elements/_blueprints';
+import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 
 class HorizontalList extends React.Component {
   render() {
-    const { elements } = this.props;
+    const { style, elements } = this.props;
+
+    const innerStyles = {
+      marginHorizontal: style.gutter,
+    }
+    const innerClassNames = convertStyleToAtomic(innerStyles)
+
     return (
-      <div className="dib">
-        <Element {...elements.link} />
-        <Element {...elements.link} />
-        <Element {...elements.link} />
+      <div className={convertStyleToAtomic(style) + " dib"}>
+        <div className={innerClassNames}>
+          <Element {...elements.link} />
+        </div>
+        <div className={innerClassNames}>
+          <Element {...elements.link} />
+        </div>
+        <div className={innerClassNames}>
+          <Element {...elements.link} />
+        </div>
       </div>
     )
   }
@@ -18,7 +31,16 @@ export default HorizontalList;
 
 export const blueprint = {
   inherits: [],
-  style: {},
+  style: {
+    gutter: {
+      _default: 2,
+      options: [0,1,2,3,4],
+    },
+    marginHorizontal: {
+      _default: 2,
+      options: [0,1,2,3,4],
+    }
+  },
   color: {},
   elements: {
     link: {

@@ -104,15 +104,17 @@ function getIconContent() {
 
 function getImageContent(props) {
   return randomItem([
+    { src: 'https://cdn.dribbble.com/users/175710/screenshots/3628199/dribbble-setapp-cat-02.png' },
+    { src: 'https://cdn.dribbble.com/users/1008875/screenshots/3630620/bear.png' },
     // { src: 'https://unsplash.it/400/600?random' },
     // { src: 'https://unsplash.it/400/601?random' },
     // { src: 'https://unsplash.it/400/602?random' },
     // { src: 'https://unsplash.it/600/400?random' },
     // { src: 'https://unsplash.it/601/400?random' },
     // { src: 'https://unsplash.it/602/400?random' },
-    { src: 'http://placehold.it/600x400'},
-    { src: 'http://placehold.it/500x400'},
-    { src: 'http://placehold.it/300x400'},
+    // { src: 'http://placehold.it/600x400'},
+    // { src: 'http://placehold.it/500x400'},
+    // { src: 'http://placehold.it/300x400'},
   ]);
 }
 
