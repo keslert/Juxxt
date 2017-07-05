@@ -402,6 +402,17 @@ img { max-width: 100%; }
 .pb-140P { padding-bottom: 140%; }
 .pb-71p42P { padding-bottom: 71.42%; }
 
+/* Fonts */
+.f-abril { font-family: 'Abril', cursive; }
+.f-bitter { font-family: 'Bitter', serif; }
+.f-fira-sans { font-family: 'Fira Sans', sans-serif; }
+.f-libre-franklin { font-family: 'Libre Franklin', sans-serif; }
+.f-merriweather { font-family: 'Merriweather', serif; }
+.f-playfair-display { font-family: 'Playfair Display', serif; }
+.f-pt-serif { font-family: 'PT Serif', serif; }
+.f-roboto { font-family: 'Roboto', sans-serif; }
+.f-rubik { font-family: 'Rubik', sans-serif; }
+.f-source-sans-pro { font-family: 'Source Sans Pro', sans-serif; }
 
 /* Margins */
 .mauto { margin: auto; }
