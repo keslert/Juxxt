@@ -46,11 +46,9 @@ export function getGradient(color, okBackgrounds) {
 
 const PATTERNS = ['chevrons','octogons','overlappingCircles','plusSigns','xes','sineWaves','hexagons','overlappingRings','plaid','triangles','squares','nestedSquares','mosaicSquares','concentricCircles','diamonds','tessellation']
 export function getPattern(color) {
-  const patternArr = [];
+  const patternArr = {};
   forEach(PATTERNS, pattern=>
-    patternArr.push(
-      geopattern.generate(Math.random().toString(36).substring(7),{color:color,generator: pattern}).toDataUrl()
-    )
+    patternArr[pattern] = geopattern.generate(Math.random().toString(36).substring(7),{color:color,generator: pattern}).toDataUrl()
   );
   return patternArr;
 }

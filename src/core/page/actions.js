@@ -42,7 +42,6 @@ export function updateAlternatives() {
     const selected = state.ui.selected;
     const section = selected.isSection ? selected : selected.section || selected.group.section;
     const index = findIndex(master.sections, s => s.id === section.id);
-
     const page = {...master,
       sections: [
         ...master.sections.slice(0, index),
@@ -50,7 +49,6 @@ export function updateAlternatives() {
         ...master.sections.slice(index + 1),
       ]
     }
-
     const alternatives = generateAlternatives(page, pick(modifications, [selectedModification]), selected);
     dispatch(setAlternatives(alternatives));
   }
@@ -67,7 +65,6 @@ export function overrideSectionWithAlternative(section, alternative) {
 export function moveSectionToIndex(section, index) {
   return (dispatch, getState) => {
     const master = getMaster(getState());
-    
     const indexedSections = master.sections.map((_section, i) => ({_section, i}))
     const page = {...master,
       sections: sortBy(indexedSections, ({_section, i}) => (

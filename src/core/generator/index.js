@@ -85,7 +85,6 @@ export function init() {
       return [...sections, section];
     }, [])
   }
-  
   return { master, alternatives: [] };
 }
 

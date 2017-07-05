@@ -45,9 +45,9 @@ class Page extends React.PureComponent {
       color: ${color}; 
     }\n
     `).join('\n');
-    
+
     const patternColors = sections.map(section => section.color.pattern && `
-      .ptrn-${section.color.pattern.substr(1)} {
+      .ptrn-${section.color.pattern} {
         background: ${section.color._pattern};
         background-size: 75%;
       }\n

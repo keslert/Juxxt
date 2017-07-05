@@ -12,7 +12,7 @@ import tinycolor from 'tinycolor2';
 
 export function generateSectionComponentAlternatives(section, modify) {
   const possibleSections = Object.keys(blueprints);
-
+  let a = blueprints;
   const validSections = filter(possibleSections, name => 
     name !== section.name && 
     modify[blueprints[name].type]
@@ -108,15 +108,15 @@ function generateSectionColorSolidsBackground(section, page) {
 }
 
 function generateSectionColorPatternsBackground(section, page) {
-
   const sections = [];
-  for(let i=0; i < page.backgroundBlueprint[section.color.background].pattern.length; i++) {
+  const colorBlueprint = page.backgroundBlueprint[section.color.background];
+  for(let i=0; i < Object.keys(page.backgroundBlueprint[section.color.background].pattern).length; i++) {
     const _section = cloneDeep(section);  
     _section.color = {
       background: section.color.background,
-      text: page.backgroundBlueprint[section.color.background].text[0],
-      pattern: section.color.background,
-      _pattern: page.backgroundBlueprint[section.color.background].pattern[i]
+      text: colorBlueprint.text[0],
+      pattern: section.color.background.substr(1) + "-" + Object.keys(colorBlueprint.pattern)[i],
+      _pattern: colorBlueprint.pattern[Object.keys(colorBlueprint.pattern)[i]]
     }
     sections.push(_section);
   }

@@ -35,7 +35,6 @@ class TalkingPoint extends React.Component {
     }
 
 
-
     const styleClassNames = convertStyleToAtomic(boxStyle);
  
 
@@ -48,8 +47,8 @@ class TalkingPoint extends React.Component {
         {paragraph && <div><Element {...paragraph} /></div>}
         {links && <div><Element {...links}/></div>}
         <div className={ styleClassNames + 'dib justify-center'}>
-        {button && <div className = 'mh3'><Element {...button}/></div>}
-        {secondaryButton && <div className = 'mh3'><Element {...secondaryButton}/></div>}
+          {button && <div className = {'mh3 '}><Element {...button}/></div>}
+          {secondaryButton && <div className = 'mh3'><Element {...secondaryButton}/></div>}
         </div>
       </Box>
     )
