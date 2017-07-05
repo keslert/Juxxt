@@ -9,11 +9,12 @@ import {
   getZoomLevel,
   getSelected,
   setSidebarOpen,
+  setShowPreview,
 } from '../../../core/ui';
 
 import Stepper from '../../common/stepper';
 import SearchBar from '../../common/search-bar';
-import { StyledFlex, StyledSpacer } from '../../common/styled-base';
+import { StyledFlex, StyledSpacer, StyledButton } from '../../common/styled-base';
 import Box from '../../common/box';
 import ModificationBar from './modification-bar';
 
@@ -28,22 +29,27 @@ const StyledSmartBar = styled.div`
 class SmartBar extends React.Component {
 
   render() {
-    const { modification, turnOnModification, setZoomLevel, zoomLevel, setSidebarOpen } = this.props;
+    const { 
+      modification, 
+      turnOnModification, 
+      setZoomLevel, 
+      zoomLevel, 
+      setSidebarOpen,
+      setShowPreview,
+    } = this.props;
+
     const buttons = [
       {label: 'Component', key: 'component'},
       {label: 'Variant', key: 'variant'},
       {label: 'Color', key: 'color'},
       {label: 'Style', key: 'style'},
       {label: 'Content', key: 'content'},
+      {label: 'Page', key: 'page'},
     ]
 
     return (
       <StyledSmartBar>
         <Box display="flex" flexWrap="wrap" width="100%" marginBottom="10px">
-          <StyledFlex>
-            <SearchBar />
-          </StyledFlex>
-
           <StyledSpacer marginLeft="5px">
             <Stepper 
               label={`${Math.floor(100 / zoomLevel)}%`}
@@ -53,17 +59,23 @@ class SmartBar extends React.Component {
 
           {buttons.map(({label, key}) => (
             <StyledSpacer marginLeft="5px" key={key}>
-              <Button 
-                text={label} 
-                active={key === modification} 
+              <StyledButton 
+                background={key === modification ? '#fff' : undefined}
+                color={key === modification ? '#202020' : undefined}
                 onClick={() => turnOnModification(key)}
-                onDoubleClick={() => {
-          
-                  console.log('doubled')
-                }}
-                />
+                >
+                {label}
+              </StyledButton>
             </StyledSpacer>
           ))}
+          <Box flex="1" textAlign="right" marginLeft="5px">
+            <StyledButton 
+              background='#6f6f6f'
+              color='#ddd'
+              onClick={() => setShowPreview(true)}>
+              Preview
+            </StyledButton>
+          </Box>
         </Box>
         <ModificationBar />
       </StyledSmartBar>
@@ -82,31 +94,5 @@ const mapStateToProps = createSelector(
   })
 )
 
-const mapDispatchToProps = Object.assign({turnOnModification, setZoomLevel, setSidebarOpen});
+const mapDispatchToProps = Object.assign({turnOnModification, setZoomLevel, setSidebarOpen, setShowPreview});
 export default connect(mapStateToProps, mapDispatchToProps)(SmartBar);
-
-
-const StyledButton = styled.div`
-  padding: 6px 8px;
-  background: #1d1d1d;
-  border-radius: 2px;
-  cursor: pointer;
-  color: #727272;
-  user-select: none;
-  ${props => `
-    ${props.active && `
-      color: #202020;
-      background: #fff;
-    `}
-  `}
-`
-
-const Button = ({
-  onClick,
-  text,
-  active,
-}) => (
-  <StyledButton active={active} onClick={onClick}>
-    {text}
-  </StyledButton>
-)

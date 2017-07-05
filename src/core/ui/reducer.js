@@ -14,6 +14,7 @@ const uiState = () => ({
   hovered: [],
   shiftDown: false,
   zoomLevel: 2,
+  preview: false,
 });
 
 export function uiReducer(state = uiState(), {payload, type}) {
@@ -50,6 +51,7 @@ export function uiReducer(state = uiState(), {payload, type}) {
       return Object.assign({}, state, {
         hovered: [...state.hovered, payload],
       })
+      
     case types.ON_HOVERABLE_MOUSE_LEAVE:
       return Object.assign({}, state, {
         hovered: filter(state.hovered, uuid => uuid !== payload),
@@ -58,6 +60,11 @@ export function uiReducer(state = uiState(), {payload, type}) {
     case types.SET_ZOOM_LEVEL:
       return Object.assign({}, state, {
         zoomLevel: payload,
+      })
+
+    case types.SET_SHOW_PREVIEW:
+      return Object.assign({}, state, {
+        preview: payload,
       })
 
     default: 

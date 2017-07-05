@@ -25,3 +25,7 @@ export function getZoomLevel(state) {
 export function getSidebarOpen(state) {
   return getUI(state).sidebarOpen;
 }
+
+export function getShowPreview(state) {
+  return getUI(state).preview;
+}

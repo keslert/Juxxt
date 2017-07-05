@@ -11,7 +11,9 @@ import {
   setSelected, 
   getSelectedModification,
   turnOnModification, 
-  getModifications 
+  getModifications,
+  getShowPreview,
+  setShowPreview,
 } from '../core/ui';
 import { getMaster, updateAlternatives } from '../core/page';
 import Page from '../components/page';
@@ -45,10 +47,12 @@ const StyledColumn = styled.div`
 class App extends React.Component {
 
   componentDidMount() {
-    const { updateAlternatives, setShiftDown, master, setSelected, turnOnModification } = this.props;
+    const { updateAlternatives, setShiftDown, master, setSelected, turnOnModification, setShowPreview } = this.props;
 
     this.listener = new window.keypress.Listener();
     // this.listener.simple_combo('right', () => updateAlternatives());
+
+    this.listener.simple_combo('escape', () => setShowPreview(false));
 
     this.listener.register_combo({
       keys: "shift",
@@ -72,7 +76,16 @@ class App extends React.Component {
   }
 
   render() {
-    const { master } = this.props;
+    const { master, preview } = this.props;
+
+    if(preview) {
+      return (
+        <StyledColumn width={100}>
+          <Page {...master} />
+        </StyledColumn>
+      )
+    }
+
     
     return (
       <StyledApp>
@@ -96,14 +109,22 @@ const mapStateToProps = createSelector(
   getSelectedModification,
   getSelected,
   getModifications,
-  (master, selectedModification, selected, modifications) => ({
+  getShowPreview,
+  (master, selectedModification, selected, modifications, preview) => ({
     master,
     selectedModification,
     modifications,
     selected,
+    preview,
   })
 )
-const mapDispatchToProps = Object.assign({setShiftDown, updateAlternatives, setSelected, turnOnModification});
+const mapDispatchToProps = Object.assign({
+  setShiftDown, 
+  updateAlternatives, 
+  setSelected, 
+  turnOnModification,
+  setShowPreview,
+});
 export default flow(
   connect(mapStateToProps, mapDispatchToProps),
   DragDropContext(HTML5Backend)

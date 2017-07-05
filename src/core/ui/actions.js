@@ -3,6 +3,12 @@ import { getSelected, getModifications, getSelectedModification } from './select
 import { mapValues, filter, zipObject, intersection, sortBy, includes, isEmpty, uniq } from 'lodash';
 import { getStyleRoot } from '../generator/style/utils';
 
+export function setShowPreview(show) {
+  return {
+    type: types.SET_SHOW_PREVIEW,
+    payload: show,
+  }
+}
 
 function _setSelected(selected) {
   return {

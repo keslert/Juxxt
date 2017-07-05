@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import tinycolor from 'tinycolor2';
 
 export const StyledDisplayFlex = styled.div`
   display: flex;
@@ -51,3 +51,23 @@ export const _Block = styled.div`
     ${props.maxWidth && `max-width: ${props.maxWidth}px;`};
   `}
 `
+
+export const StyledButton = styled.div`
+  padding: 6px 8px;
+  border-radius: 2px;
+  cursor: pointer;
+  user-select: none;
+  display: inline-block;
+  ${props => `
+    background: ${props.background};
+    color: ${props.color};
+    &:hover {
+      color: ${tinycolor(props.color).lighten(10).toString()};
+    }
+  `}
+`;
+
+StyledButton.defaultProps = {
+  background: '#1d1d1d',
+  color: '#727272',
+}

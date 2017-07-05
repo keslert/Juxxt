@@ -8,6 +8,7 @@ import {
   setSelectedModification,
   setZoomLevel,
   turnOnModification,
+  setShowPreview,
 } from './actions';
 
 export { uiReducer } from './reducer';
@@ -24,6 +25,7 @@ export const uiActions = {
   setSelectedModification,
   setZoomLevel,
   turnOnModification,
+  setShowPreview,
 }
 
 export {
@@ -36,4 +38,5 @@ export {
   setSelectedModification,
   setZoomLevel,
   turnOnModification,
+  setShowPreview,
 };

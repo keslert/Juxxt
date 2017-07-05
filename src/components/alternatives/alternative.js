@@ -40,7 +40,6 @@ const Alternative = ({
         <StyledLabel>{label}</StyledLabel>
         <StyledIconBar>
           <IconButton type="heart" onClick={onFavorite} />
-          <IconButton type="trash-o" onClick={onDelete} />
         </StyledIconBar>
       </StyledHeading>
       {children}
