@@ -1,12 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-
 import flow from 'lodash/flow';
-
 import { DropTarget } from 'react-dnd';
 import { deleteSection } from '../../core/page';
-
 
 const targetSpec = {
   canDrop(props, monitor) {

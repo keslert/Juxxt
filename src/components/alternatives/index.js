@@ -42,7 +42,10 @@ class Alternatives extends React.Component {
         <StyledContent>
           {alternatives.map((alternative, i) => (
             <StyledWrapper key={alternative.uid + `${i}`} style={{width: `${100 / zoomLevel}%`}}>
-              <Alternative onFavorite={() => null} onDelete={() => null}>
+              <Alternative 
+                onFavorite={() => null} 
+                onDelete={() => null} 
+                changes={alternative.sections[0].changes}>
                 <Page 
                   onClick={alternative.sections.length > 1 ? () => setMaster(alternative) : undefined}
                   sections={alternative.sections}

@@ -92,12 +92,13 @@ function generateSectionColorSolidsBackground(section, page) {
     bgColors = getSortedByPrimary(Object.keys(page.backgroundBlueprint));
   else
     bgColors = getSortedNormalSectionColors(Object.keys(page.backgroundBlueprint));
-  const sections = map(bgColors, clr => {
+  const sections = map(bgColors, color => {
     const _section = cloneDeep(section);
     _section.color = {
-      background: clr,
-      text: page.backgroundBlueprint[clr].text[0]
+      background: color,
+      text: page.backgroundBlueprint[color].text[0]
     }
+    _section.changes = {background: color};
     return _section;
   })
   return sections;
@@ -156,6 +157,7 @@ export function generateSectionStyleAlternatives(modify, section) {
       ...section,
       style: { ...section.style, ...style }
     };
+    _section.changes = style;
     return _section;
   })
 

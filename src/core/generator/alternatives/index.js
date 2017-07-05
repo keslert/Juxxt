@@ -66,6 +66,15 @@ function generateComponentAlternatives(page, modify, selected) {
     assignColor(_section, page);
     assignContent(_section, section.contentStore);
     assignStyles(_section, page);
+    
+    if(selected.isSection) {
+      _section.changes = { section: _section.name };
+    } else if(selected.isGroup) {
+      _section.changes = { group: _section.groups[selected.sectionKey].name };
+    } else {
+      _section.changes = { group: _section.groups[selected.group.sectionKey].name };
+    } 
+
     return _section;
   })
   return sections;

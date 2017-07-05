@@ -47,6 +47,7 @@ export function generateElementColorAlternatives(section, modify, element, page)
         background,
         text: page.backgroundBlueprint[background].text[0],
       }
+      _section.changes = { background };
       return _section;
     });
   } else {
@@ -54,6 +55,7 @@ export function generateElementColorAlternatives(section, modify, element, page)
     sections = map(page.backgroundBlueprint[background].text, text => {
       const _section = cloneDeep(section);
       _section.elements[elementIndex].color = { text, background: element.color.background }
+      _section.changes = { color: text };
       return _section;
     });
   }
@@ -75,7 +77,6 @@ export function generateElementStyleAlternatives(modify, section, element) {
   const style = filterStyle(Object.assign({}, ...sharedStyles, blueprint.style), keys);
   
   const possibleStyles = flatMap(style, ({options}, key) => options.map(value => ({
-    ...element.style,
     [key]: value,
   })))
 
@@ -86,12 +87,13 @@ export function generateElementStyleAlternatives(modify, section, element) {
         [element.group.sectionKey]: {...section.groups[element.group.sectionKey],
           elements: {...section.groups[element.group.sectionKey].elements,
             [element.groupKey]: { ...section.groups[element.group.sectionKey].elements[element.groupKey],
-              style,
+              style: {...element.style, ...style}
             }
           }
         }
       }
     }
+    _section.changes = style;
     return _section;
   })
 
