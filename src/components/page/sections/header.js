@@ -38,7 +38,7 @@ export const blueprint = {
   color: {},
   groups: {
     item: {
-      options: ['HeadingSubheadingButton', 'HeadingParagraphButton', 'HeadingParagraph2Buttons'],
+      options: ['HeadingSubheadingButton', 'HeadingParagraphButton', 'HeadingParagraph2Buttons','HeadingSubheading2Buttons'],
     },
   },
   variants: []

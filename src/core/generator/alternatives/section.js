@@ -1,28 +1,44 @@
 import blueprints from '../../../components/page/sections/_blueprints';
 import { generateSectionSkeleton } from '../skeletons/section';
+import { buildSectionFromSkeleton } from '../builder/section';
 import { filter, range, toPairs, fromPairs, sortBy, mapValues, uniqBy, flatMap, cloneDeep, forEach, includes, map } from 'lodash';
 import { assignContent } from '../content';
 import { getCombinations } from '../../utils';
 import { colorElement } from '../color/element';
 import { styles } from '../style/section/shared-styles';
 import { filterStyle } from '../style/utils';
-import { generateGroupVariantAlternatives } from './group';
+import { generateGroupVariantAlternatives, generateGroupComponentAlternatives } from './group';
 import { getSortedByPrimary, getPrimaryScores } from '../color/utils';
 import tinycolor from 'tinycolor2';
 
-export function generateSectionComponentAlternatives(section, modify) {
-  const possibleSections = Object.keys(blueprints);
-  let a = blueprints;
+export function generateSectionComponentAlternatives(section, modify, masterSkeleton) {
+  
+  const possibleSections = Object.keys(blueprints); 
   const validSections = filter(possibleSections, name => 
     name !== section.name && 
     modify[blueprints[name].type]
   );
-  const skeletons = validSections.map(sectionName => {
+  let skeletons = validSections.map(sectionName => {
     const skeleton = generateSectionSkeleton(sectionName, section.variant)
     skeleton.id = section.id;
     return skeleton;
   })
+
+  if(masterSkeleton !=null) {
+    const _skele = cloneDeep(skeletons);
+    _skele.push(masterSkeleton);
+    for(let i =0; i < _skele.length; i++) {
+      const _section = buildSectionFromSkeleton(_skele[i]);
+      for(let j=0; j < Object.keys(_section.groups).length;j++) {
+        const _skeleton = generateGroupComponentAlternatives(_section.groups[Object.keys(_section.groups)[j]], _section);
+        skeletons = [...skeletons, ..._skeleton];
+      }
+    } 
+  }
+   
+
   return skeletons;
+  
 
 }
 
@@ -36,7 +52,6 @@ export function generateSectionVariantAlternatives(section, skeleton) {
     }
     skeletons = [...cloneDeep(skeletons), ...cloneDeep(_alt)];
   }
-
   return skeletons;
 }
 

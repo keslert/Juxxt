@@ -54,7 +54,7 @@ function generateComponentAlternatives(page, modify, selected) {
 
   let skeletons;
   if(selected.isSection) {
-    skeletons = generateSectionComponentAlternatives(selected, modify);
+    skeletons = generateSectionComponentAlternatives(selected, modify, masterSkeleton);
   } else if(selected.isGroup) {
     skeletons = generateGroupComponentAlternatives(selected, masterSkeleton);
   } else {

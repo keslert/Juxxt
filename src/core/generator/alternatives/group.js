@@ -9,6 +9,7 @@ import { filterStyle } from '../style/utils';
 
 
 export function generateGroupComponentAlternatives(group, masterSkeleton) {
+
   const sectionBlueprint = sectionBlueprints[group.section.name];
   const possibleGroups = sectionBlueprint.groups[group.sectionKey].options;
   const validGroups = filter(possibleGroups, groupName => groupName !== group.name)

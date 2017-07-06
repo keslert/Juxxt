@@ -14,6 +14,7 @@ import { blueprint as ParagraphOnly } from './singles/paragraph';
 import { blueprint as VerticalList } from './vertical-list';
 import { blueprint as IconHeadingParagraph } from './icon-heading-paragraph';
 import { blueprint as HeadingParagraph2Buttons } from './heading-paragraph-2buttons';
+import { blueprint as HeadingSubheading2Buttons } from './heading-subheading-2buttons';
 // import * as IconSmallHeadingParagraph from './icon-small-heading-paragraph';
 // import * as SmallHeadingParagraph from './small-heading-paragraph';
 // import * as SmallHeadingLinkList from './small-heading-link-list';
@@ -27,6 +28,7 @@ export default {
   Logo,
   HeadingParagraph,
   HeadingParagraphButton,
+  HeadingSubheading2Buttons,
   KickerHeadingParagraph,
   HeadingSubheadingButton,
   SingleButton,
