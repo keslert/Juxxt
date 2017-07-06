@@ -38,23 +38,37 @@ export function generateElementVariantAlternatives(element, skeleton) {
 export function generateElementColorAlternatives(section, modify, element, page) {
   const elementIndex = findIndex(section.elements, e => e.id === element.id);
   
-  let sections;
+  let sections = [];
   if(element.color.background && modify.background) {
     const background = element.group.color.background || section.color.background;
     sections = map(page.backgroundBlueprint[background].solid, background => {
       const _section = cloneDeep(section);
       _section.elements[elementIndex].color = {
         background,
+        borderColor: background,
         text: page.backgroundBlueprint[background].text[0],
       }
       _section.changes = { background };
       return _section;
     });
-  } else {
+
+    sections = sections.concat(map(page.backgroundBlueprint[background].text, color => {
+      const _section = cloneDeep(section);
+      _section.elements[elementIndex].color = {
+        background: '#transparent',
+        borderColor: color,
+        text: color,
+      }
+      _section.changes = { background };
+      return _section;
+    }));
+
+
+  } else if(modify.text) {
     const background = element.color.background || element.group.color.background || section.color.background;
     sections = map(page.backgroundBlueprint[background].text, text => {
       const _section = cloneDeep(section);
-      _section.elements[elementIndex].color = { text, background: element.color.background }
+      _section.elements[elementIndex].color = { ...element.color, text }
       _section.changes = { color: text };
       return _section;
     });

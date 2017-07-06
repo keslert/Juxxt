@@ -56,35 +56,25 @@ class Page extends React.PureComponent {
     const last = sections.length - 1;
 
     const gradientColors = Object.keys(backgroundBlueprint).map(color => 
-      backgroundBlueprint[color].gradient.map(gradObj=>
-        `
+      backgroundBlueprint[color].gradient.map(gradObj=> `
         .grd-${gradObj.start.substr(1)}-${gradObj.end.substr(1)}-${gradObj.direction.replace(/\s+/g, '')} {
           background: linear-gradient(${gradObj.direction}, ${gradObj.start}, ${gradObj.end});
         }\n
-        `
-      )
+    `)
     ).join('\n');
 
-  
+    const backgroundImages = PICTURES.map(pic => `
+      .bgimg-${pic.split('.')[0]} {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/images/openSourceImages2017/${pic}) !important;
+        background-size: cover !important;
+        background-position: center center !important;
+      }\n
+    `).join('\n');
 
-      let backgroundImages = "";
-      for(let i=0;i<PICTURES.length;i++) {
-
-        backgroundImages = backgroundImages + 
-        `
-        .bgimg-${PICTURES[i].split('.')[0]} {
-          background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${"/images/openSourceImages2017/" + PICTURES[i]})  !important;
-          background-size: cover !important;
-          background-position: center center !important;
-        }\n
-        `
-      }
-    const pageColors = websiteColors.map((color) => `.bg-${color.replace("#","")} {
-      background: ${color}; 
-    }\n
-    .c-${color.replace("#","")} { 
-      color: ${color}; 
-    }\n
+    const pageColors = websiteColors.map((color) => `
+      .bg-${color.substr(1)} { background: ${color}; }
+      .c-${color.substr(1)} { color: ${color}; }
+      .b-${color.substr(1)} { border-color: ${color}; }
     `).join('\n');
 
     const patternColors = sections.map(section => section.color.pattern && `
@@ -93,8 +83,8 @@ class Page extends React.PureComponent {
         background-size: 75%;
       }\n
     `).join('\n');
-    const extraRules = [ pageColors, gradientColors, patternColors, backgroundImages ].join('\n');
 
+    const extraRules = [ pageColors, gradientColors, patternColors, backgroundImages ].join('\n');
 
     const clickable = isFunction(onClick);
     return (

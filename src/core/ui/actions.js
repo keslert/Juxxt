@@ -94,11 +94,11 @@ function resolveModifications(dispatch, state, modification, selected, callPath)
 }
 
 function resolveColorModification(dispatch, state, selected) {
-  let keys = ['color'];
+  let keys;
   if(selected.isSection) {
-    keys = keys.concat(['gradient', 'pattern', 'image']);
+    keys = ['color', 'gradient', 'pattern', 'image'];
   } else if(selected.isElement && selected.color.background) {
-    keys.push('background');
+    keys = Object.keys(selected.color);
   }
   
   resolveModificationSelection(dispatch, state, keys, 'color');

@@ -593,6 +593,15 @@ img { max-width: 100%; }
 .ttu { text-transform: uppercase; }
 .ttn { text-transform: none; }
 
+.bw0 { border-width: 0; }
+.bw1 { border-width: .125em; }
+.bw2 { border-width: .25em; }
+.bw3 { border-width: .5em; }
+.bw4 { border-width: 1em; }
+.bw5 { border-width: 2em; }
+
+.b-solid { border-style: solid; }
+
 .br0 { border-radius: 0; }
 .br1 { border-radius: .125em; }
 .br2 { border-radius: .25em; }

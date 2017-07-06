@@ -28,9 +28,12 @@ export function colorElement(element, page) {
     if(isFunction(fn)) {
       const matches = filter(valid, fn);
       element.color.background = getMode(matches.map(e => e.color.background));
+      element.color.borderColor = getMode(matches.map(e => e.color.borderColor));
     } else {
       const colorBlueprint = page.backgroundBlueprint[background];
-      element.color.background = getPreferredColor(colorBlueprint.solid, blueprint.color.background);
+      const preferred = getPreferredColor(colorBlueprint.solid, blueprint.color.background);
+      element.color.background = preferred;
+      element.color.borderColor = preferred;
     }
     background = element.color.background;
   } 
