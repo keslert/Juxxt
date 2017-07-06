@@ -13,8 +13,8 @@ class TalkingPointIcon extends React.Component {
       elements: { icon, heading, paragraph } 
     } = this.props;
 
-    const order = variant.textAlign === 'tr' ? 3 : 1;
-    const _style = { ...style, textAlign: variant.textAlign }
+    const order = variant.align === 'right' ? 3 : 1;
+    const _style = { ...style, textAlign: variant.align }
     
     return (
       <Box className={ "flex flex-row " + convertStyleToAtomic(_style)}>
@@ -36,8 +36,8 @@ class TalkingPointIcon extends React.Component {
       elements: { icon, heading, paragraph } 
     } = this.props;
 
-    const order = variant.textAlign === 'tr' ? 3 : 1;
-    const _style = { ...style, textAlign: variant.textAlign }
+    const order = variant.align === 'right' ? 3 : 1;
+    const _style = { ...style, textAlign: variant.align }
 
     return (
       <Box className={ "flex flex-column " + convertStyleToAtomic(_style)}>
@@ -59,7 +59,7 @@ class TalkingPointIcon extends React.Component {
       elements: { icon, heading, paragraph } 
     } = this.props;
 
-    const _style = { ...style, textAlign: variant.textAlign }
+    const _style = { ...style, textAlign: variant.align }
 
     return (
       <Box className={convertStyleToAtomic(_style)}>

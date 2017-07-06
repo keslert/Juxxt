@@ -99,6 +99,15 @@ function generateVariantAlternatives(page, selected) {
     assignColor(_section, page);
     assignContent(_section, section.contentStore);
     assignStyles(_section, page);
+
+    if(selected.isSection) {
+      _section.changes = _section.variant;
+    } else if(selected.isGroup) {
+      _section.changes = _section.groups[selected.sectionKey].variant;
+    } else {
+      _section.changes = _section.groups[selected.group.sectionKey].variant;
+    } 
+
     return _section;
   })
 

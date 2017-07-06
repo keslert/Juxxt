@@ -170,6 +170,7 @@ export const BasicButton = {
   color: {
     text: 'readable',
     background: 'vibrant',
+    special: (element, page) => ({})
   },
   style: {
     marginVertical: {
@@ -209,7 +210,7 @@ export const BasicIcon = {
   style: {
     fontSize: {
       _default: 5,
-      options: range(2, 6),
+      options: range(2, 10),
     },
     marginHorizontal: {
       _default: 3,

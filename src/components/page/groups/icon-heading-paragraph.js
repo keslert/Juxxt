@@ -35,9 +35,9 @@ export const blueprint = {
   },
 
   variants: [{
-    textAlign: {
-      _default: 'tl',
-      options:['tl','tr','tc']
+    align: {
+      _default: 'left',
+      options:['left','center','right']
     },
     iconPosition: {
       _default: 'column',

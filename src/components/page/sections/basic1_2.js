@@ -57,7 +57,7 @@ export const blueprint = {
   color: {},
   groups: {
     tp: {
-      options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton'],
+      options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton', 'IconHeadingParagraph'],
     },
     media: {
       options: ['BlockImage'],
