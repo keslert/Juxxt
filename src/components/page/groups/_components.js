@@ -6,8 +6,11 @@ import HeadingSubheadingButton from './heading-subheading-button';
 import HeadingParagraphButton from './heading-paragraph-button';
 import HorizontalList from './horizontal-list';
 import SingleButton from './singles/SingleButton';
+import SmallSingleButton from './singles/SmallSingleButton';
 import Logo from './singles/logo';
 import DoubleButton from './double-button';
+import SmallDoubleButton from './SmallDoubleButton';
+
 import ParagraphOnly from './singles/paragraph';
 import VerticalList from './vertical-list';
 import IconHeadingParagraph from './icon-heading-paragraph';
@@ -25,6 +28,8 @@ export default {
   HorizontalList,
   SingleButton,
   DoubleButton,
+  SmallSingleButton,
+  SmallDoubleButton,
   HeadingParagraph,
   HeadingParagraphButton,
   BlockImage,

@@ -43,7 +43,7 @@ export const blueprint = {
       options: ['Logo']
     },
     button: {
-      options: ['DoubleButton','SingleButton'],
+      options: ['SmallDoubleButton','SmallSingleButton'],
     },
   },
   variants: []

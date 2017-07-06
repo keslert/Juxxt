@@ -4,10 +4,12 @@ import { blueprint as KickerHeadingParagraph } from './kicker-heading-paragraph'
 import { blueprint as HeadingParagraphLink } from './heading-paragraph-link';
 import { blueprint as HeadingSubheadingButton } from './heading-subheading-button';
 import { blueprint as DoubleButton } from './double-button';
+import { blueprint as SmallDoubleButton } from './SmallDoubleButton';
 import { blueprint as HorizontalList } from './horizontal-list';
 import { blueprint as HeadingParagraphButton } from './heading-paragraph-button';
 import { blueprint as Logo } from './singles/logo';
 import { blueprint as SingleButton } from './singles/SingleButton';
+import { blueprint as SmallSingleButton } from './singles/SmallSingleButton';
 import { blueprint as ParagraphOnly } from './singles/paragraph';
 import { blueprint as VerticalList } from './vertical-list';
 import { blueprint as IconHeadingParagraph } from './icon-heading-paragraph';
@@ -29,6 +31,8 @@ export default {
   HeadingSubheadingButton,
   SingleButton,
   DoubleButton,
+  SmallSingleButton,
+  SmallDoubleButton,
   HorizontalList,
   VerticalList,
   ParagraphOnly,

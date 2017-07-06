@@ -163,6 +163,51 @@ export const ReadableLink = {
   },
 };
 
+export const SmallButton = { 
+  name: 'SmallButton', 
+  is: 'Link',
+  inherits: [inherits.Button],
+  color: {
+    text: 'readable',
+    background: 'vibrant',
+  },
+  style: {
+    marginVertical: {
+      _default: 2,
+      options: range(0, 3),
+    },
+    paddingVertical: {
+      _default: 2,
+      options: range(2,5),
+    },
+    paddingHorizontal: {
+      _default: 3,
+      options: range(3,6),
+    },
+    minWidth: {
+      _default: 'none',
+      options: ['none', '100px', '150px', '200px', '300px','400px'],
+    },
+    borderRadius: {
+      _default: '-pill',
+      options: [0,1,2,3,4,'-pill'],
+    },
+    borderWidth: {
+      _default: 1,
+      options: range(0, 5),
+    },
+    borderStyle: { _default: 'solid' },
+    textTransform: {
+      _default: 'none',
+      options: ['none', 'uppercase'],
+    },
+    fontSize: {
+      _default: 2,
+      options: range(2, 3),
+    },
+  },
+};
+
 export const BasicButton = { 
   name: 'BasicButton', 
   is: 'Link',
