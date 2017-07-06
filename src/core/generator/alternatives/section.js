@@ -60,16 +60,42 @@ export function generateSectionColorAlternatives(section, modify, page) {
 
 const NUM_OF_IMAGES = 1;
 
+   const PICTURES = ['baby.jpg',
+   'burger.jpg',
+   'beachChairs.jpg',
+   'camera1.jpg',
+   'coffee.jpg',
+   'coffeeMagazineFlower.jpg',
+   'coupleBikeBeach.jpg',
+   'fallLeaves2.jpg',
+   'fancyBurger.jpg',
+   'fancyFood.jpg',
+   'fashionGlasses.jpg',
+   'greenleaf.jpg',
+   'kidWithSunglasses.jpg',
+   'macarons.jpg',
+   'nyc.jpg',
+   'oceanSunset.jpg',
+   'pancake1.jpg',
+   'railroadShoes.jpg',
+   'rain.jpg',
+   'ruralHighway.jpg',
+   'silhouette.jpg',
+   'Suit.jpg',
+   'sunflower.jpg',
+   'traveler.jpg',
+   'waterfall.jpg'];
+
 function generateSectionColorImagesBackground(section, page) {
 
   const sections = [];
   
-  for(let i =0; i< NUM_OF_IMAGES ; i++) {
+  for(let i =0; i< PICTURES.length ; i++) {
     const _section = cloneDeep(section);
     _section.color = {
       text: '#ffffff',
       background: section.color.background, 
-      backgroundImage: 'randomBgImage',
+      backgroundImage: PICTURES[i].split(".")[0],
     }
     sections.push(_section)
   }

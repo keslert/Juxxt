@@ -22,6 +22,33 @@ const StyledPage = styled.div`
   `};
 `;
 
+
+    const PICTURES = ['baby.jpg',
+   'burger.jpg',
+   'beachChairs.jpg',
+   'camera1.jpg',
+   'coffee.jpg',
+   'coffeeMagazineFlower.jpg',
+   'coupleBikeBeach.jpg',
+   'fallLeaves2.jpg',
+   'fancyBurger.jpg',
+   'fancyFood.jpg',
+   'fashionGlasses.jpg',
+   'greenleaf.jpg',
+   'kidWithSunglasses.jpg',
+   'macarons.jpg',
+   'nyc.jpg',
+   'oceanSunset.jpg',
+   'pancake1.jpg',
+   'railroadShoes.jpg',
+   'rain.jpg',
+   'ruralHighway.jpg',
+   'silhouette.jpg',
+   'Suit.jpg',
+   'sunflower.jpg',
+   'traveler.jpg',
+   'waterfall.jpg'];
+
 class Page extends React.PureComponent {
   
   render() {
@@ -38,6 +65,20 @@ class Page extends React.PureComponent {
       )
     ).join('\n');
 
+  
+
+      let backgroundImages = "";
+      for(let i=0;i<PICTURES.length;i++) {
+
+        backgroundImages = backgroundImages + 
+        `
+        .bgimg-${PICTURES[i].split('.')[0]} {
+          background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${"/images/openSourceImages2017/" + PICTURES[i]})  !important;
+          background-size: cover !important;
+          background-position: center center !important;
+        }\n
+        `
+      }
     const pageColors = websiteColors.map((color) => `.bg-${color.replace("#","")} {
       background: ${color}; 
     }\n
@@ -52,7 +93,7 @@ class Page extends React.PureComponent {
         background-size: 75%;
       }\n
     `).join('\n');
-    const extraRules = [ pageColors, gradientColors, patternColors].join('\n');
+    const extraRules = [ pageColors, gradientColors, patternColors, backgroundImages ].join('\n');
 
 
     const clickable = isFunction(onClick);
