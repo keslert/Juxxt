@@ -40,7 +40,7 @@ class SmartBar extends React.Component {
 
     const buttons = [
       {label: 'Component', key: 'component'},
-      {label: 'Variant', key: 'variant'},
+      {label: 'Layout', key: 'variant'},
       {label: 'Color', key: 'color'},
       {label: 'Style', key: 'style'},
       {label: 'Content', key: 'content'},

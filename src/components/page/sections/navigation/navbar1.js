@@ -11,7 +11,7 @@ class Navbar1 extends React.PureComponent {
       display: "flex",
       align: "center",
       justify: "center",
-      height: 60,
+      height: '60px',
     }
     const styleClassNames = convertStyleToAtomic(boxStyle);
     const colorClassNames = convertColorToAtomic(color);

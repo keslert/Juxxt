@@ -623,7 +623,8 @@ img { max-width: 100%; }
 .order-3 { order: 3; }
 
 
-.h-50 { height: 50px; }
+.h-50px { height: 50px; }
+.h-60px { height: 60px; }
 .h-40e { height: 40em; }
 .h-32e { height: 32em; }
 .fr {float:right;}

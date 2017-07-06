@@ -9,7 +9,7 @@ class TalkingPoint extends React.Component {
   render() {
      const boxStyle = {
       ...style,
-      display: "flex",
+      display: "dib",
       align: "start",
       justify: "center",
       height: 60,
@@ -46,9 +46,9 @@ class TalkingPoint extends React.Component {
         {subheading && <div><Element {...subheading} /></div>}
         {paragraph && <div><Element {...paragraph} /></div>}
         {links && <div><Element {...links}/></div>}
-        <div className={ styleClassNames + 'dib justify-center'}>
-          {button && <div className = {'mh3 '}><Element {...button}/></div>}
-          {secondaryButton && <div className = 'mh3'><Element {...secondaryButton}/></div>}
+        <div className={ styleClassNames }>
+          {button && <div><Element {...button}/></div>}
+          {secondaryButton && <div className="ml3"><Element {...secondaryButton}/></div>}
         </div>
       </Box>
     )
