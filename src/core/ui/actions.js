@@ -1,6 +1,6 @@
 import * as types from './action-types';
 import { getSelected, getModifications, getSelectedModification } from './selectors';
-import { mapValues, filter, zipObject, intersection, sortBy, includes, isEmpty, uniq } from 'lodash';
+import { pick, mapValues, filter, zipObject, intersection, sortBy, includes, isEmpty, uniq } from 'lodash';
 import { getStyleRoot } from '../generator/style/utils';
 
 export function setShowPreview(show) {
@@ -97,8 +97,8 @@ function resolveColorModification(dispatch, state, selected) {
   let keys;
   if(selected.isSection) {
     keys = ['color', 'gradient', 'pattern', 'image'];
-  } else if(selected.isElement && selected.color.background) {
-    keys = Object.keys(selected.color);
+  } else if(selected.isElement) {
+    keys = selected.color.background ? ['text', 'background'] : ['text']
   }
   
   resolveModificationSelection(dispatch, state, keys, 'color');

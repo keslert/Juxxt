@@ -59,7 +59,7 @@ export function generateElementColorAlternatives(section, modify, element, page)
         borderColor: color,
         text: color,
       }
-      _section.changes = { background };
+      _section.changes = { outline: color };
       return _section;
     }));
 
