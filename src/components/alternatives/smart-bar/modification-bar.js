@@ -15,6 +15,19 @@ class Subbar extends React.Component {
     const _modification = zipObject(keys, keys.map(k => k === key));
     setModification(selectedModification, _modification);
   }
+// const StyledHeading = styled.div
+//   display: flex;
+//    justify-content: flex-end;
+//    margin-bottom: 2px;
+
+//  align-items: flex-end;
+//  line-height: 24px;
+//  const StyledLabel = styled.div
+//    font-size: 12px;
+//    color: rgba(255,255,255,0.3);
+//    white-space: nowrap;
+//    text-overflow: ellipsis;
+//  ;
 
   render() {
     const { modification } = this.props;

@@ -36,6 +36,14 @@ class Alternatives extends React.Component {
 
   render() {
     const { alternatives=[], width, zoomLevel, setMaster } = this.props;
+    if (alternatives.length === 0 ){
+      return (
+        <div>
+          <SmartBar />
+          <p className={ " mt3 fadedtext"}> No existing alternatives </p>
+        </div>
+      )
+    }
     return (
       <StyledAlternatives width={width}>
         <SmartBar />
