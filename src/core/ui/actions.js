@@ -99,6 +99,8 @@ function resolveColorModification(dispatch, state, selected) {
     keys = ['color', 'gradient', 'pattern', 'image'];
   } else if(selected.isElement) {
     keys = selected.color.background ? ['text', 'background'] : ['text']
+  } else if (selected.isGroup) {
+    keys= ['color'];
   }
   
   resolveModificationSelection(dispatch, state, keys, 'color');
