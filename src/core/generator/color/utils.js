@@ -4,6 +4,9 @@ import geopattern from 'geopattern';
 import { range, reduce, uniqueId, forEach, clone, sortBy, map, fromPairs, toPairs, max, some, filter } from 'lodash';
 
 
+export function sortByLuminance(colorArr) {
+  return sortBy(colorArr,t=> tinycolor(t).getLuminance());
+}
 
 function isSimilarHue(color1,color2) {
   const DIFFERENCE = 50;

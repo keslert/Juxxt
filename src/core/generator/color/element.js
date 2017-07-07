@@ -53,14 +53,9 @@ export function colorElement(element, page) {
       element.color.text = getPreferredColor(colorBlueprint.text, blueprint.color.text);
     }
   }
-
-
 }
 
 function getGroupOrSectionBackground(element, page) {
-  if(element.group.section.color.backgroundImage != null) {
-    return page.websiteColors[page.websiteColors.length-2];
-  }
   return element.group.color.background || 
          element.group.section.color.background;
 }

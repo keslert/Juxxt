@@ -6,7 +6,7 @@ import { assignStyles } from './style';
 import { assignColor } from './color';
 import { colorGroup } from './color/group';
 import { colorElement } from './color/element';
-import { tintColor, getSortedByPrimary, getOkSectionColors, getOkBackgroundColors } from './color/utils';
+import { tintColor, getSortedByPrimary, getOkSectionColors, getOkBackgroundColors, sortByLuminance } from './color/utils';
 import { randomItem } from '../utils';
 import { range, reduce, uniqueId, forEach, clone, sortBy, map, fromPairs, toPairs, max, some, filter } from 'lodash';
 
@@ -18,7 +18,7 @@ export function init() {
   //const palette = ["#5AFF15","#AAFFE5","#9D75CB","#A657AE", "#8C1A6A"];
   //const palette = ['#EA9F3B', "#BBBE64", "#93A8AC", "#8E5572", "#443850"];
   const primary = getSortedByPrimary(palette)[Object.keys(getSortedByPrimary(palette))[0]];
-  const websiteColors = [...palette, tintColor("#211b1a",primary,20), tintColor('#f5f6f7', primary, 20), tintColor("#fff", primary, 2)];
+  const websiteColors = sortByLuminance([...palette, tintColor("#211b1a",primary,20), tintColor('#f5f6f7', primary, 20), tintColor("#fff", primary, 2)]);
   const backgroundBlueprint = getOkSectionColors(getOkBackgroundColors(websiteColors), websiteColors, [...palette, "#ffffff"]);
   const NUM_OF_SECTIONS = 6;
 

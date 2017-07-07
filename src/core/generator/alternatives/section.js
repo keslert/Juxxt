@@ -102,14 +102,12 @@ const NUM_OF_IMAGES = 1;
    'waterfall.jpg'];
 
 function generateSectionColorImagesBackground(section, page) {
-
   const sections = [];
-  
   for(let i =0; i< PICTURES.length ; i++) {
     const _section = cloneDeep(section);
     _section.color = {
-      text: '#ffffff',
-      background: section.color.background, 
+      text: page.backgroundBlueprint[page.websiteColors[0]].text[0],
+      background: page.websiteColors[0], 
       backgroundImage: PICTURES[i].split(".")[0],
     }
     sections.push(_section)
