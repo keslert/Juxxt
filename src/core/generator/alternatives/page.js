@@ -1,3 +1,6 @@
+import { getSortedByPreference } from '../color/utils';
+import { buildPageColorBlueprint } from '../color/page';
+import { colorElement } from '../color/element';
 import { cloneDeep, omit, values, filter, isEqual} from 'lodash';
 import tinycolor from 'tinycolor2';
 
@@ -14,10 +17,22 @@ export function generatePageBrandColorAlternatives(page) {
 
   const pages = validPalettes.map(palette => {
     const _page = cloneDeep(page);
+    const colorBlueprint = buildPageColorBlueprint(palette);
     
+    _page.palette = palette;
+    _page.colorBlueprint = colorBlueprint;
+
+    const sections = [];
 
 
 
+    _page.sections.forEach(section => {
+      section.color.background = getSortedByPreference(colorBlueprint.backgrounds, section.blueprint.color.background)[0];
+      section.elements.forEach(e => colorElement(e, {sections, colorBlueprint}));
+      sections.push(section);
+    })
+
+    return _page;
   })
 
   return pages;

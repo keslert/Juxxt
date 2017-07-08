@@ -43,7 +43,6 @@ export function getSortedByPreference(colors, preference) {
   return getSortedByMostNeutral(colors);
 }
 
-
 export function getReadableColors(colors, background='#ffffff', threshold=1.8) {
   const colorReadability = zipObject(colors, colors.map(color => tinycolor.readability(color, background)));
   const readable = filter(colors, color => colorReadability[color] >= threshold);
