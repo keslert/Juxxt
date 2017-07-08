@@ -89,12 +89,13 @@ function resolveModifications(dispatch, state, modification, selected, callPath)
     case 'style': resolveStyleModification(dispatch, state, selected);
     case 'color': resolveColorModification(dispatch, state, selected);
     case 'component': resolveComponentModification(dispatch, state, selected, callPath);
+    case 'page': resolvePageModification(dispatch, state);
     default: console.log('Hm... should not be here');
   }
 }
 
 function resolveColorModification(dispatch, state, selected) {
-  let keys;
+  let keys = ['color'];
   if(selected.isSection) {
     keys = ['color', 'gradient', 'pattern', 'image'];
   } else if(selected.isElement) {
@@ -118,6 +119,11 @@ function resolveComponentModification(dispatch, state, selected, callPath) {
 function resolveStyleModification(dispatch, state, selected) {
   const keys = uniq(Object.keys(selected.style).map(key => getStyleRoot(key)));
   resolveModificationSelection(dispatch, state, keys, 'style');
+}
+
+function resolvePageModification(dispatch, state) {
+  const keys = ['brandColors'];
+  resolveModificationSelection(dispatch, state, keys, 'page');
 }
 
 function resolveModificationSelection(dispatch, state, keys, modification) {

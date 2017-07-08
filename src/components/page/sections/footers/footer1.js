@@ -41,7 +41,7 @@ export const blueprint = {
   inherits: [],
   style: {
   },
-  color: {},
+  color: { background: 'vibrant' },
   groups: {
     text: {
       options: ['ParagraphOnly']

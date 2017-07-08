@@ -8,6 +8,7 @@ const uiState = () => ({
     color: {},
     content: {},
     style: {},
+    page: {},
   },
   sidebarOpen: false,
   selectedModification: 'component',
@@ -24,11 +25,6 @@ export function uiReducer(state = uiState(), {payload, type}) {
       
     case types.SET_SELECTED:
       return Object.assign({}, state, { selected: payload });
-      // return Object.assign({}, state, {
-      //   selected: state.shiftDown 
-      //     ? toggleListItem(state.selected, payload)
-      //     : [payload],
-      // });
 
     case types.SET_SHIFT_DOWN:
       return Object.assign({}, state, {

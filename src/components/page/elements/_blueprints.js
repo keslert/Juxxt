@@ -49,7 +49,7 @@ export const BasicSubheading = {
     },
     fontSize: {
       _default: 4,
-      options: range(4, 4),
+      options: range(3, 6),
     }
   },
 };

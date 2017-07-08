@@ -41,18 +41,18 @@ export function generateElementColorAlternatives(section, modify, element, page)
   let sections = [];
   if(element.color.background && modify.background) {
     const background = element.group.color.background || section.color.background;
-    sections = map(page.backgroundBlueprint[background].solid, background => {
+    sections = map(page.colorBlueprint.bgBlueprints[background].solids, background => {
       const _section = cloneDeep(section);
       _section.elements[elementIndex].color = {
         background,
         borderColor: background,
-        text: page.backgroundBlueprint[background].text[0],
+        text: page.colorBlueprint.bgBlueprints[background].texts[0],
       }
       _section.changes = { background };
       return _section;
     });
 
-    sections = sections.concat(map(page.backgroundBlueprint[background].text, color => {
+    sections = sections.concat(map(page.colorBlueprint.bgBlueprints[background].texts, color => {
       const _section = cloneDeep(section);
       _section.elements[elementIndex].color = {
         background: '#transparent',
@@ -66,7 +66,7 @@ export function generateElementColorAlternatives(section, modify, element, page)
 
   } else if(modify.text) {
     const background = element.color.background || element.group.color.background || section.color.background;
-    sections = map(page.backgroundBlueprint[background].text, text => {
+    sections = map(page.colorBlueprint.bgBlueprints[background].texts, text => {
       const _section = cloneDeep(section);
       _section.elements[elementIndex].color = { ...element.color, text }
       _section.changes = { color: text };

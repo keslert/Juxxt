@@ -21,7 +21,8 @@ export const styles = {
       options: range(0, 4),
     },
     fontFamily: {
-      options: ['Abril', 'Bitter', 'Fira Sans', 'Libre Franklin', 'Merriweather', 'Playfair Display', 'PT Serif', 'Roboto', 'Rubik', 'Source Sans Pro'],
+      _default: 'Source Sans Pro',
+      options: ['Bitter', 'Fira Sans', 'Libre Franklin', 'Merriweather', 'Playfair Display', 'PT Serif', 'Roboto', 'Rubik', 'Source Sans Pro'],
     }
   },
   [names.Paragraph]: {

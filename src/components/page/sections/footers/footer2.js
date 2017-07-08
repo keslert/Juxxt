@@ -36,7 +36,7 @@ export const blueprint = {
   type: 'footer',
   inherits: [],
   style: {},
-  color: {},
+  color: { background: 'vibrant' },
   groups: {
     text: {
       options: ['ParagraphOnly']

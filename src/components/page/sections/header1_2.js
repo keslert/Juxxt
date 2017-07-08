@@ -61,7 +61,7 @@ export const blueprint = {
       options: [4,5,6,7,8],
     }
   },
-  color: {},
+  color: { background: 'vibrant' },
   groups: {
     tp: {
       options: ['HeadingSubheadingButton','HeadingParagraphButton','HeadingParagraph2Buttons','HeadingSubheading2Buttons'],

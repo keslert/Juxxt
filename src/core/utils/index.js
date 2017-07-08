@@ -85,3 +85,7 @@ export function getMode(list) {
 
   return maxBy(Object.keys(items), key =>  items[key])
 }
+
+export function absDiff(a, b) {
+  return Math.abs(a - b);
+}

@@ -1,14 +1,28 @@
 import blueprints from '../../../components/page/sections/_blueprints';
 import { generateSectionSkeleton } from '../skeletons/section';
 import { buildSectionFromSkeleton } from '../builder/section';
-import { filter, range, toPairs, fromPairs, sortBy, mapValues, uniqBy, flatMap, cloneDeep, forEach, includes, map } from 'lodash';
+import { 
+  filter, 
+  range, 
+  toPairs, 
+  fromPairs, 
+  sortBy, 
+  mapValues, 
+  uniqBy, 
+  flatMap, 
+  cloneDeep, 
+  forEach, 
+  includes, 
+  map,
+  zipObject,
+} from 'lodash';
 import { assignContent } from '../content';
 import { getCombinations } from '../../utils';
 import { colorElement } from '../color/element';
 import { styles } from '../style/section/shared-styles';
 import { filterStyle } from '../style/utils';
 import { generateGroupVariantAlternatives, generateGroupComponentAlternatives } from './group';
-import { getSortedByPrimary, getPrimaryScores } from '../color/utils';
+import { getSortedByPreference } from '../color/utils';
 import tinycolor from 'tinycolor2';
 
 export function generateSectionComponentAlternatives(section, modify, masterSkeleton) {
@@ -85,7 +99,7 @@ const NUM_OF_IMAGES = 1;
    'fallLeaves2.jpg',
    'fancyBurger.jpg',
    'fancyFood.jpg',
-   'fashionGlasses.jpg',
+   'fashionGlasses.jpeg',
    'greenleaf.jpg',
    'kidWithSunglasses.jpg',
    'macarons.jpg',
@@ -106,8 +120,8 @@ function generateSectionColorImagesBackground(section, page) {
   for(let i =0; i< PICTURES.length ; i++) {
     const _section = cloneDeep(section);
     _section.color = {
-      text: page.backgroundBlueprint[page.websiteColors[0]].text[0],
-      background: page.websiteColors[0], 
+      text: '#ffffff',
+      background: section.color.background,
       backgroundImage: PICTURES[i].split(".")[0],
     }
     sections.push(_section)
@@ -115,32 +129,18 @@ function generateSectionColorImagesBackground(section, page) {
   return sections;
 }
 
-function getSortedNormalSectionColors(colors) {
-  let sortedDict = getPrimaryScores(colors);
-  for(let i=0; i < Object.keys(sortedDict).length; i++) {
-    const _color = Object.keys(sortedDict)[i];
-    if(sortedDict[_color] === 0 && tinycolor(_color).toHsv()['s'] > 0.1) {
-      sortedDict[_color] = Number.MAX_VALUE;
-    }
-  }
-  return sortBy(colors, color => sortedDict[color]);
-}
-
-const SPECIAL = ["Header","Header1_2","Footer1","Footer2","FooterVerticalList"];
-
 function generateSectionColorSolidsBackground(section, page) {
-  let bgColors = [];
-  if( SPECIAL.indexOf(section.name) > -1 )
-    bgColors = getSortedByPrimary(Object.keys(page.backgroundBlueprint));
-  else
-    bgColors = getSortedNormalSectionColors(Object.keys(page.backgroundBlueprint));
-  const sections = map(bgColors, color => {
+  const blueprint = blueprints[section.name];
+  
+  const backgrounds = getSortedByPreference(page.colorBlueprint.backgrounds, blueprint.color.background);
+
+  const sections = map(backgrounds, background => {
     const _section = cloneDeep(section);
     _section.color = {
-      background: color,
-      text: page.backgroundBlueprint[color].text[0]
+      background,
+      text: page.colorBlueprint.bgBlueprints[background].texts[0]
     }
-    _section.changes = {background: color};
+    _section.changes = {background};
     return _section;
   })
   return sections;
@@ -148,14 +148,14 @@ function generateSectionColorSolidsBackground(section, page) {
 
 function generateSectionColorPatternsBackground(section, page) {
   const sections = [];
-  const colorBlueprint = page.backgroundBlueprint[section.color.background];
-  for(let i=0; i < Object.keys(page.backgroundBlueprint[section.color.background].pattern).length; i++) {
+  const colorBlueprint = page.colorBlueprint.bgBlueprints[section.color.background];
+  for(let i=0; i < Object.keys(colorBlueprint.patterns).length; i++) {
     const _section = cloneDeep(section);  
     _section.color = {
       background: section.color.background,
-      text: colorBlueprint.text[0],
-      pattern: section.color.background.substr(1) + "-" + Object.keys(colorBlueprint.pattern)[i],
-      _pattern: colorBlueprint.pattern[Object.keys(colorBlueprint.pattern)[i]]
+      text: colorBlueprint.texts[0],
+      pattern: section.color.background.substr(1) + "-" + Object.keys(colorBlueprint.patterns)[i],
+      _pattern: colorBlueprint.pattern[Object.keys(colorBlueprint.patterns)[i]]
     }
     sections.push(_section);
   }
@@ -164,14 +164,14 @@ function generateSectionColorPatternsBackground(section, page) {
 }
 
 function generateSectionColorGradientsBackground(section, page) {
-  const gradient_array = page.backgroundBlueprint[section.color.background].gradient;
+  const gradients = page.colorBlueprint.bgBlueprints[section.color.background].gradients;
   const sections = [];
-  for(let i=0; i<gradient_array.length; i++) {
+  for(let i=0; i<gradients.length; i++) {
     const _section = cloneDeep(section);
     _section.color = {
       background: section.color.background,
-      text: page.backgroundBlueprint[section.color.background].text[0],
-      gradient: section.color.background + '-' + gradient_array[i].end.substr(1) +'-' + gradient_array[i].direction.replace(/\s+/g, '')
+      text: page.colorBlueprint.bgBlueprints[section.color.background].texts[0],
+      gradient: section.color.background + '-' + gradients[i].end.substr(1) +'-' + gradients[i].direction.replace(/\s+/g, '')
     }
     sections.push(_section);
   }

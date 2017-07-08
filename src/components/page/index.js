@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { getGradient } from '../../core/generator/color/utils';
 import Section from './sections';
 import InsertionTarget from './insertion-target';
-import { isFunction } from 'lodash';
+import { isFunction, map } from 'lodash';
 
 const StyledPage = styled.div`
   ${props => `
@@ -33,7 +33,7 @@ const StyledPage = styled.div`
    'fallLeaves2.jpg',
    'fancyBurger.jpg',
    'fancyFood.jpg',
-   'fashionGlasses.jpg',
+   'fashionGlasses.jpeg',
    'greenleaf.jpg',
    'kidWithSunglasses.jpg',
    'macarons.jpg',
@@ -52,15 +52,15 @@ const StyledPage = styled.div`
 class Page extends React.PureComponent {
 
   render() {
-    const { sections, master, onClick, id, websiteColors, backgroundBlueprint } = this.props;
+    const { sections, master, onClick, id, colorBlueprint } = this.props;
     const last = sections.length - 1;
 
-    const gradientColors = Object.keys(backgroundBlueprint).map(color => 
-      backgroundBlueprint[color].gradient.map(gradObj=> `
+    const gradientColors = map(colorBlueprint.bgBlueprints, blueprint => 
+      blueprint.gradients.map(gradObj=> `
         .grd-${gradObj.start.substr(1)}-${gradObj.end.substr(1)}-${gradObj.direction.replace(/\s+/g, '')} {
           background: linear-gradient(${gradObj.direction}, ${gradObj.start}, ${gradObj.end});
         }\n
-    `)
+      `)
     ).join('\n');
 
     const backgroundImages = PICTURES.map(pic => `
@@ -71,11 +71,15 @@ class Page extends React.PureComponent {
       }\n
     `).join('\n');
 
-    const pageColors = websiteColors.map((color) => `
-      .bg-${color.substr(1)} { background: ${color}; }
+    const textColors = colorBlueprint.texts.map((color) => `
       .c-${color.substr(1)} { color: ${color}; }
+    `).join('\n');
+
+    const backgroundColors = colorBlueprint.backgrounds.map((color) => `
+      .bg-${color.substr(1)} { background: ${color}; }
       .b-${color.substr(1)} { border-color: ${color}; }
     `).join('\n');
+      
 
     const patternColors = sections.map(section => section.color.pattern && `
       .ptrn-${section.color.pattern} {
@@ -84,7 +88,7 @@ class Page extends React.PureComponent {
       }\n
     `).join('\n');
 
-    const extraRules = [ pageColors, gradientColors, patternColors, backgroundImages ].join('\n');
+    const extraRules = [ textColors, backgroundColors, gradientColors, patternColors, backgroundImages ].join('\n');
 
     const clickable = isFunction(onClick);
     return (

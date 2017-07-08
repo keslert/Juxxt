@@ -1,7 +1,7 @@
 import * as blueprints from '../../../components/page/elements/_blueprints';
 import { find, filter, flatMap, some, isFunction } from 'lodash';
 import { getMode } from '../../utils';
-import { getSortedByPrimary, getTint } from './utils';
+import { getMostVibrantColor, getTint } from './utils';
 
 export function colorElement(element, page) {
 
@@ -30,8 +30,8 @@ export function colorElement(element, page) {
       element.color.background = getMode(matches.map(e => e.color.background));
       element.color.borderColor = getMode(matches.map(e => e.color.borderColor));
     } else {
-      const colorBlueprint = page.backgroundBlueprint[background];
-      const preferred = getPreferredColor(colorBlueprint.solid, blueprint.color.background);
+      const colorBlueprint = page.colorBlueprint.bgBlueprints[background];
+      const preferred = getPreferredColor(colorBlueprint.solids, blueprint.color.background);
       element.color.background = preferred;
       element.color.borderColor = preferred;
     }
@@ -49,8 +49,8 @@ export function colorElement(element, page) {
       const matches = filter(valid, fn);
       element.color.text = getMode(matches.map(e => e.color.text));
     } else {
-      const colorBlueprint = page.backgroundBlueprint[background];
-      element.color.text = getPreferredColor(colorBlueprint.text, blueprint.color.text);
+      const colorBlueprint = page.colorBlueprint.bgBlueprints[background];
+      element.color.text = getPreferredColor(colorBlueprint.texts, blueprint.color.text);
     }
   }
 }
@@ -66,7 +66,7 @@ function getElementGroupOrSectionBackground(element, page) {
 
 function getPreferredColor(colors, preference) {
   if(preference === 'vibrant') {
-    return getSortedByPrimary(colors)[Object.keys(getSortedByPrimary(colors))[0]];
+    return getMostVibrantColor(colors);
   }
   return colors[0];
 }

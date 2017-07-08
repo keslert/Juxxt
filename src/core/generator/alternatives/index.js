@@ -20,6 +20,10 @@ import {
   generateElementStyleAlternatives,
 } from './element'
 
+import {
+  generatePageBrandColorAlternatives,
+} from './page';
+
 import { buildSectionFromSkeleton } from '../builder/section';
 import { extractSkeletonFromSection } from '../skeletons/utils';
 
@@ -27,7 +31,6 @@ import { assignContent } from '../content';
 import { assignStyles } from '../style';
 import { assignColor } from '../color';
 
-/* Returns page skeletons */
 export function generateAlternatives(page, modify, selected) {
   let sections = [];
   if(modify.component) {
@@ -40,6 +43,8 @@ export function generateAlternatives(page, modify, selected) {
     sections = generateContentAlternatives(page, selected);
   } else if(modify.style) {
     sections = generateStyleAlternatives(page, modify.style, selected);
+  } else if(modify.page) {
+    return generatePageAlternatives(page, modify.page);
   }
 
   return sections.map(section => ({
@@ -171,7 +176,14 @@ function generateStyleAlternatives(page, modify, selected) {
   return sections;
 }
 
+function generatePageAlternatives(page, modify) {
+  let _page;
+  if(modify.brandColors) {
+    _page = generatePageBrandColorAlternatives(page);
+  }
 
+  return _page;
+}
 
 function getSectionFromItem(item) {
   if(item.isSection) {

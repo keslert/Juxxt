@@ -58,8 +58,7 @@ class Alternatives extends React.Component {
                   onClick={alternative.sections.length > 1 ? () => setMaster(alternative) : undefined}
                   sections={alternative.sections}
                   sectionsDraggable={alternative.isSection}
-                  websiteColors={alternative.websiteColors}
-                  backgroundBlueprint={alternative.backgroundBlueprint}
+                  colorBlueprint={alternative.colorBlueprint}
                   master={false} />
               </Alternative>
             </StyledWrapper>

@@ -35,7 +35,7 @@ export const blueprint = {
   type: 'header',
   inherits: ['HeaderSection'],
   style: {},
-  color: {},
+  color: { background: 'vibrant' },
   groups: {
     item: {
       options: ['HeadingSubheadingButton', 'HeadingParagraphButton', 'HeadingParagraph2Buttons','HeadingSubheading2Buttons'],
