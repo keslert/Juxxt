@@ -33,20 +33,24 @@ export function buildPageColorBlueprint(colors) {
   }
 }
 
+const GRADIENT_DIRECTIONS = ['to left top', 'to right top', 'to right', ' to left bottom', 'to right bottom', 'to bottom'];
 function getGradients(base, colors) {
   const gradients = [];
-  const GRADIENT_DIRECTIONS = ['to left top', 'to right top', 'to right', ' to left bottom', 'to right bottom', 'to bottom'];
-
-  const _colors = filter([...colors, tinycolor(base).darken(15).toString()], color => color !== base);
+  
+  const _colors = filter(colors, color => color !== base);
   forEach(_colors, color => {
     const _base = tinycolor(base).toHsl();
     const _color = tinycolor(color).toHsl();
-
-    if(absDiff(_base.h, _color.h) < 50 && absDiff(_base.l, _color.l) < 0.3) {
+    if(absDiff(_base.h, _color.h) < 50 && absDiff(_base.l, _color.l) < 0.2) {
       forEach(GRADIENT_DIRECTIONS, direction => {
         gradients.push({start: base, end: color, direction});
       })
     }
+  })
+
+  const darker = tinycolor(base).darken(15).toString();
+  forEach(GRADIENT_DIRECTIONS, direction => {
+    gradients.push({start: base, end: darker, direction});
   })
 
   return gradients;
