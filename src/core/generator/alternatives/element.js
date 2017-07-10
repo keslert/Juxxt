@@ -55,7 +55,7 @@ export function generateElementColorAlternatives(section, modify, element, page)
     sections = sections.concat(map(page.colorBlueprint.bgBlueprints[background].texts, color => {
       const _section = cloneDeep(section);
       _section.elements[elementIndex].color = {
-        background: '#transparent',
+        background: 'transparent',
         borderColor: color,
         text: color,
       }

@@ -26,6 +26,8 @@ export function buildPageColorBlueprint(colors) {
 
   return {
     primary,
+    lightGray,
+    darkGray,
     lights: ['#ffffff', lightGray],
     texts: uniq(flatMap(blueprints, 'texts')),
     backgrounds,

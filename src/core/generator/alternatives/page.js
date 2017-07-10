@@ -22,14 +22,32 @@ export function generatePageBrandColorAlternatives(page) {
     _page.palette = palette;
     _page.colorBlueprint = colorBlueprint;
 
+    const colorMapping = {
+      [page.colorBlueprint.primary]: colorBlueprint.primary,
+      [page.colorBlueprint.lightGray]: colorBlueprint.lightGray,
+      [page.colorBlueprint.darkGray]: colorBlueprint.darkGray,
+      '#ffffff': '#ffffff',
+      'transparent': 'transparent',
+    }
+
+
     const sections = [];
 
+    _page.sections.forEach((_section, i) => {
+      const section = page.sections[i];
+      _section.color.background = colorMapping[section.color.background] || 
+                                  getSortedByPreference(colorBlueprint.backgrounds, section.blueprint.color.background)[0];
+      _section.elements.forEach((_element, i) => {
+        colorElement(_element, {sections, colorBlueprint});
 
-
-    _page.sections.forEach(section => {
-      section.color.background = getSortedByPreference(colorBlueprint.backgrounds, section.blueprint.color.background)[0];
-      section.elements.forEach(e => colorElement(e, {sections, colorBlueprint}));
-      sections.push(section);
+        const element = section.elements[i];
+        ['background', 'text', 'borderColor'].forEach(key => {
+          if(colorMapping[element.color[key]]) {
+            _element.color[key] = colorMapping[element.color[key]];
+          }
+        })
+        sections.push(section);
+      })
     })
 
     return _page;
