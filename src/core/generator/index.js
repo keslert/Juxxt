@@ -23,8 +23,10 @@ export function init() {
     id: 'p_' + uniqueId(),
     palette,
     colorBlueprint,
-    fontFamily: 'Helvetica Neue',
-    fontSize: '16px',
+    style: {
+      fontFamily: 'Source Sans Pro',
+      fontSize: '16px',
+    },
     isPage: true,
     sections: reduce(range(0, NUM_SECTIONS), (sections, i) => {
       const page = {sections, colorBlueprint};

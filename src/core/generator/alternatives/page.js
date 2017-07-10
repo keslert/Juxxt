@@ -30,9 +30,7 @@ export function generatePageBrandColorAlternatives(page) {
       'transparent': 'transparent',
     }
 
-
     const sections = [];
-
     _page.sections.forEach((_section, i) => {
       const section = page.sections[i];
       _section.color.background = colorMapping[section.color.background] || 

@@ -64,7 +64,7 @@ export function getVibrancy(color) {
   if(tinycolor.isReadable('#ffffff', color)) {
     return (lDiff + sDiff) / 2;
   } else {
-    return 0;
+    return saturation > 0.1 ? -1 : 0;
   }
 }
 

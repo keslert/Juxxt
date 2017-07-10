@@ -11,6 +11,7 @@ export function buildElementFromSkeleton(skeleton) {
 
   const blueprint = blueprints[element.name];
   element.is = blueprint.is;
+  element.blueprint = blueprint;
 
   return element;
 }

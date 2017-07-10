@@ -4,6 +4,7 @@ import { getGradient } from '../../core/generator/color/utils';
 import Section from './sections';
 import InsertionTarget from './insertion-target';
 import { isFunction, map } from 'lodash';
+import { convertStyleToAtomic } from '../../core/generator/style/conversions';
 
 const StyledPage = styled.div`
   ${props => `
@@ -23,36 +24,38 @@ const StyledPage = styled.div`
 `;
 
 
-    const PICTURES = ['baby.jpg',
-   'burger.jpg',
-   'beachChairs.jpg',
-   'camera1.jpg',
-   'coffee.jpg',
-   'coffeeMagazineFlower.jpg',
-   'coupleBikeBeach.jpg',
-   'fallLeaves2.jpg',
-   'fancyBurger.jpg',
-   'fancyFood.jpg',
-   'fashionGlasses.jpeg',
-   'greenleaf.jpg',
-   'kidWithSunglasses.jpg',
-   'macarons.jpg',
-   'nyc.jpg',
-   'oceanSunset.jpg',
-   'pancake1.jpg',
-   'railroadShoes.jpg',
-   'rain.jpg',
-   'ruralHighway.jpg',
-   'silhouette.jpg',
-   'Suit.jpg',
-   'sunflower.jpg',
-   'traveler.jpg',
-   'waterfall.jpg'];
+const PICTURES = [
+  'baby.jpg',
+  'burger.jpg',
+  'beachChairs.jpg',
+  'camera1.jpg',
+  'coffee.jpg',
+  'coffeeMagazineFlower.jpg',
+  'coupleBikeBeach.jpg',
+  'fallLeaves2.jpg',
+  'fancyBurger.jpg',
+  'fancyFood.jpg',
+  'fashionGlasses.jpeg',
+  'greenleaf.jpg',
+  'kidWithSunglasses.jpg',
+  'macarons.jpg',
+  'nyc.jpg',
+  'oceanSunset.jpg',
+  'pancake1.jpg',
+  'railroadShoes.jpg',
+  'rain.jpg',
+  'ruralHighway.jpg',
+  'silhouette.jpg',
+  'Suit.jpg',
+  'sunflower.jpg',
+  'traveler.jpg',
+  'waterfall.jpg'
+];
 
 class Page extends React.PureComponent {
 
   render() {
-    const { sections, master, onClick, id, colorBlueprint } = this.props;
+    const { sections, master, onClick, id, colorBlueprint, style } = this.props;
     const last = sections.length - 1;
 
     const gradientColors = map(colorBlueprint.bgBlueprints, blueprint => 
@@ -90,9 +93,11 @@ class Page extends React.PureComponent {
 
     const extraRules = [ textColors, backgroundColors, gradientColors, patternColors, backgroundImages ].join('\n');
 
+    const classNames = convertStyleToAtomic(style);
+
     const clickable = isFunction(onClick);
     return (
-      <StyledPage onClick={onClick} clickable={clickable} className={id} extraRules={extraRules}>
+      <StyledPage onClick={onClick} clickable={clickable} className={classNames} extraRules={extraRules}>
         {sections.map((section, i) => (
           <div key={i} style={{marginTop: -1}}>
             <Section {...section} master={master} index={master ? i : 1000 + i} draggable={!clickable} />

@@ -74,7 +74,7 @@ export const Copyright = {
 export const ListTitle = { 
   name: 'ListTitle', 
   is: 'Text',
-  inherits: [],
+  inherits: [inherits.Heading],
   color: {},
   style: {
     textTransform: {
