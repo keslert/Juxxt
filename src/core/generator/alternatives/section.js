@@ -1,5 +1,5 @@
 import blueprints from '../../../components/page/sections/_blueprints';
-import { generateSectionSkeleton } from '../skeletons/section';
+import { generateSectionSkeleton, generateAllSectionSkeletons } from '../skeletons/section';
 import { buildSectionFromSkeleton } from '../builder/section';
 import { 
   filter, 
@@ -26,34 +26,24 @@ import { getSortedByPreference } from '../color/utils';
 import tinycolor from 'tinycolor2';
 
 export function generateSectionComponentAlternatives(section, modify, masterSkeleton) {
-  
   const possibleSections = Object.keys(blueprints); 
   const validSections = filter(possibleSections, name => 
-    name !== section.name && 
     modify[blueprints[name].type]
   );
-  let skeletons = validSections.map(sectionName => {
-    const skeleton = generateSectionSkeleton(sectionName, section.variant)
-    skeleton.id = section.id;
-    return skeleton;
-  })
 
-  if(masterSkeleton !=null) {
-    const _skele = cloneDeep(skeletons);
-    _skele.push(masterSkeleton);
-    for(let i =0; i < _skele.length; i++) {
-      const _section = buildSectionFromSkeleton(_skele[i]);
-      for(let j=0; j < Object.keys(_section.groups).length;j++) {
-        const _skeleton = generateGroupComponentAlternatives(_section.groups[Object.keys(_section.groups)[j]], _section);
-        skeletons = [...skeletons, ..._skeleton];
-      }
-    } 
-  }
-   
+  const skeletons = flatMap(validSections, sectionName => {
+    const skeletons = generateAllSectionSkeletons(sectionName, section.variant);
+    skeletons.forEach(skeleton => { 
+      skeleton.id = section.id;
+    });
+    return skeletons;
+  });
 
-  return skeletons;
-  
+  const sections = flatMap(skeletons, skeleton =>
+    buildSectionFromSkeleton(skeleton)
+  )
 
+  return sections;
 }
 
 const OPTIONS = [1,3];
