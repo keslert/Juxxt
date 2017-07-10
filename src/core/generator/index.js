@@ -35,13 +35,15 @@ export function init() {
         navigation: i === 0,
         header: i === 1,
         footer: i === NUM_SECTIONS - 1,
-        basic: i > 1 && i < NUM_SECTIONS - 1,
+        action: i === NUM_SECTIONS - 2, 
+        basic: i > 1 && i < NUM_SECTIONS - 2,
       };
 
       const backgrounds = {
         navigation: colorBlueprint.lights,
         header: [colorBlueprint.primary],
-        footer: [colorBlueprint.primary],
+        footer: colorBlueprint.lights,
+        action: [colorBlueprint.primary],
         basic: colorBlueprint.lights,
       };
 

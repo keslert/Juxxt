@@ -56,7 +56,8 @@ function getParagraphContent() {
     units: 'sentences',
   });
   return { text };
-}
+  }
+
 function getSubheaderContent() {
   return randomItem([
     {text: "Oval is creating a platform that helps everyone be money wise."},

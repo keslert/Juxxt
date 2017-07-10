@@ -7,6 +7,7 @@ import { blueprint as Header1_2 } from './header1_2';
 import { blueprint as Footer1 } from './footers/footer1';
 import { blueprint as Footer2 } from './footers/footer2';
 import { blueprint as FooterVerticalLists } from './footers/footer-vertical-lists';
+import { blueprint as CallToAction } from './C2A/call-to-action';
 // import * as ProductHeader from './headers/product-header';
 // import * as HeadingHorizontalItems from './heading-horizontal-items';
 // import * as CopyrightFooter from './footers/copyright-footer';
@@ -23,4 +24,5 @@ export default {
   Footer1,
   Footer2,
   FooterVerticalLists,
+  CallToAction,
 }

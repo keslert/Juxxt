@@ -110,7 +110,7 @@ function resolveColorModification(dispatch, state, selected) {
 function resolveComponentModification(dispatch, state, selected, callPath) {
   let modification = {};
   if(selected.isSection) {
-    const keys = ['basic', 'header', 'footer', 'navigation'];
+    const keys = ['basic', 'header', 'footer', 'navigation', 'action'];
     modification = zipObject(keys, keys.map(key => key === selected.type))
   }
   dispatch(setModification('component', modification));
