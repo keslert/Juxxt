@@ -147,20 +147,18 @@ function generateSectionColorSolidsBackground(section, page) {
 }
 
 function generateSectionColorPatternsBackground(section, page) {
-  const sections = [];
   const colorBlueprint = page.colorBlueprint.bgBlueprints[section.color.background];
-  for(let i=0; i < Object.keys(colorBlueprint.patterns).length; i++) {
+  const sections = map(colorBlueprint.patterns, (urlData, pattern) => {
     const _section = cloneDeep(section);  
     _section.color = {
       background: section.color.background,
       text: colorBlueprint.texts[0],
-      pattern: section.color.background.substr(1) + "-" + Object.keys(colorBlueprint.patterns)[i],
-      _pattern: colorBlueprint.pattern[Object.keys(colorBlueprint.patterns)[i]]
+      pattern: section.color.background.substr(1) + "-" + pattern,
+      _pattern: urlData,
     }
-    sections.push(_section);
-  }
+    return _section;
+  })
   return sections;
-  
 }
 
 function generateSectionColorGradientsBackground(section, page) {
