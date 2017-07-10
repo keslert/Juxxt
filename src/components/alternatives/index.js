@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import { getZoomLevel } from '../../core/ui';
-import { getAlternatives, setMaster } from '../../core/page';
+import { getAlternatives, replaceMaster } from '../../core/page';
 import Alternative from './alternative';
 import Page from '../page';
 
@@ -35,7 +35,7 @@ const StyledWrapper = styled.div`
 class Alternatives extends React.Component {
 
   render() {
-    const { alternatives=[], width, zoomLevel, setMaster } = this.props;
+    const { alternatives=[], width, zoomLevel, replaceMaster } = this.props;
     if (alternatives.length === 0 ){
       return (
         <div>
@@ -55,7 +55,7 @@ class Alternatives extends React.Component {
                 onDelete={() => null} 
                 changes={alternative.sections[0].changes}>
                 <Page 
-                  onClick={alternative.sections.length > 1 ? () => setMaster(alternative) : undefined}
+                  onClick={alternative.sections.length > 1 ? () => replaceMaster(alternative) : undefined}
                   sections={alternative.sections}
                   sectionsDraggable={alternative.isSection}
                   colorBlueprint={alternative.colorBlueprint}
@@ -79,7 +79,7 @@ const mapStateToProps = createSelector(
 )
 
 const mapDispatchToProps = {
-  setMaster
+  replaceMaster
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Alternatives);

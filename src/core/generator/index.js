@@ -64,6 +64,9 @@ export function init() {
       return [...sections, section];
     }, [])
   }
+
+  master.sections.forEach(section => { section.master = true });
+
   return { master, alternatives: [] };
 }
 

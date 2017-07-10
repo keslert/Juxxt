@@ -85,12 +85,14 @@ export function turnOnModification(key) {
 }
 
 function resolveModifications(dispatch, state, modification, selected, callPath) {
-  switch(modification) {
-    case 'style': resolveStyleModification(dispatch, state, selected);
-    case 'color': resolveColorModification(dispatch, state, selected);
-    case 'component': resolveComponentModification(dispatch, state, selected, callPath);
-    case 'page': resolvePageModification(dispatch, state);
-    default: console.log('Hm... should not be here');
+  if(modification === 'style') {
+    resolveStyleModification(dispatch, state, selected);
+  } else if(modification === 'color') {
+    resolveColorModification(dispatch, state, selected);
+  } else if(modification === 'component') {
+    resolveComponentModification(dispatch, state, selected, callPath);
+  } else if(modification === 'page') {
+    resolvePageModification(dispatch, state);
   }
 }
 

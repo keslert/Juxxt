@@ -69,7 +69,7 @@ const targetSpec = {
   drop(props, monitor) {
     const alternative = monitor.getItem();
     const { overrideSectionWithAlternative } = props;
-    overrideSectionWithAlternative(props, alternative);
+    overrideSectionWithAlternative(alternative, props);
   }
 }
 
@@ -91,6 +91,16 @@ function targetCollect(connect, monitor) {
 
 
 class Section extends React.Component {
+
+  handleClick() {
+    const { master, setSelected, overrideSectionWithAlternative } = this.props;
+    
+    if(master) {
+      setSelected(this.props);
+    } else {
+      overrideSectionWithAlternative(this.props);
+    }
+  }
 
   render() {
 
@@ -124,7 +134,7 @@ class Section extends React.Component {
                 canDrop={canDrop}
                 isDragging={isDragging}
                 selected={isSelected || isHovered} 
-                onClick={(e) => { e.stopPropagation(); setSelected(this.props); }}
+                onClick={(e) => { e.stopPropagation(); this.handleClick()}}
                 onDoubleClick={(e) => { e.stopPropagation(); setSidebarOpen(true); }}
                 onMouseEnter={() => onHoverableMouseEnter(uid)}
                 onMouseLeave={() => onHoverableMouseLeave(uid)}

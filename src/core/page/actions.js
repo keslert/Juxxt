@@ -33,6 +33,11 @@ export function setAlternatives(alternatives) {
   }
 }
 
+export function replaceMaster(page) {
+  page.sections.forEach(section => section.master = true);
+  return setMaster(page);
+}
+
 export function updateAlternatives() {
   return (dispatch, getState) => {
     const state = getState();
@@ -50,16 +55,20 @@ export function updateAlternatives() {
       ]
     }
     const alternatives = generateAlternatives(page, pick(modifications, [selectedModification]), selected);
+    alternatives.forEach(({sections}) => sections.forEach(section => section.master = false));
     dispatch(setAlternatives(alternatives));
   }
 }
 
-export function overrideSectionWithAlternative(section, alternative) {
+export function overrideSectionWithAlternative(alternative, section) {
   return (dispatch, getState) => {
     const state = getState();
     const selected = getSelected(state);
     const duplicated = duplicateSection(alternative);
-    replaceSection(dispatch, state, section, duplicated);
+    duplicated.master = true;
+
+    const _section = section || (selected.isSection ? selected : selected.isGroup ? selected.section : selected.group.section);
+    replaceSection(dispatch, state, _section, duplicated);
 
     let _selected = duplicated;
     if(selected.isGroup && duplicated.groups[selected.sectionKey]) {
@@ -106,6 +115,7 @@ export function insertAlternative(alternative, index) {
 function insertSection(dispatch, state, section, index) {
   const master = getMaster(state);
   const duplicated = duplicateSection(section);
+  duplicated.master = true;
   const page = {...master,
     sections: [
       ...master.sections.slice(0, index),
