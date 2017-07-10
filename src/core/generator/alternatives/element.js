@@ -62,10 +62,8 @@ export function generateElementColorAlternatives(section, modify, element, page)
       _section.changes = { outline: color };
       return _section;
     }));
-
-
   } else if(modify.text) {
-    const background = element.color.background || element.group.color.background || section.color.background;
+    const background = getElementBackground(element);
     sections = map(page.colorBlueprint.bgBlueprints[background].texts, text => {
       const _section = cloneDeep(section);
       _section.elements[elementIndex].color = { ...element.color, text }
@@ -103,4 +101,14 @@ export function generateElementStyleAlternatives(modify, section, element) {
   })
 
   return sections;
+}
+
+function getElementBackground(element) {
+  if(element.color.background && element.color.background !== 'transparent') {
+    return element.color.background;
+  } else if(element.group.color.background) {
+    return element.group.color.background;
+  }
+
+  return element.group.section.color.background;
 }

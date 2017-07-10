@@ -3,7 +3,7 @@ import { overrideElementContent } from '../../core/generator';
 import { generateAlternatives } from '../../core/generator/alternatives';
 import { getMaster } from './selectors';
 import { sortBy, cloneDeep, uniqueId, forEach, findIndex, pick, find, filter } from 'lodash';
-import { setSelected, getModifications, getSelectedModification, setSelectedModification } from '../ui';
+import { getSelected, setSelected, getModifications, getSelectedModification, setSelectedModification } from '../ui';
 
 
 export function clearRegistry() {
@@ -56,9 +56,19 @@ export function updateAlternatives() {
 
 export function overrideSectionWithAlternative(section, alternative) {
   return (dispatch, getState) => {
+    const state = getState();
+    const selected = getSelected(state);
     const duplicated = duplicateSection(alternative);
-    replaceSection(dispatch, getState(), section, duplicated);
-    dispatch(setSelected(duplicated));
+    replaceSection(dispatch, state, section, duplicated);
+
+    let _selected = duplicated;
+    if(selected.isGroup && duplicated.groups[selected.sectionKey]) {
+      _selected = duplicated.groups[selected.sectionKey];
+    } else if(selected.isElement && duplicated.groups[selected.group.sectionKey].elements[selected.groupKey]) {
+      _selected = duplicated.groups[selected.group.sectionKey].elements[selected.groupKey];
+    }
+
+    dispatch(setSelected(_selected));
   }
 }
 
