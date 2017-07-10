@@ -13,16 +13,22 @@ const StyledElement = styled.div`
       content: '';
       position: absolute;
       top: -3px;
-      left: -3px;
-      right: -3px;
+      left: -6px;
+      right: -6px;
       bottom: -3px;
-      background: rgba(122,122,122,0.1);
+      border-left: 4px dashed tomato;
+      border-right: 4px dashed tomato;
       box-sizing: border-box;
       pointer-events: none;
-      animation: ${fadeIn} 0.3s;
     }
   `}
   &:hover:after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -6px;
+    right: -6px;
+    bottom: -3px;
     background: rgba(0, 122,122,0.1);
   }
 `
@@ -30,7 +36,7 @@ const StyledElement = styled.div`
 const Element = (props) => {
   
   const { 
-    id,
+    uid,
     is,
     isSelected,
     setSelected,
@@ -44,11 +50,12 @@ const Element = (props) => {
 
   return (
     <StyledElement 
-      selected={isSelected || isHovered} 
+      selected={isSelected} 
+      hovered={isHovered}
       onClick={(e) => { e.stopPropagation(); setSelected(props);}}
       onDoubleClick={(e) => { e.stopPropagation(); setSidebarOpen(true); }}
-      onMouseEnter={() => onHoverableMouseEnter(id)}
-      onMouseLeave={() => onHoverableMouseLeave(id)}
+      onMouseEnter={() => onHoverableMouseEnter(uid)}
+      onMouseLeave={() => onHoverableMouseLeave(uid)}
       >
       <ElementComponent {...props} />
     </StyledElement>
@@ -56,8 +63,8 @@ const Element = (props) => {
 }
 
 const mapStateToProps = (state, props) => ({
-  isSelected: state.ui.shiftDown && includes(map(state.ui.selected, 'id'), props.id),
-  isHovered: last(state.ui.hovered) === props.id,
+  isSelected: state.ui.selected.uid === props.uid,
+  isHovered: last(state.ui.hovered) === props.uid,
 });
 const mapDispatchToProps = Object.assign({}, uiActions);
 export default connect(mapStateToProps, mapDispatchToProps)(Element);

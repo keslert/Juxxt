@@ -23,12 +23,11 @@ const StyledSection = styled.div`
         content: '';
         position: absolute;
         top: 0;
-        left: 0px;
-        right: 0px;
+        left: 0;
+        right: 0;
         bottom: 0;
-        background: rgba(122,122,122,0.1);
-        border: 3px dashed rgb(122,122,122);
-        box-sizing: border-box;
+        border-right: 8px solid tomato;
+        border-left: 8px solid tomato;
         pointer-events: none;
       }
     `};
@@ -97,7 +96,6 @@ class Section extends React.Component {
 
     const { 
       name, 
-      id,
       uid,
       master,
       isSelected,
@@ -128,8 +126,8 @@ class Section extends React.Component {
                 selected={isSelected || isHovered} 
                 onClick={(e) => { e.stopPropagation(); setSelected(this.props); }}
                 onDoubleClick={(e) => { e.stopPropagation(); setSidebarOpen(true); }}
-                onMouseEnter={() => onHoverableMouseEnter(id)}
-                onMouseLeave={() => onHoverableMouseLeave(id)}
+                onMouseEnter={() => onHoverableMouseEnter(uid)}
+                onMouseLeave={() => onHoverableMouseLeave(uid)}
                 >
                 <SectionComponent {...this.props} />
               </StyledSection>
@@ -142,8 +140,8 @@ class Section extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  isSelected: state.ui.shiftDown && includes(map(state.ui.selected, 'id'), props.id),
-  isHovered: last(state.ui.hovered) === props.id,
+  isSelected: state.ui.selected.uid === props.uid,
+  isHovered: last(state.ui.hovered) === props.uid,
 });
 
 const mapDispatchToProps = Object.assign({overrideSectionWithAlternative}, uiActions);
