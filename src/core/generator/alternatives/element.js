@@ -6,6 +6,7 @@ import { assignContent } from '../content';
 import { map, uniq, intersection, filter, range, cloneDeep, flatMap, findIndex } from 'lodash';
 import { styles } from '../style/element/shared-styles';
 import { filterStyle } from '../style/utils';
+import { generateGroupVariantAlternatives } from './group';
 
 export function generateElementComponentAlternatives(element, masterSkeleton) {
   const elementsInGroup = uniq(map(element.group.elements, 'name'));
@@ -31,8 +32,7 @@ export function generateElementComponentAlternatives(element, masterSkeleton) {
 }
 
 export function generateElementVariantAlternatives(element, skeleton) {
-  // const blueprint = blueprints[element.name];
-  return [];
+  return generateGroupVariantAlternatives(element.group, skeleton);
 }
 
 export function generateElementColorAlternatives(section, modify, element, page) {
