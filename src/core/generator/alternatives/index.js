@@ -31,6 +31,8 @@ import { assignContent } from '../content';
 import { assignStyles } from '../style';
 import { assignColor } from '../color';
 
+import { map } from 'lodash';
+
 export function generateAlternatives(page, modify, selected) {
   let sections = [];
   if(modify.component) {
@@ -71,15 +73,6 @@ function generateComponentAlternatives(page, modify, selected) {
     assignColor(_section, page);
     assignContent(_section, section.contentStore);
     assignStyles(_section, page);
-    
-    if(selected.isSection) {
-      _section.changes = { section: _section.name };
-    } else if(selected.isGroup) {
-      _section.changes = { group: _section.groups[selected.sectionKey].name };
-    } else {
-      _section.changes = { group: _section.groups[selected.group.sectionKey].name };
-    } 
-
     return _section;
   })
   return sections;
@@ -105,8 +98,9 @@ function generateVariantAlternatives(page, selected) {
     assignContent(_section, section.contentStore);
     assignStyles(_section, page);
 
+    
     if(selected.isSection) {
-      _section.changes = _section.variant;
+      _section.changes = Object.assign({}, _section.variant, ...map(_section.groups, group => group.variant));
     } else if(selected.isGroup) {
       _section.changes = _section.groups[selected.sectionKey].variant;
     } else {

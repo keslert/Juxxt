@@ -50,6 +50,8 @@ export function colorElement(element, page) {
       element.color.text = getMode(matches.map(e => e.color.text));
     } else {
       const colorBlueprint = page.colorBlueprint.bgBlueprints[background];
+      // TODO: If the element doens't have a background, and the group doesn't have a background 
+      // and the section background is an image, the text is white.
       element.color.text = getPreferredColor(colorBlueprint.texts, blueprint.color.text);
     }
   }

@@ -173,6 +173,7 @@ function generateSectionColorGradientsBackground(section, page) {
       text: page.colorBlueprint.bgBlueprints[section.color.background].texts[0],
       gradient: section.color.background + '-' + gradients[i].end.substr(1) +'-' + gradients[i].direction.replace(/\s+/g, '')
     }
+    _section.changes = { direction: gradients[i].direction };
     sections.push(_section);
   }
   return sections;

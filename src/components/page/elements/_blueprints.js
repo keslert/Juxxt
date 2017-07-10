@@ -196,7 +196,10 @@ export const SmallButton = {
       _default: 1,
       options: range(0, 5),
     },
-    borderStyle: { _default: 'solid' },
+    borderStyle: { 
+      _default: 'solid',
+      options: ['solid'],
+    },
     textTransform: {
       _default: 'none',
       options: ['none', 'uppercase'],

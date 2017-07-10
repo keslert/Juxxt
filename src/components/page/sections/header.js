@@ -3,9 +3,6 @@ import Group from '../groups';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 
-
-
-
 class Header extends React.PureComponent {
   render () {
     const { groups, style, color } = this.props;
