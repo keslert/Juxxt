@@ -256,6 +256,14 @@ export const BasicButton = {
   },
 };
 
+export const BasicInput = {
+  name: 'BasicInput',
+  is: 'Input',
+  inherits: [],
+  color: {},
+  style: {},
+}
+
 export const BasicIcon = {
   name: 'BasicIcon',
   is: 'Icon',

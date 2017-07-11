@@ -10,6 +10,8 @@ import SmallSingleButton from './singles/SmallSingleButton';
 import Logo from './singles/logo';
 import DoubleButton from './double-button';
 import SmallDoubleButton from './SmallDoubleButton';
+import InputButton from './input-button';
+import ImputInputButton from './input-input-button';
 
 import ParagraphOnly from './singles/paragraph';
 import VerticalList from './vertical-list';
@@ -23,6 +25,8 @@ import HeadingSubheading2Buttons from './heading-subheading-2buttons';
 // import * as Navigation from './navigation';
 import BlockImage from './singles/block-image';
 // import * as Device from './device';
+import { blueprint as InputButton } from './input-button';
+import { blueprint as InputInputButton } from './input-input-button';
 
 export default {
   HeadingSubheading,
@@ -43,6 +47,8 @@ export default {
   ParagraphOnly,
   IconHeadingParagraph,
   HeadingParagraph2Buttons,
+  InputButton,
+  InputInputButton,
   // IconHeadingParagraph,
   
   // IconSmallHeadingParagraph: {

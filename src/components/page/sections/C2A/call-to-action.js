@@ -30,14 +30,22 @@ class CallToAction extends React.PureComponent {
 export default CallToAction;
 
 export const blueprint = {
-  type: 'action', //change this back to call-to-action
+  type: 'action',
   inherits: ['BasicSection'],
+/*  type: 'basic',*/
   style: {},
   color: {},
   groups: {
-    item: {
-      options: ['HeadingSubheadingButton','HeadingParagraphButton','HeadingParagraph2Buttons','HeadingSubheading2Buttons'],
+    tp: {
+      options: 
+      ['HeadingSubheadingButton','HeadingParagraphButton'/*,
+      'HeadingParagraph2Buttons','HeadingSubheading2Buttons'*/],
+    },
+    input: {
+      options:['InputButton','InputInputButton'],
     },
   },
-  variants: []
+  variants: [{
+    //maybe buttons and input being left-right v. up-down??
+  }],
 }

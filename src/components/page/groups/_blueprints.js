@@ -21,6 +21,8 @@ import { blueprint as HeadingSubheading2Buttons } from './heading-subheading-2bu
 // import * as Navigation from './navigation';
 import { blueprint as BlockImage } from './singles/block-image';
 // import * as Device from './device';
+import { blueprint as InputButton } from './input-button';
+import { blueprint as InputInputButton } from './input-input-button';
 
 export default {
   HeadingSubheading,
@@ -40,6 +42,8 @@ export default {
   ParagraphOnly,
   IconHeadingParagraph,
   HeadingParagraph2Buttons,
+  InputButton,
+  InputInputButton,
   
   // IconSmallHeadingParagraph: {
   //   ...IconSmallHeadingParagraph,
