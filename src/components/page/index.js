@@ -100,7 +100,7 @@ class Page extends React.PureComponent {
       <StyledPage onClick={onClick} clickable={clickable} className={classNames} extraRules={extraRules}>
         {sections.map((section, i) => (
           <div key={i} style={{marginTop: -1}}>
-            <Section {...section} master={master} index={master ? i : 1000 + i} draggable={!clickable} />
+            <Section {...section} master={master} index={master ? i : 1000 + i} draggable={sections.length === 1 || master} />
             {master && <InsertionTarget index={i} />}
           </div>
         ))}

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import sections from './_components';
-import { overrideSectionWithAlternative } from '../../../core/page';
+import { replaceSectionWithAlternative } from '../../../core/page';
 import { uiActions } from '../../../core/ui';
 import { includes, last, map } from 'lodash';
 import flow from 'lodash/flow';
@@ -68,8 +68,8 @@ const targetSpec = {
   },
   drop(props, monitor) {
     const alternative = monitor.getItem();
-    const { overrideSectionWithAlternative } = props;
-    overrideSectionWithAlternative(alternative, props);
+    const { replaceSectionWithAlternative } = props;
+    replaceSectionWithAlternative(alternative, props);
   }
 }
 
@@ -93,12 +93,12 @@ function targetCollect(connect, monitor) {
 class Section extends React.Component {
 
   handleClick() {
-    const { master, setSelected, overrideSectionWithAlternative } = this.props;
+    const { master, setSelected, replaceSectionWithAlternative } = this.props;
     
     if(master) {
       setSelected(this.props);
     } else {
-      overrideSectionWithAlternative(this.props);
+      replaceSectionWithAlternative(this.props);
     }
   }
 
@@ -154,7 +154,7 @@ const mapStateToProps = (state, props) => ({
   isHovered: last(state.ui.hovered) === props.uid,
 });
 
-const mapDispatchToProps = Object.assign({overrideSectionWithAlternative}, uiActions);
+const mapDispatchToProps = Object.assign({replaceSectionWithAlternative}, uiActions);
 export default flow(
   DragSource('section', sourceSpec, sourceCollect),
   DropTarget('section', targetSpec, targetCollect),

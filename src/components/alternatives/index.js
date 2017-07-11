@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import { getZoomLevel } from '../../core/ui';
-import { getAlternatives, replaceMaster } from '../../core/page';
+import { getAlternatives, replaceMaster, replaceSectionWithAlternative } from '../../core/page';
 import Alternative from './alternative';
 import Page from '../page';
 
@@ -34,16 +34,31 @@ const StyledWrapper = styled.div`
 
 class Alternatives extends React.Component {
 
-  render() {
-    const { alternatives=[], width, zoomLevel, replaceMaster } = this.props;
-    if (alternatives.length === 0 ){
-      return (
-        <div>
-          <SmartBar />
-          <p className={ " mt3 fadedtext"}> No existing alternatives </p>
-        </div>
-      )
+  handleClick(page) {
+    const { replaceMaster, replaceSectionWithAlternative } = this.props;
+    if(page.sections.length === 1) {
+      replaceSectionWithAlternative(page.sections[0]);
+    } else {
+      replaceMaster(page);
     }
+  }
+
+  renderNoAlternatives() {
+    return (
+      <div>
+        <SmartBar />
+        <p className={ " mt3 fadedtext"}> No existing alternatives </p>
+      </div>
+    )
+  }
+
+  render() {
+    const { alternatives=[], width, zoomLevel } = this.props;
+    
+    if (!alternatives.length) {
+      return this.renderNoAlternatives();
+    }
+
     return (
       <StyledAlternatives width={width}>
         <SmartBar />
@@ -55,7 +70,7 @@ class Alternatives extends React.Component {
                 onDelete={() => null} 
                 changes={alternative.sections[0].changes}>
                 <Page 
-                  onClick={alternative.sections.length > 1 ? () => replaceMaster(alternative) : undefined}
+                  onClick={() => this.handleClick(alternative)}
                   sections={alternative.sections}
                   sectionsDraggable={alternative.isSection}
                   colorBlueprint={alternative.colorBlueprint}
@@ -79,7 +94,8 @@ const mapStateToProps = createSelector(
 )
 
 const mapDispatchToProps = {
-  replaceMaster
+  replaceMaster,
+  replaceSectionWithAlternative,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Alternatives);

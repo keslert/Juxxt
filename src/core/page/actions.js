@@ -60,7 +60,7 @@ export function updateAlternatives() {
   }
 }
 
-export function overrideSectionWithAlternative(alternative, section) {
+export function replaceSectionWithAlternative(alternative, section) {
   return (dispatch, getState) => {
     const state = getState();
     const selected = getSelected(state);

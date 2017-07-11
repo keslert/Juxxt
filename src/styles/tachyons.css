@@ -647,10 +647,9 @@ img { max-width: 100%; }
   background-position: center center !important;
 }*/
 
-.vmiddle { vertical-align:middle; }
 .fadedtext {
   color:rgba(255,255,255,0.3);
-  text-align:center;
+  text-align: center;
 }
 
 .lh-1 { line-height: 1; }

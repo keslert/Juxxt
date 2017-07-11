@@ -57,11 +57,7 @@ export const styles = {
     },
     borderWidth: {
       _default: 1,
-      options: [1],
-    },
-    borderStyle: { 
-      _default: 'solid',
-      options: ['solid'],
+      options: range(0,2),
     },
     textTransform: {
       _default: 'none',
