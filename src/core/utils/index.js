@@ -33,6 +33,10 @@ export function lowerCamelCaseToRegular(camelCase) {
   return camelCase.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
 }
 
+export function replaceWhiteSpace(str, replacement='-') {
+  return str.replace(/\s+/g, replacement);
+}
+
 export function flattenPage(page) {
   const flattened = {};
   const flatten = (item) => {

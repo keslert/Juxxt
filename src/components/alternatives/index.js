@@ -69,11 +69,12 @@ class Alternatives extends React.Component {
                 onFavorite={() => null} 
                 onDelete={() => null} 
                 changes={alternative.sections[0].changes}>
-                <Page 
+                <Page
+                  preview={true}
                   onClick={() => this.handleClick(alternative)}
                   sections={alternative.sections}
                   sectionsDraggable={alternative.isSection}
-                  colorBlueprint={alternative.colorBlueprint}
+                  CSSRules={alternative.CSSRules}  
                   master={false} />
               </Alternative>
             </StyledWrapper>

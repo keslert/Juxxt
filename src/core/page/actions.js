@@ -1,5 +1,5 @@
 import * as types from './action-types';
-import { overrideElementContent } from '../../core/generator';
+import { overrideElementContent, generatePageCSSRules } from '../../core/generator';
 import { generateAlternatives } from '../../core/generator/alternatives';
 import { getMaster } from './selectors';
 import { sortBy, cloneDeep, uniqueId, forEach, findIndex, pick, find, filter } from 'lodash';
@@ -20,6 +20,7 @@ export function registerItem(item) {
 }
 
 export function setMaster(page) {
+  generatePageCSSRules(page);
   return {
     type: types.SET_MASTER,
     payload: page,
@@ -134,6 +135,7 @@ function replaceSection(dispatch, state, section, newSection) {
       s.id !== section.id ? s : newSection,
     )
   }
+
   dispatch(setMaster(page));
 }
 

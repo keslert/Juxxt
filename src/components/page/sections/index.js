@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import styled from 'styled-components';
 import sections from './_components';
 import { replaceSectionWithAlternative } from '../../../core/page';
-import { uiActions } from '../../../core/ui';
+import { uiActions, getSelected, getHovered } from '../../../core/ui';
 import { includes, last, map } from 'lodash';
 import flow from 'lodash/flow';
 
@@ -121,6 +122,7 @@ class Section extends React.Component {
       canDrop,
     } = this.props;
 
+    const { preview } = this.context;
   
     const SectionComponent = sections[name];
     
@@ -133,7 +135,7 @@ class Section extends React.Component {
                 showDrop={master && isOver}
                 canDrop={canDrop}
                 isDragging={isDragging}
-                selected={isSelected || isHovered} 
+                selected={(isSelected || isHovered) && !preview} 
                 onClick={(e) => { e.stopPropagation(); this.handleClick()}}
                 onDoubleClick={(e) => { e.stopPropagation(); setSidebarOpen(true); }}
                 onMouseEnter={() => onHoverableMouseEnter(uid)}
@@ -149,10 +151,19 @@ class Section extends React.Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  isSelected: state.ui.selected.uid === props.uid,
-  isHovered: last(state.ui.hovered) === props.uid,
-});
+Section.contextTypes = {
+  preview: React.PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = createSelector(
+  getHovered,
+  getSelected,
+  (_, props) => props.uid,
+  (hovered, selected, uid) => ({
+    isSelected: selected.uid === uid,
+    isHovered: last(hovered) === uid,
+  })
+)
 
 const mapDispatchToProps = Object.assign({replaceSectionWithAlternative}, uiActions);
 export default flow(
