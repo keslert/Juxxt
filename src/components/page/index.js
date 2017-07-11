@@ -25,7 +25,7 @@ const StyledPage = styled.div`
 
 
 const PICTURES = [
-  'baby.jpg',
+  //'baby.jpg',
   'burger.jpg',
   'beachChairs.jpg',
   'camera1.jpg',
@@ -35,13 +35,13 @@ const PICTURES = [
   'fallLeaves2.jpg',
   'fancyBurger.jpg',
   'fancyFood.jpg',
-  'fashionGlasses.jpeg',
+  //'fashionGlasses.jpeg',
   'greenleaf.jpg',
-  'kidWithSunglasses.jpg',
+  //'kidWithSunglasses.jpg',
   'macarons.jpg',
   'nyc.jpg',
   'oceanSunset.jpg',
-  'pancake1.jpg',
+  //'pancake1.jpg',
   'railroadShoes.jpg',
   'rain.jpg',
   'ruralHighway.jpg',

@@ -79,7 +79,8 @@ export function generateSectionColorAlternatives(section, modify, page) {
 
 const NUM_OF_IMAGES = 1;
 
-   const PICTURES = ['baby.jpg',
+   const PICTURES = [
+   //'baby.jpg',
    'burger.jpg',
    'beachChairs.jpg',
    'camera1.jpg',
@@ -88,14 +89,13 @@ const NUM_OF_IMAGES = 1;
    'coupleBikeBeach.jpg',
    'fallLeaves2.jpg',
    'fancyBurger.jpg',
-   'fancyFood.jpg',
-   'fashionGlasses.jpeg',
+ //'fashionGlasses.jpeg',
    'greenleaf.jpg',
-   'kidWithSunglasses.jpg',
+   //'kidWithSunglasses.jpg',
    'macarons.jpg',
    'nyc.jpg',
    'oceanSunset.jpg',
-   'pancake1.jpg',
+   //'pancake1.jpg',
    'railroadShoes.jpg',
    'rain.jpg',
    'ruralHighway.jpg',
