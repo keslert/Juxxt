@@ -54,7 +54,7 @@ export default Header1_2;
 
 export const blueprint = {
   type: 'header',
-  inherits: ['HeaderSection'],
+  inherits: ['HeaderSection', 'GutterSection'],
   style: {},
   color: { background: 'vibrant' },
   groups: {

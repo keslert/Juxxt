@@ -4,7 +4,7 @@ import Box from '../../common/box';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 
-const Basic1_2 = ({
+const Basic1_2Wide = ({
   groups,
   variant,
   style,
@@ -15,8 +15,18 @@ const Basic1_2 = ({
     ...style,
   }
 
+  const tpBox = {
+    maxWidth: style.maxWidth / 2,
+    width: '50P',
+    order: variant.order,
+  }
+
+  const imageBox = {
+    width: '50P',
+    order: 2,
+  }
+
   const wrapStyle = {
-    marginHorizontal: `-${style.gutter}`,
     display: "flex",
     flexWrap: "wrap",
   }
@@ -34,32 +44,30 @@ const Basic1_2 = ({
 
   return (
     <Box className={colorClassNames}>
-      <Box className={convertStyleToAtomic(containerStyle)}>
-        <Box className={convertStyleToAtomic(wrapStyle)}>
-          <Box className={innerClassNames + ' order-' + variant.order}>
-            <Group {...groups.tp} />
-          </Box>
-          <Box className={innerClassNames + ' order-2'}>
-            <Group {...groups.media} />
-          </Box>
+      <Box className={convertStyleToAtomic(wrapStyle)}>
+        <Box className={convertStyleToAtomic(imageBox)}>
+          <Group {...groups.image} />
+        </Box>
+        <Box className={convertStyleToAtomic(tpBox)}>
+          <Group {...groups.tp} />
         </Box>
       </Box>
     </Box>
   )
 }
-export default Basic1_2;
+export default Basic1_2Wide;
 
 export const blueprint = {
   type: 'basic',
-  inherits: ['BasicSection', 'GutterSection'],
+  inherits: ['BasicSection'],
   style: {},
   color: {},
   groups: {
     tp: {
       options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','HeadingParagraphButton', 'IconHeadingParagraph'],
     },
-    media: {
-      options: ['BlockImage'],
+    image: {
+      options: ['CoverImage'],
     },
   },
   variants: [{

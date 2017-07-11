@@ -117,6 +117,19 @@ export const BasicImage = {
   style: {},
 };
 
+export const CoverImage = { 
+  name: 'CoverImage', 
+  is: 'Image',
+  inherits: [],
+  color: {},
+  style: {
+    aspectRatio: {
+      _default: '4x3',
+      options: ['1x1', '16x9', '9x16', '4x3', '3x4', '6x4', '4x6', '8x5', '5x8', '7x5', '5x7']
+    },
+  },
+};
+
 export const LogoImage = {
   name: 'LogoImage',
   is: 'Image',
@@ -170,7 +183,7 @@ export const ReadableLink = {
 
 export const SmallButton = { 
   name: 'SmallButton', 
-  is: 'Link',
+  is: 'Button',
   inherits: [inherits.Button],
   color: {
     text: 'readable',
@@ -198,7 +211,7 @@ export const SmallButton = {
 
 export const BasicButton = { 
   name: 'BasicButton', 
-  is: 'Link',
+  is: 'Button',
   inherits: [inherits.Button],
   color: {
     text: 'readable',

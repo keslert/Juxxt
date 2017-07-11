@@ -22,6 +22,7 @@ import HeadingSubheading2Buttons from './heading-subheading-2buttons';
 // import * as SmallHeadingLinkList from './small-heading-link-list';
 // import * as Navigation from './navigation';
 import BlockImage from './singles/block-image';
+import CoverImage from './singles/cover-image';
 // import * as Device from './device';
 
 export default {
@@ -35,6 +36,7 @@ export default {
   HeadingParagraph,
   HeadingParagraphButton,
   BlockImage,
+  CoverImage,
   Logo,
   VerticalList,
   KickerHeadingParagraph,

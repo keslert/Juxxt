@@ -581,6 +581,9 @@ img { max-width: 100%; }
 .mw-900px { max-width: 900px; }
 .mw-1024px { max-width: 1024px; }
 .mw-1170px { max-width: 1170px; }
+.mw-450px { max-width: 450px; }
+.mw-512px { max-width: 512px; }
+.mw-585px { max-width: 585px; }
 
 
 .tl { text-align: left; }

@@ -1,5 +1,6 @@
 import { blueprint as Basic } from './basic';
 import { blueprint as Basic1_2  } from './basic1_2';
+import { blueprint as Basic1_2Wide  } from './basic1_2_wide';
 import { blueprint as Header } from './header';
 import { blueprint as Navbar1 } from './navigation/navbar1';
 import { blueprint as Navbar2 } from './navigation/navbar2';
@@ -17,6 +18,7 @@ import { blueprint as CallToAction } from './C2A/call-to-action';
 export default {
   Basic,
   Basic1_2,
+  Basic1_2Wide,
   Header,
   Header1_2,
   Navbar1,
