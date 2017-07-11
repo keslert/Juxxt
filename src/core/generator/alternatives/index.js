@@ -124,7 +124,7 @@ function generateColorAlternatives(page, modify, selected) {
   if(selected.isSection) {
     sections = generateSectionColorAlternatives(_section, modify, page);
   } else if(selected.isGroup) {
-    sections = generateGroupColorAlternatives(_section, modify);
+    sections = generateGroupColorAlternatives(_section, modify, page);
   } else {
     sections = generateElementColorAlternatives(_section, modify, selected, page);
   }
