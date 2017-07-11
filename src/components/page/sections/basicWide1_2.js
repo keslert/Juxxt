@@ -4,7 +4,7 @@ import Box from '../../common/box';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 
-const Basic1_2Wide = ({
+const BasicWide1_2 = ({
   groups,
   variant,
   style,
@@ -16,9 +16,11 @@ const Basic1_2Wide = ({
   }
 
   const tpBox = {
-    maxWidth: style.maxWidth / 2,
-    width: '50P',
+    display: "flex",
+    width: '40P',
     order: variant.order,
+    flexWrap: "flex",
+   
   }
 
   const imageBox = {
@@ -29,14 +31,17 @@ const Basic1_2Wide = ({
   const wrapStyle = {
     display: "flex",
     flexWrap: "wrap",
+    
   }
 
   const innerBoxStyle = {
-    paddingHorizontal: style.gutter,
-    width: '50P',
+    //paddingHorizontal: style.gutter,
+    width: '100P',
+    //paddingHorizontal: 3,
     display: "flex",
-    justify: "center",
+    justify: 'center',
     align: "center",
+    
   }
 
   const colorClassNames = convertColorToAtomic(color);
@@ -48,14 +53,14 @@ const Basic1_2Wide = ({
         <Box className={convertStyleToAtomic(imageBox)}>
           <Group {...groups.image} />
         </Box>
-        <Box className={convertStyleToAtomic(tpBox)}>
+        <Box className={convertStyleToAtomic(tpBox) + " mauto"}>
           <Group {...groups.tp} />
         </Box>
       </Box>
     </Box>
   )
 }
-export default Basic1_2Wide;
+export default BasicWide1_2;
 
 export const blueprint = {
   type: 'basic',
