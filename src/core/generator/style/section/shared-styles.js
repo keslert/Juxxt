@@ -31,12 +31,20 @@ export const styles = {
     maxWidth: {
       options: ['1024px'],
     },
-    paddingVertical: {
-      _default: 7,
-      options: [4,5,6,7,8],
+    paddingTop: {
+      _default: 6,
+      options: [4,5,6,7],
+    },
+    paddingBottom: {
+      _default: 6,
+      options: [4,5,6,7],
     },
     margin: {
       options: ['auto'],
+    },
+    fontSize: {
+      _default: 4,
+      options: [2,3,4,5],
     }
   },
   [names.NavigationSection]: {

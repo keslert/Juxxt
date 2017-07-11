@@ -10,8 +10,7 @@ import { buildPageColorBlueprint } from './color/page';
 import { randomItem } from '../utils';
 import { range, reduce, uniqueId, forEach, clone, sortBy, map, fromPairs, toPairs, max, some, filter } from 'lodash';
 
-const NUM_SECTIONS = 6;
-
+const NUM_SECTIONS = 7;
 export function init() {
   // const palette = ["#dc5131", "#374140"];
   // const palette = ["#48F6F9","#052F54","#ffcc00","#910000"]

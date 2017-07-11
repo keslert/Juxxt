@@ -33,7 +33,7 @@ export const BasicHeading = {
     fontWeight: {
       _default: 6,
       options: [2,4,6,8],
-    }
+    },
   }
 };
 
@@ -184,26 +184,6 @@ export const SmallButton = {
       _default: 3,
       options: range(3,6),
     },
-    minWidth: {
-      _default: 'none',
-      options: ['none', '100px', '150px', '200px', '300px','400px'],
-    },
-    borderRadius: {
-      _default: '-pill',
-      options: [0,1,2,3,4,'-pill'],
-    },
-    borderWidth: {
-      _default: 1,
-      options: range(0, 5),
-    },
-    borderStyle: { 
-      _default: 'solid',
-      options: ['solid'],
-    },
-    textTransform: {
-      _default: 'none',
-      options: ['none', 'uppercase'],
-    },
     fontSize: {
       _default: 2,
       options: range(2, 3),
@@ -231,23 +211,6 @@ export const BasicButton = {
     paddingHorizontal: {
       _default: 4,
       options: range(3,6),
-    },
-    minWidth: {
-      _default: 'none',
-      options: ['none', '100px', '150px', '200px', '300px','400px'],
-    },
-    borderRadius: {
-      _default: '-pill',
-      options: [0,1,2,3,4,'-pill'],
-    },
-    borderWidth: {
-      _default: 1,
-      options: range(0, 5),
-    },
-    borderStyle: { _default: 'solid' },
-    textTransform: {
-      _default: 'none',
-      options: ['none', 'uppercase'],
     },
     fontSize: {
       _default: 2,

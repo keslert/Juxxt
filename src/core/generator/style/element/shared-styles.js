@@ -14,11 +14,9 @@ export const styles = {
     fontWeight: {
       options: [2,4,6,8],
     },
-    ...p0,
-    ...mh0,
     marginBottom: {
-      _default: 2,
-      options: range(0, 4),
+      _default: 3,
+      options: range(0, 7),
     },
     fontFamily: {
       _default: 'Source Sans Pro',
@@ -26,10 +24,9 @@ export const styles = {
     }
   },
   [names.Paragraph]: {
-    ...p0,
     marginBottom: {
-      _default: 2,
-      options: range(0, 4),
+      _default: 3,
+      options: range(0, 7),
     }
   },
   [names.Media]: {
@@ -46,6 +43,25 @@ export const styles = {
 
   },
   [names.Button]: {
-
+    minWidth: {
+      _default: 'none',
+      options: ['none', '100px', '150px', '200px', '300px','400px'],
+    },
+    borderRadius: {
+      _default: 2,
+      options: [0,1,2,3,4,'-pill'],
+    },
+    borderWidth: {
+      _default: 1,
+      options: range(0, 5),
+    },
+    borderStyle: { 
+      _default: 'solid',
+      options: ['solid'],
+    },
+    textTransform: {
+      _default: 'none',
+      options: ['none', 'uppercase'],
+    },
   },
 }

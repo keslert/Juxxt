@@ -11,7 +11,6 @@ class FooterVerticalLists extends React.PureComponent {
       display: "flex",
       align: "start",
       justify: "center",
-      height: 60,
     }
     const styleClassNames = convertStyleToAtomic(boxStyle);
     const colorClassNames = convertColorToAtomic(color);

@@ -55,12 +55,7 @@ export default Header1_2;
 export const blueprint = {
   type: 'header',
   inherits: ['HeaderSection'],
-  style: {
-    paddingVertical: {
-      _default: 6,
-      options: [4,5,6,7,8],
-    }
-  },
+  style: {},
   color: { background: 'vibrant' },
   groups: {
     tp: {
@@ -70,12 +65,7 @@ export const blueprint = {
       options: ['BlockImage']
     }
   },
-  variants: [
-  {
-    order: {
-      options:[1,3],
-    }
-  }
-
-  ]
+  variants: [{
+    order: { options: [1,3] }
+  }]
 }

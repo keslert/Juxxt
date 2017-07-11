@@ -11,7 +11,6 @@ class Footer1 extends React.PureComponent {
       display: "flex",
       align: "center",
       justify: "center",
-      height: 60,
     }
 
     const styleClassNames = convertStyleToAtomic(boxStyle);
