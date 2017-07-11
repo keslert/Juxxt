@@ -649,3 +649,8 @@ img { max-width: 100%; }
   color:rgba(255,255,255,0.3);
   text-align:center;
 }
+
+.lh-1 { line-height: 1; }
+.lh-2 { line-height: 1.35; }
+.lh-3 { line-height: 1.55; }
+.lh-4 { line-height: 1.85; }

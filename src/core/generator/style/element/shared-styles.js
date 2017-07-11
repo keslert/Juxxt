@@ -15,7 +15,7 @@ export const styles = {
       options: [2,4,6,8],
     },
     marginBottom: {
-      _default: 3,
+      _default: 4,
       options: range(0, 7),
     },
     fontFamily: {
@@ -25,8 +25,12 @@ export const styles = {
   },
   [names.Paragraph]: {
     marginBottom: {
-      _default: 3,
+      _default: 4,
       options: range(0, 7),
+    },
+    lineHeight: {
+      _default: 3,
+      options: [1,2,3,4],
     }
   },
   [names.Media]: {
@@ -53,7 +57,7 @@ export const styles = {
     },
     borderWidth: {
       _default: 1,
-      options: range(0, 5),
+      options: [1],
     },
     borderStyle: { 
       _default: 'solid',

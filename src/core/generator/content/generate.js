@@ -9,6 +9,9 @@ export function generateContent(element) {
       return getHeaderContent();
     case 'BasicParagraph':
       return {text: LoremIpsum({count: random(2, 4), units: 'sentences'})};
+
+    case 'BasicImage':
+      return getBlockImageContent(element);
     case 'BasicButton':
     case 'SmallButton':
       return getButtonContent();
@@ -167,4 +170,11 @@ function getSmallHeadingContent(props) {
     units: 'words',
   });
   return { text };
+}
+
+function getBlockImageContent(element) {
+  if(element.group.section.type === 'header') {
+    return {src: 'https://cdn.dribbble.com/users/86723/screenshots/3646014/run_shot_2_1x.png'};
+  }
+  return getImageContent();
 }

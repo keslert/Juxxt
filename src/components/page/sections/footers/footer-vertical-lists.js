@@ -33,7 +33,7 @@ export const blueprint = {
   type: 'footer',
   inherits: [],
   style: {},
-  color: { background: 'vibrant' },
+  color: {},
   groups: {
   	verticallist: {
   		options:['VerticalList'],

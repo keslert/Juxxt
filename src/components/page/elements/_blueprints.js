@@ -13,7 +13,8 @@ export const BasicKicker = {
       options: range(1, 3)
     },
     marginBottom: {
-      options: range(0, 2),
+      _default: 2,
+      options: range(0, 4),
     }
   },
 };
@@ -34,6 +35,10 @@ export const BasicHeading = {
       _default: 6,
       options: [2,4,6,8],
     },
+    lineHeight: {
+      _default: 1,
+      options: range(1, 5),
+    }
   }
 };
 
