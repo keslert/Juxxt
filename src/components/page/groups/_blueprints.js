@@ -23,6 +23,9 @@ import { blueprint as BlockImage } from './singles/block-image';
 import { blueprint as CoverImage } from './singles/cover-image';
 // import * as Device from './device';
 
+import { blueprint as ButtonList } from './button-list';
+
+
 export default {
   HeadingSubheading,
   HeadingParagraphLink,
@@ -41,7 +44,7 @@ export default {
   ParagraphOnly,
   IconHeadingParagraph,
   HeadingParagraph2Buttons,
-  
+  ButtonList,
   // IconSmallHeadingParagraph: {
   //   ...IconSmallHeadingParagraph,
   //   special: true,

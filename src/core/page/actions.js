@@ -2,8 +2,10 @@ import * as types from './action-types';
 import { overrideElementContent, generatePageCSSRules } from '../../core/generator';
 import { generateAlternatives } from '../../core/generator/alternatives';
 import { getMaster } from './selectors';
-import { sortBy, cloneDeep, uniqueId, forEach, findIndex, pick, find, filter } from 'lodash';
+import { sortBy, cloneDeep, uniqueId, forEach, findIndex, pick, find, filter, map } from 'lodash';
 import { getSelected, setSelected, getModifications, getSelectedModification, setSelectedModification } from '../ui';
+
+import { linkChildren, getParents, getElementsInItem, getGroupsInItem } from '../generator/generator-utils';
 
 
 export function clearRegistry() {
@@ -66,18 +68,14 @@ export function replaceSectionWithAlternative(alternative, section) {
     const state = getState();
     const selected = getSelected(state);
     const duplicated = duplicateSection(alternative);
-    duplicated.master = true;
-
-    const _section = section || (selected.isSection ? selected : selected.isGroup ? selected.section : selected.group.section);
-    replaceSection(dispatch, state, _section, duplicated);
+    replaceSection(dispatch, state, selected.section, duplicated);
 
     let _selected = duplicated;
-    if(selected.isGroup && duplicated.groups[selected.sectionKey]) {
-      _selected = duplicated.groups[selected.sectionKey];
-    } else if(selected.isElement && duplicated.groups[selected.group.sectionKey].elements[selected.groupKey]) {
-      _selected = duplicated.groups[selected.group.sectionKey].elements[selected.groupKey];
+    if(selected.isGroup) {
+      _selected = find(duplicated._groups, g => g.oldId === selected.id) || _selected;
+    } else if(selected.isElement) {
+      _selected = find(duplicated._elements, e => e.oldId === selected.id) || _selected;
     }
-
     dispatch(setSelected(_selected));
   }
 }
@@ -154,27 +152,37 @@ export function setElementContent(element, content) {
     const state = getState();
     const master = getMaster(state);
     const section = overrideElementContent(element, content, master);
-    const _element = find(section.elements, e => e.id === element.id);
+    const _element = find(section._elements, e => e.id === element.id);
 
-    replaceSection(dispatch, state, element.group.section, section);
+    replaceSection(dispatch, state, element.section, section);
     dispatch(setSelected(_element));
   }
 }
 
 function duplicateSection(section) {
   const _section = cloneDeep(section);
+  linkChildren(_section);
+  _section._elements = getElementsInItem(_section);
+  _section._groups = getGroupsInItem(_section);
+  
+  _section.oldId = _section.id;
   _section.id = 's_' + uniqueId();
-  forEach(_section.groups, group => {
-    group.id = 'g_' + uniqueId();
-    group.section = _section;
-    forEach(group.elements, element => {
-      const content = find(_section.contentStore, item => item.elementId === element.id);
-      element.id = 'e_' + uniqueId();
-      element.group = group;
-      content.elementId = element.id;
-      content.groupId = group.id;
-    })
+  _section.section = _section;
+  
+  _section._groups.forEach(g => {
+    g.oldId = g.id;
+    g.id = 'g_' + uniqueId();
+    g.section = _section;
   });
+
+  _section._elements.forEach(e => {
+    e.oldId = e.id;
+    e.id = 'e_' + uniqueId();
+    e.section = _section;
+    const content = find(_section.contentStore, item => item.elementId === e.oldId);
+    content.elementId = e.id;
+    content.parentIds = map(getParents(e), 'id');
+  })
   
   return _section;
 }

@@ -25,7 +25,7 @@ import {
 } from './page';
 
 import { buildSectionFromSkeleton } from '../builder/section';
-import { extractSkeletonFromSection } from '../skeletons/utils';
+import { extractSkeletonFromItem } from '../skeletons/utils';
 
 import { generatePageCSSRules } from '../index';
 
@@ -65,40 +65,40 @@ export function generateAlternatives(page, modify, selected) {
 }
 
 function generateComponentAlternatives(page, modify, selected) {
-  const section = getSectionFromItem(selected)
-  const masterSkeleton = extractSkeletonFromSection(section);
+  const sectionSkeleton = extractSkeletonFromItem(selected.section);
 
   let skeletons;
   if(selected.isSection) {
-    skeletons = generateSectionComponentAlternatives(selected, modify, masterSkeleton);
+    skeletons = generateSectionComponentAlternatives(selected, modify, sectionSkeleton);
   } else if(selected.isGroup) {
-    skeletons = generateGroupComponentAlternatives(selected, masterSkeleton);
+    skeletons = generateGroupComponentAlternatives(selected, sectionSkeleton);
   } else {
-    skeletons = generateElementComponentAlternatives(selected, masterSkeleton);
+    skeletons = generateElementComponentAlternatives(selected, sectionSkeleton);
   }
 
   const sections = skeletons.map(skeleton => {
-    const _section = buildSectionFromSkeleton(skeleton)
-    assignColor(_section, page);
-    assignContent(_section, section.contentStore);
-    assignStyles(_section, page);
-    return _section;
-  })
+    const section = buildSectionFromSkeleton(skeleton)
+    assignColor(section, page);
+    assignContent(section, selected.section.contentStore);
+    assignStyles(section, page);
+    return section;
+  });
+
   return sections;
 }
 
 
 function generateVariantAlternatives(page, selected) {
-  const section = getSectionFromItem(selected);
-  const masterSkeleton = extractSkeletonFromSection(section);
+  const section = selected.section;
+  const sectionSkeleton = extractSkeletonFromItem(section);
   
   let skeletons;
   if(selected.isSection) {
-    skeletons = generateSectionVariantAlternatives(selected, masterSkeleton);
+    skeletons = generateSectionVariantAlternatives(selected, sectionSkeleton);
   } else if(selected.isGroup) {
-    skeletons = generateGroupVariantAlternatives(selected, masterSkeleton);
+    skeletons = generateGroupVariantAlternatives(selected, sectionSkeleton);
   } else {
-    skeletons = generateElementVariantAlternatives(selected, masterSkeleton);
+    skeletons = generateElementVariantAlternatives(selected, sectionSkeleton);
   }
   
   const sections = skeletons.map(skeleton => {
@@ -106,16 +106,8 @@ function generateVariantAlternatives(page, selected) {
     assignColor(_section, page);
     assignContent(_section, section.contentStore);
     assignStyles(_section, page);
-
+    _section.changes = skeleton.changes;
     
-    if(selected.isSection) {
-      _section.changes = Object.assign({}, _section.variant, ...map(_section.groups, group => group.variant));
-    } else if(selected.isGroup) {
-      _section.changes = _section.groups[selected.sectionKey].variant;
-    } else {
-      _section.changes = _section.groups[selected.group.sectionKey].variant;
-    } 
-
     return _section;
   })
 
@@ -123,57 +115,55 @@ function generateVariantAlternatives(page, selected) {
 }
 
 function generateColorAlternatives(page, modify, selected) {
-  const section = getSectionFromItem(selected)
-  const skeleton = extractSkeletonFromSection(section);
-  const _section = buildSectionFromSkeleton(skeleton);
-  assignContent(_section, section.contentStore);
-  assignStyles(_section,page);
-  assignColor(_section,page);
+  const skeleton = extractSkeletonFromItem(selected.section);
+  const section = buildSectionFromSkeleton(skeleton);
+  assignContent(section, selected.section.contentStore);
+  assignStyles(section, page);
+  assignColor(section, page);
+  
   let sections;
   if(selected.isSection) {
-    sections = generateSectionColorAlternatives(_section, modify, page);
+    sections = generateSectionColorAlternatives(section, modify, page);
   } else if(selected.isGroup) {
-    sections = generateGroupColorAlternatives(_section, modify, page);
+    sections = generateGroupColorAlternatives(section, modify, page);
   } else {
-    sections = generateElementColorAlternatives(_section, modify, selected, page);
+    sections = generateElementColorAlternatives(section, modify, selected, page);
   }
 
   return sections;
 }
 
 function generateContentAlternatives(page, selected) {
-  const section = getSectionFromItem(selected);
-  const skeleton = extractSkeletonFromSection(section);
-  const _section = buildSectionFromSkeleton(skeleton);
-  assignColor(_section, page);
-  assignStyles(_section, page);
+  const skeleton = extractSkeletonFromItem(selected.section);
+  const section = buildSectionFromSkeleton(skeleton);
+  assignColor(section, page);
+  assignStyles(section, page);
 
   let sections;
   if(selected.isSection) {
-    sections = generateSectionContentAlternatives(_section, section.contentStore);
+    sections = generateSectionContentAlternatives(section, selected.section.contentStore);
   } else if(selected.isGroup) {
-    sections = generateGroupContentAlternatives(_section, selected, section.contentStore);
+    sections = generateGroupContentAlternatives(section, selected, selected.section.contentStore);
   } else if(selected.isElement) {
-    sections = generateElementContentAlternatives(_section, selected, section.contentStore);
+    sections = generateElementContentAlternatives(section, selected, selected.section.contentStore);
   }
 
   return sections;
 }
 
 function generateStyleAlternatives(page, modify, selected) {
-  const section = getSectionFromItem(selected);
-  const skeleton = extractSkeletonFromSection(section);
-  const _section = buildSectionFromSkeleton(skeleton);
-  assignColor(_section, page);
-  assignContent(_section, section.contentStore);
-  assignStyles(_section, page);
+  const skeleton = extractSkeletonFromItem(selected.section);
+  const section = buildSectionFromSkeleton(skeleton);
+  assignColor(section, page);
+  assignContent(section, selected.section.contentStore);
+  assignStyles(section, page);
   let sections;
   if(selected.isSection) {
-    sections = generateSectionStyleAlternatives(modify, _section, page);
+    sections = generateSectionStyleAlternatives(modify, section, page);
   } else if(selected.isGroup) {
-    sections = generateGroupStyleAlternatives(modify, _section, selected);
+    sections = generateGroupStyleAlternatives(modify, section, selected);
   } else if(selected.isElement) {
-    sections = generateElementStyleAlternatives(modify, _section, selected);
+    sections = generateElementStyleAlternatives(modify, section, selected);
   }
 
   return sections;
@@ -186,13 +176,4 @@ function generatePageAlternatives(page, modify) {
   }
 
   return _page;
-}
-
-function getSectionFromItem(item) {
-  if(item.isSection) {
-    return item;
-  } else if(item.isGroup) {
-    return item.section;
-  }
-  return item.group.section;
 }

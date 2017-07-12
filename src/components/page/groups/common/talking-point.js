@@ -1,5 +1,6 @@
 import React from 'react';
 import Element from '../../elements';
+import Group from '../../groups';
 import Box from '../../../common/box';
 
 import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
@@ -24,7 +25,9 @@ class TalkingPoint extends React.Component {
         links,
         button,
         secondaryButton,
-        
+      },
+      groups: {
+        buttonList,
       }
     } = this.props;
 
@@ -49,6 +52,8 @@ class TalkingPoint extends React.Component {
           {button && <div><Element {...button}/></div>}
           {secondaryButton && <div className="ml3"><Element {...secondaryButton}/></div>}
         </div>
+
+        {buttonList && <div><Group {...buttonList} /></div>}
       </Box>
     )
   }

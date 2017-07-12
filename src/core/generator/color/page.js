@@ -35,7 +35,7 @@ export function buildPageColorBlueprint(colors) {
   }
 }
 
-const GRADIENT_DIRECTIONS = ['to left top', 'to right top', 'to right', ' to left bottom', 'to right bottom', 'to bottom'];
+const GRADIENT_DIRECTIONS = ['to left top', 'to right top', 'to right', 'to left', ' to left bottom', 'to right bottom', 'to bottom'];
 function getGradients(base, colors) {
   const gradients = [];
   

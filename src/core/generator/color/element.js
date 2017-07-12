@@ -1,27 +1,28 @@
 import * as blueprints from '../../../components/page/elements/_blueprints';
 import { find, filter, flatMap, some, isFunction } from 'lodash';
 import { getMode } from '../../utils';
+import { getSection, getBackground } from '../generator-utils';
 import { getMostVibrantColor, getTint } from './utils';
 
 export function colorElement(element, page) {
 
   element.color = {};
   const blueprint = blueprints[element.name];
-  const elements = flatMap(page.sections, s => s.elements);
+  const elements = flatMap(page.sections, s => s._elements);
   const rules = [
     e => e.id === element.id,
-    e => e.group.section.id === element.group.section.id,
-    e => e.group.name === element.group.name,
+    e => e.section.id === element.section.id,
+    e => e.parent.name === element.parent.name,
     e => true,
   ]
   
-  let background = getGroupOrSectionBackground(element,page);
+  let background = getBackground(element.parent);
 
   if(blueprint.color.background) {
     const valid = filter(elements, e => 
       e.name === element.name && 
       e.color && e.color.background && 
-      getGroupOrSectionBackground(e,page) === background
+      getBackground(e.parent) === background
     );
     
     const fn = find(rules, fn => some(valid, fn));
@@ -42,7 +43,7 @@ export function colorElement(element, page) {
     const valid = filter(elements, e => 
       e.name === element.name &&
       e.color && e.color.text && 
-      getElementGroupOrSectionBackground(e, page) === background
+      getBackground(e) === background
     )
     const fn = find(rules, fn => some(valid, fn));
     if(isFunction(fn)) {
@@ -55,15 +56,6 @@ export function colorElement(element, page) {
       element.color.text = getPreferredColor(colorBlueprint.texts, blueprint.color.text);
     }
   }
-}
-
-function getGroupOrSectionBackground(element, page) {
-  return element.group.color.background || 
-         element.group.section.color.background;
-}
-
-function getElementGroupOrSectionBackground(element, page) {
-  return element.color.background || getGroupOrSectionBackground(element, page);
 }
 
 function getPreferredColor(colors, preference) {

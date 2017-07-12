@@ -15,6 +15,7 @@ const HeadingSubheading = ({
       style={style}
       color={color}
       elements={elements}
+      groups={{}}
       align={variant.align} />
   )
 }

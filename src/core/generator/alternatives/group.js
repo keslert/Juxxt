@@ -2,28 +2,26 @@ import sectionBlueprints from '../../../components/page/sections/_blueprints';
 import blueprints from '../../../components/page/groups/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
-import { filter, range, uniqBy, flatMap, mapValues, cloneDeep } from 'lodash';
+import { filter, range, uniqBy, flatMap, mapValues, cloneDeep, includes } from 'lodash';
 import { getCombinations } from '../../utils';
+
+import { findItemInSection, getBlueprint } from '../generator-utils';
 import { styles } from '../style/group/shared-styles';
 import { filterStyle } from '../style/utils';
 import { getSortedByMostVibrant } from '../color/utils';
 
 
-export function generateGroupComponentAlternatives(group, masterSkeleton) {
-
-  const sectionBlueprint = sectionBlueprints[group.section.name];
-  const possibleGroups = sectionBlueprint.groups[group.sectionKey].options;
+export function generateGroupComponentAlternatives(group, sectionSkeleton) {
+  const blueprint = getBlueprint(group.parent);  
+  const possibleGroups = blueprint.groups[group.parentKey].options;
   const validGroups = filter(possibleGroups, groupName => groupName !== group.name)
 
-  const skeletons = validGroups.map(groupName => ({
-    ...masterSkeleton,
-    groups: {...masterSkeleton.groups,
-      [group.sectionKey]: {
-        id: group.id,
-        ...generateGroupSkeleton(groupName, group.variant),
-      }
-    }
-  }))
+  const skeletons = validGroups.map(groupName => {
+    const skeleton = cloneDeep(sectionSkeleton);
+    const parentSkeleton = findItemInSection(group.parent, skeleton);
+    parentSkeleton.groups[group.parentKey] = generateGroupSkeleton(groupName, group.variant);
+    return skeleton;
+  })
 
   return skeletons;
 }
@@ -31,14 +29,16 @@ export function generateGroupComponentAlternatives(group, masterSkeleton) {
 export function generateGroupVariantAlternatives(group, skeleton) {
   const variants = blueprints[group.name].variants;
   
-  const combinations = flatMap(variants, variant => getCombinations(
-    mapValues(variant, ({options}) => options)
-  ))
-  const unique = uniqBy(combinations, JSON.stringify);
+  const combos = flatMap(variants, 
+    variant => getCombinations(mapValues(variant, 'options'))
+  )
+  
+  const unique = uniqBy(combos, JSON.stringify);
 
   const skeletons = unique.map(variant => {
     const _skeleton = cloneDeep(skeleton);
-    _skeleton.groups[group.sectionKey].variant = variant;
+    const _groupSkeleton = findItemInSection(group, _skeleton);
+    _groupSkeleton.variant = variant;
     return _skeleton;
   })
 
@@ -83,7 +83,7 @@ export function generateGroupColorAlternatives(section, element, page) {
 }
 
 export function generateGroupContentAlternatives(section, group, contentStore) {
-  const store = filter(contentStore, content => content.groupId !== group.id);
+  const store = filter(contentStore, content => !includes(content.parentIds, group.id));
 
   const sections = range(0, 6).map(() => cloneDeep(section));
   sections.forEach(s => assignContent(s, store));
@@ -103,7 +103,7 @@ export function generateGroupStyleAlternatives(modify, section, group) {
   
   const sections = possibleStyles.map(style => {
     const _section = cloneDeep(section);
-    const _group = _section.groups[group.sectionKey];
+    const _group = findItemInSection(group, _section);
     _group.style = {...group.style, ...style}
     _section.changes = style;
     return _section;

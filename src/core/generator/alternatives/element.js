@@ -3,47 +3,53 @@ import groupBlueprints from '../../../components/page/groups/_blueprints';
 import * as blueprints from '../../../components/page/elements/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
-import { map, uniq, intersection, filter, range, cloneDeep, flatMap, findIndex } from 'lodash';
+import { map, uniq, intersection, filter, range, cloneDeep, flatMap, findIndex, find } from 'lodash';
 import { styles } from '../style/element/shared-styles';
 import { filterStyle } from '../style/utils';
-import { generateGroupVariantAlternatives } from './group';
+import { getBackground, getBlueprint } from '../generator-utils';
+import { generateSectionComponentAlternatives } from './section';
+import { generateGroupVariantAlternatives, generateGroupComponentAlternatives } from './group';
 
-export function generateElementComponentAlternatives(element, masterSkeleton) {
-  const elementsInGroup = uniq(map(element.group.elements, 'name'));
-  const otherElements = filter(elementsInGroup, elementName => elementName !== element.name);
+export function generateElementComponentAlternatives(element, sectionSkeleton) {
+  const blueprint = getBlueprint(element.parent);  
 
-  const sectionBlueprint = sectionBlueprints[element.group.section.name];
-  const possibleGroups = sectionBlueprint.groups[element.group.sectionKey].options;
+  // const sectionBlueprint = sectionBlueprints[element.section.name];
 
-  const validGroups = filter(possibleGroups, groupName => {
-    const elements = map(groupBlueprints[groupName].elements, 'name');
-    return otherElements.length === intersection(otherElements, elements).length &&
-           groupName !== element.group.name;
-  })
 
-  const skeletons = validGroups.map(groupName => ({
-    ...masterSkeleton,
-    groups: {...masterSkeleton.groups,
-      [element.group.sectionKey]: generateGroupSkeleton(groupName, element.group.variant)
-    }
-  }))
+
+  // const possibleGroups = sectionBlueprint.groups[element.group.sectionKey].options;
+
+  // const validGroups = filter(possibleGroups, groupName => {
+  //   const elements = map(groupBlueprints[groupName].elements, 'name');
+  //   return otherElements.length === intersection(otherElements, elements).length &&
+  //          groupName !== element.group.name;
+  // })
+
+  // const skeletons = validGroups.map(groupName => ({
+  //   ...masterSkeleton,
+  //   groups: {...masterSkeleton.groups,
+  //     [element.group.sectionKey]: generateGroupSkeleton(groupName, element.group.variant)
+  //   }
+  // }))
   
-  return skeletons;
+  // return skeletons;
+  // TODO: Rewrite this section
+  return [];
 }
 
 export function generateElementVariantAlternatives(element, skeleton) {
-  return generateGroupVariantAlternatives(element.group, skeleton);
+  return generateGroupVariantAlternatives(element.parent, skeleton);
 }
 
 export function generateElementColorAlternatives(section, modify, element, page) {
-  const elementIndex = findIndex(section.elements, e => e.id === element.id);
+  const elementIndex = findIndex(section._elements, e => e.id === element.id);
   
   let sections = [];
   if(element.color.background && modify.background) {
-    const background = element.group.color.background || section.color.background;
+    const background = getBackground(element.parent);
     sections = map(page.colorBlueprint.bgBlueprints[background].solids, background => {
       const _section = cloneDeep(section);
-      _section.elements[elementIndex].color = {
+      _section._elements[elementIndex].color = {
         background,
         borderColor: background,
         text: page.colorBlueprint.bgBlueprints[background].texts[0],
@@ -54,7 +60,7 @@ export function generateElementColorAlternatives(section, modify, element, page)
 
     sections = sections.concat(map(page.colorBlueprint.bgBlueprints[background].texts, color => {
       const _section = cloneDeep(section);
-      _section.elements[elementIndex].color = {
+      _section._elements[elementIndex].color = {
         background: 'transparent',
         borderColor: color,
         text: color,
@@ -63,10 +69,10 @@ export function generateElementColorAlternatives(section, modify, element, page)
       return _section;
     }));
   } else if(modify.text) {
-    const background = getElementBackground(element);
+    const background = getBackground(element);
     sections = map(page.colorBlueprint.bgBlueprints[background].texts, text => {
       const _section = cloneDeep(section);
-      _section.elements[elementIndex].color = { ...element.color, text }
+      _section._elements[elementIndex].color = { ...element.color, text }
       _section.changes = { color: text };
       return _section;
     });
@@ -94,21 +100,11 @@ export function generateElementStyleAlternatives(modify, section, element) {
 
   const sections = possibleStyles.map(style => {
     const _section = cloneDeep(section);
-    const _element = _section.groups[element.group.sectionKey].elements[element.groupKey];
+    const _element = find(_section._elements, e => e.id === element.id);
     _element.style = {...element.style, ...style};
     _section.changes = style;
     return _section;
   })
 
   return sections;
-}
-
-function getElementBackground(element) {
-  if(element.color.background && element.color.background !== 'transparent') {
-    return element.color.background;
-  } else if(element.group.color.background) {
-    return element.group.color.background;
-  }
-
-  return element.group.section.color.background;
 }

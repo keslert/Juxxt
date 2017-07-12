@@ -1,4 +1,4 @@
-import { omit, mapValues, map, includes, forEach, sortBy, isEmpty } from 'lodash';
+import { omit, mapValues, map, includes, forEach, sortBy, isEmpty, pick } from 'lodash';
 import { randomItem } from '../../utils';
 
 export function getClosestVariant(variantToMatch={}, variants) {
@@ -24,19 +24,14 @@ export function getClosestVariant(variantToMatch={}, variants) {
   return omit(sorted[0], ['score']);
 }
 
-export function extractSkeletonFromSection(section) {
-  return {
-    id: section.id,
-    name: section.name,
-    variant: section.variant,
-    groups: mapValues(section.groups, group => ({
-      id: group.id,
-      name: group.name,
-      variant: group.variant,
-      elements: mapValues(group.elements, element => ({
-        id: element.id,
-        name: element.name
-      }))
-    }))
+export function extractSkeletonFromItem(item) {
+  const skeleton = {
+    id: item.id,
+    name: item.name,
+    variant: item.variant,
+    groups: mapValues(item.groups, extractSkeletonFromItem),
+    elements: mapValues(item.elements, e => pick(e, ['id', 'name'])),
   }
+  
+  return skeleton;
 }

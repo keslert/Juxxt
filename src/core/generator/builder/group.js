@@ -12,24 +12,15 @@ export function buildGroupFromSkeleton(skeleton) {
     variant: skeleton.variant,
   }
 
-  const blueprint = getGroupBlueprint(skeleton.name);
+  const blueprint = blueprints[skeleton.name];
 
-  group.elements = mapValues(blueprint.elements, (elementReqs, key) => {
-    const element = buildElementFromSkeleton(skeleton.elements[key]);
-    element.group = group;
-    element.groupKey = key;
-    return element;
-  })  
+  group.elements = mapValues(blueprint.elements || {}, (_, key) =>
+    buildElementFromSkeleton(skeleton.elements[key])
+  );
+
+  group.groups = mapValues(blueprint.groups || {}, (_, key) => 
+    buildGroupFromSkeleton(skeleton.groups[key])
+  )
+
   return group;
 };
-
-const _genericGroups = pickBy(blueprints, group => !group.special);
-
-
-export function getGroupOptions(props) {
-  return Object.keys(_genericGroups);
-}
-
-export function getGroupBlueprint(name) {
-  return blueprints[name];
-}

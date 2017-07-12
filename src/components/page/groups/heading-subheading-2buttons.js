@@ -12,6 +12,7 @@ class HeadingSubheading2Buttons extends React.Component {
         style={style}
         color={color}
         elements={elements}
+        groups={{}}
         align={variant.align} />
     )
   }

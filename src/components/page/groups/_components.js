@@ -23,6 +23,7 @@ import HeadingSubheading2Buttons from './heading-subheading-2buttons';
 // import * as Navigation from './navigation';
 import BlockImage from './singles/block-image';
 import CoverImage from './singles/cover-image';
+import ButtonList from './button-list';
 // import * as Device from './device';
 
 export default {
@@ -45,6 +46,7 @@ export default {
   ParagraphOnly,
   IconHeadingParagraph,
   HeadingParagraph2Buttons,
+  ButtonList,
   // IconHeadingParagraph,
   
   // IconSmallHeadingParagraph: {

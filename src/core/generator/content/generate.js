@@ -1,4 +1,5 @@
 import { randomItem } from '../../utils';
+import { getSection } from '../generator-utils';
 import { random } from 'lodash';
 import LoremIpsum from 'lorem-ipsum';
 
@@ -173,7 +174,7 @@ function getSmallHeadingContent(props) {
 }
 
 function getBlockImageContent(element) {
-  if(element.group.section.type === 'header') {
+  if(element.section.type === 'header') {
     return randomItem([
     {src: 'http://images.clipartpanda.com/nature-clip-art-floral.png'},
     {src: 'https://1r65612jvqxn8fcup46pve6b-wpengine.netdna-ssl.com/wp-content/uploads/2016/04/buildings-community.png'},

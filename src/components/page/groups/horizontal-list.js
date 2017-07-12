@@ -15,13 +15,13 @@ class HorizontalList extends React.Component {
     return (
       <div className={convertStyleToAtomic(style) + " dib"}>
         <div className={innerClassNames}>
-          <Element {...elements.link} />
+          <Element {...elements.links} />
         </div>
         <div className={innerClassNames}>
-          <Element {...elements.link} />
+          <Element {...elements.links} />
         </div>
         <div className={innerClassNames}>
-          <Element {...elements.link} />
+          <Element {...elements.links} />
         </div>
       </div>
     )
@@ -43,8 +43,10 @@ export const blueprint = {
   },
   color: {},
   elements: {
-    link: {
+    links: {
       name: ReadableLink.name,
+      list: true,
+      _default: 3,
     }
   },
   variants: [],

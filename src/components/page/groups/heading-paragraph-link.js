@@ -9,7 +9,8 @@ class HeadingParagraphLink extends React.PureComponent {
 			<TalkingPointComponent
 				style={this.props.style}
 				color={this.props.color}
-				elements={this.props.elements}
+        elements={this.props.elements}
+        groups={{}}
 				align={this.props.variant.align}
 			/>
 		)

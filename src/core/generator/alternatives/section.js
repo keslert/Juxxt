@@ -4,8 +4,6 @@ import { buildSectionFromSkeleton } from '../builder/section';
 import { 
   filter, 
   range, 
-  toPairs, 
-  fromPairs, 
   sortBy, 
   mapValues, 
   uniqBy, 
@@ -15,48 +13,45 @@ import {
   includes, 
   map,
   zipObject,
+  isEmpty,
 } from 'lodash';
 import { assignContent } from '../content';
 import { getCombinations } from '../../utils';
 import { colorElement } from '../color/element';
 import { styles } from '../style/section/shared-styles';
 import { filterStyle } from '../style/utils';
-import { generateGroupVariantAlternatives, generateGroupComponentAlternatives } from './group';
+import { generateGroupVariantAlternatives } from './group';
 import { getSortedByPreference } from '../color/utils';
-import tinycolor from 'tinycolor2';
 
-export function generateSectionComponentAlternatives(section, modify, masterSkeleton) {
-  const possibleSections = Object.keys(blueprints); 
+export function generateSectionComponentAlternatives(section, modify) {
+  const possibleSections = Object.keys(blueprints);
   const validSections = filter(possibleSections, name => 
     modify[blueprints[name].type]
   );
 
   const skeletons = flatMap(validSections, sectionName => {
     const skeletons = generateAllSectionSkeletons(sectionName, section.variant);
-    skeletons.forEach(skeleton => { 
-      skeleton.id = section.id;
-    });
+    skeletons.forEach(skeleton => (skeleton.id = section.id))
     return skeletons;
   });
 
-  const sections = flatMap(skeletons, skeleton =>
-    buildSectionFromSkeleton(skeleton)
-  )
-
-  return sections;
+  return skeletons;
 }
 
-const OPTIONS = [1,3];
+
 export function generateSectionVariantAlternatives(section, skeleton) {
-  let skeletons = [];
-  for(let i=0; i<Object.keys(section.groups).length;i++) {
-    let _alt = generateGroupVariantAlternatives(section.groups[Object.keys(section.groups)[0]],skeleton);
-    for(let j =0; j<_alt.length; j++) {
-      _alt[j].variant.order = OPTIONS[i];
-    }
-    skeletons = [...cloneDeep(skeletons), ...cloneDeep(_alt)];
-  }
-  return skeletons;
+  const variants = blueprints[section.name].variants;
+  
+  const skeletons = flatMap(variants, variant => {
+    const combos = getCombinations(mapValues(variant, 'options'));
+    return combos.map(variant => ({...skeleton, variant}))
+  });
+
+  const allSkeletons = flatMap(isEmpty(skeletons) ? [skeleton] : skeletons, s => 
+    flatMap(section.groups, group => generateGroupVariantAlternatives(group, s))
+  )
+
+  return allSkeletons;
 }
 
 export function generateSectionColorAlternatives(section, modify, page) {
@@ -71,7 +66,7 @@ export function generateSectionColorAlternatives(section, modify, page) {
     sections = generateSectionColorImagesBackground(section, page);
   }
 
-  forEach(sections, s => s.elements.forEach(e => colorElement(e, page)));
+  forEach(sections, s => s._elements.forEach(e => colorElement(e, page)));
 
   return sections;
 }

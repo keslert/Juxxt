@@ -35,10 +35,10 @@ export function generatePageBrandColorAlternatives(page) {
       const section = page.sections[i];
       _section.color.background = colorMapping[section.color.background] || 
                                   getSortedByPreference(colorBlueprint.backgrounds, section.blueprint.color.background)[0];
-      _section.elements.forEach((_element, i) => {
+      _section._elements.forEach((_element, i) => {
         colorElement(_element, {sections, colorBlueprint});
 
-        const element = section.elements[i];
+        const element = section._elements[i];
         ['background', 'text', 'borderColor'].forEach(key => {
           if(colorMapping[element.color[key]]) {
             _element.color[key] = colorMapping[element.color[key]];
