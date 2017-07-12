@@ -24,6 +24,8 @@ import { blueprint as CoverImage } from './singles/cover-image';
 // import * as Device from './device';
 import { blueprint as InputButton } from './input-button';
 import { blueprint as InputInputButton } from './input-input-button';
+import { blueprint as Heading } from './heading';
+import { blueprint as StackedButtons } from './stacked-buttons';
 
 export default {
   HeadingSubheading,
@@ -45,7 +47,8 @@ export default {
   HeadingParagraph2Buttons,
   InputButton,
   InputInputButton,
-  
+  StackedButtons,
+  Heading,
   // IconSmallHeadingParagraph: {
   //   ...IconSmallHeadingParagraph,
   //   special: true,

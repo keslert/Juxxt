@@ -53,7 +53,7 @@ function getButtonContent() {
     { text: 'Download Now', href: '#' },
     { text: 'Try it Now', href: '#' },
     { text: 'Sign Up Free', href: '#' },
-    { text: 'View More Examples', href: '#' },
+    { text: 'View Samples', href: '#' },//View More Examples
     { text: 'Free Trial', href: '#' },
     //for Action section only
     /*{ text: 'Submit', href: '#' },

@@ -9,7 +9,7 @@ import Box from '../../common/box';
 
 class Header1_2 extends React.PureComponent {
   render () {
-    const { groups, style, color, variant } = this.props;
+  const { groups, style, color, variant } = this.props;
 
   const containerStyle = {
     ...style

@@ -6,25 +6,50 @@ import { convertColorToAtomic } from '../../../../core/generator/color/conversio
 
 class CallToAction extends React.PureComponent {
   render () {
-    const { groups, style, color } = this.props;
+    const { groups, style, color, variant } = this.props;
 
-    const boxStyle = {
+    const containerStyle = {
+      ...style
+    }
+    const tpBox = {
       ...style,
+      ...color,
+      //paddingHorizontal: style.gutter,
       display: "flex",
+      width: '50P',
       align: "center",
       justify: "center",
+      flexWrap: "flex",
+      //order: variant.order,
     }
-    const styleClassNames = convertStyleToAtomic(boxStyle);
-    const colorClassNames = convertColorToAtomic(color);
+    const interactionBox = {
+      ...style,
+      ...color,
+      //paddingHorizontal: style.gutter,
+      display: "flex",
+      width: '50P',
+      align: "center",
+      justify: "center",
+      flexWrap: "flex",
+      //maxWidth: "50P",
+      //order: variant.order,
+    }
+
+    const tpStyleClassNames = convertStyleToAtomic(tpBox);
+    const interactionStyleClassNames = convertStyleToAtomic(interactionBox);
+    const bothColorClassNames = convertColorToAtomic(interactionBox);//same as tpBox
 
     return (
-      <div className={colorClassNames + ' call_action'}>
-        <div className={styleClassNames}>
+      <div className={bothColorClassNames + ' call_action flex-row' }>
+        <div className={tpStyleClassNames}>
           <Group {...groups.tp} />
-          <div>
-            <Group {...groups.input} />
-          </div>
         </div>
+        <div>
+            <div className={interactionStyleClassNames}>
+              <Group {...groups.interaction} />
+            </div>
+        </div>
+        
       </div>
     )
   }
@@ -41,11 +66,11 @@ export const blueprint = {
   groups: {
     tp: {
       options: 
-      ['HeadingSubheadingButton','HeadingParagraphButton','HeadingParagraph2Buttons','HeadingSubheading2Buttons'],
+      ['HeadingSubheading','HeadingParagraph','KickerHeadingParagraph','Heading'],
     },
-    input: {
-      options:['InputButton','InputInputButton'],
-      //TODO: I want to be able to have NO input as an option
+    interaction: {
+      options:['InputButton','InputInputButton','SingleButton', 'DoubleButton', 'StackedButtons'],
+      //, 'StackedButtons'
     },
   },
   variants: [{
