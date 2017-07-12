@@ -41,11 +41,11 @@ export const blueprint = {
   groups: {
     tp: {
       options: 
-      ['HeadingSubheadingButton','HeadingParagraphButton'/*,
-      'HeadingParagraph2Buttons','HeadingSubheading2Buttons'*/],
+      ['HeadingSubheadingButton','HeadingParagraphButton','HeadingParagraph2Buttons','HeadingSubheading2Buttons'],
     },
     input: {
       options:['InputButton','InputInputButton'],
+      //TODO: I want to be able to have NO input as an option
     },
   },
   variants: [{

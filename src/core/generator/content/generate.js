@@ -50,6 +50,15 @@ function getButtonContent() {
   return randomItem([
     { text: 'Get Started', href: '#' },
     { text: 'Learn More', href: '#' },
+    { text: 'Download Now', href: '#' },
+    { text: 'Try it Now', href: '#' },
+    { text: 'Sign Up Free', href: '#' },
+    { text: 'View More Examples', href: '#' },
+    { text: 'Free Trial', href: '#' },
+    //for Action section only
+    /*{ text: 'Submit', href: '#' },
+    { text: 'App Store', href: '#' },
+    { text: 'Google Play', href: '#' },*/
   ]);
 }
 
