@@ -47,7 +47,7 @@ class Group extends React.PureComponent {
     
     const GroupComponent = groups[name];
     if(this.context.preview) {
-      return <GroupComponent {...this.props} />;
+      return <div className="w-100P"><GroupComponent {...this.props} /></div>;
     }
     
     return (

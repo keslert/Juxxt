@@ -5,6 +5,6 @@ import { styleElement } from './element';
 
 export function assignStyles(section, page) {
   styleSection(section, page);
-  forEach(section.groups, group => styleGroup(group, page));
-  forEach(section.elements, element => styleElement(element, page));
+  forEach(section._groups, group => styleGroup(group, page));
+  forEach(section._elements, element => styleElement(element, page));
 }

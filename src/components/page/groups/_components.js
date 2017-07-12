@@ -22,6 +22,7 @@ import HeadingSubheading2Buttons from './heading-subheading-2buttons';
 // import * as Navigation from './navigation';
 import BlockImage from './singles/block-image';
 import CoverImage from './singles/cover-image';
+import ButtonList from './button-list';
 // import * as Device from './device';
 import InputButton from './input-button';
 import InputInputButton from './input-input-button';
@@ -52,6 +53,7 @@ export default {
   InputInputButton,
   StackedButtons,
   Heading,
+  ButtonList,
   // IconHeadingParagraph,
   
   // IconSmallHeadingParagraph: {

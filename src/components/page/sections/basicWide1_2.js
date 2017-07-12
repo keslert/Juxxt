@@ -1,4 +1,5 @@
 import React from 'react';
+import Element from '../elements';
 import Group from '../groups';
 import Box from '../../common/box';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
@@ -6,6 +7,7 @@ import { convertColorToAtomic } from '../../../core/generator/color/conversions'
 
 const BasicWide1_2 = ({
   groups,
+  elements,
   variant,
   style,
   color,
@@ -20,7 +22,7 @@ const BasicWide1_2 = ({
     width: '40P',
     order: variant.order,
     flexWrap: "flex",
-   
+    margin: 'auto',
   }
 
   const imageBox = {
@@ -35,13 +37,10 @@ const BasicWide1_2 = ({
   }
 
   const innerBoxStyle = {
-    //paddingHorizontal: style.gutter,
     width: '100P',
-    //paddingHorizontal: 3,
     display: "flex",
     justify: 'center',
     align: "center",
-    
   }
 
   const colorClassNames = convertColorToAtomic(color);
@@ -50,10 +49,10 @@ const BasicWide1_2 = ({
   return (
     <Box className={colorClassNames}>
       <Box className={convertStyleToAtomic(wrapStyle)}>
-        <Box className={convertStyleToAtomic(imageBox) + ' order-' + variant.order}>
-            <Group {...groups.image} />
+        <Box className={convertStyleToAtomic(imageBox)}>
+            <Element {...elements.image} />
         </Box>
-        <Box className={convertStyleToAtomic(tpBox) + ' order-2 mauto' }>
+        <Box className={convertStyleToAtomic(tpBox)}>
             <Group {...groups.tp} />
         </Box>
       </Box>
@@ -71,8 +70,10 @@ export const blueprint = {
     tp: {
       options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','HeadingParagraphButton', 'IconHeadingParagraph'],
     },
+  },
+  elements: {
     image: {
-      options: ['CoverImage'],
+      name: 'CoverImage',
     },
   },
   variants: [{

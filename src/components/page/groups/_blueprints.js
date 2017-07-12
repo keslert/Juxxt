@@ -27,6 +27,9 @@ import { blueprint as InputInputButton } from './input-input-button';
 import { blueprint as Heading } from './heading';
 import { blueprint as StackedButtons } from './stacked-buttons';
 
+import { blueprint as ButtonList } from './button-list';
+
+
 export default {
   HeadingSubheading,
   HeadingParagraphLink,
@@ -49,6 +52,7 @@ export default {
   InputInputButton,
   StackedButtons,
   Heading,
+  ButtonList,
   // IconSmallHeadingParagraph: {
   //   ...IconSmallHeadingParagraph,
   //   special: true,

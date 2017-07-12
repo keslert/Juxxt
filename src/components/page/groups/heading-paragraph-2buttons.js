@@ -6,12 +6,13 @@ import { TalkingPoint } from './_inherits';
 
 class HeadingParagraph2Buttons extends React.Component {
   render() {
-    const { elements, variant, style, color } = this.props;
+    const { elements, groups, variant, style, color } = this.props;
     return (
       <TalkingPointComponent
         style={style}
         color={color}
         elements={elements}
+        groups={groups}
         align={variant.align} />
     )
   }
@@ -30,13 +31,11 @@ export const blueprint = {
     paragraph: {
       name: BasicParagraph.name,
     },
-   button: {
-      name: BasicButton.name,
-    },
-    secondaryButton: {
-      name: BasicButton.name,
+  },
+  groups: {
+    buttonList: {
+      options: ['ButtonList'],
     }
-
   },
   variants: [{
     align: {

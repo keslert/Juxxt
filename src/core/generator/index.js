@@ -1,6 +1,6 @@
 import { generateSectionComponentAlternatives } from './alternatives/section';
 import { buildSectionFromSkeleton } from './builder/section';
-import { extractSkeletonFromSection } from './skeletons/utils';
+import { extractSkeletonFromItem } from './skeletons/utils';
 import { assignContent } from './content';
 import { assignStyles } from './style';
 import { assignColor } from './color';
@@ -8,6 +8,8 @@ import { colorGroup } from './color/group';
 import { colorElement } from './color/element';
 import { buildPageColorBlueprint } from './color/page';
 import { randomItem, replaceWhiteSpace } from '../utils';
+
+import { getSection } from './generator-utils';
 import { range, reduce, uniqueId, forEach, clone, sortBy, map, fromPairs, toPairs, max, some, filter } from 'lodash';
 
 const NUM_SECTIONS = 7;
@@ -16,7 +18,8 @@ export function init() {
   // const palette = ["#48F6F9","#052F54","#ffcc00","#910000"]
   // const palette = ["#374140","#1E1E20","#D9CB9E"];
   // const palette = ["#5AFF15","#AAFFE5","#9D75CB","#A657AE", "#8C1A6A"];
-  const palette = ['#EA9F3B', "#BBBE64", "#93A8AC", "#8E5572", "#443850"];
+  // const palette = ['#EA9F3B', "#BBBE64", "#93A8AC", "#8E5572", "#443850"];
+  const palette = ['#8bc34a', '#ff5722'];
   const colorBlueprint = buildPageColorBlueprint(palette);
 
   const master = {
@@ -58,8 +61,8 @@ export function init() {
       }
 
       const page2 = {...page, sections: [...page.sections, section]};
-      forEach(section.groups, group => colorGroup(group, page2.sections));
-      forEach(section.elements, element => colorElement(element, page2));
+      forEach(section._groups, group => colorGroup(group, page2.sections));
+      forEach(section._elements, element => colorElement(element, page2));
       assignContent(section, []);
       assignStyles(section, page);
       return [...sections, section];
@@ -73,11 +76,11 @@ export function init() {
 }
 
 export function overrideElementContent(element, content, page) {
-  const store = element.group.section.contentStore.map(item => 
+  const store = element.section.contentStore.map(item => 
     item.elementId !== element.id ? item : {...item, ...content}
   );
 
-  const skeleton = extractSkeletonFromSection(element.group.section);
+  const skeleton = extractSkeletonFromItem(element.section);
   const section = buildSectionFromSkeleton(skeleton);
   assignContent(section, store);
   assignStyles(section, page);

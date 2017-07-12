@@ -1,8 +1,9 @@
-import sectionBlueprints from '../../../components/page/sections/_blueprints';
+import blueprints from '../../../components/page/sections/_blueprints';
 import { buildGroupFromSkeleton } from './group';
+import { buildElementFromSkeleton } from './element';
 
 import { mapValues, uniqueId } from 'lodash';
-import { getElementsFromSection } from './utils';
+import { getElementsInItem, getGroupsInItem, linkChildren } from '../generator-utils';
 
 
 
@@ -15,20 +16,27 @@ export function buildSectionFromSkeleton(skeleton) {
     variant: skeleton.variant,
   }
 
-  const blueprint = getSectionBlueprint(skeleton.name);
+  const blueprint = blueprints[skeleton.name];
 
   section.blueprint = blueprint;
   section.type = blueprint.type;
-  section.groups = mapValues(blueprint.groups, (groupReqs, key) => {
-    const group = buildGroupFromSkeleton(skeleton.groups[key])
-    group.section = section;
-    group.sectionKey = key;
-    return group;
-  })
-  section.elements = getElementsFromSection(section);
-  return section;
-}
+  section.groups = mapValues(blueprint.groups, (_, key) => (
+    buildGroupFromSkeleton(skeleton.groups[key])
+  ))
+  section.elements = mapValues(blueprint.elements, (_, key) => (
+    buildElementFromSkeleton(skeleton.elements[key])
+  ))
+  
+  linkChildren(section);
+  
+  section._groups = getGroupsInItem(section);
+  section._elements = getElementsInItem(section);
+  
+  section.section = section;
+  section._groups.forEach(g => g.section = section);
+  section._elements.forEach(e => e.section = section);
+  
+  
 
-export function getSectionBlueprint(name) {
-  return sectionBlueprints[name];
+  return section;
 }

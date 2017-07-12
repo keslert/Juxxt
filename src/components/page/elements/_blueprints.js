@@ -125,7 +125,7 @@ export const CoverImage = {
   style: {
     aspectRatio: {
       _default: '4x3',
-      options: ['1x1', '16x9', '9x16', '4x3', '3x4', '6x4', '4x6', '8x5', '5x8', '7x5', '5x7']
+      options: ['1x1', '16x9', '4x3', '3x4', '6x4', '8x5', '7x5'],
     },
   },
 };

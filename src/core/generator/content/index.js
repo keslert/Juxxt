@@ -1,5 +1,6 @@
 import { generateContent } from './generate';
-import { pick } from 'lodash';
+import { getParents } from '../generator-utils'
+import { pick, map } from 'lodash';
 
 export function assignContent(section, contentStore) {
   const store = contentStore.map(content => ({
@@ -8,7 +9,7 @@ export function assignContent(section, contentStore) {
   }))
 
   // ID matching
-  section.elements.forEach(element => {
+  section._elements.forEach(element => {
     const content = store.find(content => content.elementId === element.id);
     if(content) {
       element.content = pick(content, ['text', 'src', 'href', 'type']);
@@ -19,24 +20,20 @@ export function assignContent(section, contentStore) {
   })
 
   // Best match or generate new content
-  section.elements.forEach(element => {
+  section._elements.forEach(element => {
     if(!element.content) { 
-      const content = store.find(content => !content.matched && content.elementName === element.name);
-      if(content) { // Best match
-        element.content = pick(content, ['text', 'src', 'href', 'type']);
-        content.matched = true;
-        content.elementId = element.id;
-        content.groupId = element.group.id;
-      } else { // Generate new content
-        const content = generateContent(element);
-        element.content = {...content};
-        content.matched = true;
-        content.elementId = element.id;
-        content.groupId = element.group.id;
-        content.elementName = element.name;
-        content.elementIs = element.is;
+      let content = store.find(content => !content.matched && content.elementName === element.name);
+      if(!content) {
+        content = generateContent(element);
         store.push(content);
       }
+
+      element.content = pick(content, ['text', 'src', 'href', 'type']);
+      content.matched = true;
+      content.elementId = element.id;
+      content.elementName = element.name;
+      content.elementIs = element.is;
+      content.parentIds = map(getParents(element), 'id');
     }
   })
   section.contentStore = store;

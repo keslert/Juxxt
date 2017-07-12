@@ -38,8 +38,8 @@ export const styles = {
       options: ['auto'],
     },
     fontSize: {
-      _default: 4,
-      options: [2,3,4,5],
+      _default: 3,
+      options: [2,3],
     }
   },
   [names.NavigationSection]: {
