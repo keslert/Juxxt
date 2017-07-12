@@ -33,34 +33,45 @@ const StyledElement = styled.div`
   }
 `
 
-const Element = (props) => {
+class Element extends React.PureComponent {
   
-  const { 
-    uid,
-    is,
-    isSelected,
-    setSelected,
-    setSidebarOpen,
-    isHovered, 
-    onHoverableMouseEnter, 
-    onHoverableMouseLeave,
-  } = props;
-  
-  const ElementComponent = elements[is];
+  render() {
 
-  return (
-    <StyledElement 
-      selected={isSelected} 
-      hovered={isHovered}
-      onClick={(e) => { e.stopPropagation(); setSelected(props);}}
-      onDoubleClick={(e) => { e.stopPropagation(); setSidebarOpen(true); }}
-      onMouseEnter={() => onHoverableMouseEnter(uid)}
-      onMouseLeave={() => onHoverableMouseLeave(uid)}
-      >
-      <ElementComponent {...props} />
-    </StyledElement>
-  )
+    const { 
+      uid,
+      is,
+      isSelected,
+      setSelected,
+      setSidebarOpen,
+      isHovered, 
+      onHoverableMouseEnter, 
+      onHoverableMouseLeave,
+    } = this.props;
+  
+    const ElementComponent = elements[is];
+
+    if(this.context.preview) {
+      return <ElementComponent {...this.props} />
+    }
+
+    return (
+      <StyledElement 
+        selected={isSelected} 
+        hovered={isHovered}
+        onClick={(e) => { e.stopPropagation(); setSelected(this.props);}}
+        onDoubleClick={(e) => { e.stopPropagation(); setSidebarOpen(true); }}
+        onMouseEnter={() => onHoverableMouseEnter(uid)}
+        onMouseLeave={() => onHoverableMouseLeave(uid)}
+        >
+        <ElementComponent {...this.props} />
+      </StyledElement>
+    )
+  }
 }
+
+Element.contextTypes = {
+  preview: React.PropTypes.bool.isRequired,
+};
 
 const mapStateToProps = (state, props) => ({
   isSelected: state.ui.selected.uid === props.uid,

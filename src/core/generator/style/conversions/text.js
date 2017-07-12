@@ -11,4 +11,5 @@ export default {
   textTransform: v => 'tt' + v[0],
   fontFamily: v => 'f-' + v.toLowerCase().replace(/ /g, '-'),
   fontWeight: v => 'fw' + v,
+  lineHeight: v => 'lh-' + v,
 }

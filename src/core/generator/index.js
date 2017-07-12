@@ -7,11 +7,10 @@ import { assignColor } from './color';
 import { colorGroup } from './color/group';
 import { colorElement } from './color/element';
 import { buildPageColorBlueprint } from './color/page';
-import { randomItem } from '../utils';
+import { randomItem, replaceWhiteSpace } from '../utils';
 import { range, reduce, uniqueId, forEach, clone, sortBy, map, fromPairs, toPairs, max, some, filter } from 'lodash';
 
-const NUM_SECTIONS = 6;
-
+const NUM_SECTIONS = 7;
 export function init() {
   // const palette = ["#dc5131", "#374140"];
   // const palette = ["#48F6F9","#052F54","#ffcc00","#910000"]
@@ -29,6 +28,7 @@ export function init() {
       fontSize: '16px',
     },
     isPage: true,
+    isMaster: true,
     sections: reduce(range(0, NUM_SECTIONS), (sections, i) => {
       const page = {sections, colorBlueprint};
 
@@ -67,6 +67,7 @@ export function init() {
   }
 
   master.sections.forEach(section => { section.master = true });
+  generatePageCSSRules(master);
 
   return { master, alternatives: [] };
 }
@@ -83,4 +84,44 @@ export function overrideElementContent(element, content, page) {
   assignColor(section, page);
 
   return section;
+}
+
+export function generatePageCSSRules(page) {
+  
+  const rules = [];
+
+  page.colorBlueprint.texts.forEach(color => {
+    rules.push(`.c-${color.substr(1)} { color: ${color}; }`);
+  });
+
+  page.colorBlueprint.backgrounds.forEach(color => {
+    rules.push(`.bg-${color.substr(1)} { background: ${color}; }`);
+    rules.push(`.b-${color.substr(1)} { border-color: ${color}; }`);
+  });
+  
+  // Gradients
+  forEach(page.colorBlueprint.bgBlueprints, blueprint => {
+    blueprint.gradients.forEach(({start, end, direction}) => {
+      const key = `.grd-${start.substr(1)}-${end.substr(1)}-${replaceWhiteSpace(direction, '')}`;
+      rules.push(`${key} { background: linear-gradient(${direction}, ${start}, ${end}); }`);
+    })
+  })
+
+  page.sections.forEach(section => {
+    if(section.color.pattern) {
+      rules.push(`.ptrn-${section.color.pattern} { background: ${section.color._pattern}; background-size: 75%; }`);
+    }
+
+    if(section.color.backgroundImage) {
+      rules.push(`
+        .bgimg-${section.color.backgroundImage} {
+          background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/images/openSourceImages2017/${section.color.backgroundImage}.jpg) !important;
+          background-size: cover !important;
+          background-position: center center !important;
+        }
+      `);
+    }
+  })
+
+  page.CSSRules = rules.join('\n');
 }

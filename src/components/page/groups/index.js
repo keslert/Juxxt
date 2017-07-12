@@ -30,35 +30,44 @@ const StyledGroup = styled.div`
       }
     `}
   `};
-
-
 `
 
-const Group = (props) => {
-  const { 
-    name, 
-    uid,
-    isSelected,
-    setSelected,
-    isHovered, 
-    onHoverableMouseEnter, 
-    onHoverableMouseLeave
-  } = props;
-  const GroupComponent = groups[name];
+class Group extends React.PureComponent {
   
-  return (
-    <StyledGroup
-      selected={isSelected}
-      hovered={isHovered} 
-      onClick={(e) => { e.stopPropagation(); setSelected(props);}}
-      onMouseEnter={() => onHoverableMouseEnter(uid)}
-      onMouseLeave={() => onHoverableMouseLeave(uid)}
-      className="w-100P"
-      >
-      <GroupComponent {...props} />
-    </StyledGroup>
-  )
+  render() {
+    const { 
+      name, 
+      uid,
+      isSelected,
+      setSelected,
+      isHovered, 
+      onHoverableMouseEnter, 
+      onHoverableMouseLeave
+    } = this.props;
+    
+    const GroupComponent = groups[name];
+    if(this.context.preview) {
+      return <GroupComponent {...this.props} />;
+    }
+    
+    return (
+      <StyledGroup
+        selected={isSelected}
+        hovered={isHovered} 
+        onClick={(e) => { e.stopPropagation(); setSelected(this.props);}}
+        onMouseEnter={() => onHoverableMouseEnter(uid)}
+        onMouseLeave={() => onHoverableMouseLeave(uid)}
+        className="w-100P"
+        >
+        <GroupComponent {...this.props} />
+      </StyledGroup>
+    )
+  }
 }
+
+Group.contextTypes = {
+  preview: React.PropTypes.bool.isRequired,
+};
 
 const mapStateToProps = (state, props) => ({
   isSelected: state.ui.selected.uid === props.uid,

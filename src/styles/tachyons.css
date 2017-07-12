@@ -387,6 +387,8 @@ img { max-width: 100%; }
 .ph5 { padding-left: 4em; padding-right: 4em; }
 .ph6 { padding-left: 8em; padding-right: 8em; }
 .ph7 { padding-left: 16em; padding-right: 16em; }
+.ph8 { padding-left: 32em; padding-right: 32em; }
+
 
 
 
@@ -644,8 +646,29 @@ img { max-width: 100%; }
   background-position: center center !important;
 }*/
 
-.vmiddle { vertical-align:middle; }
 .fadedtext {
   color:rgba(255,255,255,0.3);
-  text-align:center;
+  text-align: center;
+}
+
+.grow {
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 0.25s ease-out;
+}
+
+.grow:hover,
+.grow:focus {
+  transform: scale(1.05);
+}
+
+.dim {
+  opacity: 1;
+  transition: opacity .15s ease-in;
+}
+.dim:hover,
+.dim:focus {
+  opacity: .5;
+  transition: opacity .15s ease-in;
 }

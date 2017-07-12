@@ -54,28 +54,18 @@ export default Header1_2;
 
 export const blueprint = {
   type: 'header',
-  inherits: ['HeaderSection'],
-  style: {
-    paddingVertical: {
-      _default: 6,
-      options: [4,5,6,7,8],
-    }
-  },
+  inherits: ['HeaderSection', 'GutterSection'],
+  style: {},
   color: { background: 'vibrant' },
   groups: {
     tp: {
-      options: ['HeadingSubheadingButton','HeadingParagraphButton','HeadingParagraph2Buttons','HeadingSubheading2Buttons'],
+      options: ['HeadingSubheadingButton', 'HeadingParagraphButton','HeadingParagraph2Buttons', 'HeadingSubheading2Buttons'],
     },
     media: {
       options: ['BlockImage']
     }
   },
-  variants: [
-  {
-    order: {
-      options:[1,3],
-    }
-  }
-
-  ]
+  variants: [{
+    order: { options: [1,3] }
+  }]
 }

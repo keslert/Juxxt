@@ -4,7 +4,7 @@ import Box from '../../common/box';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 
-const Basic1_2 = ({
+const BasicWide2_3 = ({
   groups,
   variant,
   style,
@@ -15,18 +15,33 @@ const Basic1_2 = ({
     ...style,
   }
 
+  const tpBox = {
+    display: "flex",
+    width: '66P',
+    order: variant.order,
+    flexWrap: "flex",
+   
+  }
+
+  const imageBox = {
+    width: '33P',
+    order: 2,
+  }
+
   const wrapStyle = {
-    marginHorizontal: `-${style.gutter}`,
     display: "flex",
     flexWrap: "wrap",
+    
   }
 
   const innerBoxStyle = {
-    paddingHorizontal: style.gutter,
-    width: '50P',
+    //paddingHorizontal: style.gutter,
+    width: '100P',
+    //paddingHorizontal: 3,
     display: "flex",
-    justify: "center",
+    justify: 'center',
     align: "center",
+    
   }
 
   const colorClassNames = convertColorToAtomic(color);
@@ -34,32 +49,30 @@ const Basic1_2 = ({
 
   return (
     <Box className={colorClassNames}>
-      <Box className={convertStyleToAtomic(containerStyle)}>
-        <Box className={convertStyleToAtomic(wrapStyle)}>
-          <Box className={innerClassNames + ' order-' + variant.order}>
-            <Group {...groups.tp} />
-          </Box>
-          <Box className={innerClassNames + ' order-2'}>
-            <Group {...groups.media} />
-          </Box>
+      <Box className={convertStyleToAtomic(wrapStyle)}>
+        <Box className={convertStyleToAtomic(imageBox)}>
+          <Group {...groups.image} />
+        </Box>
+        <Box className={convertStyleToAtomic(tpBox) + " mauto"}>
+          <Group {...groups.tp} />
         </Box>
       </Box>
     </Box>
   )
 }
-export default Basic1_2;
+export default BasicWide2_3;
 
 export const blueprint = {
   type: 'basic',
-  inherits: ['BasicSection', 'GutterSection'],
+  inherits: ['BasicSection'],
   style: {},
   color: {},
   groups: {
     tp: {
       options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','HeadingParagraphButton', 'IconHeadingParagraph'],
     },
-    media: {
-      options: ['BlockImage'],
+    image: {
+      options: ['CoverImage'],
     },
   },
   variants: [{

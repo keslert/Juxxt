@@ -2,7 +2,7 @@ import sectionBlueprints from '../../../components/page/sections/_blueprints';
 import blueprints from '../../../components/page/groups/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
-import { filter, range, uniqBy, flatMap, mapValues, cloneDeep } from 'lodash';
+import { filter, range, uniqBy, flatMap, mapValues, cloneDeep, forEach } from 'lodash';
 import { getCombinations } from '../../utils';
 import { styles } from '../style/group/shared-styles';
 import { filterStyle } from '../style/utils';
@@ -45,40 +45,36 @@ export function generateGroupVariantAlternatives(group, skeleton) {
   return skeletons;
 }
 
+const HEADING_ELEMENTS = ['BasicIcon', 'BasicHeading', 'BasicSubheading'];
+const SECONDARY_ELEMENTS = ['BasicButton', 'BasicLink'];
+
+function colorElements(element, colorPair, page) {
+  const color = (HEADING_ELEMENTS.indexOf(element.name) > -1) ? colorPair[0] : colorPair[1];
+  if (element.color.background) {
+    element.color.background = color
+  }
+  if(element.color.text) {
+    element.color.text = element.color.background ? page.colorBlueprint.bgBlueprints[element.color.background].texts[0] : color;
+  }
+  if (element.color.icon) {
+    element.color.icon = element.color.text;
+  }
+}
+
 export function generateGroupColorAlternatives(section, element, page) {
-  const _bg = section.color.background;
   const sections = [];
+  const ELEMENTS_TO_COLOR = []
+  const _bg = section.color.background;
   let colors = Object.keys(page.colorBlueprint.bgBlueprints)
   colors = colors.filter(item => item !== page.colorBlueprint.lightGray)
   let a = getSortedByMostVibrant(colors,_bg)
-  const vibPairs = [];
-
   for(let i = 0; i < 3; i++) {
     for (let j = 0; j< 3; j++) {
-      vibPairs.push([a[i],a[j]]);
+      const _section = cloneDeep(section);
+      forEach(_section.elements, element=> colorElements(element,[a[i],a[j]],page));
+      sections.push(_section);
     }
   }
-
-  vibPairs.forEach( function(pair) {
-     const _section = cloneDeep(section);
-     for(let i=0; i<Object.keys(_section.groups).length; i++) {
-      const _index = Object.keys(_section.groups)[i];
-      for(let j=0;j<Object.keys(_section.groups[_index].elements).length; j++) {
-        let _element = _section.groups[_index].elements[Object.keys(_section.groups[_index].elements)[j]];
-        if(_element.name == "BasicHeading") {
-          _element.color.text = pair[0];
-        } else if(_element.name == "BasicButton") {
-          _element.color.background = pair[1];
-          _element.color.text = page.colorBlueprint.bgBlueprints[pair[1]].texts[0]
-          _element.color.borderColor = pair[1];
-        } else if (_element.name == "BasicLink") {
-          _element.color.text = pair[1];
-        }
-      }
-     }
-     sections.push(_section);
-   });
-
   return sections;
 }
 
@@ -86,7 +82,7 @@ export function generateGroupContentAlternatives(section, group, contentStore) {
   const store = filter(contentStore, content => content.groupId !== group.id);
 
   const sections = range(0, 6).map(() => cloneDeep(section));
-  sections.forEach(s => assignContent(s, store));
+  forEach(sections, s => assignContent(s, store));
   
   return sections;
 }

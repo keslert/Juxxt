@@ -20,6 +20,7 @@ import { blueprint as HeadingSubheading2Buttons } from './heading-subheading-2bu
 // import * as SmallHeadingLinkList from './small-heading-link-list';
 // import * as Navigation from './navigation';
 import { blueprint as BlockImage } from './singles/block-image';
+import { blueprint as CoverImage } from './singles/cover-image';
 // import * as Device from './device';
 import { blueprint as InputButton } from './input-button';
 import { blueprint as InputInputButton } from './input-input-button';
@@ -59,6 +60,7 @@ export default {
   // },
 
   BlockImage,
+  CoverImage,
   
   // Device: {
   //   ...Device,
