@@ -27,6 +27,8 @@ import {
 import { buildSectionFromSkeleton } from '../builder/section';
 import { extractSkeletonFromSection } from '../skeletons/utils';
 
+import { generatePageCSSRules } from '../index';
+
 import { assignContent } from '../content';
 import { assignStyles } from '../style';
 import { assignColor } from '../color';
@@ -46,13 +48,20 @@ export function generateAlternatives(page, modify, selected) {
   } else if(modify.style) {
     sections = generateStyleAlternatives(page, modify.style, selected);
   } else if(modify.page) {
-    return generatePageAlternatives(page, modify.page);
+    const pages = generatePageAlternatives(page, modify.page);
+    pages.forEach(generatePageCSSRules);
+    return pages;
   }
 
-  return sections.map(section => ({
-    ...page,
-    sections: [section],
-  }))
+
+  const pages = sections.map(section => {
+    const _page = {...page, sections: [section]};
+    _page.isMaster = false;
+    generatePageCSSRules(_page);
+    return _page;
+  })
+
+  return pages;
 }
 
 function generateComponentAlternatives(page, modify, selected) {

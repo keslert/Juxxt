@@ -81,7 +81,7 @@ class App extends React.Component {
     if(preview) {
       return (
         <StyledColumn width={100}>
-          <Page {...master} />
+          <Page {...master} master={true} preview={true} />
         </StyledColumn>
       )
     }
@@ -92,7 +92,7 @@ class App extends React.Component {
         <StyledWindow>
           <SplitPane minSize={200} defaultSize='55%' split="vertical">
             <StyledColumn>
-              <Page {...master} master={true} sectionsDraggable />
+              <Page {...master} master={true} preview={false} />
             </StyledColumn>
             <Alternatives />
           </SplitPane>

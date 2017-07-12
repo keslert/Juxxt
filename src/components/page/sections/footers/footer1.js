@@ -11,13 +11,12 @@ class Footer1 extends React.PureComponent {
       display: "flex",
       align: "center",
       justify: "center",
-      height: 60,
     }
 
     const styleClassNames = convertStyleToAtomic(boxStyle);
     const colorClassNames = convertColorToAtomic(color);
     return (
-      <div className={ colorClassNames + ' pl6 pr6 vmiddle pt5 pb5 Footer1'}>
+      <div className={ colorClassNames + ' pl6 pr6 pt5 pb5 Footer1'}>
         <div className={styleClassNames }>
           <div className={"order-" + variant.order[0]}>
             <Group {...groups.text} />
@@ -41,7 +40,7 @@ export const blueprint = {
   inherits: [],
   style: {
   },
-  color: { background: 'vibrant' },
+  color: {},
   groups: {
     text: {
       options: ['ParagraphOnly']

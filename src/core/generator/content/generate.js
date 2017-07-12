@@ -9,6 +9,9 @@ export function generateContent(element) {
       return getHeaderContent();
     case 'BasicParagraph':
       return {text: LoremIpsum({count: random(2, 4), units: 'sentences'})};
+
+    case 'BasicImage':
+      return getBlockImageContent(element);
     case 'BasicButton':
     case 'SmallButton':
       return getButtonContent();
@@ -167,4 +170,17 @@ function getSmallHeadingContent(props) {
     units: 'words',
   });
   return { text };
+}
+
+function getBlockImageContent(element) {
+  if(element.group.section.type === 'header') {
+    return randomItem([
+    {src: 'http://images.clipartpanda.com/nature-clip-art-floral.png'},
+    {src: 'https://1r65612jvqxn8fcup46pve6b-wpengine.netdna-ssl.com/wp-content/uploads/2016/04/buildings-community.png'},
+    {src: 'http://wibicom.com/Images/icon_city3.png'},
+    {src: 'https://xebialabs.com/assets/files/devops-forum/nyc-icon.png'},
+    {src: 'http://wori88.com/images/transparent-background-business-man-clipart-14.png'},
+    {src: 'https://d1rkab7tlqy5f1.cloudfront.net/_processed_/7/d/csm_IE2_e25f814984.png'}]);
+  }
+  return getImageContent();
 }

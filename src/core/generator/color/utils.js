@@ -23,6 +23,10 @@ export function getSortedByMostVibrant(colors,background="#ffffff") {
   return sortBy(colors, color => -getVibrancy(color,background));
 }
 
+export function getSortedByMostBrightness(colors) {
+  return sortBy(colors, color=> -tinycolor(color).getBrightness());
+}
+
 export function getMostVibrantColor(colors) {
   return getSortedByMostVibrant(colors)[0];
 }

@@ -29,3 +29,7 @@ export function getSidebarOpen(state) {
 export function getShowPreview(state) {
   return getUI(state).preview;
 }
+
+export function getHovered(state, props) {
+  return getUI(state).hovered;
+}

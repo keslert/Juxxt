@@ -12,7 +12,6 @@ class TalkingPoint extends React.Component {
       display: "dib",
       align: "start",
       justify: "center",
-      height: 60,
     }
     const { 
       style,
