@@ -4,6 +4,8 @@ import { absDiff } from '../../utils';
 import tinycolor from 'tinycolor2';
 import geopattern from 'geopattern';
 
+
+
 export function buildPageColorBlueprint(colors) {
   const _colors = uniq([...colors, '#ffffff'])
   const primary = getMostVibrantColor(_colors);

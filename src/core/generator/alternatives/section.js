@@ -22,7 +22,7 @@ import { colorElement } from '../color/element';
 import { styles } from '../style/section/shared-styles';
 import { filterStyle } from '../style/utils';
 import { generateGroupVariantAlternatives, generateGroupComponentAlternatives } from './group';
-import { getSortedByPreference } from '../color/utils';
+import { getSortedByPreference, getSortedByMostBrightness } from '../color/utils';
 import tinycolor from 'tinycolor2';
 
 export function generateSectionComponentAlternatives(section, modify, masterSkeleton) {
@@ -109,9 +109,10 @@ function generateSectionColorImagesBackground(section, page) {
   const sections = [];
   for(let i =0; i< PICTURES.length ; i++) {
     const _section = cloneDeep(section);
+    const _brightArr = getSortedByMostBrightness(Object.keys(page.colorBlueprint.bgBlueprints));
     _section.color = {
       text: '#ffffff',
-      background: section.color.background,
+      background: _brightArr[_brightArr.length - 1],
       backgroundImage: PICTURES[i].split(".")[0],
     }
     sections.push(_section)

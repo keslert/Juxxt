@@ -1,7 +1,7 @@
 import * as blueprints from '../../../components/page/elements/_blueprints';
 import { find, filter, flatMap, some, isFunction } from 'lodash';
 import { getMode } from '../../utils';
-import { getMostVibrantColor, getTint } from './utils';
+import { getMostVibrantColor, getTint, getSortedByMostBrightness } from './utils';
 
 export function colorElement(element, page) {
 
@@ -14,17 +14,18 @@ export function colorElement(element, page) {
     e => e.group.name === element.group.name,
     e => true,
   ]
-  
   let background = getGroupOrSectionBackground(element,page);
 
   if(blueprint.color.background) {
     const valid = filter(elements, e => 
       e.name === element.name && 
       e.color && e.color.background && 
-      getGroupOrSectionBackground(e,page) === background
+      getGroupOrSectionBackground(e,page) === background &&
+      !hasImageBackground(element)
     );
     
     const fn = find(rules, fn => some(valid, fn));
+
     if(isFunction(fn)) {
       const matches = filter(valid, fn);
       element.color.background = getMode(matches.map(e => e.color.background));
@@ -50,11 +51,16 @@ export function colorElement(element, page) {
       element.color.text = getMode(matches.map(e => e.color.text));
     } else {
       const colorBlueprint = page.colorBlueprint.bgBlueprints[background];
-      // TODO: If the element doens't have a background, and the group doesn't have a background 
-      // and the section background is an image, the text is white.
-      element.color.text = getPreferredColor(colorBlueprint.texts, blueprint.color.text);
+      if(element.color.background == undefined && element.group.section.color.backgroundImage != null && element.group.color.background == undefined)
+        element.color.text = "#ffffff";
+      else
+        element.color.text = getPreferredColor(colorBlueprint.texts, blueprint.color.text);
     }
   }
+}
+
+function hasImageBackground(element) {
+  return (element.group.section.color.backgroundImage != null);
 }
 
 function getGroupOrSectionBackground(element, page) {
