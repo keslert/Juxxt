@@ -20,7 +20,10 @@ class CallToAction extends React.PureComponent {
     return (
       <div className={colorClassNames + ' call_action'}>
         <div className={styleClassNames}>
-          <Group {...groups.item} />
+          <Group {...groups.tp} />
+          <div>
+            <Group {...groups.input} />
+          </div>
         </div>
       </div>
     )

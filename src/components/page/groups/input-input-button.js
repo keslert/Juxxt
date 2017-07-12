@@ -1,7 +1,6 @@
 import React from 'react';
 import Element from '../elements';
-import { BasicButton } from '../elements/_blueprints';
-import { BasicInput } from "../elements/_blueprints";
+import { BasicButton, BasicInput } from '../elements/_blueprints';
 
 
 
@@ -12,7 +11,15 @@ class InputInputButton extends React.Component {
       //put the input here before the button
       //put second input here
       <div>
-        <Element {...elements.button} />
+        <div>
+          <Element {...elements.input} /> 
+        </div>
+        <div>
+          <Element {...elements.input} /> 
+        </div> 
+        <div>
+          <Element {...elements.button} />
+        </div>
       </div>
     )
   }

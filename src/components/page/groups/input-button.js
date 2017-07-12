@@ -1,23 +1,24 @@
 import React from 'react';
 import Element from '../elements';
-import { BasicButton } from '../elements/_blueprints';
-import { BasicInput } from "../elements/_blueprints";
-
+import { BasicButton, BasicInput } from '../elements/_blueprints';
 
 class InputButton extends React.Component {
   render() {
     const { elements } = this.props;
     return (
-      //put input here
       <div>
-        <Element {...elements.input} /> 
-        <Element {...elements.button} />
+        <div>
+          <Element {...elements.input} />
+        </div>
+        <div> 
+          <Element {...elements.button} />
+        </div>
       </div>
     )
   }
 }
 
-export default InputButton
+export default InputButton;
 
 export const blueprint = {
   inherits: [],
