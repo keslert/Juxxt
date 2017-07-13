@@ -10,7 +10,6 @@ class ButtonList extends React.Component {
 
     const wrapClassNames = convertStyleToAtomic({
       ...style,
-      display: 'flex',
       marginHorizontal: -style.gutter,
     });
 
@@ -21,7 +20,7 @@ class ButtonList extends React.Component {
     return (
       <div className={wrapClassNames}>
         {[1,2].map((_, i) => (
-          <div className={boxClassNames} key={i}>
+          <div className={boxClassNames + ' dib'} key={i}>
             <Element {...elements.buttons} />
           </div>
         ))}

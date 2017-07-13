@@ -185,7 +185,7 @@ function getSmallHeadingContent(props) {
 function getBlockImageContent(element) {
   if(element.section.type === 'header') {
     return randomItem([
-    {src: 'http://images.clipartpanda.com/nature-clip-art-floral.png'},
+    // {src: 'http://images.clipartpanda.com/nature-clip-art-floral.png'},
     {src: 'https://1r65612jvqxn8fcup46pve6b-wpengine.netdna-ssl.com/wp-content/uploads/2016/04/buildings-community.png'},
     {src: 'http://wibicom.com/Images/icon_city3.png'},
     {src: 'https://xebialabs.com/assets/files/devops-forum/nyc-icon.png'},

@@ -8,12 +8,7 @@ import { convertStyleToAtomic } from '../../../../core/generator/style/conversio
 class TalkingPoint extends React.Component {
 
   render() {
-     const boxStyle = {
-      ...style,
-      display: "dib",
-      align: "start",
-      justify: "center",
-    }
+
     const { 
       style,
       align,
@@ -23,36 +18,27 @@ class TalkingPoint extends React.Component {
         subheading,
         paragraph,
         links,
-        button,
-        secondaryButton,
       },
       groups: {
         buttonList,
       }
     } = this.props;
 
-    const _style = {
+    const classNames = convertStyleToAtomic({
       ...style,
       textAlign: align,
-    }
-
-
-    const styleClassNames = convertStyleToAtomic(boxStyle);
+    });
  
 
 
     return (
-      <Box className={convertStyleToAtomic(_style)}>
+      <Box className={classNames}>
         {kicker && <Element {...kicker} />}
         {heading && <div><Element {...heading} /></div>}
         {subheading && <div><Element {...subheading} /></div>}
         {paragraph && <div><Element {...paragraph} /></div>}
         {links && <div><Element {...links}/></div>}
-        <div className={ styleClassNames }>
-          {button && <div><Element {...button}/></div>}
-          {secondaryButton && <div className="ml3"><Element {...secondaryButton}/></div>}
-        </div>
-
+        
         {buttonList && <div><Group {...buttonList} /></div>}
       </Box>
     )
