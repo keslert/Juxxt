@@ -62,17 +62,19 @@ function colorElements(element, colorPair, page) {
 
 
 
-export function generateGroupColorAlternatives(section, element, page, selected) {
+export function generateGroupColorAlternatives(section, modify, page, selected) {
   if(Object.keys(selected.elements).length <= 1)
     return []; //TODO: Filters on images
+  
   const sections = [];
   let colors = Object.keys(page.colorBlueprint.bgBlueprints)
   colors = colors.filter(item => item !== page.colorBlueprint.lightGray)
-  let a = getSortedByMostVibrant(colors,section.color.background)
+  colors = getSortedByMostVibrant(colors,section.color.background)
   for(let i = 0; i < 3; i++) {
     for (let j = 0; j< 3; j++) {
       const _section = cloneDeep(section);
-      forEach(_section.groups[selected.sectionKey].elements , element => colorElements(element,[a[i],a[j]],page));
+      const group = findItemInSection(selected, _section);
+      forEach(group.elements, e => colorElements(e, [colors[i], colors[j]], page));
       sections.push(_section);
     }
   }

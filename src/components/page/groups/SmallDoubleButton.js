@@ -7,10 +7,8 @@ class SmallDoubleButton extends React.Component {
   render() {
     const { elements } = this.props;
     return (
-    	<div className="dib">
-        <div className="mr3">
-          <Element {...elements.button} />
-        </div>
+    	<div className="flex">
+        <Element {...elements.button} />
         <Element {...elements.secondaryButton} />
       </div>
     )

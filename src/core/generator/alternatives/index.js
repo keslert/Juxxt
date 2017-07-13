@@ -106,7 +106,7 @@ function generateVariantAlternatives(page, selected) {
     assignColor(_section, page);
     assignContent(_section, section.contentStore);
     assignStyles(_section, page);
-    _section.changes = skeleton.changes;
+    _section.changes = _section.variant;
     
     return _section;
   })

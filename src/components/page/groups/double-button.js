@@ -1,15 +1,32 @@
 import React from 'react';
 import { BasicButton } from '../elements/_blueprints';
 import Element from '../elements';
-
+import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
+import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 
 class DoubleButton extends React.Component {
   render() {
-    const { elements } = this.props;
+    const { style, elements } = this.props;
+
+    const wrapClassNames = convertStyleToAtomic({
+      ...style,
+      display: 'flex',
+      marginHorizontal: -style.gutter,
+    });
+
+    const boxClassNames = convertStyleToAtomic({
+      marginHorizontal: style.gutter,
+    });
+
+
     return (
-    	<div>
-        <Element {...elements.button} />
-        <Element {...elements.secondaryButton} />
+      <div className={wrapClassNames}>
+        <div className={boxClassNames}>
+          <Element {...elements.button} />
+        </div>
+        <div className={boxClassNames}>
+          <Element {...elements.secondaryButton} />
+        </div>
       </div>
     )
   }
@@ -18,7 +35,7 @@ class DoubleButton extends React.Component {
 export default DoubleButton;
 
 export const blueprint = {
-  inherits: [],
+  inherits: ['ListGutter'],
   style: {},
   color: {},
   elements: {

@@ -48,7 +48,7 @@ export const styles = {
   },
   [names.Button]: {
     minWidth: {
-      _default: 'auto',
+      _default: 1,
       options: ['auto', 1, 2, 3, 4],
     },
     borderRadius: {
