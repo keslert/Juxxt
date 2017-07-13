@@ -1,32 +1,32 @@
 import React from 'react';
+import Element from '../../elements';
 import Group from '../../groups';
 import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
 
 class Navbar1 extends React.PureComponent {
   render () {
-    const { groups, style, color } = this.props;
-    const boxStyle = {
+    const { elements, groups, style, color } = this.props;
+    
+    const styleClassNames = convertStyleToAtomic({
       ...style,
       display: "flex",
       align: "center",
-      justify: "center",
-      height: '60px',
-    }
-    const styleClassNames = convertStyleToAtomic(boxStyle);
+    });
+
     const colorClassNames = convertColorToAtomic(color);
 
     return (
       <div className={ colorClassNames + ' Navbar1'}>
         <div className={styleClassNames}>
           <div>
-            <Group {...groups.logo} />
+            <Element {...elements.logo} />
           </div>
-          <div className="flex-auto tr">
+          <div className="flex-1">
             <Group {...groups.links} />
           </div>
           <div>
-            <Group {...groups.button} />
+            <Group {...groups.buttons} />
           </div>
         </div>
       </div>
@@ -41,11 +41,13 @@ export const blueprint = {
   inherits: ['NavigationSection'],
   style: {},
   color: {},
-  groups: {
+  elements: {
     logo: {
-      options: ['Logo']
+      name: 'LogoImage',
     },
-    button: {
+  },
+  groups: {
+    buttons: {
       options: [
         { name: 'ButtonList', overrides: {elements: { buttons: { name: 'SmallButton' }}}},
       ],

@@ -14,9 +14,6 @@ const StyledPage = styled.div`
       &:hover {
         transform: scale(1.01);
       }
-      .section {
-        pointer-events: none;
-      }
     `};
     ${props.extraRules};
   `};

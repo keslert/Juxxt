@@ -50,6 +50,10 @@ export const styles = {
     paddingVertical: {
       _default: 2,
       options: [1,2,3],
+    },
+    height: {
+      _default: 60,
+      options: ['inherit', 60, 80],
     }
   },
   [names.GutterSection]: {

@@ -7,20 +7,27 @@ class HorizontalList extends React.Component {
   render() {
     const { style, elements } = this.props;
 
-    const innerStyles = {
+    const wrapClassNames = convertStyleToAtomic({
+      ...style,
+      display: 'flex',
+      flex: 1,
+    })
+
+
+    const boxClassNames = convertStyleToAtomic({
       marginHorizontal: style.gutter,
-    }
-    const innerClassNames = convertStyleToAtomic(innerStyles)
+      display: 'inline-block',
+    })
 
     return (
-      <div className={convertStyleToAtomic(style) + " flex flex-1"}>
-        <div className={innerClassNames}>
+      <div className={wrapClassNames}>
+        <div className={boxClassNames}>
           <Element {...elements.links} />
         </div>
-        <div className={innerClassNames}>
+        <div className={boxClassNames}>
           <Element {...elements.links} />
         </div>
-        <div className={innerClassNames}>
+        <div className={boxClassNames}>
           <Element {...elements.links} />
         </div>
       </div>
@@ -30,12 +37,8 @@ class HorizontalList extends React.Component {
 export default HorizontalList;
 
 export const blueprint = {
-  inherits: [],
+  inherits: ['ListGutter'],
   style: {
-    gutter: {
-      _default: 2,
-      options: [0,1,2,3,4],
-    },
     marginHorizontal: {
       _default: 2,
       options: [0,1,2,3,4],
