@@ -46,7 +46,9 @@ export const blueprint = {
       options: ['Logo']
     },
     button: {
-      options: ['ButtonList'],
+      options: [
+        { name: 'ButtonList', overrides: {elements: { buttons: { name: 'SmallButton' }}}},
+      ],
     },
     links: {
       options: ['HorizontalList']

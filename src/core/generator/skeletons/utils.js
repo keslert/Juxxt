@@ -1,5 +1,8 @@
-import { omit, mapValues, map, includes, forEach, sortBy, isEmpty, pick } from 'lodash';
+import { omit, mapValues, map, includes, forEach, sortBy, isEmpty, pick, isString, extend } from 'lodash';
 import { randomItem } from '../../utils';
+
+import { generateGroupSkeleton } from './group';
+import { generateElementSkeleton } from './element';
 
 export function getClosestVariant(variantToMatch={}, variants) {
   if(isEmpty(variants)) {
@@ -34,4 +37,23 @@ export function extractSkeletonFromItem(item) {
   }
   
   return skeleton;
+}
+
+export function generateItemSkeleton(name, blueprint, variant, overrides) {
+  const _blueprint = extend({}, blueprint, overrides);
+
+  return {
+    name,
+    variant: getClosestVariant(variant, _blueprint.variants),
+    elements: mapValues(_blueprint.elements || {}, element => (
+      generateElementSkeleton(element.name)
+    )),
+    groups: mapValues(_blueprint.groups || {}, ({options}) => {
+      const option = randomItem(options);
+      if(isString(option)) {
+        return generateGroupSkeleton(option)
+      }
+      return generateGroupSkeleton(option.name, undefined, option.overrides);
+    }),
+  }
 }
