@@ -15,6 +15,7 @@ const Heading = ({
       style={style}
       color={color}
       elements={elements}
+      groups={{}}
       align={variant.align} />
   )
 }

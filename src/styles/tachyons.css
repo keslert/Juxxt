@@ -580,9 +580,15 @@ img { max-width: 100%; }
 .fs9 { font-size: 7.0em; }
 .fs10 { font-size: 9.0em; }
 
-.mw-900px { max-width: 900px; }
-.mw-1024px { max-width: 1024px; }
-.mw-1170px { max-width: 1170px; }
+.mxw-900 { max-width: 900px; }
+.mxw-1024 { max-width: 1024px; }
+.mxw-1170 { max-width: 1170px; }
+
+.mnw-auto { min-width: auto; }
+.mnw-1 { min-width: 8em; }
+.mnw-2 { min-width: 10em; }
+.mnw-3 { min-width: 12em; }
+.mnw-4 { min-width: 14em; }
 
 
 .tl { text-align: left; }
@@ -619,7 +625,7 @@ img { max-width: 100%; }
 .dn { display: none; }
 .di { display: inline; }
 .db { display: block; }
-.dib { display: -webkit-inline-box; }
+.dib { display: inline-block; }
 .dit { display: inline-table; }
 .dt { display: table; }
 .dtc { display: table-cell; }

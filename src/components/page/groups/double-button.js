@@ -7,10 +7,8 @@ class DoubleButton extends React.Component {
   render() {
     const { elements } = this.props;
     return (
-    	<div className="dib">
-        <div className="mr3">
-          <Element {...elements.button} />
-        </div>
+    	<div>
+        <Element {...elements.button} />
         <Element {...elements.secondaryButton} />
       </div>
     )

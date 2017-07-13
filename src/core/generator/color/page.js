@@ -21,7 +21,7 @@ export function buildPageColorBlueprint(colors) {
   const backgrounds = map(blueprints, 'color');
 
   forEach(blueprints, blueprint => {
-    blueprint.solids = getReadableColors(backgrounds, blueprint.color, 1.5);
+    blueprint.solids = getReadableColors(backgrounds, blueprint.color, 1.4);
     blueprint.gradients = getGradients(blueprint.color, colors);
     blueprint.patterns = getPatterns(blueprint.color);
   });

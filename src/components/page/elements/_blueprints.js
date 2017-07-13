@@ -234,6 +234,10 @@ export const BasicButton = {
       _default: 2,
       options: range(2, 3),
     },
+    minWidth: {
+      _default: 2,
+      options: ['auto',1,2,3,4],
+    },
   },
 };
 

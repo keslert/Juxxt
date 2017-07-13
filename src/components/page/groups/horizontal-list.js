@@ -13,7 +13,7 @@ class HorizontalList extends React.Component {
     const innerClassNames = convertStyleToAtomic(innerStyles)
 
     return (
-      <div className={convertStyleToAtomic(style) + " dib"}>
+      <div className={convertStyleToAtomic(style) + " flex flex-1"}>
         <div className={innerClassNames}>
           <Element {...elements.links} />
         </div>
