@@ -82,7 +82,7 @@ export function generateGroupColorAlternatives(section, modify, page, selected) 
 }
 
 export function generateGroupContentAlternatives(section, group, contentStore) {
-  const store = filter(contentStore, content => !includes(content.parentIds, group.id));
+  const store = filter(contentStore, content => !includes(content.parentIds, group.fullId));
 
   const sections = range(0, 6).map(() => cloneDeep(section));
   forEach(sections, s => assignContent(s, store));

@@ -9,8 +9,8 @@ import { colorElement } from './color/element';
 import { buildPageColorBlueprint } from './color/page';
 import { randomItem, replaceWhiteSpace } from '../utils';
 
-import { getSection } from './generator-utils';
-import { range, reduce, uniqueId, forEach, clone, sortBy, map, fromPairs, toPairs, max, some, filter } from 'lodash';
+import { getSection, getParents } from './generator-utils';
+import { range, reduce, uniqueId, forEach, clone, sortBy, map, max, some, filter, cloneDeep } from 'lodash';
 
 const NUM_SECTIONS = 7;
 export function init() {
@@ -81,7 +81,7 @@ export function init() {
 
 export function overrideElementContent(element, content, page) {
   const store = element.section.contentStore.map(item => 
-    item.elementId !== element.id ? item : {...item, ...content}
+    item.elementId !== element.contentId ? item : {...item, ...content}
   );
 
   const skeleton = extractSkeletonFromItem(element.section);
@@ -91,6 +91,42 @@ export function overrideElementContent(element, content, page) {
   assignColor(section, page);
 
   return section;
+}
+
+export function duplicateSection(section, page) {
+  const _section = cloneDeep(section);
+
+
+  const skeleton = extractSkeletonFromItem(section);
+  skeleton.id = 's_' + uniqueId();
+  const duplicated = buildSectionFromSkeleton(skeleton);
+
+  _section.id = duplicated.id;
+  _section.fullId = duplicated.fullId;
+  _section.contentId = duplicated.contentId;
+  _section.colorId = duplicated.colorId;
+  ['_elements', '_groups'].forEach(key => _section[key].forEach((item, i) => {
+    item.id = duplicated[key][i].id;
+    item.fullId = duplicated[key][i].fullId;
+    item.contentId = duplicated[key][i].contentId;
+    item.colorId = duplicated[key][i].colorId;
+  }))
+
+  const store = _section._elements.map(e => ({
+    ...e.content,
+    elementId: e.contentId,
+    elementName: e.name,
+    elementIs: e.is,
+    parentIds: map(getParents(e), 'fullId'),
+  }));
+
+  const _page = {...page, sections: [_section]};
+
+  assignContent(duplicated, store);
+  assignStyles(duplicated, _page);
+  assignColor(duplicated, _page);
+
+  return duplicated;
 }
 
 export function generatePageCSSRules(page) {

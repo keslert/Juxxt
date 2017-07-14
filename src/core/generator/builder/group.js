@@ -1,5 +1,5 @@
 import blueprints from '../../../components/page/groups/_blueprints';
-import { buildElementFromSkeleton } from './element';
+import { buildItemFromSkeleton } from './builder-utils';
 
 import { mapValues, pickBy, uniqueId } from 'lodash';
 
@@ -11,16 +11,10 @@ export function buildGroupFromSkeleton(skeleton) {
     name: skeleton.name,
     variant: skeleton.variant,
   }
+  group.contentId = group.id;
+  group.colorId = group.id;
 
   const blueprint = blueprints[skeleton.name];
-
-  group.elements = mapValues(blueprint.elements || {}, (_, key) =>
-    buildElementFromSkeleton(skeleton.elements[key])
-  );
-
-  group.groups = mapValues(blueprint.groups || {}, (_, key) => 
-    buildGroupFromSkeleton(skeleton.groups[key])
-  )
-
+  buildItemFromSkeleton(group, blueprint, skeleton);
   return group;
 };

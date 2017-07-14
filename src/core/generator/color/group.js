@@ -9,7 +9,7 @@ export function colorGroup(group, sections) {
   const groups = flatMap(validSections, s => values(s.groups));
 
   const rules = [
-    g => g.id === group.id, // Exact Match
+    g => g.fullId === group.fullId, // Exact Match
     g => g.section.id === group.section.id, // Name match in same section
     g => true,
   ]

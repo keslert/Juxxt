@@ -2,7 +2,7 @@ import sectionBlueprints from '../../components/page/sections/_blueprints';
 import groupBlueprints from '../../components/page/groups/_blueprints';
 import * as elementBlueprints from '../../components/page/elements/_blueprints';
 
-import { forEach, reduce, filter } from 'lodash';
+import { forEach, reduce, filter, flatMap, mapValues } from 'lodash';
 
 export function getSection(item) {
   return !item.parent ? item : getSection(item.parent);
@@ -26,18 +26,26 @@ export function getBlueprint(item) {
 }
 
 export function linkChildren(item) {
-  forEach(item.elements, (e, key) => (e.parent = item, e.parentKey = key));
-  forEach(item.groups, (g, key) => (g.parent = item, g.parentKey = key, linkChildren(g)));
+  const _elements = mapValues(item.elements, e => [e, ...e.clones]);
+  const _groups = mapValues(item.groups, g => [g, ...g.clones]);
+
+  forEach(_elements, (elements, key) => elements.forEach(e => (e.parent = item, e.parentKey = key)));
+  forEach(_groups, (groups, key) => groups.forEach(g => (g.parent = item, g.parentKey = key, linkChildren(g))));
 }
 
 export function getElementsInItem(item, elements=[]) {
-  forEach(item.elements, e => elements.push(e));
-  forEach(item.groups, g => getElementsInItem(g, elements));
+  const _elements = getNuclearItems(item.elements);
+  const _groups = getNuclearItems(item.groups);
+
+  forEach(_elements, e => elements.push(e));
+  forEach(_groups, g => getElementsInItem(g, elements));
   return elements;
 }
 
 export function getGroupsInItem(item, groups=[]) {
-  forEach(item.groups, g => (groups.push(g), getGroupsInItem(g, groups)));
+  const _groups = getNuclearItems(item.groups);
+
+  forEach(_groups, g => (groups.push(g), getGroupsInItem(g, groups)));
   return groups;
 }
 
@@ -49,4 +57,6 @@ export function findItemInSection(item, section) {
   ), section);
 }
 
-
+function getNuclearItems(items) {
+  return flatMap(items, item => [item, ...item.clones]);
+}

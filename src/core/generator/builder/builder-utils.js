@@ -1,0 +1,33 @@
+import { buildGroupFromSkeleton } from './group';
+import { buildElementFromSkeleton } from './element';
+import { mapValues, range, cloneDeep, forEach } from 'lodash';
+import { getParents } from '../generator-utils';
+
+export function buildItemFromSkeleton(item, blueprint, skeleton) {
+  const children = {
+    elements: buildElementFromSkeleton,
+    groups: buildGroupFromSkeleton,
+  }
+
+  forEach(children, (build, childType) => {
+    item[childType] = mapValues(blueprint[childType], ({clones}, name) => {
+      const item = build(skeleton[childType][name]);
+      item.clones = !clones ? [] : range(0, clones._default).map(i => cloneItem(item, i))
+      return item;
+    });
+  })
+}
+
+function cloneItem(item, index) {
+  const clone = cloneDeep(item);
+  clone.source = item;
+  clone.colorId = clone.colorId + '_' + index;
+  clone.contentId = clone.contentId + '_' + index;
+  return clone;
+}
+
+/*
+// item.groups = mapValues(blueprint.groups || {}, (_, key) => 
+//   buildGroupFromSkeleton(skeleton.groups[key])
+// )
+*/

@@ -21,7 +21,7 @@ export function generateContent(element) {
     case 'BasicIcon':
       return getIconContent();
     case 'LogoImage':
-      return {src: 'http://acmelogos.com/images/logo-8.svg'};
+      return {src: '/images/logo.png'};
     case 'Link':
       return getLinkContent(element);
     case 'Heading':

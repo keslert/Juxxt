@@ -680,3 +680,5 @@ img { max-width: 100%; }
   opacity: .5;
   transition: opacity .15s ease-in;
 }
+
+.pointer { cursor: pointer; }

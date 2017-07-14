@@ -1,21 +1,20 @@
 import { generateContent } from './generate';
 import { getParents } from '../generator-utils'
-import { pick, map } from 'lodash';
+import { pick, map, flatMap } from 'lodash';
+
+const CONTENT_TYPES = ['text', 'src', 'href', 'type'];
 
 export function assignContent(section, contentStore) {
-  const store = contentStore.map(content => ({
-    ...content,
-    matched: false,
-  }))
+  const store = contentStore.map(content => ({...content, matched: false}));
+    
+  section._elements.forEach(e => e.content = null);
 
   // ID matching
   section._elements.forEach(element => {
-    const content = store.find(content => content.elementId === element.id);
+    const content = store.find(content => content.elementId === element.contentId);
     if(content) {
-      element.content = pick(content, ['text', 'src', 'href', 'type']);
+      element.content = pick(content, CONTENT_TYPES);
       content.matched = true;
-    } else {
-      element.content = null;
     }
   })
 
@@ -28,14 +27,13 @@ export function assignContent(section, contentStore) {
         store.push(content);
       }
 
-      element.content = pick(content, ['text', 'src', 'href', 'type']);
+      element.content = pick(content, CONTENT_TYPES);
       content.matched = true;
-      content.elementId = element.id;
+      content.elementId = element.contentId;
       content.elementName = element.name;
       content.elementIs = element.is;
-      content.parentIds = map(getParents(element), 'id');
+      content.parentIds = map(getParents(element), 'fullId');
     }
   })
   section.contentStore = store;
 }
-

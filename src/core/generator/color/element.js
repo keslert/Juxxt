@@ -5,12 +5,12 @@ import { getSection, getBackground } from '../generator-utils';
 import { getMostVibrantColor } from './utils';
 
 export function colorElement(element, page) {
-
   element.color = {};
   const blueprint = blueprints[element.name];
   const elements = flatMap(page.sections, s => s._elements);
   const rules = [
-    e => e.id === element.id,
+    e => e.colorId === element.colorId,
+    e => e.fullId === element.fullId,
     e => e.section.id === element.section.id,
     e => e.parent.name === element.parent.name,
     e => true,

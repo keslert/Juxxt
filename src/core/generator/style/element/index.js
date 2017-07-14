@@ -11,7 +11,7 @@ export function styleElement(element, page) {
   const elements = flatMap(page.sections, section => section._elements);
 
   const rules = [
-    e => e.id === element.id,
+    e => e.fullId === element.fullId,
     e => isEqual(e.variant, element.variant) &&
          e.parent.name === element.parent.name && isEqual(e.parent.variant, element.parent.variant) &&
          e.section.name === element.section.name && isEqual(e.section.variant, element.section.variant),
@@ -33,4 +33,5 @@ export function styleElement(element, page) {
   ]
   
   styleItem(element, elements, rules, {style: blueprint.style, sharedStyles});
+
 }

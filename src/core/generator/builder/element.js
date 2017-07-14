@@ -8,10 +8,11 @@ export function buildElementFromSkeleton(skeleton) {
     name: skeleton.name,
     uid: 'euid_' + uniqueId(),
   }
+  element.contentId = element.id;
+  element.colorId = element.id;
 
   const blueprint = blueprints[element.name];
   element.is = blueprint.is;
-  element.blueprint = blueprint;
 
   return element;
 }

@@ -19,9 +19,9 @@ class ButtonList extends React.Component {
 
     return (
       <div className={wrapClassNames}>
-        {[1,2].map((_, i) => (
+        {elements.buttons.clones.map((element, i) => (
           <div className={boxClassNames + ' dib'} key={i}>
-            <Element {...elements.buttons} />
+            <Element {...element} />
           </div>
         ))}
       </div>
@@ -45,10 +45,9 @@ export const blueprint = {
   elements: {
     buttons: {
       name: BasicButton.name,
-      list: true,
-      items: 2,
-      min: 1,
-      max: 2,
+      clones: {
+        _default: 2,
+      },
     },
   },
   variants: [],

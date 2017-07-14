@@ -224,7 +224,7 @@ export const BasicButton = {
     },
     paddingVertical: {
       _default: 3,
-      options: range(3,5),
+      options: range(3,4),
     },
     paddingHorizontal: {
       _default: 4,

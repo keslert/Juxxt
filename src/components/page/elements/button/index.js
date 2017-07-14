@@ -11,7 +11,7 @@ class Button extends React.PureComponent {
     const colorClassNames = convertColorToAtomic(color);
 
     return(
-      <a className={styleClassNames + ' dib b-solid tc ' + colorClassNames}>
+      <a className={styleClassNames + ' dib b-solid tc pointer ' + colorClassNames}>
         {content.text}
       </a>
     )
