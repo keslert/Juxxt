@@ -11,8 +11,7 @@ export function buildGroupFromSkeleton(skeleton) {
     name: skeleton.name,
     variant: skeleton.variant,
   }
-  group.contentId = group.id;
-  group.colorId = group.id;
+  group.relativeId = group.id;
 
   const blueprint = blueprints[skeleton.name];
   buildItemFromSkeleton(group, blueprint, skeleton);

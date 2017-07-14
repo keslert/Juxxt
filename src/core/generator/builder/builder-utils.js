@@ -22,8 +22,7 @@ export function buildItemFromSkeleton(item, blueprint, skeleton) {
 function cloneItem(item, index) {
   const clone = cloneDeep(item);
   clone.source = item;
-  clone.colorId = clone.colorId + '_' + index;
-  clone.contentId = clone.contentId + '_' + index;
+  clone.relativeId = clone.relativeId + '_' + index;
   return clone;
 }
 

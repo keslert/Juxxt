@@ -45,7 +45,7 @@ export function generateElementVariantAlternatives(element, skeleton) {
 }
 
 export function generateElementColorAlternatives(section, modify, element, page) {
-  const elementIndex = findIndex(section._elements, e => e.colorId === element.colorId);
+  const elementIndex = findIndex(section._elements, e => e.fullRelativeId === element.fullRelativeId);
   
   let sections = [];
   if(element.color.background && modify.background) {
@@ -84,7 +84,7 @@ export function generateElementColorAlternatives(section, modify, element, page)
 }
 
 export function generateElementContentAlternatives(section, element, contentStore) {
-  const store = filter(contentStore, content => content.elementId !== element.contentId);
+  const store = filter(contentStore, content => content.elementId !== element.fullRelativeId);
   const sections = range(0, 6).map(() => cloneDeep(section));
   sections.forEach(s => assignContent(s, store));
   

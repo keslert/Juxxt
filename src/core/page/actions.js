@@ -72,9 +72,9 @@ export function replaceSectionWithAlternative(alternative, section) {
 
     let _selected = duplicated;
     if(selected.isGroup) {
-      _selected = find(duplicated._groups, g => g.id === selected.id) || _selected;
+      _selected = find(duplicated._groups, g => g.relativeId === selected.relativeId) || _selected;
     } else if(selected.isElement) {
-      _selected = find(duplicated._elements, e => e.id === selected.id) || _selected;
+      _selected = find(duplicated._elements, e => e.relativeId === selected.relativeId) || _selected;
     }
     dispatch(setSelected(_selected));
   }

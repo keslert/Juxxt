@@ -15,9 +15,8 @@ export function buildSectionFromSkeleton(skeleton) {
     name: skeleton.name,
     variant: skeleton.variant,
   }
-  section.contentId = section.id;
-  section.colorId = section.id;
   section.fullId = section.id;
+  section.relativeId = section.id;
 
   const blueprint = blueprints[skeleton.name];
 
@@ -44,7 +43,6 @@ function assignUniqueIds(items) {
   items.forEach(item => {
     const parents = getParents(item);
     item.fullId = parents.map(p => p.id).join('_') + item.id;
-    item.colorId = parents.map(p => p.colorId).join('_') + item.colorId;
-    item.contentId = parents.map(p => p.contentId).join('_') + item.contentId;
+    item.fullRelativeId = parents.map(p => p.relativeId).join('_') + item.relativeId;
   });
 }

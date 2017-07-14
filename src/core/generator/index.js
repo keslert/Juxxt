@@ -81,7 +81,7 @@ export function init() {
 
 export function overrideElementContent(element, content, page) {
   const store = element.section.contentStore.map(item => 
-    item.elementId !== element.contentId ? item : {...item, ...content}
+    item.elementId !== element.fullRelativeId ? item : {...item, ...content}
   );
 
   const skeleton = extractSkeletonFromItem(element.section);
@@ -103,18 +103,16 @@ export function duplicateSection(section, page) {
 
   _section.id = duplicated.id;
   _section.fullId = duplicated.fullId;
-  _section.contentId = duplicated.contentId;
-  _section.colorId = duplicated.colorId;
+  _section.fullRelativeId = duplicated.fullRelativeId;
   ['_elements', '_groups'].forEach(key => _section[key].forEach((item, i) => {
     item.id = duplicated[key][i].id;
     item.fullId = duplicated[key][i].fullId;
-    item.contentId = duplicated[key][i].contentId;
-    item.colorId = duplicated[key][i].colorId;
+    item.fullRelativeId = duplicated[key][i].fullRelativeId;
   }))
 
   const store = _section._elements.map(e => ({
     ...e.content,
-    elementId: e.contentId,
+    elementId: e.fullRelativeId,
     elementName: e.name,
     elementIs: e.is,
     parentIds: map(getParents(e), 'fullId'),

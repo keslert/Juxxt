@@ -11,7 +11,7 @@ export function assignContent(section, contentStore) {
 
   // ID matching
   section._elements.forEach(element => {
-    const content = store.find(content => content.elementId === element.contentId);
+    const content = store.find(content => content.elementId === element.fullRelativeId);
     if(content) {
       element.content = pick(content, CONTENT_TYPES);
       content.matched = true;
@@ -29,7 +29,7 @@ export function assignContent(section, contentStore) {
 
       element.content = pick(content, CONTENT_TYPES);
       content.matched = true;
-      content.elementId = element.contentId;
+      content.elementId = element.fullRelativeId;
       content.elementName = element.name;
       content.elementIs = element.is;
       content.parentIds = map(getParents(element), 'fullId');
