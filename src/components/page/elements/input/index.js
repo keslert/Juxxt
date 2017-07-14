@@ -1,5 +1,3 @@
-//this is the input 
-
 import React from 'react';
 import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../../core/generator/color/conversions';

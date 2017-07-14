@@ -10,6 +10,7 @@ class InputButton extends React.Component {
         <div>
           <Element {...elements.input} />
         </div>
+        <br></br>
         <div> 
           <Element {...elements.button} />
         </div>

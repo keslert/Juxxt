@@ -8,49 +8,33 @@ class CallToAction extends React.PureComponent {
   render () {
     const { groups, style, color, variant } = this.props;
 
+    const isFlat = variant.orientation === 'flat'; 
     const containerStyle = {
-      ...style
+      ...style, 
+      direction: isFlat ? 'row' : 'column',
+      display: 'flex',
     }
-    const tpBox = {
-      ...style,
-      ...color,
-      //paddingHorizontal: style.gutter,
-      display: "flex",
-      width: '50P',
-      align: "center",
-      justify: "center",
-      flexWrap: "flex",
-      //order: variant.order,
+    const tpStyle = {
+      textAlign: isFlat ? 'left' : 'center',
+      flex: 'auto',
     }
-    const interactionBox = {
-      ...style,
-      ...color,
-      //paddingHorizontal: style.gutter,
-      display: "flex",
-      width: '50P',
-      align: "center",
-      justify: "center",
-      flexWrap: "flex",
-      //maxWidth: "50P",
-      //order: variant.order,
+    const actionStyle = {
+      textAlign: isFlat ? 'right' : 'center',
+      flex: 'auto',
     }
-
-    const tpStyleClassNames = convertStyleToAtomic(tpBox);
-    const interactionStyleClassNames = convertStyleToAtomic(interactionBox);
-    const bothColorClassNames = convertColorToAtomic(interactionBox);//same as tpBox
 
     return (
-      <div className={bothColorClassNames + ' call_action flex-row' }>
-        <div className={tpStyleClassNames}>
-          <Group {...groups.tp} />
+      <div className={convertColorToAtomic(color)}>
+        <div className={convertStyleToAtomic(containerStyle)}>
+
+          <div className={convertStyleToAtomic(tpStyle)}> 
+            <Group {...groups.tp} />
+          </div>
+          <div className={convertStyleToAtomic(actionStyle)}>
+            <Group {...groups.interaction} />
+          </div>
         </div>
-        <div>
-            <div className={interactionStyleClassNames}>
-              <Group {...groups.interaction} />
-            </div>
-        </div>
-        
-      </div>
+      </div> 
     )
   }
 }
@@ -60,20 +44,23 @@ export default CallToAction;
 export const blueprint = {
   type: 'action',
   inherits: ['BasicSection'],
-/*  type: 'basic',*/
+  type: 'action',
   style: {},
   color: {},
   groups: {
     tp: {
-      options: 
-      ['HeadingSubheading','HeadingParagraph','KickerHeadingParagraph','Heading'],
+      options: [
+        {name: 'HeadingSubheading', overrides: {variants: [{align: {options:['inherit']}}]}}
+      ]
+        /*'HeadingParagraph','KickerHeadingParagraph',*],*/
     },
     interaction: {
-      options:['InputButton','InputInputButton','SingleButton', 'DoubleButton', 'StackedButtons'],
-      //, 'StackedButtons'
+      options:[/*'InputButton','InputInputButton',*/'SingleButton'/*,'DoubleButton', 'StackedButtons'*/],
     },
   },
   variants: [{
-    //maybe buttons and input being left-right v. up-down??
+    orientation: {
+      options: ['stacked', 'flat'],
+    },
   }],
 }
