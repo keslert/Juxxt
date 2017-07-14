@@ -7,7 +7,7 @@ import { map, uniq, intersection, filter, range, cloneDeep, flatMap, findIndex, 
 import { styles } from '../style/element/shared-styles';
 import { filterStyle } from '../style/utils';
 import { getBackground, getBlueprint } from '../generator-utils';
-import { generateSectionComponentAlternatives } from './section';
+import { generateSectionComponentAlternatives, generateSectionVariantAlternatives } from './section';
 import { generateGroupVariantAlternatives, generateGroupComponentAlternatives } from './group';
 
 export function generateElementComponentAlternatives(element, sectionSkeleton) {
@@ -38,7 +38,10 @@ export function generateElementComponentAlternatives(element, sectionSkeleton) {
 }
 
 export function generateElementVariantAlternatives(element, skeleton) {
-  return generateGroupVariantAlternatives(element.parent, skeleton);
+  if(element.parent.isGroup) {
+    return generateGroupVariantAlternatives(element.parent, skeleton);
+  }
+  return generateSectionVariantAlternatives(element.parent, skeleton); 
 }
 
 export function generateElementColorAlternatives(section, modify, element, page) {
