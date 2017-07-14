@@ -33,7 +33,8 @@ export function extractSkeletonFromItem(item) {
     name: item.name,
     variant: item.variant,
     groups: mapValues(item.groups, extractSkeletonFromItem),
-    elements: mapValues(item.elements, e => pick(e, ['id', 'name'])),
+    elements: mapValues(item.elements, extractSkeletonFromItem),
+    clones: isEmpty(item.clones) ? undefined : { _default: item.clones.length },
   }
   
   return skeleton;
@@ -45,15 +46,19 @@ export function generateItemSkeleton(name, blueprint, variant, overrides) {
   return {
     name,
     variant: getClosestVariant(variant, _blueprint.variants),
-    elements: mapValues(_blueprint.elements || {}, element => (
-      generateElementSkeleton(element.name)
-    )),
+    elements: mapValues(_blueprint.elements || {}, element => ({
+      ...element,
+      ...generateElementSkeleton(element.name)
+    })),
     groups: mapValues(_blueprint.groups || {}, ({options}) => {
       const option = randomItem(options);
       if(isString(option)) {
         return generateGroupSkeleton(option)
       }
-      return generateGroupSkeleton(option.name, undefined, option.overrides);
+      return {
+        ...option, 
+        ...generateGroupSkeleton(option.name, undefined, option.overrides)
+      };
     }),
   }
 }

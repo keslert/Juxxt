@@ -10,9 +10,10 @@ export function buildItemFromSkeleton(item, blueprint, skeleton) {
   }
 
   forEach(children, (build, childType) => {
-    item[childType] = mapValues(blueprint[childType], ({clones}, name) => {
-      const item = build(skeleton[childType][name]);
-      item.clones = !clones ? [] : range(0, clones._default).map(i => cloneItem(item, i))
+    item[childType] = mapValues(blueprint[childType], (_, name) => {
+      const _skeleton = skeleton[childType][name];
+      const item = build(_skeleton);
+      item.clones = !_skeleton.clones ? [] : range(0, _skeleton.clones._default).map(i => cloneItem(item, i))
       return item;
     });
   })
