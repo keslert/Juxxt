@@ -144,17 +144,33 @@ function getImageContent(props) {
     // {src: '/images/openSourceImages2017/sunflower.jpg'},
     // {src: '/images/openSourceImages2017/traveler.jpg'},
     // {src: '/images/openSourceImages2017/waterfall.jpg'},
-    { src: 'https://cdn.dribbble.com/users/175710/screenshots/3628199/dribbble-setapp-cat-02.png' },
-    { src: 'https://cdn.dribbble.com/users/1008875/screenshots/3630620/bear.png' },
-    // { src: 'https://unsplash.it/400/600?random' },
-    // { src: 'https://unsplash.it/400/601?random' },
-    // { src: 'https://unsplash.it/400/602?random' },
-    // { src: 'https://unsplash.it/600/400?random' },
-    // { src: 'https://unsplash.it/601/400?random' },
-    // { src: 'https://unsplash.it/602/400?random' },
-    // { src: 'http://placehold.it/600x400'},
-    // { src: 'http://placehold.it/500x400'},
-    // { src: 'http://placehold.it/300x400'},
+    // {src: 'https://cdn.dribbble.com/users/175710/screenshots/3628199/dribbble-setapp-cat-02.png' },
+    // {src: 'https://cdn.dribbble.com/users/1008875/screenshots/3630620/bear.png' },
+    // {src: 'https://unsplash.it/400/600?random' },
+    // {src: 'https://unsplash.it/400/601?random' },
+    // {src: 'https://unsplash.it/400/602?random' },
+    // {src: 'https://unsplash.it/600/400?random' },
+    // {src: 'https://unsplash.it/601/400?random' },
+    // {src: 'https://unsplash.it/602/400?random' },
+    // {src: 'http://placehold.it/600x400'},
+    // {src: 'http://placehold.it/500x400'},
+    // {src: 'http://placehold.it/300x400'},
+    //space theme: 
+    // {src: 'http://www.clker.com/cliparts/x/w/s/A/3/B/astronaut-hi.png'},
+    // {src: 'https://s-media-cache-ak0.pinimg.com/originals/ab/a5/bd/aba5bdbb6a5985ffdf4a73d1729b609a.png'},
+    
+    //professional & urban theme 
+    // {src: 'https://1r65612jvqxn8fcup46pve6b-wpengine.netdna-ssl.com/wp-content/uploads/2016/04/buildings-community.png'},
+    // {src: 'http://wibicom.com/Images/icon_city3.png'},
+    // {src: 'https://xebialabs.com/assets/files/devops-forum/nyc-icon.png'},
+    // {src: 'http://wori88.com/images/transparent-background-business-man-clipart-14.png'},
+    // {src: 'https://d1rkab7tlqy5f1.cloudfront.net/_processed_/7/d/csm_IE2_e25f814984.png'}
+    //beach theme
+    {src: 'http://cliparting.com/wp-content/uploads/2016/05/Palm-tree-gallery-trees-clipart-clipartix.png'},
+    {src: 'http://images.clipartpanda.com/hawaiian-flower-clip-art-bTypEL9nc.png'},
+    {src: 'https://clipartion.com/wp-content/uploads/2015/11/nautical-clip-art-free.png'},
+    {src: 'https://freeclipartimage.com//storage/upload/orca-clipart/orca-clipart-18.png'},
+  
   ]);
 }
 
@@ -186,11 +202,23 @@ function getBlockImageContent(element) {
   if(element.section.type === 'header') {
     return randomItem([
     // {src: 'http://images.clipartpanda.com/nature-clip-art-floral.png'},
-    {src: 'https://1r65612jvqxn8fcup46pve6b-wpengine.netdna-ssl.com/wp-content/uploads/2016/04/buildings-community.png'},
-    {src: 'http://wibicom.com/Images/icon_city3.png'},
-    {src: 'https://xebialabs.com/assets/files/devops-forum/nyc-icon.png'},
-    {src: 'http://wori88.com/images/transparent-background-business-man-clipart-14.png'},
-    {src: 'https://d1rkab7tlqy5f1.cloudfront.net/_processed_/7/d/csm_IE2_e25f814984.png'}]);
+    // {src: 'https://1r65612jvqxn8fcup46pve6b-wpengine.netdna-ssl.com/wp-content/uploads/2016/04/buildings-community.png'},
+    // {src: 'http://wibicom.com/Images/icon_city3.png'},
+    // {src: 'https://xebialabs.com/assets/files/devops-forum/nyc-icon.png'},
+    // {src: 'http://wori88.com/images/transparent-background-business-man-clipart-14.png'},
+    // {src: 'https://d1rkab7tlqy5f1.cloudfront.net/_processed_/7/d/csm_IE2_e25f814984.png'}
+    //space theme: 
+    // {src: 'http://www.clker.com/cliparts/x/w/s/A/3/B/astronaut-hi.png'},
+    // {src: 'https://s-media-cache-ak0.pinimg.com/originals/ab/a5/bd/aba5bdbb6a5985ffdf4a73d1729b609a.png'},
+    //beach theme
+    {src: 'http://cliparting.com/wp-content/uploads/2016/05/Palm-tree-gallery-trees-clipart-clipartix.png'},
+    {src: 'http://images.clipartpanda.com/hawaiian-flower-clip-art-bTypEL9nc.png'},
+    {src: 'https://clipartion.com/wp-content/uploads/2015/11/nautical-clip-art-free.png'},
+    {src: 'https://freeclipartimage.com//storage/upload/orca-clipart/orca-clipart-18.png'},
+    {src: 'http://clipartix.com/wp-content/uploads/2016/05/Ship-clip-art-clipart-image-clipartcow.png'},
+    //{src: 'http://images.all-free-download.com/images/graphiclarge/space_astronaut_holding_flag_vector_illustration_6825237.jpg'},
+
+    ]);
   }
   return getImageContent();
 }

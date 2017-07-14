@@ -19,7 +19,10 @@ export function init() {
   // const palette = ["#374140","#1E1E20","#D9CB9E"];
   // const palette = ["#5AFF15","#AAFFE5","#9D75CB","#A657AE", "#8C1A6A"];
   // const palette = ['#EA9F3B', "#BBBE64", "#93A8AC", "#8E5572", "#443850"];
-  const palette = ['#aea'];
+
+  const palette = ['#0e73a3','#92dafc'];//for Friday presentation
+  //const palette = ['#007c02','#00638e']; //#007c02 //'#258926','#6edd70'
+  //const palette = ['#aea']; //what was active
   const colorBlueprint = buildPageColorBlueprint(palette);
 
   const master = {
