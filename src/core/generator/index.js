@@ -19,8 +19,9 @@ export function init() {
   // const palette = ["#374140","#1E1E20","#D9CB9E"];
   // const palette = ["#5AFF15","#AAFFE5","#9D75CB","#A657AE", "#8C1A6A"];
   // const palette = ['#EA9F3B', "#BBBE64", "#93A8AC", "#8E5572", "#443850"];
+  const palette = ['#def7f2', '#d5e0de','#797c7c'];
 
-  const palette = ['#0e73a3','#92dafc'];//for Friday presentation
+  //const palette = ['#0e73a3','#92dafc'];//for Friday presentation
   //const palette = ['#007c02','#00638e']; //#007c02 //'#258926','#6edd70'
   //const palette = ['#aea']; //what was active
   const colorBlueprint = buildPageColorBlueprint(palette);
@@ -121,7 +122,7 @@ export function generatePageCSSRules(page) {
     if(section.color.backgroundImage) {
       rules.push(`
         .bgimg-${section.color.backgroundImage} {
-          background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/images/openSourceImages2017/${section.color.backgroundImage}.jpg) !important;
+          background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(https://static1.squarespace.com/static/560c1513e4b0c2b900450ac1/t/5939b06ee3df282dbda0888f/1496952956394/Tori%27s+Bakeshop+Ca) !important;
           background-size: cover !important;
           background-position: center center !important;
         }
@@ -131,3 +132,5 @@ export function generatePageCSSRules(page) {
 
   page.CSSRules = rules.join('\n');
 }
+
+//background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/images/openSourceImages2017/${section.color.backgroundImage}.jpg) !important;

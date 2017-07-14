@@ -166,11 +166,20 @@ function getImageContent(props) {
     // {src: 'http://wori88.com/images/transparent-background-business-man-clipart-14.png'},
     // {src: 'https://d1rkab7tlqy5f1.cloudfront.net/_processed_/7/d/csm_IE2_e25f814984.png'}
     //beach theme
-    {src: 'http://cliparting.com/wp-content/uploads/2016/05/Palm-tree-gallery-trees-clipart-clipartix.png'},
-    {src: 'http://images.clipartpanda.com/hawaiian-flower-clip-art-bTypEL9nc.png'},
-    {src: 'https://clipartion.com/wp-content/uploads/2015/11/nautical-clip-art-free.png'},
-    {src: 'https://freeclipartimage.com//storage/upload/orca-clipart/orca-clipart-18.png'},
-  
+    // {src: 'http://cliparting.com/wp-content/uploads/2016/05/Palm-tree-gallery-trees-clipart-clipartix.png'},
+    // {src: 'http://images.clipartpanda.com/hawaiian-flower-clip-art-bTypEL9nc.png'},
+    // {src: 'https://clipartion.com/wp-content/uploads/2015/11/nautical-clip-art-free.png'},
+    // {src: 'https://freeclipartimage.com//storage/upload/orca-clipart/orca-clipart-18.png'},
+
+    //dessert cafe theme
+    //{src: 'https://static1.squarespace.com/static/560c1513e4b0c2b900450ac1/t/5939b06ee3df282dbda0888f/1496952956394/Tori%27s+Bakeshop+Ca'},
+    {src: 'https://s-media-cache-ak0.pinimg.com/736x/8f/dd/3c/8fdd3ccb3a6e4efa9d6750ac2dbdf893--chocolate-layer-cakes-chocolate-coffee.jpg'},
+   // {src: 'https://static1.squarespace.com/static/560c1513e4b0c2b900450ac1/t/56df5139a3360c4c27da16f4/1457902255925/Tandem+Coffee%2C+Toronto%2C+Ontario%2C+Canada?format=1500w'},
+    {src: 'https://www.theurbanlist.com/content/article/New-Opening-Elisabeth-Dessert-Cafe-5.jpg'},
+    {src: 'https://4.bp.blogspot.com/-G15GpgI5hR4/VxzlyIKd8II/AAAAAAAAJ58/yK3PGliFyYAqCNJaeuYZyGgX2p8jRyiXgCLcB/s1600/IMG_3360.JPG'},
+    {src: 'http://www.howsweeteats.com/wp-content/uploads/2014/08/boozy-coconut-hot-fudge-milkshakes-I-howsweeteats.com-2.jpg'},
+    {src: 'https://www.klnow.com.my/wp-content/uploads/sites/2/2017/01/b4-7.jpg'},
+    {src: 'https://img.buzzfeed.com/buzzfeed-static/static/2014-10/28/12/enhanced/webdr02/enhanced-1509-1414514224-18.jpg?crop=395:598;57,0&downsize=715:*&output-format=auto&output-quality=auto'}
   ]);
 }
 
@@ -211,12 +220,17 @@ function getBlockImageContent(element) {
     // {src: 'http://www.clker.com/cliparts/x/w/s/A/3/B/astronaut-hi.png'},
     // {src: 'https://s-media-cache-ak0.pinimg.com/originals/ab/a5/bd/aba5bdbb6a5985ffdf4a73d1729b609a.png'},
     //beach theme
-    {src: 'http://cliparting.com/wp-content/uploads/2016/05/Palm-tree-gallery-trees-clipart-clipartix.png'},
-    {src: 'http://images.clipartpanda.com/hawaiian-flower-clip-art-bTypEL9nc.png'},
-    {src: 'https://clipartion.com/wp-content/uploads/2015/11/nautical-clip-art-free.png'},
-    {src: 'https://freeclipartimage.com//storage/upload/orca-clipart/orca-clipart-18.png'},
-    {src: 'http://clipartix.com/wp-content/uploads/2016/05/Ship-clip-art-clipart-image-clipartcow.png'},
-    //{src: 'http://images.all-free-download.com/images/graphiclarge/space_astronaut_holding_flag_vector_illustration_6825237.jpg'},
+    // {src: 'http://cliparting.com/wp-content/uploads/2016/05/Palm-tree-gallery-trees-clipart-clipartix.png'},
+    // {src: 'http://images.clipartpanda.com/hawaiian-flower-clip-art-bTypEL9nc.png'},
+    // {src: 'https://clipartion.com/wp-content/uploads/2015/11/nautical-clip-art-free.png'},
+    // {src: 'https://freeclipartimage.com//storage/upload/orca-clipart/orca-clipart-18.png'},
+    // {src: 'http://clipartix.com/wp-content/uploads/2016/05/Ship-clip-art-clipart-image-clipartcow.png'},
+    // //{src: 'http://images.all-free-download.com/images/graphiclarge/space_astronaut_holding_flag_vector_illustration_6825237.jpg'},
+    //dessert cafe theme
+    {src: 'https://www.klnow.com.my/wp-content/uploads/sites/2/2017/01/b4-7.jpg'},
+    {src: 'https://www.theurbanlist.com/content/article/New-Opening-Elisabeth-Dessert-Cafe-5.jpg'},
+    {src: 'https://4.bp.blogspot.com/-G15GpgI5hR4/VxzlyIKd8II/AAAAAAAAJ58/yK3PGliFyYAqCNJaeuYZyGgX2p8jRyiXgCLcB/s1600/IMG_3360.JPG'},
+    {src: 'https://www.klnow.com.my/wp-content/uploads/sites/2/2017/01/b4-7.jpg'}
 
     ]);
   }
