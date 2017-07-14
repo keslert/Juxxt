@@ -6,7 +6,7 @@ export const BasicKicker = {
   name: 'BasicKicker', 
   is: 'Text',
   inherits: [inherits.Heading],
-  color: {},
+  color: { text: 'readable' },
   style: {
     fontSize: {
       _default: 3,
@@ -46,7 +46,7 @@ export const BasicSubheading = {
   name: 'BasicSubheading', 
   is: 'Text',
   inherits: [inherits.Heading],
-  color: {},
+  color: { text: 'readable' },
   style: {
     textTransform: {
       _default: 'none',
@@ -63,7 +63,7 @@ export const Copyright = {
   name: 'Copyright', 
   is: 'Text',
   inherits: [],
-  color: {},
+  color: { text: 'readable' },
   style: {
     textTransform: {
       _default: 'none',
@@ -80,7 +80,7 @@ export const ListTitle = {
   name: 'ListTitle', 
   is: 'Text',
   inherits: [inherits.Heading],
-  color: {},
+  color: { text: 'readable' },
   style: {
     textTransform: {
       _default: 'uppercase',
@@ -104,7 +104,7 @@ export const BasicParagraph = {
   name: 'BasicParagraph', 
   is: 'Text',
   inherits: [inherits.Paragraph],
-  color: {},
+  color: { text: 'readable' },
   style: {}
 };
 
