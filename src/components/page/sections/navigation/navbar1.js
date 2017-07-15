@@ -26,7 +26,7 @@ class Navbar1 extends React.PureComponent {
             <Group {...groups.links} />
           </div>
           <div>
-            <Group {...groups.buttons} />
+            <Group {...groups.buttonList} />
           </div>
         </div>
       </div>
@@ -47,9 +47,9 @@ export const blueprint = {
     },
   },
   groups: {
-    buttons: {
+    buttonList: {
       options: [
-        { name: 'ButtonList', overrides: {elements: { buttons: { name: 'SmallButton' }}}},
+        { name: 'ButtonList', overrides: {elements: { buttons: { name: 'SmallButton', clones: { _default: 2 }}}}},
       ],
     },
     links: {
