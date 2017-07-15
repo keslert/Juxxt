@@ -1,5 +1,6 @@
 import { generateSectionComponentAlternatives } from './alternatives/section';
 import { buildSectionFromSkeleton } from './builder/section';
+import { generateSectionSkeleton } from './skeletons/section'
 import { extractSkeletonFromItem } from './skeletons/utils';
 import { assignContent } from './content';
 import { assignStyles } from './style';
@@ -47,6 +48,8 @@ export function init() {
         basic: i > 1 && i < NUM_SECTIONS - 2,
       };
 
+      const sectionName = i === 1 ? 'Header' : undefined;
+
       const backgrounds = {
         navigation: colorBlueprint.lights,
         header: [colorBlueprint.primary],
@@ -55,7 +58,13 @@ export function init() {
         basic: colorBlueprint.lights,
       };
 
-      const skeletons = generateSectionComponentAlternatives({}, sectionType);
+      let skeletons;
+      if(sectionName) {
+        skeletons = [generateSectionSkeleton(sectionName)];
+      } else {
+        skeletons = generateSectionComponentAlternatives({}, sectionType, sectionName);
+      }
+
       const section = buildSectionFromSkeleton(randomItem(skeletons));
       const background = backgrounds[section.type][i % backgrounds[section.type].length];
 
@@ -156,7 +165,7 @@ export function generatePageCSSRules(page) {
     if(section.color.backgroundImage) {
       rules.push(`
         .bgimg-${section.color.backgroundImage} {
-          background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(https://static1.squarespace.com/static/560c1513e4b0c2b900450ac1/t/5939b06ee3df282dbda0888f/1496952956394/Tori%27s+Bakeshop+Ca) !important;
+          background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${section.color._backgroundImage}) !important;
           background-size: cover !important;
           background-position: center center !important;
         }

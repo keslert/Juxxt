@@ -14,6 +14,7 @@ import {
   map,
   zipObject,
   isEmpty,
+  last,
 } from 'lodash';
 import { assignContent } from '../content';
 import { getCombinations } from '../../utils';
@@ -23,7 +24,7 @@ import { filterStyle } from '../style/utils';
 import { generateGroupVariantAlternatives } from './group';
 import { getSortedByPreference, getSortedByMostBrightness } from '../color/utils';
 import tinycolor from 'tinycolor2';
-
+import defaultTheme from '../themes';
 
 export function generateSectionComponentAlternatives(section, modify) {
   const possibleSections = Object.keys(blueprints);
@@ -74,46 +75,18 @@ export function generateSectionColorAlternatives(section, modify, page) {
 }
 
 
-const NUM_OF_IMAGES = 1;
-
-   const PICTURES = [
-   //'baby.jpg',
-   'burger.jpg',
-   'beachChairs.jpg',
-   'camera1.jpg',
-   'coffee.jpg',
-   'coffeeMagazineFlower.jpg',
-   'coupleBikeBeach.jpg',
-   'fallLeaves2.jpg',
-   'fancyBurger.jpg',
- //'fashionGlasses.jpeg',
-   'greenleaf.jpg',
-   //'kidWithSunglasses.jpg',
-   'macarons.jpg',
-   'nyc.jpg',
-   'oceanSunset.jpg',
-   //'pancake1.jpg',
-   'railroadShoes.jpg',
-   'rain.jpg',
-   'ruralHighway.jpg',
-   'silhouette.jpg',
-   'Suit.jpg',
-   'sunflower.jpg',
-   'traveler.jpg',
-   'waterfall.jpg'];
-
 function generateSectionColorImagesBackground(section, page) {
-  const sections = [];
-  for(let i =0; i< PICTURES.length ; i++) {
+  const darkestBackground = last(getSortedByMostBrightness(page.colorBlueprint.backgrounds))
+  const sections = defaultTheme.backgroundImages.map(({key, src}) => {
     const _section = cloneDeep(section);
-    const _brightArr = getSortedByMostBrightness(Object.keys(page.colorBlueprint.bgBlueprints));
     _section.color = {
-      text: '#ffffff',
-      background: _brightArr[_brightArr.length - 1],
-      backgroundImage: PICTURES[i].split(".")[0],
+      background: darkestBackground,
+      backgroundImage: key,
+      _backgroundImage: src,
     }
-    sections.push(_section)
-  }
+    return _section;
+  })
+
   return sections;
 }
 
