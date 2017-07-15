@@ -94,6 +94,10 @@ export const ListTitle = {
       _default: 6,
       options: [4,6,8],
     },
+    marginBottom: {
+      _default: 2,
+      options: range(0, 4),
+    }
   },
 };
 
@@ -136,7 +140,10 @@ export const LogoImage = {
   inherits: ['Media'],
   color: {},
   style: {
-
+    height: {
+      _default: 35,
+      options: ['auto', 35, 40, 50, 60],
+    }
   },
 }
 
