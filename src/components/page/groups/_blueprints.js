@@ -8,7 +8,6 @@ import { blueprint as HorizontalList } from './horizontal-list';
 import { blueprint as HeadingParagraphButton } from './heading-paragraph-button';
 import { blueprint as Logo } from './singles/logo';
 import { blueprint as SingleButton } from './singles/SingleButton';
-import { blueprint as ParagraphOnly } from './singles/paragraph';
 import { blueprint as VerticalList } from './vertical-list';
 import { blueprint as IconHeadingParagraph } from './icon-heading-paragraph';
 import { blueprint as BlockImage } from './singles/block-image';
@@ -33,7 +32,6 @@ export default {
   DoubleButton,
   HorizontalList,
   VerticalList,
-  ParagraphOnly,
   IconHeadingParagraph,
   InputButton,
   InputInputButton,

@@ -61,7 +61,7 @@ class App extends React.Component {
     })
 
     setSelected(master.sections[1]);
-    turnOnModification('color');
+    turnOnModification('component');
   }
 
   componentWillReceiveProps(newProps) {

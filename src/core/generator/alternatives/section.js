@@ -53,7 +53,7 @@ export function generateSectionVariantAlternatives(section, skeleton) {
     flatMap(section.groups, group => generateGroupVariantAlternatives(group, s))
   )
 
-  return allSkeletons;
+  return isEmpty(allSkeletons) ? skeletons : allSkeletons;
 }
 
 export function generateSectionColorAlternatives(section, modify, page) {

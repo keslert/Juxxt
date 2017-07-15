@@ -8,7 +8,6 @@ import HorizontalList from './horizontal-list';
 import SingleButton from './singles/SingleButton';
 import Logo from './singles/logo';
 import DoubleButton from './double-button';
-import ParagraphOnly from './singles/paragraph';
 import VerticalList from './vertical-list';
 import IconHeadingParagraph from './icon-heading-paragraph';
 import BlockImage from './singles/block-image';
@@ -33,7 +32,6 @@ export default {
   KickerHeadingParagraph,
   HeadingParagraphLink,
   HeadingSubheadingButton,
-  ParagraphOnly,
   IconHeadingParagraph,
   InputButton,
   InputInputButton,

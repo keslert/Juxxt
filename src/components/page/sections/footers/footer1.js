@@ -1,11 +1,12 @@
 import React from 'react';
+import Element from '../../elements';
 import Group from '../../groups';
 import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
 
 class Footer1 extends React.PureComponent {
   render () {
-    const { groups, style, color, variant } = this.props;
+    const { elements, groups, style, color, variant } = this.props;
     const boxStyle = {
       ...style,
       display: "flex",
@@ -19,7 +20,7 @@ class Footer1 extends React.PureComponent {
       <div className={ colorClassNames + ' Footer1'}>
         <div className={styleClassNames }>
           <div className={"order-" + variant.order[0]}>
-            <Group {...groups.text} />
+            <Element {...elements.copyright} />
           </div>
           <div className= {"order-2 flex-auto " + variant.linkAlign}>
             <Group {...groups.links} />
@@ -41,10 +42,12 @@ export const blueprint = {
   style: {
   },
   color: {},
+  elements: {
+    copyright: {
+      name: 'Copyright',
+    }
+  },
   groups: {
-    text: {
-      options: ['ParagraphOnly']
-    },
     button: {
       options: ['SingleButton'],
     },
