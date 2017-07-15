@@ -21,15 +21,11 @@ class HorizontalList extends React.Component {
 
     return (
       <div className={wrapClassNames}>
-        <div className={boxClassNames}>
-          <Element {...elements.links} />
-        </div>
-        <div className={boxClassNames}>
-          <Element {...elements.links} />
-        </div>
-        <div className={boxClassNames}>
-          <Element {...elements.links} />
-        </div>
+        {elements.links.clones.map((link, i) => (
+          <div className={boxClassNames} key={i}>
+            <Element {...link} />
+          </div>
+        ))}
       </div>
     )
   }
@@ -48,8 +44,7 @@ export const blueprint = {
   elements: {
     links: {
       name: ReadableLink.name,
-      list: true,
-      _default: 3,
+      clones: { _default: 3 },
     }
   },
   variants: [],

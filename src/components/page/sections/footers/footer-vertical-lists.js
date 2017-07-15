@@ -6,21 +6,36 @@ import { convertColorToAtomic } from '../../../../core/generator/color/conversio
 class FooterVerticalLists extends React.PureComponent {
   render () {
     const { groups, style, color } = this.props;
-    const boxStyle = {
+
+    const containerClassNames = convertStyleToAtomic({
       ...style,
+    })
+    
+    const wrapClassNames = convertStyleToAtomic({
       display: "flex",
-      align: "start",
-      justify: "center",
-    }
-    const styleClassNames = convertStyleToAtomic(boxStyle);
-    const colorClassNames = convertColorToAtomic(color);
+      marginHorizontal: -style.gutter,
+    });
+
+    const boxClassNames = convertStyleToAtomic({
+      width: Math.floor(100 / (1 + groups.lists.clones.length)) + 'P',
+      marginHorizontal: style.gutter,
+    })
+
     return (
-      <div className={ colorClassNames + ' pl6 pr6 pt6 pb6 FooterVerticalLists'}>
-        <div className={styleClassNames}>   
-        	<Group {...groups.logo} />
-            <Group {...groups.verticallist} />
-            <Group {...groups.verticallist} />
-            <Group {...groups.verticallist} />
+      <div className={convertColorToAtomic(color) + ' FooterVerticalLists'}>
+        <div className={containerClassNames}>
+          <div className={wrapClassNames}>
+            
+            <div className={boxClassNames}>
+              <Group {...groups.logo} />
+            </div>
+            
+            {groups.lists.clones.map((list, i) => (
+              <div className={boxClassNames} key={i}>
+                <Group {...list} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     )
@@ -31,12 +46,14 @@ export default FooterVerticalLists;
 
 export const blueprint = {
   type: 'footer',
-  inherits: [],
+  inherits: ['BasicSection', 'GutterSection'],
   style: {},
   color: {},
   groups: {
-  	verticallist: {
-  		options:['VerticalList'],
+  	lists: {
+  		options:[
+        {name: 'VerticalList', clones: { _default: 3 }},
+      ],
   	},
     logo: {
       options: ['Logo']

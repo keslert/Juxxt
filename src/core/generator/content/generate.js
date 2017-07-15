@@ -10,12 +10,16 @@ export function generateContent(element) {
       return getHeaderContent();
     case 'BasicParagraph':
       return {text: LoremIpsum({count: random(2, 4), units: 'sentences'})};
+    case 'ReadableLink':
+      return getReadableLinkContent(element);
 
     case 'BasicImage':
       return getBlockImageContent(element);
     case 'BasicButton':
     case 'SmallButton':
       return getButtonContent();
+    case 'ListTitle': 
+      return getListTitleContent(element);
     case 'Paragraph':
       return getParagraphContent(element);
     case 'BasicIcon':
@@ -235,4 +239,23 @@ function getBlockImageContent(element) {
     ]);
   }
   return getImageContent();
+}
+
+function getReadableLinkContent(element) {
+  return randomItem([
+    {text: 'Pricing'},
+    {text: 'Features'},
+    {text: 'Demo'},
+    {text: 'About'},
+    {text: 'Product'},
+    {text: 'ListTitle'},
+  ])
+}
+
+function getListTitleContent(element) {
+  return randomItem([
+    {text: 'Help'},
+    {text: 'Discover'},
+    {text: 'Company'},
+  ])
 }

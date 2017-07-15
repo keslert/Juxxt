@@ -33,7 +33,7 @@ export default Footer2;
 
 export const blueprint = {
   type: 'footer',
-  inherits: [],
+  inherits: ['BasicSection'],
   style: {},
   color: {},
   groups: {

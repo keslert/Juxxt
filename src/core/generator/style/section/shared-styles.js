@@ -5,6 +5,7 @@ export const names = {
   HeaderSection: 'HeaderSection',
   NavigationSection: 'NavigationSection',
   GutterSection: 'GutterSection',
+  FooterSection: 'FooterSection',
 }
 
 export const styles = {
@@ -14,9 +15,8 @@ export const styles = {
       options: [8,7,6,5,4,3,2,1,0],
     },
     maxWidth: {
-      options: [1024],
-      // options: ['900px', '1024px', '1170px'],
-      priority: 999, // Need a way to say this shouldn't change that often...
+      _default: 1024,
+      options: [900, 1024, 1170],
     },
     margin: {
       options: ['auto'],
@@ -51,15 +51,11 @@ export const styles = {
       _default: 2,
       options: [1,2,3],
     },
-    height: {
-      _default: 60,
-      options: ['inherit', 60, 80],
-    }
   },
   [names.GutterSection]: {
     gutter: {
       _default: 4,
       options: range(0, 6),
     },
-  }
+  },
 }

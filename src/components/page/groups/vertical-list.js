@@ -15,15 +15,11 @@ class VerticalList extends React.Component {
     return (
       <div className={convertStyleToAtomic(style)}>
         <Element {...elements.title} />
-        <div className={innerClassName}>
-          <Element {...elements.link} />
-        </div>
-        <div className={innerClassName}>
-          <Element {...elements.link} />
-        </div>
-        <div className={innerClassName}>
-          <Element {...elements.link} />
-        </div>
+        {elements.links.clones.map((link, i) => (
+          <div className={innerClassName} key={i}>
+            <Element {...link} />
+          </div>
+        ))}
       </div>
     )
   }
@@ -44,8 +40,9 @@ export const blueprint = {
   	title: {
   		name: ListTitle.name,
   	},
-    link: {
+    links: {
       name: ReadableLink.name,
+      clones: { _default: 3 },
     }
   },
   variants: [],
