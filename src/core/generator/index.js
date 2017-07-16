@@ -12,24 +12,15 @@ import { randomItem, replaceWhiteSpace } from '../utils';
 
 import { getSection, getParents } from './generator-utils';
 import { range, reduce, uniqueId, forEach, clone, sortBy, map, max, some, filter, cloneDeep } from 'lodash';
+import defaultTheme from './themes';
 
 const NUM_SECTIONS = 7;
 export function init() {
-  // const palette = ["#dc5131", "#374140"];
-  // const palette = ["#48F6F9","#052F54","#ffcc00","#910000"]
-  // const palette = ["#374140","#1E1E20","#D9CB9E"];
-  // const palette = ["#5AFF15","#AAFFE5","#9D75CB","#A657AE", "#8C1A6A"];
-  // const palette = ['#EA9F3B', "#BBBE64", "#93A8AC", "#8E5572", "#443850"];
-  const palette = ['#def7f2', '#d5e0de','#797c7c'];
-
-  //const palette = ['#0e73a3','#92dafc'];//for Friday presentation
-  //const palette = ['#007c02','#00638e']; //#007c02 //'#258926','#6edd70'
-  //const palette = ['#aea']; //what was active
-  const colorBlueprint = buildPageColorBlueprint(palette);
+  const colorBlueprint = buildPageColorBlueprint(defaultTheme.palette);
 
   const master = {
     id: 'p_' + uniqueId(),
-    palette,
+    palette: defaultTheme.palette,
     colorBlueprint,
     style: {
       fontFamily: 'Source Sans Pro',
