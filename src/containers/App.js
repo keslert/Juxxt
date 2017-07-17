@@ -80,9 +80,7 @@ class App extends React.Component {
 
     if(preview) {
       return (
-        <StyledColumn width={100}>
-          <Page {...master} master={true} preview={true} />
-        </StyledColumn>
+        <Page {...master} master={true} preview={true} />
       )
     }
 
