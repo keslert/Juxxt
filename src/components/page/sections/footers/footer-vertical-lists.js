@@ -1,11 +1,12 @@
 import React from 'react';
+import Elements from '../../elements';
 import Group from '../../groups';
 import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
 
 class FooterVerticalLists extends React.PureComponent {
   render () {
-    const { groups, style, color } = this.props;
+    const { elements, groups, style, color } = this.props;
 
     const containerClassNames = convertStyleToAtomic({
       ...style,
@@ -27,7 +28,7 @@ class FooterVerticalLists extends React.PureComponent {
           <div className={wrapClassNames}>
             
             <div className={boxClassNames}>
-              <Group {...groups.logo} />
+              <Elements {...elements.logo} />
             </div>
             
             {groups.lists.clones.map((list, i) => (
@@ -49,16 +50,17 @@ export const blueprint = {
   inherits: ['BasicSection', 'GutterSection'],
   style: {},
   color: {},
+  elements: {
+    logo: {
+      name: 'LogoImage',
+    },
+  },
   groups: {
   	lists: {
   		options:[
         {name: 'VerticalList', clones: { _default: 3 }},
       ],
   	},
-    logo: {
-      options: ['Logo']
-    },
-    
   },
   variants: []
 }

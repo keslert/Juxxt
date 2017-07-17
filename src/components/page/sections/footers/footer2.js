@@ -18,7 +18,7 @@ class Footer2 extends React.PureComponent {
     return (
       <div className={ colorClassNames + ' Footer2'}>
         <div className={styleClassNames + ' flex align-center'}>
-          <div className={styleClassNames + 'tr order-' + variant.order}>
+          <div className={'tr order-' + variant.order}>
             <Group {...groups.links} />
           </div>
           <div className={'order-2'}>

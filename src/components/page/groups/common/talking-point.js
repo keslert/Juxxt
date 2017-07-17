@@ -26,9 +26,10 @@ class TalkingPoint extends React.Component {
       }
     } = this.props;
 
-    const classNames = convertStyleToAtomic({
+    const wrapClassNames = convertStyleToAtomic({
       ...style,
       textAlign: align,
+      margin: 'auto', 
     });
 
     const boxClassNames = convertStyleToAtomic({
@@ -37,19 +38,26 @@ class TalkingPoint extends React.Component {
     })
 
     return (
-      <Box className={classNames}>
+      <Box className={wrapClassNames}>
         <div className={boxClassNames}>
           {kicker && <Element {...kicker} />}
           {heading && <div><Element {...heading} /></div>}
           {subheading && <div><Element {...subheading} /></div>}
         </div>
-        <div className={boxClassNames}>
-          {paragraph && <div><Element {...paragraph} /></div>}
-        </div>
-        <div className={boxClassNames}>
-          {links && <div><Element {...links}/></div>}
-          {buttonList && <div><Group {...buttonList} /></div>}
-        </div>
+
+        {paragraph && (
+          <div className={boxClassNames}>
+            <Element {...paragraph} />
+          </div>
+        )}
+
+        {(links || buttonList) && (
+          <div className={boxClassNames}>
+            {links && <Element {...links}/>}
+            {buttonList && <Group {...buttonList} />}
+          </div>
+        )}
+        
       </Box>
     )
   }
