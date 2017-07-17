@@ -3,7 +3,6 @@ import { blueprint as HeadingParagraph } from './heading-paragraph';
 import { blueprint as KickerHeadingParagraph } from './kicker-heading-paragraph';
 import { blueprint as HeadingParagraphLink } from './heading-paragraph-link';
 import { blueprint as HeadingSubheadingButton } from './heading-subheading-button';
-import { blueprint as DoubleButton } from './double-button';
 import { blueprint as HorizontalList } from './horizontal-list';
 import { blueprint as HeadingParagraphButton } from './heading-paragraph-button';
 import { blueprint as Logo } from './singles/logo';
@@ -29,7 +28,6 @@ export default {
   KickerHeadingParagraph,
   HeadingSubheadingButton,
   SingleButton,
-  DoubleButton,
   HorizontalList,
   VerticalList,
   IconHeadingParagraph,
