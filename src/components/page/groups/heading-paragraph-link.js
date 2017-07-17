@@ -11,7 +11,7 @@ class HeadingParagraphLink extends React.PureComponent {
 				color={this.props.color}
         elements={this.props.elements}
         groups={{}}
-				align={this.props.variant.align}
+				variant={this.props.variant}
 			/>
 		)
 	}
@@ -20,7 +20,7 @@ class HeadingParagraphLink extends React.PureComponent {
 export default HeadingParagraphLink;
 
 export const blueprint = {
-  inherits: [TalkingPoint],
+  inherits: [TalkingPoint, 'RowBuffer'],
   style: {},
   color: {},
   elements: {

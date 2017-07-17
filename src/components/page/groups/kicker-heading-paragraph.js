@@ -16,13 +16,13 @@ const KickerHeadingParagraph = ({
       color={color}
       elements={elements}
       groups={{}}
-      align={variant.align} />
+      variant={variant} />
   )
 }
 export default KickerHeadingParagraph;
 
 export const blueprint = {
-  inherits: [TalkingPoint],
+  inherits: [TalkingPoint, 'RowBuffer'],
   style: {},
   color: {},
   elements:  {

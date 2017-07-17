@@ -13,7 +13,7 @@ class HeadingParagraphButton extends React.Component {
         color={color}
         elements={elements}
         groups={groups}
-        align={variant.align} />
+        variant={variant} />
     )
   }
 }
@@ -21,7 +21,7 @@ class HeadingParagraphButton extends React.Component {
 export default HeadingParagraphButton;
 
 export const blueprint = {
-  inherits: [TalkingPoint],
+  inherits: [TalkingPoint, 'RowBuffer'],
   style: {},
   color: {
   },

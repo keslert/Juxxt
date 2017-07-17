@@ -11,13 +11,15 @@ class TalkingPoint extends React.Component {
 
     const { 
       style,
-      align,
       elements: {
         kicker,
         heading,
         subheading,
         paragraph,
         links,
+      },
+      variant: {
+        align='center',
       },
       groups: {
         buttonList,
@@ -28,18 +30,26 @@ class TalkingPoint extends React.Component {
       ...style,
       textAlign: align,
     });
- 
 
+    const boxClassNames = convertStyleToAtomic({
+      marginVertical: style.buffer || 0,
+      paddingBottom: '-1px',
+    })
 
     return (
       <Box className={classNames}>
-        {kicker && <Element {...kicker} />}
-        {heading && <div><Element {...heading} /></div>}
-        {subheading && <div><Element {...subheading} /></div>}
-        {paragraph && <div><Element {...paragraph} /></div>}
-        {links && <div><Element {...links}/></div>}
-        
-        {buttonList && <div><Group {...buttonList} /></div>}
+        <div className={boxClassNames}>
+          {kicker && <Element {...kicker} />}
+          {heading && <div><Element {...heading} /></div>}
+          {subheading && <div><Element {...subheading} /></div>}
+        </div>
+        <div className={boxClassNames}>
+          {paragraph && <div><Element {...paragraph} /></div>}
+        </div>
+        <div className={boxClassNames}>
+          {links && <div><Element {...links}/></div>}
+          {buttonList && <div><Group {...buttonList} /></div>}
+        </div>
       </Box>
     )
   }

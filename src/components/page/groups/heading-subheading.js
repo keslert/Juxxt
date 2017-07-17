@@ -16,14 +16,14 @@ const HeadingSubheading = ({
       color={color}
       elements={elements}
       groups={{}}
-      align={variant.align} />
+      variant={variant} />
   )
 }
 export default HeadingSubheading;
 
 export const blueprint = {
   color: {},
-  inherits: [TalkingPoint],
+  inherits: [TalkingPoint, 'RowBuffer'],
   style: {},
   elements: {
     heading: {

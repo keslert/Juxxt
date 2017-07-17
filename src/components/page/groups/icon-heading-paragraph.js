@@ -1,6 +1,7 @@
 import React from 'react';
 import Element from '../elements';
 import TalkingPointIconComponent from './common/talking-point-icon'
+import { TalkingPoint } from './_inherits';
 import { BasicIcon, BasicHeading, BasicParagraph } from '../elements/_blueprints';
 
 class IconHeadingParagraph extends React.Component {
@@ -19,7 +20,7 @@ class IconHeadingParagraph extends React.Component {
 export default IconHeadingParagraph;
 
 export const blueprint = {
-  inherits: [],
+  inherits: [TalkingPoint, 'RowBuffer'],
   style: {},
   color: {},
   elements: {

@@ -16,7 +16,7 @@ const Heading = ({
       color={color}
       elements={elements}
       groups={{}}
-      align={variant.align} />
+      variant={variant} />
   )
 }
 export default Heading;

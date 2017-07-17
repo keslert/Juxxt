@@ -11,7 +11,7 @@ export const names = {
 export const styles = {
   [names.BasicSection]: {
     paddingVertical: {
-      _default: 5,
+      _default: 6,
       options: [8,7,6,5,4,3,2,1,0],
     },
     maxWidth: {
