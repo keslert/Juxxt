@@ -1,39 +1,16 @@
-import { blueprint as HeadingSubheading } from './heading-subheading';
-import { blueprint as HeadingParagraph } from './heading-paragraph';
-import { blueprint as KickerHeadingParagraph } from './kicker-heading-paragraph';
-import { blueprint as HeadingParagraphLink } from './heading-paragraph-link';
-import { blueprint as HeadingSubheadingButton } from './heading-subheading-button';
-import { blueprint as HorizontalList } from './horizontal-list';
-import { blueprint as HeadingParagraphButton } from './heading-paragraph-button';
-import { blueprint as SingleButton } from './singles/SingleButton';
-import { blueprint as VerticalList } from './vertical-list';
-import { blueprint as IconHeadingParagraph } from './icon-heading-paragraph';
-import { blueprint as BlockImage } from './singles/block-image';
-import { blueprint as CoverImage } from './singles/cover-image';
-import { blueprint as InputButton } from './input-button';
-import { blueprint as InputInputButton } from './input-input-button';
-import { blueprint as Heading } from './heading';
-import { blueprint as StackedButtons } from './stacked-buttons';
+export { blueprint as Heading } from './heading';
+export { blueprint as HeadingSubheading } from './heading-subheading';
+export { blueprint as HeadingParagraph } from './heading-paragraph';
+export { blueprint as HeadingParagraphLink } from './heading-paragraph-link';
+export { blueprint as HeadingSubheadingButton } from './heading-subheading-button';
+export { blueprint as HeadingParagraphButton } from './heading-paragraph-button';
+export { blueprint as KickerHeadingParagraph } from './kicker-heading-paragraph';
 
-import { blueprint as ButtonList } from './button-list';
+export { blueprint as IconHeadingParagraph } from './icon-heading-paragraph';
+export { blueprint as InputButton } from './input-button';
+export { blueprint as InputInputButton } from './input-input-button';
 
-
-export default {
-  HeadingSubheading,
-  HeadingParagraphLink,
-  HeadingParagraph,
-  HeadingParagraphButton,
-  KickerHeadingParagraph,
-  HeadingSubheadingButton,
-  SingleButton,
-  HorizontalList,
-  VerticalList,
-  IconHeadingParagraph,
-  InputButton,
-  InputInputButton,
-  StackedButtons,
-  Heading,
-  ButtonList,
-  BlockImage,
-  CoverImage,
-}
+export { blueprint as HorizontalList } from './horizontal-list';
+export { blueprint as VerticalList } from './vertical-list';
+export { blueprint as StackedButtons } from './stacked-buttons';
+export { blueprint as ButtonList } from './button-list';

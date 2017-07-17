@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import groups from './_components';
-import { uiActions } from '../../../core/ui';
+import * as groups from './_components';
+import { 
+  setSelected,
+  onHoverableMouseEnter,
+  onHoverableMouseLeave,
+} from '../../../core/ui';
 import { includes, last, map } from 'lodash';
 import { fadeIn } from '../../common/styled-animations';
 
@@ -74,5 +78,9 @@ const mapStateToProps = (state, props) => ({
   isHovered: last(state.ui.hovered) === props.uid,
 });
 
-const mapDispatchToProps = Object.assign({}, uiActions);
+const mapDispatchToProps = {
+  setSelected,
+  onHoverableMouseEnter,
+  onHoverableMouseLeave,
+}
 export default connect(mapStateToProps, mapDispatchToProps)(Group);

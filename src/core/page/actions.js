@@ -68,7 +68,7 @@ export function replaceSectionWithAlternative(alternative, section) {
     const state = getState();
     const selected = getSelected(state);
     const duplicated = duplicateSection(alternative, getMaster(state));
-    replaceSection(dispatch, state, selected.section, duplicated);
+    replaceSection(dispatch, state, section || selected.section, duplicated);
 
     let _selected = duplicated;
     if(selected.isGroup) {

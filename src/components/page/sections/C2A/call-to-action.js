@@ -55,7 +55,9 @@ export const blueprint = {
         /*'HeadingParagraph','KickerHeadingParagraph',*],*/
     },
     interaction: {
-      options:[/*'InputButton','InputInputButton',*/'SingleButton'/*,'DoubleButton', 'StackedButtons'*/],
+      options:[
+        {name: 'ButtonList', elements: { buttons: {name: 'BasicButon', clones: {_default: 1}}}},
+      ],
     },
   },
   variants: [{

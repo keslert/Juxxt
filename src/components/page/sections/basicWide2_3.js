@@ -1,10 +1,12 @@
 import React from 'react';
+import Element from '../elements';
 import Group from '../groups';
 import Box from '../../common/box';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 
 const BasicWide2_3 = ({
+  elements,
   groups,
   variant,
   style,
@@ -51,7 +53,7 @@ const BasicWide2_3 = ({
     <Box className={colorClassNames}>
       <Box className={convertStyleToAtomic(wrapStyle)}>
         <Box className={convertStyleToAtomic(imageBox)}>
-          <Group {...groups.image} />
+          <Element {...elements.image} />
         </Box>
         <Box className={convertStyleToAtomic(tpBox) + " mauto"}>
           <Group {...groups.tp} />
@@ -67,12 +69,14 @@ export const blueprint = {
   inherits: ['BasicSection'],
   style: {},
   color: {},
+  elements: {
+    image: {
+      name: 'CoverImage',
+    }
+  },
   groups: {
     tp: {
       options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','HeadingParagraphButton', 'IconHeadingParagraph'],
-    },
-    image: {
-      options: ['CoverImage'],
     },
   },
   variants: [{

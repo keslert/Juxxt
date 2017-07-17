@@ -49,7 +49,7 @@ export const blueprint = {
   },
   groups: {
     button: {
-      options: ['SingleButton'],
+      options: ['ButtonList'],
     },
     links: {
       options: ['HorizontalList']

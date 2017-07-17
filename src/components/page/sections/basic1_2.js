@@ -1,10 +1,12 @@
 import React from 'react';
+import Element from '../elements';
 import Group from '../groups';
 import Box from '../../common/box';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 
 const Basic1_2 = ({
+  elements,
   groups,
   variant,
   style,
@@ -40,7 +42,7 @@ const Basic1_2 = ({
             <Group {...groups.tp} />
           </Box>
           <Box className={innerClassNames + ' order-2'}>
-            <Group {...groups.media} />
+            <Element {...elements.media} />
           </Box>
         </Box>
       </Box>
@@ -54,12 +56,14 @@ export const blueprint = {
   inherits: ['BasicSection', 'GutterSection'],
   style: {},
   color: {},
+  elements: {
+    media: {
+      name: 'BasicImage',
+    }
+  },
   groups: {
     tp: {
       options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','HeadingParagraphButton', 'IconHeadingParagraph'],
-    },
-    media: {
-      options: ['BlockImage'],
     },
   },
   variants: [{

@@ -1,5 +1,5 @@
-import sectionBlueprints from '../../../components/page/sections/_blueprints';
-import blueprints from '../../../components/page/groups/_blueprints';
+import * as sectionBlueprints from '../../../components/page/sections/_blueprints';
+import * as blueprints from '../../../components/page/groups/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
 import { filter, range, uniqBy, flatMap, mapValues, cloneDeep, forEach, includes } from 'lodash';

@@ -2,7 +2,7 @@ import * as blueprints from '../../../../components/page/elements/_blueprints';
 import { styles } from './shared-styles';
 import { styleItem } from '../utils';
 import { getSection } from '../../generator-utils';
-import { isEqual, flatMap, zipObject }  from 'lodash';
+import { isEqual, flatMap, zipObject, values }  from 'lodash';
 
 export function styleElement(element, page) {
   const blueprint = blueprints[element.name];
@@ -32,6 +32,6 @@ export function styleElement(element, page) {
     e => true,
   ]
   
+  element._possibleStyles = Object.assign({}, ...values(sharedStyles), blueprint.style);
   styleItem(element, elements, rules, {style: blueprint.style, sharedStyles});
-
 }

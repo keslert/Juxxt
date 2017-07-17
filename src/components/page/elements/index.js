@@ -1,10 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import elements from './_components';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { uiActions } from '../../../core/ui';
+
+import { 
+  setSelected, 
+  onHoverableMouseEnter,
+  onHoverableMouseLeave,
+  getHovered,
+  getSelected,
+} from '../../../core/ui';
+
 import { includes, last, map } from 'lodash';
-import { fadeIn } from '../../common/styled-animations';
 
 const StyledElement = styled.div`
   position: relative;
@@ -73,9 +81,19 @@ Element.contextTypes = {
   preview: React.PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = (state, props) => ({
-  isSelected: state.ui.selected.uid === props.uid,
-  isHovered: last(state.ui.hovered) === props.uid,
-});
-const mapDispatchToProps = Object.assign({}, uiActions);
+const mapStateToProps = createSelector(
+  getHovered,
+  getSelected,
+  (_, props) => props.uid,
+  (hovered, selected, uid) => ({
+    isSelected: selected.uid === uid,
+    isHovered: last(hovered) === uid,
+  })
+);
+
+const mapDispatchToProps = {
+  setSelected,
+  onHoverableMouseEnter,
+  onHoverableMouseLeave,
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Element);
