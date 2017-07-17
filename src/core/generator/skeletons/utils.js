@@ -1,4 +1,4 @@
-import { omit, mapValues, map, includes, forEach, sortBy, isEmpty, pick, isString, extend } from 'lodash';
+import { omit, mapValues, map, includes, forEach, sortBy, isEmpty, pick, isString, extendWith, isObject } from 'lodash';
 import { randomItem } from '../../utils';
 
 import { generateGroupSkeleton } from './group';
@@ -41,7 +41,10 @@ export function extractSkeletonFromItem(item) {
 }
 
 export function generateItemSkeleton(name, blueprint, variant, overrides) {
-  const _blueprint = extend({}, blueprint, overrides);
+
+  const _blueprint = extendWith(overrides, blueprint, (oV, bV) => (
+    isObject(oV) && isObject(bV) ? {...bV, ...oV } : bV
+  ));
 
   return {
     name,
