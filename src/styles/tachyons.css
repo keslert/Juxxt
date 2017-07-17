@@ -693,3 +693,7 @@ img { max-width: 100%; }
 }
 
 .pointer { cursor: pointer; }
+
+.parallax { 
+  /* background-attachment: fixed !important; */
+}
