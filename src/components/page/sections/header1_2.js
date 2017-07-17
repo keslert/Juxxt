@@ -1,4 +1,5 @@
 import React from 'react';
+import Element from '../elements';
 import Group from '../groups';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
@@ -9,7 +10,7 @@ import Box from '../../common/box';
 
 class Header1_2 extends React.PureComponent {
   render () {
-  const { groups, style, color, variant } = this.props;
+  const { elements, groups, style, color, variant } = this.props;
 
   const containerStyle = {
     ...style
@@ -41,7 +42,7 @@ class Header1_2 extends React.PureComponent {
             <Group {...groups.tp} />
           </Box>
           <Box className={innerClassNames + ' order-2'}>
-            <Group {...groups.media} />
+            <Element {...elements.media} />
           </Box>
         </Box>
       </Box>
@@ -57,13 +58,15 @@ export const blueprint = {
   inherits: ['HeaderSection', 'GutterSection'],
   style: {},
   color: { background: 'vibrant' },
+  elements: {
+    media: {
+      name: 'BasicImage',
+    }
+  },
   groups: {
     tp: {
       options: ['HeadingSubheadingButton', 'HeadingParagraphButton'],
     },
-    media: {
-      options: ['BlockImage']
-    }
   },
   variants: [{
     order: { options: [1,3] }

@@ -9,7 +9,8 @@ import Footer1 from './footers/footer1';
 import Footer2 from './footers/footer2';
 import FooterVerticalLists from './footers/footer-vertical-lists';
 import CallToAction from './C2A/call-to-action';
-export default {
+
+export {
   Basic,
   Basic1_2,
   BasicWide1_2,

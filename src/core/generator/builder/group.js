@@ -1,4 +1,4 @@
-import blueprints from '../../../components/page/groups/_blueprints';
+import * as blueprints from '../../../components/page/groups/_blueprints';
 import { buildItemFromSkeleton } from './builder-utils';
 
 import { mapValues, pickBy, uniqueId } from 'lodash';

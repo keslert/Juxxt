@@ -1,5 +1,5 @@
-import blueprints from '../../../../components/page/sections/_blueprints';
-import { isEqual, zipObject } from 'lodash';
+import * as blueprints from '../../../../components/page/sections/_blueprints';
+import { isEqual, zipObject, values } from 'lodash';
 import { styles } from './shared-styles';
 import { styleItem } from '../utils';
 
@@ -14,6 +14,7 @@ export function styleSection(section, page) {
     s => isEqual(s.variant, section.variant),
     s => true,
   ]
-  
+
+  section._possibleStyles = Object.assign({}, ...values(sharedStyles), blueprint.style);
   styleItem(section, page.sections, rules, {style: blueprint.style, sharedStyles});
 }

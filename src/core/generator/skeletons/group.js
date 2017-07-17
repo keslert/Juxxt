@@ -1,4 +1,4 @@
-import blueprints from '../../../components/page/groups/_blueprints';
+import * as blueprints from '../../../components/page/groups/_blueprints';
 import { generateElementSkeleton } from './element';
 import { generateItemSkeleton } from './utils';
 import { mapValues } from 'lodash';

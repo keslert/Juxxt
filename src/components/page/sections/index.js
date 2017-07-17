@@ -2,9 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import styled from 'styled-components';
-import sections from './_components';
+import * as sections from './_components';
 import { replaceSectionWithAlternative } from '../../../core/page';
-import { uiActions, getSelected, getHovered } from '../../../core/ui';
+import { 
+  setSelected,
+  onHoverableMouseEnter,
+  onHoverableMouseLeave,
+  setSidebarOpen,
+  getSelected, 
+  getHovered,
+} from '../../../core/ui';
 import { includes, last, map } from 'lodash';
 import flow from 'lodash/flow';
 
@@ -165,7 +172,14 @@ const mapStateToProps = createSelector(
   })
 )
 
-const mapDispatchToProps = Object.assign({replaceSectionWithAlternative}, uiActions);
+const mapDispatchToProps = {
+  replaceSectionWithAlternative,
+  setSelected,
+  onHoverableMouseEnter,
+  onHoverableMouseLeave,
+  setSidebarOpen,
+};
+
 export default flow(
   DragSource('section', sourceSpec, sourceCollect),
   DropTarget('section', targetSpec, targetCollect),

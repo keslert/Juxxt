@@ -1,7 +1,7 @@
-import blueprints from '../../../../components/page/groups/_blueprints';
+import * as blueprints from '../../../../components/page/groups/_blueprints';
 import { styles } from './shared-styles';
 import { styleItem } from '../utils';
-import { isEqual, flatMap, zipObject }  from 'lodash';
+import { isEqual, flatMap, zipObject, values }  from 'lodash';
 
 export function styleGroup(group, page) {
   const blueprint = blueprints[group.name];
@@ -21,5 +21,6 @@ export function styleGroup(group, page) {
     g => true,
   ]
   
+  group._possibleStyles = Object.assign({}, ...values(sharedStyles), blueprint.style);
   styleItem(group, groups, rules, {style: blueprint.style, sharedStyles});
 }

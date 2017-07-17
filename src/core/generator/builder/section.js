@@ -1,4 +1,4 @@
-import blueprints from '../../../components/page/sections/_blueprints';
+import * as blueprints from '../../../components/page/sections/_blueprints';
 
 import { buildItemFromSkeleton } from './builder-utils';
 

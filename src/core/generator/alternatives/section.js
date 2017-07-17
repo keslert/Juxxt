@@ -1,4 +1,4 @@
-import blueprints from '../../../components/page/sections/_blueprints';
+import * as blueprints from '../../../components/page/sections/_blueprints';
 import { generateSectionSkeleton, generateAllSectionSkeletons } from '../skeletons/section';
 import { buildSectionFromSkeleton } from '../builder/section';
 import { 

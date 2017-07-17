@@ -50,8 +50,6 @@ class App extends React.Component {
     const { updateAlternatives, setShiftDown, master, setSelected, turnOnModification, setShowPreview } = this.props;
 
     this.listener = new window.keypress.Listener();
-    // this.listener.simple_combo('right', () => updateAlternatives());
-
     this.listener.simple_combo('escape', () => setShowPreview(false));
 
     this.listener.register_combo({
@@ -77,13 +75,11 @@ class App extends React.Component {
 
   render() {
     const { master, preview } = this.props;
-
     if(preview) {
       return (
         <Page {...master} master={true} preview={true} />
       )
     }
-
     
     return (
       <StyledApp>

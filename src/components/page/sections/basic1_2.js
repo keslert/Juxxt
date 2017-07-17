@@ -1,10 +1,12 @@
 import React from 'react';
+import Element from '../elements';
 import Group from '../groups';
 import Box from '../../common/box';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 
 const Basic1_2 = ({
+  elements,
   groups,
   variant,
   style,
@@ -54,12 +56,13 @@ export const blueprint = {
   inherits: ['BasicSection', 'GutterSection'],
   style: {},
   color: {},
+  elements: {},
   groups: {
     tp: {
       options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','HeadingParagraphButton', 'IconHeadingParagraph'],
     },
     media: {
-      options: ['BlockImage','Gallery'],
+      options: ['Gallery'],
     },
   },
   variants: [{

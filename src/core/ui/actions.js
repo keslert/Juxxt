@@ -1,6 +1,17 @@
 import * as types from './action-types';
 import { getSelected, getModifications, getSelectedModification } from './selectors';
-import { pick, mapValues, filter, zipObject, intersection, sortBy, includes, isEmpty, uniq } from 'lodash';
+import { 
+  pick, 
+  mapValues, 
+  filter, 
+  zipObject, 
+  intersection, 
+  sortBy, 
+  includes, 
+  isEmpty, 
+  uniq 
+} from 'lodash';
+
 import { getStyleRoot } from '../generator/style/utils';
 
 export function setShowPreview(show) {
@@ -119,8 +130,11 @@ function resolveComponentModification(dispatch, state, selected, callPath) {
 }
 
 function resolveStyleModification(dispatch, state, selected) {
-  const keys = uniq(Object.keys(selected.style).map(key => getStyleRoot(key)));
-  resolveModificationSelection(dispatch, state, keys, 'style');
+  const style = selected._possibleStyles;
+  const valid = filter(Object.keys(style), key => style[key].options && style[key].options.length > 1);
+  const rootKeys = uniq(valid.map(key => getStyleRoot(key)));
+
+  resolveModificationSelection(dispatch, state, rootKeys, 'style');
 }
 
 function resolvePageModification(dispatch, state) {

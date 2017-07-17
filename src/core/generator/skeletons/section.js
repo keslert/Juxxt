@@ -1,4 +1,4 @@
-import blueprints from '../../../components/page/sections/_blueprints';
+import * as blueprints from '../../../components/page/sections/_blueprints';
 import { generateGroupSkeleton } from './group';
 import { generateElementSkeleton } from './element';
 import { getClosestVariant, generateItemSkeleton } from './utils';
