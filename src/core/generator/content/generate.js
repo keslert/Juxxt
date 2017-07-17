@@ -93,14 +93,13 @@ function getSubheaderContent() {
 
 function getHeaderContent() {
   return randomItem([
-    {text: "SmartThings is the easy way to turn your home into a smart home."},
+    {text: "SmartThings: turn your home into a smart home."},
     {text: "Track, learn, Save, Invest automatically"},
-    {text: "The Ultimate Guide to Xsolla Services and Products"},
+    {text: "The Ultimate Guide to Xsolla"},
     {text: "Easily Customize WordPress Themes, Live."},
-    {text: "Short-term empolyee leasing between like-minded startups"},
     {text: "Litmus makes your email better."},
     {text: "Professionals You Need, From People You Know."},
-    {text: "The digital  Assistant for cost optimization"},
+    {text: "The digital assistant for cost optimization"},
     {text: "Convert your deals into invoices."},
     {text: "Try out a fresh look for YouTube"},
     {text: "Meet pixel. Phone by Google."}
