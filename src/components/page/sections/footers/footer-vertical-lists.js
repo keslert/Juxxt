@@ -19,7 +19,7 @@ class FooterVerticalLists extends React.PureComponent {
 
     const boxClassNames = convertStyleToAtomic({
       width: Math.floor(100 / (1 + groups.lists.clones.length)) + 'P',
-      marginHorizontal: style.gutter,
+      paddingHorizontal: style.gutter,
     })
 
     return (

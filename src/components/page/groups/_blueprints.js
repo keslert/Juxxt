@@ -14,12 +14,13 @@ import { blueprint as InputButton } from './input-button';
 import { blueprint as InputInputButton } from './input-input-button';
 import { blueprint as Heading } from './heading';
 import { blueprint as StackedButtons } from './stacked-buttons';
-
+import { blueprint as Gallery } from './gallery';
 import { blueprint as ButtonList } from './button-list';
 
 
 export default {
   HeadingSubheading,
+  Gallery,
   HeadingParagraphLink,
   HeadingParagraph,
   HeadingParagraphButton,

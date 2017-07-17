@@ -15,6 +15,7 @@ import InputButton from './input-button';
 import InputInputButton from './input-input-button';
 import Heading from './heading';
 import StackedButtons from './stacked-buttons';
+import Gallery from './gallery';
 
 export default {
   HeadingSubheading,
@@ -34,4 +35,5 @@ export default {
   StackedButtons,
   Heading,
   ButtonList,
+  Gallery,
 }

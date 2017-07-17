@@ -59,7 +59,7 @@ export const blueprint = {
       options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','HeadingParagraphButton', 'IconHeadingParagraph'],
     },
     media: {
-      options: ['BlockImage'],
+      options: ['BlockImage','Gallery'],
     },
   },
   variants: [{

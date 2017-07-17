@@ -121,6 +121,20 @@ export const BasicImage = {
   style: {},
 };
 
+export const GalleryImage = { 
+  name: 'BasicImage', 
+  is: 'Image',
+  inherits: ['Media'],
+  color: {},
+  style: {
+    aspectRatio: {
+      _default: '4x3',
+      options: ['1x1', '16x9', '4x3', '3x4', '6x4', '8x5', '7x5'],
+    },
+  },
+};
+
+
 export const CoverImage = { 
   name: 'CoverImage', 
   is: 'Image',
