@@ -7,10 +7,8 @@ import { range } from 'lodash';
 class Gallery extends React.PureComponent {
   render () {
     const { style, color, elements, variant } = this.props;
-    console.log(variant)
     
     const boxStyle = {
-      
       display: "flex",
       align: "center",
       justify: "center",
