@@ -13,6 +13,7 @@ class CallToAction extends React.PureComponent {
       ...style, 
       direction: isFlat ? 'row' : 'column',
       display: 'flex',
+      align: 'center',
     }
     const tpStyle = {
       textAlign: isFlat ? 'left' : 'center',
@@ -43,7 +44,7 @@ export default CallToAction;
 
 export const blueprint = {
   type: 'action',
-  inherits: ['BasicSection'],
+  inherits: ['BasicSection', 'BaseSection'],
   type: 'action',
   style: {},
   color: {},

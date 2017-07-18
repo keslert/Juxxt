@@ -55,7 +55,7 @@ export default Header1_2;
 
 export const blueprint = {
   type: 'header',
-  inherits: ['HeaderSection', 'GutterSection', 'ParallaxSection'],
+  inherits: ['HeaderSection', 'GutterSection', 'ParallaxSection', 'BaseSection'],
   style: {
     paddingTop: {
       _default: 6,

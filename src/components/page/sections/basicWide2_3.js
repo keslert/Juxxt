@@ -66,7 +66,7 @@ export default BasicWide2_3;
 
 export const blueprint = {
   type: 'basic',
-  inherits: ['BasicSection'],
+  inherits: ['BasicSection', 'BaseSection'],
   style: {},
   color: {},
   elements: {

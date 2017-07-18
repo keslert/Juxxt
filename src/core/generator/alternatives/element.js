@@ -7,7 +7,7 @@ import { map, uniq, intersection, filter, range, cloneDeep, flatMap, findIndex, 
 import { styles } from '../style/element/shared-styles';
 import { filterStyle } from '../style/utils';
 import { getBackground, getBlueprint } from '../generator-utils';
-import { generateSectionComponentAlternatives, generateSectionVariantAlternatives } from './section';
+import { generateSectionVariantAlternatives } from './section';
 import { generateGroupVariantAlternatives, generateGroupComponentAlternatives } from './group';
 
 export function generateElementComponentAlternatives(element, sectionSkeleton) {

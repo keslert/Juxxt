@@ -12,7 +12,8 @@ class Gallery extends React.PureComponent {
       display: "flex",
       align: "center",
       justify: "center",
-      flex: "wrap"
+      flex: "wrap",
+      marginHorizontal: -style.padding,
     }
     const divStyle = {
       ...style,

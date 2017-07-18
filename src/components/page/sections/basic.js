@@ -33,12 +33,15 @@ export default Basic;
 
 export const blueprint = {
   type: 'basic',
-  inherits: ['BasicSection'],
+  inherits: ['BasicSection', 'BaseSection'],
   style: {},
   color: {},
   groups: {
     item: {
-      options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','IconHeadingParagraph','Gallery'],
+      // options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','IconHeadingParagraph','Gallery'],
+      options: [
+        {name: 'HeadingParagraph', overrides: {here: true, elements: {heading: {name: 'BasicButton'}}}}
+      ]
     },
   },
   variants: []

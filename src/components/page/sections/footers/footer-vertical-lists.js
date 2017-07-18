@@ -47,7 +47,7 @@ export default FooterVerticalLists;
 
 export const blueprint = {
   type: 'footer',
-  inherits: ['BasicSection', 'GutterSection'],
+  inherits: ['BasicSection', 'GutterSection', 'BaseSection'],
   style: {},
   color: {},
   elements: {

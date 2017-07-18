@@ -23,7 +23,7 @@ class Header extends React.PureComponent {
     return (
       <div className={colorClassNames + ' Header ' + containerClassNames}>
         <div className={styleClassNames}>
-          <Group {...groups.item} />
+          <Group {...groups.tp} />
         </div>
       </div>
     )
@@ -34,7 +34,7 @@ export default Header;
 
 export const blueprint = {
   type: 'header',
-  inherits: ['HeaderSection', /*'ParallaxSection'*/],
+  inherits: ['HeaderSection', 'BaseSection'],
   style: {
     paddingTop: {
       _default: 8,
@@ -47,7 +47,7 @@ export const blueprint = {
   },
   color: { background: 'vibrant' },
   groups: {
-    item: {
+    tp: {
       options: ['HeadingSubheadingButton', /* 'HeadingParagraphButton' */],
     },
   },

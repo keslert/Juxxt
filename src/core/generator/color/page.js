@@ -8,7 +8,6 @@ import geopattern from 'geopattern';
 
 export function buildPageColorBlueprint(colors) {
   const _colors = uniq([...colors, '#ffffff'])
-  debugger;
   const primary = getMostVibrantColor(_colors);
   const darkGray = tintColor("#211b1a", primary, 20);
   const lightGray = tintColor('#f5f6f7', primary, 20);

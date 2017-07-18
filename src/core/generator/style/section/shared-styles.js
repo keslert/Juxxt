@@ -1,12 +1,13 @@
 import { range } from 'lodash';
 
 export const names = {
+  BaseSection: 'BaseSection',
   BasicSection: 'BasicSection',
   HeaderSection: 'HeaderSection',
   NavigationSection: 'NavigationSection',
-  GutterSection: 'GutterSection',
   FooterSection: 'FooterSection',
   ParallaxSection: 'ParallaxSection',
+  GutterSection: 'GutterSection',
 }
 
 export const styles = {
@@ -15,13 +16,6 @@ export const styles = {
       _default: 6,
       options: [8,7,6,5,4,3,2,1,0],
     },
-    maxWidth: {
-      _default: 1024,
-      options: [900, 1024, 1170, 'auto'],
-    },
-    margin: {
-      options: ['auto'],
-    }
   },
   [names.HeaderSection]: {
     maxWidth: {
@@ -34,9 +28,6 @@ export const styles = {
     paddingBottom: {
       _default: 6,
       options: [4,5,6,7,8],
-    },
-    margin: {
-      options: ['auto'],
     },
     fontSize: {
       _default: 3,
@@ -64,5 +55,14 @@ export const styles = {
       _default: "on",
       options: ["on","off"],
     }
+  },
+  [names.BaseSection]: {
+    margin: {
+      options: ['auto'],
+    },
+    maxWidth: {
+      _default: 1024,
+      options: [900, 1024, 1170, 'auto'],
+    },
   }
 }
