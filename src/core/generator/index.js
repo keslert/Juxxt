@@ -14,7 +14,7 @@ import { getSection, getParents } from './generator-utils';
 import { range, reduce, uniqueId, forEach, clone, sortBy, map, max, some, filter, cloneDeep } from 'lodash';
 import defaultTheme from './themes';
 
-const NUM_SECTIONS = 7;
+const NUM_SECTIONS = 9;
 export function init() {
   const colorBlueprint = buildPageColorBlueprint(defaultTheme.palette);
 
@@ -36,7 +36,8 @@ export function init() {
         header: i === 1,
         footer: i === NUM_SECTIONS - 1,
         action: i === NUM_SECTIONS - 2, 
-        basic: i > 1 && i < NUM_SECTIONS - 2,
+        grid: i === NUM_SECTIONS - 3,
+        basic: i > 1 && i < NUM_SECTIONS - 3,
       };
 
       const sectionName = i === 1 ? 'Header' : undefined;
@@ -46,6 +47,7 @@ export function init() {
         header: [colorBlueprint.primary],
         footer: colorBlueprint.lights,
         action: [colorBlueprint.primary],
+        grid: colorBlueprint.lights,
         basic: colorBlueprint.lights,
       };
 

@@ -18,11 +18,33 @@ export const BasicKicker = {
     }
   },
 };
+export const SmallHeading = {
+  name: 'SmallHeading', 
+  is: 'Text',
+  inherits: [inherits.Heading],
+  color: {
+    text: 'vibrant',
+  },
+  style: {
+    fontSize: {
+      _default: 3,
+      options: range(3, 4),
+    },
+    fontWeight: {
+      _default: 6,
+      options: [2,4,6,8],
+    },
+    lineHeight: {
+      _default: 1,
+      options: range(1, 5),
+    }
+  }
+};
 
 export const BasicHeading = { 
   name: 'BasicHeading', 
   is: 'Text',
-  inherits: [inherits.Heading],
+  inherits: [],
   color: {
     text: 'vibrantOrWhite',
   },

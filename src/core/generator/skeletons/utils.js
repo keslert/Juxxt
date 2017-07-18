@@ -41,11 +41,11 @@ export function extractSkeletonFromItem(item) {
 }
 
 export function generateItemSkeleton(name, blueprint, variant, overrides) {
-
+  
   const _blueprint = extendWith(overrides, blueprint, (oV, bV) => (
     isObject(oV) && isObject(bV) ? {...bV, ...oV } : bV
   ));
-
+  
   return {
     name,
     variant: getClosestVariant(variant, _blueprint.variants),
