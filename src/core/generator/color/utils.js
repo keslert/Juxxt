@@ -66,15 +66,17 @@ export function getVibrancy(color,background) {
   const lDiff = (1 - Math.abs(LUM_TARGET - luminance)) * LUM_WEIGHT;
   const sDiff = (1 - Math.abs(SAT_TARGET - saturation)) * SAT_WEIGHT;
   
-  if(tinycolor.isReadable(background, color)) {
+  // if(tinycolor.isReadable(background, '#ffffff')) {
     return (lDiff + sDiff) / 2;
-  } else {
-    return saturation > 0.1 ? -1 : 0;
+  // }
+  //  else {
+  //      return saturation > 0.1 ? -1 : 0;
+  //  }
   }
-}
 
 export function tintColor(base, color) {
   const _base = tinycolor(base).toHsv();
   _base.h = tinycolor(color).toHsv().h
   return tinycolor(_base).toHexString();
 }
+

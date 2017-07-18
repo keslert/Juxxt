@@ -55,8 +55,17 @@ export default Header1_2;
 
 export const blueprint = {
   type: 'header',
-  inherits: ['HeaderSection', 'GutterSection'],
-  style: {},
+  inherits: ['HeaderSection', 'GutterSection', 'ParallaxSection'],
+  style: {
+    paddingTop: {
+      _default: 6,
+      options: [4,5,6,7,8],
+    },
+    paddingBottom: {
+      _default: 6,
+      options: [4,5,6,7,8],
+    }
+  },
   color: { background: 'vibrant' },
   elements: {
     media: {

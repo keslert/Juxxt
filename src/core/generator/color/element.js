@@ -58,8 +58,21 @@ export function colorElement(element, page) {
 }
 
 function getPreferredColor(colors, preference) {
+  if(preference === 'vibrantOrWhite'){
+    return getVibrantOrWhite(colors, preference);
+  }
   if(preference === 'vibrant') {
     return getMostVibrantColor(colors);
   }
   return colors[0];
 }
+
+function getVibrantOrWhite(colors, preference) {
+    if (colors.indexOf('#ffffff') !== -1){
+      return '#ffffff';
+    }
+    else {
+      return getMostVibrantColor(colors);
+    }
+  }
+  

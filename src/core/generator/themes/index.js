@@ -1,4 +1,8 @@
 import DessertShop from './dessert-shop';
 import SimpleWhite from './simple-white';
+import TravelBlog from './travel-blog';
+import FashionHipster from './fashion-hipster';
+import HealthyFood from './healthy-food';
+import IceCreamShop from './ice-cream-shop';
 
-export default DessertShop;
+export default FashionHipster;

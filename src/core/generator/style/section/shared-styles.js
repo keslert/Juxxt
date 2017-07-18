@@ -6,6 +6,7 @@ export const names = {
   NavigationSection: 'NavigationSection',
   GutterSection: 'GutterSection',
   FooterSection: 'FooterSection',
+  ParallaxSection: 'ParallaxSection',
 }
 
 export const styles = {
@@ -28,11 +29,11 @@ export const styles = {
     },
     paddingTop: {
       _default: 6,
-      options: [4,5,6,7],
+      options: [4,5,6,7,8],
     },
     paddingBottom: {
       _default: 6,
-      options: [4,5,6,7],
+      options: [4,5,6,7,8],
     },
     margin: {
       options: ['auto'],
@@ -58,4 +59,10 @@ export const styles = {
       options: range(0, 6),
     },
   },
+  [names.ParallaxSection]: {
+    parallax: {
+      _default: "on",
+      options: ["on","off"],
+    }
+  }
 }

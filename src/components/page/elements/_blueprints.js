@@ -24,7 +24,7 @@ export const BasicHeading = {
   is: 'Text',
   inherits: [inherits.Heading],
   color: {
-    text: 'vibrant',
+    text: 'vibrantOrWhite',
   },
   style: {
     fontSize: {

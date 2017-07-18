@@ -16,8 +16,12 @@ class Header extends React.PureComponent {
     const styleClassNames = convertStyleToAtomic(boxStyle);
     const colorClassNames = convertColorToAtomic(color);
 
+    const containerClassNames = convertStyleToAtomic({
+      parallax: style.parallax,
+    });
+
     return (
-      <div className={colorClassNames + ' Header'}>
+      <div className={colorClassNames + ' Header ' + containerClassNames}>
         <div className={styleClassNames}>
           <Group {...groups.item} />
         </div>
@@ -30,8 +34,17 @@ export default Header;
 
 export const blueprint = {
   type: 'header',
-  inherits: ['HeaderSection'],
-  style: {},
+  inherits: ['HeaderSection', /*'ParallaxSection'*/],
+  style: {
+    paddingTop: {
+      _default: 8,
+      options: [4,5,6,7,8],
+    },
+    paddingBottom: {
+      _default: 6,
+      options: [4,5,6,7,8],
+    }
+  },
   color: { background: 'vibrant' },
   groups: {
     item: {
