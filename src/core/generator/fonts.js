@@ -1,4 +1,4 @@
-/*import { flatMap, values, uniq } from 'lodash';
+import { flatMap, values, flatten, filter, map, includes, zipObject, uniq } from 'lodash';
 //for a given heading, which paragraph fonts can it take??
 export const headings = {
 	'Alice': ['Open Sans', 'Raleway', 'Lato', 'Roboto', 'Montserrant'],
@@ -27,4 +27,4 @@ export const paragraphs = zipObject(paragraphNames, map(paragraphNames, name => 
 	filter(allHeadings, filter(allHeadings, heading => includes(headings[heading], name)))
 )))
 
-console.log(paragraphs);*/
+console.log(paragraphs);
