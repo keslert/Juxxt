@@ -17,7 +17,7 @@ export const styles = {
     },
     maxWidth: {
       _default: 1024,
-      options: [900, 1024, 1170],
+      options: [900, 1024, 1170, 'auto'],
     },
     margin: {
       options: ['auto'],

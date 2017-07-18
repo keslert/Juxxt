@@ -15,3 +15,4 @@ export { blueprint as VerticalList } from './vertical-list';
 export { blueprint as StackedButtons } from './stacked-buttons';
 export { blueprint as ButtonList } from './button-list';
 export { blueprint as Gallery } from './gallery';
+export { blueprint as BlockImage } from './block-image';

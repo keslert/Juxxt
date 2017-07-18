@@ -1,11 +1,14 @@
 import * as sectionBlueprints from '../../../components/page/sections/_blueprints';
+import * as elementBlueprints from '../../../components/page/elements/_blueprints';
 import * as blueprints from '../../../components/page/groups/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
 import { filter, range, uniqBy, flatMap, mapValues, cloneDeep, forEach, includes } from 'lodash';
 import { getCombinations } from '../../utils';
 
-import { findItemInSection, getBlueprint } from '../generator-utils';
+import { generateElementColorAlternatives } from './element';
+
+import { findItemInSection, getBlueprint, getBackground } from '../generator-utils';
 import { styles } from '../style/group/shared-styles';
 import { filterStyle } from '../style/utils';
 import { getSortedByMostVibrant } from '../color/utils';
@@ -45,39 +48,20 @@ export function generateGroupVariantAlternatives(group, skeleton) {
   return skeletons;
 }
 
-const HEADING_ELEMENTS = ['BasicIcon', 'BasicHeading', 'BasicSubheading'];
-function colorElements(element, colorPair, page) {
-  const color = (HEADING_ELEMENTS.indexOf(element.name) > -1) ? colorPair[0] : colorPair[1];
-  const transparentBg = (element.color.background === "transparent");
-  if (element.color.background && !transparentBg) {
-    element.color.background = color
-  }
-  if (element.color.borderColor) {
-    element.color.borderColor = transparentBg ? color : (element.color.background);
-  }
-  if(element.color.text) {
-    element.color.text = element.color.background ? (transparentBg ? element.color.borderColor : page.colorBlueprint.bgBlueprints[element.color.background].texts[0]) : color;
-  }
-}
-
-
 
 export function generateGroupColorAlternatives(section, modify, page, selected) {
-  if(Object.keys(selected.elements).length <= 1)
-    return []; //TODO: Filters on images
-  
-  const sections = [];
-  let colors = Object.keys(page.colorBlueprint.bgBlueprints)
-  colors = colors.filter(item => item !== page.colorBlueprint.lightGray)
-  colors = getSortedByMostVibrant(colors,section.color.background)
-  for(let i = 0; i < 3; i++) {
-    for (let j = 0; j< 3; j++) {
-      const _section = cloneDeep(section);
-      const group = findItemInSection(selected, _section);
-      forEach(group.elements, e => colorElements(e, [colors[i], colors[j]], page));
-      sections.push(_section);
-    }
-  }
+  const background = getBackground(selected);
+  const blueprint = page.colorBlueprint.bgBlueprints[background];
+
+  const elements = filter(selected.section._elements, e => e.parent.fullId === selected.fullId);  
+  const backgroundElements = filter(elements, e => elementBlueprints[e.name].color.background === 'vibrant');
+  const textElements = filter(elements, e => elementBlueprints[e.name].color.text === 'vibrant');
+
+  const sections = [
+    ...flatMap(backgroundElements, e => generateElementColorAlternatives(section, {background: true}, e, page)),
+    ...flatMap(textElements, e => generateElementColorAlternatives(section, {text: true}, e, page)),
+  ];
+
   return sections;
 }
 
