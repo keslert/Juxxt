@@ -12,6 +12,7 @@ class Header extends React.PureComponent {
       display: "flex",
       align: "center",
       justify: "center",
+      parallax: false,
     }
     const styleClassNames = convertStyleToAtomic(boxStyle);
     const colorClassNames = convertColorToAtomic(color);
@@ -34,7 +35,7 @@ export default Header;
 
 export const blueprint = {
   type: 'header',
-  inherits: ['HeaderSection', 'BaseSection'],
+  inherits: ['HeaderSection', 'BaseSection', 'ParallaxSection'],
   style: {
     paddingTop: {
       _default: 8,
