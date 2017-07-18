@@ -5,4 +5,4 @@ import FashionHipster from './fashion-hipster';
 import HealthyFood from './healthy-food';
 import IceCreamShop from './ice-cream-shop';
 
-export default FashionHipster;
+export default IceCreamShop;
