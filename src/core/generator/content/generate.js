@@ -95,6 +95,7 @@ function getHeaderContent() {
   return randomItem([
     {text: "SmartThings: turn your home into a smart home."},
     {text: "Track, learn, Save, Invest automatically"},
+    {text: "Simple, Fast, Customizeable."},
     {text: "The Ultimate Guide to Xsolla"},
     {text: "Easily Customize WordPress Themes, Live."},
     {text: "Litmus makes your email better."},
