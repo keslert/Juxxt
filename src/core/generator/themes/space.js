@@ -3,7 +3,7 @@ import uniqueId from 'lodash/uniqueId';
 
 
 export default {
-  palette: ['#3c0963', '#012456', '#091238'],
+  palette: ['#3c0963', '#012456', '091238'],
   backgroundImages: [
     {key: uniqueId(), src: 'https://images.pexels.com/photos/110854/pexels-photo-110854.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
     {key: uniqueId(), src: 'https://images.pexels.com/photos/2156/sky-earth-space-working.jpg?w=940&h=650&auto=compress&cs=tinysrgb'},

@@ -70,7 +70,7 @@ class Alternatives extends React.Component {
                 onDelete={() => null} 
                 changes={alternative.sections[0].changes}>
                 <Page
-                  preview={true}
+                  preview={false}
                   onClick={() => this.handleClick(alternative)}
                   sections={alternative.sections}
                   sectionsDraggable={alternative.isSection}

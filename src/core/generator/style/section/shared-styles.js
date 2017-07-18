@@ -8,6 +8,7 @@ export const names = {
   FooterSection: 'FooterSection',
   ParallaxSection: 'ParallaxSection',
   GutterSection: 'GutterSection',
+  FixedNavBar: 'FixedNavBar',
 }
 
 export const styles = {
@@ -64,5 +65,13 @@ export const styles = {
       _default: 1024,
       options: [900, 1024, 1170, 'auto'],
     },
-  }
+  },
+
+  [names.FixedNavBar]: {
+     fixedNavBar: {
+       _default: "true",
+       options: ["true","false"],
+     }
+   }
+  
 }

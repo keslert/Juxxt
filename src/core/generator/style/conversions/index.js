@@ -21,6 +21,7 @@ const conversions = {
   borderWidth: v => 'bw' + v,
   height: v => 'h-' + v,
   parallax: v => v === "on" ? 'parallax': '',
+  fixedNavBar: v => v === "true" ? 'fixedNavBar': '',
 }
 
 
