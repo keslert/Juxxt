@@ -66,10 +66,15 @@ export const blueprint = {
     },
     gridItem: {
       options: [
-        {name: 'HeadingParagraph' , clones: 6, overrides: {elements:{heading:{name:'SmallHeading'}}}},
-        {name: 'HeadingParagraphLink', clones:6,  overrides: {elements:{heading:{name:'SmallHeading'}}}},
-        {name: 'IconHeadingParagraph',  clones: 6, overrides: {elements:{heading:{name:'SmallHeading'}}}},
-        {name: 'ImageHeadingParagraph', clones: 6, overrides: {elements:{heading:{name:'SmallHeading'}}}},
+        {name: 'HeadingParagraph' , clones: 6, elements:{heading:{name:'SmallHeading'}}},
+        {name: 'HeadingParagraphLink', clones:6,  elements:{heading:{name:'SmallHeading'}}},
+        {name: 'IconHeadingParagraph',  clones: 6, elements:{heading:{name:'SmallHeading'}}},
+        {name: 'ImageHeadingParagraph', clones: 6, 
+          groups: { tp: { options: [
+            {name: 'HeadingParagraph', elements: {heading: {name:'SmallHeading'}}}
+          ]}},
+          elements: { image: { _defaults: {style: {'aspectRatio': '4x3'}}}}
+        },
       ]
     },
   },

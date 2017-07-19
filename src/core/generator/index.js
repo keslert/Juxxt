@@ -48,7 +48,7 @@ export function init() {
   master.sections.forEach(section => { section.master = true });
   generatePageCSSRules(master);
 
-  return { master, alternatives: [] };
+  return master;
 }
 
 export function overrideElementContent(element, content, page) {
