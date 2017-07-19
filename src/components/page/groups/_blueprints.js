@@ -9,6 +9,9 @@ export { blueprint as KickerHeadingParagraph } from './kicker-heading-paragraph'
 export { blueprint as IconHeadingParagraph } from './icon-heading-paragraph';
 export { blueprint as InputButton } from './input-button';
 export { blueprint as InputInputButton } from './input-input-button';
+export { blueprint as NameEmailForm } from './name-email-form';
+export { blueprint as EmailForm } from './email-form';
+export { blueprint as NameEmailMessageForm } from './name-email-message-form';
 
 export { blueprint as HorizontalList } from './horizontal-list';
 export { blueprint as VerticalList } from './vertical-list';

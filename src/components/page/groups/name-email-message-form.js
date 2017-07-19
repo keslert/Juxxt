@@ -2,19 +2,18 @@ import React from 'react';
 import Element from '../elements';
 import { BasicButton, BasicInput } from '../elements/_blueprints';
 
-class InputForm extends React.Component {
+class NameEmailMessageForm extends React.Component {
   render() {
     const { elements } = this.props;
     return (
       <div>
         <div>
-
-          <Element {...elements.input} />
           <Element {...elements.input} />
         </div>
         <div>
           <Element {...elements.input} />
-
+        </div>
+        <div>
           <Element {...elements.input} />
         </div>
         <div> 
@@ -25,7 +24,7 @@ class InputForm extends React.Component {
   }
 }
 
-export default InputForm;
+export default NameEmailMessageForm;
 
 export const blueprint = {
   inherits: [],
@@ -41,7 +40,6 @@ export const blueprint = {
   },
   variants: [{
     align: {
-
       _default: 'center',
       options: ['left', 'center', 'right'],
     }

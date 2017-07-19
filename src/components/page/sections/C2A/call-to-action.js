@@ -51,12 +51,15 @@ export const blueprint = {
   groups: {
     tp: {
       options: [
-        {name: 'HeadingSubheading', overrides: {variants: [{align: {options:['inherit']}}]}}
-      ]
+        {name: 'HeadingSubheading', overrides: {variants: [{align: {options:['inherit']}}]}},
+       ]
         /*'HeadingParagraph','KickerHeadingParagraph',*],*/
     },
     interaction: {
       options:[
+        'NameEmailForm',
+        'EmailForm',
+        'NameEmailMessageForm',
         {name: 'ButtonList', elements: { buttons: {name: 'BasicButon', clones: {_default: 1}}}},
       ],
     },
