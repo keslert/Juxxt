@@ -50,7 +50,7 @@ class Group extends React.PureComponent {
     } = this.props;
     
     const GroupComponent = groups[name];
-    if(this.context.preview) {
+    if(this.context.preview || !this.context.master) {
       return <div className="w-100P"><GroupComponent {...this.props} /></div>;
     }
     
@@ -71,6 +71,7 @@ class Group extends React.PureComponent {
 
 Group.contextTypes = {
   preview: React.PropTypes.bool.isRequired,
+  master: React.PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state, props) => ({

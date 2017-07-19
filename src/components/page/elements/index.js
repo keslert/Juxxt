@@ -59,7 +59,7 @@ class Element extends React.PureComponent {
   
     const ElementComponent = elements[is];
 
-    if(this.context.preview) {
+    if(this.context.preview || !this.context.master) {
       return <ElementComponent {...this.props} />
     }
 
@@ -80,6 +80,7 @@ class Element extends React.PureComponent {
 
 Element.contextTypes = {
   preview: React.PropTypes.bool.isRequired,
+  master: React.PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = createSelector(
