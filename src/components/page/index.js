@@ -36,7 +36,7 @@ class Page extends React.PureComponent {
 
     const clickable = isFunction(onClick);
 
-    const isDraggable = master && !preview && sections.length === 1;
+    const isDraggable = !preview && sections.length === 1;
     return (
       <StyledPage onClick={onClick} clickable={clickable} className={classNames} extraRules={CSSRules}>
         {sections.map((section, i) => (
