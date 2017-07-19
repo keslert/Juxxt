@@ -631,6 +631,14 @@ img { max-width: 100%; }
 .br--right { border-top-left-radius: 0; border-bottom-left-radius: 0; }
 .br--left { border-top-right-radius: 0; border-bottom-right-radius: 0; }
 
+/* Needed for input boxes*/
+.b-none { border: none; }
+.b-underline { border-bottom: 2px solid black; }
+/*.i-place { placeholder: "input placeholder"; }*/
+/*
+.back-color { background-color: ???; }
+Actually, make background just like ghost buttons?? But greyed out??*/
+
 
 .dn { display: none; }
 .di { display: inline; }

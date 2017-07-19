@@ -5,13 +5,15 @@ import { convertColorToAtomic } from '../../../../core/generator/color/conversio
 class Input extends React.PureComponent {
  
   render() {
-    const { style, color } = this.props;
+    const { style, color, content } = this.props;
     
     const colorClassNames = convertColorToAtomic(color);
     const styleClassNames = convertStyleToAtomic(style);
     return(
-      <input className={colorClassNames + ' ' + styleClassNames} />
+      <input placeholder={content.placeholder} className={colorClassNames + ' b-none b-underline ' + styleClassNames} />
     )
   }
 }
 export default Input;
+
+//placeholder = placeholder_val

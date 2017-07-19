@@ -289,7 +289,14 @@ export const BasicInput = {
   is: 'Input',
   inherits: [],
   color: {},
+/*  placeholder_val: {
+    _default: "input",
+    options: ["First","Last","Email","Message","Name"],
+  },*/
   style: {},
+  _defaults: {
+    content: {placeholder: ''}
+  }
 }
 
 export const BasicIcon = {
