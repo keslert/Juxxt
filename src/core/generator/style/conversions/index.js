@@ -21,6 +21,11 @@ const conversions = {
   borderWidth: v => 'bw' + v,
   height: v => 'h-' + v,
   parallax: v => v === "on" ? 'parallax': '',
+  fixedNavBar: v => v === "true" ? 'fixedNavBar': '',
+  // overlayText: v => v === "true" ? ' overlayText': '', 
+  // overlayImage: v => v === "true" ? ' overlayImage': '', 
+  // overlayContainer: v => v === "true" ? ' overlayContainer': '', 
+  
 }
 
 

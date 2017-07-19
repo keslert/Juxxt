@@ -115,7 +115,6 @@ class Section extends React.Component {
     const { 
       name, 
       uid,
-      master,
       isSelected,
       setSelected,
       setSidebarOpen,
@@ -129,9 +128,13 @@ class Section extends React.Component {
       canDrop,
     } = this.props;
 
-    const { preview } = this.context;
-  
+    const { preview, master } = this.context;
     const SectionComponent = sections[name];
+    if(preview) {
+      return <SectionComponent {...this.props} />
+    }
+  
+    
     
     return connectDropTarget(
       <div key={uid}>
@@ -142,7 +145,7 @@ class Section extends React.Component {
                 showDrop={master && isOver}
                 canDrop={canDrop}
                 isDragging={isDragging}
-                selected={(isSelected || isHovered) && !preview} 
+                selected={(isSelected || isHovered) && !preview && !master} 
                 onClick={(e) => { e.stopPropagation(); this.handleClick()}}
                 onDoubleClick={(e) => { e.stopPropagation(); setSidebarOpen(true); }}
                 onMouseEnter={() => onHoverableMouseEnter(uid)}
@@ -160,6 +163,7 @@ class Section extends React.Component {
 
 Section.contextTypes = {
   preview: React.PropTypes.bool.isRequired,
+  master: React.PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = createSelector(

@@ -8,6 +8,8 @@ export const names = {
   FooterSection: 'FooterSection',
   ParallaxSection: 'ParallaxSection',
   GutterSection: 'GutterSection',
+  FixedNavBar: 'FixedNavBar',
+  OverlayImage: 'OverlayImage',
 }
 
 export const styles = {
@@ -52,7 +54,7 @@ export const styles = {
   },
   [names.ParallaxSection]: {
     parallax: {
-      _default: "on",
+      _default: "off",
       options: ["on","off"],
     }
   },
@@ -64,5 +66,29 @@ export const styles = {
       _default: 1024,
       options: [900, 1024, 1170, 'auto'],
     },
-  }
+  },
+
+  [names.FixedNavBar]: {
+     fixedNavBar: {
+       _default: "true",
+       options: ["true","false"],
+     }
+   },
+   
+   [names.OverlaySection]: {
+     overlayImage: {
+        _default: "true",
+        options: ["true","false"]
+     },
+     overlayText: {
+        _default: "true",
+        options: ["true","false"]
+     },
+     overlayContainer: {
+        _default: "true",
+        options: ["true","false"]
+     }
+   }
+  
+
 }

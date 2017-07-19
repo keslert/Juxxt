@@ -22,22 +22,27 @@ const StyledPage = styled.div`
 class Page extends React.PureComponent {
 
   getChildContext() {
-    return { preview: this.props.preview };
+    return { 
+      preview: this.props.preview,
+      master: this.props.master,
+    };
   }
 
   render() {
-    const { sections, master, onClick, id, style, CSSRules } = this.props;
+    const { sections, master, onClick, id, style, CSSRules, preview } = this.props;
     const last = sections.length - 1;
 
-    const classNames = convertStyleToAtomic(style);
+    const classNames = convertStyleToAtomic(style) + (preview ? ' preview' : '');
 
     const clickable = isFunction(onClick);
+
+    const isDraggable = master && !preview && sections.length === 1;
     return (
       <StyledPage onClick={onClick} clickable={clickable} className={classNames} extraRules={CSSRules}>
         {sections.map((section, i) => (
           <div key={i} style={{marginTop: -1}}>
-            <Section {...section} master={master} index={master ? i : 1000 + i} draggable={sections.length === 1 || master} />
-            {master && <InsertionTarget index={i} />}
+            <Section {...section} master={master} index={master ? i : 1000 + i} draggable={isDraggable} />
+            {master && !preview && <InsertionTarget index={i} />}
           </div>
         ))}
       </StyledPage>
@@ -46,7 +51,8 @@ class Page extends React.PureComponent {
 }
 
 Page.childContextTypes = {
-  preview: React.PropTypes.bool.isRequired
+  preview: React.PropTypes.bool.isRequired,
+  master: React.PropTypes.bool.isRequired,
 };
 
 export default Page;
