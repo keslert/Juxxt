@@ -63,5 +63,8 @@ export const styles = {
       _default: 'none',
       options: ['none', 'uppercase'],
     },
+    fontWeight: {
+      options: [4,6],
+    },
   },
 }

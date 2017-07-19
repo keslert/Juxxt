@@ -44,7 +44,7 @@ export const blueprint = {
   elements: {
     links: {
       name: ReadableLink.name,
-      clones: { _default: 3 },
+      clones: 3,
     }
   },
   variants: [],

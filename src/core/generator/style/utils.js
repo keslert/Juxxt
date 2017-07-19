@@ -1,55 +1,7 @@
 import { filter, some, find, includes, values, map, forEach, zipObject, pick } from 'lodash';
 import { randomItem, getMode } from '../../utils';
 
-export const ph0 = {
-  paddingLeft: {
-    options: [0],
-  },
-  paddingRight: {
-    options: [0],
-  }
-}
-
-export const pv0 = {
-  paddingTop: {
-    options: [0],
-  },
-  paddingBottom: {
-    options: [0],
-  }
-}
-
-export const p0 = {
-  ...ph0,
-  ...pv0,
-}
-
-export const mh0 = {
-  marginLeft: {
-    options: [0],
-  },
-  marginRight: {
-    options: [0],
-  }
-}
-
-export const mv0 = {
-  marginTop: {
-    options: [0],
-  },
-  marginBottom: {
-    options: [0],
-  }
-}
-
-export const m0 = {
-  ...mh0,
-  ...mv0,
-}
-
 export function styleItem(item, items, rules, blueprint) {
-  item.style = {};
-
   const matches = filter(items, i => i.name === item.name);
   if(matches.length) {
     styleItemLikeItems(item, matches, rules);
@@ -86,7 +38,9 @@ function styleItemLikeItems(item, items, rules) {
   const fn = find(rules, fn => some(items, fn));
   const styles = filter(items, fn).map(item => item.style);
   Object.keys(styles[0]).forEach(key => {
-    item.style[key] = getMode(map(styles, key));
+    if(item.style[key] === undefined) {
+      item.style[key] = getMode(map(styles, key));
+    }
   })
 }
 

@@ -67,11 +67,9 @@ export const blueprint = {
     },
     gridItem: {
       options: [
-        {name: 'HeadingParagraph' , clones: {_default:6}, overrides: {elements:{heading:{name:'SmallHeading'}}}},
-        // {name: 'HeadingSubheading', clones: {_default:6},  overrides: {elements:{heading:{name:'SmallHeading'}}}},
-        // {name: 'KickerHeadingParagraph', clones: {_default:6},  overrides: {elements:{heading:{name:'SmallHeading'}}}},
-        {name: 'HeadingParagraphLink', clones: {_default:6},  overrides: {elements:{heading:{name:'SmallHeading'}}}},
-        {name: 'IconHeadingParagraph', clones: {_default:6},  overrides: {elements:{heading:{name:'SmallHeading'}}}},
+        {name: 'HeadingParagraph', clones: 6, elements:{heading:{name:'SmallHeading'}}},
+        {name: 'HeadingParagraphLink', clones: 6, elements:{heading:{name:'SmallHeading'}}},
+        {name: 'IconHeadingParagraph', clones: 6, elements:{heading:{name:'SmallHeading'}}},
       ]
     }
   },

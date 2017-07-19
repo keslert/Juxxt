@@ -52,12 +52,12 @@ export const blueprint = {
   elements: {
     images: {
       name: 'GalleryImage',
-      clones: {_default: 9 },
+      clones: 9,
     }
   },
   variants: [{
     columns: {
-      _default:3,
+      _default: 3,
       options: range(2, 7),
     }
   }]

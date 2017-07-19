@@ -38,10 +38,7 @@ export const blueprint = {
   color: {},
   groups: {
     item: {
-      // options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','IconHeadingParagraph','Gallery'],
-      options: [
-        {name: 'HeadingParagraph', overrides: {here: true, elements: {heading: {name: 'BasicButton'}}}}
-      ]
+      options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','IconHeadingParagraph','Gallery'],
     },
   },
   variants: []

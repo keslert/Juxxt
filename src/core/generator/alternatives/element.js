@@ -3,10 +3,11 @@ import groupBlueprints from '../../../components/page/groups/_blueprints';
 import * as blueprints from '../../../components/page/elements/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
+import { generateContent } from '../content/generate';
 import { map, uniq, intersection, filter, range, cloneDeep, flatMap, findIndex, find } from 'lodash';
 import { styles } from '../style/element/shared-styles';
 import { filterStyle } from '../style/utils';
-import { getBackground, getBlueprint } from '../generator-utils';
+import { getBackground, getBlueprint, linkSkeleton } from '../generator-utils';
 import { generateSectionVariantAlternatives } from './section';
 import { generateGroupVariantAlternatives, generateGroupComponentAlternatives } from './group';
 
@@ -44,55 +45,74 @@ export function generateElementVariantAlternatives(element, skeleton) {
   return generateSectionVariantAlternatives(element.parent, skeleton); 
 }
 
-export function generateElementColorAlternatives(section, modify, element, page) {
-  const elementIndex = findIndex(section._elements, e => e.fullRelativeId === element.fullRelativeId);
+export function generateElementColorAlternatives(sectionSkeleton, modify, element, page) {
+  const elementIndex = findIndex(element.section._elements, e => e.fullRelativeId === element.fullRelativeId);
   
   let sections = [];
-  if(element.color.background && modify.background) {
+  if(modify.background) {
     const background = getBackground(element.parent);
-    sections = map(page.colorBlueprint.bgBlueprints[background].solids, background => {
-      const _section = cloneDeep(section);
-      _section._elements[elementIndex].color = {
-        background,
-        borderColor: background,
-        text: page.colorBlueprint.bgBlueprints[background].texts[0],
+    sections = map(page.colorBlueprint.bgBlueprints[background].solids, color => {
+      const skeleton = cloneDeep(sectionSkeleton);
+      linkSkeleton(skeleton);
+      skeleton._elements[elementIndex].color = {
+        background: color,
+        borderColor: color,
+        text: page.colorBlueprint.bgBlueprints[color].texts[0],
+        _textBackground: color,
+        _parentBackground: background,
       }
-      _section.changes = { background };
-      return _section;
+      skeleton.changes = { background: color };
+      return skeleton;
     });
 
     sections = sections.concat(map(page.colorBlueprint.bgBlueprints[background].texts, color => {
-      const _section = cloneDeep(section);
-      _section._elements[elementIndex].color = {
+      const skeleton = cloneDeep(sectionSkeleton);
+      linkSkeleton(skeleton);
+      skeleton._elements[elementIndex].color = {
         background: 'transparent',
         borderColor: color,
         text: color,
+        _textBackground: background,
+        _parentBackground: background,
       }
-      _section.changes = { outline: color };
-      return _section;
+      skeleton.changes = { outline: color };
+      return skeleton;
     }));
   } else if(modify.text) {
     const background = getBackground(element);
     sections = map(page.colorBlueprint.bgBlueprints[background].texts, text => {
-      const _section = cloneDeep(section);
-      _section._elements[elementIndex].color = { ...element.color, text }
-      _section.changes = { color: text };
-      return _section;
+      const skeleton = cloneDeep(sectionSkeleton);
+      linkSkeleton(skeleton);
+      skeleton._elements[elementIndex].color = { 
+        ...element.color, 
+        text,
+        _textBackground: background,
+      }
+      skeleton.changes = { color: text };
+      return skeleton;
     });
   }
   return sections;
 }
 
-export function generateElementContentAlternatives(section, element, contentStore) {
-  const store = filter(contentStore, content => content.elementId !== element.fullRelativeId);
-  const sections = range(0, 6).map(() => cloneDeep(section));
-  sections.forEach(s => assignContent(s, store));
+export function generateElementContentAlternatives(sectionSkeleton, element) {
   
-  return sections;
+  const skeletons = range(0, 6).map(_ => {
+    const skeleton = cloneDeep(sectionSkeleton);
+    linkSkeleton(skeleton);
+    skeleton._elements.forEach(e => {
+      if(e.fullRelativeId === element.fullRelativeId) {
+        e.content = generateContent(e);
+      }
+    });
+    return skeleton;
+  })
+  
+  return skeletons;
 }
 
-export function generateElementStyleAlternatives(modify, section, element) {
-  const blueprint = blueprints[element.name];
+export function generateElementStyleAlternatives(modify, sectionSkeleton, element) {
+  const blueprint = element.blueprint;
   const keys = filter(Object.keys(modify), key => modify[key]);
   const sharedStyles = blueprint.inherits.map(name => styles[name]);
   const style = filterStyle(Object.assign({}, ...sharedStyles, blueprint.style), keys);
@@ -101,14 +121,18 @@ export function generateElementStyleAlternatives(modify, section, element) {
     options.map(value => ({[key]: value})
   ))
 
-  const sections = possibleStyles.map(style => {
-    const _section = cloneDeep(section);
+  const skeletons = possibleStyles.map(style => {
+    const skeleton = cloneDeep(sectionSkeleton);
+    linkSkeleton(skeleton);
     const _style = {...element.style, ...style};
-    const elements = filter(_section._elements, e => e.fullId === element.fullId);
-    elements.forEach(e => e.style = _style);
-    _section.changes = style;
-    return _section;
+    skeleton._elements.forEach(e => {
+      if(e.id === element.id) {
+        e.style = _style;
+      }
+    });
+    skeleton.changes = style;
+    return skeleton;
   })
 
-  return sections;
+  return skeletons;
 }

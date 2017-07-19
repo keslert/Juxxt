@@ -1,6 +1,5 @@
 import * as blueprints from '../../../components/page/sections/_blueprints';
 import { generateAllSectionSkeletons } from '../skeletons/section';
-import { buildSectionFromSkeleton } from '../builder/section';
 import { 
   filter, 
   range, 
@@ -16,8 +15,13 @@ import {
   isEmpty,
   last,
 } from 'lodash';
+
 import { assignContent } from '../content';
+import { generateContent } from '../content/generate';
+
+import { linkSkeleton } from '../generator-utils';
 import { getCombinations } from '../../utils';
+import { colorGroup } from '../color/group';
 import { colorElement } from '../color/element';
 import { styles } from '../style/section/shared-styles';
 import { filterStyle } from '../style/utils';
@@ -32,9 +36,9 @@ export function generateSectionComponentAlternatives(section, modify) {
     modify[blueprints[name].type]
   );
 
-  const skeletons = flatMap(validSections, sectionName => {
-    const skeletons = generateAllSectionSkeletons(sectionName, section.variant);
-    skeletons.forEach(skeleton => (skeleton.id = section.id))
+  const skeletons = flatMap(validSections, name => {
+    const skeletons = generateAllSectionSkeletons({name, id: section.id, variant: section.variant});
+    skeletons.forEach(linkSkeleton);
     return skeletons;
   });
 
@@ -43,7 +47,7 @@ export function generateSectionComponentAlternatives(section, modify) {
 
 
 export function generateSectionVariantAlternatives(section, skeleton) {
-  const variants = blueprints[section.name].variants;
+  const variants = section.blueprint.variants;
   
   const skeletons = flatMap(variants, variant => {
     const combos = getCombinations(mapValues(variant, 'options'));
@@ -69,99 +73,102 @@ export function generateSectionColorAlternatives(section, modify, page) {
     sections = generateSectionColorImagesBackground(section, page);
   }
 
+  forEach(sections, s => s._groups.forEach(e => colorGroup(e, page)));
   forEach(sections, s => s._elements.forEach(e => colorElement(e, page)));
 
   return sections;
 }
 
 
-function generateSectionColorImagesBackground(section, page) {
+function generateSectionColorImagesBackground(sectionSkeleton, page) {
   const darkestBackground = last(getSortedByMostBrightness(page.colorBlueprint.backgrounds))
-  const sections = defaultTheme.backgroundImages.map(({key, src}) => {
-    const _section = cloneDeep(section);
-    _section.color = {
+  const skeletons = defaultTheme.backgroundImages.map(({key, src}) => {
+    const skeleton = cloneDeep(sectionSkeleton);
+    linkSkeleton(skeleton);
+    skeleton.color = {
       background: darkestBackground,
       backgroundImage: key,
       _backgroundImage: src,
     }
-    return _section;
+    return skeleton;
   })
 
-  return sections;
+  return skeletons;
 }
 
-function generateSectionColorSolidsBackground(section, page) {
-  const blueprint = blueprints[section.name];
-  
-  const backgrounds = getSortedByPreference(page.colorBlueprint.backgrounds, blueprint.color.background);
+function generateSectionColorSolidsBackground(sectionSkeleton, page) {  
+  const backgrounds = getSortedByPreference(page.colorBlueprint.backgrounds, sectionSkeleton.blueprint.color.background);
 
-  const sections = map(backgrounds, background => {
-    const _section = cloneDeep(section);
-    _section.color = {
-      background,
-      text: page.colorBlueprint.bgBlueprints[background].texts[0]
-    }
-    _section.changes = {background};
-    return _section;
+  const skeletons = map(backgrounds, background => {
+    const skeleton = cloneDeep(sectionSkeleton);
+    linkSkeleton(skeleton);
+    skeleton.color = { background };
+    skeleton.changes = { background };
+    return skeleton;
   })
-  return sections;
+  return skeletons;
 }
 
-function generateSectionColorPatternsBackground(section, page) {
-  const colorBlueprint = page.colorBlueprint.bgBlueprints[section.color.background];
-  const sections = map(colorBlueprint.patterns, (urlData, pattern) => {
-    const _section = cloneDeep(section);  
-    _section.color = {
-      background: section.color.background,
+function generateSectionColorPatternsBackground(sectionSkeleton, page) {
+  const colorBlueprint = page.colorBlueprint.bgBlueprints[sectionSkeleton.color.background];
+  const skeletons = map(colorBlueprint.patterns, (urlData, pattern) => {
+    const skeleton = cloneDeep(sectionSkeleton);
+    linkSkeleton(skeleton);
+    skeleton.color = {
+      background: sectionSkeleton.color.background,
       text: colorBlueprint.texts[0],
-      pattern: section.color.background.substr(1) + "-" + pattern,
+      pattern: sectionSkeleton.color.background.substr(1) + "-" + pattern,
       _pattern: urlData,
     }
-    return _section;
+    return skeleton;
   })
-  return sections;
+  return skeletons;
 }
 
-function generateSectionColorGradientsBackground(section, page) {
-  const gradients = page.colorBlueprint.bgBlueprints[section.color.background].gradients;
-  const sections = [];
-  for(let i=0; i<gradients.length; i++) {
-    const _section = cloneDeep(section);
-    _section.color = {
-      background: section.color.background,
-      text: page.colorBlueprint.bgBlueprints[section.color.background].texts[0],
-      gradient: section.color.background + '-' + gradients[i].end.substr(1) +'-' + gradients[i].direction.replace(/\s+/g, '')
+function generateSectionColorGradientsBackground(sectionSkeleton, page) {
+  const blueprint = page.colorBlueprint.bgBlueprints[sectionSkeleton.color.background];
+
+  const skeletons = map(blueprint.gradients, ({start, end, direction}) => {
+    const skeleton = cloneDeep(sectionSkeleton);
+    linkSkeleton(skeleton);
+    skeleton.color = {
+      background: sectionSkeleton.color.background,
+      text: blueprint.texts[0],
+      gradient: start + '-' + end.substr(1) +'-' + direction.replace(/\s+/g, '')
     }
-    _section.changes = { direction: gradients[i].direction };
-    sections.push(_section);
-  }
-  return sections;
+    skeleton.changes = { direction: direction };
+    return skeleton;
+  })
+
+  return skeletons;
 }
 
 
-export function generateSectionContentAlternatives(section, contentStore) {
-  const store = [];
-  const sections = range(0, 6).map(() => cloneDeep(section));
-  sections.forEach(s => assignContent(s, store));
-  return sections;
+export function generateSectionContentAlternatives(sectionSkeleton) {
+  const skeletons = range(0, 6).map(_ => {
+    const skeleton = cloneDeep(sectionSkeleton);
+    linkSkeleton(skeleton);
+    forEach(skeleton._elements, e => e.content = generateContent(e));
+    return skeleton;
+  });
+
+  return skeletons;
 }
 
-export function generateSectionStyleAlternatives(modify, section) {
-  const blueprint = blueprints[section.name];
+export function generateSectionStyleAlternatives(modify, sectionSkeleton) {
   const keys = filter(Object.keys(modify), key => modify[key]);
-  const sharedStyles = blueprint.inherits.map(name => styles[name]);
-  const style = filterStyle(Object.assign({}, ...sharedStyles, blueprint.style), keys);
+  const sharedStyles = sectionSkeleton.blueprint.inherits.map(name => styles[name]);
+  const style = filterStyle(Object.assign({}, ...sharedStyles, sectionSkeleton.blueprint.style), keys);
   const _style = mapValues(style, s => s.options);
   
   const combinations = getCombinations(_style);
-  const sections = combinations.map(style => {
-    const _section = {
-      ...section,
-      style: { ...section.style, ...style }
-    };
-    _section.changes = style;
-    return _section;
+  const skeletons = combinations.map(style => {
+    const skeleton = cloneDeep(sectionSkeleton);
+    linkSkeleton(skeleton);
+    skeleton.style = {...skeleton.style, ...style};
+    skeleton.changes = style;
+    return skeleton;
   })
 
-  return sections;
+  return skeletons;
 }

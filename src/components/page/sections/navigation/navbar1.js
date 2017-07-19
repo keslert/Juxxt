@@ -16,7 +16,6 @@ class Navbar1 extends React.PureComponent {
     });
 
     const colorClassNames = convertColorToAtomic(color);
-    debugger;
     const containerClassNames = convertStyleToAtomic({fixedNavBar: style.fixedNavBar});
 
     return (
@@ -52,7 +51,7 @@ export const blueprint = {
   groups: {
     buttonList: {
       options: [
-        { name: 'ButtonList', overrides: {elements: { buttons: { name: 'SmallButton', clones: { _default: 2 }}}}},
+        { name: 'ButtonList', elements: { buttons: { name: 'SmallButton', clones: 2}}},
       ],
     },
     links: {

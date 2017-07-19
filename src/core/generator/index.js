@@ -1,5 +1,4 @@
 import { generateSectionComponentAlternatives } from './alternatives/section';
-import { buildSectionFromSkeleton } from './builder/section';
 import { generateSectionSkeleton } from './skeletons/section'
 import { extractSkeletonFromItem } from './skeletons/utils';
 import { assignContent } from './content';
@@ -10,11 +9,11 @@ import { colorElement } from './color/element';
 import { buildPageColorBlueprint } from './color/page';
 import { randomItem, replaceWhiteSpace } from '../utils';
 
-import { getSection, getParents } from './generator-utils';
-import { range, reduce, uniqueId, forEach, clone, sortBy, map, max, some, filter, cloneDeep } from 'lodash';
+import { getSection, getParents, linkSkeleton } from './generator-utils';
+import { range, reduce, uniqueId, forEach, clone, sortBy, map, max, some, filter, cloneDeep, find } from 'lodash';
 import defaultTheme from './themes';
 
-const NUM_SECTIONS = 9;
+const NUM_SECTIONS = 2;
 export function init() {
   const colorBlueprint = buildPageColorBlueprint(defaultTheme.palette);
 
@@ -51,27 +50,76 @@ export function init() {
         basic: colorBlueprint.lights,
       };
 
-      let skeletons;
-      if(sectionName) {
-        skeletons = [generateSectionSkeleton(sectionName)];
+      let skeleton;
+      if(i === 0) {
+        skeleton = generateSectionSkeleton({
+          name: 'Navbar1',
+          _defaults: {
+            style: {
+              paddingTop: 2,
+              paddingBottom: 2,
+            },
+            color: { background: page.colorBlueprint.backgrounds[i] }
+          }
+        });
+      } else if(true) {
+        skeleton = generateSectionSkeleton({
+          name: 'Header',
+          _defaults: {
+            color: {
+              background: page.colorBlueprint.backgrounds[i],
+              backgroundImage: defaultTheme.backgroundImages[1].key,
+              _backgroundImage: defaultTheme.backgroundImages[1].src,
+            },
+            style: {
+              paddingTop: 7,
+              paddingBottom: 6,
+            },
+          },
+          groups: {
+            tp: {
+              _default: {
+                name: 'HeadingParagraphButton',
+                elements: {
+                  heading: {
+                    name: 'BasicHeading',
+                    _defaults: {
+                      color: { text: '#ffffff', _textBackground: page.colorBlueprint.backgrounds[i] },
+                      content: { text: 'Buy Now' }
+                    },
+                  }
+                },
+              },
+              variants: [{
+                align: {
+                  _default: 'left',
+                  options: ['left', 'right'],
+                }
+              }],
+            }
+          }
+        });
       } else {
-        skeletons = generateSectionComponentAlternatives({}, sectionType, sectionName);
+        const skeletons = generateSectionComponentAlternatives({}, sectionType);
+        skeleton = randomItem(skeletons);
       }
+      
+      linkSkeleton(skeleton);
+      
+      const _backgrounds = backgrounds[skeleton.type];
+      skeleton.color.background = skeleton.color.background || _backgrounds[i % _backgrounds.length];
+      
 
-      const section = buildSectionFromSkeleton(randomItem(skeletons));
-      const background = backgrounds[section.type][i % backgrounds[section.type].length];
+      const page2 = {...page, sections: [...page.sections, skeleton]};
+      forEach(skeleton._groups, group => colorGroup(group, page2.sections));
+      forEach(skeleton._elements, element => colorElement(element, page2));
 
-      section.color = {
-        background,
-        text: colorBlueprint.bgBlueprints[background].texts[0],
-      }
 
-      const page2 = {...page, sections: [...page.sections, section]};
-      forEach(section._groups, group => colorGroup(group, page2.sections));
-      forEach(section._elements, element => colorElement(element, page2));
-      assignContent(section, []);
-      assignStyles(section, page);
-      return [...sections, section];
+
+
+      assignContent(skeleton, []);
+      assignStyles(skeleton, page);
+      return [...sections, skeleton];
     }, [])
   }
 
@@ -82,51 +130,20 @@ export function init() {
 }
 
 export function overrideElementContent(element, content, page) {
-  const store = element.section.contentStore.map(item => 
-    item.elementId !== element.fullRelativeId ? item : {...item, ...content}
-  );
-
   const skeleton = extractSkeletonFromItem(element.section);
-  const section = buildSectionFromSkeleton(skeleton);
-  assignContent(section, store);
-  assignStyles(section, page);
-  assignColor(section, page);
+  linkSkeleton(skeleton);
+  const _element = find(skeleton._elements, e => e.fullRelativeId === element.fullRelativeId);
+  _element.content = content;
 
-  return section;
+  return skeleton;
 }
 
-export function duplicateSection(section, page) {
-  const _section = cloneDeep(section);
-
-
+export function duplicateSection(section) {
   const skeleton = extractSkeletonFromItem(section);
   skeleton.id = 's_' + uniqueId();
-  const duplicated = buildSectionFromSkeleton(skeleton);
-
-  _section.id = duplicated.id;
-  _section.fullId = duplicated.fullId;
-  _section.fullRelativeId = duplicated.fullRelativeId;
-  ['_elements', '_groups'].forEach(key => _section[key].forEach((item, i) => {
-    item.id = duplicated[key][i].id;
-    item.fullId = duplicated[key][i].fullId;
-    item.fullRelativeId = duplicated[key][i].fullRelativeId;
-  }))
-
-  const store = _section._elements.map(e => ({
-    ...e.content,
-    elementId: e.fullRelativeId,
-    elementName: e.name,
-    elementIs: e.is,
-    parentIds: map(getParents(e), 'fullId'),
-  }));
-
-  const _page = {...page, sections: [_section]};
-
-  assignContent(duplicated, store);
-  assignStyles(duplicated, _page);
-  assignColor(duplicated, _page);
-
-  return duplicated;
+  skeleton.relativeId = skeleton.id;
+  linkSkeleton(skeleton);
+  return skeleton;
 }
 
 export function generatePageCSSRules(page) {

@@ -1,8 +1,83 @@
-import { omit, mapValues, map, includes, forEach, sortBy, isEmpty, pick, isString, extendWith, isObject } from 'lodash';
+import { 
+  omit, 
+  mapValues, 
+  map, 
+  includes, 
+  forEach, 
+  sortBy, 
+  isEmpty, 
+  pick, 
+  isString, 
+  mergeWith, 
+  isArray, 
+  cloneDeep,
+  range,
+  uniqueId,
+} from 'lodash';
 import { randomItem } from '../../utils';
 
 import { generateGroupSkeleton } from './group';
 import { generateElementSkeleton } from './element';
+
+import { getElementsInItem, getGroupsInItem, linkChildren, getParents } from '../generator-utils';
+
+export function extractSkeletonFromItem(item) {
+  const skeleton = {
+    ...pick(item, ['id', 'is', 'type', 'relativeId', 'name', 'variant', 'color', 'style', 'content', 'blueprint', 'isSection', 'isGroup', 'isElement']),
+    groups: mapValues(item.groups, extractSkeletonFromItem),
+    elements: mapValues(item.elements, extractSkeletonFromItem),
+    clones: map(item.clones, extractSkeletonFromItem),
+    uid: 'uid_' + uniqueId(),
+  }
+  
+  return skeleton;
+}
+
+export function generateItemSkeleton(skeleton, blueprint, generic, _variant, _overrides) {
+  
+  const merged = mergeBlueprints(generic, blueprint);
+  
+  return {
+    style: getDefaults(blueprint._defaults, 'style'),
+    color: getDefaults(blueprint._defaults, 'color'),
+    content: getDefaults(blueprint._defaults, 'content'),
+    ...skeleton,
+    name: merged.name,
+    clones: generateCloneSkeletons(merged.clones, blueprint, generic),
+    variant: getClosestVariant(_variant, merged.variants),
+    elements: mapValues(merged.elements, generateElementSkeleton),
+    groups: mapValues(merged.groups, ({_default, options}) => {
+      const selected = _default || randomItem(options);
+      return generateGroupSkeleton(isString(selected) ? {name: selected} : selected);
+    }),
+    blueprint: omit(merged, ['_defaults']),
+    uid: 'uid_' + uniqueId(),
+  }
+}
+
+function generateCloneSkeletons(clones, blueprint) {
+  if(isArray(clones)) {
+    return clones.map((clone, i) => generateCloneSkeleton(i, clone))
+  }
+  return range(0, clones).map(i => generateCloneSkeleton(i, omit(blueprint, ['clones'])));
+}
+
+function generateCloneSkeleton(index, blueprint) {
+  const skeleton = (blueprint.isGroup ? generateGroupSkeleton : generateElementSkeleton)(blueprint);
+  skeleton.relativeId = skeleton.relativeId + "_" + index;
+  return skeleton;
+}
+
+function getDefaults(_defaults={}, key) {
+  return _defaults[key] || {};
+}
+
+function mergeBlueprints(generic, blueprint) {
+  return mergeWith({}, generic, blueprint, (g, b) => (
+    isArray(g) && isArray(b) ? b : undefined
+  ));
+}
+
 
 export function getClosestVariant(variantToMatch={}, variants) {
   if(isEmpty(variants)) {
@@ -25,43 +100,4 @@ export function getClosestVariant(variantToMatch={}, variants) {
 
   const sorted = sortBy(variantsWithScores, variant => -variant.score);
   return omit(sorted[0], ['score']);
-}
-
-export function extractSkeletonFromItem(item) {
-  const skeleton = {
-    id: item.id,
-    name: item.name,
-    variant: item.variant,
-    groups: mapValues(item.groups, extractSkeletonFromItem),
-    elements: mapValues(item.elements, extractSkeletonFromItem),
-    clones: isEmpty(item.clones) ? undefined : { _default: item.clones.length },
-  }
-  
-  return skeleton;
-}
-
-export function generateItemSkeleton(name, blueprint, variant, overrides) {
-  
-  const _blueprint = extendWith(overrides, blueprint, (oV, bV) => (
-    isObject(oV) && isObject(bV) ? {...bV, ...oV } : bV
-  ));
-  
-  return {
-    name,
-    variant: getClosestVariant(variant, _blueprint.variants),
-    elements: mapValues(_blueprint.elements || {}, element => ({
-      ...element,
-      ...generateElementSkeleton(element.name)
-    })),
-    groups: mapValues(_blueprint.groups || {}, ({options}) => {
-      const option = randomItem(options);
-      if(isString(option)) {
-        return generateGroupSkeleton(option)
-      }
-      return {
-        ...option, 
-        ...generateGroupSkeleton(option.name, undefined, option.overrides)
-      };
-    }),
-  }
 }

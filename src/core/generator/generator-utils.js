@@ -61,3 +61,23 @@ export function findItemInSection(item, section) {
 function getNuclearItems(items) {
   return flatMap(items, item => [item, ...item.clones]);
 }
+
+export function linkSkeleton(skeleton) {
+  linkChildren(skeleton);
+  skeleton._groups = getGroupsInItem(skeleton);
+  skeleton._elements = getElementsInItem(skeleton);
+
+  assignFullIds(skeleton);
+  skeleton._groups.forEach(assignFullIds);
+  skeleton._elements.forEach(assignFullIds);
+  
+  skeleton.section = skeleton;
+  skeleton._groups.forEach(g => g.section = skeleton);
+  skeleton._elements.forEach(e => e.section = skeleton);
+}
+
+function assignFullIds(item) {
+  const parents = getParents(item);
+  item.fullId = parents.map(p => p.id).join('_') + item.id;
+  item.fullRelativeId = parents.map(p => p.relativeId).join('_') + item.relativeId;
+}

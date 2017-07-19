@@ -2,7 +2,7 @@ import * as types from './action-types';
 import { overrideElementContent, generatePageCSSRules, duplicateSection } from '../../core/generator';
 import { generateAlternatives } from '../../core/generator/alternatives';
 import { getMaster } from './selectors';
-import { sortBy, cloneDeep, uniqueId, forEach, findIndex, pick, find, filter, map } from 'lodash';
+import { mapValues, sortBy, cloneDeep, uniqueId, forEach, findIndex, pick, find, filter, map } from 'lodash';
 import { getSelected, setSelected, getModifications, getSelectedModification, setSelectedModification } from '../ui';
 
 import { linkChildren, getParents, getElementsInItem, getGroupsInItem } from '../generator/generator-utils';
@@ -67,7 +67,7 @@ export function replaceSectionWithAlternative(alternative, section) {
   return (dispatch, getState) => {
     const state = getState();
     const selected = getSelected(state);
-    const duplicated = duplicateSection(alternative, getMaster(state));
+    const duplicated = duplicateSection(alternative);
     replaceSection(dispatch, state, section || selected.section, duplicated);
 
     let _selected = duplicated;
@@ -156,5 +156,29 @@ export function setElementContent(element, content) {
 
     replaceSection(dispatch, state, element.section, section);
     dispatch(setSelected(_element));
+  }
+}
+
+export function exportPage() {
+  return (disptach, getState) => {
+    const master = getMaster(getState());
+
+
+    const page = {
+      sections: master.sections.map(exportItem)
+    }
+
+    console.log(JSON.stringify(page));
+  }
+}
+
+function exportItem(item) {
+  return {
+    name: item.name,
+    style: item.style,
+    content: item.content,
+    color: item.color,
+    elements: mapValues(item.elements, exportItem),
+    groups: mapValues(item.groups, exportItem),
   }
 }

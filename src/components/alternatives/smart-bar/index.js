@@ -12,6 +12,10 @@ import {
   setShowPreview,
 } from '../../../core/ui';
 
+import { 
+  exportPage
+} from '../../../core/page';
+
 import Stepper from '../../common/stepper';
 import SearchBar from '../../common/search-bar';
 import { StyledFlex, StyledSpacer, StyledButton } from '../../common/styled-base';
@@ -36,6 +40,7 @@ class SmartBar extends React.Component {
       zoomLevel, 
       setSidebarOpen,
       setShowPreview,
+      exportPage,
     } = this.props;
 
     const buttons = [
@@ -69,12 +74,14 @@ class SmartBar extends React.Component {
             </StyledSpacer>
           ))}
           <Box flex="1" textAlign="right" marginLeft="5px">
-            <StyledButton 
-              background='#6f6f6f'
-              color='#ddd'
-              onClick={() => setShowPreview(true)}>
-              Preview
-            </StyledButton>
+            <StyledSpacer marginLeft="5px">
+              <StyledButton 
+                background='#6f6f6f'
+                color='#ddd'
+                onClick={() => setShowPreview(true)}>
+                Preview
+              </StyledButton>
+            </StyledSpacer>
           </Box>
         </Box>
         <ModificationBar />
@@ -94,5 +101,5 @@ const mapStateToProps = createSelector(
   })
 )
 
-const mapDispatchToProps = Object.assign({turnOnModification, setZoomLevel, setSidebarOpen, setShowPreview});
+const mapDispatchToProps = Object.assign({turnOnModification, setZoomLevel, setSidebarOpen, setShowPreview, exportPage});
 export default connect(mapStateToProps, mapDispatchToProps)(SmartBar);

@@ -3,22 +3,33 @@ import { generateGroupSkeleton } from './group';
 import { generateElementSkeleton } from './element';
 import { getClosestVariant, generateItemSkeleton } from './utils';
 import { randomItem, getCombinations } from '../../utils';
-import { mapValues, map } from 'lodash';
+import { mapValues, map, uniqueId } from 'lodash';
 
-export function generateSectionSkeleton(name, variant) {
-  const blueprint = blueprints[name];
-  return generateItemSkeleton(name, blueprint, variant);
+export function generateSectionSkeleton(blueprint) {
+  const generic = blueprints[blueprint.name];
+  
+  const id = blueprint.id || 's_' + uniqueId()
+  const skeleton = { 
+    id, 
+    relativeId: id,
+    isSection: true,
+    type: generic.type,
+  }
+
+  return generateItemSkeleton(skeleton, blueprint, generic);
 }
 
-export function generateAllSectionSkeletons(name, variant) {
-  const blueprint = blueprints[name];
+export function generateAllSectionSkeletons(blueprint) {
+  const generic = blueprints[blueprint.name];
 
-  const _variant = getClosestVariant(variant, blueprint.variants);
-  const combinations = getCombinations(mapValues(blueprint.groups, group => group.options));
+  const _variant = getClosestVariant(blueprint.variant, generic.variants);
+  const combinations = getCombinations(mapValues(generic.groups, group => group.options));
 
   const skeletons = map(combinations, groups => {
-    const overrides = { groups: mapValues(groups, name => ({options: [name]})) }
-    return generateItemSkeleton(name, blueprint, _variant, overrides)
+    return generateSectionSkeleton({
+      ...blueprint,
+      groups: mapValues(groups, name => ({_default: name}))
+    })
   })
 
   return skeletons;

@@ -337,6 +337,27 @@ img { max-width: 100%; }
 .p5 { padding: 4em; }
 .p6 { padding: 8em; }
 .p7 { padding: 12em; }
+
+.pv0 { padding-top: 0; padding-bottom: 0; }
+.pv1 { padding-top: .25em; padding-bottom: .25em; }
+.pv2 { padding-top: .5em; padding-bottom: .5em; }
+.pv3 { padding-top: 1em; padding-bottom: 1em; }
+.pv4 { padding-top: 2em; padding-bottom: 2em; }
+.pv5 { padding-top: 4em; padding-bottom: 4em; }
+.pv6 { padding-top: 8em; padding-bottom: 8em; }
+.pv7 { padding-top: 12em; padding-bottom: 12em; }
+.pv8 { padding-top: 16em; padding-bottom: 16em; }
+
+.ph0 { padding-left: 0; padding-right: 0; }
+.ph1 { padding-left: .25em; padding-right: .25em; }
+.ph2 { padding-left: .5em; padding-right: .5em; }
+.ph3 { padding-left: 1em; padding-right: 1em; }
+.ph4 { padding-left: 2em; padding-right: 2em; }
+.ph5 { padding-left: 4em; padding-right: 4em; }
+.ph6 { padding-left: 8em; padding-right: 8em; }
+.ph7 { padding-left: 12em; padding-right: 12em; }
+.ph8 { padding-left: 16em; padding-right: 16em; }
+
 .pl0 { padding-left: 0; }
 .pl1 { padding-left: .25em; }
 .pl2 { padding-left: .5em; }
@@ -371,25 +392,6 @@ img { max-width: 100%; }
 .pt6 { padding-top: 8em; }
 .pt7 { padding-top: 12em; }
 .pt8 { padding-top: 18em; }
-.pv0 { padding-top: 0; padding-bottom: 0; }
-.pv1 { padding-top: .25em; padding-bottom: .25em; }
-.pv2 { padding-top: .5em; padding-bottom: .5em; }
-.pv3 { padding-top: 1em; padding-bottom: 1em; }
-.pv4 { padding-top: 2em; padding-bottom: 2em; }
-.pv5 { padding-top: 4em; padding-bottom: 4em; }
-.pv6 { padding-top: 8em; padding-bottom: 8em; }
-.pv7 { padding-top: 12em; padding-bottom: 12em; }
-.pv8 { padding-top: 16em; padding-bottom: 16em; }
-
-.ph0 { padding-left: 0; padding-right: 0; }
-.ph1 { padding-left: .25em; padding-right: .25em; }
-.ph2 { padding-left: .5em; padding-right: .5em; }
-.ph3 { padding-left: 1em; padding-right: 1em; }
-.ph4 { padding-left: 2em; padding-right: 2em; }
-.ph5 { padding-left: 4em; padding-right: 4em; }
-.ph6 { padding-left: 8em; padding-right: 8em; }
-.ph7 { padding-left: 12em; padding-right: 12em; }
-.ph8 { padding-left: 16em; padding-right: 16em; }
 
 
 

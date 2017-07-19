@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { 
   setSelected, 
+  setSidebarOpen,
   onHoverableMouseEnter,
   onHoverableMouseLeave,
   getHovered,
@@ -93,6 +94,7 @@ const mapStateToProps = createSelector(
 
 const mapDispatchToProps = {
   setSelected,
+  setSidebarOpen,
   onHoverableMouseEnter,
   onHoverableMouseLeave,
 };
