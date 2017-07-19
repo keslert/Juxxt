@@ -6,6 +6,7 @@ export { blueprint as HeadingSubheadingButton } from './heading-subheading-butto
 export { blueprint as HeadingParagraphButton } from './heading-paragraph-button';
 export { blueprint as KickerHeadingParagraph } from './kicker-heading-paragraph';
 
+
 export { blueprint as IconHeadingParagraph } from './icon-heading-paragraph';
 export { blueprint as InputButton } from './input-button';
 export { blueprint as InputInputButton } from './input-input-button';
@@ -19,3 +20,4 @@ export { blueprint as StackedButtons } from './stacked-buttons';
 export { blueprint as ButtonList } from './button-list';
 export { blueprint as Gallery } from './gallery';
 export { blueprint as BlockImage } from './block-image';
+export { blueprint as ImageHeadingParagraph } from './image-heading-paragraph';

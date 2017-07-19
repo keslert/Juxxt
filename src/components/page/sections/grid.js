@@ -25,7 +25,7 @@ class Grid extends React.PureComponent {
     const tpClassNames = convertStyleToAtomic({
       textAlign: "center",
     })
-
+    console.log(groups.gridItem.clones)
     return (
       <div className={colorClassNames + ' Grid'}>
         <div className={containerClassNames}>
@@ -66,11 +66,12 @@ export const blueprint = {
     },
     gridItem: {
       options: [
-        {name: 'HeadingParagraph', clones: 6, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'HeadingParagraphLink', clones: 6, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'IconHeadingParagraph', clones: 6, elements:{heading:{name:'SmallHeading'}}},
+        {name: 'HeadingParagraph' , clones: 6, overrides: {elements:{heading:{name:'SmallHeading'}}}},
+        {name: 'HeadingParagraphLink', clones:6,  overrides: {elements:{heading:{name:'SmallHeading'}}}},
+        {name: 'IconHeadingParagraph',  clones: 6, overrides: {elements:{heading:{name:'SmallHeading'}}}},
+        {name: 'ImageHeadingParagraph', clones: 6, overrides: {elements:{heading:{name:'SmallHeading'}}}},
       ]
-    }
+    },
   },
   variants: [{
     columns: {

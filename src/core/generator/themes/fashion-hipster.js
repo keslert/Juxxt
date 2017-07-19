@@ -48,6 +48,7 @@ export default {
   page: {
     sections: [
       {name: 'Navbar1'},
+      {name: 'Header'},
       {name: 'Grid'},
     ]
   }

@@ -13,7 +13,7 @@ import { getSection, getParents, linkSkeleton } from './generator-utils';
 import { range, reduce, uniqueId, forEach, clone, sortBy, map, max, some, filter, cloneDeep, find } from 'lodash';
 import defaultTheme from './themes';
 
-const NUM_SECTIONS = 2;
+const NUM_SECTIONS = 7;
 export function init() {
   const colorBlueprint = buildPageColorBlueprint(defaultTheme.palette);
 

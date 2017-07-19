@@ -52,6 +52,7 @@ export const blueprint = {
     buttonList: {
       options: [
         { name: 'ButtonList', elements: { buttons: { name: 'SmallButton', clones: 2}}},
+//      {name: 'HeadingParagraph', clones: {_default:6} , overrides: {elements:{heading:{name:'SmallHeading', clones:{_default:1}}}} },
       ],
     },
     links: {
