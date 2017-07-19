@@ -4,7 +4,7 @@ import * as blueprints from '../../../components/page/groups/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
 import { generateContent } from '../content/generate';
-import { filter, range, uniqBy, flatMap, mapValues, cloneDeep, forEach, includes, map } from 'lodash';
+import { filter, range, uniqBy, flatMap, mapValues, cloneDeep, forEach, includes, map, isString } from 'lodash';
 import { getCombinations } from '../../utils';
 
 import { generateElementColorAlternatives } from './element';
@@ -20,10 +20,12 @@ export function generateGroupComponentAlternatives(group, sectionSkeleton) {
   const possibleGroups = blueprint.groups[group.parentKey].options;
   const validGroups = filter(possibleGroups, groupName => groupName !== group.name)
 
-  const skeletons = validGroups.map(name => {
+  const skeletons = validGroups.map(option => {
     const skeleton = cloneDeep(sectionSkeleton);
     const parentSkeleton = findItemInSection(group.parent, skeleton);
-    parentSkeleton.groups[group.parentKey] = generateGroupSkeleton({name, id: group.id, variant: group.variant});
+
+    const _group = isString(option) ? {name: option} : option;
+    parentSkeleton.groups[group.parentKey] = generateGroupSkeleton({..._group, id: group.id, variant: group.variant});
     linkSkeleton(skeleton);
     return skeleton;
   })

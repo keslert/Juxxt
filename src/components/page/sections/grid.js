@@ -3,7 +3,6 @@ import Group from '../groups';
 import Element from '../elements';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
-import { range } from 'lodash';
 
 class Grid extends React.PureComponent {
   render () {
@@ -76,7 +75,7 @@ export const blueprint = {
   variants: [{
     columns: {
       _default:3,
-      options: range(2, 7),
+      options: [2,3,4],
     }
   }]
 }

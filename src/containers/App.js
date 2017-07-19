@@ -58,7 +58,7 @@ class App extends React.Component {
       on_keyup: () => setShiftDown(false),
     })
 
-    setSelected(master.sections[1]);
+    setSelected(master.sections[0]);
     turnOnModification('component');
   }
 

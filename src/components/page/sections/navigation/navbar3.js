@@ -51,8 +51,7 @@ export const blueprint = {
   groups: {
     buttonList: {
       options: [
-        { name: 'ButtonList', overrides: {elements: { buttons: { name: 'SmallButton', clones: { _default: 2 }}}}},
-        //{ name: 'Logo', overrides: {align:  'center' }},
+        { name: 'ButtonList', elements: { buttons: { name: 'SmallButton', clones: 2 }}},
       ],
     },
     links: {

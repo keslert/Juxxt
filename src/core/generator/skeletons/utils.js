@@ -33,7 +33,7 @@ export function extractSkeletonFromItem(item) {
   return skeleton;
 }
 
-export function generateItemSkeleton(skeleton, blueprint, generic, _variant, _overrides) {
+export function generateItemSkeleton(skeleton, blueprint, generic) {
   
   const merged = mergeBlueprints(generic, blueprint);
   
@@ -43,8 +43,8 @@ export function generateItemSkeleton(skeleton, blueprint, generic, _variant, _ov
     content: getDefaults(blueprint._defaults, 'content'),
     ...skeleton,
     name: merged.name,
-    clones: generateCloneSkeletons(merged.clones, blueprint, generic),
-    variant: getClosestVariant(_variant, merged.variants),
+    clones: generateCloneSkeletons(merged.clones, skeleton, merged),
+    variant: getClosestVariant(blueprint.variant, merged.variants),
     elements: mapValues(merged.elements, generateElementSkeleton),
     groups: mapValues(merged.groups, ({_default, options}) => {
       const selected = _default || randomItem(options);
@@ -55,11 +55,13 @@ export function generateItemSkeleton(skeleton, blueprint, generic, _variant, _ov
   }
 }
 
-function generateCloneSkeletons(clones, blueprint) {
+function generateCloneSkeletons(clones, source, blueprint) {
   if(isArray(clones)) {
     return clones.map((clone, i) => generateCloneSkeleton(i, clone))
   }
-  return range(0, clones).map(i => generateCloneSkeleton(i, omit(blueprint, ['clones'])));
+
+  const _blueprint = mergeBlueprints(blueprint, source);
+  return range(0, clones).map(i => generateCloneSkeleton(i, omit(_blueprint, ['clones'])));
 }
 
 function generateCloneSkeleton(index, blueprint) {

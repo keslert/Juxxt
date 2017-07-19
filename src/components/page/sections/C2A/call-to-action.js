@@ -51,7 +51,7 @@ export const blueprint = {
   groups: {
     tp: {
       options: [
-        {name: 'HeadingSubheading', overrides: {variants: [{align: {options:['inherit']}}]}},
+        {name: 'HeadingSubheading', variants: [{align: {options:['inherit']}}]},
        ]
         /*'HeadingParagraph','KickerHeadingParagraph',*],*/
     },
