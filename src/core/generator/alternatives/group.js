@@ -64,7 +64,7 @@ export function generateGroupColorAlternatives(sectionSkeleton, modify, page, se
   return sections;
 }
 
-export function generateGroupContentAlternatives(sectionSkeleton, group, contentStore) {
+export function generateGroupContentAlternatives(sectionSkeleton, group) {
   const skeletons = range(0, 6).map(_ => {
     const skeleton = cloneDeep(sectionSkeleton);
     linkSkeleton(skeleton);

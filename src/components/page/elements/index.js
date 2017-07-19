@@ -17,6 +17,7 @@ import { includes, last, map } from 'lodash';
 
 const StyledElement = styled.div`
   position: relative;
+  width: 100%;
   ${props => props.selected && `
     &:after {
       content: '';

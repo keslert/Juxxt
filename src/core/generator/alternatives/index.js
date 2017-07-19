@@ -130,9 +130,9 @@ function generateContentAlternatives(page, selected) {
   if(selected.isSection) {
     sections = generateSectionContentAlternatives(skeleton);
   } else if(selected.isGroup) {
-    sections = generateGroupContentAlternatives(skeleton, selected, selected.section.contentStore);
+    sections = generateGroupContentAlternatives(skeleton, selected);
   } else if(selected.isElement) {
-    sections = generateElementContentAlternatives(skeleton, selected, selected.section.contentStore);
+    sections = generateElementContentAlternatives(skeleton, selected);
   }
   return sections;
 }
