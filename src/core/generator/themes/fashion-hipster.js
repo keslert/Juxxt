@@ -44,5 +44,56 @@ export default {
     {key: uniqueId(), src: 'https://images.pexels.com/photos/488449/pexels-photo-488449.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
     {key: uniqueId(), src: 'https://images.pexels.com/photos/139259/pexels-photo-139259.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
     {key: uniqueId(), src: 'https://images.pexels.com/photos/466727/pexels-photo-466727.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'} 
-  ]
+  ],
+  page: {
+    sections: [
+      {name: 'Navbar1'},
+      {name: 'Header'},
+      {name: 'Basic1_2'},
+    ]
+  }
 }
+
+// Default Section styles
+// name: 'Navbar1',
+// _defaults: {
+//   style: {
+//     paddingTop: 2,
+//     paddingBottom: 2,
+//   },
+//   color: { background: page.colorBlueprint.backgrounds[i] }
+// }
+
+// name: 'Header',
+// _defaults: {
+//   color: {
+//     background: page.colorBlueprint.backgrounds[i],
+//     backgroundImage: defaultTheme.backgroundImages[1].key,
+//     _backgroundImage: defaultTheme.backgroundImages[1].src,
+//   },
+//   style: {
+//     paddingTop: 7,
+//     paddingBottom: 6,
+//   },
+// },
+// groups: {
+//   tp: {
+//     _default: {
+//       name: 'HeadingSubheadingButton',
+//       elements: {
+//         heading: {
+//           _defaults: {
+//             color: { text: '#ffffff', _textBackground: page.colorBlueprint.backgrounds[i], background: '#ffffff', _parentBackground:  },
+//             content: { text: 'Buy Now' }
+//           },
+//         }
+//       },
+//     },
+//     variants: [{
+//       align: {
+//         _default: 'left',
+//         options: ['left', 'right'],
+//       }
+//     }],
+//   }
+// }

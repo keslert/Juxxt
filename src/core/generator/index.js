@@ -27,95 +27,17 @@ export function init() {
     },
     isPage: true,
     isMaster: true,
-    sections: reduce(range(0, NUM_SECTIONS), (sections, i) => {
+    sections: reduce(defaultTheme.page.sections, (sections, blueprint) => {
       const page = {sections, colorBlueprint};
-
-      const sectionType = {
-        navigation: i === 0,
-        header: i === 1,
-        footer: i === NUM_SECTIONS - 1,
-        action: i === NUM_SECTIONS - 2, 
-        grid: i === NUM_SECTIONS - 3,
-        basic: i > 1 && i < NUM_SECTIONS - 3,
-      };
-
-      const sectionName = i === 1 ? 'Header' : undefined;
-
-      const backgrounds = {
-        navigation: colorBlueprint.lights,
-        header: [colorBlueprint.primary],
-        footer: colorBlueprint.lights,
-        action: [colorBlueprint.primary],
-        grid: colorBlueprint.lights,
-        basic: colorBlueprint.lights,
-      };
-
-      let skeleton;
-      if(i === 0) {
-        skeleton = generateSectionSkeleton({
-          name: 'Navbar1',
-          _defaults: {
-            style: {
-              paddingTop: 2,
-              paddingBottom: 2,
-            },
-            color: { background: page.colorBlueprint.backgrounds[i] }
-          }
-        });
-      } else if(true) {
-        skeleton = generateSectionSkeleton({
-          name: 'Header',
-          _defaults: {
-            color: {
-              background: page.colorBlueprint.backgrounds[i],
-              backgroundImage: defaultTheme.backgroundImages[1].key,
-              _backgroundImage: defaultTheme.backgroundImages[1].src,
-            },
-            style: {
-              paddingTop: 7,
-              paddingBottom: 6,
-            },
-          },
-          groups: {
-            tp: {
-              _default: {
-                name: 'HeadingParagraphButton',
-                elements: {
-                  heading: {
-                    name: 'BasicHeading',
-                    _defaults: {
-                      color: { text: '#ffffff', _textBackground: page.colorBlueprint.backgrounds[i] },
-                      content: { text: 'Buy Now' }
-                    },
-                  }
-                },
-              },
-              variants: [{
-                align: {
-                  _default: 'left',
-                  options: ['left', 'right'],
-                }
-              }],
-            }
-          }
-        });
-      } else {
-        const skeletons = generateSectionComponentAlternatives({}, sectionType);
-        skeleton = randomItem(skeletons);
-      }
       
+      const skeleton = generateSectionSkeleton(blueprint);
       linkSkeleton(skeleton);
       
-      const _backgrounds = backgrounds[skeleton.type];
-      skeleton.color.background = skeleton.color.background || _backgrounds[i % _backgrounds.length];
+      skeleton.color.background = skeleton.color.background || '#ffffff';
       
-
       const page2 = {...page, sections: [...page.sections, skeleton]};
       forEach(skeleton._groups, group => colorGroup(group, page2.sections));
       forEach(skeleton._elements, element => colorElement(element, page2));
-
-
-
 
       assignContent(skeleton, []);
       assignStyles(skeleton, page);

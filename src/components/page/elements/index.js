@@ -25,8 +25,8 @@ const StyledElement = styled.div`
       left: -6px;
       right: -6px;
       bottom: -3px;
-      border-left: 4px dashed tomato;
-      border-right: 4px dashed tomato;
+      border-left: 4px dashed #8bc34a;
+      border-right: 4px dashed #8bc34a;
       box-sizing: border-box;
       pointer-events: none;
     }

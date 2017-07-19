@@ -24,8 +24,8 @@ const StyledGroup = styled.div`
   ${props => `
     ${props.selected && `
       &:before {
-        border-left: 6px dashed tomato;
-        border-right: 6px dashed tomato;
+        border-left: 6px dashed #8bc34a;
+        border-right: 6px dashed #8bc34a;
       }
     `};
     ${props.hovered && `
