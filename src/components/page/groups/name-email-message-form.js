@@ -8,13 +8,13 @@ class NameEmailMessageForm extends React.Component {
     return (
       <div>
         <div>
-          <Element {...elements.input} />
+          <Element {...elements.name} />
         </div>
         <div>
-          <Element {...elements.input} />
+          <Element {...elements.email} />
         </div>
         <div>
-          <Element {...elements.input} />
+          <Element {...elements.message} />
         </div>
         <div> 
           <Element {...elements.button} />
@@ -31,8 +31,17 @@ export const blueprint = {
   style: {},
   color: {},
   elements: {
-    input: {
+    name: {
       name: BasicInput.name,
+      _defaults: {content: {placeholder: "name"}},
+    },
+    email: {
+      name: BasicInput.name,
+      _defaults: {content: {placeholder: "email"}},
+    },
+    message: {
+      name: BasicInput.name,
+      _defaults: {content: {placeholder: "message"}},
     },
     button: {
       name: BasicButton.name,

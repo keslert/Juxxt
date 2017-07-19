@@ -8,7 +8,7 @@ class EmailForm extends React.Component {
     return (
       <div>
         <div>
-          <Element {...elements.input} />
+          <Element {...elements.email} />
         </div>
         <div> 
           <Element {...elements.button} />
@@ -25,8 +25,9 @@ export const blueprint = {
   style: {},
   color: {},
   elements: {
-    input: {
+    email: {
       name: BasicInput.name,
+      _defaults: {content: {placeholder: "email"}},
     },
     button: {
       name: BasicButton.name,
