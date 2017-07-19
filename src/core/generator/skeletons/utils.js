@@ -23,7 +23,9 @@ import { getElementsInItem, getGroupsInItem, linkChildren, getParents } from '..
 
 export function extractSkeletonFromItem(item) {
   const skeleton = {
-    ...pick(item, ['id', 'is', 'type', 'relativeId', 'name', 'variant', 'color', 'style', 'content', 'blueprint', 'isSection', 'isGroup', 'isElement']),
+    ...pick(item, ['id', 'is', 'type', 'relativeId', 'name', 'variant', 'color', 'style', 
+      'content', 'blueprint', 'isSection', 'isGroup', 'isElement', 'fullRelativeId', 'fullId'
+    ]),
     groups: mapValues(item.groups, extractSkeletonFromItem),
     elements: mapValues(item.elements, extractSkeletonFromItem),
     clones: map(item.clones, extractSkeletonFromItem),
@@ -37,13 +39,12 @@ export function generateItemSkeleton(skeleton, blueprint, generic) {
   
   const merged = mergeBlueprints(generic, blueprint);
   
-  return {
+  const _skeleton = {
     style: getDefaults(blueprint._defaults, 'style'),
     color: getDefaults(blueprint._defaults, 'color'),
     content: getDefaults(blueprint._defaults, 'content'),
     ...skeleton,
     name: merged.name,
-    clones: generateCloneSkeletons(merged.clones, skeleton, merged),
     variant: getClosestVariant(blueprint.variant, merged.variants),
     elements: mapValues(merged.elements, generateElementSkeleton),
     groups: mapValues(merged.groups, ({_default, options}) => {
@@ -53,20 +54,23 @@ export function generateItemSkeleton(skeleton, blueprint, generic) {
     blueprint: omit(merged, ['_defaults']),
     uid: 'uid_' + uniqueId(),
   }
+  _skeleton.clones = generateCloneSkeletons(merged.clones, _skeleton);
+
+  return _skeleton;
 }
 
-function generateCloneSkeletons(clones, source, blueprint) {
+function generateCloneSkeletons(clones, source) {
   if(isArray(clones)) {
     return clones.map((clone, i) => generateCloneSkeleton(i, clone))
   }
 
-  const _blueprint = mergeBlueprints(blueprint, source);
-  return range(0, clones).map(i => generateCloneSkeleton(i, omit(_blueprint, ['clones'])));
+  return range(0, clones).map(i => generateCloneSkeleton(i, source));
 }
 
 function generateCloneSkeleton(index, blueprint) {
   const skeleton = (blueprint.isGroup ? generateGroupSkeleton : generateElementSkeleton)(blueprint);
   skeleton.relativeId = skeleton.relativeId + "_" + index;
+  skeleton.uid = blueprint.uid;
   return skeleton;
 }
 

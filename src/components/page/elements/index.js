@@ -18,7 +18,7 @@ import { includes, last, map } from 'lodash';
 const StyledElement = styled.div`
   position: relative;
   width: 100%;
-  ${props => props.selected && `
+  ${props => props.sudoSelected && `
     &:after {
       content: '';
       position: absolute;
@@ -26,8 +26,8 @@ const StyledElement = styled.div`
       left: -6px;
       right: -6px;
       bottom: -3px;
-      border-left: 4px dashed #8bc34a;
-      border-right: 4px dashed #8bc34a;
+      border-left: 3px dashed ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
+      border-right: 3px dashed ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
       box-sizing: border-box;
       pointer-events: none;
     }
@@ -51,6 +51,7 @@ class Element extends React.PureComponent {
       uid,
       is,
       isSelected,
+      isSudoSelected,
       setSelected,
       setSidebarOpen,
       isHovered, 
@@ -66,8 +67,8 @@ class Element extends React.PureComponent {
 
     return (
       <StyledElement 
-        selected={isSelected} 
-        hovered={isHovered}
+        selected={isSelected}
+        sudoSelected={isSudoSelected}
         onClick={(e) => { e.stopPropagation(); setSelected(this.props);}}
         onDoubleClick={(e) => { e.stopPropagation(); setSidebarOpen(true); }}
         onMouseEnter={() => onHoverableMouseEnter(uid)}
@@ -85,12 +86,11 @@ Element.contextTypes = {
 };
 
 const mapStateToProps = createSelector(
-  getHovered,
   getSelected,
-  (_, props) => props.uid,
-  (hovered, selected, uid) => ({
-    isSelected: selected.uid === uid,
-    isHovered: last(hovered) === uid,
+  (_, props) => ({id: props.id, fullRelativeId: props.fullRelativeId}),
+  (selected, {fullRelativeId, id}) => ({
+    isSelected: selected.fullRelativeId === fullRelativeId,
+    isSudoSelected: selected.id === id,
   })
 );
 

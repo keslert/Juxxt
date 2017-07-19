@@ -125,11 +125,8 @@ export function generateElementStyleAlternatives(modify, sectionSkeleton, elemen
     const skeleton = cloneDeep(sectionSkeleton);
     linkSkeleton(skeleton);
     const _style = {...element.style, ...style};
-    skeleton._elements.forEach(e => {
-      if(e.id === element.id) {
-        e.style = _style;
-      }
-    });
+    const elements = filter(skeleton._elements, e => e.id === element.id);
+    elements.forEach(e => e.style = _style)
     skeleton.changes = style;
     return skeleton;
   })

@@ -22,10 +22,10 @@ const StyledGroup = styled.div`
     box-sizing: border-box;
   }
   ${props => `
-    ${props.selected && `
+    ${props.sudoSelected && `
       &:before {
-        border-left: 6px dashed #8bc34a;
-        border-right: 6px dashed #8bc34a;
+        border-left: 6px dashed ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
+        border-right: 6px dashed ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
       }
     `};
     ${props.hovered && `
@@ -41,8 +41,9 @@ class Group extends React.PureComponent {
   render() {
     const { 
       name, 
-      uid,
+      fullRelativeId,
       isSelected,
+      isSudoSelected,
       setSelected,
       isHovered, 
       onHoverableMouseEnter, 
@@ -57,10 +58,11 @@ class Group extends React.PureComponent {
     return (
       <StyledGroup
         selected={isSelected}
+        sudoSelected={isSudoSelected}
         hovered={isHovered} 
         onClick={(e) => { e.stopPropagation(); setSelected(this.props);}}
-        onMouseEnter={() => onHoverableMouseEnter(uid)}
-        onMouseLeave={() => onHoverableMouseLeave(uid)}
+        onMouseEnter={() => onHoverableMouseEnter(fullRelativeId)}
+        onMouseLeave={() => onHoverableMouseLeave(fullRelativeId)}
         className="w-100P"
         >
         <GroupComponent {...this.props} />
@@ -75,8 +77,9 @@ Group.contextTypes = {
 };
 
 const mapStateToProps = (state, props) => ({
-  isSelected: state.ui.selected.uid === props.uid,
-  isHovered: last(state.ui.hovered) === props.uid,
+  isSelected: state.ui.selected.fullRelativeId === props.fullRelativeId,
+  isSudoSelected: state.ui.selected.id === props.id,
+  isHovered: last(state.ui.hovered) === props.fullRelativeId,
 });
 
 const mapDispatchToProps = {

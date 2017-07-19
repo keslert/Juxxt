@@ -79,5 +79,6 @@ export function linkSkeleton(skeleton) {
 function assignFullIds(item) {
   const parents = getParents(item);
   item.fullId = parents.map(p => p.id).join('_') + item.id;
+  item._oldFullRelativeId = item.fullRelativeId;
   item.fullRelativeId = parents.map(p => p.relativeId).join('_') + item.relativeId;
 }
