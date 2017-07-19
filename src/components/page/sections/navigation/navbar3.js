@@ -13,12 +13,14 @@ class Navbar3 extends React.PureComponent {
       ...style,
       display: "flex",
       align: "center",
+      fixedNavBar: false,
     });
 
     const colorClassNames = convertColorToAtomic(color);
+    const containerClassNames = convertStyleToAtomic({fixedNavBar: style.fixedNavBar});
 
     return (
-      <div className={ colorClassNames + ' Navbar3'+ ' justify-center'}>
+      <div className={ colorClassNames + ' Navbar3 '+ ' justify-center ' + containerClassNames}>
         <div className={styleClassNames + ' justify-center'}>
             <Element {...elements.logo} />
         </div>
@@ -38,7 +40,7 @@ export default Navbar3;
 
 export const blueprint = {
   type: 'navigation',
-  inherits: ['NavigationSection'],
+  inherits: ['NavigationSection', 'FixedNavBar'],
   style: {},
   color: {},
   elements: {

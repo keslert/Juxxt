@@ -19,7 +19,7 @@ class Navbar2 extends React.PureComponent {
     const containerClassNames = convertStyleToAtomic({fixedNavBar: style.fixedNavBar});
 
     return (
-      <div className={ colorClassNames + ' Navbar2 '+  containerClassNames}>
+      <div className={ colorClassNames + ' Navbar2 '+  containerClassNames }>
         <div className={styleClassNames}>
           <div>
             <Elements {...elements.logo} />

@@ -6,4 +6,4 @@ import HealthyFood from './healthy-food';
 import IceCreamShop from './ice-cream-shop';
 import Space from './space';
 
-export default Space;
+export default FashionHipster;
