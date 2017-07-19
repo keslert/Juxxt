@@ -1,10 +1,9 @@
 import * as types from './action-types';
 import { init } from '../generator';
 
-const _init = init();
 const PageState = () => ({
-  master: _init.master,
-  alternatives: _init.alternatives,
+  master: init(),
+  alternatives: [],
 });
 
 export function pageReducer(state = PageState(), {type, payload}) {

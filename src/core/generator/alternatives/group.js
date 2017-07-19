@@ -33,7 +33,7 @@ export function generateGroupComponentAlternatives(group, sectionSkeleton) {
   return skeletons;
 }
 
-export function generateGroupVariantAlternatives(group, skeleton) {
+export function generateGroupVariantAlternatives(group, sectionSkeleton) {
   const variants = group.blueprint.variants;
   
   const combos = flatMap(variants, 
@@ -43,10 +43,11 @@ export function generateGroupVariantAlternatives(group, skeleton) {
   const unique = uniqBy(combos, JSON.stringify);
 
   const skeletons = unique.map(variant => {
-    const _skeleton = cloneDeep(skeleton);
-    const _groupSkeleton = findItemInSection(group, _skeleton);
-    _groupSkeleton.variant = variant;
-    return _skeleton;
+    const skeleton = cloneDeep(sectionSkeleton);
+    linkSkeleton(skeleton);
+    const groups = filter(skeleton._groups, g => g.id === group.id);
+    groups.forEach(g => g.variant = variant);
+    return skeleton;
   })
 
   return skeletons;

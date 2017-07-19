@@ -40,10 +40,10 @@ export function generateItemSkeleton(skeleton, blueprint, generic) {
   const merged = mergeBlueprints(generic, blueprint);
   
   const _skeleton = {
-    style: getDefaults(blueprint._defaults, 'style'),
     color: getDefaults(blueprint._defaults, 'color'),
     content: getDefaults(blueprint._defaults, 'content'),
     ...skeleton,
+    style: {...skeleton.style, ...getDefaults(blueprint._defaults, 'style')},
     name: merged.name,
     variant: getClosestVariant(blueprint.variant, merged.variants),
     elements: mapValues(merged.elements, generateElementSkeleton),
@@ -68,7 +68,16 @@ function generateCloneSkeletons(clones, source) {
 }
 
 function generateCloneSkeleton(index, blueprint) {
-  const skeleton = (blueprint.isGroup ? generateGroupSkeleton : generateElementSkeleton)(blueprint);
+  let skeleton = (blueprint.isGroup ? generateGroupSkeleton : generateElementSkeleton)(blueprint);
+  if(blueprint.isGroup) {
+    const _blueprint = cloneDeep(blueprint);
+    _blueprint.groups = mapValues(blueprint.groups, group => ({_default: group}));
+    skeleton = generateGroupSkeleton(_blueprint);
+  } else {
+    skeleton = generateElementSkeleton(blueprint);
+  }
+
+
   skeleton.relativeId = skeleton.relativeId + "_" + index;
   skeleton.uid = blueprint.uid;
   return skeleton;

@@ -152,7 +152,7 @@ export function setElementContent(element, content) {
     const state = getState();
     const master = getMaster(state);
     const section = overrideElementContent(element, content, master);
-    const _element = find(section._elements, e => e.fullId === element.fullId);
+    const _element = find(section._elements, e => e.fullRelativeId === element.fullRelativeId);
 
     replaceSection(dispatch, state, element.section, section);
     dispatch(setSelected(_element));
