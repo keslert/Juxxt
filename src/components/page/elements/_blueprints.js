@@ -288,11 +288,7 @@ export const BasicInput = {
   name: 'BasicInput',
   is: 'Input',
   inherits: [],
-  color: {},
-/*  placeholder_val: {
-    _default: "input",
-    options: ["First","Last","Email","Message","Name"],
-  },*/
+  color: { text: 'readable' },
   style: {},
   _defaults: {
     content: {placeholder: ''}
