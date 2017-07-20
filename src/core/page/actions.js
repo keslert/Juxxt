@@ -146,10 +146,14 @@ function replaceSection(dispatch, state, section, newSection) {
 export function deleteSection(section) {
   return (dispatch, getState) => {
     const master = getMaster(getState());
+    const index = findIndex(master.sections, s => s.id === section.id);
     const page = {...master,
       sections: filter(master.sections, s => s.id !== section.id)
     }
+
+    const _selected = master.sections[index - 1] || master.sections[index + 1];
     dispatch(setMaster(page));
+    dispatch(setSelected(_selected));
   }
 }
 

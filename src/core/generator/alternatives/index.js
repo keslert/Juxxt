@@ -150,10 +150,10 @@ function generateStyleAlternatives(page, modify, selected) {
 }
 
 function generatePageAlternatives(page, modify) {
-  let _page;
+  let pages;
   if(modify.brandColors) {
-    _page = generatePageBrandColorAlternatives(page);
+    pages = generatePageBrandColorAlternatives(page);
   }
 
-  return _page;
+  return pages;
 }
