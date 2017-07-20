@@ -130,7 +130,7 @@ function resolveComponentModification(dispatch, state, selected, callPath) {
 }
 
 function resolveStyleModification(dispatch, state, selected) {
-  const style = selected.blueprint.style;
+  const style = selected._possibleStyles;
   const valid = filter(Object.keys(style), key => style[key].options && style[key].options.length > 1);
   const rootKeys = uniq(valid.map(key => getStyleRoot(key)));
 
