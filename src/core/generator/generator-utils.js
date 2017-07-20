@@ -10,7 +10,11 @@ export function getSection(item) {
 }
 
 export function getBackground(item) {
-  return item.color.background || getBackground(item.parent);
+  const background = item.color.background;
+  if(background && background !== 'transparent') {
+    return background;
+  }
+  return getBackground(item.parent);
 }
 
 export function getParents(item, parents=[]) {

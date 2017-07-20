@@ -24,7 +24,8 @@ import { getElementsInItem, getGroupsInItem, linkChildren, getParents } from '..
 export function extractSkeletonFromItem(item) {
   const skeleton = {
     ...pick(item, ['id', 'is', 'type', 'relativeId', 'name', 'variant', 'color', 'style', 
-      'content', 'blueprint', 'isSection', 'isGroup', 'isElement', 'fullRelativeId', 'fullId'
+      'content', 'blueprint', 'isSection', 'isGroup', 'isElement', 'fullRelativeId', 
+      'fullId', 'index'
     ]),
     groups: mapValues(item.groups, extractSkeletonFromItem),
     elements: mapValues(item.elements, extractSkeletonFromItem),
@@ -79,6 +80,7 @@ function generateCloneSkeleton(index, blueprint) {
 
 
   skeleton.relativeId = skeleton.relativeId + "_" + index;
+  skeleton.index = index;
   skeleton.uid = blueprint.uid;
   return skeleton;
 }

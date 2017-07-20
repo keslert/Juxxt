@@ -1,7 +1,7 @@
-import { find, filter, flatMap, some, isFunction } from 'lodash';
+import { find, filter, flatMap, some, isFunction, sortBy } from 'lodash';
 import { getMode } from '../../utils';
 import { getSection, getBackground } from '../generator-utils';
-import { getMostVibrantColor } from './utils';
+import { getSortedByMostVibrant } from './utils';
 
 // 1. No color, get preferred color
 // 2. Color but background has changed
@@ -13,7 +13,8 @@ export function colorElement(element, page) {
   const elements = flatMap(page.sections, s => filter(s._elements, e => e.name === element.name));
   const rules = [
     e => e.fullRelativeId === element.fullRelativeId,
-    e => e.fullId === element.fullId,
+    e => e.relativeId === element.relativeId,
+    e => e.parent.name === element.parent.name && e.index === element.index,
     e => e.parent.name === element.parent.name,
     e => true,
   ]
@@ -41,11 +42,14 @@ function colorBackground(rules, elements, element, colorBlueprint) {
     element.color.background = getMode(matches.map(e => e.color.background));
     element.color.borderColor = getMode(matches.map(e => e.color.borderColor));
   } else {
-    // TODO: Map across palettes
     const solids = colorBlueprint.bgBlueprints[background].solids;
-    const preferred = getPreferredColor(solids, element.blueprint.color.background);
-    element.color.background = preferred;
-    element.color.borderColor = preferred;
+    const prevSolids = colorBlueprint.bgBlueprints[element.color._parentBackground || background].solids;
+    
+    if(element.color.background !== 'transparent') {
+      const preferred = getMappedPreferredColor(solids, prevSolids, element.color.background, element.blueprint.color.background);
+      element.color.background = preferred;
+      element.color.borderColor = preferred;
+    }
   }
   element.color._parentBackground = background;
 }
@@ -63,27 +67,33 @@ function colorText(rules, elements, element, colorBlueprint) {
     element.color.text = getMode(matches.map(e => e.color.text));
   } else {
     const texts = colorBlueprint.bgBlueprints[background].texts;
-    element.color.text = getPreferredColor(texts, element.blueprint.color.text);
+    const prevTexts = colorBlueprint.bgBlueprints[element.color._textBackground || background].texts;
+    element.color.text = getMappedPreferredColor(texts, prevTexts, element.color.text, element.blueprint.color.text);
   }
+  if(element.color.background === 'transparent') {
+    element.color.borderColor = element.color.text;
+  }
+
   element.color._textBackground = background;
 }
 
 
 
 const _preferanceMap = {
-  whiteOrVibrant: colors => getWhiteOrPreferred(colors, getMostVibrantColor),
-  whiteOrReadable: colors => getWhiteOrPreferred(colors, colors => colors[0]),
-  vibrant: getMostVibrantColor,
-  readable: colors => colors[0],
-}
-function getPreferredColor(colors, preference) {
-  return _preferanceMap[preference](colors);
+  whiteOrVibrant: colors => sortByWhite(colors, getSortedByMostVibrant),
+  whiteOrReadable: colors => sortByWhite(colors, colors => colors),
+  vibrant: getSortedByMostVibrant,
+  readable: colors => colors,
 }
 
-function getWhiteOrPreferred(colors, preferred) {
-  if(colors.indexOf('#ffffff') !== -1) {
-    return '#ffffff';
-  }
-  return preferred(colors);
+function getMappedPreferredColor(colors, prevColors, prevColor, preference) {
+  const sortedColors = _preferanceMap[preference](colors);
+  const sortedPrevColors = _preferanceMap[preference](prevColors);
+  const index = Math.max(0, sortedPrevColors.indexOf(prevColor));
+  return sortedColors[Math.min(sortedColors.length - 1, index)];
+}
+
+function sortByWhite(colors, preferredSort) {
+  return sortBy(preferredSort(colors), color => color === '#ffffff' ? 0 : 1);
 }
   
