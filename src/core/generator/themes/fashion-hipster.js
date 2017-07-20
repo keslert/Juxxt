@@ -90,7 +90,7 @@ export default {
                     },
                     style: {
                       fontSize: 8,
-                      lineHeight: 2,
+                      lineHeight: 3,
                     }
                   }
                 },
@@ -133,40 +133,6 @@ export default {
       },
       {name: 'BasicWide1_2',
         _defaults: {
-          variants: {
-            order: 1,
-          },
-          color: {
-            background: palette[2],
-          },
-        },
-        groups: {
-          tp: {
-            _default: {
-              name: 'IconHeadingParagraph',
-              style: {
-                align: 'left'
-              },
-              color: {
-                background: palette[2],
-              },
-            },
-          },
-        },
-        elements: {
-          image: {
-            _defaults : {
-              content: images[7],
-            }   
-          },
-        },
-        variant: {
-          order: 1,
-        },
-      },
-
-      {name: 'BasicWide1_2',
-        _defaults: {
           color: {
             background: palette[2],
           },
@@ -176,7 +142,9 @@ export default {
             _default: {
               name: 'HeadingParagraphButton',
               style: {
-                align: 'right'
+                _default: {
+                  align: 'right'
+                }
               },
               color: {
                 background: palette[2],
@@ -195,52 +163,93 @@ export default {
           order: 3,
         },
       },
+      {name: 'Basic',
+        _default: {
+          color: {
+            background: colorBlueprint.lightGray,
+          }
+        },
+        groups: {
+          item:{
+            _default: { name: 'HeadingParagraph' },
+          }
+        }
+      },
+      {name: 'BasicWide1_2',
+        _defaults: {
+          variants: {
+            order: 1,
+          },
+          color: {
+            background: palette[2],
+          },
+        },
+        groups: {
+          tp: {
+            _default: {
+              name: 'IconHeadingParagraph',
+              style: {
+                _default: {
+                  align: 'left'
+                }
+              },
+              color: {
+                background: palette[2],
+              },
+            },
+          },
+        },
+        elements: {
+          image: {
+            _defaults : {
+              content: images[7],
+            }   
+          },
+        },
+        variant: {
+          order: 1,
+        },
+      },
+      {name: 'Grid',
+        groups: {
+          tp: {
+            _default: {
+              name: 'HeadingSubheading',
+            },
+          },
+          gridItem: {
+            _default: {
+              name: 'HeadingParagraph', clones:6,  elements:{heading:{name:'SmallHeading'}},
+            },
+          }
+        },
+      },
+      {name: 'Footer1',
+        _defaults: {
+          color: {
+            background: colorBlueprint.lightGray,
+          }
+        },
+        elements: {
+          copyright: {
+            _default: {
+              name: 'Copyright',
+            }
+          }
+        },
+        groups: {
+          button: {
+            _default: {
+              name: 'ButtonList',
+            }
+          },
+          links: {
+            _default: {
+              name: 'HorizontalList',
+            }
+          }
+        },
+      }
     ]
   }
-}      
-
-
-// Default Section styles
-//   name: 'Navbar1',
-//     _defaults: {
-//       style: {
-//         paddingTop: 2,
-//         paddingBottom: 2,
-//       },
-//       color: { background: page.colorBlueprint.backgrounds[i] }
-//     }
-
-//   name: 'Header',
-//   _defaults: {
-//     color: {
-//       background: page.colorBlueprint.backgrounds[i],
-//       backgroundImage: defaultTheme.backgroundImages[1].key,
-//       _backgroundImage: defaultTheme.backgroundImages[1].src,
-//     },
-//     style: {
-//       paddingTop: 7,
-//       paddingBottom: 6,
-//     },
-//   },
-//   groups: {
-//     tp: {
-//       _default: {
-//         name: 'HeadingSubheadingButton',
-//         elements: {
-//           heading: {
-//             _defaults: {
-//               color: { text: '#ffffff', _textBackground: page.colorBlueprint.backgrounds[i], background: '#ffffff', _parentBackground:  },
-//               content: { text: 'Buy Now' }
-//             },
-//           }
-//         },
-//       },
-//       variants: [{
-//         align: {
-//           _default: 'left',
-//           options: ['left', 'right'],
-//         }
-//       }],
-//     }
-//   }
-// }
+}
