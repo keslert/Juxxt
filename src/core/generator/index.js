@@ -7,9 +7,8 @@ import { assignColor } from './color';
 import { colorGroup } from './color/group';
 import { colorElement } from './color/element';
 import { buildPageColorBlueprint } from './color/page';
-import { randomItem, replaceWhiteSpace } from '../utils';
 
-import { getSection, getParents, linkSkeleton } from './generator-utils';
+import { getSection, getParents, linkSkeleton, generatePageCSSRules } from './generator-utils';
 import { range, reduce, uniqueId, forEach, clone, sortBy, map, max, some, filter, cloneDeep, find } from 'lodash';
 import defaultTheme from './themes';
 
@@ -66,46 +65,6 @@ export function duplicateSection(section) {
   skeleton.relativeId = skeleton.id;
   linkSkeleton(skeleton);
   return skeleton;
-}
-
-export function generatePageCSSRules(page) {
-  
-  const rules = [];
-
-  page.colorBlueprint.texts.forEach(color => {
-    rules.push(`.c-${color.substr(1)} { color: ${color}; }`);
-  });
-
-  page.colorBlueprint.backgrounds.forEach(color => {
-    rules.push(`.bg-${color.substr(1)} { background: ${color}; }`);
-    rules.push(`.b-${color.substr(1)} { border-color: ${color}; }`);
-  });
-  
-  // Gradients
-  forEach(page.colorBlueprint.bgBlueprints, blueprint => {
-    blueprint.gradients.forEach(({start, end, direction}) => {
-      const key = `.grd-${start.substr(1)}-${end.substr(1)}-${replaceWhiteSpace(direction, '')}`;
-      rules.push(`${key} { background: linear-gradient(${direction}, ${start}, ${end}); }`);
-    })
-  })
-
-  page.sections.forEach(section => {
-    if(section.color.pattern) {
-      rules.push(`.ptrn-${section.color.pattern} { background: ${section.color._pattern}; background-size: 75%; }`);
-    }
-
-    if(section.color.backgroundImage) {
-      rules.push(`
-        .bgimg-${section.color.backgroundImage} {
-          background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${section.color._backgroundImage}) !important;
-          background-size: cover !important;
-          background-position: center center !important;
-        }
-      `);
-    }
-  })
-
-  page.CSSRules = rules.join('\n');
 }
 
 //background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/images/openSourceImages2017/${section.color.backgroundImage}.jpg) !important;

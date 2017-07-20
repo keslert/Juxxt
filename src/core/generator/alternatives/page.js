@@ -1,7 +1,9 @@
+import { linkSkeleton } from '../generator-utils';
+import { extractSkeletonFromItem } from '../skeletons/utils';
 import { getSortedByPreference } from '../color/utils';
 import { buildPageColorBlueprint } from '../color/page';
 import { colorElement } from '../color/element';
-import { cloneDeep, omit, values, filter, isEqual} from 'lodash';
+import { cloneDeep, omit, values, filter, isEqual, reduce, uniqueId } from 'lodash';
 import tinycolor from 'tinycolor2';
 
 export const palettes = [
@@ -16,7 +18,8 @@ export function generatePageBrandColorAlternatives(page) {
   const validPalettes = filter(palettes, palette => !isEqual(palette, page.palette))
 
   const pages = validPalettes.map(palette => {
-    const _page = cloneDeep(page);
+    const _page = { id: uniqueId(), style: page.style }
+
     const colorBlueprint = buildPageColorBlueprint(palette);
     
     _page.palette = palette;
@@ -30,23 +33,22 @@ export function generatePageBrandColorAlternatives(page) {
       'transparent': 'transparent',
     }
 
-    const sections = [];
-    _page.sections.forEach((_section, i) => {
-      const section = page.sections[i];
-      _section.color.background = colorMapping[section.color.background] || 
-                                  getSortedByPreference(colorBlueprint.backgrounds, section.blueprint.color.background)[0];
-      _section._elements.forEach((_element, i) => {
-        colorElement(_element, {sections, colorBlueprint});
+    _page.sections = reduce(page.sections, (sections, section) => {
+      const skeleton = extractSkeletonFromItem(section);
+      
+      const background = colorMapping[section.color.background] || 
+                         getSortedByPreference(colorBlueprint.backgrounds, skeleton.blueprint.color.background)[0];
+      skeleton.color = { background };
 
-        const element = section._elements[i];
-        ['background', 'text', 'borderColor'].forEach(key => {
-          if(colorMapping[element.color[key]]) {
-            _element.color[key] = colorMapping[element.color[key]];
-          }
-        })
-        sections.push(section);
-      })
-    })
+      linkSkeleton(skeleton);
+      skeleton._groups.forEach(e => e.color = {});
+      skeleton._elements.forEach(e => e.color = {});
+      
+      const __page = {sections, colorBlueprint};
+      skeleton._elements.forEach(e => colorElement(e, __page))
+
+      return [...sections, skeleton];
+    }, []);
 
     return _page;
   })

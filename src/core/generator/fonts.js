@@ -26,5 +26,3 @@ const paragraphNames = uniq(flatten(values(headings)))
 export const paragraphs = zipObject(paragraphNames, map(paragraphNames, name => (
 	filter(allHeadings, filter(allHeadings, heading => includes(headings[heading], name)))
 )))
-
-console.log(paragraphs);
