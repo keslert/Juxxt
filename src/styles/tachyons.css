@@ -410,6 +410,7 @@ img { max-width: 100%; }
 
 
 /* Fonts */
+.f-anton { font-family: 'Anton', serif; }
 .f-bitter { font-family: 'Bitter', serif; }
 .f-fira-sans { font-family: 'Fira Sans', sans-serif; }
 .f-libre-franklin { font-family: 'Libre Franklin', sans-serif; }
