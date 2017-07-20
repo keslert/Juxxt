@@ -25,7 +25,7 @@ class Grid extends React.PureComponent {
     const tpClassNames = convertStyleToAtomic({
       textAlign: "center",
     })
-    console.log(groups.gridItem.clones)
+
     return (
       <div className={colorClassNames + ' Grid'}>
         <div className={containerClassNames}>

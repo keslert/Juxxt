@@ -54,7 +54,9 @@ class AlternativesToolbar extends React.Component {
               )}
             </Box>
             <Box display="flex">
-              <ToolbarItem>50%</ToolbarItem>
+              <ToolbarItem onClick={() => setZoomLevel(zoomLevel % 4 + 1)}>
+                {Math.floor(100 / zoomLevel)}%
+              </ToolbarItem>
             </Box>
           </Box>
         </Toolbar>

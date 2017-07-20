@@ -15,6 +15,11 @@ const StyledPage = styled.div`
         transform: scale(1.01);
       }
     `};
+    ${props.preventDrag && `
+      .section {
+        pointer-events: none;
+      }
+    `};
     ${props.extraRules};
   `};
 `;
@@ -35,13 +40,18 @@ class Page extends React.PureComponent {
     const classNames = convertStyleToAtomic(style) + (preview ? ' preview' : '');
 
     const clickable = isFunction(onClick);
-
-    const isDraggable = !preview && sections.length === 1;
+    const preventDrag = preview || (!master && sections.length > 1);
     return (
-      <StyledPage onClick={onClick} clickable={clickable} className={classNames} extraRules={CSSRules}>
+      <StyledPage 
+        onClick={onClick} 
+        clickable={clickable} 
+        extraRules={CSSRules}
+        className={classNames} 
+        preventDrag={preventDrag}
+        >
         {sections.map((section, i) => (
           <div key={i} style={{marginTop: -1}}>
-            <Section {...section} master={master} index={master ? i : 1000 + i} draggable={isDraggable} />
+            <Section {...section} master={master} index={master ? i : 1000 + i} draggable={!preventDrag} />
             {master && !preview && <InsertionTarget index={i} />}
           </div>
         ))}

@@ -2,6 +2,7 @@ import * as sectionBlueprints from '../../components/page/sections/_blueprints';
 import * as groupBlueprints from '../../components/page/groups/_blueprints';
 import * as elementBlueprints from '../../components/page/elements/_blueprints';
 import { paragraphs } from './fonts';
+import { replaceWhiteSpace } from '../utils';
 
 import { forEach, reduce, filter, flatMap, mapValues } from 'lodash';
 
@@ -85,4 +86,44 @@ function assignFullIds(item) {
   item.fullId = parents.map(p => p.id).join('_') + item.id;
   item._oldFullRelativeId = item.fullRelativeId;
   item.fullRelativeId = parents.map(p => p.relativeId).join('_') + item.relativeId;
+}
+
+export function generatePageCSSRules(page) {
+  
+  const rules = [];
+
+  page.colorBlueprint.texts.forEach(color => {
+    rules.push(`.c-${color.substr(1)} { color: ${color}; }`);
+  });
+
+  page.colorBlueprint.backgrounds.forEach(color => {
+    rules.push(`.bg-${color.substr(1)} { background: ${color}; }`);
+    rules.push(`.b-${color.substr(1)} { border-color: ${color}; }`);
+  });
+  
+  // Gradients
+  forEach(page.colorBlueprint.bgBlueprints, blueprint => {
+    blueprint.gradients.forEach(({start, end, direction}) => {
+      const key = `.grd-${start.substr(1)}-${end.substr(1)}-${replaceWhiteSpace(direction, '')}`;
+      rules.push(`${key} { background: linear-gradient(${direction}, ${start}, ${end}); }`);
+    })
+  })
+
+  page.sections.forEach(section => {
+    if(section.color.pattern) {
+      rules.push(`.ptrn-${section.color.pattern} { background: ${section.color._pattern}; background-size: 75%; }`);
+    }
+
+    if(section.color.backgroundImage) {
+      rules.push(`
+        .bgimg-${section.color.backgroundImage} {
+          background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${section.color._backgroundImage}) !important;
+          background-size: cover !important;
+          background-position: center center !important;
+        }
+      `);
+    }
+  })
+
+  page.CSSRules = rules.join('\n');
 }

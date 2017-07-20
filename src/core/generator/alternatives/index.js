@@ -24,10 +24,8 @@ import {
   generatePageBrandColorAlternatives,
 } from './page';
 
-import { linkSkeleton } from '../generator-utils';
+import { linkSkeleton, generatePageCSSRules } from '../generator-utils';
 import { extractSkeletonFromItem } from '../skeletons/utils';
-
-import { generatePageCSSRules } from '../index';
 
 import { assignContent, getContentStore } from '../content';
 import { assignStyles } from '../style';
@@ -56,7 +54,6 @@ export function generateAlternatives(page, modify, selected) {
 
   const pages = sections.map(section => {
     const _page = {...page, sections: [section]};
-    _page.isMaster = false;
     generatePageCSSRules(_page);
     return _page;
   })
@@ -153,10 +150,10 @@ function generateStyleAlternatives(page, modify, selected) {
 }
 
 function generatePageAlternatives(page, modify) {
-  let _page;
+  let pages;
   if(modify.brandColors) {
-    _page = generatePageBrandColorAlternatives(page);
+    pages = generatePageBrandColorAlternatives(page);
   }
 
-  return _page;
+  return pages;
 }

@@ -1,11 +1,11 @@
 import * as types from './action-types';
-import { overrideElementContent, generatePageCSSRules, duplicateSection } from '../../core/generator';
+import { overrideElementContent, duplicateSection } from '../../core/generator';
 import { generateAlternatives } from '../../core/generator/alternatives';
 import { getMaster } from './selectors';
 import { mapValues, sortBy, cloneDeep, uniqueId, forEach, findIndex, pick, find, filter, map } from 'lodash';
 import { getSelected, setSelected, getModifications, getSelectedModification, setSelectedModification } from '../ui';
 
-import { linkChildren, getParents, getElementsInItem, getGroupsInItem } from '../generator/generator-utils';
+import { linkChildren, getParents, getElementsInItem, getGroupsInItem, generatePageCSSRules } from '../generator/generator-utils';
 
 
 export function clearRegistry() {
@@ -37,8 +37,14 @@ export function setAlternatives(alternatives) {
 }
 
 export function replaceMaster(page) {
-  page.sections.forEach(section => section.master = true);
-  return setMaster(page);
+  return (dispatch, getState) => {
+    const selected = getSelected(getState());
+    page.sections.forEach(section => section.master = true);
+    const section = find(page.sections, s => s.id === selected.section.id);
+
+    dispatch(setMaster(page));
+    dispatch(setSelected(section));
+  }
 }
 
 export function updateAlternatives() {
@@ -140,10 +146,14 @@ function replaceSection(dispatch, state, section, newSection) {
 export function deleteSection(section) {
   return (dispatch, getState) => {
     const master = getMaster(getState());
+    const index = findIndex(master.sections, s => s.id === section.id);
     const page = {...master,
       sections: filter(master.sections, s => s.id !== section.id)
     }
+
+    const _selected = master.sections[index - 1] || master.sections[index + 1];
     dispatch(setMaster(page));
+    dispatch(setSelected(_selected));
   }
 }
 
