@@ -8,8 +8,6 @@ import { getAlternatives, replaceMaster, replaceSectionWithAlternative } from '.
 import Alternative from './alternative';
 import Page from '../page';
 
-import SmartBar from './smart-bar';
-
 const StyledAlternatives = styled.div`
   display: flex;
   flex-direction: column;
@@ -45,10 +43,7 @@ class Alternatives extends React.Component {
 
   renderNoAlternatives() {
     return (
-      <div>
-        <SmartBar />
-        <p className={ " mt3 fadedtext"}> No existing alternatives </p>
-      </div>
+      <p className="mt3 fadedtext">No existing alternatives...</p>
     )
   }
 
@@ -61,7 +56,6 @@ class Alternatives extends React.Component {
 
     return (
       <StyledAlternatives width={width}>
-        <SmartBar />
         <StyledContent>
           {alternatives.map((alternative, i) => (
             <StyledWrapper key={alternative.uid + `${i}`} style={{width: `${100 / zoomLevel}%`}}>

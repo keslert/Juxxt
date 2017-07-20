@@ -20,6 +20,8 @@ import Page from '../components/page';
 import Sidebar from '../components/sidebar';
 import Trashbar from '../components/trashbar';
 import Alternatives from '../components/alternatives';
+import PageToolbar from '../components/toolbar/page-toolbar';
+import AlternativesToolbar from '../components/toolbar/alternatives-toolbar';
 
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -29,7 +31,7 @@ import Box from '../components/common/box';
 
 const StyledColumn = styled.div`
   width: ${props => props.width}%;
-  height: 100vh;
+  height: calc(100vh - 40px);
   overflow-y: auto;
 `
 
@@ -47,7 +49,7 @@ class App extends React.Component {
       on_keyup: () => setShiftDown(false),
     })
 
-    setSelected(master.sections[0]);
+    setSelected(master.sections[1 % master.sections.length]);
     turnOnModification('component');
   }
 
@@ -74,10 +76,16 @@ class App extends React.Component {
       <Box display="flex">
         <Box display="flex" position="relative" flex="1">
           <SplitPane minSize={200} defaultSize='55%' split="vertical">
-            <StyledColumn>
-              <Page {...master} master={true} preview={false} />
-            </StyledColumn>
-            <Alternatives />
+            <div>
+              <PageToolbar />
+              <StyledColumn>
+                <Page {...master} master={true} preview={false} />
+              </StyledColumn>
+            </div>
+            <div>
+              <AlternativesToolbar />
+              <Alternatives />
+            </div>
           </SplitPane>
         </Box>
         <Sidebar />
