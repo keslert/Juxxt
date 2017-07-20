@@ -39,7 +39,7 @@ export function generateAlternatives(page, modify, selected) {
   if(modify.component) {
     sections = generateComponentAlternatives(page, modify.component, selected);
   } else if(modify.variant) {
-    sections = generateVariantAlternatives(page, selected);
+    sections = generateVariantAlternatives(page, modify.variant, selected);
   } else if(modify.color) {
     sections = generateColorAlternatives(page, modify.color, selected);
   } else if(modify.content) {
@@ -83,17 +83,18 @@ function generateComponentAlternatives(page, modify, selected) {
 }
 
 
-function generateVariantAlternatives(page, selected) {
+function generateVariantAlternatives(page, modify, selected) {
   const section = selected.section;
   const sectionSkeleton = extractSkeletonFromItem(section);
   
   let skeletons;
+
   if(selected.isSection) {
-    skeletons = generateSectionVariantAlternatives(selected, sectionSkeleton);
+    skeletons = generateSectionVariantAlternatives(modify, selected, sectionSkeleton);
   } else if(selected.isGroup) {
-    skeletons = generateGroupVariantAlternatives(selected, sectionSkeleton);
+    skeletons = generateGroupVariantAlternatives(modify, selected, sectionSkeleton);
   } else {
-    skeletons = generateElementVariantAlternatives(selected, sectionSkeleton);
+    skeletons = generateElementVariantAlternatives(modify, selected, sectionSkeleton);
   }
   
   const sections = skeletons.map(skeleton => {

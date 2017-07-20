@@ -25,7 +25,7 @@ export function extractSkeletonFromItem(item) {
   const skeleton = {
     ...pick(item, ['id', 'is', 'type', 'relativeId', 'name', 'variant', 'color', 'style', 
       'content', 'blueprint', 'isSection', 'isGroup', 'isElement', 'fullRelativeId', 
-      'fullId', 'index'
+      'fullId', 'index', '_possibleStyles'
     ]),
     groups: mapValues(item.groups, extractSkeletonFromItem),
     elements: mapValues(item.elements, extractSkeletonFromItem),

@@ -5,6 +5,8 @@ import FashionHipster from './fashion-hipster';
 import HealthyFood from './healthy-food';
 import IceCreamShop from './ice-cream-shop';
 import Space from './space';
+import RedRock from './red_rock';
 import Landay from './landay';
+
 
 export default Landay;

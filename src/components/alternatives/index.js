@@ -50,9 +50,8 @@ class Alternatives extends React.Component {
   render() {
     const { alternatives=[], width, zoomLevel } = this.props;
     
-    if (!alternatives.length) {
+    if (!alternatives.length)
       return this.renderNoAlternatives();
-    }
 
     return (
       <StyledAlternatives width={width}>
