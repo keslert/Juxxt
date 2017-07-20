@@ -21,10 +21,14 @@ const StyledHeading = styled.div`
 
 const StyledLabel = styled.div`
   font-size: 12px;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,1.0);
   white-space: nowrap;
   text-overflow: ellipsis;
 `;
+
+const StyledShadow = styled.div`
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+`
 
 const Alternative = ({
   changes,
@@ -42,7 +46,9 @@ const Alternative = ({
           <IconButton type="heart" onClick={onFavorite} />
         </StyledIconBar>
       </StyledHeading>
-      {children}
+      <StyledShadow>
+        {children}
+      </StyledShadow>
     </StyledAlternative>
   )
 }

@@ -68,20 +68,22 @@ function colorText(rules, elements, element, colorBlueprint) {
   element.color._textBackground = background;
 }
 
+
+
+const _preferanceMap = {
+  whiteOrVibrant: colors => getWhiteOrPreferred(colors, getMostVibrantColor),
+  whiteOrReadable: colors => getWhiteOrPreferred(colors, colors => colors[0]),
+  vibrant: getMostVibrantColor,
+  readable: colors => colors[0],
+}
 function getPreferredColor(colors, preference) {
-  if(preference === 'vibrantOrWhite'){
-    return getVibrantOrWhite(colors, preference);
-  }
-  if(preference === 'vibrant') {
-    return getMostVibrantColor(colors);
-  }
-  return colors[0];
+  return _preferanceMap[preference](colors);
 }
 
-function getVibrantOrWhite(colors, preference) {
+function getWhiteOrPreferred(colors, preferred) {
   if(colors.indexOf('#ffffff') !== -1) {
     return '#ffffff';
   }
-  return getMostVibrantColor(colors);
+  return preferred(colors);
 }
   

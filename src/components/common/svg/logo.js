@@ -20,8 +20,3 @@ const LogoSVG = ({
 )
 
 export default LogoSVG;
-
-
-
-
-

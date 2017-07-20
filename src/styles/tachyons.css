@@ -673,7 +673,7 @@ img { max-width: 100%; }
 }
 
 .fadedtext {
-  color:rgba(255,255,255,0.3);
+  color:#fff;
   text-align: center;
 }
 

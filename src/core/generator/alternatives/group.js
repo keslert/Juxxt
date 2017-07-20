@@ -57,7 +57,7 @@ export function generateGroupVariantAlternatives(group, sectionSkeleton) {
 export function generateGroupColorAlternatives(sectionSkeleton, modify, page, selected) {
   const elements = filter(selected.section._elements, e => e.parent.fullId === selected.fullId);  
   const backgroundElements = filter(elements, e => e.blueprint.color.background === 'vibrant');
-  const textElements = filter(elements, e => e.blueprint.color.text === 'vibrantOrWhite');
+  const textElements = filter(elements, e => e.blueprint.color.text === 'whiteOrVibrant');
 
   const sections = [
     ...flatMap(backgroundElements, e => generateElementColorAlternatives(sectionSkeleton, {background: true}, e, page)),
