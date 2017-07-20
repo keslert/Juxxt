@@ -89,7 +89,7 @@ export default {
                       _textBackground: palette[0],
                     },
                     style: {
-                      fontSize: 8,
+                      fontSize: 6,
                       lineHeight: 3,
                     }
                   }
