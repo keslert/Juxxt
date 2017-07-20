@@ -6,8 +6,10 @@ import {
   filter, 
   zipObject, 
   intersection, 
+  forEach,
   sortBy, 
   includes, 
+  flatMap,
   isEmpty, 
   uniq 
 } from 'lodash';
@@ -96,6 +98,7 @@ export function turnOnModification(key) {
 }
 
 function resolveModifications(dispatch, state, modification, selected, callPath) {
+
   if(modification === 'style') {
     resolveStyleModification(dispatch, state, selected);
   } else if(modification === 'color') {
@@ -104,7 +107,30 @@ function resolveModifications(dispatch, state, modification, selected, callPath)
     resolveComponentModification(dispatch, state, selected, callPath);
   } else if(modification === 'page') {
     resolvePageModification(dispatch, state);
+  } else if(modification === 'variant') {
+    resolveVariantModification(dispatch, state, selected);
   }
+}
+
+function getVariantKeysFromElement(element) {
+  const parent = element.parent;
+  return Object.keys(Object.assign({}, ...parent.blueprint.variants));
+}
+
+function getVariantKeysFromSelected(section) {
+  const groupVariants = flatMap(section.groups, group => group.blueprint.variants);
+  const variant = Object.assign({}, ...section.blueprint.variants, ...groupVariants)
+  return Object.keys(variant);
+}
+
+function resolveVariantModification(dispatch, state, selected) {
+  let keys = []
+  if(selected.isElement) {
+    keys = getVariantKeysFromElement(selected);
+  } else {
+    keys = getVariantKeysFromSelected(selected.isSection ? selected : selected.parent);
+  }
+  resolveModificationSelection(dispatch, state, keys, 'variant')
 }
 
 function resolveColorModification(dispatch, state, selected) {

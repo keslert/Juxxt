@@ -38,7 +38,7 @@ export function generateElementComponentAlternatives(element, sectionSkeleton) {
   return [];
 }
 
-export function generateElementVariantAlternatives(element, skeleton) {
+export function generateElementVariantAlternatives(modify, element, skeleton) {
   if(element.parent.isGroup) {
     return generateGroupVariantAlternatives(element.parent, skeleton);
   }
