@@ -25,18 +25,7 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
 import SplitPane from 'react-split-pane';
-
-
-
-const StyledApp = styled.div`
-  display: flex;
-`
-
-const StyledWindow = styled.div`
-  position: relative;
-  display: flex;
-  flex: 1;
-`
+import Box from '../components/common/box';
 
 const StyledColumn = styled.div`
   width: ${props => props.width}%;
@@ -82,18 +71,18 @@ class App extends React.Component {
     }
     
     return (
-      <StyledApp>
-        <StyledWindow>
+      <Box display="flex">
+        <Box display="flex" position="relative" flex="1">
           <SplitPane minSize={200} defaultSize='55%' split="vertical">
             <StyledColumn>
               <Page {...master} master={true} preview={false} />
             </StyledColumn>
             <Alternatives />
           </SplitPane>
-        </StyledWindow>
+        </Box>
         <Sidebar />
         <Trashbar />
-      </StyledApp>
+      </Box>
     ); 
   }
 }

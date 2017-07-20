@@ -46,7 +46,7 @@ export const BasicHeading = {
   is: 'Text',
   inherits: [],
   color: {
-    text: 'vibrantOrWhite',
+    text: 'whiteOrVibrant',
   },
   style: {
     fontSize: {
@@ -229,7 +229,7 @@ export const SmallButton = {
   is: 'Button',
   inherits: [inherits.Button],
   color: {
-    text: 'readable',
+    text: 'whiteOrReadable',
     background: 'vibrant',
   },
   style: {
@@ -257,7 +257,7 @@ export const BasicButton = {
   is: 'Button',
   inherits: [inherits.Button],
   color: {
-    text: 'readable',
+    text: 'whiteOrReadable',
     background: 'vibrant',
   },
   style: {
