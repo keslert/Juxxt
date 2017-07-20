@@ -11,6 +11,8 @@ import Footer2 from './footers/footer2';
 import FooterVerticalLists from './footers/footer-vertical-lists';
 import CallToAction from './C2A/call-to-action';
 import Grid from './grid';
+import ParallaxImage from './parallaxImage';
+
 export {
   Basic,
   Basic1_2,
@@ -25,4 +27,5 @@ export {
   FooterVerticalLists,
   CallToAction,
   Grid,
+  ParallaxImage,
 }

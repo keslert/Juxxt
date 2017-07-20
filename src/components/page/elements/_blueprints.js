@@ -58,7 +58,7 @@ export const BasicHeading = {
       options: [2,4,6,8],
     },
     lineHeight: {
-      _default: 1,
+      _default: 4,
       options: range(1, 5),
     }
   }

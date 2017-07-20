@@ -29,7 +29,7 @@ export function init() {
     isMaster: true,
     sections: reduce(defaultTheme.page.sections, (sections, blueprint) => {
       const page = {sections, colorBlueprint};
-      
+
       const skeleton = generateSectionSkeleton(blueprint);
       linkSkeleton(skeleton);
       
