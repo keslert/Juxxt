@@ -1,6 +1,6 @@
 import uniqueId from 'lodash/uniqueId';
 import { buildPageColorBlueprint } from '../color/page';
-const palette = ['#bc1515'];
+const palette = ['#bc1515', '#000000'];
 const colorBlueprint = buildPageColorBlueprint(palette);
 const backgroundImages = [  
   {key: uniqueId(), src: 'https://static.wixstatic.com/media/e549d4_7d9454e8a4f24493b614498e7821098e~mv2_d_3264_2448_s_4_2.jpg/v1/fill/w_2882,h_1596,al_c,q_90,usm_0.66_1.00_0.01/e549d4_7d9454e8a4f24493b614498e7821098e~mv2_d_3264_2448_s_4_2.webp'},
@@ -109,6 +109,202 @@ export default {
         _defaults: {
           color: { background: colorBlueprint.primary }
         }
+      },
+      {name: 'Header',
+        _defaults: {
+          style: {
+            paddingBottom: 5,
+            paddingTop: 6,
+            fontFamily: 'Montserrat',
+            fontSize: 3,
+            parallax: 'on',
+          },
+          color: {
+            backgroundImage: backgroundImages[1].key,
+            _backgroundImage: backgroundImages[1].src,
+            background: palette[0],
+          }
+        },
+        groups: {
+          tp: {
+            _default: {
+              name: 'HeadingSubheadingButton',
+              elements: {
+                heading: {
+                  _defaults: {
+                    content: {text: 'Projects'},
+                    style: {
+                      fontSize: 6,
+                      align: 'left',
+                    },
+                    color: {
+                      text: '#ffffff',
+                      _textBackground: palette[0],
+                    },
+                  }
+                },
+                subheading: {
+                  _defaults: {
+                    content: {text: ''},
+                    color: {
+                      text: '#ffffff',
+                      _textBackground: palette[0],
+                    },
+                  }
+                },
+              },
+            } 
+          }
+        }
+      },
+      {name: 'Grid',
+        _defaults: {
+            color: { 
+              background: palette[1], 
+            }
+          },
+        groups: {
+          tp: {
+            _default: {
+              name: 'HeadingSubheading',
+            },
+          },
+          gridItem: {
+            _default: {
+              name: 'IconHeadingParagraph', clones:3,  elements:{heading:{name:'SmallHeading', color: colorBlueprint.lightGray}},
+            },
+          }
+        },
+      },
+      {name: 'Header',
+        _defaults: {
+          style: {
+            paddingBottom: 5,
+            paddingTop: 6,
+            fontFamily: 'Montserrat',
+            fontSize: 3,
+            parallax: 'on',
+          },
+          color: {
+            backgroundImage: backgroundImages[0].key,
+            _backgroundImage: backgroundImages[0].src,
+            background: palette[0],
+          }
+        },
+        groups: {
+          tp: {
+            _default: {
+              name: 'HeadingSubheadingButton',
+              elements: {
+                heading: {
+                  _defaults: {
+                    content: {text: 'Teaching'},
+                    color: {
+                      text: '#ffffff',
+                      _textBackground: palette[0],
+                    },
+                    style: {
+                      fontSize: 5,
+                      lineHeight: 3,
+                    }
+                  }
+                },
+                subheading: {
+                  _defaults: {
+                    content: {text: ''},
+                    color: {
+                      text: '#ffffff',
+                      _textBackground: palette[0],
+                    },
+                  }
+                },
+              },
+            } 
+          }
+        }
+      },
+      {name: 'Grid',
+        _defaults: {
+            color: { 
+              background: palette[0], 
+            }
+          },
+        groups: {
+          tp: {
+            elements: {
+            _default: {
+              name: 'HeadingSubheading',
+              content: '',
+            },
+          },
+          gridItem: {
+            _default: {
+              name: 'IconHeadingParagraph', clones:2,  elements:{heading:{name:'SmallHeading', color: colorBlueprint.lightGray}},
+            },
+          }
+        },
+      },
+    },
+    
+      {name: 'Grid',
+        _defaults: {
+            color: { 
+              background: palette[0], 
+            }
+          },
+        groups: {
+          tp: {
+            _default: {
+              name: 'HeadingSubheading',
+                elements: {
+                  heading: {
+                    _defaults: {
+                      content: {text:''},
+                    }
+                  },
+                  subheading: {
+                    _defaults: {
+                      content: {text:''},
+                    }
+                  }
+                }
+            },
+          },
+          gridItem: {
+            _default: {
+              name: 'HeadingParagraphButton', clones:2,  elements:{heading:{name:'SmallHeading', color: colorBlueprint.lightGray}},
+            },
+          }
+        },
+      },
+      {
+        name: 'Basic',
+        _defaults: {
+          color: {
+                background: palette[1],
+              },
+        },
+        groups: {
+          item: {
+            _default: {
+              name: 'HeadingParagraph',
+              variant: { align: 'center' },
+              elements: {
+                heading: {
+                  _defaults: {
+                    content: {text: 'landay@stanford.edu'},
+                    style: {fontSize: 5},
+                  }
+                },
+                paragraph: {
+                  _defaults: {
+                    content: {text: "390 Gates Hall, 353 Serra Mall, Stanford CA 94305" }
+                  }
+                }
+              }
+            }
+          }
+        },
       },
     ]
   }

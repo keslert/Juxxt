@@ -7,4 +7,4 @@ import IceCreamShop from './ice-cream-shop';
 import Space from './space';
 import Landay from './landay';
 
-export default HealthyFood;
+export default Landay;
