@@ -634,9 +634,9 @@ img { max-width: 100%; }
 /* Needed for input boxes*/
 .b-none { border: none; }
 .b-underline { border-bottom: 2px solid black; }
-/*.i-place { placeholder: "input placeholder"; }*/
+.back-trans { background-color: transparent; }
+
 /*
-.back-color { background-color: ???; }
 Actually, make background just like ghost buttons?? But greyed out??*/
 
 

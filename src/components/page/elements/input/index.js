@@ -10,7 +10,7 @@ class Input extends React.PureComponent {
     const colorClassNames = convertColorToAtomic(color);
     const styleClassNames = convertStyleToAtomic(style);
     return(
-      <input placeholder={content.placeholder} className={colorClassNames + ' b-none b-underline ' + styleClassNames} />
+      <input placeholder={content.placeholder} className={colorClassNames + ' b-none b-underline back-trans ' + styleClassNames} />
     )
   }
 }
