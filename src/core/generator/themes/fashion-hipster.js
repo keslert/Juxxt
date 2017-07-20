@@ -59,7 +59,7 @@ export default {
             paddingBottom: 2,
           },
           color: { 
-            background: colorBlueprint.lightGray,
+            background: "transparent",
           },
         }
       },
