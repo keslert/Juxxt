@@ -10,7 +10,7 @@ export function assignContent(section, contentStore) {
   const rules = [
     (content, element) => content.elementId === element.fullRelativeId, // ID Matching
     (content, element) => content.elementName === element.name,
-    (content, element) => content.elementIs === element.is,
+    (content, element) => element.is === 'Image' && content.elementIs === element.is,
   ]
 
   rules.forEach(rule => {
