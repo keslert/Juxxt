@@ -1,11 +1,12 @@
 import React from 'react';
 import Group from '../groups';
+import Element from '../elements';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 
-class Grid extends React.PureComponent {
+class StackedGrid extends React.PureComponent {
   render () {
-    const { style, color, groups, variant } = this.props;
+    const { style, color, groups, variant, elements } = this.props;
 
     const containerClassNames = convertStyleToAtomic(style);
     const colorClassNames = convertColorToAtomic(color);
@@ -24,10 +25,13 @@ class Grid extends React.PureComponent {
     const tpClassNames = convertStyleToAtomic({
       textAlign: "center",
     });
-
+    
     return (
-      <div className={colorClassNames + ' Grid'}>
+      <div className={colorClassNames + ' StackedGrid'}>
         <div className={containerClassNames}>
+          <div className={tpClassNames}>
+            <Group {...groups.tp} />
+          </div>
           <div className={itemClassNames}>
             {groups.gridItem.clones.map((group, i) => (
               <div className={boxClassNames} key={i}>
@@ -41,24 +45,31 @@ class Grid extends React.PureComponent {
   }
 }
 
-const NUM_OF_CLONES = 3;
-
-export default Grid;
-
-
+export default StackedGrid;
 
 export const blueprint = {
   type: 'grid',
   inherits: ['BasicSection', 'GutterSection', 'BaseSection'],
   style: {},
   color: {},
+  elements: {
+    heading: {
+      name: "BasicHeading",
+    },
+    subheading: {
+      name: "BasicSubheading",
+    },
+  },
   groups: {
+    tp: {
+      options: ['HeadingParagraph', 'HeadingSubheading'],
+    },
     gridItem: {
       options: [
-        {name: 'HeadingParagraph' , clones: NUM_OF_CLONES, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'HeadingParagraphLink', clones: NUM_OF_CLONES,  elements:{heading:{name:'SmallHeading'}}},
-        {name: 'IconHeadingParagraph',  clones: NUM_OF_CLONES, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'ImageHeadingParagraph', clones: NUM_OF_CLONES, 
+        {name: 'HeadingParagraph' , clones: 6, elements:{heading:{name:'SmallHeading'}}},
+        {name: 'HeadingParagraphLink', clones:6,  elements:{heading:{name:'SmallHeading'}}},
+        {name: 'IconHeadingParagraph',  clones: 6, elements:{heading:{name:'SmallHeading'}}},
+        {name: 'ImageHeadingParagraph', clones: 6, 
           groups: { tp: { options: [
             {name: 'HeadingParagraph', elements: {heading: {name:'SmallHeading'}}}
           ]}},

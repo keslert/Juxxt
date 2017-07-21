@@ -205,7 +205,7 @@ page: {
           order: 1,
         },
       },
-      {name: 'Grid',
+      {name: 'StackedGrid',
         groups: {
           tp: {
             _default: {

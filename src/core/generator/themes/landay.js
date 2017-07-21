@@ -164,11 +164,6 @@ export default {
             }
           },
         groups: {
-          tp: {
-            _default: {
-              name: 'HeadingSubheading',
-            },
-          },
           gridItem: {
             _default: {
               name: 'IconHeadingParagraph', clones:3,  elements:{heading:{name:'SmallHeading', color: colorBlueprint.lightGray}},
@@ -223,7 +218,7 @@ export default {
           }
         }
       },
-      {name: 'Grid',
+      {name: 'StackedGrid',
         _defaults: {
             color: { 
               background: palette[0], 
@@ -246,7 +241,7 @@ export default {
       },
     },
     
-      {name: 'Grid',
+      {name: 'StackedGrid',
         _defaults: {
             color: { 
               background: palette[0], 

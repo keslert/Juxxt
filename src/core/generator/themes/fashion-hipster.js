@@ -210,7 +210,7 @@ export default {
           order: 1,
         },
       },
-      {name: 'Grid',
+      {name: 'StackedGrid',
         groups: {
           tp: {
             _default: {
@@ -249,7 +249,10 @@ export default {
             }
           }
         },
-      }
+      },
+      {name: 'Navbar1'},
+      {name: 'Header'},
+      {name: 'StackedGrid'},
     ]
   }
 }
