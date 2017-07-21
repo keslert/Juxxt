@@ -47,7 +47,7 @@ export default {
   page: {
     sections: [
       {name: 'Navbar2',
-        _default: {
+        /*_default: {
           style: {
             paddingTop: 2,
             paddingBottom: 2,
@@ -55,10 +55,10 @@ export default {
           color: { 
             background: colorBlueprint.lightGray,
           },
-        }
+        }*/
       },
       {name: 'Header',
-        _defaults: {
+       /* _defaults: {
           style: {
             paddingBottom: 4,
             paddingTop: 7,
@@ -115,17 +115,17 @@ export default {
               }
             } 
           }
-        }
+        }*/
       },
       {name: 'Basic',
-        groups: {
+/*        groups: {
           item:{
             _default: { name: 'HeadingParagraph' },
           }
-        }
+        }*/
       },
       {name: 'BasicWide1_2',
-        groups: {
+/*        groups: {
           tp: {
             name: 'HeadingParagraph',
           },
@@ -142,10 +142,10 @@ export default {
               order: 1,
               align: "left"
             }
-          },
+          },*/
       },
       {name: 'BasicWide1_2',
-        _defaults: {
+/*        _defaults: {
           groups: {
             tp: {
               name: 'IconHeadingParagraph',
@@ -156,9 +156,9 @@ export default {
               },
             },
           },
-        },
+        },*/
       },
-      {name: 'Footer1',
+      {name: 'Footer2',
         _default: {
           style: {
             paddingTop: 2,
