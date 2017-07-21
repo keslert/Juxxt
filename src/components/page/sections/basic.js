@@ -15,12 +15,17 @@ class Basic extends React.PureComponent {
       display: "flex",
       align: "center",
       justify: "center",
+      parallax: false,
     }
     const styleClassNames = convertStyleToAtomic(boxStyle);
     const colorClassNames = convertColorToAtomic(color);
 
+    const containerClassNames = convertStyleToAtomic({
+      parallax: style.parallax,
+    });
+
     return (
-      <div className={colorClassNames + ' Basic'}>
+      <div className={colorClassNames + ' Basic ' + containerClassNames}>
         <div className={styleClassNames}>
           <Group {...groups.item} />
         </div>
@@ -33,7 +38,7 @@ export default Basic;
 
 export const blueprint = {
   type: 'basic',
-  inherits: ['BasicSection', 'BaseSection'],
+  inherits: ['BasicSection', 'BaseSection', 'ParallaxSection'],
   style: {},
   color: {},
   groups: {

@@ -9,4 +9,4 @@ import RedRock from './red_rock';
 import Landay from './landay';
 
 
-export default Landay;
+export default HealthyFood;
