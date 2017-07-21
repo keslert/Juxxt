@@ -438,6 +438,7 @@ img { max-width: 100%; }
 
 /* Margins */
 .mauto { margin: auto; }
+.mlauto { margin-left: auto; }
 
 .m0 { margin: 0; }
 .m1 { margin: .25rem; }
@@ -554,7 +555,7 @@ img { max-width: 100%; }
 .w-20P { width: 20%; }
 .w-25P { width: 25%; }
 .w-30P { width: 30%; }
-.w-33P { width: 33%; }
+.w-33P { width: 33.333333%; }
 .w-34P { width: 34%; }
 .w-40P { width: 40%; }
 .w-50P { width: 50%; }
@@ -602,6 +603,9 @@ img { max-width: 100%; }
 .fs9 { font-size: 7.0em; }
 .fs10 { font-size: 9.0em; }
 
+.mxw-450 { max-width: 450px; }
+.mxw-512 { max-width: 512px; }
+.mxw-585 { max-width: 585px; }
 .mxw-900 { max-width: 900px; }
 .mxw-1024 { max-width: 1024px; }
 .mxw-1170 { max-width: 1170px; }

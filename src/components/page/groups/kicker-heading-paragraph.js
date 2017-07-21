@@ -22,7 +22,7 @@ const KickerHeadingParagraph = ({
 export default KickerHeadingParagraph;
 
 export const blueprint = {
-  inherits: [TalkingPoint, 'RowBuffer'],
+  inherits: [TalkingPoint, 'RowBuffer', 'BaseGroup'],
   style: {},
   color: {},
   elements:  {

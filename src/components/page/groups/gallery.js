@@ -13,10 +13,11 @@ class Gallery extends React.PureComponent {
       align: "center",
       justify: "center",
       flex: "wrap",
-      marginHorizontal: -style.padding,
+      marginHorizontal: -style.gutter,
     }
     const divStyle = {
       ...style,
+      padding: style.gutter,
       width: Math.floor(100 / (variant.columns)) + 'P',
     }
     const styleClassNames = convertStyleToAtomic(boxStyle);
@@ -41,13 +42,8 @@ export default Gallery;
 
 export const blueprint = {
   type: 'gallery',
-  inherits: ['GutterSection'],
-  style: {
-    padding: {
-      _default: 2,
-      options: range(0,4)
-    }
-  },
+  inherits: ['ListGutter', 'BaseGroup'],
+  style: {},
   color: {},
   elements: {
     images: {

@@ -13,7 +13,8 @@ export function styleItem(item, items, rules, blueprint) {
 function styleItemByBlueprint(item, items, blueprint) {  
   Object.keys(blueprint.style).forEach(key => {
     if(item.style[key] === undefined) {
-      item.style[key] = blueprint.style[key]._default || randomItem(blueprint.style[key].options);
+      const {_default, options} = blueprint.style[key];
+      item.style[key] = _default !== undefined ? _default : randomItem(options);
     }
   })
 
@@ -31,7 +32,7 @@ function styleItemByBlueprint(item, items, blueprint) {
   const combinedStyle = Object.assign({}, ...values(blueprint.sharedStyles));
   forEach(combinedStyle, ({options, _default}, key) => {
     if(item.style[key] === undefined) {
-      item.style[key] = _default || randomItem(options);
+      item.style[key] = _default !== undefined ? _default : randomItem(options);
     }
   })
 }

@@ -1,5 +1,15 @@
 
 export const styles = {
+  'BaseGroup': {
+    margin: {
+      _default: 0,
+      options: ['auto', 0,1,2,3,4,5],
+    },
+    padding: {
+      _default: 0,
+      options: ['auto', 0,1,2,3,4,5],
+    },
+  },
   'TalkingPoint': {
     maxWidth: {
       _default: 'auto',
