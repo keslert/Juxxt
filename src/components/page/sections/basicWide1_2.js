@@ -4,6 +4,7 @@ import Group from '../groups';
 import Box from '../../common/box';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
+import isNumber from 'lodash/isNumber';
 
 const BasicWide1_2 = ({
   groups,
@@ -17,12 +18,19 @@ const BasicWide1_2 = ({
     ...style,
   }
 
-  const tpBox = {
-    display: "flex",
-    width: '40P',
+  const tpWrapClassNames = convertStyleToAtomic({
+    width: '50P',
     order: variant.order,
-    flexWrap: "flex",
-    margin: 'auto',
+    display: 'flex',
+    align: 'center',
+  });
+
+  const isTpLeft = variant.order === 1;
+  const tpBox = {
+    marginLeft: isTpLeft ? 'auto' : 'inherit',
+    paddingLeft: isTpLeft ? 0 : style.gutter,
+    paddingRight: isTpLeft ? style.gutter : 'auto',
+    maxWidth: isNumber(style.maxWidth) ? style.maxWidth / 2 : style.maxWidth,
   }
 
   const imageBox = {
@@ -52,8 +60,10 @@ const BasicWide1_2 = ({
         <Box className={convertStyleToAtomic(imageBox)}>
             <Element {...elements.image} />
         </Box>
-        <Box className={convertStyleToAtomic(tpBox)}>
-            <Group {...groups.tp} />
+        <Box className={tpWrapClassNames}>
+          <Box className={convertStyleToAtomic(tpBox)}>
+              <Group {...groups.tp} />
+          </Box>
         </Box>
       </Box>
     </Box>
@@ -63,7 +73,7 @@ export default BasicWide1_2;
 
 export const blueprint = {
   type: 'basic',
-  inherits: ['BasicSection', 'BaseSection'],
+  inherits: ['GutterSection', 'BaseSection'],
   style: {},
   color: {},
   groups: {
