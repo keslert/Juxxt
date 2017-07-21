@@ -177,8 +177,9 @@ export default {
           },
           media: {
             _defaults : {
-              BlockImage: images[5],
-            }
+              name: 'BlockImage',
+/*              BlockImage: images[5],
+*/            }
           },
         },
         _defaults: {
