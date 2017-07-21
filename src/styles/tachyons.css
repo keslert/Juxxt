@@ -410,16 +410,31 @@ img { max-width: 100%; }
 
 
 /* Fonts */
+.f-alice { font-family: 'Alice', serif; }
+.f-amatic-sc { font-family: 'Amatic SC', cursive; }
 .f-anton { font-family: 'Anton', serif; }
 .f-bitter { font-family: 'Bitter', serif; }
 .f-fira-sans { font-family: 'Fira Sans', sans-serif; }
+.f-josefin-sans { font-family: 'Josefin Sans', sans-serif; }
+.f-lato { font-family: 'Lato', sans-serif; }
 .f-libre-franklin { font-family: 'Libre Franklin', sans-serif; }
+.f-meddon { font-family: 'Meddon', cursive; }
 .f-merriweather { font-family: 'Merriweather', serif; }
+.f-montserrant { font-family: 'Montserrat', sans-serif; }
+.f-muli { font-family: 'Muli', sans-serif; }
+.f-open-sans { font-family: 'Open Sans', sans-serif; }
+.f-open-sans-condensed { font-family: 'Open Sans Condensed', sans-serif; }
+.f-oswald { font-family: 'Oswald', sans-serif; }
 .f-playfair-display { font-family: 'Playfair Display', serif; }
 .f-pt-serif { font-family: 'PT Serif', serif; }
+.f-quicksand { font-family: 'Quicksand', sans-serif; }
+.f-raleway { font-family: 'Raleway', sans-serif; }
 .f-roboto { font-family: 'Roboto', sans-serif; }
+.f-roboto-slab { font-family: 'Roboto Slab', serif; }
 .f-rubik { font-family: 'Rubik', sans-serif; }
+.f-sacramento { font-family: 'Sacramento', cursive; }
 .f-source-sans-pro { font-family: 'Source Sans Pro', sans-serif; }
+.f-work-sans { font-family: 'Work Sans', sans-serif; }
 
 /* Margins */
 .mauto { margin: auto; }
