@@ -1,6 +1,6 @@
 import uniqueId from 'lodash/uniqueId';
 import { buildPageColorBlueprint } from '../color/page';
-const palette = ['#bc1515', '#000000'];
+const palette = ['#bc1515'];
 const colorBlueprint = buildPageColorBlueprint(palette);
 const backgroundImages = [  
   {key: uniqueId(), src: 'https://static.wixstatic.com/media/e549d4_7d9454e8a4f24493b614498e7821098e~mv2_d_3264_2448_s_4_2.jpg/v1/fill/w_2882,h_1596,al_c,q_90,usm_0.66_1.00_0.01/e549d4_7d9454e8a4f24493b614498e7821098e~mv2_d_3264_2448_s_4_2.webp'},
@@ -61,13 +61,13 @@ export default {
                 kicker: {
                   _defaults: { 
                     content: {text: 'Stanford University Computer Science'},
-                    style: { fontSize: 4, fontFamily: 'Anton' },
+                    style: { fontSize: 4, fontFamily: 'Anton', fontWeight: 4, },
                   }
                 },
                 heading: {
                   _defaults: {
                     content: {text: 'James Landay'},
-                    style: { fontSize: 9, textTransform: 'uppercase', fontFamily: 'Anton' },
+                    style: { fontSize: 9, textTransform: 'uppercase', fontFamily: 'Anton', fontWeight: 4 },
                   }
                 },
                 paragraph: {
@@ -99,7 +99,7 @@ export default {
                 },
                 paragraph: {
                   _defaults: {
-                    content: {text: "Previously, Landay was a Professor of Information Science at Cornell Tech in New York City and prior to that he was a Professor of Computer Science & Engineering at the University of Washington. From 2003 through 2006 he was the Laboratory Director of Intel Labs Seattle, a university affiliated research lab that explored the new usage models, applications, and technology for ubiquitous computing. He was also the chief scientist and co-founder of NetRaker, which was acquired by KeyNote Systems in 2004. From 1997 through 2003 he was a professor in EECS at UC Berkeley. Landay received his BS i" }
+                    content: {text: "Previously, Landay was a Professor of Information Science at Cornell Tech in New York City and prior to that he was a Professor of Computer Science & Engineering at the University of Washington. From 2003 through 2006 he was the Laboratory Director of Intel Labs Seattle, a university affiliated research lab that explored the new usage models, applications, and technology for ubiquitous computing. He was also the chief scientist and co-founder of NetRaker, which was acquired by KeyNote Systems in 2004. From 1997 through 2003 he was a professor in EECS at UC Berkeley. Landay received his BS in EECS from UC Berkeley in 1990, and MS and PhD in Computer Science from Carnegie Mellon University in 1993 and 1996, respectively. His PhD dissertation was the first to demonstrate the use of sketching in user interface design tools. He was named to the ACM SIGCHI Academy in 2011 and as an ACM Fellow in 2017. He formerly served on the NSF CISE Advisory Committee." }
                   }
                 }
               }
@@ -110,11 +110,12 @@ export default {
           color: { background: colorBlueprint.primary }
         }
       },
-      {name: 'Header',
+      {
+        name: 'Header',
         _defaults: {
           style: {
-            paddingBottom: 5,
-            paddingTop: 6,
+            paddingBottom: 7,
+            paddingTop: 7,
             fontFamily: 'Montserrat',
             fontSize: 3,
             parallax: 'on',
@@ -128,7 +129,7 @@ export default {
         groups: {
           tp: {
             _default: {
-              name: 'HeadingSubheadingButton',
+              name: 'Heading',
               elements: {
                 heading: {
                   _defaults: {
@@ -142,16 +143,7 @@ export default {
                       _textBackground: palette[0],
                     },
                   }
-                },
-                subheading: {
-                  _defaults: {
-                    content: {text: ''},
-                    color: {
-                      text: '#ffffff',
-                      _textBackground: palette[0],
-                    },
-                  }
-                },
+                }
               },
             } 
           }
@@ -160,7 +152,7 @@ export default {
       {name: 'Grid',
         _defaults: {
             color: { 
-              background: palette[1], 
+              background: colorBlueprint.darkGray, 
             }
           },
         groups: {
@@ -174,8 +166,8 @@ export default {
       {name: 'Header',
         _defaults: {
           style: {
-            paddingBottom: 5,
-            paddingTop: 6,
+            paddingBottom: 7,
+            paddingTop: 7,
             fontFamily: 'Montserrat',
             fontSize: 3,
             parallax: 'on',
@@ -189,7 +181,7 @@ export default {
         groups: {
           tp: {
             _default: {
-              name: 'HeadingSubheadingButton',
+              name: 'Heading',
               elements: {
                 heading: {
                   _defaults: {
@@ -202,15 +194,6 @@ export default {
                       fontSize: 5,
                       lineHeight: 3,
                     }
-                  }
-                },
-                subheading: {
-                  _defaults: {
-                    content: {text: ''},
-                    color: {
-                      text: '#ffffff',
-                      _textBackground: palette[0],
-                    },
                   }
                 },
               },
@@ -272,12 +255,13 @@ export default {
           }
         },
       },
+      {name: 'Basic', groups: {item: {_default: 'Gallery'}}},
       {
         name: 'Basic',
         _defaults: {
           color: {
-                background: palette[1],
-              },
+            background: colorBlueprint.darkGray,
+          },
         },
         groups: {
           item: {
