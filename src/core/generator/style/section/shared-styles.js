@@ -49,7 +49,7 @@ export const styles = {
   [names.GutterSection]: {
     gutter: {
       _default: 4,
-      options: range(0, 6),
+      options: [6,5,4,3,2,1,0],
     },
   },
   [names.ParallaxSection]: {

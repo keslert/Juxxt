@@ -26,7 +26,7 @@ const StyledSection = styled.div`
   width: 1440px;
   
   ${props => `
-    ${props.selected && `
+    ${(props.selected || props.hovered) && `
       &:after {
         content: '';
         position: absolute;
@@ -34,8 +34,8 @@ const StyledSection = styled.div`
         left: 0;
         right: 0;
         bottom: 0;
-        border-right: 8px solid #8bc34a;
-        border-left: 8px solid #8bc34a;
+        border-right: 10px ${props.selected ? 'solid' : 'dashed'} #8bc34a;
+        border-left: 10px ${props.selected ? 'solid' : 'dashed'} #8bc34a;
         pointer-events: none;
       }
     `};
@@ -145,7 +145,8 @@ class Section extends React.Component {
                 showDrop={master && isOver}
                 canDrop={canDrop}
                 isDragging={isDragging}
-                selected={(isSelected || isHovered) && !preview && master} 
+                selected={isSelected && !preview && master} 
+                hovered={isHovered && !preview && master}
                 onClick={(e) => { e.stopPropagation(); this.handleClick()}}
                 onDoubleClick={(e) => { e.stopPropagation(); setSidebarOpen(true); }}
                 onMouseEnter={() => onHoverableMouseEnter(uid)}

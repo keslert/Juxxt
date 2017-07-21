@@ -17,10 +17,7 @@ export const ToolbarItem = styled.div`
   ${props => props.selected 
     ? `
       color: #fff;
-      background: #313131;
-      &:hover {
-        background: #393939;
-      }
+      background: #03a9f4;
     ` 
     : `
       color: #999;

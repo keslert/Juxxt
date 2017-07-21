@@ -1,13 +1,13 @@
 
 export const styles = {
   'BaseGroup': {
-    margin: {
-      _default: 0,
-      options: ['auto', 0,1,2,3,4,5],
-    },
+    // margin: {
+    //   _default: 0,
+    //   options: [0,1,2,3,4,5,6,7],
+    // },
     padding: {
       _default: 0,
-      options: ['auto', 0,1,2,3,4,5],
+      options: [0,1,2,3,4,5,6,7],
     },
   },
   'TalkingPoint': {
