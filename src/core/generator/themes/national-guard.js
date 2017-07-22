@@ -55,19 +55,33 @@ export default {
           },
         }
       },
-      {
-        name: "Header",//'130+ JOBS. ONE MISSION.'//'FIND YOUR DREAM JOB -->'
+      {name: "Header",//'130+ JOBS. ONE MISSION.'//'FIND YOUR DREAM JOB -->'
         variants:{},
         elements:{},
         groups:{
           tp: {
-            Heading: {
-              _defaults: {
-                content: {text: '130+ JOBS. ONE MISSION.'},
-                //style: { fontSize: 9, textTransform: 'uppercase', fontFamily: 'Anton' },
-              }
+            _default:{
+              name: 'HeadingSubheadingButton',
+              elements: {
+                heading: {
+                  _defaults: {
+                    content: {text: '130+ JOBS. ONE MISSION.'},
+                    style: { fontSize: '6', textTransform: 'uppercase'/*, fontFamily: 'Anton'*/ },
+                  }
+                },
+                subheading: {
+/*                  _defaults: {
+                    content: {text: 'FIND YOUR DREAM JOB -->'},
+                    //style: { fontSize: 9, textTransform: 'uppercase', fontFamily: 'Anton' },
+                  }*/
+                },
+                /*button:{
+                  _defaults: {
+                    content: {text: 'FIND YOUR DREAM JOB -->'},
+                  }
+                }*/
+              },
             },
-            Subheading:{},
             groups: {
               buttonList: {
                 options: ['ButtonList'],
@@ -93,19 +107,25 @@ export default {
         groups: {
           item:{
             _default: { 
-              name: 'HeadingParagraph',              
+              name: 'HeadingParagraph', 
+              elements: {
+                heading: {
+                  _defaults: { 
+                    content: {text: 'TAKE A PATH WITH PURPOSE. BE PART OF SOMETHING BIGGER THAN YOURSELF.'},
+                    style: { fontSize: 5, /*fontFamily: 'Anton', fontWeight: 4,*/ },
+                  },
+                  //name: 'heading',
+                },
+                paragraph: {
+                  _defaults: { 
+                    content: {text: 'The National Guard is more than just a job. As a Guard Soldier you\'ll respond when disaster strikes at home. You\'ll also answer the call when your country needs you around the world. This is our unique dual mission–serving both community and country. Make it your mission today.'},
+                    style: { fontSize: 3, /*fontFamily: 'Anton', fontWeight: 4,*/ },
+                  }
+                },
+              },             
             },
           }
         },
-
-//TAKE A PATH WITH PURPOSE. BE PART OF SOMETHING BIGGER THAN YOURSELF.
-//The National Guard is more than just a job. As a Guard Soldier you'll respond when disaster strikes at home. You'll also answer the call when your country needs you around the world. This is our unique dual mission–serving both community and country. Make it your mission today.
-
-        /*_defaults: {
-          color: { 
-            background: '#B26E3E',//#f7f6f5
-          },
-        },*/
       },
       //heading, image, paragraph
       {name: 'Basic',
@@ -116,7 +136,7 @@ export default {
         },
         _defaults: {
           color: { 
-            background: '#f7f6f5',
+            //background: '#f7f6f5',
           },
         },
       },
@@ -141,6 +161,21 @@ export default {
             }
           },
       },
+      {name: 'Basic',
+        groups: {
+          item:{
+            _default: { name: 'Heading' 
+            //content:"SEE THE ARMY NATIONAL GUARD IN ACTION",
+          },
+          }
+        },
+        _defaults: {
+          color: { 
+            //background: 'white',
+          },
+
+        },
+      },
       //eight gallery with heading
       {name: 'Basic',
         groups: {
@@ -150,19 +185,23 @@ export default {
         },
         _defaults: {
           color: { 
-            background: 'white',
+            //background: 'white',
           },
         },
       },
       //call to action (3 part input)
       {name: 'CallToAction',
-/*        _default: {
+        _default: {
           style: {
-
+            //
+          },
+        color: { 
+            background: palette[0],
           },
 
-        }*/
+        },
       },
+
       //footer that is smallest 
       {name: 'Footer1',
         _default: {
@@ -172,7 +211,7 @@ export default {
           },
         _defaults: {
           color: { 
-            background: '#4B7176',
+            //background: '#4B7176',
           },
         },
         }
