@@ -34,8 +34,19 @@ const StyledSection = styled.div`
         left: 0;
         right: 0;
         bottom: 0;
-        border-right: 10px ${props.selected ? 'solid' : 'dashed'} #8bc34a;
-        border-left: 10px ${props.selected ? 'solid' : 'dashed'} #8bc34a;
+        ${props.selected 
+          ? `
+            border: 10px solid #8bc34a;
+            border-image: linear-gradient(to right, #8bc34a 0%,#8bc34a 5%, transparent 5%, transparent 95%, #8bc34a 95%, #8bc34a 100%);
+            border-image-slice: 1;
+          `
+          : `
+            border-left: 10px dashed #8bc34a;
+            border-right: 10px dashed #8bc34a;
+          `
+        }
+        
+
         pointer-events: none;
       }
     `};
