@@ -2,7 +2,7 @@ import { generateContent } from './generate';
 import { getParents } from '../generator-utils'
 import { pick, map, flatMap, filter, isEmpty } from 'lodash';
 
-const CONTENT_TYPES = ['text', 'src', 'href', 'type'];
+const CONTENT_TYPES = ['text', 'url', 'href', 'type'];
 
 export function assignContent(section, contentStore) {
   const store = contentStore.map(content => ({...content, matched: false}));

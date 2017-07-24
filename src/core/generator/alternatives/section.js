@@ -85,13 +85,13 @@ export function generateSectionColorAlternatives(section, modify, page) {
 
 function generateSectionColorImagesBackground(sectionSkeleton, page) {
   const darkestBackground = last(getSortedByMostBrightness(page.colorBlueprint.backgrounds))
-  const skeletons = defaultTheme.backgroundImages.map(({key, src}) => {
+  const skeletons = defaultTheme.backgroundImages.map(({key, url}) => {
     const skeleton = cloneDeep(sectionSkeleton);
     linkSkeleton(skeleton);
     skeleton.color = {
       background: darkestBackground,
       backgroundImage: key,
-      _backgroundImage: src,
+      _backgroundImage: url,
     }
     return skeleton;
   })
