@@ -28,6 +28,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 
 import SplitPane from 'react-split-pane';
 import Box from '../components/common/box';
+import Notification from '../components/common/notification';
 
 const StyledColumn = styled.div`
   width: ${props => props.width}%;
@@ -76,7 +77,10 @@ class App extends React.Component {
     const { master, preview } = this.props;
     if(preview) {
       return (
-        <Page {...master} master={true} preview={true} />
+        <div>
+          <Notification>Press ESC to exit preview</Notification>
+          <Page {...master} master={true} preview={true} />
+        </div>
       )
     }
     

@@ -26,8 +26,8 @@ const StyledElement = styled.div`
       left: -6px;
       right: -6px;
       bottom: -3px;
-      border-left: 3px dashed ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
-      border-right: 3px dashed ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
+      border-left: 3px solid ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
+      border-right: 3px solid ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
       box-sizing: border-box;
       pointer-events: none;
     }
