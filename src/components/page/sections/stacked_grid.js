@@ -68,14 +68,14 @@ export const blueprint = {
     gridItem: {
       options: [
         {name: 'HeadingParagraph' , clones: num_clones, elements:{heading:{name:'SmallHeading'}}},
-        // {name: 'HeadingParagraphLink', clones: num_clones,  elements:{heading:{name:'SmallHeading'}}},
-        // {name: 'IconHeadingParagraph',  clones: num_clones, elements:{heading:{name:'SmallHeading'}}},
-        // {name: 'ImageHeadingParagraph', clones: num_clones, 
-        //   groups: { tp: { options: [
-        //     {name: 'HeadingParagraph', elements: {heading: {name:'SmallHeading'}}}
-        //   ]}},
-        //   elements: { image: { _defaults: {style: {'aspectRatio': '4x3'}}}}
-        // },
+        {name: 'HeadingParagraphLink', clones: num_clones,  elements:{heading:{name:'SmallHeading'}}},
+        {name: 'IconHeadingParagraph',  clones: num_clones, elements:{heading:{name:'SmallHeading'}}},
+        {name: 'ImageHeadingParagraph', clones: num_clones, 
+          groups: { tp: { options: [
+            {name: 'HeadingParagraph', elements: {heading: {name:'SmallHeading'}}}
+          ]}},
+          elements: { image: { _defaults: {style: {'aspectRatio': '4x3'}}}}
+        },
       ]
     },
   },
@@ -83,11 +83,6 @@ export const blueprint = {
     columns: {
       _default:3,
       options: [2,3,4],
-    },
-    clones: {
-      _default: 2,
-      
-      options:[3,6,2],
     }
   }]
 }
