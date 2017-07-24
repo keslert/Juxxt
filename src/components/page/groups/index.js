@@ -24,8 +24,8 @@ const StyledGroup = styled.div`
   ${props => `
     ${props.sudoSelected && `
       &:before {
-        border-left: 6px dashed ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
-        border-right: 6px dashed ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
+        border-left: 6px solid ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
+        border-right: 6px solid ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
       }
     `};
     ${props.hovered && `

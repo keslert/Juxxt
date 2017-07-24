@@ -24,8 +24,8 @@ import { getElementsInItem, getGroupsInItem, linkChildren, getParents } from '..
 export function extractSkeletonFromItem(item) {
   const skeleton = {
     ...pick(item, ['id', 'is', 'type', 'relativeId', 'name', 'variant', 'color', 'style', 
-      'content', 'blueprint', 'isSection', 'isGroup', 'isElement', 'fullRelativeId', 
-      'fullId', 'index', '_possibleStyles'
+      'content', 'blueprint', 'isSection', 'isGroup', 'isElement', 'isClone', 
+      'fullRelativeId', 'fullId', 'index', '_possibleStyles',
     ]),
     groups: mapValues(item.groups, extractSkeletonFromItem),
     elements: mapValues(item.elements, extractSkeletonFromItem),
@@ -61,11 +61,9 @@ export function generateItemSkeleton(skeleton, blueprint, generic) {
 }
 
 function generateCloneSkeletons(clones, source) {
-  if(isArray(clones)) {
-    return clones.map((clone, i) => generateCloneSkeleton(i, clone))
-  }
-
-  return range(0, clones).map(i => generateCloneSkeleton(i, source));
+  return isArray(clones)
+          ? clones.map((clone, i) => generateCloneSkeleton(i, clone))
+          : range(0, clones).map(i => generateCloneSkeleton(i, source));
 }
 
 function generateCloneSkeleton(index, blueprint) {
@@ -82,6 +80,7 @@ function generateCloneSkeleton(index, blueprint) {
   skeleton.relativeId = skeleton.relativeId + "_" + index;
   skeleton.index = index;
   skeleton.uid = blueprint.uid;
+  skeleton.isClone = true;
   return skeleton;
 }
 
