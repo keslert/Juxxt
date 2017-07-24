@@ -103,19 +103,44 @@ function getVariantKeysFromElement(element) {
   return Object.keys(Object.assign({}, ...parent.blueprint.variants));
 }
 
+function containsClone(selected) {
+  if(selected.groups)
+    return containsClone(selected.groups);
+  for(let j=0;j<Object.keys(selected).length;j++) {
+    const group = selected[Object.keys(selected)[j]];
+    if(group.elements) {
+      for(let i=0;i<Object.keys(group.elements).length;i++) {
+        if(group.elements[Object.keys(group.elements)[i]].clones.length >= 1) {
+          return true;
+        }
+      }
+    }
+    if(group.clones.length > 1) {
+      return true;
+    }
+  }
+  return false;
+}
+
 function getVariantKeysFromSelected(section) {
   const groupVariants = flatMap(section.groups, group => group.blueprint.variants);
   const variant = Object.assign({}, ...section.blueprint.variants, ...groupVariants)
   return Object.keys(variant);
 }
 
+
+
 function resolveVariantModification(dispatch, state, selected) {
   let keys = []
+
   if(selected.isElement) {
     keys = getVariantKeysFromElement(selected);
   } else {
     keys = getVariantKeysFromSelected(selected.isSection ? selected : selected.parent);
   }
+  let lmao = containsClone(selected);
+  if(lmao)
+    keys.push("clones")
   resolveModificationSelection(dispatch, state, keys, 'variant')
 }
 

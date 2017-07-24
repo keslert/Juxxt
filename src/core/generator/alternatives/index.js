@@ -88,7 +88,7 @@ function generateVariantAlternatives(page, modify, selected) {
   const sectionSkeleton = extractSkeletonFromItem(section);
   
   let skeletons;
-
+  
   if(selected.isSection) {
     skeletons = generateSectionVariantAlternatives(modify, selected, sectionSkeleton);
   } else if(selected.isGroup) {

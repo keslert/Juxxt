@@ -49,18 +49,20 @@ export function generateSectionComponentAlternatives(section, modify) {
 
 export function generateSectionVariantAlternatives(modify, section, skeleton) {
   const validVariations = filter(Object.keys(modify), e=> modify[e]==true);
+  
   const variants = [];
   section.blueprint.variants.forEach(function(variantList) {
     variants.push(pick(variantList,validVariations));
   });
+
   const skeletons = flatMap(variants, variant => {
     const combos = getCombinations(mapValues(variant, 'options'));
     return combos.map(variant => ({...skeleton, variant: {...section.variant, ...variant}}))
   });
+
   const allSkeletons = flatMap(isEmpty(skeletons) ? [skeleton] : skeletons, s => 
     flatMap(section.groups, group => generateGroupVariantAlternatives(modify, group, s))
   )
-
   return isEmpty(allSkeletons) ? skeletons : allSkeletons;
 }
 

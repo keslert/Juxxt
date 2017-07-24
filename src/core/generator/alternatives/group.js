@@ -3,8 +3,9 @@ import * as elementBlueprints from '../../../components/page/elements/_blueprint
 import * as blueprints from '../../../components/page/groups/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
+import { extractSkeletonFromItem, generateItemSkeleton } from '../skeletons/utils'
 import { generateContent } from '../content/generate';
-import { filter, range, uniqBy, flatMap, mapValues, pick, cloneDeep, forEach, includes, map, isString } from 'lodash';
+import { filter, range, uniqBy, find, flatMap, mapValues, pick, cloneDeep, forEach, includes, map, isString } from 'lodash';
 import { getCombinations } from '../../utils';
 
 import { generateElementColorAlternatives } from './element';
@@ -13,7 +14,6 @@ import { findItemInSection, getBlueprint, getBackground, getParents, linkSkeleto
 import { styles } from '../style/group/shared-styles';
 import { filterStyle } from '../style/utils';
 import { getSortedByMostVibrant } from '../color/utils';
-
 
 export function generateGroupComponentAlternatives(group, sectionSkeleton) {
   const blueprint = group.parent.blueprint;
@@ -33,7 +33,28 @@ export function generateGroupComponentAlternatives(group, sectionSkeleton) {
   return skeletons;
 }
 
+const cloneVariants = [1,2,3,4,5,6,7,8,9,10,11,12];
+
+
+function fillGroupsWithClones(clones, numClones) {
+  let index = 0;
+  const _clones = [];
+  for(let i = 0; i < numClones; i++) {
+    if(clones[i]) {
+      _clones.push(clones[i]);
+    } else {
+      const newClone = cloneDeep(clones[clones.length-1]);
+      newClone.relativeId = newClone.id + "_" + i;
+      _clones.push(newClone);
+    }
+  }
+  return _clones
+}
+
 export function generateGroupVariantAlternatives(modify, group, sectionSkeleton) {
+
+
+
   const validVariations = filter(Object.keys(modify), e=> modify[e]==true);
   const variants = [];
   group.blueprint.variants.forEach(function(variantList) {
@@ -42,15 +63,28 @@ export function generateGroupVariantAlternatives(modify, group, sectionSkeleton)
   const combos = flatMap(variants, 
     variant => getCombinations(mapValues(variant, 'options'))
   )
-  
-  const unique = filter(uniqBy(combos, JSON.stringify),(u)=>modify[Object.keys(u)[0]]);
-  const skeletons = unique.map(variant => {
+  const unique = filter(uniqBy(combos, JSON.stringify),(u)=>modify[Object.keys(u)[0]]); //TODO: FIX THIS LINE.
+  let skeletons = [];
+
+  skeletons = unique.map(variant => {
       const skeleton = cloneDeep(sectionSkeleton);
       linkSkeleton(skeleton);
       const groups = filter(skeleton._groups, g => g.id === group.id);
       groups.forEach(g => g.variant =  {...group.variant, ...variant});
       return skeleton;
   })
+
+  if(modify.clones && group.clones.length >= 1) {
+    forEach(cloneVariants,function(clones) {
+      const _skeleton = cloneDeep(sectionSkeleton);
+      linkSkeleton(_skeleton);
+      const _group = find(_skeleton._groups, g => g.id === group.id)
+      _group.clones = fillGroupsWithClones(_group.clones, clones);
+      linkSkeleton(_skeleton);
+      skeletons.push(_skeleton);
+    });
+  }
+
   return skeletons;
 }
 

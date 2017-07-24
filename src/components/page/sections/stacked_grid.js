@@ -4,6 +4,8 @@ import Element from '../elements';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 
+let num_clones = 6;
+
 class StackedGrid extends React.PureComponent {
   render () {
     const { style, color, groups, variant, elements } = this.props;
@@ -25,7 +27,6 @@ class StackedGrid extends React.PureComponent {
     const tpClassNames = convertStyleToAtomic({
       textAlign: "center",
     });
-    
     return (
       <div className={colorClassNames + ' StackedGrid'}>
         <div className={containerClassNames}>
@@ -66,15 +67,15 @@ export const blueprint = {
     },
     gridItem: {
       options: [
-        {name: 'HeadingParagraph' , clones: 6, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'HeadingParagraphLink', clones:6,  elements:{heading:{name:'SmallHeading'}}},
-        {name: 'IconHeadingParagraph',  clones: 6, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'ImageHeadingParagraph', clones: 6, 
-          groups: { tp: { options: [
-            {name: 'HeadingParagraph', elements: {heading: {name:'SmallHeading'}}}
-          ]}},
-          elements: { image: { _defaults: {style: {'aspectRatio': '4x3'}}}}
-        },
+        {name: 'HeadingParagraph' , clones: num_clones, elements:{heading:{name:'SmallHeading'}}},
+        // {name: 'HeadingParagraphLink', clones: num_clones,  elements:{heading:{name:'SmallHeading'}}},
+        // {name: 'IconHeadingParagraph',  clones: num_clones, elements:{heading:{name:'SmallHeading'}}},
+        // {name: 'ImageHeadingParagraph', clones: num_clones, 
+        //   groups: { tp: { options: [
+        //     {name: 'HeadingParagraph', elements: {heading: {name:'SmallHeading'}}}
+        //   ]}},
+        //   elements: { image: { _defaults: {style: {'aspectRatio': '4x3'}}}}
+        // },
       ]
     },
   },
@@ -82,6 +83,11 @@ export const blueprint = {
     columns: {
       _default:3,
       options: [2,3,4],
+    },
+    clones: {
+      _default: 2,
+      
+      options:[3,6,2],
     }
   }]
 }

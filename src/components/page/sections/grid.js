@@ -55,15 +55,18 @@ export const blueprint = {
   groups: {
     gridItem: {
       options: [
-        {name: 'HeadingParagraph' , clones: NUM_OF_CLONES, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'HeadingParagraphLink', clones: NUM_OF_CLONES,  elements:{heading:{name:'SmallHeading'}}},
-        {name: 'IconHeadingParagraph',  clones: NUM_OF_CLONES, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'ImageHeadingParagraph', clones: NUM_OF_CLONES, 
-          groups: { tp: { options: [
-            {name: 'HeadingParagraph', elements: {heading: {name:'SmallHeading'}}}
-          ]}},
-          elements: { image: { _defaults: {style: {'aspectRatio': '4x3'}}}}
-        },
+        {name: 'HeadingParagraph' , clones: NUM_OF_CLONES, elements:{heading:{name:'SmallHeading'}}, variants: {clones: {
+      _default: 3,
+      options:[3,4,6],
+    }}},
+        // {name: 'HeadingParagraphLink', clones: NUM_OF_CLONES,  elements:{heading:{name:'SmallHeading'}}},
+        // {name: 'IconHeadingParagraph',  clones: NUM_OF_CLONES, elements:{heading:{name:'SmallHeading'}}},
+        // {name: 'ImageHeadingParagraph', clones: NUM_OF_CLONES, 
+        //   groups: { tp: { options: [
+        //     {name: 'HeadingParagraph', elements: {heading: {name:'SmallHeading'}}}
+        //   ]}},
+        //   elements: { image: { _defaults: {style: {'aspectRatio': '4x3'}}}}
+        // },
       ]
     },
   },
@@ -72,6 +75,7 @@ export const blueprint = {
       _default:3,
       options: [2,3,4],
     }
+    
   }]
 }
 

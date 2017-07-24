@@ -75,11 +75,8 @@ function generateCloneSkeleton(index, blueprint) {
   } else {
     skeleton = generateElementSkeleton(blueprint);
   }
-
-
   skeleton.relativeId = skeleton.relativeId + "_" + index;
   skeleton.index = index;
-  skeleton.uid = blueprint.uid;
   skeleton.isClone = true;
   return skeleton;
 }
