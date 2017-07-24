@@ -51,7 +51,6 @@ const StyledSection = styled.div`
         box-sizing: border-box;
         pointer-events: none;
         animation: ${fadeIn} 0.3s;
-        ${!props.canDrop && 'background: hsla(0, 72%, 80%, 0.63);'}
       }
     `};
     ${props.isDragging && 'opacity: 0.1;'};
@@ -142,7 +141,7 @@ class Section extends React.Component {
           <div>
             <AutoScale>
               <StyledSection className="section"
-                showDrop={master && isOver}
+                showDrop={isOver && canDrop}
                 canDrop={canDrop}
                 isDragging={isDragging}
                 selected={isSelected && !preview && master} 
