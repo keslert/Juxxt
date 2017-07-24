@@ -26,7 +26,7 @@ export function generateContent(element) {
     case 'BasicIcon':
       return getIconContent();
     case 'LogoImage':
-      return {src: '/images/logo.png'};
+      return {url: '/images/logo.png'};
     case 'Link':
       return getLinkContent(element);
     case 'Heading':

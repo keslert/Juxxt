@@ -21,7 +21,7 @@ const StyledHeading = styled.div`
 
 const StyledLabel = styled.div`
   font-size: 12px;
-  color: rgba(255,255,255,1.0);
+  color: #202020;
   white-space: nowrap;
   text-overflow: ellipsis;
 `;

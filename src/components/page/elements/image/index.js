@@ -10,11 +10,11 @@ class Image extends React.PureComponent {
 
     if(style.aspectRatio !== 'auto') {
       return <div className={classNames + ' bg-center cover w-100P overflow-hidden'}
-                  style={{backgroundImage: `url(${content.src})`}} />
+                  style={{backgroundImage: `url(${content.url})`}} />
     }
 
     return (
-      <img src={content.src} className={classNames} alt="" />
+      <img src={content.url} className={classNames} alt="" />
     )
   }
 }
