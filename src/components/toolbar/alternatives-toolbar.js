@@ -55,7 +55,7 @@ class AlternativesToolbar extends React.Component {
             </Box>
             <Box display="flex">
               <ToolbarItem onClick={() => setZoomLevel(zoomLevel % 4 + 1)}>
-                {Math.floor(100 / zoomLevel)}%
+                <i className="fa fa-search-plus"></i> {Math.floor(100 / zoomLevel)}%
               </ToolbarItem>
             </Box>
           </Box>
