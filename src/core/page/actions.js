@@ -1,11 +1,22 @@
 import * as types from './action-types';
 import { overrideElementContent, duplicateSection } from '../../core/generator';
 import { generateAlternatives } from '../../core/generator/alternatives';
-import { getMaster } from './selectors';
+import { getMaster, getSelected } from './selectors';
 import { mapValues, sortBy, cloneDeep, uniqueId, forEach, findIndex, pick, find, filter, map } from 'lodash';
-import { getSelected, setSelected, getModifications, getSelectedModification, setSelectedModification } from '../ui';
+import { 
+  getModifications, 
+  getSelectedModification, 
+  setSelectedModification, 
+  resolveModifications,
+} from '../ui';
 
-import { linkChildren, getParents, getElementsInItem, getGroupsInItem, generatePageCSSRules } from '../generator/generator-utils';
+import { 
+  linkChildren, 
+  getParents, 
+  getElementsInItem, 
+  getGroupsInItem, 
+  generatePageCSSRules,
+} from '../generator/generator-utils';
 
 
 export function clearRegistry() {
@@ -21,6 +32,22 @@ export function registerItem(item) {
   }
 }
 
+function _setSelected(selected) {
+  return {
+    type: types.SET_SELECTED,
+    payload: selected
+  };
+}
+
+export function setSelected(selected) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const modification = getSelectedModification(state);
+    resolveModifications(dispatch, state, modification, selected, 'selection');
+    dispatch(_setSelected(selected));
+  }
+}
+
 export function setMaster(page) {
   generatePageCSSRules(page);
   return {
@@ -33,6 +60,18 @@ export function setAlternatives(alternatives) {
   return {
     type: types.SET_ALTERNATIVES,
     payload: alternatives,
+  }
+}
+
+export function pageRedo() {
+  return (dispatch, getState) => {
+    dispatch({type: types.PAGE_REDO});
+  }
+}
+
+export function pageUndo() {
+  return {
+    type: types.PAGE_UNDO,
   }
 }
 
@@ -53,7 +92,7 @@ export function updateAlternatives() {
     const master = getMaster(state);
     const modifications = getModifications(state);
     const selectedModification = getSelectedModification(state);
-    const selected = state.ui.selected;
+    const selected = getSelected(state);
     const section = selected.isSection ? selected : selected.section || selected.group.section;
     const index = findIndex(master.sections, s => s.id === section.id);
     const page = {...master,
@@ -120,7 +159,6 @@ export function insertAlternative(alternative, index) {
 function insertSection(dispatch, state, section, index) {
   const master = getMaster(state);
   const duplicated = duplicateSection(section, master);
-  duplicated.master = true;
   const page = {...master,
     sections: [
       ...master.sections.slice(0, index),

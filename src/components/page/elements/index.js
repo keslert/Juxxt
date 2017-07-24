@@ -5,13 +5,13 @@ import elements from './_components';
 import styled from 'styled-components';
 
 import { 
-  setSelected, 
   setSidebarOpen,
   onHoverableMouseEnter,
   onHoverableMouseLeave,
-  getHovered,
-  getSelected,
 } from '../../../core/ui';
+
+import { setSelected } from '../../../core/page/actions';
+import { getSelected } from '../../../core/page/selectors';
 
 import { includes, last, map } from 'lodash';
 
@@ -22,13 +22,17 @@ const StyledElement = styled.div`
     &:after {
       content: '';
       position: absolute;
-      top: -3px;
-      left: -6px;
-      right: -6px;
-      bottom: -3px;
-      border-left: 3px solid ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
-      border-right: 3px solid ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
-      box-sizing: border-box;
+      top: -4px;
+      left: -8px;
+      right: -8px;
+      bottom: -4px;
+
+      border: 4px solid #8bc34a;      
+      border-image: ${props.selected 
+        ? 'linear-gradient(to right, #8bc34a 0%,#8bc34a 2%, transparent 2%, transparent 98%, #8bc34a 98%, #8bc34a 100%);'
+        : 'linear-gradient(to right, rgba(122,122,122,0.3) 0%,rgba(122,122,122,0.3) 2%, transparent 2%, transparent 98%, rgba(122,122,122,0.3) 98%, rgba(122,122,122,0.3) 100%);'
+      };
+      border-image-slice: 1;
       pointer-events: none;
     }
   `}

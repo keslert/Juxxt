@@ -1,7 +1,6 @@
 import * as types from './action-types';
 import { filter } from 'lodash';
 const uiState = () => ({
-  selected: {},
   modifications: {
     component: {},
     variant: {},
@@ -22,9 +21,6 @@ export function uiReducer(state = uiState(), {payload, type}) {
   switch (type) {
     case types.SET_SIDEBAR_OPEN: 
       return Object.assign({}, state, { sidebarOpen: payload });
-      
-    case types.SET_SELECTED:
-      return Object.assign({}, state, { selected: payload });
 
     case types.SET_SHIFT_DOWN:
       return Object.assign({}, state, {

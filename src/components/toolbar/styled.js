@@ -13,7 +13,7 @@ export const ToolbarItem = styled.div`
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  padding: 0 16px;
+  padding: 0 12px;
   ${props => props.selected 
     ? `
       color: #fff;

@@ -7,15 +7,22 @@ import { isEqual } from 'lodash';
 import flow from 'lodash/flow';
 import { 
   setShiftDown, 
-  getSelected, 
-  setSelected, 
   getSelectedModification,
   turnOnModification, 
   getModifications,
   getShowPreview,
   setShowPreview,
 } from '../core/ui';
-import { getMaster, updateAlternatives, deleteSection } from '../core/page';
+
+import { 
+  getMaster, 
+  getSelected, 
+  setSelected,
+  updateAlternatives, 
+  deleteSection, 
+  pageUndo,
+} from '../core/page';
+
 import Page from '../components/page';
 import Sidebar from '../components/sidebar';
 import Trashbar from '../components/trashbar';
@@ -46,11 +53,13 @@ class App extends React.Component {
       turnOnModification, 
       setShowPreview, 
       deleteSection,
+      pageUndo,
     } = this.props;
 
     this.listener = new window.keypress.Listener();
     this.listener.simple_combo('escape', () => setShowPreview(false));
-    this.listener.simple_combo('backspace', () => (console.log('here'), deleteSection(this.props.selected.section)));
+    this.listener.simple_combo('backspace', () => deleteSection(this.props.selected.section));
+    this.listener.simple_combo('cmd z', pageUndo);
 
     this.listener.register_combo({
       keys: "shift",
@@ -128,6 +137,7 @@ const mapDispatchToProps = Object.assign({
   turnOnModification,
   setShowPreview,
   deleteSection,
+  pageUndo,
 });
 export default flow(
   connect(mapStateToProps, mapDispatchToProps),

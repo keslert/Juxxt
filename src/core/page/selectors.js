@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import { getSelected } from '../ui';
 
 import { flattenPage } from '../utils';
 
@@ -7,23 +6,25 @@ export function getPage(state) {
   return state.page;
 }
 
+export function getSelected(state) {
+  return getPage(state).selected;
+}
+
 export function getMaster(state) {
-  return getPage(state).master;
+  const { stack, stackIndex } =  getPage(state);
+  return stack[stackIndex];
+}
+
+export function canUndo(state) {
+  const { stack, stackIndex } =  getPage(state);
+  return stackIndex < stack.length - 1;
+}
+
+export function canRedo(state) {
+  const { stackIndex } = getPage(state);
+  return stackIndex > 0;
 }
 
 export function getAlternatives(state) {
   return getPage(state).alternatives;
 }
-
-
-export const getSelectedDetails = createSelector(
-  getSelected,
-  getMaster,
-  (selected, master) => {
-    const flattened = flattenPage(master);
-    return selected.map(item => ({
-      ...item,
-      ...flattened[item.uuid],
-    }));
-  }
-);

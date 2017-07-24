@@ -1,12 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import * as groups from './_components';
 import { 
-  setSelected,
   onHoverableMouseEnter,
   onHoverableMouseLeave,
 } from '../../../core/ui';
+
+import { setSelected } from '../../../core/page/actions';
+
 import { includes, last, map } from 'lodash';
 import { fadeIn } from '../../common/styled-animations';
 
@@ -77,8 +80,8 @@ Group.contextTypes = {
 };
 
 const mapStateToProps = (state, props) => ({
-  isSelected: state.ui.selected.fullRelativeId === props.fullRelativeId,
-  isSudoSelected: state.ui.selected.id === props.id,
+  isSelected: state.page.selected.fullRelativeId === props.fullRelativeId,
+  isSudoSelected: state.page.selected.id === props.id,
   isHovered: last(state.ui.hovered) === props.fullRelativeId,
 });
 

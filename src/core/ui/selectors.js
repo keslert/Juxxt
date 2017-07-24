@@ -14,10 +14,6 @@ export function getSelectedModification(state) {
   return getUI(state).selectedModification;
 }
 
-export function getSelected(state) {
-  return getUI(state).selected;
-}
-
 export function getZoomLevel(state) {
   return getUI(state).zoomLevel;
 }

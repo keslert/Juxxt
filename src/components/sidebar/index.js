@@ -6,7 +6,8 @@ import theme from '../../styles/theme';
 // import ContentPanel from '../panels/content-panel';
 // import PropsPanel from '../panels/props-panel';
 
-import { getSelected, getSidebarOpen, setSidebarOpen } from '../../core/ui';
+import { getSidebarOpen, setSidebarOpen } from '../../core/ui';
+import { getSelected } from '../../core/page';
 
 import ContentPanel from './panels/content-panel';
 
