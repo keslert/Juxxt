@@ -1,11 +1,11 @@
 export {
-  setSelected,
   setShiftDown,
   setSidebarOpen,
   onHoverableMouseEnter,
   onHoverableMouseLeave,
   setModification,
   setSelectedModification,
+  resolveModifications,
   setZoomLevel,
   turnOnModification,
   setShowPreview,

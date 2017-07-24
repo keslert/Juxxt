@@ -1,5 +1,5 @@
 import * as types from './action-types';
-import { getSelected, getModifications, getSelectedModification } from './selectors';
+import { getModifications, getSelectedModification } from './selectors';
 import { 
   pick, 
   mapValues, 
@@ -14,28 +14,14 @@ import {
   uniq 
 } from 'lodash';
 
+import { getSelected } from '../page/selectors';
+
 import { getStyleRoot } from '../generator/style/utils';
 
 export function setShowPreview(show) {
   return {
     type: types.SET_SHOW_PREVIEW,
     payload: show,
-  }
-}
-
-function _setSelected(selected) {
-  return {
-    type: types.SET_SELECTED,
-    payload: selected
-  };
-}
-
-export function setSelected(selected) {
-  return (dispatch, getState) => {
-    const state = getState();
-    const modification = getSelectedModification(state);
-    resolveModifications(dispatch, state, modification, selected, 'selection');
-    dispatch(_setSelected(selected));
   }
 }
 
@@ -97,7 +83,7 @@ export function turnOnModification(key) {
   }
 }
 
-function resolveModifications(dispatch, state, modification, selected, callPath) {
+export function resolveModifications(dispatch, state, modification, selected, callPath) {
 
   if(modification === 'style') {
     resolveStyleModification(dispatch, state, selected);

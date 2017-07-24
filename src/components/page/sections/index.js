@@ -3,13 +3,16 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import styled from 'styled-components';
 import * as sections from './_components';
-import { replaceSectionWithAlternative } from '../../../core/page';
 import { 
+  replaceSectionWithAlternative, 
+  getSelected,
   setSelected,
+} from '../../../core/page';
+
+import { 
   onHoverableMouseEnter,
   onHoverableMouseLeave,
   setSidebarOpen,
-  getSelected, 
   getHovered,
 } from '../../../core/ui';
 import { includes, last, map } from 'lodash';

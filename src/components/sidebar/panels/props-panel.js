@@ -79,12 +79,7 @@ class PropsPanel extends React.Component {
   }
 }
 
-const mapStateToProps = createSelector(
-  getSelectedDetails,
-  (selected) => ({
-    selected,
-  })
-)
+
 const mapDispatchToProps = Object.assign({updateUserOverride});
 
-export default connect(mapStateToProps, mapDispatchToProps)(PropsPanel);
+export default connect(undefined, mapDispatchToProps)(PropsPanel);
