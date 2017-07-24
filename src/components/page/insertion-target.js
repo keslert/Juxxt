@@ -34,16 +34,20 @@ const StyledInsertionTarget = styled.div`
   &:after {
     content: 'Insert Section';
     position: absolute;
-    top: -14px;
+    
     left: 0;
     right: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 12px;
-    height: 28px;
+    
     background: #8bc34a;
     color: #fff;
+    ${props => `
+      top: ${props.enlarge ? '-32px' : '-14px'};
+      height: ${props.enlarge ? '64px' : '28px'};
+    `}
   }
   &:hover {
     opacity: 1;
@@ -58,15 +62,16 @@ function targetCollect(connect, monitor) {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
     canDrop: monitor.canDrop(),
+    itemType: monitor.getItemType(),
   }
 }
 
 const InsertionTarget = (props) => {
-  const { connectDropTarget, isOver, canDrop, insertBest, index } = props;
+  const { connectDropTarget, isOver, canDrop, insertBest, index, itemType } = props;
   
   return connectDropTarget(
     <div>
-      <StyledInsertionTarget show={isOver && canDrop} onClick={() => insertBest(index)} />
+      <StyledInsertionTarget enlarge={itemType === 'section'} show={isOver && canDrop} onClick={() => insertBest(index)} />
     </div>
   )
 }

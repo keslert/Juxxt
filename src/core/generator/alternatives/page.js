@@ -38,7 +38,7 @@ export function generatePageBrandColorAlternatives(page) {
       
       const background = colorMapping[section.color.background] || 
                          getSortedByPreference(colorBlueprint.backgrounds, skeleton.blueprint.color.background)[0];
-      skeleton.color = { background };
+      skeleton.color = { ...skeleton.color, background };
 
       linkSkeleton(skeleton);
       skeleton._groups.forEach(e => e.color = {});

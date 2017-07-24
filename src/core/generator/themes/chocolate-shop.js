@@ -5,33 +5,33 @@ const palette = ['#ffeecc','#59a029','#ced1cc'];
 const colorBlueprint = buildPageColorBlueprint(palette);
 
 const backgroundImages = [
-  {key: uniqueId(), src: 'https://static.wixstatic.com/media/84770f_ac1da095982f4c81ae2661e88fef8c61.jpg/v1/fill/w_1920,h_1280,al_b,q_85,usm_0.66_1.00_0.01/84770f_ac1da095982f4c81ae2661e88fef8c61.webp'},
+  {key: uniqueId(), url: 'https://static.wixstatic.com/media/84770f_ac1da095982f4c81ae2661e88fef8c61.jpg/v1/fill/w_1920,h_1280,al_b,q_85,usm_0.66_1.00_0.01/84770f_ac1da095982f4c81ae2661e88fef8c61.webp'},
 ];
 const images = [
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/503175/pexels-photo-503175.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/139259/pexels-photo-139259.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/106877/pexels-photo-106877.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/52533/orange-fruit-vitamins-healthy-eating-52533.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/503174/pexels-photo-503174.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/262896/pexels-photo-262896.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/499761/pexels-photo-499761.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/247685/pexels-photo-247685.png?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/5506/bread-food-salad-sandwich.jpg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/470460/pexels-photo-470460.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/8844/red-lunch-green-knolling.jpg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/236813/pexels-photo-236813.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/128865/pexels-photo-128865.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/480153/pexels-photo-480153.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/95004/pexels-photo-95004.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/406152/pexels-photo-406152.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/520207/pexels-photo-520207.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/473646/pexels-photo-473646.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'}
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/503175/pexels-photo-503175.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/139259/pexels-photo-139259.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/106877/pexels-photo-106877.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/52533/orange-fruit-vitamins-healthy-eating-52533.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/503174/pexels-photo-503174.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/262896/pexels-photo-262896.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/499761/pexels-photo-499761.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/247685/pexels-photo-247685.png?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/5506/bread-food-salad-sandwich.jpg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/470460/pexels-photo-470460.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/8844/red-lunch-green-knolling.jpg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/236813/pexels-photo-236813.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/128865/pexels-photo-128865.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/480153/pexels-photo-480153.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/95004/pexels-photo-95004.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/406152/pexels-photo-406152.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/520207/pexels-photo-520207.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/473646/pexels-photo-473646.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'}
 ];
 const headerImages = [
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/503175/pexels-photo-503175.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/262896/pexels-photo-262896.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/499761/pexels-photo-499761.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/471327/pexels-photo-471327.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'}
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/503175/pexels-photo-503175.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/262896/pexels-photo-262896.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/499761/pexels-photo-499761.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/471327/pexels-photo-471327.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'}
 ];
 
 export default {
@@ -64,7 +64,7 @@ page: {
           },
           color: {
             backgroundImage: backgroundImages[0].key,
-            _backgroundImage: backgroundImages[0].src,
+            _backgroundImage: backgroundImages[0].url,
             background: palette[0],
           }
         },
@@ -226,7 +226,7 @@ page: {
           },
           color: {
             backgroundImage: backgroundImages[3].key,
-            _backgroundImage: backgroundImages[3].src,
+            _backgroundImage: backgroundImages[3].url,
             background: palette[0],
           }
         },

@@ -3,39 +3,39 @@ import { buildPageColorBlueprint } from '../color/page';
 const palette = ['#233B4B', '#4B7176','#B26E3E'];
 const colorBlueprint = buildPageColorBlueprint(palette);
 const headerImages = [
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/499607/pexels-photo-499607.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/220147/pexels-photo-220147.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/432832/pexels-photo-432832.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/492966/pexels-photo-492966.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/164226/pexels-photo-164226.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/290101/pexels-photo-290101.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/33688/delicate-arch-night-stars-landscape.jpg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/62600/pexels-photo-62600.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/481237/pexels-photo-481237.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/499607/pexels-photo-499607.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/220147/pexels-photo-220147.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/432832/pexels-photo-432832.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/492966/pexels-photo-492966.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/164226/pexels-photo-164226.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/290101/pexels-photo-290101.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/33688/delicate-arch-night-stars-landscape.jpg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/62600/pexels-photo-62600.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/481237/pexels-photo-481237.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
 
 
   ];
   const images = [
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/499607/pexels-photo-499607.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/220147/pexels-photo-220147.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/432832/pexels-photo-432832.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/492966/pexels-photo-492966.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/164226/pexels-photo-164226.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/290101/pexels-photo-290101.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/33688/delicate-arch-night-stars-landscape.jpg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/62600/pexels-photo-62600.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/481237/pexels-photo-481237.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/499607/pexels-photo-499607.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/220147/pexels-photo-220147.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/432832/pexels-photo-432832.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/492966/pexels-photo-492966.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/164226/pexels-photo-164226.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/290101/pexels-photo-290101.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/33688/delicate-arch-night-stars-landscape.jpg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/62600/pexels-photo-62600.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/481237/pexels-photo-481237.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
  ];
   const backgroundImages = [
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/432832/pexels-photo-432832.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/492966/pexels-photo-492966.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {key: uniqueId(), src: 'https://images.pexels.com/photos/220147/pexels-photo-220147.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/432832/pexels-photo-432832.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/492966/pexels-photo-492966.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+    {key: uniqueId(), url: 'https://images.pexels.com/photos/220147/pexels-photo-220147.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
 /*    
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/499607/pexels-photo-499607.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/290101/pexels-photo-290101.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/33688/delicate-arch-night-stars-landscape.jpg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/62600/pexels-photo-62600.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), src: 'https://images.pexels.com/photos/481237/pexels-photo-481237.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/499607/pexels-photo-499607.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/290101/pexels-photo-290101.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/33688/delicate-arch-night-stars-landscape.jpg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/62600/pexels-photo-62600.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/481237/pexels-photo-481237.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
 */ 
  ];
 export default {
@@ -67,7 +67,7 @@ export default {
           },
           color: {
             backgroundImage: backgroundImages[0].key,
-            _backgroundImage: backgroundImages[0].src,
+            _backgroundImage: backgroundImages[0].url,
             background: palette[0],
           }
         },
@@ -152,7 +152,7 @@ export default {
             },
             elements: {
               image: {
-                coverImage: images[3].src,   
+                coverImage: images[3].url,   
               },
             },
           },

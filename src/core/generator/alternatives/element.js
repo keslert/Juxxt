@@ -92,6 +92,20 @@ export function generateElementColorAlternatives(sectionSkeleton, modify, elemen
       return skeleton;
     });
   }
+
+  // Are there more items like this?
+  if(filter(element.section._elements, e => e.id === element.id).length > 1) {
+    sections = sections.concat(sections.map((_, i) => {
+      const skeleton = cloneDeep(sectionSkeleton);
+      linkSkeleton(skeleton);
+      const _element = sections[i]._elements[elementIndex];
+      const elements = filter(skeleton._elements, e => e.id === _element.id);
+      elements.forEach(e => e.color = _element.color);
+      skeleton.changes = sections[i].changes;
+      return skeleton;
+    }))
+  }
+
   return sections;
 }
 

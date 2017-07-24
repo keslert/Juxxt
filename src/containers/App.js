@@ -15,7 +15,7 @@ import {
   getShowPreview,
   setShowPreview,
 } from '../core/ui';
-import { getMaster, updateAlternatives } from '../core/page';
+import { getMaster, updateAlternatives, deleteSection } from '../core/page';
 import Page from '../components/page';
 import Sidebar from '../components/sidebar';
 import Trashbar from '../components/trashbar';
@@ -38,10 +38,18 @@ const StyledColumn = styled.div`
 class App extends React.Component {
 
   componentDidMount() {
-    const { updateAlternatives, setShiftDown, master, setSelected, turnOnModification, setShowPreview } = this.props;
+    const { 
+      setShiftDown, 
+      master, 
+      setSelected, 
+      turnOnModification, 
+      setShowPreview, 
+      deleteSection,
+    } = this.props;
 
     this.listener = new window.keypress.Listener();
     this.listener.simple_combo('escape', () => setShowPreview(false));
+    this.listener.simple_combo('backspace', () => (console.log('here'), deleteSection(this.props.selected.section)));
 
     this.listener.register_combo({
       keys: "shift",
@@ -50,7 +58,7 @@ class App extends React.Component {
     })
 
     setSelected(master.sections[1 % master.sections.length]);
-    turnOnModification('component');
+    turnOnModification('style');
   }
 
   componentWillReceiveProps(newProps) {
@@ -115,6 +123,7 @@ const mapDispatchToProps = Object.assign({
   setSelected, 
   turnOnModification,
   setShowPreview,
+  deleteSection,
 });
 export default flow(
   connect(mapStateToProps, mapDispatchToProps),

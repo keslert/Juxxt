@@ -34,8 +34,19 @@ const StyledSection = styled.div`
         left: 0;
         right: 0;
         bottom: 0;
-        border-right: 10px ${props.selected ? 'solid' : 'dashed'} #8bc34a;
-        border-left: 10px ${props.selected ? 'solid' : 'dashed'} #8bc34a;
+        ${props.selected 
+          ? `
+            border: 10px solid #8bc34a;
+            border-image: linear-gradient(to right, #8bc34a 0%,#8bc34a 5%, transparent 5%, transparent 95%, #8bc34a 95%, #8bc34a 100%);
+            border-image-slice: 1;
+          `
+          : `
+            border-left: 10px dashed #8bc34a;
+            border-right: 10px dashed #8bc34a;
+          `
+        }
+        
+
         pointer-events: none;
       }
     `};
@@ -51,7 +62,6 @@ const StyledSection = styled.div`
         box-sizing: border-box;
         pointer-events: none;
         animation: ${fadeIn} 0.3s;
-        ${!props.canDrop && 'background: hsla(0, 72%, 80%, 0.63);'}
       }
     `};
     ${props.isDragging && 'opacity: 0.1;'};
@@ -142,7 +152,7 @@ class Section extends React.Component {
           <div>
             <AutoScale>
               <StyledSection className="section"
-                showDrop={master && isOver}
+                showDrop={isOver && canDrop}
                 canDrop={canDrop}
                 isDragging={isDragging}
                 selected={isSelected && !preview && master} 
