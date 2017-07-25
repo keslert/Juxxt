@@ -1,5 +1,5 @@
 import * as blueprints from '../../../components/page/sections/_blueprints';
-import { generateAllSectionSkeletons } from '../skeletons/section';
+import { generateSectionSkeleton } from '../skeletons/section';
 import { 
   filter, 
   range, 
@@ -26,7 +26,7 @@ import { colorGroup } from '../color/group';
 import { colorElement } from '../color/element';
 import { styles } from '../style/section/shared-styles';
 import { filterStyle } from '../style/utils';
-import { generateGroupVariantAlternatives } from './group';
+import { generateGroupLayoutAlternatives } from './group';
 import { getSortedByPreference, getSortedByMostBrightness } from '../color/utils';
 import tinycolor from 'tinycolor2';
 import defaultTheme from '../themes';
@@ -37,33 +37,39 @@ export function generateSectionComponentAlternatives(section, modify) {
     modify[blueprints[name].type]
   );
 
-  const skeletons = flatMap(validSections, name => {
-    const skeletons = generateAllSectionSkeletons({name, id: section.id, variant: section.variant});
-    skeletons.forEach(linkSkeleton);
-    return skeletons;
+  const skeletons = validSections.map(name => {
+    const skeleton = generateSectionSkeleton({name, id: section.id, layout: section.layout})
+    linkSkeleton(skeleton);
+    return skeleton;
   });
 
   return skeletons;
 }
 
 
-export function generateSectionVariantAlternatives(modify, section, skeleton) {
-  const validVariations = filter(Object.keys(modify), e=> modify[e]==true);
+export function generateSectionCloneAlternatives(section, sectionSkeleton) {
+  const skeletons = range(1, 13).map(i => {
+    const skeleton = cloneDeep(sectionSkeleton);
+
+  })
+}
+
+export function generateSectionLayoutAlternatives(modify, section, sectionSkeleton) {
+  const validKeys = filter(Object.keys(modify), key => modify[key]);
   
-  const variants = [];
-  section.blueprint.variants.forEach(function(variantList) {
-    variants.push(pick(variantList,validVariations));
-  });
+  const layouts = pick(section.blueprint.layouts, validKeys);
+  const combos = getCombinations(mapValues(layouts, 'options'));
+  const skeletons = combos.map(layout => {
+    const skeleton = cloneDeep(sectionSkeleton);
+    skeleton.layout = {...skeleton.layout, ...layout};
+    return skeleton;
+  })
 
-  const skeletons = flatMap(variants, variant => {
-    const combos = getCombinations(mapValues(variant, 'options'));
-    return combos.map(variant => ({...skeleton, variant: {...section.variant, ...variant}}))
-  });
-
-  const allSkeletons = flatMap(isEmpty(skeletons) ? [skeleton] : skeletons, s => 
-    flatMap(section.groups, group => generateGroupVariantAlternatives(modify, group, s))
-  )
-  return isEmpty(allSkeletons) ? skeletons : allSkeletons;
+  return skeletons;
+  // const allSkeletons = flatMap(isEmpty(skeletons) ? [sectionSkeleton] : skeletons, s => 
+  //   flatMap(section.groups, group => generateGroupLayoutAlternatives(modify, group, s))
+  // )
+  // return isEmpty(allSkeletons) ? skeletons : allSkeletons;
 }
 
 export function generateSectionColorAlternatives(section, modify, page) {

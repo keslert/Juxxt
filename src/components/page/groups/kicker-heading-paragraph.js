@@ -1,45 +1,41 @@
 import React from 'react';
 import TalkingPointComponent from './common/talking-point';
-import { BasicHeading, BasicParagraph, BasicKicker } from '../elements/_blueprints';
-import { TalkingPoint } from './_inherits';
 
-const KickerHeadingParagraph = ({
-  elements,
-  variant,
-  style,
-  color,
-}) => {
+class KickerHeadingParagraph extends React.Component {
+  render() {
+    const { elements, layout, style, color } = this.props;
 
-  return (
-    <TalkingPointComponent
-      style={style}
-      color={color}
-      elements={elements}
-      groups={{}}
-      variant={variant} />
-  )
+    return (
+      <TalkingPointComponent
+        style={style}
+        color={color}
+        elements={elements}
+        groups={{}}
+        layout={layout} />
+    )
+  }
 }
 export default KickerHeadingParagraph;
 
 export const blueprint = {
-  inherits: [TalkingPoint, 'RowBuffer', 'BaseGroup'],
+  inherits: ['TalkingPoint', 'RowBuffer', 'BaseGroup'],
   style: {},
   color: {},
   elements:  {
     kicker: {
-      name: BasicKicker.name,
+      name: 'BasicKicker',
     },
     heading: {
-      name: BasicHeading.name,
+      name: 'BasicHeading',
     },
     paragraph: {
-      name: BasicParagraph.name,
+      name: 'BasicParagraph',
     },
   },
-  variants: [{
+  layouts: {
     align: {
-      _default: 'center',
-      options: ['left', 'center', 'right'],
+      _default: 'inherit',
+      options: ['inherit', 'left', 'center', 'right'],
     }
-  }],
+  },
 }

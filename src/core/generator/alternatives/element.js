@@ -8,41 +8,20 @@ import { map, uniq, intersection, filter, range, cloneDeep, flatMap, findIndex, 
 import { styles } from '../style/element/shared-styles';
 import { filterStyle } from '../style/utils';
 import { getBackground, getBlueprint, linkSkeleton } from '../generator-utils';
-import { generateSectionVariantAlternatives } from './section';
-import { generateGroupVariantAlternatives, generateGroupComponentAlternatives } from './group';
+import { generateSectionLayoutAlternatives } from './section';
+import { generateGroupLayoutAlternatives, generateGroupComponentAlternatives } from './group';
 
 export function generateElementComponentAlternatives(element, sectionSkeleton) {
   const blueprint = getBlueprint(element.parent);  
 
-  // const sectionBlueprint = sectionBlueprints[element.section.name];
-
-
-
-  // const possibleGroups = sectionBlueprint.groups[element.group.sectionKey].options;
-
-  // const validGroups = filter(possibleGroups, groupName => {
-  //   const elements = map(groupBlueprints[groupName].elements, 'name');
-  //   return otherElements.length === intersection(otherElements, elements).length &&
-  //          groupName !== element.group.name;
-  // })
-
-  // const skeletons = validGroups.map(groupName => ({
-  //   ...masterSkeleton,
-  //   groups: {...masterSkeleton.groups,
-  //     [element.group.sectionKey]: generateGroupSkeleton(groupName, element.group.variant)
-  //   }
-  // }))
-  
-  // return skeletons;
-  // TODO: Rewrite this section
   return [];
 }
 
-export function generateElementVariantAlternatives(modify, element, skeleton) {
+export function generateElementLayoutAlternatives(modify, element, skeleton) {
   if(element.parent.isGroup) {
-    return generateGroupVariantAlternatives(element.parent, skeleton);
+    return generateGroupLayoutAlternatives(element.parent, skeleton);
   }
-  return generateSectionVariantAlternatives(element.parent, skeleton); 
+  return generateSectionLayoutAlternatives(element.parent, skeleton); 
 }
 
 export function generateElementColorAlternatives(sectionSkeleton, modify, element, page) {

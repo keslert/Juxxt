@@ -49,5 +49,5 @@ export const blueprint = {
   color: { background: 'vibrant' },
   groups: {
   },
-  variants: []
+  layouts: {}
 }

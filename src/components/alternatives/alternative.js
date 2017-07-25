@@ -37,7 +37,7 @@ const Alternative = ({
   onDelete,
 }) => {
 
-  const label = map(changes, (value, key) => `${lowerCamelCaseToRegular(key)}: ${value}`).join(', ');
+  const label = map(changes, (value, key) => `${lowerCamelCaseToRegular(key)}: ${JSON.stringify(value)}`).join(', ');
   return (
     <StyledAlternative>
       <StyledHeading>

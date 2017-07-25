@@ -154,7 +154,7 @@ page: {
             }   
           },
         },
-        variant: {
+        layout: {
           order: 3,
         },
       },
@@ -172,7 +172,7 @@ page: {
       },
       {name: 'BasicWide1_2',
         _defaults: {
-          variants: {
+          layouts: {
             order: 1,
           },
           color: {
@@ -201,7 +201,7 @@ page: {
             }   
           },
         },
-        variant: {
+        layout: {
           order: 1,
         },
       },

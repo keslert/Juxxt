@@ -33,10 +33,5 @@ export const blueprint = {
       name: BasicButton.name,
     }
   },
-  variants: [{
-    align: {
-      _default: 'center',
-      options: ['left', 'center', 'right'],
-    }
-  }],
+  layout: {},
 }

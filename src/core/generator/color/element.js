@@ -1,4 +1,4 @@
-import { find, filter, flatMap, some, isFunction, sortBy } from 'lodash';
+import { find, filter, flatMap, some, isFunction, sortBy, clamp } from 'lodash';
 import { getMode } from '../../utils';
 import { getSection, getBackground } from '../generator-utils';
 import { getSortedByMostVibrant } from './utils';
@@ -89,8 +89,8 @@ const _preferanceMap = {
 function getMappedPreferredColor(colors, prevColors, prevColor, preference) {
   const sortedColors = _preferanceMap[preference](colors);
   const sortedPrevColors = _preferanceMap[preference](prevColors);
-  const index = Math.max(0, sortedPrevColors.indexOf(prevColor));
-  return sortedColors[Math.min(sortedColors.length - 1, index)];
+  const index = sortedPrevColors.indexOf(prevColor);
+  return sortedColors[clamp(index, 0, sortedColors.length - 1)];
 }
 
 function sortByWhite(colors, preferredSort) {

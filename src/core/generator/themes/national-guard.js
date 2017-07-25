@@ -57,7 +57,6 @@ export default {
       },
       {
         name: "Header",//'130+ JOBS. ONE MISSION.'//'FIND YOUR DREAM JOB -->'
-        variants:{},
         elements:{},
         groups:{
           tp: {
@@ -134,12 +133,10 @@ export default {
             }   
           },
         },
-        _defaults: {
-            variants: {
-              order: 1,
-              align: "left"
-            }
-          },
+        layout: {
+          order: 1,
+          align: "left"
+        },
       },
       //eight gallery with heading
       {name: 'Basic',

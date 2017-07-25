@@ -1,6 +1,5 @@
 import React from 'react';
 import Element from '../elements';
-import { BasicButton, BasicInput } from '../elements/_blueprints';
 
 class InputButton extends React.Component {
   render() {
@@ -26,17 +25,8 @@ export const blueprint = {
   style: {},
   color: {},
   elements: {
-    input: {
-      name: BasicInput.name,
-    },
-    button: {
-      name: BasicButton.name,
-    },
+    input: { name: 'BasicInput' },
+    button: { name: 'BasicButton' },
   },
-  variants: [{
-    align: {
-      _default: 'center',
-      options: ['left', 'center', 'right'],
-    }
-  }],
+  layout: {},
 }

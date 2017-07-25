@@ -5,7 +5,7 @@ import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
 import { extractSkeletonFromItem, generateItemSkeleton } from '../skeletons/utils'
 import { generateContent } from '../content/generate';
-import { filter, range, uniqBy, find, flatMap, mapValues, pick, cloneDeep, forEach, includes, map, isString } from 'lodash';
+import { filter, range, find, flatMap, mapValues, pick, cloneDeep, forEach, includes, map, isString } from 'lodash';
 import { getCombinations } from '../../utils';
 import { containsClone } from '../../ui/actions'
 import { generateElementColorAlternatives } from './element';
@@ -25,7 +25,7 @@ export function generateGroupComponentAlternatives(group, sectionSkeleton) {
     const parentSkeleton = findItemInSection(group.parent, skeleton);
 
     const _group = isString(option) ? {name: option} : option;
-    parentSkeleton.groups[group.parentKey] = generateGroupSkeleton({..._group, id: group.id, variant: group.variant});
+    parentSkeleton.groups[group.parentKey] = generateGroupSkeleton({..._group, id: group.id, layout: group.layout});
     linkSkeleton(skeleton);
     return skeleton;
   })
@@ -33,66 +33,85 @@ export function generateGroupComponentAlternatives(group, sectionSkeleton) {
   return skeletons;
 }
 
-function fillSelectionWithClones(clones, numClones) {
-  let index = 0;
-  const _clones = [];
-  for(let i = 0; i < numClones; i++) {
-    if(clones[i]) {
-      _clones.push(clones[i]);
-    } else {
-      const newClone = cloneDeep(clones[clones.length-1]);
-      newClone.relativeId = newClone.id + "_" + i;
-      _clones.push(newClone);
-    }
-  }
-  return _clones
+
+// function fillSelectionWithClones(clones, numClones) {
+//   let index = 0;
+//   const _clones = [];
+//   for(let i = 0; i < numClones; i++) {
+//     if(clones[i]) {
+//       _clones.push(clones[i]);
+//     } else {
+//       const newClone = cloneDeep(clones[clones.length-1]);
+//       newClone.relativeId = newClone.id + "_" + i;
+//       _clones.push(newClone);
+//     }
+//   }
+//   return _clones
+// }
+
+// function hasElementClone(selected)  {
+//   const elements = [];
+//   forEach(selected,function(e) {
+//     if(e.clones && e.clones.length>=1)
+//       elements.push(e.parentKey)
+//   });
+//   return elements[0];
+// }
+
+// const groupCloneVariants = range(1,13);
+// const elementCloneVariants = range(1,7);
+
+// export function generateGroupVariantAlternatives(modify, group, sectionSkeleton) {
+//   const validVariations = filter(Object.keys(modify), e=> modify[e]==true);
+//   const variants = [];
+//   group.blueprint.variants.forEach(function(variantList) {
+//     variants.push(pick(variantList,validVariations));
+//   });
+//   const combos = flatMap(variants, 
+//     variant => getCombinations(mapValues(variant, 'options'))
+//   )
+//   const unique = filter(uniqBy(combos, JSON.stringify),(u)=>modify[Object.keys(u)[0]]); //TODO: FIX THIS LINE.
+//   let skeletons = [];
+//   skeletons = unique.map(variant => {
+//       const skeleton = cloneDeep(sectionSkeleton);
+//       linkSkeleton(skeleton);
+//       const groups = filter(skeleton._groups, g => g.id === group.id);
+//       groups.forEach(g => g.variant =  {...group.variant, ...variant});
+//       return skeleton;
+//   })
+//   if(modify.clones && (group.clones.length >= 1 || containsClone(group))) {
+//     let elementCloneOrigin = hasElementClone(group.elements);
+//     forEach((elementCloneOrigin?elementCloneVariants:groupCloneVariants), function(clones){
+//       const _skeleton = cloneDeep(sectionSkeleton);
+//       linkSkeleton(_skeleton);
+//       const _group = find(_skeleton._groups, g=> g.id === group.id);
+//       if(elementCloneOrigin)
+//         _group.elements[elementCloneOrigin].clones = fillSelectionWithClones(_group.elements[elementCloneOrigin].clones,clones);
+//       else
+//         _group.clones = fillSelectionWithClones(_group.clones,clones);
+//       linkSkeleton(_skeleton)
+//       skeletons.push(_skeleton);
+//     });
+//   }
+
+export function generateGroupCloneAlternatives(group, sectionSkeleton) {
+
 }
 
-function hasElementClone(selected)  {
-  const elements = [];
-  forEach(selected,function(e) {
-    if(e.clones && e.clones.length>=1)
-      elements.push(e.parentKey)
-  });
-  return elements[0];
-}
-
-const groupCloneVariants = range(1,13);
-const elementCloneVariants = range(1,7);
-
-export function generateGroupVariantAlternatives(modify, group, sectionSkeleton) {
-  const validVariations = filter(Object.keys(modify), e=> modify[e]==true);
-  const variants = [];
-  group.blueprint.variants.forEach(function(variantList) {
-    variants.push(pick(variantList,validVariations));
-  });
-  const combos = flatMap(variants, 
-    variant => getCombinations(mapValues(variant, 'options'))
-  )
-  const unique = filter(uniqBy(combos, JSON.stringify),(u)=>modify[Object.keys(u)[0]]); //TODO: FIX THIS LINE.
-  let skeletons = [];
-  skeletons = unique.map(variant => {
-      const skeleton = cloneDeep(sectionSkeleton);
-      linkSkeleton(skeleton);
-      const groups = filter(skeleton._groups, g => g.id === group.id);
-      groups.forEach(g => g.variant =  {...group.variant, ...variant});
-      return skeleton;
+export function generateGroupLayoutAlternatives(modify, group, sectionSkeleton) {
+  const validKeys = filter(Object.keys(modify), key => modify[key]);
+  
+  const layouts = pick(group.blueprint.layouts, validKeys);
+  
+  const combos = getCombinations(mapValues(layouts, 'options'))
+  const skeletons = combos.map(layout => {
+    const skeleton = cloneDeep(sectionSkeleton);
+    linkSkeleton(skeleton);
+    const groups = filter(skeleton._groups, g => g.id === group.id);
+    groups.forEach(g => g.layout =  {...group.layout, ...layout});
+    return skeleton;
   })
-  if(modify.clones && (group.clones.length >= 1 || containsClone(group))) {
-    let elementCloneOrigin = hasElementClone(group.elements);
-    forEach((elementCloneOrigin?elementCloneVariants:groupCloneVariants), function(clones){
-      const _skeleton = cloneDeep(sectionSkeleton);
-      linkSkeleton(_skeleton);
-      const _group = find(_skeleton._groups, g=> g.id === group.id);
-      if(elementCloneOrigin)
-        _group.elements[elementCloneOrigin].clones = fillSelectionWithClones(_group.elements[elementCloneOrigin].clones,clones);
-      else
-        _group.clones = fillSelectionWithClones(_group.clones,clones);
-      linkSkeleton(_skeleton)
-      skeletons.push(_skeleton);
-    });
-  }
-
+  
   return skeletons;
 }
 

@@ -5,7 +5,7 @@ import { convertColorToAtomic } from '../../../core/generator/color/conversions'
 
 class Grid extends React.PureComponent {
   render () {
-    const { style, color, groups, variant } = this.props;
+    const { style, color, groups, layout } = this.props;
 
     const containerClassNames = convertStyleToAtomic(style);
     const colorClassNames = convertColorToAtomic(color);
@@ -17,7 +17,7 @@ class Grid extends React.PureComponent {
     });
 
     const boxClassNames = convertStyleToAtomic({
-      width: Math.floor(100 / (variant.columns)) + 'P',
+      width: Math.floor(100 / (layout.columns)) + 'P',
       paddingHorizontal: style.gutter,
     });
 
@@ -41,19 +41,18 @@ class Grid extends React.PureComponent {
   }
 }
 
-const NUM_OF_CLONES = 3;
-
 export default Grid;
 
 
-
+const NUM_OF_CLONES = 3;
 export const blueprint = {
-  type: 'grid',
+  type: 'basic',
   inherits: ['BasicSection', 'GutterSection', 'BaseSection'],
   style: {},
   color: {},
   groups: {
     gridItem: {
+      _default: {name: 'HeadingParagraph' , clones: NUM_OF_CLONES, elements:{heading:{name:'SmallHeading'}}},
       options: [
         {name: 'HeadingParagraph' , clones: NUM_OF_CLONES, elements:{heading:{name:'SmallHeading'}}, variants: {clones: {
       _default: 3,
@@ -70,12 +69,11 @@ export const blueprint = {
       ]
     },
   },
-  variants: [{
+  layouts: {
     columns: {
-      _default:3,
-      options: [2,3,4],
+      _default: 3,
+      options: [2,3,4,5,6],
     }
-    
-  }]
+  }
 }
 

@@ -6,9 +6,9 @@ import { convertColorToAtomic } from '../../../../core/generator/color/conversio
 
 class CallToAction extends React.PureComponent {
   render () {
-    const { groups, style, color, variant } = this.props;
+    const { groups, style, color, layout } = this.props;
 
-    const isFlat = variant.orientation === 'flat'; 
+    const isFlat = layout.orientation === 'flat'; 
     const containerStyle = {
       ...style, 
       direction: isFlat ? 'row' : 'column',
@@ -51,7 +51,7 @@ export const blueprint = {
   groups: {
     tp: {
       options: [
-        {name: 'HeadingSubheading', variants: [{align: {options:['inherit']}}]},
+        {name: 'HeadingSubheading', layouts: {align: {options:['inherit']}}},
        ]
         /*'HeadingParagraph','KickerHeadingParagraph',*],*/
     },
@@ -64,9 +64,9 @@ export const blueprint = {
       ],
     },
   },
-  variants: [{
+  layouts: {
     orientation: {
       options: ['stacked', 'flat'],
     },
-  }],
+  },
 }

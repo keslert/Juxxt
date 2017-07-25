@@ -12,7 +12,8 @@ import {
   mergeWith,
   flatMap,
   isEmpty, 
-  uniq 
+  uniq,
+  clamp,
 } from 'lodash';
 
 import { getSelected } from '../page/selectors';
@@ -71,7 +72,7 @@ export function setSelectedModification(modification) {
 export function setZoomLevel(level) {
   return {
     type: types.SET_ZOOM_LEVEL,
-    payload: Math.min(Math.max(1, level), 4),
+    payload: clamp(level, 1, 4),
   }
 }
 
@@ -94,15 +95,11 @@ export function resolveModifications(dispatch, state, modification, selected, ca
     resolveComponentModification(dispatch, state, selected, callPath);
   } else if(modification === 'page') {
     resolvePageModification(dispatch, state);
-  } else if(modification === 'variant') {
-    resolveVariantModification(dispatch, state, selected);
+  } else if(modification === 'layout') {
+    resolveLayoutModification(dispatch, state, selected);
   }
 }
 
-function getVariantKeysFromElement(element) {
-  const parent = element.parent;
-  return Object.keys(Object.assign({}, ...parent.blueprint.variants));
-}
 
 function selectedHasClones(selected) {
   return selected.clones.length >= 1;
@@ -123,22 +120,27 @@ export function containsClone(selected) {
   return cloneList.some(selectedHasClones)
 }
 
-function getVariantKeysFromSelected(section) {
+function getLayoutKeysFromSelected(section) {
   const groupVariants = flatMap(section.groups, group => group.blueprint.variants);
   const variant = Object.assign({}, ...section.blueprint.variants, ...groupVariants)
   return Object.keys(variant);
+
+
+  const groupLayouts = flatMap(section.groups, group => group.blueprint.layouts);
+  const layouts = Object.assign({}, ...section.blueprint.layouts, ...groupLayouts)
+  return Object.keys(layouts);
 }
 
-function resolveVariantModification(dispatch, state, selected) {
+function resolveLayoutModification(dispatch, state, selected) {
   let keys = []
   if(selected.isElement) {
-    keys = getVariantKeysFromElement(selected);
+    keys = Object.keys(...selected.parent.blueprint.layouts);
   } else {
-    keys = getVariantKeysFromSelected(selected.isSection ? selected : selected.parent);
+    keys = Object.keys(selected.blueprint.layouts);
   }
   if(containsClone(selected))
     keys.push("clones")
-  resolveModificationSelection(dispatch, state, keys, 'variant')
+  resolveModificationSelection(dispatch, state, keys, 'layout')
 }
 
 function resolveColorModification(dispatch, state, selected) {

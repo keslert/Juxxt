@@ -159,7 +159,7 @@ export default {
             }   
           },
         },
-        variant: {
+        layout: {
           order: 3,
         },
       },
@@ -177,7 +177,7 @@ export default {
       },
       {name: 'BasicWide1_2',
         _defaults: {
-          variants: {
+          layouts: {
             order: 1,
           },
           color: {
@@ -206,7 +206,7 @@ export default {
             }   
           },
         },
-        variant: {
+        layout: {
           order: 1,
         },
       },

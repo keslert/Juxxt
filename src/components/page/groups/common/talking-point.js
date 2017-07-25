@@ -18,7 +18,7 @@ class TalkingPoint extends React.Component {
         paragraph,
         links,
       },
-      variant: {
+      layout: {
         align='center',
       },
       groups: {

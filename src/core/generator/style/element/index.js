@@ -12,22 +12,22 @@ export function styleElement(element, page) {
 
   const rules = [
     e => e.fullId === element.fullId,
-    e => isEqual(e.variant, element.variant) &&
-         e.parent.name === element.parent.name && isEqual(e.parent.variant, element.parent.variant) &&
-         e.section.name === element.section.name && isEqual(e.section.variant, element.section.variant),
+    e => isEqual(e.layout, element.layout) &&
+         e.parent.name === element.parent.name && isEqual(e.parent.layout, element.parent.layout) &&
+         e.section.name === element.section.name && isEqual(e.section.layout, element.section.layout),
     
-    e => isEqual(e.variant, element.variant) &&
-         e.parent.name === element.parent.name && isEqual(e.parent.variant, element.parent.variant) &&
+    e => isEqual(e.layout, element.layout) &&
+         e.parent.name === element.parent.name && isEqual(e.parent.layout, element.parent.layout) &&
          e.section.name === element.section.name,
 
-    e => isEqual(e.variant, element.variant) &&
+    e => isEqual(e.layout, element.layout) &&
          e.parent.name === element.parent.name &&
          e.section.name === element.section.name,
         
-    e => isEqual(e.variant, element.variant) && 
+    e => isEqual(e.layout, element.layout) && 
          e.section.name === element.section.name,
     e => 
-         e.section.name === element.section.name && isEqual(e.section.variant, element.section.variant),
+         e.section.name === element.section.name && isEqual(e.section.layout, element.section.layout),
     e => e.section.name === element.section.name,
     e => true,
   ]

@@ -44,8 +44,9 @@ const StyledSection = styled.div`
             border-image-slice: 1;
           `
           : `
-            border-left: 10px dashed #8bc34a;
-            border-right: 10px dashed #8bc34a;
+            border: 10px solid rgba(122,122,122,0.8);
+            border-image: linear-gradient(to right, rgba(122,122,122,0.8) 0%,rgba(122,122,122,0.8) 5%, transparent 5%, transparent 95%, rgba(122,122,122,0.8) 95%, rgba(122,122,122,0.8) 100%);
+            border-image-slice: 1;
           `
         }
         

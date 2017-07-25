@@ -11,7 +11,7 @@ class HeadingParagraphLink extends React.PureComponent {
 				color={this.props.color}
         elements={this.props.elements}
         groups={{}}
-				variant={this.props.variant}
+				layout={this.props.layout}
 			/>
 		)
 	}
@@ -34,10 +34,10 @@ export const blueprint = {
       name: BasicParagraph.name,
     }
   },
-  variants: [{
+  layouts: {
     align: {
-      _default: 'center',
-      options: ['left', 'center', 'right'],
+      _default: 'inherit',
+      options: ['inherit', 'left', 'center', 'right'],
     }
-  }],
+  },
 }

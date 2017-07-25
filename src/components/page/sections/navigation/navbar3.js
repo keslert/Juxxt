@@ -58,5 +58,5 @@ export const blueprint = {
       options: ['HorizontalList']
     }
   },
-  variants: []
+  layouts: {}
 }

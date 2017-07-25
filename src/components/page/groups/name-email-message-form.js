@@ -1,6 +1,5 @@
 import React from 'react';
 import Element from '../elements';
-import { BasicButton, BasicInput } from '../elements/_blueprints';
 
 class NameEmailMessageForm extends React.Component {
   render() {
@@ -32,25 +31,25 @@ export const blueprint = {
   color: {},
   elements: {
     name: {
-      name: BasicInput.name,
+      name: 'BasicInput',
       _defaults: {content: {placeholder: "name"}},
     },
     email: {
-      name: BasicInput.name,
+      name: 'BasicInput',
       _defaults: {content: {placeholder: "email"}},
     },
     message: {
-      name: BasicInput.name,
+      name: 'BasicInput',
       _defaults: {content: {placeholder: "message"}},
     },
     button: {
-      name: BasicButton.name,
+      name: 'BasicButton',
     },
   },
-  variants: [{
+  layout: {
     align: {
-      _default: 'center',
-      options: ['left', 'center', 'right'],
+      _default: 'inherit',
+      options: ['inherit', 'left', 'center', 'right'],
     }
-  }],
+  },
 }

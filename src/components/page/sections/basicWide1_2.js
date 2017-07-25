@@ -6,79 +6,81 @@ import { convertStyleToAtomic } from '../../../core/generator/style/conversions'
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 import isNumber from 'lodash/isNumber';
 
-const BasicWide1_2 = ({
-  groups,
-  elements,
-  variant,
-  style,
-  color,
-}) => {
+class BasicWide1_2 extends React.Component {
 
-  const containerStyle = {
-    ...style,
-  }
+  render() {
 
-  const tpWrapClassNames = convertStyleToAtomic({
-    width: '50P',
-    order: variant.order,
-    display: 'flex',
-    align: 'center',
-  });
+    const { groups, elements, layout, color } = this.props;
 
-  const isTpLeft = variant.order === 1;
-  const tpBox = {
-    marginLeft: isTpLeft ? 'auto' : 'inherit',
-    paddingLeft: isTpLeft ? 0 : style.gutter,
-    paddingRight: isTpLeft ? style.gutter : 'auto',
-    maxWidth: isNumber(style.maxWidth) ? style.maxWidth / 2 : style.maxWidth,
-  }
+    const mediaWrapClassNames = convertStyleToAtomic({width: '50P', order: 2})
 
-  const imageBox = {
-    width: '50P',
-    order: 2,
-  }
+    const isTpLeft = layout.order === 'left';
 
-  const wrapStyle = {
-    display: "flex",
-    flexWrap: "wrap",
+    const tpWrapClassNames = convertStyleToAtomic({
+      textAlign: layout.constrained ? 'left' : 'center',
+      width: '50P',
+      order: isTpLeft ? 1 : 3,
+      display: 'flex',
+      align: 'center',
+    })
+
     
-  }
+    const tpClassNames = convertStyleToAtomic({
+      maxWidth: layout.constrained ? 'page-50P' : 'inherit',
+      marginLeft: isTpLeft ? 'auto' : 'inherit',
+      paddingLeft: !isTpLeft || !layout.constrained ? layout.gutter : 0,
+      paddingRight: isTpLeft || !layout.constrained ? layout.gutter : 0,
+    })
 
-  const innerBoxStyle = {
-    width: '100P',
-    display: "flex",
-    justify: 'center',
-    align: "center",
-  }
+    const wrapClassNames = convertStyleToAtomic({
+      display: "flex",
+      flexWrap: "wrap",
+    });
 
-  const colorClassNames = convertColorToAtomic(color);
-  const innerClassNames = convertStyleToAtomic(innerBoxStyle);
+    const colorClassNames = convertColorToAtomic(color);
 
-  return (
-    <Box className={colorClassNames}>
-      <Box className={convertStyleToAtomic(wrapStyle)}>
-        <Box className={convertStyleToAtomic(imageBox)}>
+    return (
+      <Box className={colorClassNames}>
+        <Box className={wrapClassNames}>
+          <Box className={mediaWrapClassNames}>
             <Element {...elements.image} />
-        </Box>
-        <Box className={tpWrapClassNames}>
-          <Box className={convertStyleToAtomic(tpBox)}>
+          </Box>
+          <Box className={tpWrapClassNames}>
+            <Box className={tpClassNames}>
               <Group {...groups.tp} />
+            </Box>
           </Box>
         </Box>
       </Box>
-    </Box>
-  )
+    )
+  }
 }
 export default BasicWide1_2;
 
 export const blueprint = {
   type: 'basic',
   inherits: ['GutterSection', 'BaseSection'],
-  style: {},
   color: {},
+  layouts: {
+    order: {
+      options: ['left', 'right'],
+    },
+    constrained: {
+      _default: true,
+      options: [true, false],
+    },
+    height: {
+      _default: 2,
+      options: [0,1,2,3,4,5,6,7,8],
+    },
+    gutter: {
+      _default: 4,
+      options: [0,1,2,3,4,5],
+    }
+  },
   groups: {
     tp: {
-      options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','HeadingParagraphButton', 'IconHeadingParagraph'],
+      options: ['HeadingParagraph'], //, 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','HeadingParagraphButton', 'IconHeadingParagraph'],
     },
   },
   elements: {
@@ -86,9 +88,5 @@ export const blueprint = {
       name: 'CoverImage',
     },
   },
-  variants: [{
-    order: {
-      options: [1, 3],
-    }
-  }]
+  style: {},
 }

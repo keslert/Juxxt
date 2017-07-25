@@ -45,5 +45,5 @@ export const blueprint = {
       clones: 3,
     }
   },
-  variants: [],
+  layouts: {},
 }

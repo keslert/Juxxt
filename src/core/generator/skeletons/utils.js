@@ -23,7 +23,7 @@ import { getElementsInItem, getGroupsInItem, linkChildren, getParents } from '..
 
 export function extractSkeletonFromItem(item) {
   const skeleton = {
-    ...pick(item, ['id', 'is', 'type', 'relativeId', 'name', 'variant', 'color', 'style', 
+    ...pick(item, ['id', 'is', 'type', 'relativeId', 'name', 'layout', 'color', 'style', 
       'content', 'blueprint', 'isSection', 'isGroup', 'isElement', 'isClone', 
       'fullRelativeId', 'fullId', 'index', '_possibleStyles',
     ]),
@@ -46,7 +46,7 @@ export function generateItemSkeleton(skeleton, blueprint, generic) {
     ...skeleton,
     style: {...skeleton.style, ...getDefaults(blueprint._defaults, 'style')},
     name: merged.name,
-    variant: getClosestVariant(blueprint.variant, merged.variants),
+    layout: getClosestLayout(blueprint.layout, merged.layouts),
     elements: mapValues(merged.elements, generateElementSkeleton),
     groups: mapValues(merged.groups, ({_default, options}) => {
       const selected = _default || randomItem(options);
@@ -92,25 +92,16 @@ function mergeBlueprints(generic, blueprint) {
 }
 
 
-export function getClosestVariant(variantToMatch={}, variants) {
-  if(isEmpty(variants)) {
+export function getClosestLayout(layoutToMatch={}, layouts) {
+  if(isEmpty(layouts)) {
     return {};
   }
 
-  const randomizedVariants = sortBy(variants, _ => Math.random());
-  const variantsWithScores = map(randomizedVariants, variant => {
-    const _variant = { score: 0 };
-    forEach(variant, ({options, _default}, key) => {
-      if(variantToMatch[key] !== undefined && includes(options, variantToMatch[key])) {
-        _variant[key] = variantToMatch[key];
-        _variant.score++;
-      } else {
-        _variant[key] = _default || randomItem(options);
-      }
-    })
-    return _variant;
+  return mapValues(layouts, ({options, _default}, key) => {
+    if(layoutToMatch[key] !== undefined && includes(options, layoutToMatch[key])) {
+      return layoutToMatch[key];
+    } else {
+      return _default || randomItem(options);
+    }
   })
-
-  const sorted = sortBy(variantsWithScores, variant => -variant.score);
-  return omit(sorted[0], ['score']);
 }

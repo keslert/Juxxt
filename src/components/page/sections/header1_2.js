@@ -10,7 +10,7 @@ import Box from '../../common/box';
 
 class Header1_2 extends React.PureComponent {
   render () {
-  const { elements, groups, style, color, variant } = this.props;
+  const { elements, groups, style, color, layout } = this.props;
 
   const containerStyle = {
     ...style
@@ -38,7 +38,7 @@ class Header1_2 extends React.PureComponent {
     <Box className={colorClassNames + " tl"}>
       <Box className={convertStyleToAtomic(containerStyle) }>
         <Box className={convertStyleToAtomic(wrapStyle) }>
-          <Box className={innerClassNames + ' order-' + variant.order}>
+          <Box className={innerClassNames + ' order-' + layout.order}>
             <Group {...groups.tp} />
           </Box>
           <Box className={innerClassNames + ' order-2'}>
@@ -77,7 +77,7 @@ export const blueprint = {
       options: ['HeadingSubheadingButton', 'HeadingParagraphButton'],
     },
   },
-  variants: [{
+  layouts: {
     order: { options: [1,3] }
-  }]
+  }
 }

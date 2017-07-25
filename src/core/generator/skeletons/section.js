@@ -1,7 +1,7 @@
 import * as blueprints from '../../../components/page/sections/_blueprints';
 import { generateGroupSkeleton } from './group';
 import { generateElementSkeleton } from './element';
-import { getClosestVariant, generateItemSkeleton } from './utils';
+import { getClosestLayout, generateItemSkeleton } from './utils';
 import { randomItem, getCombinations } from '../../utils';
 import { mapValues, map, uniqueId } from 'lodash';
 
@@ -22,7 +22,7 @@ export function generateSectionSkeleton(blueprint) {
 export function generateAllSectionSkeletons(blueprint) {
   const generic = blueprints[blueprint.name];
 
-  const _variant = getClosestVariant(blueprint.variant, generic.variants);
+  const layout = getClosestLayout(blueprint.layout, generic.layouts);
   const combinations = getCombinations(mapValues(generic.groups, group => group.options));
 
   const skeletons = map(combinations, groups => {

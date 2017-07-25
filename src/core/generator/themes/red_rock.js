@@ -160,12 +160,10 @@ export default {
             }   
           },
         },
-        _defaults: {
-            variants: {
-              order: 1,
-              align: "left"
-            }
-          },
+        layout: {
+          order: 1,
+          align: "left"
+        }
       },
       {
         name: 'Basic1_2',
@@ -182,11 +180,9 @@ export default {
 */            }
           },
         },
-        _defaults: {
-          variants: {
-            order: 1,
-          }
-        },
+        layout: {
+          order: 1,
+        }
       },
       {name: 'Footer1',
         _default: {

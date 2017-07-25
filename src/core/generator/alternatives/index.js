@@ -1,20 +1,22 @@
 import { 
   generateSectionComponentAlternatives,
-  generateSectionVariantAlternatives,
+  generateSectionLayoutAlternatives,
   generateSectionContentAlternatives,
   generateSectionColorAlternatives,
   generateSectionStyleAlternatives,
+  generateSectionCloneAlternatives,
 } from './section'
 import { 
   generateGroupComponentAlternatives,
-  generateGroupVariantAlternatives,
+  generateGroupLayoutAlternatives,
   generateGroupContentAlternatives,
   generateGroupColorAlternatives,
   generateGroupStyleAlternatives,
+  generateGroupCloneAlternatives,
 } from './group'
 import { 
   generateElementComponentAlternatives,
-  generateElementVariantAlternatives,
+  generateElementLayoutAlternatives,
   generateElementContentAlternatives,
   generateElementColorAlternatives,
   generateElementStyleAlternatives,
@@ -31,15 +33,15 @@ import { assignContent, getContentStore } from '../content';
 import { assignStyles } from '../style';
 import { assignColor } from '../color';
 
-import { map } from 'lodash';
+import { map, pick, filter } from 'lodash';
 
 export function generateAlternatives(page, modify, selected) {
   let sections = [];
 
   if(modify.component) {
     sections = generateComponentAlternatives(page, modify.component, selected);
-  } else if(modify.variant) {
-    sections = generateVariantAlternatives(page, modify.variant, selected);
+  } else if(modify.layout) {
+    sections = generateLayoutAlternatives(page, modify.layout, selected);
   } else if(modify.color) {
     sections = generateColorAlternatives(page, modify.color, selected);
   } else if(modify.content) {
@@ -83,23 +85,31 @@ function generateComponentAlternatives(page, modify, selected) {
 }
 
 
-function generateVariantAlternatives(page, modify, selected) {
+function generateLayoutAlternatives(page, modify, selected) {
   const section = selected.section;
   const sectionSkeleton = extractSkeletonFromItem(section);
   
   let skeletons;
   
   if(selected.isSection) {
-    skeletons = generateSectionVariantAlternatives(modify, selected, sectionSkeleton);
+    if(modify.clones) {
+      skeletons = generateSectionCloneAlternatives(selected, sectionSkeleton);
+    } else {
+      skeletons = generateSectionLayoutAlternatives(modify, selected, sectionSkeleton);
+    }
   } else if(selected.isGroup) {
-    skeletons = generateGroupVariantAlternatives(modify, selected, sectionSkeleton);
+    if(modify.clones) {
+      skeletons = generateGroupCloneAlternatives(selected, sectionSkeleton);
+    } else {
+      skeletons = generateGroupLayoutAlternatives(modify, selected, sectionSkeleton);
+    }
   } else {
-    skeletons = generateElementVariantAlternatives(modify, selected, sectionSkeleton);
+    skeletons = generateElementLayoutAlternatives(modify, selected, sectionSkeleton);
   }
   
   const sections = skeletons.map(skeleton => {
     linkSkeleton(skeleton);
-    skeleton.changes = Object.assign({}, skeleton.variant, ...map(skeleton.groups, 'variant'));
+    skeleton.changes = pick(skeleton.layout, filter(Object.keys(modify), k => modify[k]));
     return skeleton;
   })
 

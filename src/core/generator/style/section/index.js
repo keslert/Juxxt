@@ -9,7 +9,7 @@ export function styleSection(section, page) {
 
   const rules = [
     s => s.id === section.id,
-    s => isEqual(s.variant, section.variant),
+    s => isEqual(s.layout, section.layout),
     s => true,
   ]
 

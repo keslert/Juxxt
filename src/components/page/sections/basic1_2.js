@@ -5,61 +5,90 @@ import Box from '../../common/box';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 
-const Basic1_2 = ({
-  elements,
-  groups,
-  variant,
-  style,
-  color,
-}) => {
 
-  const containerStyle = {
-    ...style,
-  }
+class Basic1_2 extends React.Component {
+  render() {
+    const { elements, style, groups, layout, color } = this.props;
 
-  const wrapStyle = {
-    marginHorizontal: `-${style.gutter}`,
-    display: "flex",
-    flexWrap: "wrap",
-  }
+    const mediaPercentage = Math.floor(100 - layout.splitRatio.ratio);
+    const mediaWrapClassNames = convertStyleToAtomic({
+      width: Math.floor(mediaPercentage) + 'P',
+      order: 2,
+      paddingHorizontal: layout.gutter,
+    })
 
-  const innerBoxStyle = {
-    paddingHorizontal: style.gutter,
-    width: '50P',
-    display: "flex",
-    justify: "center",
-    align: "center",
-    overlayText: false,
-    overlayImage: false,
-    overlayContainer: false,
-  }
+    const isTpLeft = layout.order === 'left';
+    const tpPercentage = Math.floor(layout.splitRatio.ratio)
+    const tpWrapClassNames = convertStyleToAtomic({
+      width: tpPercentage + 'P',
+      order: isTpLeft ? 1 : 3,
+      display: 'flex',
+      align: 'center',
+      paddingHorizontal: layout.gutter,
+    })
 
-  const colorClassNames = convertColorToAtomic(color);
-  const innerClassNames = convertStyleToAtomic(innerBoxStyle);
-  const containerClassNames = convertStyleToAtomic({overlayText: style.overlayText, overlayImage: style.overlayImage, overlayContainer: style.overlayContainer});
+    const isConstrained = layout.splitRatio.constrained;
+    const wrapClassNames = convertStyleToAtomic({
+      maxWidth: isConstrained ? 'page' : 'inherit',
+      margin: 'auto',
+      paddingVertical: layout.height,
+    });
 
-  return (
-    <Box className={colorClassNames}>
-      <Box className={convertStyleToAtomic(containerStyle)+ containerClassNames}>
-        <Box className={convertStyleToAtomic(wrapStyle)}>
-          <Box className={innerClassNames + ' order-' + variant.order}>
-            <Group {...groups.tp} />
-          </Box>
-          <Box className={innerClassNames + ' order-2' + containerClassNames}>
-            <Group {...groups.media} />
+    const wrapInnerClassNames = convertStyleToAtomic({
+      marginHorizontal: isConstrained ? -layout.gutter : 0,
+      display: "flex",
+      flexWrap: "wrap",
+      textAlign: isConstrained ? 'left' : 'center',
+    })
+
+    const colorClassNames = convertColorToAtomic(color);
+
+    return (
+      <Box className={colorClassNames}>
+        <Box className={wrapClassNames}>
+          <Box className={wrapInnerClassNames}>
+            <Box className={tpWrapClassNames}>
+              <Group {...groups.tp} />
+            </Box>
+            <Box className={mediaWrapClassNames}>
+              <Group {...groups.media} />
+            </Box>
           </Box>
         </Box>
       </Box>
-    </Box>
-  )
+    )
+  }
 }
 export default Basic1_2;
 
 export const blueprint = {
   type: 'basic',
   inherits: ['BasicSection', 'GutterSection', 'BaseSection', 'OverlaySection'],
-  style: {},
   color: {},
+  layouts: {
+    order: {
+      options: ['left', 'right'],
+    },
+    gutter: {
+      _default: 4,
+      options: [0,1,2,3,4,5],
+    },
+    splitRatio: {
+      _default: {ratio: 50, constrained: true},
+      options: [
+        {ratio: 33, constrained: true},
+        {ratio: 50, constrained: true},
+        {ratio: 66, constrained: true},
+        {ratio: 33, constrained: false},
+        {ratio: 50, constrained: false},
+        {ratio: 66, constrained: false},
+      ]
+    },
+    height: {
+      _default: 5,
+      options: [0,2,4,5,6,7,8],
+    },
+  },
   elements: {},
   groups: {
     tp: {
@@ -69,9 +98,5 @@ export const blueprint = {
       options: ['BlockImage', 'Gallery'],
     },
   },
-  variants: [{
-    order: {
-      options: [1, 3],
-    }
-  }]
+  style:{},
 }

@@ -43,7 +43,7 @@ export default {
       },
       {
         name: 'BasicWide1_2',
-        variant: { order: 3 },
+        layout: { order: 3 },
         elements: {
           image: {
             _defaults: {
@@ -56,7 +56,7 @@ export default {
           tp: {
             _default: {
               name: 'KickerHeadingParagraph',
-              variant: { align: 'left' },
+              layout: { align: 'left' },
               elements: {
                 kicker: {
                   _defaults: { 
@@ -89,7 +89,7 @@ export default {
           item: {
             _default: {
               name: 'HeadingParagraph',
-              variant: { align: 'left' },
+              layout: { align: 'left' },
               elements: {
                 heading: {
                   _defaults: {
@@ -267,7 +267,7 @@ export default {
           item: {
             _default: {
               name: 'HeadingParagraph',
-              variant: { align: 'center' },
+              layout: { align: 'center' },
               elements: {
                 heading: {
                   _defaults: {

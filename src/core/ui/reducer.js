@@ -3,7 +3,7 @@ import { filter } from 'lodash';
 const uiState = () => ({
   modifications: {
     component: {},
-    variant: {},
+    layout: {},
     color: {},
     content: {},
     style: {},

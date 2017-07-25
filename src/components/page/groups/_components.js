@@ -9,7 +9,6 @@ export {default as VerticalList} from './vertical-list';
 export {default as IconHeadingParagraph} from './icon-heading-paragraph';
 export {default as ButtonList} from './button-list';
 export {default as InputButton} from './input-button';
-export {default as InputInputButton} from './input-input-button';
 export {default as NameEmailForm} from './name-email-form';
 export {default as NameEmailMessageForm} from './name-email-message-form';
 export {default as EmailForm} from './email-form';

@@ -7,7 +7,7 @@ import { convertColorToAtomic } from '../../../core/generator/color/conversions'
 
 class BlockImage extends React.Component {
   render() {
-    const { elements, style, color, variant } = this.props;
+    const { elements, style, color, layout } = this.props;
 
     const styleClassNames = convertStyleToAtomic(style);
     const colorClassNames = convertColorToAtomic(color);
@@ -24,11 +24,11 @@ export default BlockImage;
 export const blueprint = {
   inherits: ['Media'],
   style: {},
+  layouts: {},
   color: {},
   elements: {
     icon: {
       name: BasicImage.name,
     },
   },
-  variants: []
 }

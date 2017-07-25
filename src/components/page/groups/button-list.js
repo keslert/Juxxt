@@ -35,18 +35,14 @@ export default ButtonList;
 
 export const blueprint = {
   inherits: ['ListGutter'],
-  style: {
-    textAlign: {
-      _default: 'inherit',
-      options: ['inherit', 'left', 'center', 'right'],
-    }
-  },
   color: {},
+  style: {},
+  layouts: {},
   elements: {
     buttons: {
       name: BasicButton.name,
       clones: 2,
     },
   },
-  variants: [],
+  
 }

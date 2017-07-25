@@ -62,5 +62,5 @@ export const blueprint = {
       ],
   	},
   },
-  variants: []
+  layouts: {},
 }

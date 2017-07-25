@@ -17,7 +17,7 @@ import {
 
 const buttons = [
   {label: 'Component', key: 'component'},
-  {label: 'Layout', key: 'variant'},
+  {label: 'Layout', key: 'layout'},
   {label: 'Color', key: 'color'},
   {label: 'Style', key: 'style'},
   {label: 'Content', key: 'content'},

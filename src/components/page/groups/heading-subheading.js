@@ -1,42 +1,38 @@
 import React from 'react';
 import TalkingPointComponent from './common/talking-point';
-import { TalkingPoint } from './_inherits';
-import { BasicSubheading, BasicHeading } from '../elements/_blueprints';
 
-const HeadingSubheading = ({
-  elements,
-  variant,
-  style,
-  color,
-}) => {
+class HeadingSubheading extends React.Component {
+  render() {
+    const { elements, layout, color, style } = this.props;
 
-  return (
-    <TalkingPointComponent
-      style={style}
-      color={color}
-      elements={elements}
-      groups={{}}
-      variant={variant} />
-  )
+    return (
+      <TalkingPointComponent
+        style={style}
+        color={color}
+        elements={elements}
+        groups={{}}
+        layout={layout} />
+    )
+  }
 }
 export default HeadingSubheading;
 
 export const blueprint = {
   color: {},
-  inherits: [TalkingPoint, 'RowBuffer'],
+  inherits: ['TalkingPoint', 'RowBuffer'],
   style: {},
   elements: {
     heading: {
-      name: BasicHeading.name,
+      name: 'BasicHeading',
     },
     subheading: {
-      name: BasicSubheading.name,
+      name: 'BasicSubheading',
     },
   },
-  variants: [{
+  layouts: {
     align: {
-      _default: 'center',
-      options: ['left', 'center', 'right'],
+      _default: 'inherit',
+      options: ['inherit', 'left', 'center', 'right'],
     }
-  }]
+  }
 }

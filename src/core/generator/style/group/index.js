@@ -11,12 +11,12 @@ export function styleGroup(group, page) {
 
   const rules = [
     g => g.fullId === group.fullId,
-    g => isEqual(g.variant, group.variant) && 
-         g.section.name === group.section.name && isEqual(g.section.variant, group.section.variant),    
-    g => isEqual(g.variant, group.variant) && 
+    g => isEqual(g.layout, group.layout) && 
+         g.section.name === group.section.name && isEqual(g.section.layout, group.section.layout),    
+    g => isEqual(g.layout, group.layout) && 
          g.section.name === group.section.name,
     g => 
-         g.section.name === group.section.name && isEqual(g.section.variant, group.section.variant),
+         g.section.name === group.section.name && isEqual(g.section.layout, group.section.layout),
     g => g.section.name === group.section.name,
     g => true,
   ]

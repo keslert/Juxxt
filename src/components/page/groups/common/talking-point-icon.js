@@ -9,12 +9,12 @@ class TalkingPointIcon extends React.Component {
   renderColumn() {
     const { 
       style,
-      variant,
+      layout,
       elements: { icon, heading, paragraph } 
     } = this.props;
 
-    const order = variant.align === 'right' ? 3 : 1;
-    const _style = { ...style, textAlign: variant.align }
+    const order = layout.align === 'right' ? 3 : 1;
+    const _style = { ...style, textAlign: layout.align }
     
     return (
       <Box className={ "flex flex-row " + convertStyleToAtomic(_style)}>
@@ -32,12 +32,12 @@ class TalkingPointIcon extends React.Component {
   renderInline() {
     const { 
       style,
-      variant,
+      layout,
       elements: { icon, heading, paragraph } 
     } = this.props;
 
-    const order = variant.align === 'right' ? 3 : 1;
-    const _style = { ...style, textAlign: variant.align }
+    const order = layout.align === 'right' ? 3 : 1;
+    const _style = { ...style, textAlign: layout.align }
 
     return (
       <Box className={ "flex flex-column " + convertStyleToAtomic(_style)}>
@@ -55,11 +55,11 @@ class TalkingPointIcon extends React.Component {
   renderAbove() {
     const { 
       style,
-      variant,
+      layout,
       elements: { icon, heading, paragraph } 
     } = this.props;
 
-    const _style = { ...style, textAlign: variant.align }
+    const _style = { ...style, textAlign: layout.align }
 
     return (
       <Box className={convertStyleToAtomic(_style)}>
@@ -71,11 +71,11 @@ class TalkingPointIcon extends React.Component {
   }
 
   render() {
-    const { variant } = this.props;
+    const { layout } = this.props;
 
-    if (variant.iconPosition === "column") {
+    if (layout.iconPosition === "column") {
        return this.renderColumn();
-    } else if (variant.iconPosition === "inline") {
+    } else if (layout.iconPosition === "inline") {
        return this.renderInline();
     }
     return this.renderAbove();

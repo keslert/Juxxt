@@ -24,6 +24,7 @@ export function init() {
       fontFamily: 'Source Sans Pro',
       fontSize: '16px',
     },
+    maxWidth: 1024,
     isPage: true,
     isMaster: true,
     sections: reduce(defaultTheme.page.sections, (sections, blueprint) => {
