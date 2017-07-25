@@ -60,8 +60,8 @@ class AlternativesToolbar extends React.Component {
               <ToolbarItem onClick={() => setZoomLevel(zoomLevel % 4 + 1)}>
                 <i className="fa fa-search-plus"></i> {Math.floor(100 / zoomLevel)}%
               </ToolbarItem>
-              <ToolbarItem onClick={() => setSidebarOpen(sidebarOpen ? false : true)}>
-                <SidebarSVG/>
+              <ToolbarItem  onClick={() => setSidebarOpen(sidebarOpen ? false : true)}>
+                <SidebarSVG color={(sidebarOpen ? "#03a9f4":"#999")}/>
               </ToolbarItem>
             </Box>
           </Box>

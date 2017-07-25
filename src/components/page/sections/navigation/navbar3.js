@@ -21,11 +21,11 @@ class Navbar3 extends React.PureComponent {
 
     return (
       <div className={ colorClassNames + ' Navbar3 '+ ' justify-center ' + containerClassNames}>
-        <div className={styleClassNames + ' justify-center'}>
+        <div className={styleClassNames + ' tc justify-center'}>
             <Element {...elements.logo} />
         </div>
         <div className={styleClassNames + ' justify-center'}>
-          <div className="flex flex-1 justify-center">
+          <div className="flex justify-center">
             <Group {...groups.links} />
           </div>
 

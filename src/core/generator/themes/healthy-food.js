@@ -47,16 +47,7 @@ export default {
   colorBlueprint,
 page: {
     sections: [
-      {name: 'Navbar1',
-        _default: {
-          style: {
-            paddingTop: 2,
-            paddingBottom: 2,
-          },
-          color: { 
-            background: "colorBlueprint.lightGray",
-          },
-        }
+      {name: 'Navbar3'
       },
       {name: 'Header',
         _defaults: {
