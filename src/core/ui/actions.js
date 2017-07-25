@@ -121,11 +121,6 @@ export function containsClone(selected) {
 }
 
 function getLayoutKeysFromSelected(section) {
-  const groupVariants = flatMap(section.groups, group => group.blueprint.variants);
-  const variant = Object.assign({}, ...section.blueprint.variants, ...groupVariants)
-  return Object.keys(variant);
-
-
   const groupLayouts = flatMap(section.groups, group => group.blueprint.layouts);
   const layouts = Object.assign({}, ...section.blueprint.layouts, ...groupLayouts)
   return Object.keys(layouts);
