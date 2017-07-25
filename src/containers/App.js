@@ -95,7 +95,7 @@ class App extends React.Component {
     return (
       <Box display="flex">
         <Box display="flex" position="relative" flex="1">
-          <SplitPane minSize={200} defaultSize='55%' split="vertical">
+          <SplitPane minSize={200} defaultSize='45%' split="vertical">
             <div>
               <PageToolbar />
               <StyledColumn>
