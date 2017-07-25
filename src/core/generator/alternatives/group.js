@@ -33,10 +33,7 @@ export function generateGroupComponentAlternatives(group, sectionSkeleton) {
   return skeletons;
 }
 
-
-
-
-function fillGroupsWithClones(clones, numClones) {
+function fillSelectionWithClones(clones, numClones) {
   let index = 0;
   const _clones = [];
   for(let i = 0; i < numClones; i++) {
@@ -51,7 +48,7 @@ function fillGroupsWithClones(clones, numClones) {
   return _clones
 }
 
-function elementCloneOrigin(selected)  {
+function hasElementClone(selected)  {
   const elements = [];
   forEach(selected,function(e) {
     if(e.clones && e.clones.length>=1)
@@ -60,8 +57,8 @@ function elementCloneOrigin(selected)  {
   return elements[0];
 }
 
-const groupCloneVariants = [1,2,3,4,5,6,7,8,9,10,11,12];
-const elementCloneVariants = [1,2,3,4,5,6];
+const groupCloneVariants = range(1,13);
+const elementCloneVariants = range(1,7);
 
 export function generateGroupVariantAlternatives(modify, group, sectionSkeleton) {
   const validVariations = filter(Object.keys(modify), e=> modify[e]==true);
@@ -74,7 +71,6 @@ export function generateGroupVariantAlternatives(modify, group, sectionSkeleton)
   )
   const unique = filter(uniqBy(combos, JSON.stringify),(u)=>modify[Object.keys(u)[0]]); //TODO: FIX THIS LINE.
   let skeletons = [];
-
   skeletons = unique.map(variant => {
       const skeleton = cloneDeep(sectionSkeleton);
       linkSkeleton(skeleton);
@@ -82,28 +78,19 @@ export function generateGroupVariantAlternatives(modify, group, sectionSkeleton)
       groups.forEach(g => g.variant =  {...group.variant, ...variant});
       return skeleton;
   })
-
   if(modify.clones && (group.clones.length >= 1 || containsClone(group))) {
-    let b = elementCloneOrigin(group.elements);
-    if(group.clones.length>=1) {
-      forEach(groupCloneVariants,function(clones) {
-        const _skeleton = cloneDeep(sectionSkeleton);
-        linkSkeleton(_skeleton);
-        const _group = find(_skeleton._groups, g => g.id === group.id)
-        _group.clones = fillGroupsWithClones(_group.clones, clones);
-        linkSkeleton(_skeleton);
-        skeletons.push(_skeleton);
-      });
-    } else if(b) {
-      forEach(elementCloneVariants,function(clones) {
-        const _skeleton = cloneDeep(sectionSkeleton);
-        linkSkeleton(_skeleton);
-        const _group = find(_skeleton._groups, g => g.id === group.id)
-        _group.elements[b].clones = fillGroupsWithClones(_group.elements[b].clones, clones);
-        linkSkeleton(_skeleton);
-        skeletons.push(_skeleton);
-      });
-    }
+    let elementCloneOrigin = hasElementClone(group.elements);
+    forEach((elementCloneOrigin?elementCloneVariants:groupCloneVariants), function(clones){
+      const _skeleton = cloneDeep(sectionSkeleton);
+      linkSkeleton(_skeleton);
+      const _group = find(_skeleton._groups, g=> g.id === group.id);
+      if(elementCloneOrigin)
+        _group.elements[elementCloneOrigin].clones = fillSelectionWithClones(_group.elements[elementCloneOrigin].clones,clones);
+      else
+        _group.clones = fillSelectionWithClones(_group.clones,clones);
+      linkSkeleton(_skeleton)
+      skeletons.push(_skeleton);
+    });
   }
 
   return skeletons;
