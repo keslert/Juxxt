@@ -11,7 +11,6 @@ class Grid extends React.PureComponent {
     const colorClassNames = convertColorToAtomic(color);
     const itemClassNames = convertStyleToAtomic({
       display: "flex",
-      justify: "center",
       flex: "wrap",
       marginHorizontal: -style.gutter,
     });
@@ -44,7 +43,7 @@ class Grid extends React.PureComponent {
 export default Grid;
 
 
-const NUM_OF_CLONES = 3;
+const clones = { _default: 3, min: 1, max: 12 };
 export const blueprint = {
   type: 'basic',
   inherits: ['BasicSection', 'GutterSection', 'BaseSection'],
@@ -52,17 +51,14 @@ export const blueprint = {
   color: {},
   groups: {
     gridItem: {
-      _default: {name: 'HeadingParagraph' , clones: NUM_OF_CLONES, elements:{heading:{name:'SmallHeading'}}},
+      _default: {name: 'HeadingParagraph', clones, elements:{heading:{name:'SmallHeading'}}},
       options: [
-        {name: 'HeadingParagraph' , clones: NUM_OF_CLONES, elements:{heading:{name:'SmallHeading'}}, variants: {clones: {
-      _default: 3,
-      options:[3,4,6],
-    }}},
-        {name: 'HeadingParagraphLink', clones: NUM_OF_CLONES,  elements:{heading:{name:'SmallHeading'}}},
-        {name: 'IconHeadingParagraph',  clones: NUM_OF_CLONES, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'ImageHeadingParagraph', clones: NUM_OF_CLONES, 
+        {name: 'HeadingParagraph', clones, elements:{heading:{name:'SmallHeading'}}},
+        {name: 'HeadingParagraphLink', clones, elements:{heading:{name:'SmallHeading'}}},
+        {name: 'IconHeadingParagraph', clones, elements:{heading:{name:'SmallHeading'}}},
+        {name: 'ImageHeadingParagraph', 
           groups: { tp: { options: [
-            {name: 'HeadingParagraph', elements: {heading: {name:'SmallHeading'}}}
+            {name: 'HeadingParagraph', clones, elements: {heading: {name:'SmallHeading'}}}
           ]}},
           elements: { image: { _defaults: {style: {'aspectRatio': '4x3'}}}}
         },

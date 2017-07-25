@@ -60,7 +60,7 @@ export const blueprint = {
         'NameEmailForm',
         'EmailForm',
         'NameEmailMessageForm',
-        {name: 'ButtonList', elements: { buttons: {name: 'BasicButton', clones: 1}}},
+        {name: 'ButtonList', elements: { buttons: {clones: {_default: 1}}}},
       ],
     },
   },

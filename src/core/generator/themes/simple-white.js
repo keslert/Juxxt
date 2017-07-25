@@ -18,9 +18,11 @@ const colorBlueprint = buildPageColorBlueprint(palette);
 
 const page = {
   sections: [
+    {name: 'Navbar1'},
     {name: 'BasicWide1_2'},
     {name: 'Basic1_2'},
     {name: 'Basic'},
+    {name: 'Grid'},
     {name: 'Footer1'},
   ]
 }

@@ -28,6 +28,8 @@ import { styles } from '../style/section/shared-styles';
 import { filterStyle } from '../style/utils';
 import { generateGroupLayoutAlternatives } from './group';
 import { getSortedByPreference, getSortedByMostBrightness } from '../color/utils';
+import { generateItemClones } from './alternatives-utils';
+
 import tinycolor from 'tinycolor2';
 import defaultTheme from '../themes';
 
@@ -46,14 +48,6 @@ export function generateSectionComponentAlternatives(section, modify) {
   return skeletons;
 }
 
-
-export function generateSectionCloneAlternatives(section, sectionSkeleton) {
-  const skeletons = range(1, 13).map(i => {
-    const skeleton = cloneDeep(sectionSkeleton);
-
-  })
-}
-
 export function generateSectionLayoutAlternatives(modify, section, sectionSkeleton) {
   const validKeys = filter(Object.keys(modify), key => modify[key]);
   
@@ -66,10 +60,6 @@ export function generateSectionLayoutAlternatives(modify, section, sectionSkelet
   })
 
   return skeletons;
-  // const allSkeletons = flatMap(isEmpty(skeletons) ? [sectionSkeleton] : skeletons, s => 
-  //   flatMap(section.groups, group => generateGroupLayoutAlternatives(modify, group, s))
-  // )
-  // return isEmpty(allSkeletons) ? skeletons : allSkeletons;
 }
 
 export function generateSectionColorAlternatives(section, modify, page) {

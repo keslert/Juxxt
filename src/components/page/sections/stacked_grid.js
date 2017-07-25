@@ -48,6 +48,7 @@ class StackedGrid extends React.PureComponent {
 
 export default StackedGrid;
 
+const clones = {_default: 3, min: 1, max: 12};
 export const blueprint = {
   type: 'grid',
   inherits: ['BasicSection', 'GutterSection', 'BaseSection'],
@@ -67,10 +68,10 @@ export const blueprint = {
     },
     gridItem: {
       options: [
-        {name: 'HeadingParagraph' , clones: num_clones, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'HeadingParagraphLink', clones: num_clones,  elements:{heading:{name:'SmallHeading'}}},
-        {name: 'IconHeadingParagraph',  clones: num_clones, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'ImageHeadingParagraph', clones: num_clones, 
+        {name: 'HeadingParagraph' , clones, elements:{heading:{name:'SmallHeading'}}},
+        {name: 'HeadingParagraphLink', clones,  elements:{heading:{name:'SmallHeading'}}},
+        {name: 'IconHeadingParagraph',  clones, elements:{heading:{name:'SmallHeading'}}},
+        {name: 'ImageHeadingParagraph', clones, 
           groups: { tp: { options: [
             {name: 'HeadingParagraph', elements: {heading: {name:'SmallHeading'}}}
           ]}},

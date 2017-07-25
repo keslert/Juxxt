@@ -61,9 +61,12 @@ export function generateItemSkeleton(skeleton, blueprint, generic) {
 }
 
 function generateCloneSkeletons(clones, source) {
-  return isArray(clones)
-          ? clones.map((clone, i) => generateCloneSkeleton(i, clone))
-          : range(0, clones).map(i => generateCloneSkeleton(i, source));
+  if(clones === undefined) {
+    return [];
+  } else if(clones._default) {
+    return range(0, clones._default).map(i => generateCloneSkeleton(i, source));
+  }
+  return clones.map((clone, i) => generateCloneSkeleton(i, clone));
 }
 
 function generateCloneSkeleton(index, blueprint) {

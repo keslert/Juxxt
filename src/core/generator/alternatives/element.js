@@ -19,9 +19,9 @@ export function generateElementComponentAlternatives(element, sectionSkeleton) {
 
 export function generateElementLayoutAlternatives(modify, element, skeleton) {
   if(element.parent.isGroup) {
-    return generateGroupLayoutAlternatives(element.parent, skeleton);
+    return generateGroupLayoutAlternatives(modify, element.parent, skeleton);
   }
-  return generateSectionLayoutAlternatives(element.parent, skeleton); 
+  return generateSectionLayoutAlternatives(modify, element.parent, skeleton); 
 }
 
 export function generateElementColorAlternatives(sectionSkeleton, modify, element, page) {

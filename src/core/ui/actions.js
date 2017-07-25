@@ -134,7 +134,7 @@ function getLayoutKeysFromSelected(section) {
 function resolveLayoutModification(dispatch, state, selected) {
   let keys = []
   if(selected.isElement) {
-    keys = Object.keys(...selected.parent.blueprint.layouts);
+    keys = Object.keys(selected.parent.blueprint.layouts);
   } else {
     keys = Object.keys(selected.blueprint.layouts);
   }

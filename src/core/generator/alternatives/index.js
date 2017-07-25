@@ -4,7 +4,6 @@ import {
   generateSectionContentAlternatives,
   generateSectionColorAlternatives,
   generateSectionStyleAlternatives,
-  generateSectionCloneAlternatives,
 } from './section'
 import { 
   generateGroupComponentAlternatives,
@@ -12,7 +11,6 @@ import {
   generateGroupContentAlternatives,
   generateGroupColorAlternatives,
   generateGroupStyleAlternatives,
-  generateGroupCloneAlternatives,
 } from './group'
 import { 
   generateElementComponentAlternatives,
@@ -25,7 +23,7 @@ import {
 import {
   generatePageBrandColorAlternatives,
 } from './page';
-
+import { generateItemCloneAlternatives } from './alternatives-utils'
 import { linkSkeleton, generatePageCSSRules } from '../generator-utils';
 import { extractSkeletonFromItem } from '../skeletons/utils';
 
@@ -90,19 +88,12 @@ function generateLayoutAlternatives(page, modify, selected) {
   const sectionSkeleton = extractSkeletonFromItem(section);
   
   let skeletons;
-  
-  if(selected.isSection) {
-    if(modify.clones) {
-      skeletons = generateSectionCloneAlternatives(selected, sectionSkeleton);
-    } else {
-      skeletons = generateSectionLayoutAlternatives(modify, selected, sectionSkeleton);
-    }
+  if(modify.clones) {
+    skeletons = generateItemCloneAlternatives(selected, sectionSkeleton);
+  } else if(selected.isSection) {
+    skeletons = generateSectionLayoutAlternatives(modify, selected, sectionSkeleton);
   } else if(selected.isGroup) {
-    if(modify.clones) {
-      skeletons = generateGroupCloneAlternatives(selected, sectionSkeleton);
-    } else {
-      skeletons = generateGroupLayoutAlternatives(modify, selected, sectionSkeleton);
-    }
+    skeletons = generateGroupLayoutAlternatives(modify, selected, sectionSkeleton);
   } else {
     skeletons = generateElementLayoutAlternatives(modify, selected, sectionSkeleton);
   }

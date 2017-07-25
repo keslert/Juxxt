@@ -48,7 +48,7 @@ export const blueprint = {
   groups: {
     buttonList: {
       options: [
-        { name: 'ButtonList', elements: { buttons: { name: 'SmallButton', clones: 2 }}},
+        { name: 'ButtonList', elements: { buttons: { name: 'SmallButton'}}},
       ],
     },
   },
