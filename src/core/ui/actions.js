@@ -9,6 +9,7 @@ import {
   forEach,
   sortBy, 
   includes, 
+  mergeWith,
   flatMap,
   isEmpty, 
   uniq 
@@ -103,23 +104,23 @@ function getVariantKeysFromElement(element) {
   return Object.keys(Object.assign({}, ...parent.blueprint.variants));
 }
 
-function containsClone(selected) {
-  if(selected.groups)
-    return containsClone(selected.groups);
-  for(let j=0;j<Object.keys(selected).length;j++) {
-    const group = selected[Object.keys(selected)[j]];
-    if(group.elements) {
-      for(let i=0;i<Object.keys(group.elements).length;i++) {
-        if(group.elements[Object.keys(group.elements)[i]].clones.length >= 1) {
-          return true;
-        }
-      }
-    }
-    if(group.clones.length > 1) {
-      return true;
-    }
+function selectedHasClones(selected) {
+  return selected.clones.length >= 1;
+}
+
+export function containsClone(selected) {
+  let cloneList;
+  if(selected._groups) {
+    cloneList = selected._groups;
+  } else if (selected.elements) {
+    cloneList = [];
+    forEach(selected.elements, (e)=>cloneList.push(e));
+  } else if (selected.clones.length >=1 ) {
+    return true;
+  } else {
+    return false;
   }
-  return false;
+  return cloneList.some(selectedHasClones)
 }
 
 function getVariantKeysFromSelected(section) {
@@ -128,18 +129,14 @@ function getVariantKeysFromSelected(section) {
   return Object.keys(variant);
 }
 
-
-
 function resolveVariantModification(dispatch, state, selected) {
   let keys = []
-
   if(selected.isElement) {
     keys = getVariantKeysFromElement(selected);
   } else {
     keys = getVariantKeysFromSelected(selected.isSection ? selected : selected.parent);
   }
-  let lmao = containsClone(selected);
-  if(lmao)
+  if(containsClone(selected))
     keys.push("clones")
   resolveModificationSelection(dispatch, state, keys, 'variant')
 }

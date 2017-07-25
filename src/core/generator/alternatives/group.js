@@ -7,7 +7,7 @@ import { extractSkeletonFromItem, generateItemSkeleton } from '../skeletons/util
 import { generateContent } from '../content/generate';
 import { filter, range, uniqBy, find, flatMap, mapValues, pick, cloneDeep, forEach, includes, map, isString } from 'lodash';
 import { getCombinations } from '../../utils';
-
+import { containsClone } from '../../ui/actions'
 import { generateElementColorAlternatives } from './element';
 
 import { findItemInSection, getBlueprint, getBackground, getParents, linkSkeleton } from '../generator-utils';
@@ -33,7 +33,7 @@ export function generateGroupComponentAlternatives(group, sectionSkeleton) {
   return skeletons;
 }
 
-const cloneVariants = [1,2,3,4,5,6,7,8,9,10,11,12];
+
 
 
 function fillGroupsWithClones(clones, numClones) {
@@ -51,10 +51,19 @@ function fillGroupsWithClones(clones, numClones) {
   return _clones
 }
 
+function elementCloneOrigin(selected)  {
+  const elements = [];
+  forEach(selected,function(e) {
+    if(e.clones && e.clones.length>=1)
+      elements.push(e.parentKey)
+  });
+  return elements[0];
+}
+
+const groupCloneVariants = [1,2,3,4,5,6,7,8,9,10,11,12];
+const elementCloneVariants = [1,2,3,4,5,6];
+
 export function generateGroupVariantAlternatives(modify, group, sectionSkeleton) {
-
-
-
   const validVariations = filter(Object.keys(modify), e=> modify[e]==true);
   const variants = [];
   group.blueprint.variants.forEach(function(variantList) {
@@ -74,15 +83,27 @@ export function generateGroupVariantAlternatives(modify, group, sectionSkeleton)
       return skeleton;
   })
 
-  if(modify.clones && group.clones.length >= 1) {
-    forEach(cloneVariants,function(clones) {
-      const _skeleton = cloneDeep(sectionSkeleton);
-      linkSkeleton(_skeleton);
-      const _group = find(_skeleton._groups, g => g.id === group.id)
-      _group.clones = fillGroupsWithClones(_group.clones, clones);
-      linkSkeleton(_skeleton);
-      skeletons.push(_skeleton);
-    });
+  if(modify.clones && (group.clones.length >= 1 || containsClone(group))) {
+    let b = elementCloneOrigin(group.elements);
+    if(group.clones.length>=1) {
+      forEach(groupCloneVariants,function(clones) {
+        const _skeleton = cloneDeep(sectionSkeleton);
+        linkSkeleton(_skeleton);
+        const _group = find(_skeleton._groups, g => g.id === group.id)
+        _group.clones = fillGroupsWithClones(_group.clones, clones);
+        linkSkeleton(_skeleton);
+        skeletons.push(_skeleton);
+      });
+    } else if(b) {
+      forEach(elementCloneVariants,function(clones) {
+        const _skeleton = cloneDeep(sectionSkeleton);
+        linkSkeleton(_skeleton);
+        const _group = find(_skeleton._groups, g => g.id === group.id)
+        _group.elements[b].clones = fillGroupsWithClones(_group.elements[b].clones, clones);
+        linkSkeleton(_skeleton);
+        skeletons.push(_skeleton);
+      });
+    }
   }
 
   return skeletons;
