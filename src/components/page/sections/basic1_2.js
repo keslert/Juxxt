@@ -110,7 +110,7 @@ export const blueprint = {
       options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','HeadingParagraphButton', 'IconHeadingParagraph'],
     },
     media: {
-      options: ['BlockImage', 'Gallery'],
+      options: ['BlockImage', 'Gallery','IpadMockup','BrowserMockup'],
     },
   },
   style:{},

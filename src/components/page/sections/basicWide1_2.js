@@ -1,7 +1,7 @@
 import React from 'react';
-import Element from '../elements';
 import Group from '../groups';
 import Box from '../../common/box';
+import Element from '../elements';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 import isNumber from 'lodash/isNumber';
