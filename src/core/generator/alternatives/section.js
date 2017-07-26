@@ -62,16 +62,16 @@ export function generateSectionLayoutAlternatives(modify, section, sectionSkelet
   return skeletons;
 }
 
-export function generateSectionColorAlternatives(section, modify, page) {
+export function generateSectionBackgroundAlternatives(modify, sectionSkeleton, page) {
   let sections = [];
   if(modify.color) {
-    sections = generateSectionColorSolidsBackground(section, page);
+    sections = generateSectionColorSolidsBackground(sectionSkeleton, page);
   } else if(modify.pattern) {
-    sections = generateSectionColorPatternsBackground(section, page);
+    sections = generateSectionColorPatternsBackground(sectionSkeleton, page);
   } else if(modify.gradient) {
-    sections = generateSectionColorGradientsBackground(section, page);
+    sections = generateSectionColorGradientsBackground(sectionSkeleton, page);
   } else if(modify.image) {
-    sections = generateSectionColorImagesBackground(section, page);
+    sections = generateSectionColorImagesBackground(sectionSkeleton, page);
   }
 
   forEach(sections, s => s._groups.forEach(e => colorGroup(e, page)));

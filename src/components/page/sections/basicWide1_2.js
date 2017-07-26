@@ -1,7 +1,7 @@
 import React from 'react';
-import Element from '../elements';
 import Group from '../groups';
 import Box from '../../common/box';
+import Element from '../elements';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 import isNumber from 'lodash/isNumber';
@@ -12,7 +12,7 @@ class BasicWide1_2 extends React.Component {
 
     const { groups, elements, layout, color } = this.props;
 
-    const mediaWrapClassNames = convertStyleToAtomic({width: '50P', order: 2})
+    const mediaWrapClassNames = convertStyleToAtomic({width: '50P', order: 2, height: (layout.height + "e")})
 
     const isTpLeft = layout.order === 'left';
 
@@ -35,14 +35,18 @@ class BasicWide1_2 extends React.Component {
     const wrapClassNames = convertStyleToAtomic({
       display: "flex",
       flexWrap: "wrap",
+      
     });
+    const innerWrapClassNames= convertStyleToAtomic({
 
+    })
     const colorClassNames = convertColorToAtomic(color);
 
     return (
       <Box className={colorClassNames}>
         <Box className={wrapClassNames}>
           <Box className={mediaWrapClassNames}>
+
             <Element {...elements.image} />
           </Box>
           <Box className={tpWrapClassNames}>
@@ -70,17 +74,23 @@ export const blueprint = {
       options: [true, false],
     },
     height: {
-      _default: 2,
-      options: [0,1,2,3,4,5,6,7,8],
+      _default: 35,
+      options: [35,40,45,50,55],
     },
+
     gutter: {
       _default: 4,
       options: [0,1,2,3,4,5],
     }
   },
+  background: {
+    color: 'default',
+    pattern: true,
+    gradient: true,
+  },
   groups: {
     tp: {
-      options: ['HeadingParagraph'], //, 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','HeadingParagraphButton', 'IconHeadingParagraph'],
+      options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','HeadingParagraphButton', 'IconHeadingParagraph'],
     },
   },
   elements: {

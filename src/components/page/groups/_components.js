@@ -17,3 +17,5 @@ export {default as StackedButtons} from './stacked-buttons';
 export {default as Gallery} from './gallery';
 export {default as BlockImage} from './block-image';
 export {default as ImageHeadingParagraph} from './image-heading-paragraph'
+export {default as BrowserMockup} from './browser-mockup'
+export {default as IpadMockup} from './ipad-mockup'

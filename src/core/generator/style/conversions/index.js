@@ -23,7 +23,11 @@ const conversions = {
   minHeight: v => 'minh-' + v,
   parallax: v => v === "on" ? 'parallax': '',
   fixedNavBar: v => v === "true" ? 'fixedNavBar': '',
+<<<<<<< HEAD
 
+=======
+  minHeight: v => 'mnh-' + v,
+>>>>>>> ae9f3119d75d9e2b6b17b3f8eeee0acf53c9f0fc
   // overlayText: v => v === "true" ? ' overlayText': '', 
   // overlayImage: v => v === "true" ? ' overlayImage': '', 
   // overlayContainer: v => v === "true" ? ' overlayContainer': '', 

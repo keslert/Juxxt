@@ -11,7 +11,7 @@ Toolbar.defaultProps = {
 
 export const ToolbarItem = styled.div`
   font-size: 12px;
-  font-weight: 600;
+  // font-weight: 600;
   cursor: pointer;
   padding: 0 12px;
   ${props => props.selected 
@@ -31,7 +31,7 @@ export const ToolbarItem = styled.div`
 
 export const ToolbarButton = styled.div`
   font-size: 12px;
-  font-weight: 600;
+  // font-weight: 600;
   background: #8bc34a;
   color: #fff;
   padding: 0 16px;

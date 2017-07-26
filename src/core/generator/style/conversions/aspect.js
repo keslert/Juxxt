@@ -14,5 +14,5 @@ const conversion = {
 }
 
 export default {
-  aspectRatio: v => 'pb-' + conversion[v],
+  aspectRatio: v => 'aspect-ratio--' + v,
 }

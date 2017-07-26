@@ -3,11 +3,6 @@ import { getMode } from '../../utils';
 import { getSection, getBackground } from '../generator-utils';
 import { getSortedByMostVibrant } from './utils';
 
-// 1. No color, get preferred color
-// 2. Color but background has changed
-  // a. Precendent exists
-  // b. Find mapping of color in new palette
-
 
 export function colorElement(element, page) {
   const elements = flatMap(page.sections, s => filter(s._elements, e => e.name === element.name));
@@ -19,13 +14,12 @@ export function colorElement(element, page) {
     e => true,
   ]
 
-  if(element.blueprint.color.background) {
+  if(element.blueprint.background && element.blueprint.background.color) {
     colorBackground(rules, elements, element, page.colorBlueprint);
   }
-  if(element.blueprint.color.text) {
+  if(element.blueprint.text && element.blueprint.text.color) {
     colorText(rules, elements, element, page.colorBlueprint);
   }
-
 }
 
 function colorBackground(rules, elements, element, colorBlueprint) {
@@ -46,7 +40,7 @@ function colorBackground(rules, elements, element, colorBlueprint) {
     const prevSolids = colorBlueprint.bgBlueprints[element.color._parentBackground || background].solids;
     
     if(element.color.background !== 'transparent') {
-      const preferred = getMappedPreferredColor(solids, prevSolids, element.color.background, element.blueprint.color.background);
+      const preferred = getMappedPreferredColor(solids, prevSolids, element.color.background, element.blueprint.background.color);
       element.color.background = preferred;
       element.color.borderColor = preferred;
     }
@@ -68,7 +62,7 @@ function colorText(rules, elements, element, colorBlueprint) {
   } else {
     const texts = colorBlueprint.bgBlueprints[background].texts;
     const prevTexts = colorBlueprint.bgBlueprints[element.color._textBackground || background].texts;
-    element.color.text = getMappedPreferredColor(texts, prevTexts, element.color.text, element.blueprint.color.text);
+    element.color.text = getMappedPreferredColor(texts, prevTexts, element.color.text, element.blueprint.text.color);
   }
   if(element.color.background === 'transparent') {
     element.color.borderColor = element.color.text;

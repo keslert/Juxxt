@@ -8,7 +8,7 @@ import { generateContent } from '../content/generate';
 import { filter, range, find, flatMap, mapValues, pick, cloneDeep, forEach, includes, map, isString } from 'lodash';
 import { getCombinations } from '../../utils';
 import { containsClone } from '../../ui/actions'
-import { generateElementColorAlternatives } from './element';
+import { generateElementBackgroundAlternatives } from './element';
 
 import { findItemInSection, getBlueprint, getBackground, getParents, linkSkeleton } from '../generator-utils';
 import { styles } from '../style/group/shared-styles';
@@ -50,14 +50,18 @@ export function generateGroupLayoutAlternatives(modify, group, sectionSkeleton) 
   return skeletons;
 }
 
-export function generateGroupColorAlternatives(sectionSkeleton, modify, page, selected) {
+export function generateGroupBackgroundAlternatives(modify, selected, sectionSkeleton, page) {
   const elements = filter(selected.section._elements, e => e.parent.fullId === selected.fullId);  
-  const backgroundElements = filter(elements, e => e.blueprint.color.background === 'vibrant');
-  const textElements = filter(elements, e => e.blueprint.color.text === 'whiteOrVibrant');
+  const backgroundElements = filter(elements, e => 
+    e.blueprint.background && e.blueprint.background.color === 'vibrant'
+  );
+  const textElements = filter(elements, e => 
+    e.blueprint.text && e.blueprint.text.color === 'whiteOrVibrant'
+  );  
 
   const sections = [
-    ...flatMap(backgroundElements, e => generateElementColorAlternatives(sectionSkeleton, {background: true}, e, page)),
-    ...flatMap(textElements, e => generateElementColorAlternatives(sectionSkeleton, {text: true}, e, page)),
+    ...flatMap(backgroundElements, e => generateElementBackgroundAlternatives({background: true}, e, sectionSkeleton, page)),
+    ...flatMap(textElements, e => generateElementBackgroundAlternatives({text: true}, e, sectionSkeleton, page)),
   ];
 
   return sections;

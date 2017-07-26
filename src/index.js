@@ -10,7 +10,9 @@ import 'react-select/dist/react-select.css';
 import './styles/react-select.css'; 
 import './styles/react-split-pane.css';
 import './styles/tachyons.css';  
+import './styles/mockup.css'
 import './styles/main.css'; 
+
 
 
 const store = configureStore();
