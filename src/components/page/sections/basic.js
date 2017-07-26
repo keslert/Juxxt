@@ -15,19 +15,36 @@ class Basic extends React.PureComponent {
 
     const isLeft = layout.position.horizontal === 'left';
     const isCenter = layout.position.horizontal === 'center';
+
+    const boxStyle = {
+      
+
+    }
+
     const wrapClassNames = convertStyleToAtomic({
       maxWidth: 'page',
       margin: 'auto',
-      paddingBottom: '-l-' + layout.height / (isTop ? 3 : isMid ? 2 : (3/2)),
-      paddingTop: '-l-' + layout.height / (isTop ? (3/2) : isMid ? 2 : 3),
+      display: (groups.item.name === "Gallery" ? '' : 'flex'),
+      align: (isTop ? "start" : isMid ? "center" : "end"),
+      justify: (isLeft ? "start" : isCenter ? "center" : "end"),
+      minHeight: layout.height,
+
+      // paddingBottom: '-l-' + layout.height / (isTop ? (3/2) : isMid ? 2 : 3),
+      // paddingTop: '-l-' + layout.height / (isTop ? 3 : isMid ? 2 : (3/2)),
+      paddingBottom: '-l-' + layout.height * (.2),
+      paddingTop: '-l-' + layout.height * (.2),
+    
     })
 
     const colorClassNames = convertColorToAtomic(color);
+    const styleClassNames = convertStyleToAtomic(boxStyle);
 
     return (
       <div className={colorClassNames}>
         <div className={wrapClassNames}>
-          <Group {...groups.item} />
+          <div className = {styleClassNames}>
+            <Group {...groups.item} />
+          </div>
         </div>
       </div>
     )
@@ -41,11 +58,12 @@ export const blueprint = {
   inherits: ['BasicSection', 'BaseSection', 'ParallaxSection'],
   layouts: {
     height: {
-      _default: 24,
-      options: [0,6,12,18,24,30,36,42],
+      _default: 40,
+      //options: [0,6,12,18,24,30,36,42],
+      options: [10,20,30,40,50,60,70,80,90,100,110,120,130,140],
     },
     position: {
-      _default: {vertical: 'top', horizontal: 'left'},
+      _default: {vertical: 'middle', horizontal: 'center'},
       options: [
         {vertical: 'top', horizontal: 'left'}, 
         {vertical: 'top', horizontal: 'center'},
