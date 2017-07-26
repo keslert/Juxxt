@@ -2,21 +2,22 @@ import {
   generateSectionComponentAlternatives,
   generateSectionLayoutAlternatives,
   generateSectionContentAlternatives,
-  generateSectionColorAlternatives,
+  generateSectionBackgroundAlternatives,
   generateSectionStyleAlternatives,
 } from './section'
 import { 
   generateGroupComponentAlternatives,
   generateGroupLayoutAlternatives,
   generateGroupContentAlternatives,
-  generateGroupColorAlternatives,
+  generateGroupBackgroundAlternatives,
   generateGroupStyleAlternatives,
 } from './group'
 import { 
   generateElementComponentAlternatives,
   generateElementLayoutAlternatives,
   generateElementContentAlternatives,
-  generateElementColorAlternatives,
+  generateElementBackgroundAlternatives,
+  generateElementTextAlternatives,
   generateElementStyleAlternatives,
 } from './element'
 
@@ -40,8 +41,10 @@ export function generateAlternatives(page, modify, selected) {
     sections = generateComponentAlternatives(page, modify.component, selected);
   } else if(modify.layout) {
     sections = generateLayoutAlternatives(page, modify.layout, selected);
-  } else if(modify.color) {
-    sections = generateColorAlternatives(page, modify.color, selected);
+  } else if(modify.background) {
+    sections = generateBackgroundAlternatives(page, modify.background, selected);
+  } else if(modify.text) {
+    sections = generateTextAlternatives(page, modify.text, selected);
   } else if(modify.content) {
     sections = generateContentAlternatives(page, selected);
   } else if(modify.style) {
@@ -107,20 +110,37 @@ function generateLayoutAlternatives(page, modify, selected) {
   return sections;
 }
 
-function generateColorAlternatives(page, modify, selected) {
+function generateBackgroundAlternatives(page, modify, selected) {
   const skeleton = extractSkeletonFromItem(selected.section);
   
   let sections;
   if(selected.isSection) {
-    sections = generateSectionColorAlternatives(skeleton, modify, page);
+    sections = generateSectionBackgroundAlternatives(modify, skeleton, page);
   } else if(selected.isGroup) {
-    sections = generateGroupColorAlternatives(skeleton, modify, page, selected);
+    sections = generateGroupBackgroundAlternatives(modify, selected, skeleton, page);
   } else {
-    sections = generateElementColorAlternatives(skeleton, modify, selected, page);
+    sections = generateElementBackgroundAlternatives(modify, selected, skeleton, page);
+  }
+  return sections;
+}
+
+function generateTextAlternatives(page, modify, selected) {
+  const skeleton = extractSkeletonFromItem(selected.section);
+  
+  let sections;
+  if(selected.isSection) {
+    // sections = generateSectionBackgroundAlternatives(modify, skeleton, page);
+    sections = [];
+  } else if(selected.isGroup) {
+    sections = [];
+  } else {
+    sections = generateElementTextAlternatives(modify, selected, skeleton, page);
   }
 
   return sections;
 }
+
+
 
 function generateContentAlternatives(page, selected) {
   const skeleton = extractSkeletonFromItem(selected.section);

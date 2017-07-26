@@ -4,9 +4,22 @@ import * as blueprints from '../../../components/page/elements/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
 import { generateContent } from '../content/generate';
-import { map, uniq, intersection, filter, range, cloneDeep, flatMap, findIndex, find } from 'lodash';
+import { 
+  map, 
+  uniq, 
+  intersection, 
+  filter, 
+  range, 
+  cloneDeep, 
+  flatMap, 
+  findIndex, 
+  find,
+  pick,
+  mapValues,
+} from 'lodash';
 import { styles } from '../style/element/shared-styles';
 import { filterStyle } from '../style/utils';
+import { getTruthyKeys, getCombinations } from '../../utils';
 import { getBackground, getBlueprint, linkSkeleton } from '../generator-utils';
 import { generateSectionLayoutAlternatives } from './section';
 import { generateGroupLayoutAlternatives, generateGroupComponentAlternatives } from './group';
@@ -24,11 +37,11 @@ export function generateElementLayoutAlternatives(modify, element, skeleton) {
   return generateSectionLayoutAlternatives(modify, element.parent, skeleton); 
 }
 
-export function generateElementColorAlternatives(sectionSkeleton, modify, element, page) {
+export function generateElementBackgroundAlternatives(modify, element, sectionSkeleton, page) {
   const elementIndex = findIndex(element.section._elements, e => e.fullRelativeId === element.fullRelativeId);
   
   let sections = [];
-  if(modify.background) {
+  if(modify.color) {
     const background = getBackground(element.parent);
     sections = map(page.colorBlueprint.bgBlueprints[background].solids, color => {
       const skeleton = cloneDeep(sectionSkeleton);
@@ -57,22 +70,62 @@ export function generateElementColorAlternatives(sectionSkeleton, modify, elemen
       skeleton.changes = { outline: color };
       return skeleton;
     }));
-  } else if(modify.text) {
-    const background = getBackground(element);
-    sections = map(page.colorBlueprint.bgBlueprints[background].texts, text => {
-      const skeleton = cloneDeep(sectionSkeleton);
-      linkSkeleton(skeleton);
-      skeleton._elements[elementIndex].color = { 
-        ...element.color, 
-        text,
-        _textBackground: background,
-      }
-      skeleton.changes = { color: text };
-      return skeleton;
-    });
   }
 
   // Are there more items like this?
+  if(filter(element.section._elements, e => e.id === element.id).length > 1) {
+    sections = sections.concat(sections.map((_, i) => {
+      const skeleton = cloneDeep(sectionSkeleton);
+      linkSkeleton(skeleton);
+      const _element = sections[i]._elements[elementIndex];
+      const elements = filter(skeleton._elements, e => e.id === _element.id);
+      elements.forEach(e => e.color = _element.color);
+      skeleton.changes = sections[i].changes;
+      return skeleton;
+    }))
+  }
+
+  return sections;
+}
+
+export function generateElementTextAlternatives(modify, element, sectionSkeleton, page) {
+  let sections = [];
+  if(modify.color) {
+    sections = generateElementTextColorAlternatives(element, sectionSkeleton, page);
+  } else {
+    const keys = getTruthyKeys(modify);
+    const combos = getCombinations(mapValues(pick(element.blueprint.text, keys), 'options'));
+
+    sections = combos.map(textStyle => {
+      const skeleton = cloneDeep(sectionSkeleton);
+      linkSkeleton(skeleton);
+      const elements = filter(skeleton._elements, e => e.id === element.id);
+      elements.forEach(e => e.style = {...e.style, ...textStyle});
+      return skeleton;
+    })
+  }
+
+  return sections;
+}
+
+function generateElementTextColorAlternatives(element, sectionSkeleton, page) {
+  const elementIndex = findIndex(element.section._elements, e => e.fullRelativeId === element.fullRelativeId);
+  let sections = [];
+  
+  const background = getBackground(element);
+  sections = map(page.colorBlueprint.bgBlueprints[background].texts, text => {
+    const skeleton = cloneDeep(sectionSkeleton);
+    linkSkeleton(skeleton);
+    skeleton._elements[elementIndex].color = { 
+      ...element.color, 
+      text,
+      _textBackground: background,
+    }
+    skeleton.changes = { color: text };
+    return skeleton;
+  });
+
+    // Are there more items like this?
   if(filter(element.section._elements, e => e.id === element.id).length > 1) {
     sections = sections.concat(sections.map((_, i) => {
       const skeleton = cloneDeep(sectionSkeleton);

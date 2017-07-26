@@ -724,6 +724,12 @@ img { max-width: 100%; }
 .fr {float:right;}
 .fl {float:left;}
 
+.lh-0 { line-height: 1em; }
+.lh-1 { line-height: 1.2em; }
+.lh-2 { line-height: 1.4em; }
+.lh-3 { line-height: 1.6em; }
+.lh-4 { line-height: 1.8em; }
+
 /*.randomBgImage { 
   background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("https://unsplash.it/1240/680?random") !important; 
   background-size: cover !important;

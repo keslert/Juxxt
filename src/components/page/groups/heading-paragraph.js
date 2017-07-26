@@ -25,6 +25,12 @@ export const blueprint = {
   inherits: [TalkingPoint, 'RowBuffer'],
   style: {},
   color: {},
+  background: {
+    color: true,
+    border: true,
+    borderRadius: true,
+    shadow: true,
+  },
   elements: {
     heading: {
       name: BasicHeading.name,

@@ -205,7 +205,7 @@ page: {
           },
           gridItem: {
             _default: {
-              name: 'HeadingParagraph', clones:6,  elements:{heading:{name:'SmallHeading'}},
+              name: 'HeadingParagraph', clones: {_default: 6, min: 1, max: 16},  elements:{heading:{name:'SmallHeading'}},
             },
           }
         },

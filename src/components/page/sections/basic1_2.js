@@ -39,6 +39,7 @@ class Basic1_2 extends React.Component {
       display: "flex",
       flexWrap: "wrap",
       textAlign: isConstrained ? 'left' : 'center',
+      align: 'center',
     })
 
     const colorClassNames = convertColorToAtomic(color);
@@ -87,6 +88,20 @@ export const blueprint = {
     height: {
       _default: 5,
       options: [0,2,4,5,6,7,8],
+    },
+  },
+  background: {
+    color: 'default',
+    pattern: true,
+    gradient: true,
+    image: true,
+  },
+  image: {
+    content: true,
+    filter: true,
+    crop: {
+      _default: 'center center',
+      options: ['left top', 'left center', 'left bottom', 'center top', 'center center', 'center bottom', 'right top', 'right center', 'right bottom']
     },
   },
   elements: {},
