@@ -164,9 +164,10 @@ export const CoverImage = {
   color: {},
   style: {
     aspectRatio: {
-      _default: '4x3',
-      options: ['1x1', '16x9', '4x3', '3x4', '6x4', '8x5', '7x5'],
-    },
+      _default: "object",
+      options:['object']
+    }
+
   },
 };
 
