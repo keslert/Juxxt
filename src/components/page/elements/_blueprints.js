@@ -6,7 +6,10 @@ export const BasicKicker = {
   name: 'BasicKicker', 
   is: 'Text',
   inherits: [inherits.Heading],
-  color: { text: 'readable' },
+  text: { 
+    color: 'readable',
+    fontSize: { _default: 3, options: [1,2,3,4] },
+  },
   style: {
     fontSize: {
       _default: 3,
@@ -22,8 +25,11 @@ export const SmallHeading = {
   name: 'SmallHeading', 
   is: 'Text',
   inherits: [inherits.Heading],
-  color: {
-    text: 'vibrant',
+  text: { 
+    color: 'vibrant',
+    fontSize: { _default: 3, options: [3,4,5] },
+    fontWeight: { _default: 6, options: [2,4,6,8] },
+    lineHeight: { _default: 1, options: [1,2,3,4] },
   },
   style: {
     fontSize: {
@@ -45,8 +51,11 @@ export const BasicHeading = {
   name: 'BasicHeading', 
   is: 'Text',
   inherits: [],
-  color: {
-    text: 'whiteOrVibrant',
+  text: {
+    color: 'whiteOrVibrant',
+    fontSize: { _default: 5, options: [3,4,5,6,7,8,9] },
+    fontWeight: { _default: 6, options: [2,4,6,8] },
+    lineHeight: { _default: 4, options: [1,2,3,4] },
   },
   style: {
     fontSize: {
@@ -68,7 +77,11 @@ export const BasicSubheading = {
   name: 'BasicSubheading', 
   is: 'Text',
   inherits: [inherits.Heading],
-  color: { text: 'readable' },
+  text: { 
+    color: 'readable',
+    fontSize: { _default: 4, options: [2,3,4,5,6,7] },
+    textTransform: { _defaults: 'none', options: ['none', 'uppercase'] },
+  },
   style: {
     textTransform: {
       _default: 'none',
@@ -85,7 +98,11 @@ export const Copyright = {
   name: 'Copyright', 
   is: 'Text',
   inherits: [],
-  color: { text: 'readable' },
+  text: { 
+    text: 'readable',
+    fontSize: { _default: 3, options: [2,3,4] },
+    textTransform: { _defaults: 'none', options: ['none', 'uppercase'] },
+  },
   style: {
     textTransform: {
       _default: 'none',
@@ -102,7 +119,11 @@ export const ListTitle = {
   name: 'ListTitle', 
   is: 'Text',
   inherits: [inherits.Heading],
-  color: { text: 'readable' },
+  text: { 
+    text: 'readable',
+    fontSize: { _default: 4, options: [2,3,4,5,6,7] },
+    textTransform: { _defaults: 'none', options: ['none', 'uppercase'] },
+  },
   style: {
     textTransform: {
       _default: 'uppercase',
@@ -130,7 +151,7 @@ export const BasicParagraph = {
   name: 'BasicParagraph', 
   is: 'Text',
   inherits: [inherits.Paragraph],
-  color: { text: 'readable' },
+  text: { color: 'readable' },
   style: {}
 };
 
@@ -141,6 +162,17 @@ export const BasicImage = {
   inherits: ['Media'],
   color: {},
   style: {},
+  image: {
+    content: true,
+    aspectRatio: {
+      _default: '4x3',
+      options: ['auto', '1x1', '16x9', '4x3', '3x4', '6x4', '8x5', '7x5'],
+    },
+    crop: {
+      _default: 'center center',
+      options: ['left top', 'left center', 'left bottom', 'center top', 'center center', 'center bottom', 'right top', 'right center', 'right bottom']
+    },
+  },
 };
 
 export const GalleryImage = { 
@@ -203,8 +235,8 @@ export const BasicLink = {
   name: 'BasicLink',
   is: 'Link',
   inherits: [inherits.Link],
-  color: {
-    text: 'vibrant',
+  text: {
+    color: 'vibrant',
   },
   style: {},
 };
@@ -213,8 +245,8 @@ export const ReadableLink = {
   name: 'ReadableLink',
   is: 'Link',
   inherits: [inherits.Link],
-  color: {
-    text: 'readable',
+  text: {
+    color: 'readable',
   },
   style: {
     margin: {
@@ -228,15 +260,15 @@ export const SmallButton = {
   name: 'SmallButton', 
   is: 'Button',
   inherits: [inherits.Button],
-  color: {
-    text: 'whiteOrReadable',
-    background: 'vibrant',
+  color: {},
+  background: {
+    color: 'vibrant',
+  },
+  text: {
+    color: 'whiteOrReadable',
+    fontSize: { _default: 2, options: range(1, 4) },
   },
   style: {
-    marginVertical: {
-      _default: 2,
-      options: range(0, 3),
-    },
     paddingVertical: {
       _default: 2,
       options: range(2,5),
@@ -256,15 +288,15 @@ export const BasicButton = {
   name: 'BasicButton', 
   is: 'Button',
   inherits: [inherits.Button],
-  color: {
-    text: 'whiteOrReadable',
-    background: 'vibrant',
+  background: {
+    color: 'vibrant',
   },
+  text: {
+    color: 'whiteOrReadable',
+    fontSize: { _default: 2, options: range(1, 4) },
+  },
+  color: {},
   style: {
-    marginVertical: {
-      _default: 2,
-      options: range(0, 3),
-    },
     paddingVertical: {
       _default: 3,
       options: range(3,4),
@@ -288,19 +320,17 @@ export const BasicInput = {
   name: 'BasicInput',
   is: 'Input',
   inherits: [],
-  color: { text: 'readable' },
+  text: { color: 'readable' },
   style: {},
-  _defaults: {
-    content: {placeholder: ''}
-  }
 }
 
 export const BasicIcon = {
   name: 'BasicIcon',
   is: 'Icon',
   inherits: [],
-  color: {
-    text: 'vibrant',
+  text: {
+    color: 'vibrant',
+    fontSize: { _default: 5, options: [2,3,4,5,6,7,8,9] },
   },
   style: {
     fontSize: {

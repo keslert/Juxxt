@@ -18,9 +18,13 @@ import {
 const buttons = [
   {label: 'Component', key: 'component'},
   {label: 'Layout', key: 'layout'},
-  {label: 'Color', key: 'color'},
-  {label: 'Style', key: 'style'},
-  {label: 'Content', key: 'content'},
+  {label: 'Background', key: 'background'},
+  {label: 'Text', key: 'text'},
+  {label: 'Image', key: 'image'},
+  // {label: 'Color', key: 'color'},
+  // {label: 'Style', key: 'style'},
+
+  // {label: 'Content', key: 'content'},
   {label: 'Page', key: 'page'},
 ]
 

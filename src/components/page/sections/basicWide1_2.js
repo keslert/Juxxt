@@ -78,6 +78,11 @@ export const blueprint = {
       options: [0,1,2,3,4,5],
     }
   },
+  background: {
+    color: 'default',
+    pattern: true,
+    gradient: true,
+  },
   groups: {
     tp: {
       options: ['HeadingParagraph'], //, 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','HeadingParagraphButton', 'IconHeadingParagraph'],

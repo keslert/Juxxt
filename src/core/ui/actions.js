@@ -87,16 +87,18 @@ export function turnOnModification(key) {
 
 export function resolveModifications(dispatch, state, modification, selected, callPath) {
 
-  if(modification === 'style') {
-    resolveStyleModification(dispatch, state, selected);
-  } else if(modification === 'color') {
-    resolveColorModification(dispatch, state, selected);
-  } else if(modification === 'component') {
+  if(modification === 'component') {
     resolveComponentModification(dispatch, state, selected, callPath);
   } else if(modification === 'page') {
     resolvePageModification(dispatch, state);
   } else if(modification === 'layout') {
     resolveLayoutModification(dispatch, state, selected);
+  } else if(modification === 'background') {
+    resolveBackgroundModification(dispatch, state, selected);
+  } else if(modification === 'text') {
+    resolveTextModification(dispatch, state, selected);
+  } else if(modification === 'image') {
+    resolveImageModification(dispatch, state, selected);
   }
 }
 
@@ -138,19 +140,6 @@ function resolveLayoutModification(dispatch, state, selected) {
   resolveModificationSelection(dispatch, state, keys, 'layout')
 }
 
-function resolveColorModification(dispatch, state, selected) {
-  let keys = ['color'];
-  if(selected.isSection) {
-    keys = ['color', 'gradient', 'pattern', 'image'];
-  } else if(selected.isElement) {
-    keys = selected.color.background ? ['text', 'background'] : ['text']
-  } else if (selected.isGroup) {
-    keys= ['color'];
-  }
-  
-  resolveModificationSelection(dispatch, state, keys, 'color');
-}
-
 function resolveComponentModification(dispatch, state, selected, callPath) {
   let modification = {};
   if(selected.isSection) {
@@ -168,10 +157,27 @@ function resolveStyleModification(dispatch, state, selected) {
   resolveModificationSelection(dispatch, state, rootKeys, 'style');
 }
 
+function resolveBackgroundModification(dispatch, state, selected) {
+  const keys = Object.keys(selected.blueprint.background || {});
+  resolveModificationSelection(dispatch, state, keys, 'background')
+}
+
+function resolveTextModification(dispatch, state, selected) {
+  const keys = Object.keys(selected.blueprint.text || {});
+  resolveModificationSelection(dispatch, state, keys, 'text')
+}
+
+function resolveImageModification(dispatch, state, selected) {
+  const keys = Object.keys(selected.blueprint.image || {});
+  resolveModificationSelection(dispatch, state, keys, 'image')
+}
+
 function resolvePageModification(dispatch, state) {
   const keys = ['brandColors'];
   resolveModificationSelection(dispatch, state, keys, 'page');
 }
+
+
 
 function resolveModificationSelection(dispatch, state, keys, modification) {
   const oldModification = getModifications(state)[modification];

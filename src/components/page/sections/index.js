@@ -40,12 +40,12 @@ const StyledSection = styled.div`
         ${props.selected 
           ? `
             border: 10px solid #8bc34a;
-            border-image: linear-gradient(to right, #8bc34a 0%,#8bc34a 5%, transparent 5%, transparent 95%, #8bc34a 95%, #8bc34a 100%);
+            border-image: linear-gradient(to right, #8bc34a 0%,#8bc34a 2%, transparent 2%, transparent 98%, #8bc34a 98%, #8bc34a 100%);
             border-image-slice: 1;
           `
           : `
             border: 10px solid rgba(122,122,122,0.8);
-            border-image: linear-gradient(to right, rgba(122,122,122,0.8) 0%,rgba(122,122,122,0.8) 5%, transparent 5%, transparent 95%, rgba(122,122,122,0.8) 95%, rgba(122,122,122,0.8) 100%);
+            border-image: linear-gradient(to right, rgba(122,122,122,0.8) 0%,rgba(122,122,122,0.8) 2%, transparent 2%, transparent 98%, rgba(122,122,122,0.8) 98%, rgba(122,122,122,0.8) 100%);
             border-image-slice: 1;
           `
         }

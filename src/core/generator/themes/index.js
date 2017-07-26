@@ -9,4 +9,4 @@ import RedRock from './red_rock';
 import Landay from './landay';
 import NationalGuard from './national-guard';
 
-export default SimpleWhite;
+export default HealthyFood;

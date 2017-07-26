@@ -13,14 +13,14 @@ const images = [
 const headerImages = [
   {key: uniqueId(), url: 'https://images.pexels.com/photos/202737/pexels-photo-202737.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
 ]
-const palette = ['#aaeeaa'];
+const palette = ['#aaeeaa', '#00beef'];
 const colorBlueprint = buildPageColorBlueprint(palette);
 
 const page = {
   sections: [
     {name: 'Navbar1'},
-    {name: 'BasicWide1_2'},
     {name: 'Basic1_2'},
+    {name: 'BasicWide1_2'},
     {name: 'Basic'},
     {name: 'Grid'},
     {name: 'Footer1'},

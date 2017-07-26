@@ -93,3 +93,7 @@ export function getMode(list) {
 export function absDiff(a, b) {
   return Math.abs(a - b);
 }
+
+export function getTruthyKeys(obj) {
+  return filter(Object.keys(obj), key => obj[key])
+}
