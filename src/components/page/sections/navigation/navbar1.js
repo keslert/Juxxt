@@ -8,23 +8,27 @@ class Navbar1 extends React.PureComponent {
   render () {
     const { elements, groups, style, color } = this.props;
     
-    const styleClassNames = convertStyleToAtomic({
-      ...style,
-      display: "flex",
-      align: "center",
-      fixedNavBar: false,
+    const linksClassNames = convertStyleToAtomic({
+      display: 'flex',
+      flex: 1,
+      justify: style.linksAlign === 'left' ? 'start' : 'end',
     });
 
     const colorClassNames = convertColorToAtomic(color);
-    const containerClassNames = convertStyleToAtomic({fixedNavBar: style.fixedNavBar});
+    const containerClassNames = convertStyleToAtomic({
+      ...style,
+      paddingHorizontal: style.edgePadding,
+      display: 'flex',
+      align: 'center',
+    });
 
     return (
-      <div className={ colorClassNames + ' Navbar1 ' + containerClassNames}>
-        <div className={styleClassNames}>
+      <div className={colorClassNames}>
+        <div className={containerClassNames}>
           <div>
             <Element {...elements.logo} />
           </div>
-          <div className="flex-1">
+          <div className={linksClassNames}>
             <Group {...groups.links} />
           </div>
           <div>
@@ -40,8 +44,10 @@ export default Navbar1;
 
 export const blueprint = {
   type: 'navigation',
-  inherits: ['NavigationSection','FixedNavBar'],
-  style: {},
+  inherits: ['NavigationSection', 'FixedSection', 'Section'],
+  style: {
+    linksAlign: { options: ['left', 'right'] }
+  },
   color: {},
   elements: {
     logo: {
@@ -58,5 +64,4 @@ export const blueprint = {
       options: ['HorizontalList']
     }
   },
-  layouts: {}
 }

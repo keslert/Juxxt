@@ -45,8 +45,8 @@ const StyledInsertionTarget = styled.div`
     background: #8bc34a;
     color: #fff;
     ${props => `
-      top: ${props.enlarge ? '-32px' : '-14px'};
-      height: ${props.enlarge ? '64px' : '28px'};
+      top: ${props.enlarge ? '-32px' : '-10px'};
+      height: ${props.enlarge ? '64px' : '20px'};
     `}
   }
   &:hover {

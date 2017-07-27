@@ -10,14 +10,14 @@ class BasicWide1_2 extends React.Component {
 
   render() {
 
-    const { groups, elements, layout, color } = this.props;
+    const { groups, elements, style, color } = this.props;
 
-    const mediaWrapClassNames = convertStyleToAtomic({width: '50P', order: 2, height: (layout.height + "e")})
+    const mediaWrapClassNames = convertStyleToAtomic({width: '50P', order: 2, height: (style.height + "e")})
 
-    const isTpLeft = layout.order === 'left';
-
+    const isTpLeft = style.order === 'left';
+    const isConstrained = style.constrained === 'page';
     const tpWrapClassNames = convertStyleToAtomic({
-      textAlign: layout.constrained ? 'left' : 'center',
+      textAlign: isConstrained ? 'left' : 'center',
       width: '50P',
       order: isTpLeft ? 1 : 3,
       display: 'flex',
@@ -26,10 +26,10 @@ class BasicWide1_2 extends React.Component {
 
     
     const tpClassNames = convertStyleToAtomic({
-      maxWidth: layout.constrained ? 'page-50P' : 'inherit',
+      maxWidth: isConstrained ? 'page-50P' : 'inherit',
       marginLeft: isTpLeft ? 'auto' : 'inherit',
-      paddingLeft: !isTpLeft || !layout.constrained ? layout.gutter : 0,
-      paddingRight: isTpLeft || !layout.constrained ? layout.gutter : 0,
+      paddingLeft: !isTpLeft || !isConstrained ? style.gutter : isConstrained ? style.edgePadding : 0,
+      paddingRight: isTpLeft || !isConstrained ? style.gutter : isConstrained ? style.edgePadding : 0,
     })
 
     const wrapClassNames = convertStyleToAtomic({
@@ -63,26 +63,8 @@ export default BasicWide1_2;
 
 export const blueprint = {
   type: 'basic',
-  inherits: ['GutterSection', 'BaseSection'],
+  inherits: ['Guttered', 'Ordered', 'ConstrainedSection', 'Section'],
   color: {},
-  layouts: {
-    order: {
-      options: ['left', 'right'],
-    },
-    constrained: {
-      _default: true,
-      options: [true, false],
-    },
-    height: {
-      _default: 35,
-      options: [35,40,45,50,55],
-    },
-
-    gutter: {
-      _default: 4,
-      options: [0,1,2,3,4,5],
-    }
-  },
   background: {
     color: 'default',
     pattern: true,
@@ -98,5 +80,10 @@ export const blueprint = {
       name: 'CoverImage',
     },
   },
-  style: {},
+  style: {
+    height: {
+      _default: 35,
+      options: [35,40,45,50,55],
+    },
+  },
 }

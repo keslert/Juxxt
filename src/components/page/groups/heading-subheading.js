@@ -3,7 +3,7 @@ import TalkingPointComponent from './common/talking-point';
 
 class HeadingSubheading extends React.Component {
   render() {
-    const { elements, layout, color, style } = this.props;
+    const { elements, color, style } = this.props;
 
     return (
       <TalkingPointComponent
@@ -11,7 +11,7 @@ class HeadingSubheading extends React.Component {
         color={color}
         elements={elements}
         groups={{}}
-        layout={layout} />
+        />
     )
   }
 }
@@ -29,10 +29,4 @@ export const blueprint = {
       name: 'BasicSubheading',
     },
   },
-  layouts: {
-    align: {
-      _default: 'inherit',
-      options: ['inherit', 'left', 'center', 'right'],
-    }
-  }
 }

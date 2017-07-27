@@ -52,5 +52,4 @@ export const blueprint = {
       options: ['HeadingSubheadingButton', /* 'HeadingParagraphButton' */],
     },
   },
-  layouts: {},
 }

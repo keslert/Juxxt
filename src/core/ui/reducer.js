@@ -7,13 +7,11 @@ const uiState = () => ({
     background: {},
     text: {},
     image: {},
-    // color: {},
-    // content: {},
-    // style: {},
     page: {},
   },
   sidebarOpen: false,
   selectedModification: 'component',
+  modificationOptions: [],
   hovered: [],
   shiftDown: false,
   zoomLevel: 2,
@@ -40,6 +38,11 @@ export function uiReducer(state = uiState(), {payload, type}) {
         modifications: {...state.modifications,
           [payload.key]: payload.value,
         }
+      })
+    
+    case types.SET_MODIFICATION_OPTIONS:
+      return Object.assign({}, state, {
+        modificationOptions: payload,
       })
 
     case types.ON_HOVERABLE_MOUSE_ENTER:

@@ -21,14 +21,14 @@ import { assignContent } from '../content';
 import { generateContent } from '../content/generate';
 
 import { linkSkeleton } from '../generator-utils';
-import { getCombinations } from '../../utils';
+import { getTruthyKeys, getCombinations } from '../../utils';
 import { colorGroup } from '../color/group';
 import { colorElement } from '../color/element';
-import { styles } from '../style/section/shared-styles';
+import styles from '../style/shared-styles';
 import { filterStyle } from '../style/utils';
 import { generateGroupLayoutAlternatives } from './group';
 import { getSortedByPreference, getSortedByMostBrightness } from '../color/utils';
-import { generateItemClones } from './alternatives-utils';
+import { generateItemClones, generateStyleCombinations } from './alternatives-utils';
 
 import tinycolor from 'tinycolor2';
 import defaultTheme from '../themes';
@@ -49,29 +49,27 @@ export function generateSectionComponentAlternatives(section, modify) {
 }
 
 export function generateSectionLayoutAlternatives(modify, section, sectionSkeleton) {
-  const validKeys = filter(Object.keys(modify), key => modify[key]);
-  
-  const layouts = pick(section.blueprint.layouts, validKeys);
-  const combos = getCombinations(mapValues(layouts, 'options'));
-  const skeletons = combos.map(layout => {
-    const skeleton = cloneDeep(sectionSkeleton);
-    skeleton.layout = {...skeleton.layout, ...layout};
-    return skeleton;
-  })
-
-  return skeletons;
+  return generateStyleCombinations(modify, section, sectionSkeleton);
 }
 
+export function generateSectionImageAlternatives(modify, sectionSkeleton, page) {
+  if(modify.content) {
+    return generateSectionImagesBackground(sectionSkeleton, page);
+  }
+  return generateStyleCombinations(modify, sectionSkeleton, sectionSkeleton);
+}
+
+
 export function generateSectionBackgroundAlternatives(modify, sectionSkeleton, page) {
-  let sections = [];
+  let sections;
   if(modify.color) {
-    sections = generateSectionColorSolidsBackground(sectionSkeleton, page);
+    sections = generateSectionSolidsBackground(sectionSkeleton, page);
   } else if(modify.pattern) {
-    sections = generateSectionColorPatternsBackground(sectionSkeleton, page);
+    sections = generateSectionPatternsBackground(sectionSkeleton, page);
   } else if(modify.gradient) {
-    sections = generateSectionColorGradientsBackground(sectionSkeleton, page);
+    sections = generateSectionGradientsBackground(sectionSkeleton, page);
   } else if(modify.image) {
-    sections = generateSectionColorImagesBackground(sectionSkeleton, page);
+    sections = generateSectionImagesBackground(sectionSkeleton, page);
   }
 
   forEach(sections, s => s._groups.forEach(e => colorGroup(e, page)));
@@ -81,7 +79,7 @@ export function generateSectionBackgroundAlternatives(modify, sectionSkeleton, p
 }
 
 
-function generateSectionColorImagesBackground(sectionSkeleton, page) {
+function generateSectionImagesBackground(sectionSkeleton, page) {
   const darkestBackground = last(getSortedByMostBrightness(page.colorBlueprint.backgrounds))
   const skeletons = defaultTheme.backgroundImages.map(({key, url}) => {
     const skeleton = cloneDeep(sectionSkeleton);
@@ -97,7 +95,7 @@ function generateSectionColorImagesBackground(sectionSkeleton, page) {
   return skeletons;
 }
 
-function generateSectionColorSolidsBackground(sectionSkeleton, page) {  
+function generateSectionSolidsBackground(sectionSkeleton, page) {  
   const backgrounds = getSortedByPreference(page.colorBlueprint.backgrounds, sectionSkeleton.blueprint.color.background);
 
   const skeletons = map(backgrounds, background => {
@@ -114,8 +112,7 @@ function trimFileName(name) {
   return name.split(".")[0].split("/")[name.split(".")[0].split("/").length-1];
 }
 
-function generateSectionColorPatternsBackground(sectionSkeleton, page) {
-
+function generateSectionPatternsBackground(sectionSkeleton, page) {
   const colorBlueprint = page.colorBlueprint.bgBlueprints[sectionSkeleton.color.background];
   const skeletons = map(colorBlueprint.patterns, (pattern) => {
     const skeleton = cloneDeep(sectionSkeleton);
@@ -131,7 +128,7 @@ function generateSectionColorPatternsBackground(sectionSkeleton, page) {
   return skeletons;
 }
 
-function generateSectionColorGradientsBackground(sectionSkeleton, page) {
+function generateSectionGradientsBackground(sectionSkeleton, page) {
   const blueprint = page.colorBlueprint.bgBlueprints[sectionSkeleton.color.background];
 
   const skeletons = map(blueprint.gradients, ({start, end, direction}) => {

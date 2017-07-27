@@ -1,12 +1,10 @@
 import React from 'react';
 import TalkingPointComponent from './common/talking-point';
 import { BasicHeading, BasicParagraph } from '../elements/_blueprints';
-import { TalkingPoint } from './_inherits';
-
 
 class HeadingParagraph extends React.Component {
   render() {
-    const { elements, layout, style, color } = this.props;
+    const { elements, style, color } = this.props;
 
     return (
       <TalkingPointComponent
@@ -14,7 +12,7 @@ class HeadingParagraph extends React.Component {
         color={color}
         elements={elements}
         groups={{}}
-        layout={layout} />
+        />
     )
   }
 }
@@ -22,7 +20,7 @@ class HeadingParagraph extends React.Component {
 export default HeadingParagraph;
 
 export const blueprint = {
-  inherits: [TalkingPoint, 'RowBuffer'],
+  inherits: ['TalkingPoint', 'RowBuffer'],
   style: {},
   color: {},
   background: {
@@ -39,10 +37,4 @@ export const blueprint = {
       name: BasicParagraph.name,
     },
   },
-  layouts: {
-    align: {
-      _default: 'inherit',
-      options: ['inherit', 'left', 'center', 'right'],
-    }
-  }
 }

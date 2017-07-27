@@ -4,31 +4,30 @@ import Group from '../../groups';
 import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
 import { Heading } from './../../groups/heading';
+import omit from 'lodash/omit';
 
 class Navbar3 extends React.PureComponent {
   render () {
     const { elements, groups, style, color } = this.props;
     
-    const styleClassNames = convertStyleToAtomic({
+    const colorClassNames = convertColorToAtomic(color);
+    const containerClassNames = convertStyleToAtomic({
       ...style,
-      display: "flex",
-      align: "center",
-      fixedNavBar: false,
+      paddingHorizontal: style.edgePadding,
+      display: 'flex',
+      align: 'center',
+      direction: 'column',
     });
 
-    const colorClassNames = convertColorToAtomic(color);
-    const containerClassNames = convertStyleToAtomic({fixedNavBar: style.fixedNavBar});
-
     return (
-      <div className={ colorClassNames + ' Navbar3 '+ ' justify-center ' + containerClassNames}>
-        <div className={styleClassNames + ' tc justify-center'}>
+      <div className={colorClassNames}>
+        <div className={containerClassNames}>
+          <div>
             <Element {...elements.logo} />
-        </div>
-        <div className={styleClassNames + ' justify-center'}>
-          <div className="flex justify-center">
+          </div>
+          <div>
             <Group {...groups.links} />
           </div>
-
         </div>
       </div>
     )
@@ -40,12 +39,13 @@ export default Navbar3;
 
 export const blueprint = {
   type: 'navigation',
-  inherits: ['NavigationSection', 'FixedNavBar'],
+  inherits: ['GutterSection', 'NavigationSection', 'FixedSection', 'Section'],
   style: {},
   color: {},
   elements: {
     logo: {
       name: 'LogoImage',
+      _defaults: { style: {marginBottom: 2}}
     },
   },
   groups: {
@@ -58,5 +58,4 @@ export const blueprint = {
       options: ['HorizontalList']
     }
   },
-  layouts: {}
 }

@@ -18,9 +18,6 @@ class TalkingPoint extends React.Component {
         paragraph,
         links,
       },
-      layout: {
-        align='center',
-      },
       groups: {
         buttonList,
       }
@@ -28,7 +25,6 @@ class TalkingPoint extends React.Component {
 
     const wrapClassNames = convertStyleToAtomic({
       ...style,
-      textAlign: align,
       margin: 'auto', 
     });
 

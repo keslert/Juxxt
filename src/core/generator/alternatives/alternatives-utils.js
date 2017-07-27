@@ -1,7 +1,8 @@
 
 import { linkSkeleton } from '../generator-utils'
 import { generateContent } from '../content/generate';
-import { range, cloneDeep, filter, values, find, flatMap } from 'lodash';
+import { range, cloneDeep, filter, values, find, flatMap, mapValues, pick } from 'lodash';
+import { getTruthyKeys, getCombinations } from '../../utils';
 
 export function generateItemClones(item, numClones) {
   item.clones = range(0, numClones).map(i => {
@@ -34,4 +35,20 @@ export function generateItemCloneAlternatives(item, sectionSkeleton) {
   })
 
   return skeletons;
+}
+
+export function generateStyleCombinations(modify, item, sectionSkeleton) {
+  const keys = getTruthyKeys(modify);
+  const style = pick(item._possibleStyles, keys);
+  const styleCombos = getCombinations(mapValues(style, 'options'));
+
+  return styleCombos.map(combo => {
+    const skeleton = cloneDeep(sectionSkeleton);
+    linkSkeleton(skeleton);
+    const style = {...item.style, ...combo}
+    const items = filter(skeleton._items, ({id}) => id === item.id);
+    items.forEach(i => i.style = style);
+    skeleton.changes = combo;
+    return skeleton;
+  })
 }

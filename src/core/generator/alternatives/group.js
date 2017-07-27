@@ -11,9 +11,10 @@ import { containsClone } from '../../ui/actions'
 import { generateElementBackgroundAlternatives } from './element';
 
 import { findItemInSection, getBlueprint, getBackground, getParents, linkSkeleton } from '../generator-utils';
-import { styles } from '../style/group/shared-styles';
+import styles from '../style/shared-styles';
 import { filterStyle } from '../style/utils';
 import { getSortedByMostVibrant } from '../color/utils';
+import { generateStyleCombinations } from './alternatives-utils';
 
 export function generateGroupComponentAlternatives(group, sectionSkeleton) {
   const blueprint = group.parent.blueprint;
@@ -34,20 +35,7 @@ export function generateGroupComponentAlternatives(group, sectionSkeleton) {
 }
 
 export function generateGroupLayoutAlternatives(modify, group, sectionSkeleton) {
-  const validKeys = filter(Object.keys(modify), key => modify[key]);
-  
-  const layouts = pick(group.blueprint.layouts, validKeys);
-  
-  const combos = getCombinations(mapValues(layouts, 'options'))
-  const skeletons = combos.map(layout => {
-    const skeleton = cloneDeep(sectionSkeleton);
-    linkSkeleton(skeleton);
-    const groups = filter(skeleton._groups, g => g.id === group.id);
-    groups.forEach(g => g.layout =  {...group.layout, ...layout});
-    return skeleton;
-  })
-  
-  return skeletons;
+  return generateStyleCombinations(modify, group, sectionSkeleton);
 }
 
 export function generateGroupBackgroundAlternatives(modify, selected, sectionSkeleton, page) {
@@ -79,31 +67,5 @@ export function generateGroupContentAlternatives(sectionSkeleton, group) {
     return skeleton;
   });
   
-  return skeletons;
-}
-
-export function generateGroupStyleAlternatives(modify, sectionSkeleton, group) {
-  const blueprint = group.blueprint;
-  const keys = filter(Object.keys(modify), key => modify[key]);
-  const sharedStyles = blueprint.inherits.map(name => styles[name]);
-  const style = filterStyle(Object.assign({}, ...sharedStyles, blueprint.style), keys);
-  
-  const possibleStyles = flatMap(style, ({options}, key) => options.map(value => ({
-    [key]: value,
-  })))
-  
-  const skeletons = possibleStyles.map(style => {
-    const skeleton = cloneDeep(sectionSkeleton);
-    linkSkeleton(skeleton);
-    const _style = {...group.style, ...style};
-    skeleton._groups.forEach(g => {
-      if(g.id === group.id) {
-        g.style = _style;
-      }
-    })
-    skeleton.changes = style;
-    return skeleton;
-  })
-
   return skeletons;
 }

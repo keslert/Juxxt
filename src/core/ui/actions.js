@@ -1,7 +1,9 @@
 import * as types from './action-types';
 import { getModifications, getSelectedModification } from './selectors';
 import { 
-  pick, 
+  pick,
+  pickBy,
+  keys,
   mapValues, 
   filter, 
   zipObject, 
@@ -12,8 +14,11 @@ import {
   mergeWith,
   flatMap,
   isEmpty, 
+  isArray,
   uniq,
   clamp,
+  difference,
+  chain,
 } from 'lodash';
 
 import { getSelected } from '../page/selectors';
@@ -59,6 +64,13 @@ export function setModification(key, value) {
   return {
     type: types.SET_MODIFICATION,
     payload: { key, value },
+  }
+}
+
+export function setModificationOptions(options) {
+  return {
+    type: types.SET_MODIFICATION_OPTIONS,
+    payload: options,
   }
 }
 
@@ -128,48 +140,47 @@ function getLayoutKeysFromSelected(section) {
   return Object.keys(layouts);
 }
 
-function resolveLayoutModification(dispatch, state, selected) {
-  let keys = []
-  if(selected.isElement) {
-    keys = Object.keys(selected.parent.blueprint.layouts);
-  } else {
-    keys = Object.keys(selected.blueprint.layouts);
-  }
-  if(containsClone(selected))
-    keys.push("clones")
-  resolveModificationSelection(dispatch, state, keys, 'layout')
-}
-
 function resolveComponentModification(dispatch, state, selected, callPath) {
-  let modification = {};
+  let keys = [];
   if(selected.isSection) {
-    const keys = ['basic', 'header', 'footer', 'navigation', 'action'];
-    modification = zipObject(keys, keys.map(key => key === selected.type))
+    keys = ['basic', 'header', 'footer', 'navigation', 'action'];
   }
+  const modification = zipObject(keys, keys.map(key => key === selected.type))
+  const options = keys.map(key => ({label: key, keys: [key]}));
+  dispatch(setModificationOptions(options));
   dispatch(setModification('component', modification));
-}
-
-function resolveStyleModification(dispatch, state, selected) {
-  const style = selected._possibleStyles;
-  const valid = filter(Object.keys(style), key => style[key].options && style[key].options.length > 1);
-  const rootKeys = uniq(valid.map(key => getStyleRoot(key)));
-
-  resolveModificationSelection(dispatch, state, rootKeys, 'style');
 }
 
 function resolveBackgroundModification(dispatch, state, selected) {
   const keys = Object.keys(selected.blueprint.background || {});
-  resolveModificationSelection(dispatch, state, keys, 'background')
+  const options = keys.map(key => ({label: key, keys: [key]}));
+  resolveModificationSelection(dispatch, state, 'background', keys, options);
 }
 
+const textStyles = ['color', 'fontSize', 'fontWeight', 'fontFamily', 'lineHeight']
 function resolveTextModification(dispatch, state, selected) {
-  const keys = Object.keys(selected.blueprint.text || {});
-  resolveModificationSelection(dispatch, state, keys, 'text')
+  const {keys, options} = getModificationKeysAndOptions(textStyles, selected, selected.blueprint.text);
+  if(selected.blueprint.color.text) {
+    keys.push('color');
+    options.unshift({label: 'color', keys: ['color']});
+  }
+  resolveModificationSelection(dispatch, state, 'text', keys, options);
 }
 
+const imageStyles = ['content', 'crop', 'filter', 'aspectRatio']
 function resolveImageModification(dispatch, state, selected) {
-  const keys = Object.keys(selected.blueprint.image || {});
-  resolveModificationSelection(dispatch, state, keys, 'image')
+  const {keys, options} = getModificationKeysAndOptions(imageStyles, selected, selected.blueprint.image);
+  resolveModificationSelection(dispatch, state, 'image', keys, options)
+}
+
+const layoutStyles = [
+  'splitRatio', 'order', 'height', 'columns', 'constrained', 
+  'maxWidth', 'buffer', 'textAlign', 'position', 'marginBottom',
+  'paddingHorizontal', 'paddingVertical', 'gutter', 'fixed',
+]
+function resolveLayoutModification(dispatch, state, selected) {
+  const {keys, options} = getModificationKeysAndOptions(layoutStyles, selected, selected.blueprint.layout);
+  resolveModificationSelection(dispatch, state, 'layout', keys, options);
 }
 
 function resolvePageModification(dispatch, state) {
@@ -179,14 +190,41 @@ function resolvePageModification(dispatch, state) {
 
 
 
-function resolveModificationSelection(dispatch, state, keys, modification) {
-  const oldModification = getModifications(state)[modification];
+function resolveModificationSelection(dispatch, state, modificationKey, keys, options) {
+  const oldModification = getModifications(state)[modificationKey];
   const oldKeys = Object.keys(oldModification);
   const oldSelectedKeys = filter(oldKeys, key => oldModification[key]);
   
   const overlap = intersection(keys, oldSelectedKeys);
-  const selectedKeys = !isEmpty(overlap) ? overlap : sortBy(keys).slice(0, 1)
+  const selectedKeys = !isEmpty(overlap) ? overlap : options[0] && options[0].keys;
 
-  const value = zipObject(keys, keys.map(key => includes(selectedKeys, key)));
-  dispatch(setModification(modification, value));
+  const modification = zipObject(keys, keys.map(key => includes(selectedKeys, key)));
+
+  dispatch(setModificationOptions(options));
+  dispatch(setModification(modificationKey, modification));
+}
+
+function getModificationKeysAndOptions(standardKeys, selected, blueprint={}) {
+  const specialKeys = Object.keys(blueprint);
+  const condensedKeys = flatMap(blueprint);  
+  const styleKeys = Object.keys(selected.style);
+  
+  const options = 
+    chain(standardKeys)
+    .intersection(styleKeys)
+    .difference(condensedKeys)
+    .concat(specialKeys)
+    .uniq()
+    .orderBy(key => standardKeys.indexOf(key))
+    .map(key => ({label: key, keys: blueprint[key] ? blueprint[key] : [key]}))
+    .value();
+
+  const keys =
+    chain(standardKeys)
+    .intersection(styleKeys)
+    .concat(specialKeys)
+    .uniq()
+    .value();
+  
+  return {options, keys};
 }

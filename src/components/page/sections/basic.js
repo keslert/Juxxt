@@ -2,47 +2,36 @@ import React from 'react';
 import Group from '../groups';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
-
-
-
+import pick from 'lodash/pick';
 
 class Basic extends React.PureComponent {
   render () {
-    const { groups, layout, color } = this.props;
+    const { groups, style, color } = this.props;
 
-    const isTop = layout.position.vertical === 'top';
-    const isMid = layout.position.vertical === 'middle';
+    const isTop = style.position.vertical === 'top';
+    const isMid = style.position.vertical === 'middle';
+    const isLeft = style.position.horizontal === 'left';
+    const isCenter = style.position.horizontal === 'center';
 
-    const isLeft = layout.position.horizontal === 'left';
-    const isCenter = layout.position.horizontal === 'center';
-
-    const boxStyle = {
-      
-
-    }
-
-    const wrapClassNames = convertStyleToAtomic({
+    const containerClassNames = convertStyleToAtomic({
       maxWidth: 'page',
       margin: 'auto',
       display: (groups.item.name === "Gallery" ? '' : 'flex'),
       align: (isTop ? "start" : isMid ? "center" : "end"),
       justify: (isLeft ? "start" : isCenter ? "center" : "end"),
-      minHeight: layout.height,
-
-      // paddingBottom: '-l-' + layout.height / (isTop ? (3/2) : isMid ? 2 : 3),
-      // paddingTop: '-l-' + layout.height / (isTop ? 3 : isMid ? 2 : (3/2)),
-      paddingBottom: '-l-' + layout.height * (.2),
-      paddingTop: '-l-' + layout.height * (.2),
-    
+      minHeight: style.height,
+      paddingHorizontal: style.edgePadding,
+      paddingBottom: '-l-' + style.height * (.2),
+      paddingTop: '-l-' + style.height * (.2),    
     })
 
     const colorClassNames = convertColorToAtomic(color);
-    const styleClassNames = convertStyleToAtomic(boxStyle);
-
+    const imageStyle = pick(style, ['crop', 'filter'])
+    const imageClassNames = convertStyleToAtomic(imageStyle);
     return (
-      <div className={colorClassNames}>
-        <div className={wrapClassNames}>
-          <div className = {styleClassNames}>
+      <div className={colorClassNames + ' ' + imageClassNames}>
+        <div className={containerClassNames}>
+          <div>
             <Group {...groups.item} />
           </div>
         </div>
@@ -55,8 +44,17 @@ export default Basic;
 
 export const blueprint = {
   type: 'basic',
-  inherits: ['BasicSection', 'BaseSection', 'ParallaxSection'],
-  layouts: {
+  inherits: ['BackgroundImageSection', 'Section'],
+  background: {
+    color: 'default',
+    pattern: true,
+    gradient: true,
+    image: true,
+  },
+  image: {
+    content: true,
+  },
+  style: {
     height: {
       _default: 40,
       //options: [0,6,12,18,24,30,36,42],
@@ -77,25 +75,10 @@ export const blueprint = {
       ]
     },
   },
-  background: {
-    color: 'default',
-    pattern: true,
-    gradient: true,
-    image: true,
-  },
-  image: {
-    content: true,
-    filter: true,
-    crop: {
-      _default: 'center center',
-      options: ['left top', 'left center', 'left bottom', 'center top', 'center center', 'center bottom', 'right top', 'right center', 'right bottom']
-    },
-  },
-  style: {},
   color: {},
   groups: {
     item: {
-      options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','IconHeadingParagraph','Gallery','Heading'],
+      options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','IconHeadingParagraph','Heading'],
     },
   },
 }

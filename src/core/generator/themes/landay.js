@@ -158,7 +158,7 @@ export default {
         groups: {
           gridItem: {
             _default: {
-              name: 'IconHeadingParagraph', clones:3,  elements:{heading:{name:'SmallHeading', color: colorBlueprint.lightGray}},
+              name: 'IconHeadingParagraph', clones: {_default: 3, min: 2, max: 16},  elements:{heading:{name:'SmallHeading', color: colorBlueprint.lightGray}},
             },
           }
         },
@@ -217,7 +217,7 @@ export default {
           },
           gridItem: {
             _default: {
-              name: 'IconHeadingParagraph', clones:2,  elements:{heading:{name:'SmallHeading', color: colorBlueprint.lightGray}},
+              name: 'IconHeadingParagraph', clones: {_default: 2, min: 2, max: 12},  elements:{heading:{name:'SmallHeading', color: colorBlueprint.lightGray}},
             },
           }
         },
@@ -250,7 +250,7 @@ export default {
           },
           gridItem: {
             _default: {
-              name: 'HeadingParagraphButton', clones:2,  elements:{heading:{name:'SmallHeading', color: colorBlueprint.lightGray}},
+              name: 'HeadingParagraphButton', clones: {_default: 2, min: 2, max: 12},  elements:{heading:{name:'SmallHeading', color: colorBlueprint.lightGray}},
             },
           }
         },

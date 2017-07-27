@@ -33,5 +33,4 @@ export const blueprint = {
       name: BasicButton.name,
     }
   },
-  layout: {},
 }

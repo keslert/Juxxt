@@ -8,7 +8,7 @@ let num_clones = 6;
 
 class StackedGrid extends React.PureComponent {
   render () {
-    const { style, color, groups, layout, elements } = this.props;
+    const { style, color, groups, elements } = this.props;
 
     const containerClassNames = convertStyleToAtomic(style);
     const colorClassNames = convertColorToAtomic(color);
@@ -20,7 +20,7 @@ class StackedGrid extends React.PureComponent {
     });
 
     const boxClassNames = convertStyleToAtomic({
-      width: Math.floor(100 / (layout.columns)) + 'P',
+      width: Math.floor(100 / (style.columns)) + 'P',
       paddingHorizontal: style.gutter,
     });
 
@@ -51,7 +51,7 @@ export default StackedGrid;
 const clones = {_default: 3, min: 1, max: 12};
 export const blueprint = {
   type: 'grid',
-  inherits: ['BasicSection', 'GutterSection', 'BaseSection'],
+  inherits: ['Columned'],
   style: {},
   color: {},
   elements: {
@@ -80,11 +80,5 @@ export const blueprint = {
       ]
     },
   },
-  layouts: {
-    columns: {
-      _default:3,
-      options: [2,3,4],
-    }
-  }
 }
 

@@ -71,6 +71,7 @@ export function linkSkeleton(skeleton) {
   linkChildren(skeleton);
   skeleton._groups = getGroupsInItem(skeleton);
   skeleton._elements = getElementsInItem(skeleton);
+  skeleton._items = [skeleton, ...skeleton._groups, ...skeleton._elements];
 
   assignFullIds(skeleton);
   skeleton._groups.forEach(assignFullIds);
@@ -131,7 +132,6 @@ export function generatePageCSSRules(page) {
         .bgimg-${section.color.backgroundImage} {
           background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${section.color._backgroundImage}) !important;
           background-size: cover !important;
-          background-position: center center !important;
         }
       `);
     }

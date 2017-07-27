@@ -4,7 +4,6 @@ import { buildPageColorBlueprint } from '../color/page';
 const backgroundImages = [
   {key: uniqueId(), url: 'https://images.pexels.com/photos/403571/pexels-photo-403571.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
   {key: uniqueId(), url: 'https://images.pexels.com/photos/106567/pexels-photo-106567.jpeg?h=350&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), url: 'https://images.pexels.com/photos/238116/pexels-photo-238116.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
 ]
 const images = [
   {key: uniqueId(), url: 'https://images.pexels.com/photos/310435/pexels-photo-310435.jpeg?h=350&auto=compress&cs=tinysrgb'},
@@ -19,11 +18,15 @@ const colorBlueprint = buildPageColorBlueprint(palette);
 const page = {
   sections: [
     {name: 'Navbar1'},
+    {name: 'Navbar2'},
+    {name: 'Navbar3'},
     {name: 'Basic1_2'},
     {name: 'BasicWide1_2'},
     {name: 'Basic'},
     {name: 'Grid'},
     {name: 'Footer1'},
+    {name: 'Footer2'},
+    {name: 'FooterVerticalLists'},
   ]
 }
 

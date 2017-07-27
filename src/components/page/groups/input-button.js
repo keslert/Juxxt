@@ -28,5 +28,4 @@ export const blueprint = {
     input: { name: 'BasicInput' },
     button: { name: 'BasicButton' },
   },
-  layout: {},
 }

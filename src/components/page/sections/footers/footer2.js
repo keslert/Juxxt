@@ -6,19 +6,21 @@ import { convertColorToAtomic } from '../../../../core/generator/color/conversio
 
 class Footer2 extends React.PureComponent {
   render () {
-    const { elements, groups, style, color, layout } = this.props;
-    const boxStyle = {
-      ...style,
-      display: "flex",
-      align: "center",
-      justify: "center",
-    }
-    const styleClassNames = convertStyleToAtomic(boxStyle);
+    const { elements, groups, style, color } = this.props;
+    
     const colorClassNames = convertColorToAtomic(color);
+    const containerClassNames = convertStyleToAtomic({
+      ...style,
+      paddingVertical: style.height,
+      paddingHorizontal: style.edgePadding,
+      display: 'flex',
+      align: 'center',
+    })
+
     return (
-      <div className={ colorClassNames + ' Footer2'}>
-        <div className={styleClassNames + ' flex align-center'}>
-          <div className={'tr order-' + layout.order}>
+      <div className={colorClassNames}>
+        <div className={containerClassNames}>
+          <div className={'tr order-' + style.order}>
             <Group {...groups.links} />
           </div>
           <div className={'order-2'}>
@@ -34,8 +36,13 @@ export default Footer2;
 
 export const blueprint = {
   type: 'footer',
-  inherits: ['BasicSection', 'BaseSection'],
-  style: {},
+  inherits: ['ConstrainedSection', 'Section'],
+  style: {
+    order: {
+      options: [1,3],
+    },
+    height: { _default: 4, options: [0,1,2,3,4,5,6,7,8] }
+  },
   color: {},
   elements: {
     copyright: {
@@ -47,9 +54,4 @@ export const blueprint = {
       options: ['HorizontalList']
     }
   },
-  layouts: {
-    order: {
-      options: [1,3],
-    }
-  }
 }

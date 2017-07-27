@@ -10,6 +10,8 @@ class FooterVerticalLists extends React.PureComponent {
 
     const containerClassNames = convertStyleToAtomic({
       ...style,
+      paddingVertical: style.height,
+      paddingHorizontal: style.edgePadding,
     })
     
     const wrapClassNames = convertStyleToAtomic({
@@ -47,8 +49,10 @@ export default FooterVerticalLists;
 
 export const blueprint = {
   type: 'footer',
-  inherits: ['BasicSection', 'GutterSection', 'BaseSection'],
-  style: {},
+  inherits: ['ConstrainedSection', 'Section'],
+  style: {
+    height: { _default: 4, options: [0,1,2,3,4,5,6,7,8] }
+  },
   color: {},
   elements: {
     logo: {
@@ -58,9 +62,8 @@ export const blueprint = {
   groups: {
   	lists: {
   		options:[
-        {name: 'VerticalList', clones: {_default: 2, min: 1, max: 3 }},
+        {name: 'VerticalList', clones: {_default: 3, min: 1, max: 4 }},
       ],
   	},
   },
-  layouts: {},
 }

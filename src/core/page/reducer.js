@@ -4,7 +4,7 @@ import find from 'lodash/find';
 
 const master = init();
 const PageState = () => ({
-  selected: master.sections[1 % master.sections.length],
+  selected: master.sections[3 % master.sections.length],
   stack: [master],
   stackIndex: 0,
   alternatives: [],

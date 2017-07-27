@@ -5,7 +5,7 @@ import { convertColorToAtomic } from '../../../core/generator/color/conversions'
 
 class Gallery extends React.PureComponent {
   render () {
-    const { style, color, elements, layout } = this.props;
+    const { style, color, elements } = this.props;
     
     const boxStyle = {
       display: "flex",
@@ -17,7 +17,7 @@ class Gallery extends React.PureComponent {
     const divStyle = {
       ...style,
       padding: style.gutter,
-      width: Math.floor(100 / (layout.columns)) + 'P',
+      width: Math.floor(100 / (style.columns)) + 'P',
     }
     const styleClassNames = convertStyleToAtomic(boxStyle);
     const divClassNames = convertStyleToAtomic(divStyle);
@@ -42,7 +42,9 @@ export default Gallery;
 export const blueprint = {
   type: 'gallery',
   inherits: ['ListGutter', 'BaseGroup'],
-  style: {},
+  style: {
+    columns: { _default: 3, options: [2,3]},
+  },
   color: {},
   elements: {
     images: {
@@ -50,11 +52,5 @@ export const blueprint = {
       clones: {_default: 6, min: 1, max: 12},
     }
   },
-  layouts: {
-    columns: {
-      _default: 3,
-      options: [2,3,4,5,6],
-    }
-  }
 }
 

@@ -7,24 +7,23 @@ import { convertColorToAtomic } from '../../../../core/generator/color/conversio
 class Navbar2 extends React.PureComponent {
   render () {
     const { elements, groups, style, color } = this.props;
-    const boxStyle = {
-      ...style,
-      display: "flex",
-      align: "center",
-      justify: "center",
-      fixedNavBar: false,
-    }
-    const styleClassNames = convertStyleToAtomic(boxStyle);
+
     const colorClassNames = convertColorToAtomic(color);
-    const containerClassNames = convertStyleToAtomic({fixedNavBar: style.fixedNavBar});
+    const containerClassNames = convertStyleToAtomic({
+      ...style,
+      paddingHorizontal: style.edgePadding,
+      display: 'flex',
+      justify: 'between',
+      align: 'center',
+    });
 
     return (
-      <div className={ colorClassNames + ' Navbar2 '+  containerClassNames }>
-        <div className={styleClassNames}>
+      <div className={colorClassNames}>
+        <div className={containerClassNames}>        
           <div>
             <Elements {...elements.logo} />
           </div>
-          <div className="mla">
+          <div>
             <Group {...groups.buttonList} />
           </div>
         </div>
@@ -37,7 +36,7 @@ export default Navbar2;
 
 export const blueprint = {
   type: 'navigation',
-  inherits: ['NavigationSection', 'FixedNavBar'],
+  inherits: ['NavigationSection', 'FixedSection', 'Section'],
   style: {},
   color: {},
   elements: {
@@ -52,5 +51,4 @@ export const blueprint = {
       ],
     },
   },
-  layouts: {}
 }

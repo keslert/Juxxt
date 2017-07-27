@@ -3,7 +3,7 @@ import TalkingPointComponent from './common/talking-point';
 
 class KickerHeadingParagraph extends React.Component {
   render() {
-    const { elements, layout, style, color } = this.props;
+    const { elements, style, color } = this.props;
 
     return (
       <TalkingPointComponent
@@ -11,7 +11,7 @@ class KickerHeadingParagraph extends React.Component {
         color={color}
         elements={elements}
         groups={{}}
-        layout={layout} />
+        />
     )
   }
 }
@@ -31,11 +31,5 @@ export const blueprint = {
     paragraph: {
       name: 'BasicParagraph',
     },
-  },
-  layouts: {
-    align: {
-      _default: 'inherit',
-      options: ['inherit', 'left', 'center', 'right'],
-    }
   },
 }

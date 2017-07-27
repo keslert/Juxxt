@@ -45,5 +45,4 @@ export const blueprint = {
       clones: {_default: 3, min: 1, max: 7},
     }
   },
-  layouts: {},
 }

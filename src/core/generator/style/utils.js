@@ -10,10 +10,12 @@ export function styleItem(item, items, rules, blueprint) {
   }
 }
 
-function styleItemByBlueprint(item, items, blueprint) {  
+function styleItemByBlueprint(item, items, blueprint) {
+  
   Object.keys(blueprint.style).forEach(key => {
-    if(item.style[key] === undefined) {
-      const {_default, options} = blueprint.style[key];
+    const {_default, options} = blueprint.style[key];
+    const value = item.style[key];
+    if(value === undefined || !includes(options, value)) {
       item.style[key] = _default !== undefined ? _default : randomItem(options);
     }
   })

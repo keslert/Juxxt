@@ -5,7 +5,7 @@ import Group from './index';
 
 class ImageHeadingParagraph extends React.Component {
   render() {
-    const { elements, style, color, layout, groups } = this.props;
+    const { elements, style, color, groups } = this.props;
     return (
       <div>
         <Element {...elements.image} />
@@ -28,14 +28,4 @@ export const blueprint = {
       options: ['HeadingParagraph'],
     }
   },
-  layouts: {
-    align: {
-      _default: 'inherit',
-      options:['inherit', 'left','center','right']
-    },
-    iconPosition: {
-      _default: 'column',
-      options: ['above', 'column', 'inline'],
-    },
-  }
 }

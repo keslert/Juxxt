@@ -43,7 +43,7 @@ class Alternatives extends React.Component {
 
   renderNoAlternatives() {
     return (
-      <p className="mt3 fadedtext">No existing alternatives...</p>
+      <p className="mt3 tc black-80">No existing alternatives...</p>
     )
   }
 

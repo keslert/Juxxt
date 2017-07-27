@@ -21,7 +21,7 @@ class EmailForm extends React.Component {
 export default EmailForm;
 
 export const blueprint = {
-  inherits: [],
+  inherits: ['TextAlignment'],
   style: {},
   color: {},
   elements: {
@@ -32,11 +32,5 @@ export const blueprint = {
     button: {
       name: BasicButton.name,
     },
-  },
-  layouts: {
-    align: {
-      _default: 'center',
-      options: ['left', 'center', 'right'],
-    }
   },
 }

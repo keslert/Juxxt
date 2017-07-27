@@ -5,9 +5,15 @@ import { convertColorToAtomic } from '../../../core/generator/color/conversions'
 
 class Grid extends React.PureComponent {
   render () {
-    const { style, color, groups, layout } = this.props;
+    const { style, color, groups } = this.props;
 
-    const containerClassNames = convertStyleToAtomic(style);
+    const containerClassNames = convertStyleToAtomic({
+      ...style,
+      paddingVertical: style.height,
+      paddingHorizontal: style.edgePadding,
+      margin: 'auto',
+      maxWidth: 'page',
+    });
     const colorClassNames = convertColorToAtomic(color);
     const itemClassNames = convertStyleToAtomic({
       display: "flex",
@@ -16,7 +22,7 @@ class Grid extends React.PureComponent {
     });
 
     const boxClassNames = convertStyleToAtomic({
-      width: Math.floor(100 / (layout.columns)) + 'P',
+      width: Math.floor(100 / (style.columns)) + 'P',
       paddingHorizontal: style.gutter,
     });
 
@@ -46,9 +52,15 @@ export default Grid;
 const clones = { _default: 3, min: 1, max: 12 };
 export const blueprint = {
   type: 'basic',
-  inherits: ['BasicSection', 'GutterSection', 'BaseSection'],
-  style: {},
-  color: {},
+  inherits: ['Guttered', 'Columned', 'Section'],
+  style: {
+    height: { _default: 2, options: [0,1,2,3,4,5,6,7,8] }
+  },
+  background: {
+    color: 'default',
+    pattern: true,
+    gradient: true,
+  },
   groups: {
     gridItem: {
       _default: {name: 'HeadingParagraph', clones, elements:{heading:{name:'SmallHeading'}}},
@@ -64,12 +76,6 @@ export const blueprint = {
         },
       ]
     },
-  },
-  layouts: {
-    columns: {
-      _default: 3,
-      options: [2,3,4,5,6],
-    }
   }
 }
 

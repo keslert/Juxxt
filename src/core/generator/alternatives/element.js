@@ -17,12 +17,14 @@ import {
   pick,
   mapValues,
 } from 'lodash';
-import { styles } from '../style/element/shared-styles';
+import styles from '../style/shared-styles';
 import { filterStyle } from '../style/utils';
 import { getTruthyKeys, getCombinations } from '../../utils';
 import { getBackground, getBlueprint, linkSkeleton } from '../generator-utils';
+import { generateStyleCombinations } from './alternatives-utils';
 import { generateSectionLayoutAlternatives } from './section';
 import { generateGroupLayoutAlternatives, generateGroupComponentAlternatives } from './group';
+import defaultTheme from '../themes';
 
 export function generateElementComponentAlternatives(element, sectionSkeleton) {
   const blueprint = getBlueprint(element.parent);  
@@ -30,11 +32,12 @@ export function generateElementComponentAlternatives(element, sectionSkeleton) {
   return [];
 }
 
-export function generateElementLayoutAlternatives(modify, element, skeleton) {
-  if(element.parent.isGroup) {
-    return generateGroupLayoutAlternatives(modify, element.parent, skeleton);
-  }
-  return generateSectionLayoutAlternatives(modify, element.parent, skeleton); 
+export function generateElementLayoutAlternatives(modify, element, sectionSkeleton) {
+  return generateStyleCombinations(modify, element, sectionSkeleton);
+  // if(element.parent.isGroup) {
+  //   return generateGroupLayoutAlternatives(modify, element.parent, skeleton);
+  // }
+  // return generateSectionLayoutAlternatives(modify, element.parent, skeleton); 
 }
 
 export function generateElementBackgroundAlternatives(modify, element, sectionSkeleton, page) {
@@ -89,23 +92,10 @@ export function generateElementBackgroundAlternatives(modify, element, sectionSk
 }
 
 export function generateElementTextAlternatives(modify, element, sectionSkeleton, page) {
-  let sections = [];
   if(modify.color) {
-    sections = generateElementTextColorAlternatives(element, sectionSkeleton, page);
-  } else {
-    const keys = getTruthyKeys(modify);
-    const combos = getCombinations(mapValues(pick(element.blueprint.text, keys), 'options'));
-
-    sections = combos.map(textStyle => {
-      const skeleton = cloneDeep(sectionSkeleton);
-      linkSkeleton(skeleton);
-      const elements = filter(skeleton._elements, e => e.id === element.id);
-      elements.forEach(e => e.style = {...e.style, ...textStyle});
-      return skeleton;
-    })
+    return generateElementTextColorAlternatives(element, sectionSkeleton, page);
   }
-
-  return sections;
+  return generateStyleCombinations(modify, element, sectionSkeleton);
 }
 
 function generateElementTextColorAlternatives(element, sectionSkeleton, page) {
@@ -141,41 +131,15 @@ function generateElementTextColorAlternatives(element, sectionSkeleton, page) {
   return sections;
 }
 
-export function generateElementContentAlternatives(sectionSkeleton, element) {
-  
-  const skeletons = range(0, 6).map(_ => {
-    const skeleton = cloneDeep(sectionSkeleton);
-    linkSkeleton(skeleton);
-    skeleton._elements.forEach(e => {
-      if(e.fullRelativeId === element.fullRelativeId) {
-        e.content = generateContent(e);
-      }
-    });
-    return skeleton;
-  })
-  
-  return skeletons;
-}
-
-export function generateElementStyleAlternatives(modify, sectionSkeleton, element) {
-  const blueprint = element.blueprint;
-  const keys = filter(Object.keys(modify), key => modify[key]);
-  const sharedStyles = blueprint.inherits.map(name => styles[name]);
-  const style = filterStyle(Object.assign({}, ...sharedStyles, blueprint.style), keys);
-  
-  const possibleStyles = flatMap(style, ({options}, key) => 
-    options.map(value => ({[key]: value})
-  ))
-
-  const skeletons = possibleStyles.map(style => {
-    const skeleton = cloneDeep(sectionSkeleton);
-    linkSkeleton(skeleton);
-    const _style = {...element.style, ...style};
-    const elements = filter(skeleton._elements, e => e.id === element.id);
-    elements.forEach(e => e.style = _style)
-    skeleton.changes = style;
-    return skeleton;
-  })
-
-  return skeletons;
+export function generateElementImageAlternatives(modify, element, sectionSkeleton, page) {
+  if(modify.content) {
+    return defaultTheme.images.map(image => {
+      const skeleton = cloneDeep(sectionSkeleton);
+      linkSkeleton(skeleton);
+      const _element = find(skeleton._elements, e => e.fullRelativeId === element.fullRelativeId);
+      _element.content = image;
+      return skeleton;
+    })
+  }
+  return generateStyleCombinations(modify, element, sectionSkeleton);
 }

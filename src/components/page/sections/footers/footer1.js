@@ -6,9 +6,11 @@ import { convertColorToAtomic } from '../../../../core/generator/color/conversio
 
 class Footer1 extends React.PureComponent {
   render () {
-    const { elements, groups, style, color, layout } = this.props;
+    const { elements, groups, style, color } = this.props;
     const boxStyle = {
       ...style,
+      paddingVertical: style.height,
+      paddingHorizontal: style.edgePadding,
       display: "flex",
       align: "center",
       justify: "center",
@@ -19,13 +21,13 @@ class Footer1 extends React.PureComponent {
     return (
       <div className={ colorClassNames + ' Footer1'}>
         <div className={styleClassNames }>
-          <div className={"order-" + layout.order[0]}>
+          <div className={"order-" + style.order[0]}>
             <Element {...elements.copyright} />
           </div>
-          <div className= {"order-2 flex-auto " + layout.linkAlign}>
+          <div className= {"order-2 flex-auto " + style.linkAlign}>
             <Group {...groups.links} />
           </div>
-          <div className = {"order-"  + layout.order[1] }>
+          <div className = {"order-"  + style.order[1] }>
             <Group {...groups.button} />
           </div>
         </div>
@@ -38,8 +40,17 @@ export default Footer1;
 
 export const blueprint = {
   type: 'footer',
-  inherits: ['BasicSection', 'BaseSection'],
+  inherits: ['ConstrainedSection', 'Section'],
   style: {
+    order: {
+      _default: [2,3],
+      options: [[3,1],[2,3]],
+    },
+    linkAlign: {
+      _default: 'tc',
+      options: ['tc','tl', 'tr'],
+    },
+    height: { _default: 4, options: [0,1,2,3,4,5,6,7,8] }
   },
   color: {},
   elements: {
@@ -55,15 +66,4 @@ export const blueprint = {
       options: ['HorizontalList']
     }
   },
-
-  layouts: {
-    order: {
-      _default: [2,3],
-      options: [[3,1],[2,3]],
-    },
-    linkAlign: {
-      _default: 'tc',
-      options: ['tc','tl', 'tr'],
-    },
-  }
 }

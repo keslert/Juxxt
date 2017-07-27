@@ -4,49 +4,51 @@ import Group from '../groups';
 import Box from '../../common/box';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
-
+import pick from 'lodash/pick';
 
 class Basic1_2 extends React.Component {
   render() {
-    const { elements, style, groups, layout, color } = this.props;
+    const { elements, style, groups, color, image } = this.props;
 
-    const mediaPercentage = Math.floor(100 - layout.splitRatio.ratio);
+    const mediaPercentage = Math.floor(100 - style.splitRatio);
     const mediaWrapClassNames = convertStyleToAtomic({
       width: Math.floor(mediaPercentage) + 'P',
       order: 2,
-      paddingHorizontal: layout.gutter,
+      paddingHorizontal: style.gutter,
     })
 
-    const isTpLeft = layout.order === 'left';
-    const tpPercentage = Math.floor(layout.splitRatio.ratio)
+    const isTpLeft = style.order === 'left';
+    const tpPercentage = Math.floor(style.splitRatio)
     const tpWrapClassNames = convertStyleToAtomic({
       width: tpPercentage + 'P',
       order: isTpLeft ? 1 : 3,
       display: 'flex',
       align: 'center',
-      paddingHorizontal: layout.gutter,
+      paddingHorizontal: style.gutter,
     })
 
-    const isConstrained = layout.splitRatio.constrained;
-    const wrapClassNames = convertStyleToAtomic({
-      maxWidth: isConstrained ? 'page' : 'inherit',
-      margin: 'auto',
-      paddingVertical: layout.height,
+    const containerClassNames = convertStyleToAtomic({
+      ...style,
+      paddingVertical: style.height,
+      paddingHorizontal: style.edgePadding,
     });
 
     const wrapInnerClassNames = convertStyleToAtomic({
-      marginHorizontal: isConstrained ? -layout.gutter : 0,
+      marginHorizontal: style.constrained ? -style.gutter : 0,
+      textAlign: style.constrained ? 'left' : 'center',
       display: "flex",
       flexWrap: "wrap",
-      textAlign: isConstrained ? 'left' : 'center',
       align: 'center',
     })
 
     const colorClassNames = convertColorToAtomic(color);
 
+    const imageStyle = pick(style, ['crop', 'filter'])
+    const imageClassNames = convertStyleToAtomic(imageStyle);
+
     return (
-      <Box className={colorClassNames}>
-        <Box className={wrapClassNames}>
+      <Box className={colorClassNames + ' ' + imageClassNames}>
+        <Box className={containerClassNames}>
           <Box className={wrapInnerClassNames}>
             <Box className={tpWrapClassNames}>
               <Group {...groups.tp} />
@@ -64,27 +66,9 @@ export default Basic1_2;
 
 export const blueprint = {
   type: 'basic',
-  inherits: ['BasicSection', 'GutterSection', 'BaseSection', 'OverlaySection'],
+  inherits: ['Guttered', 'Ordered', 'BackgroundImageSection', 'ConstrainedSection', 'SplitRatioSection', 'Section'],
   color: {},
-  layouts: {
-    order: {
-      options: ['left', 'right'],
-    },
-    gutter: {
-      _default: 4,
-      options: [0,1,2,3,4,5],
-    },
-    splitRatio: {
-      _default: {ratio: 50, constrained: true},
-      options: [
-        {ratio: 33, constrained: true},
-        {ratio: 50, constrained: true},
-        {ratio: 66, constrained: true},
-        {ratio: 33, constrained: false},
-        {ratio: 50, constrained: false},
-        {ratio: 66, constrained: false},
-      ]
-    },
+  style: {
     height: {
       _default: 5,
       options: [0,2,4,5,6,7,8],
@@ -96,13 +80,11 @@ export const blueprint = {
     gradient: true,
     image: true,
   },
-  image: {
-    content: true,
-    filter: true,
-    crop: {
-      _default: 'center center',
-      options: ['left top', 'left center', 'left bottom', 'center top', 'center center', 'center bottom', 'right top', 'right center', 'right bottom']
-    },
+  image: { 
+    content: ['content'], 
+  },
+  layout: {
+    splitRatio: ['splitRatio', 'constrained'],
   },
   elements: {},
   groups: {
@@ -110,8 +92,16 @@ export const blueprint = {
       options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','HeadingParagraphButton', 'IconHeadingParagraph'],
     },
     media: {
-      options: ['BlockImage', 'Gallery','IpadMockup','BrowserMockup'],
+      options: [
+        'BlockImage', 
+        'IpadMockup',
+        'BrowserMockup',
+        {
+          name: 'Gallery', 
+          elements: { images: { clones: { _default: 4, min: 2, max: 9 }}},
+          _defaults: { style: { columns: 2 }},
+        }
+      ],
     },
   },
-  style:{},
 }

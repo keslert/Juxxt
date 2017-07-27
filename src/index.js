@@ -11,6 +11,7 @@ import './styles/react-select.css';
 import './styles/react-split-pane.css';
 import './styles/tachyons.css';  
 import './styles/mockup.css'
+import './styles/filters.css';
 import './styles/main.css'; 
 
 

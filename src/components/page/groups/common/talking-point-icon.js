@@ -9,15 +9,13 @@ class TalkingPointIcon extends React.Component {
   renderColumn() {
     const { 
       style,
-      layout,
       elements: { icon, heading, paragraph } 
     } = this.props;
 
-    const order = layout.align === 'right' ? 3 : 1;
-    const _style = { ...style, textAlign: layout.align }
+    const order = style.textAlign === 'right' ? 3 : 1;
     
     return (
-      <Box className={ "flex flex-row " + convertStyleToAtomic(_style)}>
+      <Box className={ "flex flex-row " + convertStyleToAtomic(style)}>
         <div className={"flex order-" + order}>
           <Element {...icon} />
         </div>
@@ -32,15 +30,13 @@ class TalkingPointIcon extends React.Component {
   renderInline() {
     const { 
       style,
-      layout,
       elements: { icon, heading, paragraph } 
     } = this.props;
 
-    const order = layout.align === 'right' ? 3 : 1;
-    const _style = { ...style, textAlign: layout.align }
+    const order = style.textAlign === 'right' ? 3 : 1;
 
     return (
-      <Box className={ "flex flex-column " + convertStyleToAtomic(_style)}>
+      <Box className={ "flex flex-column " + convertStyleToAtomic(style)}>
         <div className="flex flex-row">
           <Element {...icon} />
           {heading && <Element {...heading} />}
@@ -55,14 +51,11 @@ class TalkingPointIcon extends React.Component {
   renderAbove() {
     const { 
       style,
-      layout,
       elements: { icon, heading, paragraph } 
     } = this.props;
 
-    const _style = { ...style, textAlign: layout.align }
-
     return (
-      <Box className={convertStyleToAtomic(_style)}>
+      <Box className={convertStyleToAtomic(style)}>
         <div><Element {...icon} /></div>
         {heading && <div><Element {...heading} /></div>}
         {paragraph && <div><Element {...paragraph} /></div>}
@@ -71,11 +64,11 @@ class TalkingPointIcon extends React.Component {
   }
 
   render() {
-    const { layout } = this.props;
+    const { style } = this.props;
 
-    if (layout.iconPosition === "column") {
+    if (style.iconPosition === "column") {
        return this.renderColumn();
-    } else if (layout.iconPosition === "inline") {
+    } else if (style.iconPosition === "inline") {
        return this.renderInline();
     }
     return this.renderAbove();

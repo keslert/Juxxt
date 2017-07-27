@@ -37,7 +37,6 @@ export const blueprint = {
   inherits: ['ListGutter'],
   color: {},
   style: {},
-  layouts: {},
   elements: {
     buttons: {
       name: BasicButton.name,

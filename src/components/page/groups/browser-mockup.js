@@ -15,9 +15,8 @@ class BrowserMockup extends React.Component {
 export default BrowserMockup;
 
 export const blueprint = {
-  inherits: ['Media'],
+  inherits: [],
   style: {},
-  layouts: {},
   color: {},
   elements: {
     image: {

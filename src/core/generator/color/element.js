@@ -14,10 +14,10 @@ export function colorElement(element, page) {
     e => true,
   ]
 
-  if(element.blueprint.background && element.blueprint.background.color) {
+  if(element.blueprint.color.background) {
     colorBackground(rules, elements, element, page.colorBlueprint);
   }
-  if(element.blueprint.text && element.blueprint.text.color) {
+  if(element.blueprint.color.text) {
     colorText(rules, elements, element, page.colorBlueprint);
   }
 }
@@ -40,7 +40,7 @@ function colorBackground(rules, elements, element, colorBlueprint) {
     const prevSolids = colorBlueprint.bgBlueprints[element.color._parentBackground || background].solids;
     
     if(element.color.background !== 'transparent') {
-      const preferred = getMappedPreferredColor(solids, prevSolids, element.color.background, element.blueprint.background.color);
+      const preferred = getMappedPreferredColor(solids, prevSolids, element.color.background, element.blueprint.color.background);
       element.color.background = preferred;
       element.color.borderColor = preferred;
     }
@@ -62,7 +62,7 @@ function colorText(rules, elements, element, colorBlueprint) {
   } else {
     const texts = colorBlueprint.bgBlueprints[background].texts;
     const prevTexts = colorBlueprint.bgBlueprints[element.color._textBackground || background].texts;
-    element.color.text = getMappedPreferredColor(texts, prevTexts, element.color.text, element.blueprint.text.color);
+    element.color.text = getMappedPreferredColor(texts, prevTexts, element.color.text, element.blueprint.color.text);
   }
   if(element.color.background === 'transparent') {
     element.color.borderColor = element.color.text;

@@ -18,9 +18,8 @@ class IpadMockup extends React.Component {
 export default IpadMockup;
 
 export const blueprint = {
-  inherits: ['Media'],
+  inherits: [],
   style: {},
-  layouts: {},
   color: {},
   elements: {
     image: {
