@@ -5,6 +5,18 @@ import tinycolor from 'tinycolor2';
 import geopattern from 'geopattern';
 
 
+const PATTERNS = ["/images/patterns/bedge-grunge.png",
+                  "/images/patterns/bright-squares.png",
+                  "/images/patterns/cubes.png",
+                  "/images/patterns/escheresque.png",
+                  "/images/patterns/subtle-carbon.png",
+                  "/images/patterns/inspiration-geometry.png",
+                  "/images/patterns/simple-dashed.png",
+                  "/images/patterns/food.png",
+                  "/images/patterns/shattered-dark.png",
+                  "/images/patterns/gradient-squares.png",
+                  "/images/patterns/gplay.png",
+                  "/images/patterns/stardust.png",]
 
 export function buildPageColorBlueprint(colors) {
   const _colors = uniq([...colors, '#ffffff'])
@@ -23,7 +35,7 @@ export function buildPageColorBlueprint(colors) {
   forEach(blueprints, blueprint => {
     blueprint.solids = getReadableColors(backgrounds, blueprint.color, 1.4);
     blueprint.gradients = getGradients(blueprint.color, colors);
-    blueprint.patterns = getPatterns(blueprint.color);
+    blueprint.patterns = PATTERNS;
   });
 
   return {
@@ -60,14 +72,4 @@ function getGradients(base, colors) {
   return gradients;
 }
 
-const PATTERNS = ['chevrons','octogons','overlappingCircles','plusSigns','xes','sineWaves','hexagons','overlappingRings','plaid','triangles','squares','nestedSquares','mosaicSquares','concentricCircles','diamonds','tessellation']
-function getPatterns(color) {
-  const patterns = zipObject(PATTERNS, PATTERNS.map(pattern => 
-    geopattern.generate(
-      Math.random().toString(36).substring(7),
-      { color, generator: pattern }
-    ).toDataUrl()
-  ))
-
-  return patterns;
-}
+// const PATTERNS = ['chevrons','octogons','overlappingCircles','plusSigns','xes','sineWaves','hexagons','overlappingRings','plaid','triangles','squares','nestedSquares','mosaicSquares','concentricCircles','diamonds','tessellation']

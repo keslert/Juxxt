@@ -110,16 +110,21 @@ function generateSectionColorSolidsBackground(sectionSkeleton, page) {
   return skeletons;
 }
 
+function trimFileName(name) {
+  return name.split(".")[0].split("/")[name.split(".")[0].split("/").length-1];
+}
+
 function generateSectionColorPatternsBackground(sectionSkeleton, page) {
+
   const colorBlueprint = page.colorBlueprint.bgBlueprints[sectionSkeleton.color.background];
-  const skeletons = map(colorBlueprint.patterns, (urlData, pattern) => {
+  const skeletons = map(colorBlueprint.patterns, (pattern) => {
     const skeleton = cloneDeep(sectionSkeleton);
     linkSkeleton(skeleton);
     skeleton.color = {
       background: sectionSkeleton.color.background,
       text: colorBlueprint.texts[0],
-      pattern: sectionSkeleton.color.background.substr(1) + "-" + pattern,
-      _pattern: urlData,
+      pattern: sectionSkeleton.color.background.substr(1) + "-" + trimFileName(pattern),
+      _pattern: pattern,
     }
     return skeleton;
   })

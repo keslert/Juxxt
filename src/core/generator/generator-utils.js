@@ -116,8 +116,14 @@ export function generatePageCSSRules(page) {
   })
 
   page.sections.forEach(section => {
+
     if(section.color.pattern) {
-      rules.push(`.ptrn-${section.color.pattern} { background: ${section.color._pattern}; background-size: 75%; }`);
+      rules.push(`.ptrn-${section.color.pattern} {
+        background-color: ${section.color.background}; 
+        background-image: url('${section.color._pattern}') !important;
+        background-repeat: repeat;
+      }
+      `);
     }
 
     if(section.color.backgroundImage) {
