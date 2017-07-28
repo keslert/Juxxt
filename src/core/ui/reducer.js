@@ -3,14 +3,15 @@ import { filter } from 'lodash';
 const uiState = () => ({
   modifications: {
     component: {},
-    variant: {},
-    color: {},
-    content: {},
-    style: {},
+    layout: {},
+    background: {},
+    text: {},
+    image: {},
     page: {},
   },
   sidebarOpen: false,
   selectedModification: 'component',
+  modificationOptions: [],
   hovered: [],
   shiftDown: false,
   zoomLevel: 2,
@@ -37,6 +38,11 @@ export function uiReducer(state = uiState(), {payload, type}) {
         modifications: {...state.modifications,
           [payload.key]: payload.value,
         }
+      })
+    
+    case types.SET_MODIFICATION_OPTIONS:
+      return Object.assign({}, state, {
+        modificationOptions: payload,
       })
 
     case types.ON_HOVERABLE_MOUSE_ENTER:

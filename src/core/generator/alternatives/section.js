@@ -1,5 +1,6 @@
 import * as blueprints from '../../../components/page/sections/_blueprints';
-import { generateAllSectionSkeletons } from '../skeletons/section';
+import { generateSectionSkeleton } from '../skeletons/section';
+import { PatternDict } from '../color/page';
 import { 
   filter, 
   range, 
@@ -21,13 +22,15 @@ import { assignContent } from '../content';
 import { generateContent } from '../content/generate';
 
 import { linkSkeleton } from '../generator-utils';
-import { getCombinations } from '../../utils';
+import { getTruthyKeys, getCombinations } from '../../utils';
 import { colorGroup } from '../color/group';
 import { colorElement } from '../color/element';
-import { styles } from '../style/section/shared-styles';
+import styles from '../style/shared-styles';
 import { filterStyle } from '../style/utils';
-import { generateGroupVariantAlternatives } from './group';
+import { generateGroupLayoutAlternatives } from './group';
 import { getSortedByPreference, getSortedByMostBrightness } from '../color/utils';
+import { generateItemClones, generateStyleCombinations } from './alternatives-utils';
+
 import tinycolor from 'tinycolor2';
 import defaultTheme from '../themes';
 
@@ -37,43 +40,37 @@ export function generateSectionComponentAlternatives(section, modify) {
     modify[blueprints[name].type]
   );
 
-  const skeletons = flatMap(validSections, name => {
-    const skeletons = generateAllSectionSkeletons({name, id: section.id, variant: section.variant});
-    skeletons.forEach(linkSkeleton);
-    return skeletons;
+  const skeletons = validSections.map(name => {
+    const skeleton = generateSectionSkeleton({name, id: section.id, layout: section.layout})
+    linkSkeleton(skeleton);
+    return skeleton;
   });
 
   return skeletons;
 }
 
-
-export function generateSectionVariantAlternatives(modify, section, skeleton) {
-  const validVariations = filter(Object.keys(modify), e=> modify[e]==true);
-  const variants = [];
-  section.blueprint.variants.forEach(function(variantList) {
-    variants.push(pick(variantList,validVariations));
-  });
-  const skeletons = flatMap(variants, variant => {
-    const combos = getCombinations(mapValues(variant, 'options'));
-    return combos.map(variant => ({...skeleton, variant: {...section.variant, ...variant}}))
-  });
-  const allSkeletons = flatMap(isEmpty(skeletons) ? [skeleton] : skeletons, s => 
-    flatMap(section.groups, group => generateGroupVariantAlternatives(modify, group, s))
-  )
-
-  return isEmpty(allSkeletons) ? skeletons : allSkeletons;
+export function generateSectionLayoutAlternatives(modify, section, sectionSkeleton) {
+  return generateStyleCombinations(modify, section, sectionSkeleton);
 }
 
-export function generateSectionColorAlternatives(section, modify, page) {
-  let sections = [];
+export function generateSectionImageAlternatives(modify, sectionSkeleton, page) {
+  if(modify.content) {
+    return generateSectionImagesBackground(sectionSkeleton, page);
+  }
+  return generateStyleCombinations(modify, sectionSkeleton, sectionSkeleton);
+}
+
+
+export function generateSectionBackgroundAlternatives(modify, sectionSkeleton, page) {
+  let sections;
   if(modify.color) {
-    sections = generateSectionColorSolidsBackground(section, page);
+    sections = generateSectionSolidsBackground(sectionSkeleton, page);
   } else if(modify.pattern) {
-    sections = generateSectionColorPatternsBackground(section, page);
+    sections = generateSectionPatternsBackground(sectionSkeleton, page);
   } else if(modify.gradient) {
-    sections = generateSectionColorGradientsBackground(section, page);
+    sections = generateSectionGradientsBackground(sectionSkeleton, page);
   } else if(modify.image) {
-    sections = generateSectionColorImagesBackground(section, page);
+    sections = generateSectionImagesBackground(sectionSkeleton, page);
   }
 
   forEach(sections, s => s._groups.forEach(e => colorGroup(e, page)));
@@ -83,7 +80,7 @@ export function generateSectionColorAlternatives(section, modify, page) {
 }
 
 
-function generateSectionColorImagesBackground(sectionSkeleton, page) {
+function generateSectionImagesBackground(sectionSkeleton, page) {
   const darkestBackground = last(getSortedByMostBrightness(page.colorBlueprint.backgrounds))
   const skeletons = defaultTheme.backgroundImages.map(({key, url}) => {
     const skeleton = cloneDeep(sectionSkeleton);
@@ -99,7 +96,7 @@ function generateSectionColorImagesBackground(sectionSkeleton, page) {
   return skeletons;
 }
 
-function generateSectionColorSolidsBackground(sectionSkeleton, page) {  
+function generateSectionSolidsBackground(sectionSkeleton, page) {  
   const backgrounds = getSortedByPreference(page.colorBlueprint.backgrounds, sectionSkeleton.blueprint.color.background);
 
   const skeletons = map(backgrounds, background => {
@@ -112,23 +109,39 @@ function generateSectionColorSolidsBackground(sectionSkeleton, page) {
   return skeletons;
 }
 
-function generateSectionColorPatternsBackground(sectionSkeleton, page) {
+function trimFileName(name) {
+  return name.split(".")[0].split("/")[name.split(".")[0].split("/").length-1];
+}
+
+function checkPattern(color,patternPath) {
+  // const colorLuminance = tinycolor(color).getLuminance();
+  // const pattern_brightness = PatternDict[patternPath]/255;
+  // if(colorLuminance < 0.45) { // all dark colors can show any pattern
+  //   return true;
+  // }
+  // return (pattern_brightness < colorLuminance);
+  return true;
+}
+function generateSectionPatternsBackground(sectionSkeleton, page) {
+
   const colorBlueprint = page.colorBlueprint.bgBlueprints[sectionSkeleton.color.background];
-  const skeletons = map(colorBlueprint.patterns, (urlData, pattern) => {
+  const _patterns = filter(colorBlueprint.patterns, (pattern)=> checkPattern(sectionSkeleton.color.background,pattern));
+
+ const skeletons = map(_patterns, (pattern) => {
     const skeleton = cloneDeep(sectionSkeleton);
     linkSkeleton(skeleton);
     skeleton.color = {
       background: sectionSkeleton.color.background,
       text: colorBlueprint.texts[0],
-      pattern: sectionSkeleton.color.background.substr(1) + "-" + pattern,
-      _pattern: urlData,
+      pattern: sectionSkeleton.color.background.substr(1) + "-" + trimFileName(pattern),
+      _pattern: pattern,
     }
     return skeleton;
   })
   return skeletons;
 }
 
-function generateSectionColorGradientsBackground(sectionSkeleton, page) {
+function generateSectionGradientsBackground(sectionSkeleton, page) {
   const blueprint = page.colorBlueprint.bgBlueprints[sectionSkeleton.color.background];
 
   const skeletons = map(blueprint.gradients, ({start, end, direction}) => {

@@ -4,31 +4,32 @@ import Group from '../../groups';
 import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
 import { Heading } from './../../groups/heading';
+import omit from 'lodash/omit';
 
 class Navbar3 extends React.PureComponent {
   render () {
     const { elements, groups, style, color } = this.props;
     
-    const styleClassNames = convertStyleToAtomic({
+    const colorClassNames = convertColorToAtomic(color);
+    const containerClassNames = convertStyleToAtomic({
       ...style,
-      display: "flex",
-      align: "center",
-      fixedNavBar: false,
+      paddingHorizontal: style.edgePadding,
+      display: 'flex',
+      align: 'center',
+      direction: 'column',
+      fixed: false,
     });
 
-    const colorClassNames = convertColorToAtomic(color);
-    const containerClassNames = convertStyleToAtomic({fixedNavBar: style.fixedNavBar});
-
+    const fixedClassNames = convertStyleToAtomic({fixed: style.fixed});
     return (
-      <div className={ colorClassNames + ' Navbar3 '+ ' justify-center ' + containerClassNames}>
-        <div className={styleClassNames + ' justify-center'}>
+      <div className={colorClassNames + ' ' + fixedClassNames}>
+        <div className={containerClassNames}>
+          <div>
             <Element {...elements.logo} />
-        </div>
-        <div className={styleClassNames + ' justify-center'}>
-          <div className="flex flex-1 justify-center">
+          </div>
+          <div>
             <Group {...groups.links} />
           </div>
-
         </div>
       </div>
     )
@@ -40,23 +41,25 @@ export default Navbar3;
 
 export const blueprint = {
   type: 'navigation',
-  inherits: ['NavigationSection', 'FixedNavBar'],
+  inherits: ['GutterSection', 'NavigationSection', 'FixedSection', 'Section'],
   style: {},
-  color: {},
+  color: {
+    background: 'default',
+  },
   elements: {
     logo: {
       name: 'LogoImage',
+      _defaults: { style: {marginBottom: 2}}
     },
   },
   groups: {
     buttonList: {
       options: [
-        { name: 'ButtonList', elements: { buttons: { name: 'SmallButton', clones: 2 }}},
+        { name: 'ButtonList', elements: { buttons: { name: 'SmallButton' }}},
       ],
     },
     links: {
       options: ['HorizontalList']
     }
   },
-  variants: []
 }

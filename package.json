@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "axs": "^1.0.6",
-    "geopattern": "^1.2.3",
     "jquery": "^2.2.4",
     "keypress.js": "^2.1.4",
     "lodash": "^4.17.4",

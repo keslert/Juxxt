@@ -71,6 +71,7 @@ export function linkSkeleton(skeleton) {
   linkChildren(skeleton);
   skeleton._groups = getGroupsInItem(skeleton);
   skeleton._elements = getElementsInItem(skeleton);
+  skeleton._items = [skeleton, ...skeleton._groups, ...skeleton._elements];
 
   assignFullIds(skeleton);
   skeleton._groups.forEach(assignFullIds);
@@ -92,6 +93,12 @@ export function generatePageCSSRules(page) {
   
   const rules = [];
 
+  rules.push(`.mxw-page { max-width: ${page.maxWidth}px; }`);
+  [33,50,66,67].forEach(ratio => {
+    rules.push(`.mxw-page-${ratio}P { max-width: ${page.maxWidth * (ratio / 100)}px; }`)
+  })
+  
+
   page.colorBlueprint.texts.forEach(color => {
     rules.push(`.c-${color.substr(1)} { color: ${color}; }`);
   });
@@ -110,8 +117,14 @@ export function generatePageCSSRules(page) {
   })
 
   page.sections.forEach(section => {
+
     if(section.color.pattern) {
-      rules.push(`.ptrn-${section.color.pattern} { background: ${section.color._pattern}; background-size: 75%; }`);
+      rules.push(`.ptrn-${section.color.pattern} {
+        background-color: ${section.color.background}; 
+        background-image: url('${section.color._pattern}') !important;
+        background-repeat: repeat;
+      }
+      `);
     }
 
     if(section.color.backgroundImage) {
@@ -119,7 +132,6 @@ export function generatePageCSSRules(page) {
         .bgimg-${section.color.backgroundImage} {
           background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${section.color._backgroundImage}) !important;
           background-size: cover !important;
-          background-position: center center !important;
         }
       `);
     }

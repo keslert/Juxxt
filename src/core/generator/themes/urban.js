@@ -137,12 +137,12 @@ export default {
                 }   
               },
         },
-        _defaults: {
-            variants: {
-              order: 1,
-              align: "left"
-            }
-          },*/
+
+        layout: {
+          order: 1,
+          align: "left"
+        }
+        */
       },
       {name: 'BasicWide1_2',
 /*        _defaults: {

@@ -3,17 +3,18 @@ import * as elementBlueprints from '../../../components/page/elements/_blueprint
 import * as blueprints from '../../../components/page/groups/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
+import { extractSkeletonFromItem, generateItemSkeleton } from '../skeletons/utils'
 import { generateContent } from '../content/generate';
-import { filter, range, uniqBy, flatMap, mapValues, pick, cloneDeep, forEach, includes, map, isString } from 'lodash';
+import { filter, range, find, flatMap, mapValues, pick, cloneDeep, forEach, includes, map, isString } from 'lodash';
 import { getCombinations } from '../../utils';
-
-import { generateElementColorAlternatives } from './element';
+import { containsClone } from '../../ui/actions'
+import { generateElementBackgroundAlternatives } from './element';
 
 import { findItemInSection, getBlueprint, getBackground, getParents, linkSkeleton } from '../generator-utils';
-import { styles } from '../style/group/shared-styles';
+import styles from '../style/shared-styles';
 import { filterStyle } from '../style/utils';
 import { getSortedByMostVibrant } from '../color/utils';
-
+import { generateStyleCombinations } from './alternatives-utils';
 
 export function generateGroupComponentAlternatives(group, sectionSkeleton) {
   const blueprint = group.parent.blueprint;
@@ -25,7 +26,7 @@ export function generateGroupComponentAlternatives(group, sectionSkeleton) {
     const parentSkeleton = findItemInSection(group.parent, skeleton);
 
     const _group = isString(option) ? {name: option} : option;
-    parentSkeleton.groups[group.parentKey] = generateGroupSkeleton({..._group, id: group.id, variant: group.variant});
+    parentSkeleton.groups[group.parentKey] = generateGroupSkeleton({..._group, id: group.id, layout: group.layout});
     linkSkeleton(skeleton);
     return skeleton;
   })
@@ -33,36 +34,22 @@ export function generateGroupComponentAlternatives(group, sectionSkeleton) {
   return skeletons;
 }
 
-export function generateGroupVariantAlternatives(modify, group, sectionSkeleton) {
-  const validVariations = filter(Object.keys(modify), e=> modify[e]==true);
-  const variants = [];
-  group.blueprint.variants.forEach(function(variantList) {
-    variants.push(pick(variantList,validVariations));
-  });
-  const combos = flatMap(variants, 
-    variant => getCombinations(mapValues(variant, 'options'))
-  )
-  
-  const unique = filter(uniqBy(combos, JSON.stringify),(u)=>modify[Object.keys(u)[0]]);
-  const skeletons = unique.map(variant => {
-      const skeleton = cloneDeep(sectionSkeleton);
-      linkSkeleton(skeleton);
-      const groups = filter(skeleton._groups, g => g.id === group.id);
-      groups.forEach(g => g.variant =  {...group.variant, ...variant});
-      return skeleton;
-  })
-  return skeletons;
+export function generateGroupLayoutAlternatives(modify, group, sectionSkeleton) {
+  return generateStyleCombinations(modify, group, sectionSkeleton);
 }
 
-
-export function generateGroupColorAlternatives(sectionSkeleton, modify, page, selected) {
+export function generateGroupBackgroundAlternatives(modify, selected, sectionSkeleton, page) {
   const elements = filter(selected.section._elements, e => e.parent.fullId === selected.fullId);  
-  const backgroundElements = filter(elements, e => e.blueprint.color.background === 'vibrant');
-  const textElements = filter(elements, e => e.blueprint.color.text === 'whiteOrVibrant');
+  const backgroundElements = filter(elements, e => 
+    e.blueprint.background && e.blueprint.background.color === 'vibrant'
+  );
+  const textElements = filter(elements, e => 
+    e.blueprint.text && e.blueprint.text.color === 'whiteOrVibrant'
+  );  
 
   const sections = [
-    ...flatMap(backgroundElements, e => generateElementColorAlternatives(sectionSkeleton, {background: true}, e, page)),
-    ...flatMap(textElements, e => generateElementColorAlternatives(sectionSkeleton, {text: true}, e, page)),
+    ...flatMap(backgroundElements, e => generateElementBackgroundAlternatives({background: true}, e, sectionSkeleton, page)),
+    ...flatMap(textElements, e => generateElementBackgroundAlternatives({text: true}, e, sectionSkeleton, page)),
   ];
 
   return sections;
@@ -80,31 +67,5 @@ export function generateGroupContentAlternatives(sectionSkeleton, group) {
     return skeleton;
   });
   
-  return skeletons;
-}
-
-export function generateGroupStyleAlternatives(modify, sectionSkeleton, group) {
-  const blueprint = group.blueprint;
-  const keys = filter(Object.keys(modify), key => modify[key]);
-  const sharedStyles = blueprint.inherits.map(name => styles[name]);
-  const style = filterStyle(Object.assign({}, ...sharedStyles, blueprint.style), keys);
-  
-  const possibleStyles = flatMap(style, ({options}, key) => options.map(value => ({
-    [key]: value,
-  })))
-  
-  const skeletons = possibleStyles.map(style => {
-    const skeleton = cloneDeep(sectionSkeleton);
-    linkSkeleton(skeleton);
-    const _style = {...group.style, ...style};
-    skeleton._groups.forEach(g => {
-      if(g.id === group.id) {
-        g.style = _style;
-      }
-    })
-    skeleton.changes = style;
-    return skeleton;
-  })
-
   return skeletons;
 }

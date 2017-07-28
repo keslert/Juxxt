@@ -1,6 +1,5 @@
 import React from 'react';
 import Element from '../elements';
-import { BasicButton, BasicInput } from '../elements/_blueprints';
 
 class NameEmailForm extends React.Component {
   render() {
@@ -24,27 +23,20 @@ class NameEmailForm extends React.Component {
 export default NameEmailForm;
 
 export const blueprint = {
-  inherits: [],
+  inherits: ['TextAligned'],
   style: {},
   color: {},
   elements: {
     name: {
-      name: BasicInput.name,
+      name: 'BasicInput',
       _defaults: {content: {placeholder: "name"}},
     },
     email: {
-      name: BasicInput.name,
+      name: 'BasicInput',
       _defaults: {content: {placeholder: "email"}},
     },
     button: {
-      name: BasicButton.name,
+      name: 'BasicButton',
     },
   },
-  variants: [{
-    align: {
-
-      _default: 'center',
-      options: ['left', 'center', 'right'],
-    }
-  }],
 }

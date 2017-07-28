@@ -1,7 +1,6 @@
 import React from 'react';
 import TalkingPointComponent from './common/talking-point';
 import { BasicHeading, BasicParagraph, BasicLink} from '../elements/_blueprints';
-import { TalkingPoint } from './_inherits';
 
 class HeadingParagraphLink extends React.PureComponent {
 	render() {
@@ -11,8 +10,7 @@ class HeadingParagraphLink extends React.PureComponent {
 				color={this.props.color}
         elements={this.props.elements}
         groups={{}}
-				variant={this.props.variant}
-			/>
+			  />
 		)
 	}
 }
@@ -20,7 +18,7 @@ class HeadingParagraphLink extends React.PureComponent {
 export default HeadingParagraphLink;
 
 export const blueprint = {
-  inherits: [TalkingPoint, 'RowBuffer'],
+  inherits: ['TalkingPoint', 'RowBuffer'],
   style: {},
   color: {},
   elements: {
@@ -34,10 +32,4 @@ export const blueprint = {
       name: BasicParagraph.name,
     }
   },
-  variants: [{
-    align: {
-      _default: 'center',
-      options: ['left', 'center', 'right'],
-    }
-  }],
 }

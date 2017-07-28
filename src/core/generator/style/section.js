@@ -1,6 +1,6 @@
 import { isEqual, zipObject, values } from 'lodash';
-import { styles } from './shared-styles';
-import { styleItem } from '../utils';
+import styles from './shared-styles';
+import { styleItem } from './utils';
 
 export function styleSection(section, page) {  
   const blueprint = section.blueprint;
@@ -9,7 +9,7 @@ export function styleSection(section, page) {
 
   const rules = [
     s => s.id === section.id,
-    s => isEqual(s.variant, section.variant),
+    // TODO: Maybe something about the children included?
     s => true,
   ]
 

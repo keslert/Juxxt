@@ -18,7 +18,7 @@ export function generatePageBrandColorAlternatives(page) {
   const validPalettes = filter(palettes, palette => !isEqual(palette, page.palette))
 
   const pages = validPalettes.map(palette => {
-    const _page = { id: uniqueId(), style: page.style }
+    const _page = { id: uniqueId(), style: page.style, maxWidth: page.maxWidth }
 
     const colorBlueprint = buildPageColorBlueprint(palette);
     

@@ -1,29 +1,30 @@
 import { 
   generateSectionComponentAlternatives,
-  generateSectionVariantAlternatives,
+  generateSectionLayoutAlternatives,
   generateSectionContentAlternatives,
-  generateSectionColorAlternatives,
+  generateSectionBackgroundAlternatives,
   generateSectionStyleAlternatives,
+  generateSectionImageAlternatives,
 } from './section'
 import { 
   generateGroupComponentAlternatives,
-  generateGroupVariantAlternatives,
+  generateGroupLayoutAlternatives,
   generateGroupContentAlternatives,
-  generateGroupColorAlternatives,
+  generateGroupBackgroundAlternatives,
   generateGroupStyleAlternatives,
 } from './group'
 import { 
   generateElementComponentAlternatives,
-  generateElementVariantAlternatives,
-  generateElementContentAlternatives,
-  generateElementColorAlternatives,
-  generateElementStyleAlternatives,
+  generateElementLayoutAlternatives,
+  generateElementBackgroundAlternatives,
+  generateElementTextAlternatives,
+  generateElementImageAlternatives,
 } from './element'
 
 import {
   generatePageBrandColorAlternatives,
 } from './page';
-
+import { generateItemCloneAlternatives } from './alternatives-utils'
 import { linkSkeleton, generatePageCSSRules } from '../generator-utils';
 import { extractSkeletonFromItem } from '../skeletons/utils';
 
@@ -31,21 +32,21 @@ import { assignContent, getContentStore } from '../content';
 import { assignStyles } from '../style';
 import { assignColor } from '../color';
 
-import { map } from 'lodash';
+import { map, pick, filter } from 'lodash';
 
 export function generateAlternatives(page, modify, selected) {
   let sections = [];
 
   if(modify.component) {
     sections = generateComponentAlternatives(page, modify.component, selected);
-  } else if(modify.variant) {
-    sections = generateVariantAlternatives(page, modify.variant, selected);
-  } else if(modify.color) {
-    sections = generateColorAlternatives(page, modify.color, selected);
-  } else if(modify.content) {
-    sections = generateContentAlternatives(page, selected);
-  } else if(modify.style) {
-    sections = generateStyleAlternatives(page, modify.style, selected);
+  } else if(modify.layout) {
+    sections = generateLayoutAlternatives(page, modify.layout, selected);
+  } else if(modify.background) {
+    sections = generateBackgroundAlternatives(page, modify.background, selected);
+  } else if(modify.text) {
+    sections = generateTextAlternatives(page, modify.text, selected);
+  } else if(modify.image) {
+    sections = generateImageAlternatives(page, modify.image, selected);
   } else if(modify.page) {
     const pages = generatePageAlternatives(page, modify.page);
     pages.forEach(generatePageCSSRules);
@@ -83,72 +84,73 @@ function generateComponentAlternatives(page, modify, selected) {
 }
 
 
-function generateVariantAlternatives(page, modify, selected) {
+function generateLayoutAlternatives(page, modify, selected) {
   const section = selected.section;
   const sectionSkeleton = extractSkeletonFromItem(section);
   
   let skeletons;
-
-  if(selected.isSection) {
-    skeletons = generateSectionVariantAlternatives(modify, selected, sectionSkeleton);
+  if(modify.clones) {
+    skeletons = generateItemCloneAlternatives(selected, sectionSkeleton);
+  } else if(selected.isSection) {
+    skeletons = generateSectionLayoutAlternatives(modify, selected, sectionSkeleton);
   } else if(selected.isGroup) {
-    skeletons = generateGroupVariantAlternatives(modify, selected, sectionSkeleton);
+    skeletons = generateGroupLayoutAlternatives(modify, selected, sectionSkeleton);
   } else {
-    skeletons = generateElementVariantAlternatives(modify, selected, sectionSkeleton);
+    skeletons = generateElementLayoutAlternatives(modify, selected, sectionSkeleton);
   }
   
   const sections = skeletons.map(skeleton => {
     linkSkeleton(skeleton);
-    skeleton.changes = Object.assign({}, skeleton.variant, ...map(skeleton.groups, 'variant'));
     return skeleton;
   })
 
   return sections;
 }
 
-function generateColorAlternatives(page, modify, selected) {
+function generateBackgroundAlternatives(page, modify, selected) {
   const skeleton = extractSkeletonFromItem(selected.section);
   
   let sections;
   if(selected.isSection) {
-    sections = generateSectionColorAlternatives(skeleton, modify, page);
+    sections = generateSectionBackgroundAlternatives(modify, skeleton, page);
   } else if(selected.isGroup) {
-    sections = generateGroupColorAlternatives(skeleton, modify, page, selected);
+    sections = generateGroupBackgroundAlternatives(modify, selected, skeleton, page);
   } else {
-    sections = generateElementColorAlternatives(skeleton, modify, selected, page);
+    sections = generateElementBackgroundAlternatives(modify, selected, skeleton, page);
   }
-
   return sections;
 }
 
-function generateContentAlternatives(page, selected) {
+function generateTextAlternatives(page, modify, selected) {
   const skeleton = extractSkeletonFromItem(selected.section);
-
+  
   let sections;
   if(selected.isSection) {
-    sections = generateSectionContentAlternatives(skeleton);
+    sections = [];
   } else if(selected.isGroup) {
-    sections = generateGroupContentAlternatives(skeleton, selected);
-  } else if(selected.isElement) {
-    sections = generateElementContentAlternatives(skeleton, selected);
+    sections = [];
+  } else {
+    sections = generateElementTextAlternatives(modify, selected, skeleton, page);
   }
+
   return sections;
 }
 
-function generateStyleAlternatives(page, modify, selected) {
+function generateImageAlternatives(page, modify, selected) {
   const skeleton = extractSkeletonFromItem(selected.section);
-
+  
   let sections;
   if(selected.isSection) {
-    sections = generateSectionStyleAlternatives(modify, skeleton);
+    sections = generateSectionImageAlternatives(modify, skeleton, page);
   } else if(selected.isGroup) {
-    sections = generateGroupStyleAlternatives(modify, skeleton, selected);
-  } else if(selected.isElement) {
-    sections = generateElementStyleAlternatives(modify, skeleton, selected);
+    sections = [];
+  } else {
+    sections = generateElementImageAlternatives(modify, selected, skeleton, page);
   }
 
   return sections;
 }
+
 
 function generatePageAlternatives(page, modify) {
   let pages;

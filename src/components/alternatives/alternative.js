@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import IconButton from '../common/icon-button';
 import { lowerCamelCaseToRegular } from '../../core/utils';
-import { map } from 'lodash';
+import { map, isObject } from 'lodash';
 
 const StyledAlternative = styled.div`
   margin-bottom: 10px;
@@ -30,27 +30,32 @@ const StyledShadow = styled.div`
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 `
 
-const Alternative = ({
-  changes,
-  children,
-  onFavorite,
-  onDelete,
-}) => {
+class Alternative extends React.PureComponent {
 
-  const label = map(changes, (value, key) => `${lowerCamelCaseToRegular(key)}: ${value}`).join(', ');
-  return (
-    <StyledAlternative>
-      <StyledHeading>
-        <StyledLabel>{label}</StyledLabel>
-        <StyledIconBar>
-          <IconButton type="heart" onClick={onFavorite} />
-        </StyledIconBar>
-      </StyledHeading>
-      <StyledShadow>
-        {children}
-      </StyledShadow>
-    </StyledAlternative>
-  )
+  render() {
+    const { changes, children, onFavorite, onDelete } = this.props;
+
+    const label = getLabel(changes);
+    return (
+      <StyledAlternative>
+        <StyledHeading>
+          <StyledLabel>{label}</StyledLabel>
+          <StyledIconBar>
+            <IconButton type="heart" onClick={onFavorite} />
+          </StyledIconBar>
+        </StyledHeading>
+        <StyledShadow>
+          {children}
+        </StyledShadow>
+      </StyledAlternative>
+    )
+  }
 }
 
 export default Alternative;
+
+function getLabel(obj) {
+  return map(obj, (value, key) =>
+    isObject(value) ? getLabel(value) : `${lowerCamelCaseToRegular(key)}: ${value}`
+  ).join(', ');
+}

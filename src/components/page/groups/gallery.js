@@ -2,11 +2,10 @@ import React from 'react';
 import Element from '../elements';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
-import { range } from 'lodash';
 
 class Gallery extends React.PureComponent {
   render () {
-    const { style, color, elements, variant } = this.props;
+    const { style, color, elements } = this.props;
     
     const boxStyle = {
       display: "flex",
@@ -18,7 +17,7 @@ class Gallery extends React.PureComponent {
     const divStyle = {
       ...style,
       padding: style.gutter,
-      width: Math.floor(100 / (variant.columns)) + 'P',
+      width: Math.floor(100 / (style.columns)) + 'P',
     }
     const styleClassNames = convertStyleToAtomic(boxStyle);
     const divClassNames = convertStyleToAtomic(divStyle);
@@ -43,19 +42,17 @@ export default Gallery;
 export const blueprint = {
   type: 'gallery',
   inherits: ['ListGutter', 'BaseGroup'],
-  style: {},
+  style: {
+    columns: { _default: 3, options: [2,3]},
+  },
   color: {},
   elements: {
     images: {
       name: 'GalleryImage',
-      clones: 9,
+      blueprint: { 
+        clones: { _default: 6, min: 1, max: 12 }
+      },
     }
   },
-  variants: [{
-    columns: {
-      _default: 3,
-      options: range(2, 7),
-    }
-  }]
 }
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import Element from '../elements';
-import { ReadableLink } from '../elements/_blueprints';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 
 class HorizontalList extends React.Component {
@@ -12,7 +11,6 @@ class HorizontalList extends React.Component {
       display: 'flex',
       flex: 1,
     })
-
 
     const boxClassNames = convertStyleToAtomic({
       marginHorizontal: style.gutter,
@@ -43,9 +41,10 @@ export const blueprint = {
   color: {},
   elements: {
     links: {
-      name: ReadableLink.name,
-      clones: 3,
+      name: 'ReadableLink',
+      blueprint: { 
+        clones: { _default: 3, min: 1, max: 7 },
+      },
     }
   },
-  variants: [],
 }

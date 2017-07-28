@@ -5,19 +5,25 @@ import { convertColorToAtomic } from '../../../core/generator/color/conversions'
 
 class Grid extends React.PureComponent {
   render () {
-    const { style, color, groups, variant } = this.props;
+    const { style, color, groups } = this.props;
 
-    const containerClassNames = convertStyleToAtomic(style);
+    const containerClassNames = convertStyleToAtomic({
+      ...style,
+      paddingBottom: '-l-' + (style.height / 2),
+      paddingTop: '-l-' + (style.height / 2),
+      paddingHorizontal: style.edgePadding,
+      margin: 'auto',
+      maxWidth: 'page',
+    });
     const colorClassNames = convertColorToAtomic(color);
     const itemClassNames = convertStyleToAtomic({
       display: "flex",
-      justify: "center",
       flex: "wrap",
       marginHorizontal: -style.gutter,
     });
 
     const boxClassNames = convertStyleToAtomic({
-      width: Math.floor(100 / (variant.columns)) + 'P',
+      width: Math.floor(100 / (style.columns)) + 'P',
       paddingHorizontal: style.gutter,
     });
 
@@ -41,37 +47,46 @@ class Grid extends React.PureComponent {
   }
 }
 
-const NUM_OF_CLONES = 3;
-
 export default Grid;
 
 
+const gridItem = {
+  name: 'HeadingParagraph', 
+  elements: {
+    heading: { 
+      name:'SmallHeading'
+    }
+  },
+  blueprint: { 
+    clones: { _default: 3, min: 1, max: 12 },
+  },
+}
 
 export const blueprint = {
-  type: 'grid',
-  inherits: ['BasicSection', 'GutterSection', 'BaseSection'],
+  type: 'basic',
+  inherits: ['Guttered', 'Columned', 'Section'],
   style: {},
-  color: {},
+  color: {
+    color: 'default',
+    pattern: true,
+    gradient: true,
+  },
   groups: {
     gridItem: {
+      _default: gridItem,
       options: [
-        {name: 'HeadingParagraph' , clones: NUM_OF_CLONES, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'HeadingParagraphLink', clones: NUM_OF_CLONES,  elements:{heading:{name:'SmallHeading'}}},
-        {name: 'IconHeadingParagraph',  clones: NUM_OF_CLONES, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'ImageHeadingParagraph', clones: NUM_OF_CLONES, 
+        gridItem,
+        {...gridItem, name: 'HeadingParagraphLink'},
+        {...gridItem, name: 'IconHeadingParagraph'},
+        {
+          name: 'ImageHeadingParagraph', 
           groups: { tp: { options: [
-            {name: 'HeadingParagraph', elements: {heading: {name:'SmallHeading'}}}
+            {name: 'HeadingParagraph', blueprint: { clones: {_default: 3, min: 1, max: 12}}, elements: {heading: {name:'SmallHeading'}}}
           ]}},
-          elements: { image: { _defaults: {style: {'aspectRatio': '4x3'}}}}
+          elements: { image: {style: {'aspectRatio': '4x3'}}}
         },
       ]
     },
-  },
-  variants: [{
-    columns: {
-      _default:3,
-      options: [2,3,4],
-    }
-  }]
+  }
 }
 

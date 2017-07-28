@@ -55,7 +55,7 @@ class Group extends React.PureComponent {
     
     const GroupComponent = groups[name];
     if(this.context.preview || !this.context.master) {
-      return <div className="w-100P"><GroupComponent {...this.props} /></div>;
+      return <div><GroupComponent {...this.props} /></div>;
     }
     
     return (
@@ -66,7 +66,7 @@ class Group extends React.PureComponent {
         onClick={(e) => { e.stopPropagation(); setSelected(this.props);}}
         onMouseEnter={() => onHoverableMouseEnter(fullRelativeId)}
         onMouseLeave={() => onHoverableMouseLeave(fullRelativeId)}
-        className="w-100P"
+        className=""
         >
         <GroupComponent {...this.props} />
       </StyledGroup>

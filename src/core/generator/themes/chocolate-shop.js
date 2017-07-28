@@ -150,7 +150,7 @@ page: {
             }   
           },
         },
-        variant: {
+        layout: {
           order: 3,
         },
       },
@@ -168,7 +168,7 @@ page: {
       },
       {name: 'BasicWide1_2',
         _defaults: {
-          variants: {
+          layouts: {
             order: 1,
           },
           color: {
@@ -197,7 +197,7 @@ page: {
             }   
           },
         },
-        variant: {
+        layout: {
           order: 1,
         },
       },
@@ -208,11 +208,11 @@ page: {
               name: 'HeadingSubheading',
             },
           },
-          gridItem: {
-            _default: {
-              name: 'HeadingParagraph', clones:6,  elements:{heading:{name:'SmallHeading'}},
-            },
-          }
+          // gridItem: {
+          //   _default: {
+          //     name: 'HeadingParagraph', clones:6,  elements:{heading:{name:'SmallHeading'}},
+          //   },
+          // }
         },
       },
       {name: 'Header',
