@@ -40,7 +40,9 @@ export const blueprint = {
   elements: {
     buttons: {
       name: BasicButton.name,
-      clones: {_default: 2, min: 1, max: 3},
+      blueprint: {
+        clones: {_default: 2, min: 1, max: 3},
+      }
     },
   },
   

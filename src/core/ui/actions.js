@@ -151,8 +151,10 @@ function resolveComponentModification(dispatch, state, selected, callPath) {
   dispatch(setModification('component', modification));
 }
 
+const bgStyles = ['color', 'gradient', 'pattern', 'image'];
 function resolveBackgroundModification(dispatch, state, selected) {
-  const keys = Object.keys(selected.blueprint.background || {});
+  const bgKeys = Object.keys(selected.blueprint.color);
+  const keys = intersection(bgStyles, [...bgKeys, 'color']);
   const options = keys.map(key => ({label: key, keys: [key]}));
   resolveModificationSelection(dispatch, state, 'background', keys, options);
 }
@@ -185,7 +187,8 @@ function resolveLayoutModification(dispatch, state, selected) {
 
 function resolvePageModification(dispatch, state) {
   const keys = ['brandColors'];
-  resolveModificationSelection(dispatch, state, keys, 'page');
+  const options = keys.map(key => ({label: key, keys: [key]}));
+  resolveModificationSelection(dispatch, state, 'page', keys, options);
 }
 
 
@@ -223,6 +226,7 @@ function getModificationKeysAndOptions(standardKeys, selected, blueprint={}) {
     chain(standardKeys)
     .intersection(styleKeys)
     .concat(specialKeys)
+    .concat(condensedKeys)
     .uniq()
     .value();
   

@@ -308,12 +308,6 @@ img { max-width: 100%; }
       -m  = medium
       -l  = large
  */
-.bg-center { background-repeat: no-repeat; background-position: center center; }
-.bg-top { background-repeat: no-repeat; background-position: top center; }
-.bg-right { background-repeat: no-repeat; background-position: center right; }
-.bg-bottom { background-repeat: no-repeat; background-position: bottom center; }
-.bg-left { background-repeat: no-repeat; background-position: center left; }
-
 
 .normal { font-weight: normal; }
 .b { font-weight: bold; }
@@ -675,6 +669,7 @@ img { max-width: 100%; }
 .mxw-30em { max-width: 30em; }
 .mxw-34em { max-width: 34em; }
 .mxw-38em { max-width: 38em; }
+.mxw-44em { max-width: 44em; }
 
 .mnw-auto { min-width: auto; }
 .mnw-1 { min-width: 8em; }
@@ -773,6 +768,17 @@ img { max-width: 100%; }
 .lh-3 { line-height: 1.6em; }
 .lh-4 { line-height: 1.8em; }
 
+.bg-10 { background-position: 10% 10% !important; }
+.bg-20 { background-position: 20% 20% !important; }
+.bg-30 { background-position: 30% 30% !important; }
+.bg-40 { background-position: 40% 40% !important; }
+.bg-50 { background-position: 50% 50% !important; }
+.bg-60 { background-position: 60% 60% !important; }
+.bg-70 { background-position: 70% 70% !important; }
+.bg-80 { background-position: 80% 80% !important; }
+.bg-90 { background-position: 90% 90% !important; }
+.bg-100 { background-position: 100% 100% !important; }
+
 .bg-top-left { background-position: top left !important; }
 .bg-top-center { background-position: top center !important; }
 .bg-top-right { background-position: top right !important; }
@@ -794,10 +800,11 @@ img { max-width: 100%; }
 }
 
 .preview .fixed {
-  position: fixed !important; 
+  position: fixed; 
   top: 0; 
+  left: 0;
+  right: 0;
   z-index: 99999;
-  width: 100%; 
 }
 
 

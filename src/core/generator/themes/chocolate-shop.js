@@ -208,11 +208,11 @@ page: {
               name: 'HeadingSubheading',
             },
           },
-          gridItem: {
-            _default: {
-              name: 'HeadingParagraph', clones:6,  elements:{heading:{name:'SmallHeading'}},
-            },
-          }
+          // gridItem: {
+          //   _default: {
+          //     name: 'HeadingParagraph', clones:6,  elements:{heading:{name:'SmallHeading'}},
+          //   },
+          // }
         },
       },
       {name: 'Header',

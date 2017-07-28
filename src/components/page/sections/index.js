@@ -128,7 +128,7 @@ class Section extends React.Component {
 
     const { 
       name, 
-      uid,
+      id,
       isSelected,
       setSelected,
       setSidebarOpen,
@@ -151,7 +151,7 @@ class Section extends React.Component {
     
     
     return connectDropTarget(
-      <div key={uid}>
+      <div key={id}>
         {connectDragSource(
           <div>
             <AutoScale>
@@ -163,8 +163,8 @@ class Section extends React.Component {
                 hovered={isHovered && !preview && master}
                 onClick={(e) => { e.stopPropagation(); this.handleClick()}}
                 onDoubleClick={(e) => { e.stopPropagation(); setSidebarOpen(true); }}
-                onMouseEnter={() => onHoverableMouseEnter(uid)}
-                onMouseLeave={() => onHoverableMouseLeave(uid)}
+                onMouseEnter={() => onHoverableMouseEnter(id)}
+                onMouseLeave={() => onHoverableMouseLeave(id)}
                 >
                 <SectionComponent {...this.props} />
               </StyledSection>
@@ -184,10 +184,10 @@ Section.contextTypes = {
 const mapStateToProps = createSelector(
   getHovered,
   getSelected,
-  (_, props) => props.uid,
-  (hovered, selected, uid) => ({
-    isSelected: selected.uid === uid,
-    isHovered: last(hovered) === uid,
+  (_, props) => props.id,
+  (hovered, selected, id) => ({
+    isSelected: selected.id === id,
+    isHovered: last(hovered) === id,
   })
 )
 

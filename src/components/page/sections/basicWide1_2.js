@@ -64,8 +64,7 @@ export default BasicWide1_2;
 export const blueprint = {
   type: 'basic',
   inherits: ['Guttered', 'Ordered', 'ConstrainedSection', 'Section'],
-  color: {},
-  background: {
+  color: {
     color: 'default',
     pattern: true,
     gradient: true,

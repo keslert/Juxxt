@@ -29,8 +29,11 @@ class TalkingPoint extends React.Component {
     });
 
     const boxClassNames = convertStyleToAtomic({
-      marginVertical: style.buffer || 0,
-      paddingBottom: '-1px',
+      marginBottom: style.buffer || 0,
+    })
+
+    const paragraphClassNames = convertStyleToAtomic({
+      marginBottom: ((links || buttonList) && style.buffer) || 0,
     })
 
     return (
@@ -42,17 +45,15 @@ class TalkingPoint extends React.Component {
         </div>
 
         {paragraph && (
-          <div className={boxClassNames}>
+          <div className={paragraphClassNames}>
             <Element {...paragraph} />
           </div>
         )}
 
-        {(links || buttonList) && (
-          <div className={boxClassNames}>
-            {links && <Element {...links}/>}
-            {buttonList && <Group {...buttonList} />}
-          </div>
-        )}
+        <div>
+          {links && <Element {...links}/>}
+          {buttonList && <Group {...buttonList} />}
+        </div>
         
       </Box>
     )

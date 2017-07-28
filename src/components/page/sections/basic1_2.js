@@ -67,14 +67,13 @@ export default Basic1_2;
 export const blueprint = {
   type: 'basic',
   inherits: ['Guttered', 'Ordered', 'BackgroundImageSection', 'ConstrainedSection', 'SplitRatioSection', 'Section'],
-  color: {},
   style: {
     height: {
       _default: 5,
       options: [0,2,4,5,6,7,8],
     },
   },
-  background: {
+  color: {
     color: 'default',
     pattern: true,
     gradient: true,
@@ -98,8 +97,12 @@ export const blueprint = {
         'BrowserMockup',
         {
           name: 'Gallery', 
-          elements: { images: { clones: { _default: 4, min: 2, max: 9 }}},
-          _defaults: { style: { columns: 2 }},
+          style: { columns: 2 },
+          elements: { images: { 
+            blueprint: { 
+              clones: { _default: 4, min: 2, max: 9 }
+            }
+          }},
         }
       ],
     },

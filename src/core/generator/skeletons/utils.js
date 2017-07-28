@@ -8,7 +8,8 @@ import {
   isEmpty, 
   pick, 
   isString, 
-  mergeWith, 
+  merge,
+  get,
   isArray, 
   cloneDeep,
   range,
@@ -36,64 +37,61 @@ export function extractSkeletonFromItem(item) {
   return skeleton;
 }
 
-export function generateItemSkeleton(skeleton, blueprint, generic) {
+export function generateItemSkeleton(skeleton, blueprint) {
   
-  const merged = mergeBlueprints(generic, blueprint);
+  const merged = merge({}, blueprint, skeleton.blueprint);
   
   const _skeleton = {
-    color: getDefaults(blueprint._defaults, 'color'),
-    content: getDefaults(blueprint._defaults, 'content'),
+    content: {},
+    color: {},
+    style: {},
     ...skeleton,
-    style: {...skeleton.style, ...getDefaults(blueprint._defaults, 'style')},
-    name: merged.name,
-    layout: getClosestLayout(blueprint.layout, merged.layouts),
-    elements: mapValues(merged.elements, generateElementSkeleton),
-    groups: mapValues(merged.groups, ({_default, options}) => {
-      const selected = _default || randomItem(options);
-      return generateGroupSkeleton(isString(selected) ? {name: selected} : selected);
+    elements: mapValues(merged.elements, (e, elementKey) => {
+      const element = merge({}, e, get(skeleton, ['elements', elementKey]));
+      return generateElementSkeleton(element);
     }),
-    blueprint: omit(merged, ['_defaults']),
-    uid: 'uid_' + uniqueId(),
+    groups: mapValues(merged.groups, ({_default, options}, groupKey) => {
+      const selected = _default || randomItem(options);
+      const _selected = isString(selected) ? {name: selected} : selected
+      const group = merge({}, _selected, get(skeleton, ['groups', groupKey]));
+      return generateGroupSkeleton(group);
+    }),
+    blueprint: merged,
   }
-  _skeleton.clones = generateCloneSkeletons(merged.clones, _skeleton);
+  _skeleton.clones = generateCloneSkeletons(_skeleton);
 
   return _skeleton;
 }
 
-function generateCloneSkeletons(clones, source) {
-  if(clones === undefined) {
-    return [];
-  } else if(clones._default) {
-    return range(0, clones._default).map(i => generateCloneSkeleton(i, source));
+function generateCloneSkeletons(source) {
+  if(source.clones) {
+    return source.clones.map((clone, i) => generateCloneSkeleton(clone, source, i));
   }
-  return clones.map((clone, i) => generateCloneSkeleton(i, clone));
+  const numClones = get(source.blueprint, ['clones', '_default']) || 0;
+  return range(0, numClones).map(i => generateCloneSkeleton({}, source, i));
 }
 
-function generateCloneSkeleton(index, blueprint) {
-  let skeleton = (blueprint.isGroup ? generateGroupSkeleton : generateElementSkeleton)(blueprint);
-  if(blueprint.isGroup) {
-    const _blueprint = cloneDeep(blueprint);
-    _blueprint.groups = mapValues(blueprint.groups, group => ({_default: group}));
-    skeleton = generateGroupSkeleton(_blueprint);
+function generateCloneSkeleton(clone, source, index) {
+  const skeleton = merge({}, clone, source);
+  skeleton.blueprint = {...skeleton.blueprint, clones: null};
+
+  const _skeleton = cloneDeep(skeleton);
+  _skeleton.clones = [];
+
+  let _clone;
+  if(skeleton.isGroup) {
+    _clone = generateGroupSkeleton(_skeleton);
   } else {
-    skeleton = generateElementSkeleton(blueprint);
+    _clone = generateElementSkeleton(_skeleton);
   }
-  skeleton.relativeId = skeleton.relativeId + "_" + index;
-  skeleton.index = index;
-  skeleton.isClone = true;
-  return skeleton;
+  _clone.relativeId = source.id + "_" + index;
+  _clone.isClone = true;
+  return _clone;
 }
 
 function getDefaults(_defaults={}, key) {
   return _defaults[key] || {};
 }
-
-function mergeBlueprints(generic, blueprint) {
-  return mergeWith({}, generic, blueprint, (g, b) => (
-    isArray(g) && isArray(b) ? b : undefined
-  ));
-}
-
 
 export function getClosestLayout(layoutToMatch={}, layouts) {
   if(isEmpty(layouts)) {

@@ -20,10 +20,12 @@ class Navbar1 extends React.PureComponent {
       paddingHorizontal: style.edgePadding,
       display: 'flex',
       align: 'center',
+      fixed: false,
     });
 
+    const fixedClassNames = convertStyleToAtomic({fixed: style.fixed});
     return (
-      <div className={colorClassNames}>
+      <div className={colorClassNames + ' ' + fixedClassNames}>
         <div className={containerClassNames}>
           <div>
             <Element {...elements.logo} />
@@ -48,7 +50,9 @@ export const blueprint = {
   style: {
     linksAlign: { options: ['left', 'right'] }
   },
-  color: {},
+  color: {
+    background: 'default',
+  },
   elements: {
     logo: {
       name: 'LogoImage',

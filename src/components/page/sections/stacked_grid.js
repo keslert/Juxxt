@@ -48,12 +48,27 @@ class StackedGrid extends React.PureComponent {
 
 export default StackedGrid;
 
-const clones = {_default: 3, min: 1, max: 12};
+
+const gridItem = {
+  name: 'HeadingParagraph', 
+  elements: {
+    heading: { 
+      name:'SmallHeading'
+    }
+  },
+  blueprint: { 
+    clones: { _default: 3, min: 1, max: 12 },
+  },
+}
 export const blueprint = {
   type: 'grid',
   inherits: ['Columned'],
   style: {},
-  color: {},
+  color: {
+    background: 'default',
+    pattern: true,
+    gradient: true,
+  },
   elements: {
     heading: {
       name: "BasicHeading",
@@ -67,15 +82,17 @@ export const blueprint = {
       options: ['HeadingParagraph', 'HeadingSubheading'],
     },
     gridItem: {
+      _default: gridItem,
       options: [
-        {name: 'HeadingParagraph' , clones, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'HeadingParagraphLink', clones,  elements:{heading:{name:'SmallHeading'}}},
-        {name: 'IconHeadingParagraph',  clones, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'ImageHeadingParagraph', clones, 
+        gridItem,
+        {...gridItem, name: 'HeadingParagraphLink'},
+        {...gridItem, name: 'IconHeadingParagraph'},
+        {
+          name: 'ImageHeadingParagraph', 
           groups: { tp: { options: [
-            {name: 'HeadingParagraph', elements: {heading: {name:'SmallHeading'}}}
+            {name: 'HeadingParagraph', blueprint: { clones: {_default: 3, min: 1, max: 12}}, elements: {heading: {name:'SmallHeading'}}}
           ]}},
-          elements: { image: { _defaults: {style: {'aspectRatio': '4x3'}}}}
+          elements: { image: {style: {'aspectRatio': '4x3'}}}
         },
       ]
     },

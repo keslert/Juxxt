@@ -11,9 +11,7 @@ export function styleItem(item, items, rules, blueprint) {
 }
 
 function styleItemByBlueprint(item, items, blueprint) {
-  
-  Object.keys(blueprint.style).forEach(key => {
-    const {_default, options} = blueprint.style[key];
+  forEach(blueprint.style, ({options, _default}, key) => {
     const value = item.style[key];
     if(value === undefined || !includes(options, value)) {
       item.style[key] = _default !== undefined ? _default : randomItem(options);
@@ -42,6 +40,7 @@ function styleItemByBlueprint(item, items, blueprint) {
 function styleItemLikeItems(item, items, rules) {
   const fn = find(rules, fn => some(items, fn));
   const styles = filter(items, fn).map(item => item.style);
+  const _defaults = item._defaults
   Object.keys(styles[0]).forEach(key => {
     if(item.style[key] === undefined) {
       item.style[key] = getMode(map(styles, key));

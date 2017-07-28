@@ -49,7 +49,9 @@ export const blueprint = {
   elements: {
     images: {
       name: 'GalleryImage',
-      clones: {_default: 6, min: 1, max: 12},
+      blueprint: { 
+        clones: { _default: 6, min: 1, max: 12 }
+      },
     }
   },
 }

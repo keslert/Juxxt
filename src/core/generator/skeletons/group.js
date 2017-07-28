@@ -1,18 +1,16 @@
 import * as blueprints from '../../../components/page/groups/_blueprints';
-import { generateElementSkeleton } from './element';
 import { generateItemSkeleton } from './utils';
 import uniqueId from 'lodash/uniqueId';
-import { randomItem } from '../../utils';
 
-export function generateGroupSkeleton(blueprint) {
-  const generic = blueprints[blueprint.name];
+export function generateGroupSkeleton(skeleton) {
+  const blueprint = blueprints[skeleton.name];
   
-  const id = blueprint.id || 'g_' + uniqueId()
-  const skeleton = { 
-    id, 
-    relativeId: id,
+  const _skeleton = { 
+    id: 'g_' + uniqueId(),
+    ...skeleton,
     isGroup: true,
   }
+  _skeleton.relativeId = _skeleton.id;
 
-  return generateItemSkeleton(skeleton, blueprint, generic);
+  return generateItemSkeleton(_skeleton, blueprint);
 }

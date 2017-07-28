@@ -25,8 +25,8 @@ const sections = {
   },
   BackgroundImageSection: {
     crop: {
-      _default: 'center-center',
-      options: ['top-left', 'top-center', 'top-right', 'center-left', 'center-center', 'center-right', 'bottom-left', 'bottom-center', 'bottom-right'],
+      _default: 50,
+      options: [10,100,20,30,40,50,60,70,80,90],
       hide: section => !section.color.backgroundImage,
     },
     filter: {
@@ -59,7 +59,7 @@ const groups = {
   TalkingPoint: {
     maxWidth: {
       _default: '38em',
-      options: ['auto', '30em', '34em', '38em'],
+      options: ['auto', '30em', '34em', '38em', '44em'],
     }
   },
   ListGutter: {
@@ -133,8 +133,8 @@ const elements = {
   },
   AspectMedia: {
     crop: {
-      _default: 'center center',
-      options: ['left top', 'left center', 'left bottom', 'center top', 'center center', 'center bottom', 'right top', 'right center', 'right bottom']
+      _default: 50,
+      options: [10,100,20,30,40,50,60,70,80,90],
     },
     aspectRatio: {
       _default: '4x3',

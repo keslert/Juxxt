@@ -62,7 +62,12 @@ export const blueprint = {
   groups: {
   	lists: {
   		options:[
-        {name: 'VerticalList', clones: {_default: 3, min: 1, max: 4 }},
+        {
+          name: 'VerticalList', 
+          blueprint: {
+            clones: { _default: 3, min: 1, max: 4 }
+          }
+        },
       ],
   	},
   },

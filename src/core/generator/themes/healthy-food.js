@@ -47,248 +47,198 @@ export default {
   colorBlueprint,
 page: {
     sections: [
-      {name: 'Navbar3'
-      },
-      {name: 'Header',
-        _defaults: {
-          style: {
-            paddingBottom: 5,
-            paddingTop: 7,
-            fontFamily: 'Montserrat',
-            fontSize: 4,
-          },
-          color: {
-            backgroundImage: backgroundImages[1].key,
-            _backgroundImage: backgroundImages[1].url,
-            background: palette[0],
-          }
+      {name: 'Navbar3'},
+      {
+        name: 'Basic',
+        style: {
+          paddingBottom: 5,
+          paddingTop: 7,
+          fontFamily: 'Montserrat',
+          fontSize: 4,
+        },
+        color: {
+          backgroundImage: backgroundImages[1].key,
+          _backgroundImage: backgroundImages[1].url,
+          background: palette[0],
         },
         groups: {
           tp: {
-            _default: {
-              name: 'HeadingSubheadingButton',
-              elements: {
-                heading: {
-                  _defaults: {
-                    color: {
-                      text: '#ffffff',
-                      _textBackground: palette[0],
-                    },
-                    style: {
-                      fontSize: 6,
-                      lineHeight: 3,
-                    }
-                  }
+            name: 'HeadingSubheadingButton',
+            elements: {
+              heading: {
+                color: {
+                  text: '#ffffff',
+                  _textBackground: palette[0],
                 },
-                subheading: {
-                  _defaults: {
-                    color: {
-                      text: '#ffffff',
-                      _textBackground: palette[0],
-                    },
-                  }
+                style: {
+                  fontSize: 6,
+                  lineHeight: 3,
+                }
+              },
+              subheading: {
+                color: {
+                  text: '#ffffff',
+                  _textBackground: palette[0],
                 },
               },
-              // groups: {
-              //   buttonList : {
-              //     _default: {
-              //       name: 'ButtonList',
-              //       elements: {
-              //         buttons: {
-              //           _defaults: {
-              //             color: {
-              //               background: "transparent",
-              //               text: '#ffffff',
-              //             }
-              //           }
-              //         }
-              //       }
-              //     }
-              //   }
-              // }
             } 
           }
         }
       },
       {name: 'Basic',
         groups: {
-          item:{
-            _default: { name: 'HeadingParagraph' },
-          }
-        }
-      },
-      {name: 'BasicWide1_2',
-        _defaults: {
-          color: {
-            background: palette[2],
-          },
-        },
-        groups: {
-          tp: {
-            _default: {
-              name: 'HeadingParagraphButton',
-              style: {
-                _default: {
-                  align: 'right'
-                }
-              },
-              color: {
-                background: palette[2],
-              }
-            }
-          },
-        },
-        elements: {
-          image: {
-            _defaults : {
-              content: images[15],
-            }   
-          },
-        },
-        layout: {
-          order: 3,
-        },
-      },
-      {name: 'Basic',
-        _default: {
-          color: {
-            background: colorBlueprint.lightGray,
-          }
-        },
-        groups: {
-          item:{
-            _default: { name: 'HeadingParagraph' },
-          }
-        }
-      },
-      {name: 'BasicWide1_2',
-        _defaults: {
-          layouts: {
-            order: 1,
-          },
-          color: {
-            background: palette[2],
-          },
-        },
-        groups: {
-          tp: {
-            _default: {
-              name: 'IconHeadingParagraph',
-              style: {
-                _default: {
-                  align: 'left'
-                }
-              },
-              color: {
-                background: palette[2],
-              },
-            },
-          },
-        },
-        elements: {
-          image: {
-            _defaults : {
-              content: images[7],
-            }   
-          },
-        },
-        layout: {
-          order: 1,
-        },
-      },
-      {name: 'StackedGrid',
-        groups: {
-          tp: {
-            _default: {
-              name: 'HeadingSubheading',
-            },
-          },
-          gridItem: {
-            _default: {
-              name: 'HeadingParagraph', clones: {_default: 6, min: 1, max: 16},  elements:{heading:{name:'SmallHeading'}},
-            },
-          }
-        },
-      },
-      {name: 'Header',
-        _defaults: {
-          style: {
-            paddingBottom: 5,
-            paddingTop: 6,
-            fontFamily: 'Montserrat',
-            fontSize: 3,
-            parallax: 'on',
-          },
-          color: {
-            backgroundImage: backgroundImages[3].key,
-            _backgroundImage: backgroundImages[3].url,
-            background: palette[0],
-          }
-        },
-        groups: {
-          tp: {
-            _default: {
-              name: 'HeadingSubheadingButton',
-              elements: {
-                heading: {
-                  _defaults: {
-                    color: {
-                      text: '#ffffff',
-                      _textBackground: palette[0],
-                    },
-                    style: {
-                      fontSize: 5,
-                      lineHeight: 3,
-                    }
-                  }
-                },
-                subheading: {
-                  _defaults: {
-                    color: {
-                      text: '#ffffff',
-                      _textBackground: palette[0],
-                    },
-                  }
-                },
-              },
-            } 
+          item: {
+            name: 'HeadingParagraph',
           }
         }
       },
       {
-        name: 'Basic',
+        name: 'BasicWide1_2',
+        color: {
+          background: palette[2],
+        },
+        style: {
+          order: 3,
+        },
         groups: {
-          item: {
-            _default: 'Gallery'
+          tp: {
+            name: 'HeadingParagraphButton',
+            color: {
+              background: palette[2],
+            }
+          },
+        },
+        elements: {
+          image: {
+            content: images[15],
+          },
+        },
+      },
+      {
+        name: 'Basic',
+        color: {
+          background: colorBlueprint.lightGray,
+        },
+        groups: {
+          item:{
+            name: 'HeadingParagraph',
           }
         }
       },
-      {name: 'Footer1',
-        _defaults: {
-          color: {
-            background: colorBlueprint.lightGray,
-          }
-        },
-        elements: {
-          copyright: {
-            _default: {
-              name: 'Copyright',
-            }
-          }
-        },
-        groups: {
-          button: {
-            _default: {
-              name: 'ButtonList',
-            }
-          },
-          links: {
-            _default: {
-              name: 'HorizontalList',
-            }
-          }
-        },
-      }
+      // {
+      //   name: 'BasicWide1_2',
+      //   style: {
+      //     order: 1,
+      //   },
+      //   color: {
+      //     background: palette[2],
+      //   },
+      //   groups: {
+      //     tp: {
+      //       _default: {
+      //         name: 'IconHeadingParagraph',
+      //         color: {
+      //           background: palette[2],
+      //         },
+      //       },
+      //     },
+      //   },
+      //   elements: {
+      //     image: {
+      //       _defaults : {
+      //         content: images[7],
+      //       }   
+      //     },
+      //   },
+      // },
+      // {name: 'StackedGrid',
+      //   groups: {
+      //     tp: {
+      //       _default: {
+      //         name: 'HeadingSubheading',
+      //       },
+      //     },
+      //   },
+      // },
+      // {name: 'Header',
+      //   _defaults: {
+      //     style: {
+      //       paddingBottom: 5,
+      //       paddingTop: 6,
+      //       fontFamily: 'Montserrat',
+      //       fontSize: 3,
+      //       parallax: 'on',
+      //     },
+      //     color: {
+      //       backgroundImage: backgroundImages[3].key,
+      //       _backgroundImage: backgroundImages[3].url,
+      //       background: palette[0],
+      //     }
+      //   },
+      //   groups: {
+      //     tp: {
+      //       _default: {
+      //         name: 'HeadingSubheadingButton',
+      //         elements: {
+      //           heading: {
+      //             _defaults: {
+      //               color: {
+      //                 text: '#ffffff',
+      //                 _textBackground: palette[0],
+      //               },
+      //               style: {
+      //                 fontSize: 5,
+      //                 lineHeight: 3,
+      //               }
+      //             }
+      //           },
+      //           subheading: {
+      //             _defaults: {
+      //               color: {
+      //                 text: '#ffffff',
+      //                 _textBackground: palette[0],
+      //               },
+      //             }
+      //           },
+      //         },
+      //       } 
+      //     }
+      //   }
+      // },
+      // {
+      //   name: 'Basic',
+      //   groups: {
+      //     item: {
+      //       _default: 'Gallery'
+      //     }
+      //   }
+      // },
+      // {name: 'Footer1',
+      //   _defaults: {
+      //     color: {
+      //       background: colorBlueprint.lightGray,
+      //     }
+      //   },
+      //   elements: {
+      //     copyright: {
+      //       _default: {
+      //         name: 'Copyright',
+      //       }
+      //     }
+      //   },
+      //   groups: {
+      //     button: {
+      //       _default: {
+      //         name: 'ButtonList',
+      //       }
+      //     },
+      //     links: {
+      //       _default: {
+      //         name: 'HorizontalList',
+      //       }
+      //     }
+      //   },
+      // }
     ]
   }
 }

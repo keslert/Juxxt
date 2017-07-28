@@ -49,30 +49,42 @@ class Grid extends React.PureComponent {
 export default Grid;
 
 
-const clones = { _default: 3, min: 1, max: 12 };
+const gridItem = {
+  name: 'HeadingParagraph', 
+  elements: {
+    heading: { 
+      name:'SmallHeading'
+    }
+  },
+  blueprint: { 
+    clones: { _default: 3, min: 1, max: 12 },
+  },
+}
+
 export const blueprint = {
   type: 'basic',
   inherits: ['Guttered', 'Columned', 'Section'],
   style: {
     height: { _default: 2, options: [0,1,2,3,4,5,6,7,8] }
   },
-  background: {
+  color: {
     color: 'default',
     pattern: true,
     gradient: true,
   },
   groups: {
     gridItem: {
-      _default: {name: 'HeadingParagraph', clones, elements:{heading:{name:'SmallHeading'}}},
+      _default: gridItem,
       options: [
-        {name: 'HeadingParagraph', clones, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'HeadingParagraphLink', clones, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'IconHeadingParagraph', clones, elements:{heading:{name:'SmallHeading'}}},
-        {name: 'ImageHeadingParagraph', 
+        gridItem,
+        {...gridItem, name: 'HeadingParagraphLink'},
+        {...gridItem, name: 'IconHeadingParagraph'},
+        {
+          name: 'ImageHeadingParagraph', 
           groups: { tp: { options: [
-            {name: 'HeadingParagraph', clones, elements: {heading: {name:'SmallHeading'}}}
+            {name: 'HeadingParagraph', blueprint: { clones: {_default: 3, min: 1, max: 12}}, elements: {heading: {name:'SmallHeading'}}}
           ]}},
-          elements: { image: { _defaults: {style: {'aspectRatio': '4x3'}}}}
+          elements: { image: {style: {'aspectRatio': '4x3'}}}
         },
       ]
     },

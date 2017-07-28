@@ -42,7 +42,9 @@ export const blueprint = {
   elements: {
     links: {
       name: 'ReadableLink',
-      clones: {_default: 3, min: 1, max: 7},
+      blueprint: { 
+        clones: { _default: 3, min: 1, max: 7 },
+      },
     }
   },
 }
