@@ -90,11 +90,15 @@ export default {
           fontFamily: 'Montserrat',
           fontSize: 3,
           parallax: true,
+          height: 110,
         },
         color: {
           backgroundImage: backgroundImages[1].key,
           _backgroundImage: backgroundImages[1].url,
           background: palette[0],
+        },
+        BackgroundImageSection: {
+          parallax: '',
         },
         groups: {
           item: {
@@ -116,6 +120,9 @@ export default {
       },
       {
         name: 'Grid',
+        style: {
+          height: 5,
+        },
         color: { background: colorBlueprint.darkGray },
         groups: {
           gridItem: {
@@ -138,6 +145,7 @@ export default {
           fontFamily: 'Montserrat',
           fontSize: 3,
           parallax: true,
+          height: 110,
         },
         color: {
           backgroundImage: backgroundImages[0].key,
@@ -182,16 +190,10 @@ export default {
       },
     
       {
-        name: 'StackedGrid',
-      },
-      {
-        name: 'Basic', 
-        groups: {
-          item: 'Gallery'
-        },
-      },
-      {
         name: 'Basic',
+        style: {
+          height: 30,
+        },
         color: { background: colorBlueprint.darkGray },
         groups: {
           item: {
