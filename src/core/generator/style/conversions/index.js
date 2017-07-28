@@ -14,16 +14,22 @@ const conversions = {
   ...text,
   ...width,
   ...aspect,
+
   order: v => 'order-' + v,
   borderRadius: v => 'br' + v,
   borderStyle: v => 'b-' + v,
   borderWidth: v => 'bw' + v,
   height: v => 'h-' + v,
-  minHeight: v => 'minh-' + v,  
-  parallax: v => v ? 'parallax': '',
-  fixed: v => v ? 'fixed' : '',
-  crop: v => 'bg-' + v,
+  minHeight: v => 'minh-' + v,
+  parallax: v => v === "on" ? 'parallax': '',
+  fixedNavBar: v => v === "true" ? 'fixedNavBar': '',
+
+  // overlayText: v => v === "true" ? ' overlayText': '', 
+  // overlayImage: v => v === "true" ? ' overlayImage': '', 
+  // overlayContainer: v => v === "true" ? ' overlayContainer': '', 
+  
 }
+
 
 export function convertStyleToAtomic(style) {
   return map(style, (value, key) => (

@@ -44,6 +44,7 @@ export default Basic;
 
 export const blueprint = {
   type: 'basic',
+
   inherits: ['BackgroundImageSection', 'Section'],
   background: {
     color: 'default',
@@ -55,6 +56,7 @@ export const blueprint = {
     content: true,
   },
   style: {
+
     height: {
       _default: 40,
       //options: [0,6,12,18,24,30,36,42],
