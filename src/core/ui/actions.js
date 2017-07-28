@@ -19,6 +19,8 @@ import {
   clamp,
   difference,
   chain,
+  some,
+  values,
 } from 'lodash';
 
 import { getSelected } from '../page/selectors';
@@ -115,23 +117,9 @@ export function resolveModifications(dispatch, state, modification, selected, ca
 }
 
 
-function selectedHasClones(selected) {
-  return selected.clones.length >= 1;
-}
-
 export function containsClone(selected) {
-  let cloneList;
-  if(selected._groups) {
-    cloneList = selected._groups;
-  } else if (selected.elements) {
-    cloneList = [];
-    forEach(selected.elements, (e)=>cloneList.push(e));
-  } else if (selected.clones.length >=1 ) {
-    return true;
-  } else {
-    return false;
-  }
-  return cloneList.some(selectedHasClones)
+  const items = [...values(selected.elements), ...values(selected.groups)];
+  return some(items, item => item.clones.length);
 }
 
 function getLayoutKeysFromSelected(section) {
@@ -182,6 +170,11 @@ const layoutStyles = [
 ]
 function resolveLayoutModification(dispatch, state, selected) {
   const {keys, options} = getModificationKeysAndOptions(layoutStyles, selected, selected.blueprint.layout);
+  if(selected.isClone || containsClone(selected)) {
+    keys.push('clones');
+    options.push({label: 'clones', keys: ['clones']});
+  }
+
   resolveModificationSelection(dispatch, state, 'layout', keys, options);
 }
 

@@ -90,7 +90,7 @@ function generateLayoutAlternatives(page, modify, selected) {
   
   let skeletons;
   if(modify.clones) {
-    skeletons = generateItemCloneAlternatives(selected, sectionSkeleton);
+    skeletons = generateItemCloneAlternatives(selected.isClone ? selected.parent : selected, sectionSkeleton);
   } else if(selected.isSection) {
     skeletons = generateSectionLayoutAlternatives(modify, selected, sectionSkeleton);
   } else if(selected.isGroup) {
