@@ -1,5 +1,6 @@
 import * as blueprints from '../../../components/page/sections/_blueprints';
 import { generateSectionSkeleton } from '../skeletons/section';
+import { PatternDict } from '../color/page';
 import { 
   filter, 
   range, 
@@ -112,9 +113,21 @@ function trimFileName(name) {
   return name.split(".")[0].split("/")[name.split(".")[0].split("/").length-1];
 }
 
+function checkPattern(color,patternPath) {
+  // const colorLuminance = tinycolor(color).getLuminance();
+  // const pattern_brightness = PatternDict[patternPath]/255;
+  // if(colorLuminance < 0.45) { // all dark colors can show any pattern
+  //   return true;
+  // }
+  // return (pattern_brightness < colorLuminance);
+  return true;
+}
 function generateSectionPatternsBackground(sectionSkeleton, page) {
+
   const colorBlueprint = page.colorBlueprint.bgBlueprints[sectionSkeleton.color.background];
-  const skeletons = map(colorBlueprint.patterns, (pattern) => {
+  const _patterns = filter(colorBlueprint.patterns, (pattern)=> checkPattern(sectionSkeleton.color.background,pattern));
+
+ const skeletons = map(_patterns, (pattern) => {
     const skeleton = cloneDeep(sectionSkeleton);
     linkSkeleton(skeleton);
     skeleton.color = {

@@ -1,24 +1,87 @@
 import { getMostVibrantColor, tintColor, getReadableColors, isSimilarHue } from './utils';
 import { zipObject, filter, map, forEach, uniq, flatMap, clone } from 'lodash';
 import { absDiff } from '../../utils';
+import { getVibrancy } from './utils';
 import tinycolor from 'tinycolor2';
 import geopattern from 'geopattern';
 
-
-const PATTERNS = ["/images/patterns/bedge-grunge.png",
-                  "/images/patterns/bright-squares.png",
-                  "/images/patterns/cubes.png",
+const PATTERNS = [
                   "/images/patterns/escheresque.png",
-                  "/images/patterns/subtle-carbon.png",
                   "/images/patterns/inspiration-geometry.png",
                   "/images/patterns/simple-dashed.png",
                   "/images/patterns/food.png",
                   "/images/patterns/shattered-dark.png",
                   "/images/patterns/gradient-squares.png",
                   "/images/patterns/gplay.png",
-                  "/images/patterns/stardust.png",]
+                  "/images/patterns/stardust.png",
+                  "/images/patterns/cubes.png",
+                  "/images/patterns/shattered-dark.png",
+                  "/images/patterns/type.png",
+                  "/images/patterns/escheresque-dark.png",
+                  "/images/patterns/diamonds.png",
+                  "/images/patterns/asfalt.png",
+]
+
+export const PatternDict = {};
+
+function getImageLightness(imageSrc,callback) {
+    var img = document.createElement("img");
+    img.src = imageSrc;
+    img.style.display = "none";
+    document.body.appendChild(img);
+
+    var colorSum = 0;
+
+    img.onload = function() {
+        // create canvas
+        var canvas = document.createElement("canvas");
+        canvas.width = this.width;
+        canvas.height = this.height;
+
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(this,0,0);
+
+        var imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
+        var data = imageData.data;
+        var r,g,b,avg;
+
+        for(var x = 0, len = data.length; x < len; x+=4) {
+            r = data[x];
+            g = data[x+1];
+            b = data[x+2];
+              
+
+            avg = Math.floor( ((r+g+b)/3) * data[x+3]);
+            colorSum += avg;
+            
+        }
+
+        var brightness = Math.floor(colorSum / (this.width*this.height));
+        callback(brightness);
+    }
+}
+
+
+forEach(PATTERNS,function(pattern) {
+  getImageLightness(pattern, function(brightness) {
+    PatternDict[pattern] = brightness;
+    console.log(pattern + " : " + brightness);
+  })
+});
+
+
+function isColorVisibleOnPattern(color) {
+  const tc = tinycolor(color);
+  if(tc.getBrightness() < 127.5 )
+    return true;
+  else if (tc.getLuminance() > 0.5)
+    return false;
+  return false;
+}
+
 
 export function buildPageColorBlueprint(colors) {
+  
   const _colors = uniq([...colors, '#ffffff'])
   const primary = getMostVibrantColor(_colors);
   const darkGray = tintColor("#211b1a", primary, 20);
@@ -29,15 +92,14 @@ export function buildPageColorBlueprint(colors) {
     color,
     texts: getReadableColors(allColors, color),
   })), blueprint => blueprint.texts.length)
-  
+  const DAWK= [];
   const backgrounds = map(blueprints, 'color');
-
+  let _patterns = {};
   forEach(blueprints, blueprint => {
     blueprint.solids = getReadableColors(backgrounds, blueprint.color, 1.4);
     blueprint.gradients = getGradients(blueprint.color, colors);
     blueprint.patterns = PATTERNS;
   });
-
   return {
     primary,
     lightGray,
@@ -47,6 +109,7 @@ export function buildPageColorBlueprint(colors) {
     backgrounds,
     bgBlueprints: zipObject(backgrounds, blueprints),
   }
+
 }
 
 const GRADIENT_DIRECTIONS = ['to left top', 'to right top', 'to right', 'to left', ' to left bottom', 'to right bottom', 'to bottom', 'to top'];
