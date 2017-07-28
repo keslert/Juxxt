@@ -65,6 +65,7 @@ export default {
           }
         },
       },
+      { name: 'Basic1_2' },
       {
         name: 'Basic',
         color: { background: colorBlueprint.primary },

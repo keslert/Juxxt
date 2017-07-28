@@ -9,7 +9,7 @@ class Image extends React.PureComponent {
     const classNames = convertStyleToAtomic(style);
 
     if(style.aspectRatio !== 'auto') {
-      return <div className={classNames + ' bg-center cover w-100P overflow-hidden'}
+      return <div className={classNames + ' cover w-100P'}
                   style={{backgroundImage: `url(${content.url})`}} />
     }
 

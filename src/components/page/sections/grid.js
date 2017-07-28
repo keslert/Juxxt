@@ -9,7 +9,8 @@ class Grid extends React.PureComponent {
 
     const containerClassNames = convertStyleToAtomic({
       ...style,
-      paddingVertical: style.height,
+      paddingBottom: '-l-' + (style.height / 2),
+      paddingTop: '-l-' + (style.height / 2),
       paddingHorizontal: style.edgePadding,
       margin: 'auto',
       maxWidth: 'page',
@@ -64,9 +65,7 @@ const gridItem = {
 export const blueprint = {
   type: 'basic',
   inherits: ['Guttered', 'Columned', 'Section'],
-  style: {
-    height: { _default: 2, options: [0,1,2,3,4,5,6,7,8] }
-  },
+  style: {},
   color: {
     color: 'default',
     pattern: true,

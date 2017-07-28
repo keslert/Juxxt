@@ -3,7 +3,10 @@ import Group from '../groups';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 import pick from 'lodash/pick';
+import clamp from 'lodash/clamp';
+import range from 'lodash/range';
 
+const POSITIONS = 6;
 class Basic extends React.PureComponent {
   render () {
     const { groups, style, color } = this.props;
@@ -13,6 +16,8 @@ class Basic extends React.PureComponent {
     const isLeft = style.horizontalPosition === 'left';
     const isCenter = style.horizontalPosition === 'center';
 
+      
+    const paddingBottom = clamp(Math.floor(style.height * (style.verticalPosition / POSITIONS)), 1, style.height);
     const containerClassNames = convertStyleToAtomic({
       maxWidth: 'page',
       margin: 'auto',
@@ -21,8 +26,8 @@ class Basic extends React.PureComponent {
       justify: (isLeft ? "start" : isCenter ? "center" : "end"),
       minHeight: style.height,
       paddingHorizontal: style.edgePadding,
-      paddingBottom: '-l-' + style.height * (.2),
-      paddingTop: '-l-' + style.height * (.2),    
+      paddingBottom: '-l-' + paddingBottom,
+      paddingTop: '-l-' + (style.height - paddingBottom), 
     })
 
     const colorClassNames = convertColorToAtomic(color);
@@ -51,14 +56,9 @@ export const blueprint = {
     position: ['verticalPosition', 'horizontalPosition']
   },
   style: {
-
-    height: {
-      _default: 40,
-      options: [10,140,20,30,40,50,60,70,80,90,100,110,120,130],
-    },
     verticalPosition: {
-      _default: 'middle',
-      options: ['top', 'middle', 'bottom'],
+      _default: POSITIONS / 2,
+      options: range(1, POSITIONS),
     },
     horizontalPosition: {
       _default: 'center',

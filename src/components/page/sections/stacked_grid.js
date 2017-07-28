@@ -10,7 +10,12 @@ class StackedGrid extends React.PureComponent {
   render () {
     const { style, color, groups, elements } = this.props;
 
-    const containerClassNames = convertStyleToAtomic(style);
+    const containerClassNames = convertStyleToAtomic({
+      ...style,
+      paddingBottom: '-l-' + (style.height / 2),
+      paddingTop: '-l-' + (style.height / 2),
+    });
+
     const colorClassNames = convertColorToAtomic(color);
     const itemClassNames = convertStyleToAtomic({
       display: "flex",
@@ -62,7 +67,7 @@ const gridItem = {
 }
 export const blueprint = {
   type: 'grid',
-  inherits: ['Columned'],
+  inherits: ['Columned', 'ConstrainedSection', 'Section'],
   style: {},
   color: {
     background: 'default',
