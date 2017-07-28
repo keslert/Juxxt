@@ -33,11 +33,27 @@ class Page extends React.PureComponent {
     };
   }
 
+  renderPreview() {
+    const { sections, master, CSSRules } = this.props;
+    return (
+      <StyledPage className="preview" extraRules={CSSRules}>
+        {sections.map((section, i) => (
+          <Section {...section} master={master} index={master ? i : 1000 + i} draggable={false} />
+        ))}
+      </StyledPage>
+    )
+  }
+
   render() {
     const { sections, master, onClick, id, style, CSSRules, preview } = this.props;
+
+    if(preview) {
+      return this.renderPreview();
+    }
+
     const last = sections.length - 1;
 
-    const classNames = convertStyleToAtomic(style) + (preview ? ' preview' : '');
+    const classNames = convertStyleToAtomic(style);
 
     const clickable = isFunction(onClick);
     const preventDrag = preview || (!master && sections.length > 1);

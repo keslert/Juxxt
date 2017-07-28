@@ -20,7 +20,7 @@ class HeadingParagraph extends React.Component {
 export default HeadingParagraph;
 
 export const blueprint = {
-  inherits: ['TalkingPoint', 'RowBuffer'],
+  inherits: ['RowBuffer'],
   style: {},
   color: {},
   background: {

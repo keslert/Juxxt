@@ -19,7 +19,7 @@ export default Heading;
 
 export const blueprint = {
   color: {},
-  inherits: ['TalkingPoint'],
+  inherits: ['BaseGroup'],
   style: {},
   elements: {
     heading: {

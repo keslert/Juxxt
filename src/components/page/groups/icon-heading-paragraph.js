@@ -18,7 +18,7 @@ class IconHeadingParagraph extends React.Component {
 export default IconHeadingParagraph;
 
 export const blueprint = {
-  inherits: ['TalkingPoint', 'RowBuffer'],
+  inherits: ['RowBuffer'],
   style: {
     iconPosition: {
       _default: 'column',

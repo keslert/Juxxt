@@ -18,7 +18,7 @@ class KickerHeadingParagraph extends React.Component {
 export default KickerHeadingParagraph;
 
 export const blueprint = {
-  inherits: ['TalkingPoint', 'RowBuffer', 'BaseGroup'],
+  inherits: ['RowBuffer', 'BaseGroup'],
   style: {},
   color: {},
   elements:  {

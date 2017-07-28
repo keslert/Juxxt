@@ -17,7 +17,7 @@ class ImageHeadingParagraph extends React.Component {
 export default ImageHeadingParagraph;
 
 export const blueprint = {
-  inherits: ['TalkingPoint'],
+  inherits: ['BaseGroup'],
   style: {},
   color: {},
   elements: {

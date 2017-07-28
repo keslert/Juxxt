@@ -64,12 +64,6 @@ const groups = {
       options: ['inherit', 'left', 'center', 'right'],
     }
   },
-  TalkingPoint: {
-    maxWidth: {
-      _default: '38em',
-      options: ['auto', '30em', '34em', '38em', '44em'],
-    },
-  },
   ListGutter: {
     gutter: {
       _default: 2,

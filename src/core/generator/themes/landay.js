@@ -65,7 +65,6 @@ export default {
           }
         },
       },
-      { name: 'Basic1_2' },
       {
         name: 'Basic',
         color: { background: colorBlueprint.primary },
@@ -87,14 +86,16 @@ export default {
       {
         name: 'Basic',
         style: {
-          fontFamily: 'Montserrat',
-          fontSize: 3,
+          height: 10,
           parallax: true,
         },
         color: {
           backgroundImage: backgroundImages[1].key,
           _backgroundImage: backgroundImages[1].url,
           background: palette[0],
+        },
+        BackgroundImageSection: {
+          parallax: '',
         },
         groups: {
           item: {
@@ -120,9 +121,16 @@ export default {
         groups: {
           gridItem: {
             name: 'IconHeadingParagraph', 
+            style: {
+              iconPosition: 'above',
+              textAlign: 'center',
+            },
             elements: {
               heading: {
                 name:'SmallHeading', 
+                style: { 
+                  fontWeight: 4,
+                },
                 color: { 
                   text: colorBlueprint.lightGray,
                   _textBackground: colorBlueprint.darkGray,
@@ -135,8 +143,7 @@ export default {
       {
         name: 'Basic',
         style: {
-          fontFamily: 'Montserrat',
-          fontSize: 3,
+          height: 10,
           parallax: true,
         },
         color: {
@@ -167,7 +174,7 @@ export default {
             name: 'HeadingSubheading',
           },
           gridItem: {
-            name: 'IconHeadingParagraph', 
+            name: 'IconHeadingParagraph',
             elements: {
               heading: { 
                 name:'SmallHeading', 
@@ -181,15 +188,6 @@ export default {
         },
       },
     
-      {
-        name: 'StackedGrid',
-      },
-      {
-        name: 'Basic', 
-        groups: {
-          item: 'Gallery'
-        },
-      },
       {
         name: 'Basic',
         color: { background: colorBlueprint.darkGray },

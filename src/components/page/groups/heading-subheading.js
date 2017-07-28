@@ -19,7 +19,7 @@ export default HeadingSubheading;
 
 export const blueprint = {
   color: {},
-  inherits: ['TalkingPoint', 'RowBuffer'],
+  inherits: ['RowBuffer'],
   style: {},
   elements: {
     heading: {

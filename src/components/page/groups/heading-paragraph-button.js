@@ -19,7 +19,7 @@ class HeadingParagraphButton extends React.Component {
 export default HeadingParagraphButton;
 
 export const blueprint = {
-  inherits: ['TalkingPoint', 'RowBuffer'],
+  inherits: ['RowBuffer'],
   style: {},
   color: {},
   elements: {
