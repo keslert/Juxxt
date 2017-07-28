@@ -18,7 +18,7 @@ class HeadingParagraphLink extends React.PureComponent {
 export default HeadingParagraphLink;
 
 export const blueprint = {
-  inherits: ['TalkingPoint', 'RowBuffer'],
+  inherits: ['RowBuffer'],
   style: {},
   color: {},
   elements: {

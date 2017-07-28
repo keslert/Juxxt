@@ -19,7 +19,7 @@ class HeadingSubheadingButton extends React.Component {
 export default HeadingSubheadingButton;
 
 export const blueprint = {
-  inherits: ['TalkingPoint', 'RowBuffer'],
+  inherits: ['RowBuffer'],
   style: {},
   color: {},
   elements: {
