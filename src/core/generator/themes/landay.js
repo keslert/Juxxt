@@ -88,7 +88,6 @@ export default {
         style: {
           height: 10,
           parallax: true,
-          height: 110,
         },
         color: {
           backgroundImage: backgroundImages[1].key,
@@ -118,9 +117,6 @@ export default {
       },
       {
         name: 'Grid',
-        style: {
-          height: 5,
-        },
         color: { background: colorBlueprint.darkGray },
         groups: {
           gridItem: {
@@ -149,7 +145,6 @@ export default {
         style: {
           height: 10,
           parallax: true,
-          height: 110,
         },
         color: {
           backgroundImage: backgroundImages[0].key,
@@ -195,9 +190,6 @@ export default {
     
       {
         name: 'Basic',
-        style: {
-          height: 30,
-        },
         color: { background: colorBlueprint.darkGray },
         groups: {
           item: {
