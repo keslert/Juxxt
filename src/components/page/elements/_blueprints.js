@@ -85,7 +85,7 @@ export const BasicParagraph = {
 export const BasicImage = { 
   name: 'BasicImage', 
   is: 'Image',
-  inherits: ['AspectMedia', 'BorderRadius'],
+  inherits: ['AspectMedia', 'Cropped', 'BorderRadius'],
   color: {},
   style: {
     aspectRatio: {
@@ -99,7 +99,7 @@ export const BasicImage = {
 export const GalleryImage = { 
   name: 'BasicImage', 
   is: 'Image',
-  inherits: ['AspectMedia', 'BorderRadius'],
+  inherits: ['AspectMedia', 'Cropped', 'BorderRadius'],
   color: {},
   style: {},
   image: { content: ['content'] },
@@ -109,7 +109,7 @@ export const GalleryImage = {
 export const CoverImage = {
   name: 'CoverImage', 
   is: 'Image',
-  inherits: ['AspectMedia'],
+  inherits: ['Cropped'],
   color: {},
   style: {
     aspectRatio: {

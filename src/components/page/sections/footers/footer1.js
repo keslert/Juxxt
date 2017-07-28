@@ -9,7 +9,8 @@ class Footer1 extends React.PureComponent {
     const { elements, groups, style, color } = this.props;
     const boxStyle = {
       ...style,
-      paddingVertical: style.height,
+      paddingBottom: '-l-' + (style.height / 2),
+      paddingTop: '-l-' + (style.height / 2),
       paddingHorizontal: style.edgePadding,
       display: "flex",
       align: "center",
@@ -50,7 +51,6 @@ export const blueprint = {
       _default: 'tc',
       options: ['tc','tl', 'tr'],
     },
-    height: { _default: 4, options: [0,1,2,3,4,5,6,7,8] }
   },
   color: {},
   elements: {

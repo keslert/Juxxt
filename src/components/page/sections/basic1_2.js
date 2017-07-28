@@ -5,10 +5,29 @@ import Box from '../../common/box';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
 import pick from 'lodash/pick';
+import clamp from 'lodash/clamp';
+import range from 'lodash/range';
 
+const POSITIONS = 6;
 class Basic1_2 extends React.Component {
   render() {
     const { elements, style, groups, color, image } = this.props;
+
+    const paddingBottom = clamp(Math.floor(style.height * (style.position / POSITIONS)), 1, style.height);
+    const containerClassNames = convertStyleToAtomic({
+      ...style,
+      paddingBottom: '-l-' + paddingBottom,
+      paddingTop: '-l-' + (style.height - paddingBottom),
+      paddingHorizontal: style.edgePadding,
+    });
+
+    const wrapInnerClassNames = convertStyleToAtomic({
+      marginHorizontal: style.constrained ? -style.gutter : 0,
+      textAlign: style.constrained ? 'left' : 'center',
+      display: "flex",
+      flexWrap: "wrap",
+      align: 'center',
+    })
 
     const mediaPercentage = Math.floor(100 - style.splitRatio);
     const mediaWrapClassNames = convertStyleToAtomic({
@@ -27,25 +46,10 @@ class Basic1_2 extends React.Component {
       paddingHorizontal: style.gutter,
     })
 
-    const containerClassNames = convertStyleToAtomic({
-      ...style,
-      paddingVertical: style.height,
-      paddingHorizontal: style.edgePadding,
-    });
-
-    const wrapInnerClassNames = convertStyleToAtomic({
-      marginHorizontal: style.constrained ? -style.gutter : 0,
-      textAlign: style.constrained ? 'left' : 'center',
-      display: "flex",
-      flexWrap: "wrap",
-      align: 'center',
-    })
-
     const colorClassNames = convertColorToAtomic(color);
 
     const imageStyle = pick(style, ['crop', 'filter'])
     const imageClassNames = convertStyleToAtomic(imageStyle);
-
     return (
       <Box className={colorClassNames + ' ' + imageClassNames}>
         <Box className={containerClassNames}>
@@ -68,10 +72,10 @@ export const blueprint = {
   type: 'basic',
   inherits: ['Guttered', 'Ordered', 'BackgroundImageSection', 'ConstrainedSection', 'SplitRatioSection', 'Section'],
   style: {
-    height: {
-      _default: 5,
-      options: [0,2,4,5,6,7,8],
-    },
+    position: {
+      _default: POSITIONS / 2,
+      options: [1, POSITIONS - 1, ...range(2, POSITIONS - 2)], // 
+    }
   },
   color: {
     color: 'default',

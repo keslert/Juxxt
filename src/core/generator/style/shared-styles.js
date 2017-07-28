@@ -4,6 +4,10 @@ const sections = {
     edgePadding: {
       _default: 4,
       options: [0,1,2,3,4,5,6],
+    },
+    height: {
+      _default: 4,
+      options: [0,12, 2,4,6,8,10],
     }
   },
   FixedSection: {
@@ -55,12 +59,16 @@ const groups = {
       _default: 0,
       options: [0,1,2,3,4,5,6,7],
     },
+    textAlign: {
+      _default: 'inherit',
+      options: ['inherit', 'left', 'center', 'right'],
+    }
   },
   TalkingPoint: {
     maxWidth: {
       _default: '38em',
       options: ['auto', '30em', '34em', '38em', '44em'],
-    }
+    },
   },
   ListGutter: {
     gutter: {
@@ -131,11 +139,13 @@ const elements = {
       options: [0,1,2,3,4,100,'-pill'],
     },
   },
-  AspectMedia: {
+  Cropped: {
     crop: {
       _default: 50,
-      options: [10,100,20,30,40,50,60,70,80,90],
+      options: [0,10,100,20,30,40,50,60,70,80,90],
     },
+  },
+  AspectMedia: {
     aspectRatio: {
       _default: '4x3',
       options: ['1x1', '16x9', '4x3', '3x4', '6x4', '8x5', '7x5'],

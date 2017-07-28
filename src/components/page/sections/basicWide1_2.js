@@ -1,10 +1,9 @@
 import React from 'react';
 import Group from '../groups';
-import Box from '../../common/box';
 import Element from '../elements';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../core/generator/color/conversions';
-import isNumber from 'lodash/isNumber';
+import pick from 'lodash/pick';
 
 class BasicWide1_2 extends React.Component {
 
@@ -12,7 +11,10 @@ class BasicWide1_2 extends React.Component {
 
     const { groups, elements, style, color } = this.props;
 
-    const mediaWrapClassNames = convertStyleToAtomic({width: '50P', order: 2, height: (style.height + "e")})
+    const mediaWrapClassNames = convertStyleToAtomic({
+      width: '50P', 
+      order: 2, 
+    })
 
     const isTpLeft = style.order === 'left';
     const isConstrained = style.constrained === 'page';
@@ -22,6 +24,8 @@ class BasicWide1_2 extends React.Component {
       order: isTpLeft ? 1 : 3,
       display: 'flex',
       align: 'center',
+      paddingBottom: '-l-' + (style.height / 2),
+      paddingTop: '-l-' + (style.height / 2),
     })
 
     
@@ -35,27 +39,24 @@ class BasicWide1_2 extends React.Component {
     const wrapClassNames = convertStyleToAtomic({
       display: "flex",
       flexWrap: "wrap",
-      
     });
-    const innerWrapClassNames= convertStyleToAtomic({
-
-    })
+    
     const colorClassNames = convertColorToAtomic(color);
-
+    const imageStyle = pick(style, ['crop', 'filter'])
+    const imageClassNames = convertStyleToAtomic(imageStyle);
     return (
-      <Box className={colorClassNames}>
-        <Box className={wrapClassNames}>
-          <Box className={mediaWrapClassNames}>
-
+      <div className={colorClassNames + ' ' + imageClassNames}>
+        <div className={wrapClassNames}>
+          <div className={mediaWrapClassNames}>
             <Element {...elements.image} />
-          </Box>
-          <Box className={tpWrapClassNames}>
-            <Box className={tpClassNames}>
+          </div>
+          <div className={tpWrapClassNames}>
+            <div className={tpClassNames}>
               <Group {...groups.tp} />
-            </Box>
-          </Box>
-        </Box>
-      </Box>
+            </div>
+          </div>
+        </div>
+      </div>
     )
   }
 }
@@ -69,6 +70,7 @@ export const blueprint = {
     pattern: true,
     gradient: true,
   },
+  style: {},
   groups: {
     tp: {
       options: ['HeadingParagraph', 'HeadingSubheading','KickerHeadingParagraph','HeadingParagraphLink','HeadingSubheadingButton','HeadingParagraphButton', 'IconHeadingParagraph'],
@@ -77,12 +79,6 @@ export const blueprint = {
   elements: {
     image: {
       name: 'CoverImage',
-    },
-  },
-  style: {
-    height: {
-      _default: 35,
-      options: [35,40,45,50,55],
     },
   },
 }
