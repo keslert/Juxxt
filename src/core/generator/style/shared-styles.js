@@ -136,7 +136,7 @@ const elements = {
   Cropped: {
     crop: {
       _default: 50,
-      options: [0,10,100,20,30,40,50,60,70,80,90],
+      options: [0,100,10,20,30,40,50,60,70,80,90],
     },
   },
   AspectMedia: {
