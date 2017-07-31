@@ -18,6 +18,5 @@ export function styleElement(element, page) {
     e => true,
   ]
   
-  element._possibleStyles = Object.assign({}, ...values(sharedStyles), blueprint.style);
   styleItem(element, elements, rules, {style: blueprint.style, sharedStyles});
 }
