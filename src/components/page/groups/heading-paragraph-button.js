@@ -38,6 +38,6 @@ export const blueprint = {
   groups: {
     buttonList: {
       options: ['ButtonList'],
-    }
+    }  
   },
 }

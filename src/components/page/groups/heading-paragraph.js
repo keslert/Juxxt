@@ -41,6 +41,14 @@ export const blueprint = {
     },
     paragraph: {
       name: BasicParagraph.name,
+      // blueprint: {
+      //   style: {
+      //     marginBottom: {
+      //       _default:0 ,
+      //       hide: _=> true,
+      //     }
+      //   }
+      // }
     },
   },
   variants: [{

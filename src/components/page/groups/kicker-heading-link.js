@@ -39,6 +39,7 @@ export const blueprint = {
     },
     links: {
       name: BasicLink.name,
+      
     },
   },
   variants: [{

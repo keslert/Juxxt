@@ -57,7 +57,7 @@ const groups = {
   BaseGroup: {
     paddingHorizontal: {
       _default: 0,
-      options: [0,1,2,3,4,5,6,7],
+      options: [0,7,1,2,3,4,5,6],
     },
     textAlign: {
       _default: 'inherit',
@@ -67,13 +67,13 @@ const groups = {
   ListGutter: {
     gutter: {
       _default: 2,
-      options: [0,1,2,3],
+      options: [0,3,1,2],
     }
   },
   RowBuffer: {
     buffer: {
       _default: 3,
-      options: [0,1,2,3,4],
+      options: [0,4,1,2,3],
     },
   },
 }
@@ -88,7 +88,7 @@ const elements = {
     },
     marginBottom: {
       _default: 4,
-      options: [0,1,2,3,4,5,6],
+      options: [0,6,1,2,3,4,5],
     },
     fontFamily: {
       _default: 'Source Sans Pro',
@@ -98,11 +98,11 @@ const elements = {
   Paragraph: {
     marginBottom: {
       _default: 4,
-      options: [0,1,2,3,4,5,6],
+      options: [0,6,1,2,3,4,5],
     },
     lineHeight: {
       _default: 3,
-      options: [1,2,3,4],
+      options: [1,4,2,3],
     }
   },
   Button: {
@@ -156,7 +156,7 @@ const elements = {
       _default: '4x3',
       options: ['1x1', '16x9', '4x3', '3x4', '6x4', '8x5', '7x5'],
     },
-  },
+  }
 }
 
 
@@ -167,13 +167,13 @@ export default {
   Guttered: {
     gutter: {
       _default: 4,
-      options: [0,1,2,3,4,5],
+      options: [0,5,1,2,3,4],
     }
   },
   Columned: {
     columns: {
       _default: 3,
-      options: [2,3,4,5,6],
+      options: [2,6,3,4,5],
     }
   },
   Ordered: {

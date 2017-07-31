@@ -51,10 +51,6 @@ page: {
       {
         name: 'Basic',
         style: {
-          paddingBottom: 5,
-          paddingTop: 7,
-          fontFamily: 'Montserrat',
-          fontSize: 4,
         },
         color: {
           backgroundImage: backgroundImages[1].key,
@@ -70,10 +66,7 @@ page: {
                   text: '#ffffff',
                   _textBackground: palette[0],
                 },
-                style: {
-                  fontSize: 6,
-                  lineHeight: 3,
-                }
+                  style: { fontSize: 9, textTransform: 'uppercase', fontFamily: 'Anton', fontWeight: 4 },
               },
               subheading: {
                 color: {
@@ -87,10 +80,6 @@ page: {
       },
       {name: 'Basic',
         style: {
-            paddingBottom: 5,
-            paddingTop: 7,
-            fontFamily: 'Montserrat',
-            fontSize: 4,
           },  
         groups: {
           item: {
@@ -158,10 +147,6 @@ page: {
       },
       {name: 'Basic',
         style: {
-          paddingBottom: 5,
-          paddingTop: 6,
-          fontFamily: 'Montserrat',
-          fontSize: 3,
           parallax: 'on',
         },
         color: {
@@ -179,7 +164,6 @@ page: {
                   _textBackground: palette[0],
                 },
                 style: {
-                  fontSize: 5,
                   lineHeight: 3,
                 }
               },

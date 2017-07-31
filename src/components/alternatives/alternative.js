@@ -36,7 +36,7 @@ class Alternative extends React.PureComponent {
 renderChange() {
   const {changes } =this.props;
 
-  if(changes.palette){
+  if(changes && changes.palette){
 //render change
     return <PaletteSwatch palette = {changes.palette} />
   }
