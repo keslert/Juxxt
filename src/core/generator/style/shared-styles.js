@@ -131,11 +131,11 @@ const elements = {
       options: [true,false],
     },
     raisedButton: {
-      _default: true,
+      _default: false,
       options: [true,false],
     },
     unstyledButton: {
-      _default: true,
+      _default: false,
       options: [true,false],
     },
   },

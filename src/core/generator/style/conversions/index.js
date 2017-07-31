@@ -25,6 +25,8 @@ const conversions = {
   fixed: v => v ? 'fixed': '',
   crop: v => 'bg-' + v,
   raisedButton: v=> v ? 'raisedButton' : '',
+  shadowedButton: v=> v ? 'shadowedButton' : '',
+  unstyledButton: v=> v ? 'unstyledButton' : '',
 }
 
 

@@ -106,6 +106,7 @@ export function generatePageCSSRules(page) {
 
   page.colorBlueprint.backgrounds.forEach(color => {
     const darker = tinycolor(color).darken(10).toString();
+    const lighter = tinycolor(color).lighten(5).toString();
     rules.push(`.bg-${color.substr(1)} { background: ${color}; }`);
     rules.push(`.b-${color.substr(1)} { border-color: ${color}; }`);
 
@@ -115,7 +116,10 @@ export function generatePageCSSRules(page) {
     rules.push(`.bg-${color.substr(1)}.raisedButton:hover { 
       box-shadow: inset 0 -4px ${darker}, 0 2px ${darker};
     }`);
-
+    rules.push(`.bg-${color.substr(1)}.shadowedButton:hover { 
+      background: ${lighter};
+      border-color: ${lighter};
+    }`);
   });
   
   // Gradients
