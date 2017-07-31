@@ -726,7 +726,6 @@ img { max-width: 100%; }
   border: none; 
   transition: 0.25s cubic-bezier(0.17, 0.67, 0.52, 0.97);
 }
-
 .raisedButton:hover {
   transform: translateY(-2px);
   border: none;
@@ -735,7 +734,6 @@ img { max-width: 100%; }
   box-shadow: none !important;
   transform: translateY(0px);
 }
-
 .dn { display: none; }
 .di { display: inline; }
 .db { display: block; }

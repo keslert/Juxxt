@@ -167,7 +167,7 @@ const layoutStyles = [
   'splitRatio', 'order', 'height', 'columns', 'constrained', 
   'maxWidth', 'buffer', 'textAlign', 'position', 'marginBottom',
   'paddingHorizontal', 'paddingVertical', 'gutter', 'fixed',
-  'shadowedButton','gradiantButton','raisedButton','unstyledButton',
+  'shadowedButton','raisedButton','unstyledButton',
 ]
 function resolveLayoutModification(dispatch, state, selected) {
   const {keys, options} = getModificationKeysAndOptions(layoutStyles, selected, selected.blueprint.layout);

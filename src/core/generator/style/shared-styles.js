@@ -127,20 +127,16 @@ const elements = {
       options: [4,6],
     },
     shadowedButton: {
-      _default: 'true',
-      options: ['true','false'],
-    },
-    gradiantButton: {
-      _default: 'true',
-      options: ['true','false'],
+      _default: false,
+      options: [true,false],
     },
     raisedButton: {
-      _default: 'true',
-      options: ['true','false'],
+      _default: true,
+      options: [true,false],
     },
     unstyledButton: {
-      _default: 'true',
-      options: ['true','false'],
+      _default: true,
+      options: [true,false],
     },
   },
   BorderRadius: {

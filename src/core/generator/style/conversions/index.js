@@ -24,7 +24,7 @@ const conversions = {
   parallax: v => v ? 'parallax': '',
   fixed: v => v ? 'fixed': '',
   crop: v => 'bg-' + v,
-  
+  raisedButton: v=> v ? 'raisedButton' : '',
 }
 
 
