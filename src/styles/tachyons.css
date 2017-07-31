@@ -723,8 +723,7 @@ img { max-width: 100%; }
 
 /*Buttons*/
 .raisedButton {
-  border: none;
-  display: inline-block;
+  border: none; 
   transition: 0.25s cubic-bezier(0.17, 0.67, 0.52, 0.97);
 }
 
@@ -734,7 +733,7 @@ img { max-width: 100%; }
 }
 .raisedButton:active {
   box-shadow: none !important;
-  transform: translateY(2px);
+  transform: translateY(0px);
 }
 
 .dn { display: none; }

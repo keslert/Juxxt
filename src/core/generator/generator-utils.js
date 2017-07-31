@@ -110,7 +110,7 @@ export function generatePageCSSRules(page) {
     rules.push(`.b-${color.substr(1)} { border-color: ${color}; }`);
 
     rules.push(`.bg-${color.substr(1)}.raisedButton { 
-      box-shadow: inset 0 -2px ${darker}, 0 1px ${darker};
+      box-shadow: inset 0 -4px ${darker}, 0 0px ${darker};
     }`);
     rules.push(`.bg-${color.substr(1)}.raisedButton:hover { 
       box-shadow: inset 0 -4px ${darker}, 0 2px ${darker};
