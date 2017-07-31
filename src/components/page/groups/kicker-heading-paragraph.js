@@ -19,7 +19,12 @@ export default KickerHeadingParagraph;
 
 export const blueprint = {
   inherits: ['RowBuffer', 'BaseGroup'],
-  style: {},
+  style: {
+    textAlign: {
+      _default: 'center',
+      options: ['left', 'center', 'right'],
+    }
+  },
   color: {},
   elements:  {
     kicker: {

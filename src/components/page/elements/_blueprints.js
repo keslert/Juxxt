@@ -9,6 +9,7 @@ export const BasicKicker = {
   style: {
     fontSize: { _default: 3, options: [1,2,3] },
     marginBottom: { _default: 2, options: [0,1,2,3] },
+    textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
   },
 };
 export const SmallHeading = {
@@ -20,6 +21,7 @@ export const SmallHeading = {
     fontSize: { _default: 3, options: [3,4,5] },
     fontWeight: { _default: 6, options: [2,4,6,8] },
     lineHeight: { _default: 1, options: [1,2,3,4] },
+    textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
   }
 };
 
@@ -32,6 +34,7 @@ export const BasicHeading = {
     fontSize: { _default: 5, options: [3,4,5,6,7,8,9] },
     fontWeight: { _default: 6, options: [2,4,6,8] },
     lineHeight: { _default: 1, options: [0,1,2,3,4] },
+    textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
   }
 };
 
@@ -43,6 +46,7 @@ export const BasicSubheading = {
   style: {
     fontSize: { _default: 4, options: [2,3,4,5,6,7] },
     textTransform: { _defaults: 'none', options: ['none', 'uppercase'] },
+    textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
   },
 };
 
@@ -54,6 +58,7 @@ export const Copyright = {
   style: {
     fontSize: { _default: 3, options: [2,3,4] },
     textTransform: { _defaults: 'none', options: ['none', 'uppercase'] },
+    textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
   },
 };
 
@@ -65,6 +70,7 @@ export const ListTitle = {
   style: {
     fontSize: { _default: 4, options: [2,3,4,5,6,7] },
     textTransform: { _defaults: 'none', options: ['none', 'uppercase'] },
+    textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
     fontWeight: { _default: 6, options: [4,6,8] },
     marginBottom: { _default: 2, options: [0,1,2,3] }
   },
@@ -78,7 +84,10 @@ export const BasicParagraph = {
   is: 'Text',
   inherits: ['Paragraph'],
   color: { text: 'readable' },
-  style: {}
+  
+  style: {
+    textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
+  }
 };
 
 /** Images */
@@ -141,7 +150,10 @@ export const BasicLink = {
   is: 'Link',
   inherits: [],
   color: { text: 'vibrant' },
-  style: {},
+  style: {
+    textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
+
+  },
 };
 
 export const ReadableLink = {
@@ -149,7 +161,9 @@ export const ReadableLink = {
   is: 'Link',
   inherits: [],
   color: { text: 'readable' },
+  
   style: {
+    textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
     margin: {
       _default: '0',
       options: [0,1,2,3,4],

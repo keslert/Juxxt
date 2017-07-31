@@ -24,6 +24,11 @@ export const blueprint = {
       _default: 'column',
       options: ['above', 'column', 'inline'],
     },
+    textAlign: {
+      _default: 'center',
+      options: ['left', 'center', 'right'],
+    }
+  
   },
   color: {},
   elements: {

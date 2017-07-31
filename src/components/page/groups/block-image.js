@@ -29,5 +29,5 @@ export const blueprint = {
     icon: {
       name: BasicImage.name,
     },
-  },
+  }
 }

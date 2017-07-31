@@ -19,7 +19,12 @@ export default HeadingParagraphLink;
 
 export const blueprint = {
   inherits: ['RowBuffer'],
-  style: {},
+  style: {
+    textAlign: {
+      _default: 'center',
+      options: ['left', 'center', 'right'],
+    }
+  },
   color: {},
   elements: {
     heading: {
@@ -32,4 +37,10 @@ export const blueprint = {
       name: BasicParagraph.name,
     }
   },
+  variants: [{
+    align: {
+      _default: 'center',
+      options: ['left', 'center', 'right'],
+    }
+  }]
 }

@@ -4,7 +4,7 @@ import { BasicHeading, BasicParagraph } from '../elements/_blueprints';
 
 class HeadingParagraph extends React.Component {
   render() {
-    const { elements, style, color } = this.props;
+    const { elements, style, color, variants } = this.props;
 
     return (
       <TalkingPointComponent
@@ -12,6 +12,7 @@ class HeadingParagraph extends React.Component {
         color={color}
         elements={elements}
         groups={{}}
+        variants = {variants}
         />
     )
   }
@@ -21,7 +22,12 @@ export default HeadingParagraph;
 
 export const blueprint = {
   inherits: ['RowBuffer'],
-  style: {},
+  style: {
+    textAlign: {
+      _default: 'center',
+      options: ['left', 'center', 'right'],
+    }
+  },
   color: {},
   background: {
     color: true,
@@ -37,4 +43,7 @@ export const blueprint = {
       name: BasicParagraph.name,
     },
   },
+  variants: [{
+    
+  }]
 }
