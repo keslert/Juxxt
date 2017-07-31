@@ -721,6 +721,22 @@ img { max-width: 100%; }
 .b-underline { border-bottom: 2px solid black; }
 .back-trans { background-color: transparent; }
 
+/*Buttons*/
+.raisedButton {
+  border: none;
+  display: inline-block;
+  transition: 0.25s cubic-bezier(0.17, 0.67, 0.52, 0.97);
+}
+
+.raisedButton:hover {
+  transform: translateY(-2px);
+  border: none;
+}
+.raisedButton:active {
+  box-shadow: none !important;
+  transform: translateY(2px);
+}
+
 .dn { display: none; }
 .di { display: inline; }
 .db { display: block; }

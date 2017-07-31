@@ -51,7 +51,6 @@ export default {
   page: {
     sections: [
       {name: 'Navbar2',
-        _default: {
           style: {
             paddingTop: 2,
             paddingBottom: 2,
@@ -59,7 +58,6 @@ export default {
           color: { 
             background: colorBlueprint.lightGray,
           },
-        }
       },
       {name: 'Header',
         _defaults: {

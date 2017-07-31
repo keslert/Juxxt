@@ -3,6 +3,7 @@ import * as groupBlueprints from '../../components/page/groups/_blueprints';
 import * as elementBlueprints from '../../components/page/elements/_blueprints';
 import { paragraphs } from './fonts';
 import { replaceWhiteSpace } from '../utils';
+import tinycolor from 'tinycolor2';
 
 import { forEach, reduce, filter, flatMap, mapValues } from 'lodash';
 
@@ -104,8 +105,17 @@ export function generatePageCSSRules(page) {
   });
 
   page.colorBlueprint.backgrounds.forEach(color => {
+    const darker = tinycolor(color).darken(10).toString();
     rules.push(`.bg-${color.substr(1)} { background: ${color}; }`);
     rules.push(`.b-${color.substr(1)} { border-color: ${color}; }`);
+
+    rules.push(`.bg-${color.substr(1)}.raisedButton { 
+      box-shadow: inset 0 -2px ${darker}, 0 1px ${darker};
+    }`);
+    rules.push(`.bg-${color.substr(1)}.raisedButton:hover { 
+      box-shadow: inset 0 -4px ${darker}, 0 2px ${darker};
+    }`);
+
   });
   
   // Gradients

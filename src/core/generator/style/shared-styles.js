@@ -126,6 +126,22 @@ const elements = {
       _default: 4,
       options: [4,6],
     },
+    shadowedButton: {
+      _default: 'true',
+      options: ['true','false'],
+    },
+    gradiantButton: {
+      _default: 'true',
+      options: ['true','false'],
+    },
+    raisedButton: {
+      _default: 'true',
+      options: ['true','false'],
+    },
+    unstyledButton: {
+      _default: 'true',
+      options: ['true','false'],
+    },
   },
   BorderRadius: {
     borderRadius: {
