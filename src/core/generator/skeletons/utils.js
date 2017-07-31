@@ -19,14 +19,15 @@ import { randomItem } from '../../utils';
 
 import { generateGroupSkeleton } from './group';
 import { generateElementSkeleton } from './element';
+import sharedStyles from '../style/shared-styles';
 
 import { getElementsInItem, getGroupsInItem, linkChildren, getParents } from '../generator-utils';
 
 export function extractSkeletonFromItem(item) {
   const skeleton = {
-    ...pick(item, ['id', 'is', 'type', 'relativeId', 'name', 'layout', 'color', 'style', 
+    ...pick(item, ['id', 'is', 'type', 'relativeId', 'name', 'color', 'style', 
       'content', 'blueprint', 'isSection', 'isGroup', 'isElement', 'isClone', 
-      'fullRelativeId', 'fullId', 'index', '_possibleStyles', 'image',
+      'fullRelativeId', 'fullId', 'index',
     ]),
     groups: mapValues(item.groups, extractSkeletonFromItem),
     elements: mapValues(item.elements, extractSkeletonFromItem),
@@ -38,8 +39,10 @@ export function extractSkeletonFromItem(item) {
 }
 
 export function generateItemSkeleton(skeleton, blueprint) {
-  
   const merged = merge({}, blueprint, skeleton.blueprint);
+
+  const _sharedStyles = map(merged.inherits, name => sharedStyles[name]);
+  merged._allStyles = Object.assign({}, ..._sharedStyles, merged.style);
   
   const _skeleton = {
     content: {},

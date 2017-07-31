@@ -203,7 +203,12 @@ function resolveModificationSelection(dispatch, state, modificationKey, keys, op
 function getModificationKeysAndOptions(standardKeys, selected, blueprint={}) {
   const specialKeys = Object.keys(blueprint);
   const condensedKeys = flatMap(blueprint);  
-  const styleKeys = Object.keys(selected.style);
+
+  
+  const styleKeys = filter(Object.keys(selected.style), key => {
+    const style = selected.blueprint._allStyles[key];
+    return !style.hide || !style.hide(selected);
+  })
   
   const options = 
     chain(standardKeys)

@@ -39,7 +39,7 @@ export function generateItemCloneAlternatives(item, sectionSkeleton) {
 
 export function generateStyleCombinations(modify, item, sectionSkeleton) {
   const keys = getTruthyKeys(modify);
-  const style = pick(item._possibleStyles, keys);
+  const style = pick(item.blueprint._allStyles, keys);
   const styleCombos = getCombinations(mapValues(style, 'options'));
 
   return styleCombos.map(combo => {
