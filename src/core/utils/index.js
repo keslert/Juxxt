@@ -14,6 +14,7 @@ import {
   reduce,
   flatten,
   maxBy,
+  zipObject,
 } from 'lodash';
 
 export function randomItem(arr) {
@@ -73,12 +74,15 @@ export function getValidVariation(variations, restrictions) {
 }
 
 export function getMode(list) {
+  const kvMap = zipObject(list, list);
+
   const items = reduce(list, (res, key) => {
     res[key] = (res[key] || 0) + 1;
     return res;
   }, {});
 
-  return maxBy(Object.keys(items), key =>  items[key])
+  const key = maxBy(Object.keys(items), key =>  items[key]);
+  return kvMap[key];
 }
 
 export function absDiff(a, b) {
