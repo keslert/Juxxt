@@ -21,6 +21,14 @@ export const blueprint = {
   elements: {
     image: {
       name: BasicImage.name,
+      blueprint: {
+        style: {
+          aspectRatio: {
+            _default: '4x3',
+            options: ['16x9', '4x3', '6x4', '8x5', '7x5'],
+          }
+        }
+      }
     },
   },
 }

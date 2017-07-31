@@ -55,13 +55,8 @@ export default {
           },
         }
       },
-<<<<<<< HEAD
-      {name: "Header",//'130+ JOBS. ONE MISSION.'//'FIND YOUR DREAM JOB -->'
-        variants:{},
-=======
       {
         name: "Header",//'130+ JOBS. ONE MISSION.'//'FIND YOUR DREAM JOB -->'
->>>>>>> 4125d8c8f3b40813276cca4828e73daf305b5297
         elements:{},
         groups:{
           tp: {
