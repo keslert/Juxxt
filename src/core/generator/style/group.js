@@ -16,6 +16,5 @@ export function styleGroup(group, page) {
     g => true,
   ]
   
-  group._possibleStyles = Object.assign({}, ...values(sharedStyles), blueprint.style);
   styleItem(group, groups, rules, {style: blueprint.style, sharedStyles});
 }

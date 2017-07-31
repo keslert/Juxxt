@@ -34,6 +34,37 @@ export default {
             content: {key: uniqueId(), url: '/images/landay.png'}
           }
         },
+        groups: {
+          buttonList: {
+            name: 'ButtonList',
+            elements: {
+              buttons: {
+                clones: [
+                  {
+                    color: {
+                      background: 'transparent',
+                      _parentBackground: colorBlueprint.darkGray,
+                      text: '#ffffff',
+                      _textBackground: colorBlueprint.darkGray,
+                      borderColor: '#ffffff',
+                    },
+                    content: {text: 'Stop'}
+                  },
+                  {
+                    color: {
+                      background: colorBlueprint.primary,
+                      _parentBackground: colorBlueprint.darkGray,
+                      text: '#ffffff',
+                      _textBackground: colorBlueprint.darkGray,
+                      borderColor: colorBlueprint.primary,
+                    },
+                    content: {text: 'Play'}
+                  }
+                ]
+              }
+            }
+          }
+        },
         color: { background: colorBlueprint.darkGray },
         style: { paddingVertical: 4, constrained: 'page', margin: 'auto' },
       },

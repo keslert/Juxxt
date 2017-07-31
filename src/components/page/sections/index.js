@@ -145,7 +145,14 @@ class Section extends React.Component {
     const { preview, master } = this.context;
     const SectionComponent = sections[name];
     if(preview) {
-      return <SectionComponent {...this.props} />
+      // TODO: This is DISGUSTING... need a better fix.
+      // This adds a duplicate section for a fixed navbar so it still takes up space.
+      return (
+        <div>
+          <SectionComponent {...this.props} />
+          {this.props.style.fixed && <SectionComponent {...this.props} style={{...this.props.style, fixed: false}} />}
+        </div>
+      )
     }
   
     

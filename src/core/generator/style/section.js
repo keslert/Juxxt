@@ -13,6 +13,5 @@ export function styleSection(section, page) {
     s => true,
   ]
 
-  section._possibleStyles = Object.assign({}, ...values(sharedStyles), blueprint.style);
   styleItem(section, page.sections, rules, {style: blueprint.style, sharedStyles});
 }

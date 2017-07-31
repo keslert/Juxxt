@@ -26,7 +26,7 @@ export const SmallHeading = {
 export const BasicHeading = { 
   name: 'BasicHeading', 
   is: 'Text',
-  inherits: [],
+  inherits: ['Heading'],
   color: { text: 'whiteOrVibrant' },
   style: {
     fontSize: { _default: 5, options: [3,4,5,6,7,8,9] },
