@@ -20,14 +20,27 @@
   box-shadow: 0 0 0 2px #f44, 1.5em 0 0 2px #9b3, 3em 0 0 2px #fb5;
 }
 
-.ipad img {
+.ipad-portrait img {
   border-radius: 10px;
 }
 
-.ipad {
+.ipad-portrait {
   border-radius: 38px;
   background-color: #fff;
   padding: 10px 35px 10px 40px;
+  box-sizing: border-box;
+  box-shadow: inset 0 4px 7px 1px #fff, inset 0 -5px 20px rgba(173,186,204,.25), 0 2px 6px rgba(0,21,64,.14), 0 10px 20px rgba(0,21,64,.05);
+}
+
+
+.ipad-vertical img {
+  border-radius: 10px;
+}
+
+.ipad-vertical {
+  border-radius: 38px;
+  background-color: #fff;
+  padding: 35px 10px 40px 10px;
   box-sizing: border-box;
   box-shadow: inset 0 4px 7px 1px #fff, inset 0 -5px 20px rgba(173,186,204,.25), 0 2px 6px rgba(0,21,64,.14), 0 10px 20px rgba(0,21,64,.05);
 }

@@ -5,7 +5,7 @@ import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
 import { extractSkeletonFromItem, generateItemSkeleton } from '../skeletons/utils'
 import { generateContent } from '../content/generate';
-import { filter, range, find, flatMap, mapValues, pick, cloneDeep, forEach, includes, map, isString } from 'lodash';
+import { filter, range, find, flatMap, mapValues, size, pick, cloneDeep, forEach, includes, map, isString } from 'lodash';
 import { getCombinations } from '../../utils';
 import { containsClone } from '../../ui/actions'
 import { generateElementBackgroundAlternatives } from './element';
@@ -17,10 +17,10 @@ import { getSortedByMostVibrant } from '../color/utils';
 import { generateStyleCombinations } from './alternatives-utils';
 
 export function generateGroupComponentAlternatives(group, sectionSkeleton) {
+
   const blueprint = group.parent.blueprint;
   const possibleGroups = blueprint.groups[group.parentKey].options;
-  const validGroups = filter(possibleGroups, groupName => groupName !== group.name)
-
+  const validGroups = filter(possibleGroups, groupName => (groupName !== group.name));
   const skeletons = validGroups.map(option => {
     const skeleton = cloneDeep(sectionSkeleton);
     const parentSkeleton = findItemInSection(group.parent, skeleton);

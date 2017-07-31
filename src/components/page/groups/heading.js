@@ -20,7 +20,12 @@ export default Heading;
 export const blueprint = {
   color: {},
   inherits: ['BaseGroup'],
-  style: {},
+  style: {
+    textAlign: {
+      _default: 'center',
+      options: ['left', 'center', 'right'],
+    }
+  },
   elements: {
     heading: {
       name: 'BasicHeading',

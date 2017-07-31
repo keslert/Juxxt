@@ -20,7 +20,12 @@ export default HeadingSubheading;
 export const blueprint = {
   color: {},
   inherits: ['RowBuffer'],
-  style: {},
+  style: {
+    textAlign: {
+      _default: 'center',
+      options: ['left', 'center', 'right'],
+    }
+  },
   elements: {
     heading: {
       name: 'BasicHeading',

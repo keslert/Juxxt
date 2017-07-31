@@ -18,7 +18,12 @@ export default ImageHeadingParagraph;
 
 export const blueprint = {
   inherits: ['BaseGroup'],
-  style: {},
+  style: {
+    textAlign: {
+      _default: 'center',
+      options: ['left', 'center', 'right'],
+    }
+  },
   color: {},
   elements: {
     image: { name: 'BasicImage' },

@@ -86,14 +86,19 @@ page: {
         }
       },
       {name: 'Basic',
+        style: {
+            paddingBottom: 5,
+            paddingTop: 7,
+            fontFamily: 'Montserrat',
+            fontSize: 4,
+          },  
         groups: {
           item: {
             name: 'HeadingParagraph',
           }
         }
       },
-      {
-        name: 'BasicWide1_2',
+      {name: 'BasicWide1_2',
         color: {
           background: palette[2],
         },
@@ -103,9 +108,6 @@ page: {
         groups: {
           tp: {
             name: 'HeadingParagraphButton',
-            color: {
-              background: palette[2],
-            }
           },
         },
         elements: {
@@ -125,120 +127,98 @@ page: {
           }
         }
       },
-      // {
-      //   name: 'BasicWide1_2',
-      //   style: {
-      //     order: 1,
-      //   },
-      //   color: {
-      //     background: palette[2],
-      //   },
-      //   groups: {
-      //     tp: {
-      //       _default: {
-      //         name: 'IconHeadingParagraph',
-      //         color: {
-      //           background: palette[2],
-      //         },
-      //       },
-      //     },
-      //   },
-      //   elements: {
-      //     image: {
-      //       _defaults : {
-      //         content: images[7],
-      //       }   
-      //     },
-      //   },
-      // },
-      // {name: 'StackedGrid',
-      //   groups: {
-      //     tp: {
-      //       _default: {
-      //         name: 'HeadingSubheading',
-      //       },
-      //     },
-      //   },
-      // },
-      // {name: 'Header',
-      //   _defaults: {
-      //     style: {
-      //       paddingBottom: 5,
-      //       paddingTop: 6,
-      //       fontFamily: 'Montserrat',
-      //       fontSize: 3,
-      //       parallax: 'on',
-      //     },
-      //     color: {
-      //       backgroundImage: backgroundImages[3].key,
-      //       _backgroundImage: backgroundImages[3].url,
-      //       background: palette[0],
-      //     }
-      //   },
-      //   groups: {
-      //     tp: {
-      //       _default: {
-      //         name: 'HeadingSubheadingButton',
-      //         elements: {
-      //           heading: {
-      //             _defaults: {
-      //               color: {
-      //                 text: '#ffffff',
-      //                 _textBackground: palette[0],
-      //               },
-      //               style: {
-      //                 fontSize: 5,
-      //                 lineHeight: 3,
-      //               }
-      //             }
-      //           },
-      //           subheading: {
-      //             _defaults: {
-      //               color: {
-      //                 text: '#ffffff',
-      //                 _textBackground: palette[0],
-      //               },
-      //             }
-      //           },
-      //         },
-      //       } 
-      //     }
-      //   }
-      // },
-      // {
-      //   name: 'Basic',
-      //   groups: {
-      //     item: {
-      //       _default: 'Gallery'
-      //     }
-      //   }
-      // },
-      // {name: 'Footer1',
-      //   _defaults: {
-      //     color: {
-      //       background: colorBlueprint.lightGray,
-      //     }
-      //   },
-      //   elements: {
-      //     copyright: {
-      //       _default: {
-      //         name: 'Copyright',
-      //       }
-      //     }
-      //   },
-      //   groups: {
-      //     button: {
-      //       _default: {
-      //         name: 'ButtonList',
-      //       }
-      //     },
-      //     links: {
-      //       _default: {
-      //         name: 'HorizontalList',
-      //       }
-      //     }
-      //   },
-      // }
+       {
+        name: 'BasicWide1_2',
+        style: {
+          order: 1,
+        },
+        color: {
+          background: palette[2],
+        },
+        groups: {
+          tp: {
+            name: 'IconHeadingParagraph',
+            color: {
+              background: palette[2],
+            },
+          },
+        },
+        elements: {
+          image: {
+            content: images[7],
+          },
+        },
+      },
+      {name: 'StackedGrid',
+        groups: {
+          tp: {
+            name: 'HeadingSubheading',
+          },
+        },
+      },
+      {name: 'Basic',
+        style: {
+          paddingBottom: 5,
+          paddingTop: 6,
+          fontFamily: 'Montserrat',
+          fontSize: 3,
+          parallax: 'on',
+        },
+        color: {
+          backgroundImage: backgroundImages[3].key,
+          _backgroundImage: backgroundImages[3].url,
+          background: palette[0],
+        },
+        groups: {
+          tp: {
+            name: 'HeadingSubheadingButton',
+            elements: {
+              heading: {
+                color: {
+                  text: '#ffffff',
+                  _textBackground: palette[0],
+                },
+                style: {
+                  fontSize: 5,
+                  lineHeight: 3,
+                }
+              },
+              subheading: {
+                color: {
+                  text: '#ffffff',
+                  _textBackground: palette[0],
+                },
+              },
+            },
+          }
+        }
+      },
+      {
+        name: 'Basic',
+        groups: {
+          item: {
+            name: 'Gallery'
+          }
+        }
+      },
+      {name: 'Footer1',
+          color: {
+            background: colorBlueprint.lightGray,
+          },
+        elements: {
+          copyright: {
+            name: 'Copyright',
+          }
+        },
+        groups: {
+          button: {
+              name: 'ButtonList',
+          },
+          links: {
+              name: 'HorizontalList',
+          }
+        },
+      }
     ]
   }
 }

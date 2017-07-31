@@ -7,11 +7,26 @@ import { cloneDeep, omit, values, filter, isEqual, reduce, uniqueId } from 'loda
 import tinycolor from 'tinycolor2';
 
 export const palettes = [
-  ["#DC3522", "#374140"],
-  ["#48F6F9","#052F54","#ffcc00","#910000"],
-  ["#374140","#1E1E20","#D9CB9E"],
-  ["#5AFF15","#AAFFE5","#9D75CB","#A657AE", "#8C1A6A"],
-  ['#EA9F3B', "#BBBE64", "#93A8AC", "#8E5572", "#443850"],
+  // ["#E37222","#07889B","#66B98F","#EEAA7B"],
+  ["#96858F","#6D7993","#9099A2","#D5D5D5"],
+  // ["#CAEBF2","#A9A9A9","#FF3B3F"],
+  ["#D7CEC7","#565656","#76323F","#C09F80"],
+  // ["#18121E","#233237","#984B43","#EAC67A"],
+  // ["#0B3C5D","#328CC1","#D9B310","#1D2731"],
+  // ["#77C9D4","#57BC90","#015249","#A5A5AF"],
+  ["#6B7A8F","#F7882F","#F7C331","#DCC7AA"],
+  ["#CF6766","#30415D","#031424","#8EAEBD"],
+  // ["#99D3DF","#88BBD6","#CDCDCD","#E9E9E9"],
+  ["#6BBAA7","#FBA100","#6C648B","#B6A19E"],
+  ["#CDA34F","#E9E7DA","#636B46","#373F27"],
+  ["#4ABDAC","#99CED4","#EEB6B7","#6E7376"],
+  ["#155765","#57652A","#AB9353","#4D2C3D"],
+  ["#F7EF6A","#93C178","#465C8B","#DFDCE3"],
+  ["#A7D2CB","#F2D388","#C98474","#874C62"],
+  ["#CAE4DB","#DCAE1D","#00303F","#7A9D96"],
+  ["#062F4F","#813772","#B82601"],
+
+
 ]
 
 export function generatePageBrandColorAlternatives(page) {
@@ -49,6 +64,8 @@ export function generatePageBrandColorAlternatives(page) {
 
       return [...sections, skeleton];
     }, []);
+
+    _page.sections[0].changes = {palette: palette}
 
     return _page;
   })

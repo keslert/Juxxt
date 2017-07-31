@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import IconButton from '../common/icon-button';
+import PaletteSwatch from '../common/palette-swatch';
 import { lowerCamelCaseToRegular } from '../../core/utils';
 import { map, isObject } from 'lodash';
 
@@ -32,14 +33,25 @@ const StyledShadow = styled.div`
 
 class Alternative extends React.PureComponent {
 
+renderChange() {
+  const {changes } =this.props;
+
+  if(changes.palette){
+//render change
+    return <PaletteSwatch palette = {changes.palette} />
+  }
+  else{
+    const label = getLabel(changes);
+    return <StyledLabel>{label}</StyledLabel>
+  }
+
+}
   render() {
     const { changes, children, onFavorite, onDelete } = this.props;
-
-    const label = getLabel(changes);
     return (
       <StyledAlternative>
         <StyledHeading>
-          <StyledLabel>{label}</StyledLabel>
+          {this.renderChange()}
           <StyledIconBar>
             <IconButton type="heart" onClick={onFavorite} />
           </StyledIconBar>

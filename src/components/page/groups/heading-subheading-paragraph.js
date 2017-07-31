@@ -24,7 +24,12 @@ export default HeadingSubheadingParagraph;
 export const blueprint = {
   color: {},
   inherits: [TalkingPoint, 'RowBuffer'],
-  style: {},
+  style: {
+    textAlign: {
+      _default: 'center',
+      options: ['left', 'center', 'right'],
+    }
+  },
   elements: {
     heading: {
       name: BasicHeading.name,

@@ -20,7 +20,12 @@ export default HeadingParagraphButton;
 
 export const blueprint = {
   inherits: ['RowBuffer'],
-  style: {},
+  style: {
+    textAlign: {
+      _default: 'center',
+      options: ['left', 'center', 'right'],
+    }
+  },
   color: {},
   elements: {
     heading: {

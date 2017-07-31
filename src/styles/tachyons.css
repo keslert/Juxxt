@@ -825,6 +825,21 @@ img { max-width: 100%; }
   right: 0;
   z-index: 99999;
 }
+.preview .fixedNavBar {
+    overflow: hidden;
+    z-index: 99999;
+    position: fixed !important; 
+    top: 0; 
+    width: 100%; 
+  }
+
+
+
+/*.container {
+  position: relative;
+  width: 50%;
+>>>>>>> Stashed changes
+}
 
 
 

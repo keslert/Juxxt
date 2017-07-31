@@ -23,7 +23,12 @@ export default KickerHeadingLink;
 
 export const blueprint = {
   inherits: [TalkingPoint, 'RowBuffer'],
-  style: {},
+  style: {
+    textAlign: {
+      _default: 'center',
+      options: ['left', 'center', 'right'],
+    }
+  },
   color: {},
   elements:  {
     kicker: {

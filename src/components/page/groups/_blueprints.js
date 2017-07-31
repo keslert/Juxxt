@@ -21,4 +21,4 @@ export { blueprint as Gallery } from './gallery';
 export { blueprint as BlockImage } from './block-image';
 export { blueprint as ImageHeadingParagraph } from './image-heading-paragraph';
 export { blueprint as BrowserMockup } from './browser-mockup';
-export {blueprint as IpadMockup } from './ipad-mockup';
+export { blueprint as IpadMockup } from './ipad-mockup';
