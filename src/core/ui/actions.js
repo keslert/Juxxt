@@ -129,7 +129,7 @@ function getLayoutKeysFromSelected(section) {
 }
 
 
-const componentStyles = ['borderRadius', 'shadow', 'unstyled', 'icon']
+const componentStyles = ['shape', 'buttonType', 'unstyled', 'icon']
 function resolveComponentModification(dispatch, state, selected) {
   const {keys, options} = getModificationKeysAndOptions(componentStyles, selected, selected.blueprint.component);
   resolveModificationSelection(dispatch, state, 'component', keys, options);

@@ -111,7 +111,7 @@ const elements = {
       _default: 1,
       options: ['auto',1,2,3,4,'100P'],
     },
-    borderRadius: {
+    shape: {
       _default: 2,
       options: [0,1,3,'-pill'],
       consistent: true,
@@ -126,8 +126,8 @@ const elements = {
       options: [4,6],
       consistent: true,
     },
-    shadow: {
-      _default: 'none',
+    buttonType: {
+      _default: 'static',
       options: ['static', 'raised', 'highlight'],
       consistent: true,
     },
