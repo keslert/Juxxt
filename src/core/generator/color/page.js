@@ -101,10 +101,10 @@ export function buildPageColorBlueprint(colors) {
     blueprint.patterns = PATTERNS;
   });
   return {
+    colors,
     primary,
     lightGray,
     darkGray,
-    lights: ['#ffffff', lightGray],
     texts: uniq(flatMap(blueprints, 'texts')),
     backgrounds,
     bgBlueprints: zipObject(backgrounds, blueprints),

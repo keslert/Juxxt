@@ -52,6 +52,7 @@ export const blueprint = {
     },
   },
   color: {},
+  components: { basic: ['basic'], header: ['header'], action: ['action'] },
   groups: {
     tp: {
       options: [

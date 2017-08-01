@@ -128,15 +128,11 @@ function getLayoutKeysFromSelected(section) {
   return Object.keys(layouts);
 }
 
-function resolveComponentModification(dispatch, state, selected, callPath) {
-  let keys = [];
-  if(selected.isSection) {
-    keys = ['basic', 'header', 'footer', 'navigation', 'action'];
-  }
-  const modification = zipObject(keys, keys.map(key => key === selected.type))
-  const options = keys.map(key => ({label: key, keys: [key]}));
-  dispatch(setModificationOptions(options));
-  dispatch(setModification('component', modification));
+
+const componentStyles = ['borderRadius', 'shadow', 'unstyled', 'icon']
+function resolveComponentModification(dispatch, state, selected) {
+  const {keys, options} = getModificationKeysAndOptions(componentStyles, selected, selected.blueprint.component);
+  resolveModificationSelection(dispatch, state, 'component', keys, options);
 }
 
 const bgStyles = ['color', 'gradient', 'pattern', 'image'];
@@ -167,7 +163,6 @@ const layoutStyles = [
   'splitRatio', 'order', 'height', 'columns', 'constrained', 
   'maxWidth', 'buffer', 'textAlign', 'position', 'marginBottom',
   'paddingHorizontal', 'paddingVertical', 'gutter', 'fixed',
-  'shadowedButton','raisedButton','unstyledButton',
 ]
 function resolveLayoutModification(dispatch, state, selected) {
   const {keys, options} = getModificationKeysAndOptions(layoutStyles, selected, selected.blueprint.layout);

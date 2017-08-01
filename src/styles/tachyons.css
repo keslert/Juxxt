@@ -685,6 +685,7 @@ img { max-width: 100%; }
 .mnw-2 { min-width: 10em; }
 .mnw-3 { min-width: 12em; }
 .mnw-4 { min-width: 14em; }
+.mnw-100P { min-width: 100%; }
 
 
 .tl { text-align: left; }
@@ -704,6 +705,7 @@ img { max-width: 100%; }
 .bw5 { border-width: 2em; }
 
 .b-solid { border-style: solid; }
+.b-transparent { border-color: transparent; }
 
 .br0 { border-radius: 0; }
 .br1 { border-radius: .125em; }
@@ -722,27 +724,26 @@ img { max-width: 100%; }
 .back-trans { background-color: transparent; }
 
 /*Buttons*/
-.raisedButton {
-  border: none; 
+.shadow-raised {
+  /* border: none;  */
   transition: 0.25s cubic-bezier(0.17, 0.67, 0.52, 0.97);
 }
-.raisedButton:hover {
-  transform: translateY(-2px);
-  border: none;
+.shadow-raised:hover {
+  transform: translateY(-.125em);
 }
-.raisedButton:active {
+.shadow-raised:active {
   box-shadow: none !important;
-  transform: translateY(0px);
+  transform: translateY(.25em);
 }
-.shadowedButton {
+.shadow-shadow {
   transition: all .2s ease;
   box-shadow: 0 0.286em 0.429em rgba(50,50,93,.055), 0 0.071em 0.214em rgba(0,0,0,.04);
 }
-.shadowedButton:hover {
+.shadow-shadow:hover {
   transform: translateY(-.1em);
   box-shadow: 0 0.486em 0.429em rgba(50,50,93,.04125), 0 0.271em 0.214em rgba(0,0,0,.03);
 }
-.shadowedButton:active {
+.shadow-shadow:active {
   transition-duration: .15s;
   transform: translateY(0.05em);
   box-shadow: 0 0.20599999999999996em 0.429em rgba(50,50,93,.055), 0 -0.009000000000000008em 0.214em rgba(0,0,0,.04);
@@ -826,6 +827,9 @@ img { max-width: 100%; }
 .bg-bottom-left { background-position: bottom left !important; }
 .bg-bottom-center { background-position: bottom center !important; }
 .bg-bottom-right { background-position: bottom right !important; }
+
+.bg-transparent { background: transparent; }
+
 
 
 .pointer { cursor: pointer; }

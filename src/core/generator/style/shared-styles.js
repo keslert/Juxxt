@@ -105,39 +105,36 @@ const elements = {
       options: [1,4,2,3],
     }
   },
+
   Button: {
     minWidth: {
       _default: 1,
-      options: ['auto', 1, 2, 3, 4],
+      options: ['auto',1,2,3,4,'100P'],
     },
     borderRadius: {
       _default: 2,
-      options: [0,1,2,3,4,'-pill'],
-    },
-    borderWidth: {
-      _default: 1,
-      options: [0,1],
+      options: [0,1,3,'-pill'],
+      consistent: true,
     },
     textTransform: {
       _default: 'none',
       options: ['none', 'uppercase'],
+      consistent: true,
     },
     fontWeight: {
       _default: 4,
       options: [4,6],
+      consistent: true,
     },
-    shadowedButton: {
-      _default: false,
-      options: [true,false],
+    shadow: {
+      _default: 'none',
+      options: ['none', 'raised', 'shadow'],
+      consistent: true,
     },
-    raisedButton: {
-      _default: false,
-      options: [true,false],
-    },
-    unstyledButton: {
-      _default: false,
-      options: [true,false],
-    },
+    icon: {
+      default: 'none',
+      options: ['none', 'left', 'right'],
+    }
   },
   BorderRadius: {
     borderRadius: {

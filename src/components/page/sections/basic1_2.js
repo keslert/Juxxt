@@ -89,6 +89,7 @@ export const blueprint = {
   layout: {
     splitRatio: ['splitRatio', 'constrained'],
   },
+  component: { basic: ['basic'], header: ['header'], action: ['action'] },
   elements: {},
   groups: {
     tp: {

@@ -53,6 +53,7 @@ export const blueprint = {
     },
   },
   color: {},
+  component: { footer: ['footer'] },
   elements: {
     copyright: {
       name: 'Copyright',

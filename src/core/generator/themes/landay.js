@@ -42,7 +42,7 @@ export default {
                 clones: [
                   {
                     color: {
-                      background: 'transparent',
+                      background: '#transparent',
                       _parentBackground: colorBlueprint.darkGray,
                       text: '#ffffff',
                       _textBackground: colorBlueprint.darkGray,

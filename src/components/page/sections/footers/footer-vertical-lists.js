@@ -53,6 +53,7 @@ export const blueprint = {
   inherits: ['ConstrainedSection', 'Section'],
   style: {},
   color: {},
+  component: { footer: ['footer'] },
   elements: {
     logo: {
       name: 'LogoImage',

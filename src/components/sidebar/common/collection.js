@@ -6,8 +6,8 @@ const StyledCollection = styled.div`
 `
 
 const StyledHeading = styled.div`
-  font-size: 10px;
-  text-transform: uppercase;
+  font-size: 12px;
+  // text-transform: uppercase;
   font-weight: 600;
   color: rgba(255,255,255,0.7);
   margin-left: 10px;
@@ -30,7 +30,7 @@ const StyledHeading = styled.div`
     right: -4px;
     padding: 4px;
     border-radius: 2px;
-    color: rgba(255,255,255, 0.15);
+    color: #999;
     cursor: pointer;
     &:hover {
       background: rgba(255,255,255,0.05);
@@ -57,7 +57,7 @@ class Collection extends React.PureComponent {
       <StyledCollection>
         <StyledHeading open={open} onClick={onToggleOpen}>
           {heading}
-          <i className={`fa fa-${locked ? 'lock' :  'unlock'}`} onClick={onToggleLocked}></i>
+          <i className='fa fa-exchange' onClick={onToggleLocked}></i>
         </StyledHeading>
         <StyledContent open={open}>
           {children}

@@ -13,7 +13,7 @@ export function getSection(item) {
 
 export function getBackground(item) {
   const background = item.color.background;
-  if(background && background !== 'transparent') {
+  if(background && background !== '#transparent') {
     return background;
   }
   return getBackground(item.parent);
@@ -102,6 +102,9 @@ export function generatePageCSSRules(page) {
 
   page.colorBlueprint.texts.forEach(color => {
     rules.push(`.c-${color.substr(1)} { color: ${color}; }`);
+
+    rules.push(`.c-${color.substr(1)}.shadow-raised { box-shadow: 0 0em ${color}; }`);
+    rules.push(`.c-${color.substr(1)}.shadow-raised:hover { box-shadow: 0 .375em ${color}; }`);
   });
 
   page.colorBlueprint.backgrounds.forEach(color => {
@@ -110,13 +113,9 @@ export function generatePageCSSRules(page) {
     rules.push(`.bg-${color.substr(1)} { background: ${color}; }`);
     rules.push(`.b-${color.substr(1)} { border-color: ${color}; }`);
 
-    rules.push(`.bg-${color.substr(1)}.raisedButton { 
-      box-shadow: inset 0 -4px ${darker}, 0 0px ${darker};
-    }`);
-    rules.push(`.bg-${color.substr(1)}.raisedButton:hover { 
-      box-shadow: inset 0 -4px ${darker}, 0 2px ${darker};
-    }`);
-    rules.push(`.bg-${color.substr(1)}.shadowedButton:hover { 
+    rules.push(`.bg-${color.substr(1)}.shadow-raised { box-shadow: 0 .25em ${darker}; }`);
+    rules.push(`.bg-${color.substr(1)}.shadow-raised:hover { box-shadow: 0 .375em ${darker}; }`);
+    rules.push(`.bg-${color.substr(1)}.shadow-shadow:hover { 
       background: ${lighter};
       border-color: ${lighter};
     }`);

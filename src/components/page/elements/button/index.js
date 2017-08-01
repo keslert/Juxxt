@@ -6,8 +6,15 @@ class Button extends React.PureComponent {
  
   render() {
     const { style, color, content } = this.props;
-        
-    const styleClassNames = convertStyleToAtomic(style);
+    
+    const isUnstyled = color.borderColor === '#transparent' && color.background === '#transparent';
+    const _style = {
+      ...style,
+      paddingHorizontal: isUnstyled ? 0 : style.paddingHorizontal,
+      minWidth: isUnstyled ? 'auto' : style.minWidth,
+    }
+
+    const styleClassNames = convertStyleToAtomic(_style);
     const colorClassNames = convertColorToAtomic(color);
 
     return(

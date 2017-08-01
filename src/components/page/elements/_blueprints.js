@@ -6,6 +6,7 @@ export const BasicKicker = {
   is: 'Text',
   inherits: ['Heading'],
   color: { text: 'readable' },
+  component: { section: ['section'] },
   style: {
     fontSize: { _default: 3, options: [1,2,3] },
     marginBottom: { _default: 2, options: [0,1,2,3] },
@@ -17,6 +18,7 @@ export const SmallHeading = {
   is: 'Text',
   inherits: ['Heading'],
   color: { text: 'vibrant' },
+  component: { section: ['section'] },
   style: {
     fontSize: { _default: 3, options: [3,4,5] },
     fontWeight: { _default: 6, options: [2,4,6,8] },
@@ -30,6 +32,7 @@ export const BasicHeading = {
   is: 'Text',
   inherits: ['Heading'],
   color: { text: 'whiteOrVibrant' },
+  component: { section: ['section'] },
   style: {
     fontSize: { _default: 5, options: [3,4,5,6,7,8,9] },
     fontWeight: { _default: 6, options: [2,4,6,8] },
@@ -43,6 +46,7 @@ export const BasicSubheading = {
   is: 'Text',
   inherits: ['Heading'],
   color: { text: 'readable' },
+  component: { section: ['section'] },
   style: {
     fontSize: { _default: 4, options: [2,3,4,5,6,7] },
     textTransform: { _defaults: 'none', options: ['none', 'uppercase'] },
@@ -55,6 +59,7 @@ export const Copyright = {
   is: 'Text',
   inherits: [],
   color: { text: 'readable' },
+  component: { section: ['section'] },
   style: {
     fontSize: { _default: 3, options: [2,3,4] },
     textTransform: { _defaults: 'none', options: ['none', 'uppercase'] },
@@ -67,6 +72,7 @@ export const ListTitle = {
   is: 'Text',
   inherits: ['Heading'],
   color: { text: 'readable' },
+  component: { section: ['section'] },
   style: {
     fontSize: { _default: 4, options: [2,3,4,5,6,7] },
     textTransform: { _defaults: 'none', options: ['none', 'uppercase'] },
@@ -85,6 +91,7 @@ export const BasicParagraph = {
   inherits: ['Paragraph'],
   color: { text: 'readable' },
   
+  component: { section: ['section'] },
   style: {
     textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
   }
@@ -96,6 +103,7 @@ export const BasicImage = {
   is: 'Image',
   inherits: ['AspectMedia', 'Cropped', 'BorderRadius'],
   color: {},
+  component: { section: ['section'] },
   style: {
     aspectRatio: {
       _default: '3x4',
@@ -110,6 +118,7 @@ export const GalleryImage = {
   is: 'Image',
   inherits: ['AspectMedia', 'Cropped', 'BorderRadius'],
   color: {},
+  component: { section: ['section'] },
   style: {},
   image: { content: ['content'] },
 };
@@ -120,6 +129,7 @@ export const CoverImage = {
   is: 'Image',
   inherits: ['Cropped'],
   color: {},
+  component: { section: ['section'] },
   style: {
     aspectRatio: {
       _default: "object",
@@ -134,6 +144,7 @@ export const LogoImage = {
   is: 'Image',
   inherits: [],
   color: {},
+  component: { section: ['section'] },
   style: {
     height: {
       _default: 35,
@@ -150,6 +161,7 @@ export const BasicLink = {
   is: 'Link',
   inherits: [],
   color: { text: 'vibrant' },
+  component: { section: ['section'] },
   style: {
     textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
 
@@ -162,6 +174,7 @@ export const ReadableLink = {
   inherits: [],
   color: { text: 'readable' },
   
+  component: { section: ['section'] },
   style: {
     textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
     margin: {
@@ -179,6 +192,7 @@ export const SmallButton = {
     text: 'whiteOrReadable',
     background: 'vibrant',
   },
+  component: { section: ['section'] },
   style: {
     paddingVertical: {
       _default: 2,
@@ -200,6 +214,7 @@ export const BasicButton = {
     text: 'whiteOrReadable',
     background: 'vibrant',
   },
+  component: { section: ['section'] },
   style: {
     paddingVertical: {
       _default: 3,
@@ -225,6 +240,7 @@ export const BasicInput = {
   is: 'Input',
   inherits: [],
   color: { text: 'readable' },
+  component: { section: ['section'] },
   style: {},
 }
 
@@ -233,6 +249,7 @@ export const BasicIcon = {
   is: 'Icon',
   inherits: [],
   color: { text: 'vibrant' },
+  component: { section: ['section'] },
   style: {
     fontSize: {
       _default: 5,

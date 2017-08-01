@@ -102,7 +102,7 @@ page: {
                       buttons: {
                         _defaults: {
                           color: {
-                            background: "transparent",
+                            background: "#transparent",
                             text: '#ffffff',
                           }
                         }

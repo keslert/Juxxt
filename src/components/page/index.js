@@ -38,7 +38,7 @@ class Page extends React.PureComponent {
     return (
       <StyledPage className="preview" extraRules={CSSRules}>
         {sections.map((section, i) => (
-          <Section {...section} master={master} index={master ? i : 1000 + i} draggable={false} />
+          <Section key={i} {...section} master={master} index={master ? i : 1000 + i} draggable={false} />
         ))}
       </StyledPage>
     )
@@ -59,8 +59,8 @@ class Page extends React.PureComponent {
     const preventDrag = preview || (!master && sections.length > 1);
     return (
       <StyledPage 
-        onClick={onClick} 
-        clickable={clickable} 
+        onClick={onClick}
+        clickable={clickable}
         extraRules={CSSRules}
         className={classNames} 
         preventDrag={preventDrag}

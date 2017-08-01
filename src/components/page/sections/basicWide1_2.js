@@ -70,6 +70,7 @@ export const blueprint = {
     pattern: true,
     gradient: true,
   },
+  component: { basic: ['basic'], header: ['header'], action: ['action'] },
   style: {},
   groups: {
     tp: {

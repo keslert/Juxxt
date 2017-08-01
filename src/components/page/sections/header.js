@@ -46,6 +46,7 @@ export const blueprint = {
       options: [4,5,6,7,8],
     }
   },
+  component: { basic: ['basic'], header: ['header'], action: ['action'] },
   color: { background: 'vibrant' },
   groups: {
     tp: {

@@ -71,6 +71,7 @@ export const blueprint = {
     pattern: true,
     gradient: true,
   },
+  component: { basic: ['basic'], header: ['header'], action: ['action'] },
   groups: {
     gridItem: {
       _default: gridItem,

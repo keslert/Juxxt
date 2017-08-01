@@ -14,6 +14,7 @@ export default styled.div`
 
     ${props.marginTop && `margin-top: ${props.marginTop};`};
     ${props.marginLeft && `margin-left: ${props.marginLeft};`};
+    ${props.marginBottom && `margin-bottom: ${props.marginBottom};`};
 
     ${props.textAlign && `text-align: ${props.textAlign};`};
     ${props.position && `position: ${props.position};`};

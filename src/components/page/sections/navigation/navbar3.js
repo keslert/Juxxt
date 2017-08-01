@@ -46,6 +46,7 @@ export const blueprint = {
   color: {
     background: 'default',
   },
+  component: { navigation: ['navigation'] },
   elements: {
     logo: {
       name: 'LogoImage',

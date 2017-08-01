@@ -59,7 +59,7 @@ export default {
             paddingBottom: 2,
           },
           color: { 
-            background: "transparent",
+            background: "#transparent",
           },
         }
       },
@@ -111,7 +111,7 @@ export default {
                       buttons: {
                         _defaults: {
                           color: {
-                            background: "transparent",
+                            background: "#transparent",
                             text: '#ffffff',
                           }
                         }

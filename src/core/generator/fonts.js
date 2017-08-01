@@ -1,5 +1,5 @@
 import { flatMap, values, flatten, filter, map, includes, zipObject, uniq } from 'lodash';
-//for a given heading, which paragraph fonts can it take??
+
 export const headings = {
 	'Alice': ['Open Sans', 'Raleway', 'Lato', 'Roboto', 'Montserrant'],
 	'Amatic SC': ['Josefin Sans', 'Open Sans', 'Raleway', 'Open Sans Condensed', 'La Belle Aurore'],

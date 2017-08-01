@@ -39,7 +39,7 @@ function colorBackground(rules, elements, element, colorBlueprint) {
     const solids = colorBlueprint.bgBlueprints[background].solids;
     const prevSolids = colorBlueprint.bgBlueprints[element.color._parentBackground || background].solids;
     
-    if(element.color.background !== 'transparent') {
+    if(element.color.background !== '#transparent') {
       const preferred = getMappedPreferredColor(solids, prevSolids, element.color.background, element.blueprint.color.background);
       element.color.background = preferred;
       element.color.borderColor = preferred;
@@ -64,7 +64,7 @@ function colorText(rules, elements, element, colorBlueprint) {
     const prevTexts = colorBlueprint.bgBlueprints[element.color._textBackground || background].texts;
     element.color.text = getMappedPreferredColor(texts, prevTexts, element.color.text, element.blueprint.color.text);
   }
-  if(element.color.background === 'transparent') {
+  if(element.color.background === '#transparent') {
     element.color.borderColor = element.color.text;
   }
 

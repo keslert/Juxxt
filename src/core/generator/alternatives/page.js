@@ -25,8 +25,6 @@ export const palettes = [
   ["#A7D2CB","#F2D388","#C98474","#874C62"],
   ["#CAE4DB","#DCAE1D","#00303F","#7A9D96"],
   ["#062F4F","#813772","#B82601"],
-
-
 ]
 
 export function generatePageBrandColorAlternatives(page) {
@@ -45,7 +43,7 @@ export function generatePageBrandColorAlternatives(page) {
       [page.colorBlueprint.lightGray]: colorBlueprint.lightGray,
       [page.colorBlueprint.darkGray]: colorBlueprint.darkGray,
       '#ffffff': '#ffffff',
-      'transparent': 'transparent',
+      '#transparent': '#transparent',
     }
 
     _page.sections = reduce(page.sections, (sections, section) => {
@@ -71,4 +69,8 @@ export function generatePageBrandColorAlternatives(page) {
   })
 
   return pages;
+}
+
+export function generateTypographyAlternatives(page) {
+
 }

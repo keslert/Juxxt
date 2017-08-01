@@ -17,7 +17,7 @@ class Basic extends React.PureComponent {
     const isCenter = style.horizontalPosition === 'center';
 
       
-    const paddingBottom = clamp(Math.floor(style.height * (style.verticalPosition / POSITIONS)), 1, style.height);
+    const paddingBottom = Math.floor(style.height * (style.verticalPosition / POSITIONS));
     const containerClassNames = convertStyleToAtomic({
       maxWidth: 'page',
       margin: 'auto',
@@ -55,6 +55,7 @@ export const blueprint = {
   layout: {
     position: ['verticalPosition', 'horizontalPosition']
   },
+  component: { basic: ['basic'], header: ['header'], action: ['action'] },
   style: {
     verticalPosition: {
       _default: POSITIONS / 2,

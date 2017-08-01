@@ -71,7 +71,7 @@ function generateComponentAlternatives(page, modify, selected) {
   } else if(selected.isGroup) {
     skeletons = generateGroupComponentAlternatives(selected, sectionSkeleton);
   } else {
-    skeletons = generateElementComponentAlternatives(selected, sectionSkeleton);
+    skeletons = generateElementComponentAlternatives(modify, selected, sectionSkeleton);
   }
 
   skeletons.forEach(skeleton => {

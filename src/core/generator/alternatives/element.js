@@ -4,6 +4,7 @@ import * as blueprints from '../../../components/page/elements/_blueprints';
 import * as groupBlueprintList from '../../../components/page/groups/_blueprints';
 // import * as sectionBlueprints from '../../../components/page/sections/_blueprints';   
 import { generateGroupSkeleton } from '../skeletons/group';
+import { extractSkeletonFromItem } from '../skeletons/utils';
 import { assignContent } from '../content';
 import { generateContent } from '../content/generate';
 import { 
@@ -21,6 +22,7 @@ import {
   forEach,
   mapValues,
   values,
+  isString,
 } from 'lodash';
 import styles from '../style/shared-styles';
 import { filterStyle } from '../style/utils';
@@ -39,38 +41,41 @@ function findPathsToElement(item, elementName, path, paths) {
   }
 
   forEach(blueprint.groups, ({options}, groupKey) =>
-    forEach(options, name => {
-      findPathsToElement({name, isGroup: true}, elementName, [...path, [groupKey, name]], paths)
+    forEach(options, group => {
+      const _group = isString(group) ? {name: group, isGroup: true} : {...group, isGroup: true};
+      findPathsToElement(_group, elementName, [...path, [groupKey, _group.name]], paths)
     })
   )
 }
 
-export function generateElementComponentAlternatives(element, sectionSkeleton) {
-  const blueprint = getBlueprint(element.parent);
+export function generateElementComponentAlternatives(modify, element, sectionSkeleton) {
+  if(modify.section && !element.parent.isSection) {
+    const blueprint = getBlueprint(element.parent);
 
-  const _element = find(element.section._elements, e => e.id === element.id);
-  const validPaths = [];
-  findPathsToElement(element.section, element.name, [], validPaths);
-  
-  const skeletons = validPaths.map(path => {
-    const skeleton = cloneDeep(sectionSkeleton);
+    const _element = find(element.section._elements, e => e.id === element.id);
+    const validPaths = [];
+    findPathsToElement(element.section, element.name, [], validPaths);
+    
+    const skeletons = validPaths.map(path => {
+      const skeleton = cloneDeep(sectionSkeleton);
 
-    let item = {};
-    const _root = item;
-    forEach(path, ([key, value]) => {
-      item.groups = {[key]: {name: value}};
-      item = item.groups[key];
+      let item = {};
+      const _root = item;
+      forEach(path, ([key, value]) => {
+        item.groups = {[key]: {name: value}};
+        item = item.groups[key];
+      })
+      item.elements = {[element.parentKey]: extractSkeletonFromItem(_element)};
+
+      const groupKey = Object.keys(_root.groups)[0];
+      const groupSkeleton = generateGroupSkeleton(_root.groups[groupKey]);
+      skeleton.groups[groupKey] = groupSkeleton;
+      linkSkeleton(skeleton);
+      return skeleton;
     })
-    item.elements = {[element.parentKey]: _element};
-
-    const groupKey = Object.keys(_root.groups)[0];
-    const groupSkeleton = generateGroupSkeleton(_root.groups[groupKey]);
-    skeleton.groups[groupKey] = groupSkeleton;
-    linkSkeleton(skeleton);
-    return skeleton;
-  })
-  
-  return skeletons;
+    return skeletons;
+  }
+  return generateStyleCombinations(modify, element, sectionSkeleton);
 }
 
 export function generateElementLayoutAlternatives(modify, element, sectionSkeleton) {
@@ -87,6 +92,8 @@ export function generateElementBackgroundAlternatives(modify, element, sectionSk
   let sections = [];
   if(modify.color) {
     const background = getBackground(element.parent);
+    
+    // Regular Buttons
     sections = map(page.colorBlueprint.bgBlueprints[background].solids, color => {
       const skeleton = cloneDeep(sectionSkeleton);
       linkSkeleton(skeleton);
@@ -101,17 +108,33 @@ export function generateElementBackgroundAlternatives(modify, element, sectionSk
       return skeleton;
     });
 
+    // Outline buttons
     sections = sections.concat(map(page.colorBlueprint.bgBlueprints[background].texts, color => {
       const skeleton = cloneDeep(sectionSkeleton);
       linkSkeleton(skeleton);
       skeleton._elements[elementIndex].color = {
-        background: 'transparent',
+        background: '#transparent',
         borderColor: color,
         text: color,
         _textBackground: background,
         _parentBackground: background,
       }
       skeleton.changes = { outline: color };
+      return skeleton;
+    }));
+
+    // Ghost buttons
+    sections = sections.concat(map(page.colorBlueprint.bgBlueprints[background].texts, color => {
+      const skeleton = cloneDeep(sectionSkeleton);
+      linkSkeleton(skeleton);
+      skeleton._elements[elementIndex].color = {
+        background: '#transparent',
+        borderColor: '#transparent',
+        text: color,
+        _textBackground: background,
+        _parentBackground: background,
+      }
+      skeleton.changes = { transparent: color };
       return skeleton;
     }));
   }
