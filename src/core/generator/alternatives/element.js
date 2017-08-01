@@ -57,7 +57,7 @@ export function generateElementComponentAlternatives(modify, element, sectionSke
   //   {color: "#BB23", locked:true},
   //   {color: "#000", locked:true},
   // ];
-  // colorMind(test,function(err,httpResponse,body) { alert(body);});
+  // colorMind(test,(err,he)=>{alert(err)} , (body)=>{debugger;});
 
   if(modify.section && !element.parent.isSection) {
     const blueprint = getBlueprint(element.parent);

@@ -19,7 +19,7 @@ import {
 
 const COLORMIND_API = "http://colormind.io/api/";
 
-export function colorMind(paletteObj, callback) {
+export function colorMind(paletteObj, onFailure, onSuccess) {
   const rgbArr = map(paletteObj, (o)=> {
     const clr = tinycolor(o.color);
     return o.locked ? [clr._r,clr._g,clr._b] : "N";
@@ -29,7 +29,15 @@ export function colorMind(paletteObj, callback) {
     model: "default",
     input : [rgbArr],
   };
-  request.post({url: COLORMIND_API, body: '{"model":"default"}' },callback);
+  request.post({url: COLORMIND_API, body: '{"model":"default"}' }, (err,resp,body)=> {
+    if(err)
+      onFailure(err,resp);
+    else {
+      let a = JSON.parse(body);
+      onSuccess(map(a.result, (rgb)=> { return tinycolor('rgb (' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] +')').toHexString() }));
+    }
+    
+  });
 }
 
 export function isSimilar(color1, color2) {
