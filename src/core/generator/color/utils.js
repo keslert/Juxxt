@@ -1,5 +1,6 @@
 import { getMode, randomItem } from '../../utils';
 import tinycolor from 'tinycolor2';
+import request from 'request';
 import { 
   range, 
   reduce, 
@@ -13,6 +14,23 @@ import {
   filter,
   zipObject,
 } from 'lodash';
+
+
+
+const COLORMIND_API = "http://colormind.io/api/";
+
+export function colorMind(paletteObj, callback) {
+  const rgbArr = map(paletteObj, (o)=> {
+    const clr = tinycolor(o.color);
+    return o.locked ? [clr._r,clr._g,clr._b] : "N";
+  });
+  debugger;
+  const payload = {
+    model: "default",
+    input : [rgbArr],
+  };
+  request.post({url: COLORMIND_API, body: '{"model":"default"}' },callback);
+}
 
 export function isSimilar(color1, color2) {
   const DIFFERENCE = 50;

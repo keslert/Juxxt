@@ -1,9 +1,8 @@
 import { getMostVibrantColor, tintColor, getReadableColors, isSimilarHue } from './utils';
 import { zipObject, filter, map, forEach, uniq, flatMap, clone } from 'lodash';
 import { absDiff } from '../../utils';
-import { getVibrancy } from './utils';
+import { getVibrancy, colorMind } from './utils';
 import tinycolor from 'tinycolor2';
-import geopattern from 'geopattern';
 
 const PATTERNS = [
                   "/images/patterns/escheresque.png",
@@ -81,7 +80,6 @@ function isColorVisibleOnPattern(color) {
 
 
 export function buildPageColorBlueprint(colors) {
-  
   const _colors = uniq([...colors, '#ffffff'])
   const primary = getMostVibrantColor(_colors);
   const darkGray = tintColor("#211b1a", primary, 20);

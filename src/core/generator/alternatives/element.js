@@ -7,6 +7,7 @@ import { generateGroupSkeleton } from '../skeletons/group';
 import { extractSkeletonFromItem } from '../skeletons/utils';
 import { assignContent } from '../content';
 import { generateContent } from '../content/generate';
+import { colorMind } from '../color/utils';
 import { 
   map, 
   uniq, 
@@ -49,6 +50,15 @@ function findPathsToElement(item, elementName, path, paths) {
 }
 
 export function generateElementComponentAlternatives(modify, element, sectionSkeleton) {
+  // const test = [
+  //   {color: "#FFF", locked:false},
+  //   {color: "#F2DC", locked:false},
+  //   {color: "#A2FE", locked:false},
+  //   {color: "#BB23", locked:true},
+  //   {color: "#000", locked:true},
+  // ];
+  // colorMind(test,function(err,httpResponse,body) { alert(body);});
+
   if(modify.section && !element.parent.isSection) {
     const blueprint = getBlueprint(element.parent);
     const _element = find(element.section._elements, e => e.id === element.id);
