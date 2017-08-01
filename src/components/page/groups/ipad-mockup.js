@@ -8,10 +8,10 @@ const portrait = ['16x9', '4x3', '6x4', '8x5', '7x5'];
 class IpadMockup extends React.Component {
   render() {
     const { elements } = this.props;
-    
+    const isPortrait = includes(portrait,elements.image.style.aspectRatio);
     return (
 
-      <div className={includes(portrait,elements.image.style.aspectRatio) ? 'ipad-portrait' : 'ipad-vertical'}>
+      <div className={ isPortrait ? 'ipad-portrait' : 'ipad-vertical'}>
         <Element {...elements.image} />
       </div>
     )

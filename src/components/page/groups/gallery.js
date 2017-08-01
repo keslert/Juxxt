@@ -16,7 +16,8 @@ class Gallery extends React.PureComponent {
     }
     const divStyle = {
       ...style,
-      padding: style.gutter,
+      paddingHorizontal: style.gutter,
+      paddingVertical: style.gutter,
       width: Math.floor(100 / (style.columns)) + 'P',
     }
     const styleClassNames = convertStyleToAtomic(boxStyle);
@@ -27,7 +28,7 @@ class Gallery extends React.PureComponent {
       <div className={colorClassNames + ' Gallery'}>
         <div className={styleClassNames}>
           {elements.images.clones.map((element, i) => (
-            <div className={divClassNames}key={i}>
+            <div className={divClassNames} key={i}>
               <Element {...element} className={"w-100P"}/>
             </div>
           ))}
@@ -41,16 +42,19 @@ export default Gallery;
 
 export const blueprint = {
   type: 'gallery',
-  inherits: ['ListGutter', 'BaseGroup'],
+  inherits: ['ListGutter'],
   style: {
     columns: { _default: 3, options: [2,3]},
   },
   color: {},
   elements: {
     images: {
-      name: 'GalleryImage',
+      name: 'BasicImage',
       blueprint: { 
-        clones: { _default: 6, min: 1, max: 12 }
+        clones: { _default: 6, min: 1, max: 12 },
+        style: {
+           aspectRatio: {_default: "4x3", options: ['1x1', '16x9', '4x3', '3x4', '6x4', '8x5', '7x5']},
+        }
       },
     }
   },
