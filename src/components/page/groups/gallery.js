@@ -49,9 +49,12 @@ export const blueprint = {
   color: {},
   elements: {
     images: {
-      name: 'GalleryImage',
+      name: 'BasicImage',
       blueprint: { 
-        clones: { _default: 6, min: 1, max: 12 }
+        clones: { _default: 6, min: 1, max: 12 },
+        style: {
+           aspectRatio: {_default: "4x3", options: ['1x1', '16x9', '4x3', '3x4', '6x4', '8x5', '7x5']},
+        }
       },
     }
   },
