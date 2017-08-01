@@ -128,7 +128,7 @@ const elements = {
     },
     shadow: {
       _default: 'none',
-      options: ['none', 'raised', 'shadow'],
+      options: ['static', 'raised', 'highlight'],
       consistent: true,
     },
     icon: {

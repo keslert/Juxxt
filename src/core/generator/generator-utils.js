@@ -115,7 +115,7 @@ export function generatePageCSSRules(page) {
 
     rules.push(`.bg-${color.substr(1)}.shadow-raised { box-shadow: 0 .25em ${darker}; }`);
     rules.push(`.bg-${color.substr(1)}.shadow-raised:hover { box-shadow: 0 .375em ${darker}; }`);
-    rules.push(`.bg-${color.substr(1)}.shadow-shadow:hover { 
+    rules.push(`.bg-${color.substr(1)}.shadow-faded:hover { 
       background: ${lighter};
       border-color: ${lighter};
     }`);

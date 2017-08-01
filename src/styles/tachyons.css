@@ -735,15 +735,15 @@ img { max-width: 100%; }
   box-shadow: none !important;
   transform: translateY(.25em);
 }
-.shadow-shadow {
+.shadow-highlight {
   transition: all .2s ease;
   box-shadow: 0 0.286em 0.429em rgba(50,50,93,.055), 0 0.071em 0.214em rgba(0,0,0,.04);
 }
-.shadow-shadow:hover {
+.shadow-highlight:hover {
   transform: translateY(-.1em);
   box-shadow: 0 0.486em 0.429em rgba(50,50,93,.04125), 0 0.271em 0.214em rgba(0,0,0,.03);
 }
-.shadow-shadow:active {
+.shadow-highlight:active {
   transition-duration: .15s;
   transform: translateY(0.05em);
   box-shadow: 0 0.20599999999999996em 0.429em rgba(50,50,93,.055), 0 -0.009000000000000008em 0.214em rgba(0,0,0,.04);
