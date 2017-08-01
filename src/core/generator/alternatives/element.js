@@ -51,7 +51,6 @@ function findPathsToElement(item, elementName, path, paths) {
 export function generateElementComponentAlternatives(modify, element, sectionSkeleton) {
   if(modify.section && !element.parent.isSection) {
     const blueprint = getBlueprint(element.parent);
-
     const _element = find(element.section._elements, e => e.id === element.id);
     const validPaths = [];
     findPathsToElement(element.section, element.name, [], validPaths);
