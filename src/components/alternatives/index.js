@@ -4,7 +4,12 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import { getZoomLevel } from '../../core/ui';
-import { getAlternatives, replaceMaster, replaceSectionWithAlternative } from '../../core/page';
+import { 
+  getAlternatives, 
+  replaceMaster, 
+  replaceSectionWithAlternative,
+  removeAlternative,
+} from '../../core/page';
 import Alternative from './alternative';
 import Page from '../page';
 
@@ -60,7 +65,7 @@ class Alternatives extends React.Component {
             <StyledWrapper key={alternative.uid + `${i}`} style={{width: `${100 / zoomLevel}%`}}>
               <Alternative 
                 onFavorite={() => null} 
-                onDelete={() => null} 
+                onDelete={() => this.props.removeAlternative(i)}
                 changes={alternative.sections[0].changes}>
                 <Page
                   preview={false}
@@ -90,6 +95,7 @@ const mapStateToProps = createSelector(
 const mapDispatchToProps = {
   replaceMaster,
   replaceSectionWithAlternative,
+  removeAlternative,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Alternatives);

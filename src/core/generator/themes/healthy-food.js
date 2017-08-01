@@ -25,7 +25,6 @@ const images = [
   {key: uniqueId(), url: 'https://images.pexels.com/photos/8844/red-lunch-green-knolling.jpg?w=940&h=650&auto=compress&cs=tinysrgb'},
   {key: uniqueId(), url: 'https://images.pexels.com/photos/236813/pexels-photo-236813.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
   {key: uniqueId(), url: 'https://images.pexels.com/photos/128865/pexels-photo-128865.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), url: 'https://images.pexels.com/photos/480153/pexels-photo-480153.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
   {key: uniqueId(), url: 'https://images.pexels.com/photos/95004/pexels-photo-95004.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
   {key: uniqueId(), url: 'https://images.pexels.com/photos/406152/pexels-photo-406152.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
   {key: uniqueId(), url: 'https://images.pexels.com/photos/520207/pexels-photo-520207.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
@@ -51,6 +50,7 @@ page: {
       {
         name: 'Basic',
         style: {
+          height: 12,
         },
         color: {
           backgroundImage: backgroundImages[1].key,
@@ -58,7 +58,7 @@ page: {
           background: palette[0],
         },
         groups: {
-          tp: {
+          item: {
             name: 'HeadingSubheadingButton',
             elements: {
               heading: {
@@ -66,7 +66,7 @@ page: {
                   text: '#ffffff',
                   _textBackground: palette[0],
                 },
-                  style: { fontSize: 9, textTransform: 'uppercase', fontFamily: 'Anton', fontWeight: 4 },
+                style: { fontSize: 6, textTransform: 'uppercase', fontFamily: 'Montserrat', fontWeight: 4 },
               },
               subheading: {
                 color: {
@@ -134,7 +134,7 @@ page: {
         },
         elements: {
           image: {
-            content: images[7],
+            content: images[5],
           },
         },
       },

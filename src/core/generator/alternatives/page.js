@@ -1,4 +1,4 @@
-import { linkSkeleton } from '../generator-utils';
+import { linkSkeleton, generatePageCSSRules } from '../generator-utils';
 import { extractSkeletonFromItem } from '../skeletons/utils';
 import { getSortedByPreference } from '../color/utils';
 import { buildPageColorBlueprint } from '../color/page';
@@ -29,48 +29,48 @@ export const palettes = [
 
 export function generatePageBrandColorAlternatives(page) {
   const validPalettes = filter(palettes, palette => !isEqual(palette, page.palette))
-
-  const pages = validPalettes.map(palette => {
-    const _page = { id: uniqueId(), style: page.style, maxWidth: page.maxWidth }
-
-    const colorBlueprint = buildPageColorBlueprint(palette);
-    
-    _page.palette = palette;
-    _page.colorBlueprint = colorBlueprint;
-
-    const colorMapping = {
-      [page.colorBlueprint.primary]: colorBlueprint.primary,
-      [page.colorBlueprint.lightGray]: colorBlueprint.lightGray,
-      [page.colorBlueprint.darkGray]: colorBlueprint.darkGray,
-      '#ffffff': '#ffffff',
-      '#transparent': '#transparent',
-    }
-
-    _page.sections = reduce(page.sections, (sections, section) => {
-      const skeleton = extractSkeletonFromItem(section);
-      
-      const background = colorMapping[section.color.background] || 
-                         getSortedByPreference(colorBlueprint.backgrounds, skeleton.blueprint.color.background)[0];
-      skeleton.color = { ...skeleton.color, background };
-
-      linkSkeleton(skeleton);
-      skeleton._groups.forEach(e => e.color = {});
-      skeleton._elements.forEach(e => e.color = {});
-      
-      const __page = {sections, colorBlueprint};
-      skeleton._elements.forEach(e => colorElement(e, __page))
-
-      return [...sections, skeleton];
-    }, []);
-
-    _page.sections[0].changes = {palette: palette}
-
-    return _page;
-  })
-
+  const pages = validPalettes.map(palette => generatePageFromPalette(page, palette));
   return pages;
 }
 
 export function generateTypographyAlternatives(page) {
 
+}
+
+export function generatePageFromPalette(page, palette) {
+  const _page = { id: uniqueId(), style: page.style, maxWidth: page.maxWidth }
+
+  const colorBlueprint = buildPageColorBlueprint(palette);
+  
+  _page.palette = palette;
+  _page.colorBlueprint = colorBlueprint;
+
+  const colorMapping = {
+    [page.colorBlueprint.primary]: colorBlueprint.primary,
+    [page.colorBlueprint.lightGray]: colorBlueprint.lightGray,
+    [page.colorBlueprint.darkGray]: colorBlueprint.darkGray,
+    '#ffffff': '#ffffff',
+    '#transparent': '#transparent',
+  }
+
+  _page.sections = reduce(page.sections, (sections, section) => {
+    const skeleton = extractSkeletonFromItem(section);
+    
+    const background = colorMapping[section.color.background] || 
+                        getSortedByPreference(colorBlueprint.backgrounds, skeleton.blueprint.color.background)[0];
+    skeleton.color = { ...skeleton.color, background };
+
+    linkSkeleton(skeleton);
+    skeleton._groups.forEach(e => e.color = {});
+    skeleton._elements.forEach(e => e.color = {});
+    
+    const tempPage = {sections, colorBlueprint};
+    skeleton._elements.forEach(e => colorElement(e, tempPage));
+
+    return [...sections, skeleton];
+  }, []);
+
+  _page.sections[0].changes = { palette };
+  generatePageCSSRules(_page);
+  return _page;
 }

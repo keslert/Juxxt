@@ -52,12 +52,12 @@ const StyledContent = styled.div`
 
 class Collection extends React.PureComponent {
   render() {
-    const { heading, open, locked, children, onToggleOpen, onToggleLocked } = this.props;
+    const { heading, open, locked, children, onToggleOpen, onExchange } = this.props;
     return (
       <StyledCollection>
         <StyledHeading open={open} onClick={onToggleOpen}>
           {heading}
-          <i className='fa fa-exchange' onClick={onToggleLocked}></i>
+          <i className='fa fa-exchange' onClick={onExchange}></i>
         </StyledHeading>
         <StyledContent open={open}>
           {children}

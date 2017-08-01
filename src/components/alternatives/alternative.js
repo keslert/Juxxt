@@ -52,6 +52,7 @@ renderChange() {
         <StyledHeading>
           {this.renderChange()}
           <StyledIconBar>
+            <IconButton type="trash" onClick={onDelete} />
             <IconButton type="heart" onClick={onFavorite} />
           </StyledIconBar>
         </StyledHeading>

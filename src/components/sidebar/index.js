@@ -20,9 +20,6 @@ const StyledSidebar = styled.div`
   height: 100vh;
   background: ${theme.black};
   box-sizing: border-box;
-  // box-shadow: inset 0 0 3px rgba(0,0,0,0.5);
-  // border-left: 1px solid #222;
-  overflow: hidden;
 `
 
 const StyledHeading = styled.div`
@@ -54,7 +51,7 @@ class Sidebar extends React.PureComponent {
         <CloseButton onClick={() => setSidebarOpen(false)}><i className="fa fa-times"></i></CloseButton>
         <StyledHeading>Page Settings</StyledHeading>
         <ContentPanel element={selected} hidden={!selected.isElement} />
-        <ColorPanel palette={master.colorBlueprint.colors} />
+        <ColorPanel page={master} />
       </StyledSidebar>
     )
   }

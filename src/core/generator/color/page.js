@@ -5,23 +5,28 @@ import { getVibrancy, colorMind } from './utils';
 import tinycolor from 'tinycolor2';
 
 const PATTERNS = [
-                  "/images/patterns/escheresque.png",
-                  "/images/patterns/inspiration-geometry.png",
-                  "/images/patterns/simple-dashed.png",
-                  "/images/patterns/food.png",
-                  "/images/patterns/shattered-dark.png",
-                  "/images/patterns/gradient-squares.png",
-                  "/images/patterns/gplay.png",
-                  "/images/patterns/stardust.png",
-                  "/images/patterns/cubes.png",
-                  "/images/patterns/shattered-dark.png",
-                  "/images/patterns/type.png",
-                  "/images/patterns/escheresque-dark.png",
-                  "/images/patterns/diamonds.png",
-                  "/images/patterns/asfalt.png",
+  "/images/patterns/escheresque.png",
+  "/images/patterns/inspiration-geometry.png",
+  "/images/patterns/simple-dashed.png",
+  "/images/patterns/food.png",
+  "/images/patterns/shattered-dark.png",
+  "/images/patterns/gradient-squares.png",
+  "/images/patterns/gplay.png",
+  "/images/patterns/stardust.png",
+  "/images/patterns/cubes.png",
+  "/images/patterns/shattered-dark.png",
+  "/images/patterns/type.png",
+  "/images/patterns/escheresque-dark.png",
+  "/images/patterns/diamonds.png",
+  "/images/patterns/asfalt.png",
 ]
 
 export const PatternDict = {};
+forEach(PATTERNS,function(pattern) {
+  getImageLightness(pattern, function(brightness) {
+    PatternDict[pattern] = brightness;
+  })
+});
 
 function getImageLightness(imageSrc,callback) {
     var img = document.createElement("img");
@@ -59,15 +64,6 @@ function getImageLightness(imageSrc,callback) {
         callback(brightness);
     }
 }
-
-
-forEach(PATTERNS,function(pattern) {
-  getImageLightness(pattern, function(brightness) {
-    PatternDict[pattern] = brightness;
-    console.log(pattern + " : " + brightness);
-  })
-});
-
 
 function isColorVisibleOnPattern(color) {
   const tc = tinycolor(color);
@@ -132,5 +128,3 @@ function getGradients(base, colors) {
 
   return gradients;
 }
-
-// const PATTERNS = ['chevrons','octogons','overlappingCircles','plusSigns','xes','sineWaves','hexagons','overlappingRings','plaid','triangles','squares','nestedSquares','mosaicSquares','concentricCircles','diamonds','tessellation']

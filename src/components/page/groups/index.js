@@ -18,22 +18,22 @@ const StyledGroup = styled.div`
   &:before {
     content: '';
     position: absolute;
-    top: -10px;
-    left: -12px;
-    right: -12px;
-    bottom: -10px;
+    top: -24px;
+    left: -24px;
+    right: -24px;
+    bottom: -24px;
     box-sizing: border-box;
   }
   ${props => `
     ${props.sudoSelected && `
       &:before {
-        border-left: 6px solid ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
-        border-right: 6px solid ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
+        border-top: 6px solid ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
+        border-bottom: 6px solid ${props.selected ? '#8bc34a' : 'rgba(122,122,122,0.3)'};
       }
     `};
     ${props.hovered && `
       &:before {
-        background: rgba(122,122,122,0.3);
+        background: rgba(122,122,122,0.2);
       }
     `}
   `};

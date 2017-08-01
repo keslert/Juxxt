@@ -1,7 +1,7 @@
 import * as types from './action-types';
 import { overrideElementContent, duplicateSection } from '../../core/generator';
 import { generateAlternatives } from '../../core/generator/alternatives';
-import { getMaster, getSelected } from './selectors';
+import { getMaster, getSelected, getAlternatives } from './selectors';
 import { mapValues, sortBy, cloneDeep, uniqueId, forEach, findIndex, pick, find, filter, map } from 'lodash';
 import { 
   getModifications, 
@@ -83,6 +83,23 @@ export function replaceMaster(page) {
 
     dispatch(setMaster(page));
     dispatch(setSelected(section));
+  }
+}
+
+export function pushAlternative(alternative) {
+  return (dispatch, getState) => {
+    const alternatives = getAlternatives(getState());
+    dispatch(setAlternatives([alternative, ...alternatives]));
+  }
+}
+
+export function removeAlternative(index) {
+  return (dispatch, getState) => {
+    const alternatives = getAlternatives(getState());
+    dispatch(setAlternatives([
+      ...alternatives.slice(0, index),
+      ...alternatives.slice(index + 1),
+    ]));
   }
 }
 

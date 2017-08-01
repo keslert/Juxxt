@@ -2,15 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Collection from '../common/collection';
-import { map, isEqual } from 'lodash';
+import { map, isEqual, find } from 'lodash';
 import { StyledWrap, StyledButton } from '../common/styled';
 import Box from '../../common/box';
+import ColorPicker from '../../common/color-picker';
+import { fetchColorMindPalette } from '../../../core/generator/color/utils';
+
+import { pushAlternative, setAlternatives } from '../../../core/page';
+import { generatePageFromPalette } from '../../../core/generator/alternatives/page';
+import toastr from 'toastr';
 
 const StyledPixel = styled.div`
   width: 18px;
   height: 18px;
   background: ${props => props.color};
   border-radius: 2px;
+  cursor: pointer;
 `;
 
 const StyledIcon = styled.div`
@@ -26,6 +33,9 @@ const StyledIcon = styled.div`
     background: rgba(0,0,0,.3);
     color: #fff;
   }
+  ${props => props.highlight && `
+    color: #03a9f4;
+  `}
 `
 
 const StyledTextButton = styled.div`
@@ -48,37 +58,80 @@ class ColorPanel extends React.Component {
   }
 
   componentDidMount() {
-    this.resetPalette(this.props.palette);
+    this.resetPalette(this.props.page);
   }
 
   componentWillReceiveProps(props) {
-    this.resetPalette(props.palette);
+    this.resetPalette(props.page);
   }
 
-  resetPalette(palette) {
+  resetPalette(page) {
+    const palette = page.colorBlueprint.colors;
+    this.setState({
+      palette: palette.map(color => {
+        const old = find(this.state.palette, c => c.color === color) || {};
+        return { color, locked: old.locked }
+      })
+    })
+  }
+
+  handleColorChange(color, index) {
+    const { page, pushAlternative } = this.props;
+    const palette = [...this.state.palette];
+    palette[index] = {...palette[index], color};
     this.setState({palette});
+    const alternative = generatePageFromPalette(page, map(palette, 'color'));
+    pushAlternative(alternative);
+  }
+
+  handleColorExchange(index) {
+    const palette = this.state.palette.map((color, i) => ({
+      ...color, locked: i !== index
+    }));
+    this.exchangeColorPalette(palette);  
+  }
+
+  exchangeColorPalette(palette) {
+    const { page, pushAlternative } = this.props;
+    fetchColorMindPalette(
+      palette, 
+      _palette => pushAlternative(generatePageFromPalette(page, _palette)),
+      error => toastr.error('There was an error when we tried to fetch a new palette...', error)
+    )
+  }
+
+  toggleColorLock(index) {
+    this.setState({
+      palette: this.state.palette.map((color, i) =>
+        i !== index ? color : {...color, locked: !color.locked}
+      )
+    })
   }
 
   renderColor(color, index) {
-    const locked = false;
 
+    
     return (
       <Box display="flex" justify="space-between" marginBottom="4px">
         <Box display="flex">
-          <StyledPixel color={color} />
-          <Box marginLeft="4px">{color}</Box>
+          <ColorPicker color={color.color} onChange={value => this.handleColorChange(value, index)}>
+            <StyledPixel color={color.color} />
+          </ColorPicker>
+          <Box marginLeft="4px">{color.color}</Box>
         </Box>
         <Box display="flex">
-          <StyledIcon>
-            <i className={`fa fa-${locked ? 'lock' :  'unlock-alt'}`} onClick={() => null} />
+          <StyledIcon highlight={color.locked} onClick={() => this.toggleColorLock(index)}>
+            <i className={`fa fa-${color.locked ? 'lock' :  'unlock-alt'}`} />
           </StyledIcon>
           <StyledIcon>
-            <i className='fa fa-exchange' onClick={() => null} />
+            <i className='fa fa-exchange' onClick={() => this.handleColorExchange(index)} />
           </StyledIcon>
         </Box>
       </Box>
     )
   }
+
+  
 
   render() {
     const { palette, open } = this.state;
@@ -86,9 +139,14 @@ class ColorPanel extends React.Component {
     return (
       <StyledColorPanel>
         <StyledWrap inset>
-          <Collection heading={"Palette"} open={open} onToggleOpen={() => this.setState({open: !open})}>
+          <Collection 
+            heading={"Palette"} 
+            open={open} 
+            onToggleOpen={() => this.setState({open: !open})}
+            onExchange={e => (e.stopPropagation(), this.exchangeColorPalette(palette))}
+            >
             {palette.map((color, i) => (
-              <div key={color}>
+              <div key={i}>
                 {this.renderColor(color, i)}
               </div>
             ))}
@@ -103,6 +161,7 @@ class ColorPanel extends React.Component {
 }
 
 const mapDispatchToProps = {
-
+  pushAlternative,
+  setAlternatives,
 }
 export default connect(undefined, mapDispatchToProps)(ColorPanel);
