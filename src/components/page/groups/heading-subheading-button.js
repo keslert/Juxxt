@@ -21,10 +21,7 @@ export default HeadingSubheadingButton;
 export const blueprint = {
   inherits: ['RowBuffer'],
   style: {
-    textAlign: {
-      _default: 'center',
-      options: ['left', 'center', 'right'],
-    }
+    textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
   },
   color: {},
   elements: {

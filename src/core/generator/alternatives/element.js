@@ -69,31 +69,7 @@ export function generateElementComponentAlternatives(element, sectionSkeleton) {
     linkSkeleton(skeleton);
     return skeleton;
   })
-
-
-  // const validGroups = flatMap(sectionSkeleton.blueprint.groups,'options');
-  // const gBlueprints = intersection(filter(Object.keys(groupBlueprintList), (group) => includes(Object.keys(groupBlueprintList[group].elements),element.parentKey)), validGroups); 
-  // const skeletons = gBlueprints.map(g => {
-  //   const skeleton = cloneDeep(sectionSkeleton);
-      
-
-
-    // const parentSkeleton = findItemInSection(element.parent, skeleton);
-
-    // const _group = isString(option) ? {name: option} : option;
-    // parentSkeleton.groups[group.parentKey] = generateGroupSkeleton({..._group, id: group.id, layout: group.layout});
-  //   let e = element;
-
-  //   linkSkeleton(skeleton);
-  //   return skeleton;
-  // });
-  // forEach(gBlueprints,(g) => {
-  //   const _skeleton = cloneDeep(sectionSkeleton);
-  //   linkSkeleton(_skeleton);
-  //   console.log(groupBlueprintList[g]);
-  //   skeletons.push(_skeleton)
-  // })
-
+  
   return skeletons;
 }
 
