@@ -1,6 +1,8 @@
 import sectionBlueprints from '../../../components/page/sections/_blueprints';
 import groupBlueprints from '../../../components/page/groups/_blueprints';
 import * as blueprints from '../../../components/page/elements/_blueprints';
+import * as groupBlueprintList from '../../../components/page/groups/_blueprints';
+// import * as sectionBlueprints from '../../../components/page/sections/_blueprints';   
 import { generateGroupSkeleton } from '../skeletons/group';
 import { assignContent } from '../content';
 import { generateContent } from '../content/generate';
@@ -15,7 +17,10 @@ import {
   findIndex, 
   find,
   pick,
+  includes,
+  forEach,
   mapValues,
+  values,
 } from 'lodash';
 import styles from '../style/shared-styles';
 import { filterStyle } from '../style/utils';
@@ -26,10 +31,70 @@ import { generateSectionLayoutAlternatives } from './section';
 import { generateGroupLayoutAlternatives, generateGroupComponentAlternatives } from './group';
 import defaultTheme from '../themes';
 
-export function generateElementComponentAlternatives(element, sectionSkeleton) {
-  const blueprint = getBlueprint(element.parent);  
 
-  return [];
+function findPathsToElement(item, elementName, path, paths) {
+  const blueprint = getBlueprint(item);
+  if(includes(map(blueprint.elements, 'name'), elementName)) {
+    paths.push(path);
+  }
+
+  forEach(blueprint.groups, ({options}, groupKey) =>
+    forEach(options, name => {
+      findPathsToElement({name, isGroup: true}, elementName, [...path, [groupKey, name]], paths)
+    })
+  )
+}
+
+export function generateElementComponentAlternatives(element, sectionSkeleton) {
+  const blueprint = getBlueprint(element.parent);
+
+  const _element = find(element.section._elements, e => e.id === element.id);
+  const validPaths = [];
+  findPathsToElement(element.section, element.name, [], validPaths);
+  
+  const skeletons = validPaths.map(path => {
+    const skeleton = cloneDeep(sectionSkeleton);
+
+    let item = {};
+    const _root = item;
+    forEach(path, ([key, value]) => {
+      item.groups = {[key]: {name: value}};
+      item = item.groups[key];
+    })
+    item.elements = {[element.parentKey]: _element};
+
+    const groupKey = Object.keys(_root.groups)[0];
+    const groupSkeleton = generateGroupSkeleton(_root.groups[groupKey]);
+    skeleton.groups[groupKey] = groupSkeleton;
+    linkSkeleton(skeleton);
+    return skeleton;
+  })
+
+
+  // const validGroups = flatMap(sectionSkeleton.blueprint.groups,'options');
+  // const gBlueprints = intersection(filter(Object.keys(groupBlueprintList), (group) => includes(Object.keys(groupBlueprintList[group].elements),element.parentKey)), validGroups); 
+  // const skeletons = gBlueprints.map(g => {
+  //   const skeleton = cloneDeep(sectionSkeleton);
+      
+
+
+    // const parentSkeleton = findItemInSection(element.parent, skeleton);
+
+    // const _group = isString(option) ? {name: option} : option;
+    // parentSkeleton.groups[group.parentKey] = generateGroupSkeleton({..._group, id: group.id, layout: group.layout});
+  //   let e = element;
+
+  //   linkSkeleton(skeleton);
+  //   return skeleton;
+  // });
+  // forEach(gBlueprints,(g) => {
+  //   const _skeleton = cloneDeep(sectionSkeleton);
+  //   linkSkeleton(_skeleton);
+  //   console.log(groupBlueprintList[g]);
+  //   skeletons.push(_skeleton)
+  // })
+
+  return skeletons;
 }
 
 export function generateElementLayoutAlternatives(modify, element, sectionSkeleton) {
