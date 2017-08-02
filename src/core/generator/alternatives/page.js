@@ -33,10 +33,6 @@ export function generatePageBrandColorAlternatives(page) {
   return pages;
 }
 
-export function generateTypographyAlternatives(page) {
-
-}
-
 export function generatePageFromPalette(page, palette) {
   const _page = { id: uniqueId(), style: page.style, maxWidth: page.maxWidth }
 
@@ -73,4 +69,57 @@ export function generatePageFromPalette(page, palette) {
   _page.sections[0].changes = { palette };
   generatePageCSSRules(_page);
   return _page;
+}
+
+
+
+// If the heading is cursive or only one weight, must choose a second font
+
+
+
+
+
+// Single Font w/ multiple boldness
+// {
+//   heading: {
+//     fontFamily: font1,
+//     fontWeight: bold,
+//   },
+//   subheading: {
+//     // must be larger
+//   },
+//   smallheading: {
+//     fontFamily: font1,
+//     fontWeight: bold,
+//   },
+//   kicker: {
+//     fontFamily: font1,
+//     textTransform: ['uppercase', 'none'],
+//     fontWeight: 400,
+//     fontSize: 4,
+//   },
+//   paragraph: {
+//     fontFamily: font1,
+//     fontWeight: 'normal',
+//     textTransform: 'none',
+//   } 
+// }
+
+
+
+// {heading: 'Montserrat', paragraph: 'Montserrat'}
+export function generateTypographyAlternatives(fonts, page) {
+  
+  const typography = {
+    heading: { fontFamily: font.heading },
+    paragraph: { fontFamily: font.paragraph },
+  }
+  calculateHeading(typography);
+  // calculateParagraph(typography);
+  // calcualteKicker(typography);
+
+}
+
+function calculateHeading(typography) {
+  typography.fontFamily = 'Montserrat';
 }
