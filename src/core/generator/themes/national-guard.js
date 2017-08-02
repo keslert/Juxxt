@@ -55,7 +55,7 @@ export default {
          }
 /*
          {
-           name: "Header",//'130+ JOBS. ONE MISSION.'//'FIND YOUR DREAM JOB -->'
+           name: "Basic",//'130+ JOBS. ONE MISSION.'//'FIND YOUR DREAM JOB -->'
            elements:{},
            groups:{
              tp: {

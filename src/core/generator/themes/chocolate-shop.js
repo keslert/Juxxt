@@ -54,7 +54,7 @@ page: {
           },
         }
       },
-      {name: 'Header',
+      {name: 'Basic',
         _defaults: {
           style: {
             paddingBottom: 5,
@@ -215,7 +215,7 @@ page: {
           // }
         },
       },
-      {name: 'Header',
+      {name: 'Basic',
         _defaults: {
           style: {
             paddingBottom: 5,

@@ -50,7 +50,7 @@ export default {
           },
         }
       },
-      {name: 'Header',
+      {name: 'Basic',
         _defaults: {
           style: {
             paddingBottom: 4,

@@ -3,7 +3,7 @@ import uniqueId from 'lodash/uniqueId';
 const page = {
   sections: [
     {
-      name: 'Header',
+      name: 'Basic',
       groups: {
         tp: {
           name: 'HeadingSubheadingButton',
@@ -166,7 +166,7 @@ const __page = {
       }
     },
     {
-      "name": "Header",
+      "name": 'Basic',
       "style": {
         "maxWidth": 1024,
         "paddingTop": 6,

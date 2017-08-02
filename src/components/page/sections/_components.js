@@ -1,11 +1,9 @@
 export { default as Basic } from './basic';
 export { default as Basic1_2 } from './basic1_2';
 export { default as BasicWide1_2 } from './basicWide1_2';
-export { default as Header } from './header';
 export { default as Navbar1 } from './navigation/navbar1';
 export { default as Navbar2 } from './navigation/navbar2';
 export { default as Navbar3 } from './navigation/navbar3';
-export { default as Header1_2 } from './header1_2';
 export { default as Footer1 } from './footers/footer1';
 export { default as Footer2 } from './footers/footer2';
 export { default as FooterVerticalLists } from './footers/footer-vertical-lists';

@@ -59,7 +59,7 @@ export default {
             background: colorBlueprint.lightGray,
           },
       },
-      {name: 'Header',
+      {name: 'Basic',
         _defaults: {
           style: {
             paddingBottom: 8,
