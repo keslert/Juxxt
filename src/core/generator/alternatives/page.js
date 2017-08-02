@@ -111,8 +111,8 @@ export function generatePageFromPalette(page, palette) {
 export function generateTypographyAlternatives(fonts, page) {
   
   const typography = {
-    heading: { fontFamily: font.heading },
-    paragraph: { fontFamily: font.paragraph },
+    heading: { fontFamily: fonts.heading },
+    paragraph: { fontFamily: fonts.paragraph },
   }
   calculateHeading(typography);
   // calculateParagraph(typography);
