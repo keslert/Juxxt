@@ -36,3 +36,4 @@ export {default as ImageHeadingParagraph} from './image-heading-paragraph';
 export {default as BrowserMockup} from './browser-mockup';
 export {default as IpadMockup} from './ipad-mockup';
 export {default as ImacMockup} from './imac-mockup';
+export {default as Shadow} from './shadow';
