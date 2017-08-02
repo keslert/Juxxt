@@ -31,19 +31,24 @@ import { generateGroupLayoutAlternatives } from './group';
 import { getSortedByPreference, getSortedByMostBrightness } from '../color/utils';
 import { generateItemClones, generateStyleCombinations } from './alternatives-utils';
 
+import { getHeaders } from '../prebuilt/headers';
+
 import tinycolor from 'tinycolor2';
 import defaultTheme from '../themes';
 
-export function generateSectionComponentAlternatives(section, modify) {
-  const possibleSections = Object.keys(blueprints);
-  const validSections = filter(possibleSections, name => 
-    modify[blueprints[name].type]
-  );
+export function generateSectionComponentAlternatives(section, modify, sectionSkeleton, page) {
+  let validSkeletons = [];
+  if(modify.header) {
+    validSkeletons = getHeaders(sectionSkeleton, page);
+  } else {
+    validSkeletons = filter(Object.keys(blueprints), name => modify[blueprints[name].type])
+                     .map(name => ({name}))
+  }
 
-  const skeletons = validSections.map(name => {
-    const skeleton = generateSectionSkeleton({name, id: section.id, layout: section.layout})
-    linkSkeleton(skeleton);
-    return skeleton;
+  const skeletons = validSkeletons.map(skeleton => {
+    const _skeleton = generateSectionSkeleton({...skeleton, id: section.id});
+    linkSkeleton(_skeleton);
+    return _skeleton;
   });
 
   return skeletons;
