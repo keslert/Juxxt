@@ -63,7 +63,7 @@ export default {
           },
         }
       },
-      {name: 'Header',
+      {name: 'Basic',
         _defaults: {
           style: {
             paddingBottom: 4,
@@ -251,7 +251,7 @@ export default {
         },
       },
       {name: 'Navbar1'},
-      {name: 'Header'},
+      {name: 'Basic'},
       {name: 'StackedGrid'},
     ]
   }
