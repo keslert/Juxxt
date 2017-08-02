@@ -120,11 +120,13 @@ export function generatePageCSSRules(page) {
 
     rules.push(`.bg-${color.substr(1)}.shadow-raised { box-shadow: 0 .25em ${darker}; }`);
     rules.push(`.bg-${color.substr(1)}.shadow-raised:hover { box-shadow: 0 .375em ${darker}; }`);
+
     //can we combine the highlight+bounce with highlight rule? with like an || ? 
     rules.push(`.bg-${color.substr(1)}.shadow-bounce:hover { 
       background: ${lighter};
       border-color: ${lighter};
     }`);
+
     rules.push(`.bg-${color.substr(1)}.shadow-highlight:hover { 
       background: ${lighter};
       border-color: ${lighter};
