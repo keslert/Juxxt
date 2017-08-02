@@ -127,7 +127,7 @@ const elements = {
       consistent: true,
     },
     buttonType: {
-      _default: 'static',
+      _default: 'highlight',
       options: ['highlight', 'raised', 'bounce'],
       consistent: true,
     },

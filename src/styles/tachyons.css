@@ -741,7 +741,9 @@ img { max-width: 100%; }
 }
 .shadow-bounce:hover {
   transform: translateY(-.1em);
-  box-shadow: 0 0.486em 0.429em rgba(50,50,93,.04125), 0 0.271em 0.214em rgba(0,0,0,.03);
+  box-shadow: 0 10px 25px rgba(0,0,0,.15);
+  /*box-shadow: 0 0.486em 0.429em rgba(50,50,93,.04125), 0 0.271em 0.214em rgba(0,0,0,.03);
+*/
 }
 .shadow-bounce:active {
   transition-duration: .15s;
