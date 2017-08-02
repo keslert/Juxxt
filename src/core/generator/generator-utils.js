@@ -101,10 +101,15 @@ export function generatePageCSSRules(page) {
   
 
   page.colorBlueprint.texts.forEach(color => {
-    rules.push(`.c-${color.substr(1)} { color: ${color}; }`);
+    const key = color.substr(1);
+    rules.push(`.c-${key} { color: ${color}; }`);
 
-    rules.push(`.c-${color.substr(1)}.shadow-raised { box-shadow: 0 0em ${color}; }`);
-    rules.push(`.c-${color.substr(1)}.shadow-raised:hover { box-shadow: 0 .375em ${color}; }`);
+    rules.push(`.c-${key}.shadow-raised { box-shadow: 0 0em ${color}; }`);
+    rules.push(`.c-${key}.shadow-raised:hover { box-shadow: 0 .375em ${color}; }`);
+    rules.push(`.c-${key}.bg-transparent.shadow-highlight:not(.b-transparent):hover { 
+      color: ${page.colorBlueprint.bgBlueprints[color].texts[0]};
+      background: ${color};
+    }`);
   });
 
   page.colorBlueprint.backgrounds.forEach(color => {
@@ -115,6 +120,7 @@ export function generatePageCSSRules(page) {
 
     rules.push(`.bg-${color.substr(1)}.shadow-raised { box-shadow: 0 .25em ${darker}; }`);
     rules.push(`.bg-${color.substr(1)}.shadow-raised:hover { box-shadow: 0 .375em ${darker}; }`);
+    //can we combine the highlight+bounce with highlight rule? with like an || ? 
     rules.push(`.bg-${color.substr(1)}.shadow-bounce:hover { 
       background: ${lighter};
       border-color: ${lighter};
@@ -123,6 +129,17 @@ export function generatePageCSSRules(page) {
       background: ${lighter};
       border-color: ${lighter};
     }`);
+
+    //for ghost highlight+bounce with highlight rule?
+    //background-color: [what border color was],
+    //how do I say this rule only applies to ghost/outline buttons
+    //should I say "#transparent"??
+    //      background: ${page.colorBlueprint.backgrounds.border.substr(1)};
+    //      color: transparent;
+
+    rules.push(`.bg-${color.substr(1)}.shadow-highlight:hover { 
+    }`);
+
   });
   
   // Gradients
