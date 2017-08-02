@@ -7,8 +7,6 @@ const colorBlueprint = buildPageColorBlueprint(palette);
 const backgroundImages = [
   {key: uniqueId(), url: 'https://images.pexels.com/photos/503175/pexels-photo-503175.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
   {key: uniqueId(), url: 'https://images.pexels.com/photos/349610/pexels-photo-349610.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), url: 'https://images.pexels.com/photos/499761/pexels-photo-499761.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), url: 'https://images.pexels.com/photos/480153/pexels-photo-480153.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
   {key: uniqueId(), url: 'https://images.pexels.com/photos/52533/orange-fruit-vitamins-healthy-eating-52533.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
 ];
 const images = [
@@ -55,7 +53,7 @@ page: {
         color: {
           backgroundImage: backgroundImages[1].key,
           _backgroundImage: backgroundImages[1].url,
-          background: palette[0],
+          background: colorBlueprint.darkGray,
         },
         groups: {
           item: {
@@ -64,14 +62,14 @@ page: {
               heading: {
                 color: {
                   text: '#ffffff',
-                  _textBackground: palette[0],
+                  _textBackground: colorBlueprint.darkGray,
                 },
                 style: { fontSize: 6, textTransform: 'uppercase', fontFamily: 'Montserrat', fontWeight: 4 },
               },
               subheading: {
                 color: {
                   text: '#ffffff',
-                  _textBackground: palette[0],
+                  _textBackground: colorBlueprint.darkGray,
                 },
               },
             } 
@@ -145,14 +143,12 @@ page: {
           },
         },
       },
-      {name: 'Basic',
-        style: {
-          parallax: 'on',
-        },
+      {
+        name: 'Basic',
         color: {
-          backgroundImage: backgroundImages[3].key,
-          _backgroundImage: backgroundImages[3].url,
-          background: palette[0],
+          backgroundImage: backgroundImages[2].key,
+          _backgroundImage: backgroundImages[2].url,
+          background: colorBlueprint.darkGray,
         },
         groups: {
           tp: {
@@ -161,7 +157,7 @@ page: {
               heading: {
                 color: {
                   text: '#ffffff',
-                  _textBackground: palette[0],
+                  _textBackground: colorBlueprint.darkGray,
                 },
                 style: {
                   lineHeight: 3,
@@ -170,7 +166,7 @@ page: {
               subheading: {
                 color: {
                   text: '#ffffff',
-                  _textBackground: palette[0],
+                  _textBackground: colorBlueprint.darkGray,
                 },
               },
             },

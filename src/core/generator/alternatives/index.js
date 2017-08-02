@@ -47,10 +47,10 @@ export function generateAlternatives(page, modify, selected) {
     sections = generateTextAlternatives(page, modify.text, selected);
   } else if(modify.image) {
     sections = generateImageAlternatives(page, modify.image, selected);
-  } else if(modify.page) {
-    const pages = generatePageAlternatives(page, modify.page);
-    pages.forEach(generatePageCSSRules);
-    return pages;
+  // } else if(modify.page) {
+  //   const pages = generatePageAlternatives(page, modify.page);
+  //   pages.forEach(generatePageCSSRules);
+  //   return pages;
   }
 
   const pages = sections.map(section => {

@@ -33,7 +33,7 @@ export function fetchColorMindPalette(paletteObj, onSuccess, onFailure) {
       onFailure(err,resp);
     } else {
       const response = JSON.parse(body).result;
-      const palette = response.map(([r,g,b])=> tinycolor({r,g,b}).toHexString())
+      const palette = response.map(([r,g,b]) => tinycolor({r,g,b}).toHexString())
       onSuccess(palette);
     }
   });

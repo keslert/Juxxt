@@ -653,7 +653,7 @@ const __page = {
           },
           "elements": {
             "images": {
-              "name": "GalleryImage",
+              "name": "BasicImage",
               "style": {
                 "aspectRatio": "4x3",
                 "borderRadius": "0"

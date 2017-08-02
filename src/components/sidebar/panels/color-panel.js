@@ -9,7 +9,9 @@ import ColorPicker from '../../common/color-picker';
 import { fetchColorMindPalette } from '../../../core/generator/color/utils';
 
 import { pushAlternative, setAlternatives } from '../../../core/page';
+import { turnOnModification } from '../../../core/ui';
 import { generatePageFromPalette } from '../../../core/generator/alternatives/page';
+
 import toastr from 'toastr';
 
 const StyledPixel = styled.div`
@@ -75,13 +77,17 @@ class ColorPanel extends React.Component {
     })
   }
 
-  handleColorChange(color, index) {
-    const { page, pushAlternative } = this.props;
-    const palette = [...this.state.palette];
-    palette[index] = {...palette[index], color};
+  updatePalette(palette) {
+    const { page, pushAlternative, turnOnModification } = this.props;
+    turnOnModification('page');
     this.setState({palette});
     const alternative = generatePageFromPalette(page, map(palette, 'color'));
     pushAlternative(alternative);
+  }
+
+  handleColorChange(color, index) {
+    const palette = this.state.palette.map((c, i) => i !== index ? c : {...c, color});
+    this.updatePalette(palette);
   }
 
   handleColorExchange(index) {
@@ -95,7 +101,13 @@ class ColorPanel extends React.Component {
     const { page, pushAlternative } = this.props;
     fetchColorMindPalette(
       palette, 
-      _palette => pushAlternative(generatePageFromPalette(page, _palette)),
+      _palette => {
+        const __palette = palette.map((color, i) => ({
+          color: _palette[i],
+          locked: this.state.palette[i] && this.state.palette[i].locked,
+        }))
+        this.updatePalette(__palette);
+      },
       error => toastr.error('There was an error when we tried to fetch a new palette...', error)
     )
   }
@@ -150,9 +162,13 @@ class ColorPanel extends React.Component {
                 {this.renderColor(color, i)}
               </div>
             ))}
-            <Box marginLeft="3px" marginTop="4px">
-              <StyledTextButton><i className="fa fa-plus-circle" /> Add color</StyledTextButton>
-            </Box>
+            {palette.length < 5 &&
+              <Box marginLeft="3px" marginTop="4px">
+                <StyledTextButton onClick={() => this.exchangeColorPalette([...palette, {locked: false}])}>
+                  <i className="fa fa-plus-circle" /> Add color
+                </StyledTextButton>
+              </Box>
+            }
           </Collection>
         </StyledWrap>
       </StyledColorPanel>
@@ -163,5 +179,6 @@ class ColorPanel extends React.Component {
 const mapDispatchToProps = {
   pushAlternative,
   setAlternatives,
+  turnOnModification,
 }
 export default connect(undefined, mapDispatchToProps)(ColorPanel);

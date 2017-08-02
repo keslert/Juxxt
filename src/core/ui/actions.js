@@ -175,7 +175,7 @@ function resolveLayoutModification(dispatch, state, selected) {
 }
 
 function resolvePageModification(dispatch, state) {
-  const keys = ['brandColors'];
+  const keys = [];
   const options = keys.map(key => ({label: key, keys: [key]}));
   resolveModificationSelection(dispatch, state, 'page', keys, options);
 }

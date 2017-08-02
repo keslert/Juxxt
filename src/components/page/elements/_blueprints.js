@@ -113,17 +113,6 @@ export const BasicImage = {
   image: { content: ['content'] },
 };
 
-export const GalleryImage = { 
-  name: 'BasicImage', 
-  is: 'Image',
-  inherits: ['AspectMedia', 'Cropped', 'BorderRadius'],
-  color: {},
-  component: { section: ['section'] },
-  style: {},
-  image: { content: ['content'] },
-};
-
-
 export const CoverImage = {
   name: 'CoverImage', 
   is: 'Image',
