@@ -99,7 +99,6 @@ export const blueprint = {
       options: [
         'ImacMockup',
         'BlockImage', 
-        'Shadow',
         'IpadMockup',
         'BrowserMockup',
         {

@@ -32,7 +32,7 @@ export const blueprint = {
         style: {
           aspectRatio: {
             _default: '16x9',
-            options: ['16x9', '6x4', '8x5', '7x5'],
+            options: ['16x9', '6x4', '8x5'],
           }
         }
       }
