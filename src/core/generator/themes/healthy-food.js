@@ -50,7 +50,7 @@ page: {
       {
         name: 'Basic',
         style: {
-          height: 12,
+          height: 10,
         },
         color: {
           backgroundImage: backgroundImages[1].key,

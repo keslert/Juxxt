@@ -36,7 +36,6 @@ import { map, pick, filter } from 'lodash';
 
 export function generateAlternatives(page, modify, selected) {
   let sections = [];
-  return sections;
 
   if(modify.component) {
     sections = generateComponentAlternatives(page, modify.component, selected);
