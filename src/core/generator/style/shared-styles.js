@@ -150,7 +150,7 @@ const elements = {
   },
   AspectMedia: {
     aspectRatio: {
-      _default: '4x3',
+      _default: '16x9',
       options: ['1x1', '16x9', '4x3', '3x4', '6x4', '8x5', '7x5'],
     },
   }

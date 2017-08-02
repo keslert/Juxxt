@@ -97,6 +97,7 @@ export const blueprint = {
     },
     media: {
       options: [
+        'ImacMockup',
         'BlockImage', 
         'IpadMockup',
         'BrowserMockup',
