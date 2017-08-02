@@ -33,8 +33,8 @@ export const blueprint = {
         },
         style: {
           shadow: {
-            _default: 4,
-            options: [0,5,1,2,3,4]
+            _default: 0,
+            options: [0,'light','dark']
           }
         }
       }
