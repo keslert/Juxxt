@@ -4,10 +4,26 @@ export { blueprint as HeadingParagraph } from './heading-paragraph';
 export { blueprint as HeadingParagraphLink } from './heading-paragraph-link';
 export { blueprint as HeadingSubheadingButton } from './heading-subheading-button';
 export { blueprint as HeadingParagraphButton } from './heading-paragraph-button';
+export { blueprint as HeadingButton } from './heading-button';
+
 export { blueprint as KickerHeadingParagraph } from './kicker-heading-paragraph';
+export { blueprint as KickerHeadingSubheading } from './kicker-heading-subheading';
+export { blueprint as KickerHeadingSubheadingButton } from './kicker-heading-subheading-button';
+export { blueprint as KickerHeadingParagraphButton } from './kicker-heading-paragraph-button';
+export { blueprint as KickerHeadingButton } from './kicker-heading-button';
+export { blueprint as KickerHeading } from './kicker-heading';
+
+
 
 
 export { blueprint as IconHeadingParagraph } from './icon-heading-paragraph';
+export { blueprint as IconHeadingSubheading } from './icon-heading-subheading';
+export { blueprint as IconHeadingButton } from './icon-heading-button';
+export { blueprint as IconHeadingParagraphButton } from './icon-heading-paragraph-button';
+
+
+
+
 export { blueprint as InputButton } from './input-button';
 export { blueprint as NameEmailForm } from './name-email-form';
 export { blueprint as EmailForm } from './email-form';

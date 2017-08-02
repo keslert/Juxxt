@@ -1,5 +1,6 @@
 import React from 'react';
 import TalkingPointComponent from './common/talking-point';
+import { BasicSubheading, BasicHeading, } from '../elements/_blueprints';
 
 class HeadingSubheading extends React.Component {
   render() {
@@ -25,10 +26,10 @@ export const blueprint = {
   },
   elements: {
     heading: {
-      name: 'BasicHeading',
+      name: BasicHeading.name,
     },
     subheading: {
-      name: 'BasicSubheading',
+      name: BasicSubheading.name,
     },
   },
 }

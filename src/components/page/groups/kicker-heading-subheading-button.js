@@ -1,23 +1,22 @@
 import React from 'react';
 import TalkingPointComponent from './common/talking-point';
-import { BasicKicker, BasicHeading, BasicParagraph } from '../elements/_blueprints';
+import { BasicKicker, BasicButton, BasicSubheading, BasicHeading } from '../elements/_blueprints';
 
-
-class KickerHeadingParagraph extends React.Component {
+class KickerHeadingSubheadingButton extends React.Component {
   render() {
-    const { elements, style, color } = this.props;
+    const { elements, groups, style, color } = this.props;
 
     return (
       <TalkingPointComponent
         style={style}
         color={color}
         elements={elements}
-        groups={{}}
+        groups={groups}
         />
     )
   }
 }
-export default KickerHeadingParagraph;
+export default KickerHeadingSubheadingButton;
 
 export const blueprint = {
   inherits: ['RowBuffer', 'BaseGroup'],
@@ -31,10 +30,14 @@ export const blueprint = {
     },
     heading: {
       name: BasicHeading.name,
+    }, 
+    subheading: {
+      name: BasicSubheading.name,
     },
-    paragraph: {
-      name: BasicParagraph.name,
-      
-    },
+  },
+  groups: {
+    buttonList: {
+      options: ['ButtonList'],
+    }
   },
 }

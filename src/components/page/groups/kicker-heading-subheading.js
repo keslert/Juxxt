@@ -1,9 +1,9 @@
 import React from 'react';
 import TalkingPointComponent from './common/talking-point';
-import { BasicKicker, BasicHeading, BasicParagraph } from '../elements/_blueprints';
+import { BasicKicker, BasicHeading, BasicSubheading } from '../elements/_blueprints';
 
 
-class KickerHeadingParagraph extends React.Component {
+class KickerHeadingSubheading extends React.Component {
   render() {
     const { elements, style, color } = this.props;
 
@@ -17,7 +17,7 @@ class KickerHeadingParagraph extends React.Component {
     )
   }
 }
-export default KickerHeadingParagraph;
+export default KickerHeadingSubheading;
 
 export const blueprint = {
   inherits: ['RowBuffer', 'BaseGroup'],
@@ -32,9 +32,8 @@ export const blueprint = {
     heading: {
       name: BasicHeading.name,
     },
-    paragraph: {
-      name: BasicParagraph.name,
-      
+    subheading: {
+      name: BasicSubheading.name,
     },
   },
 }

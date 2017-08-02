@@ -1,11 +1,11 @@
 import React from 'react';
 import Element from '../elements';
 import TalkingPointIconComponent from './common/talking-point-icon'
-import { BasicIcon, BasicHeading, BasicParagraph } from '../elements/_blueprints';
+import { BasicIcon, BasicHeading, BasicSubheading } from '../elements/_blueprints';
 
 
 
-class IconHeadingParagraph extends React.Component {
+class IconHeadingSubheading extends React.Component {
   render() {
     const { elements, style, color } = this.props;
 
@@ -14,12 +14,12 @@ class IconHeadingParagraph extends React.Component {
         style={style}
         color={color}
         elements={elements}
-        groups={{}}
+        groups= {{}}
         />
     )
   }
 }
-export default IconHeadingParagraph;
+export default IconHeadingSubheading;
 
 export const blueprint = {
   inherits: ['RowBuffer'],
@@ -34,6 +34,6 @@ export const blueprint = {
   elements: {
     icon: { name: BasicIcon.name },
     heading: { name: BasicHeading.name },
-    paragraph: { name: BasicParagraph.name },
+    subheading: { name: BasicSubheading.name },
   },
 }
