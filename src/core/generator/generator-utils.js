@@ -115,7 +115,11 @@ export function generatePageCSSRules(page) {
 
     rules.push(`.bg-${color.substr(1)}.shadow-raised { box-shadow: 0 .25em ${darker}; }`);
     rules.push(`.bg-${color.substr(1)}.shadow-raised:hover { box-shadow: 0 .375em ${darker}; }`);
-    rules.push(`.bg-${color.substr(1)}.shadow-faded:hover { 
+    rules.push(`.bg-${color.substr(1)}.shadow-bounce:hover { 
+      background: ${lighter};
+      border-color: ${lighter};
+    }`);
+    rules.push(`.bg-${color.substr(1)}.shadow-highlight:hover { 
       background: ${lighter};
       border-color: ${lighter};
     }`);
