@@ -26,9 +26,9 @@ export function fetchColorMindPalette(paletteObj, onSuccess, onFailure) {
   });
   const payload = {
     model: "default",
-    input : [rgbArr],
+    input : rgbArr,
   };
-  request.post({url: COLORMIND_API, body: '{"model":"default"}' }, (err,resp,body)=> {
+  request.post({url: COLORMIND_API, body: JSON.stringify(payload) }, (err,resp,body)=> {
     if(err) {
       onFailure(err,resp);
     } else {
