@@ -44,200 +44,370 @@ const headerImages = [
     {key: uniqueId(), url: 'https://images.pexels.com/photos/492134/pexels-photo-492134.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'}
   ];
 export default {
-  palette,
-  backgroundImages,
-  images,
-  headerImages,
-  colorBlueprint,
 
-  page: {
-    sections: [
-      {name: 'Navbar1',
-        _default: {
-          style: {
-            paddingTop: 2,
-            paddingBottom: 2,
-          },
-          color: { 
-            background: "#transparent",
-          },
-        }
+palette,
+backgroundImages,
+images,
+headerImages,
+colorBlueprint,
+page: {
+  sections: [
+    {name: 'Navbar3'},
+    {
+      name: 'Basic',
+      style: {
+        height: 12,
+        parallax: true,
       },
-      {name: 'Basic',
-        _defaults: {
-          style: {
-            paddingBottom: 4,
-            paddingTop: 7,
-            fontFamily: 'Montserrat',
-            fontSize: 4,
-          },
-          color: {
-            backgroundImage: backgroundImages[2].key,
-            _backgroundImage: backgroundImages[2].url,
-            background: palette[0],
-          }
-        },
-        groups: {
-          tp: {
-            _default: {
-              name: 'HeadingSubheadingButton',
-              elements: {
-                heading: {
-                  _defaults: {
-                    color: {
-                      text: '#ffffff',
-                      _textBackground: palette[0],
-                    },
-                    style: {
-                      fontSize: 6,
-                      lineHeight: 3,
-                    }
-                  }
-                },
-                subheading: {
-                  _defaults: {
-                    color: {
-                      text: '#ffffff',
-                      _textBackground: palette[0],
-                    },
-                  }
-                },
+      color: {
+        backgroundImage: backgroundImages[3].key,
+        _backgroundImage: backgroundImages[3].url,
+        background: colorBlueprint.darkGray,
+      },
+      groups: {
+        item: {
+          name: 'HeadingSubheadingButton',
+          elements: {
+            heading: {
+              color: {
+                text: '#ffffff',
+                _textBackground: colorBlueprint.darkGray,
               },
-              groups: {
-                buttonList : {
-                  _default: {
-                    name: 'ButtonList',
-                    elements: {
-                      buttons: {
-                        _defaults: {
-                          color: {
-                            background: "#transparent",
-                            text: '#ffffff',
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            } 
-          }
+              style: { fontSize: 6, textTransform: 'uppercase', fontFamily: 'Montserrat', fontWeight: 4 },
+            },
+            subheading: {
+              color: {
+                text: '#ffffff',
+                _textBackground: colorBlueprint.darkGray,
+              },
+            },
+          } 
         }
-      },
-      {name: 'Basic',
-        groups: {
-          item:{
-            _default: { name: 'HeadingParagraph' },
-          }
+      }
+    },
+    {name: 'Basic',
+      style: {
+        },  
+      groups: {
+        item: {
+          name: 'HeadingParagraph',
         }
+      }
+    },
+    {name: 'BasicWide1_2',
+      color: {
+        background: palette[2],
       },
-      {name: 'BasicWide1_2',
-        _defaults: {
+      style: {
+        order: 1,
+      },
+      groups: {
+        tp: {
+          name: 'HeadingParagraphButton',
+        },
+      },
+      elements: {
+        image: {
+          content: images[15],
+        },
+      },
+    },
+    {
+      name: 'Basic',
+      color: {
+        background: colorBlueprint.lightGray,
+      },
+      groups: {
+        item:{
+          name: 'HeadingParagraph',
+        }
+      }
+    },
+      {
+      name: 'BasicWide1_2',
+      style: {
+        order: 1,
+      },
+      color: {
+        background: palette[2],
+      },
+      groups: {
+        tp: {
+          name: 'IconHeadingParagraph',
           color: {
             background: palette[2],
           },
         },
-        groups: {
-          tp: {
-            _default: {
-              name: 'HeadingParagraphButton',
-              style: {
-                _default: {
-                  align: 'right'
-                }
-              },
+      },
+      elements: {
+        image: {
+          content: images[5],
+        },
+      },
+    },
+    {
+      name: 'Basic',
+      color: {
+        backgroundImage: backgroundImages[2].key,
+        _backgroundImage: backgroundImages[2].url,
+        background: colorBlueprint.darkGray,
+      },
+      groups: {
+        tp: {
+          name: 'HeadingSubheadingButton',
+          elements: {
+            heading: {
               color: {
-                background: palette[2],
+                text: '#ffffff',
+                _textBackground: colorBlueprint.darkGray,
+              },
+              style: {
+                lineHeight: 3,
               }
-            }
-          },
-        },
-        elements: {
-          image: {
-            _defaults : {
-              content: images[3],
-            }   
-          },
-        },
-        layout: {
-          order: 3,
-        },
-      },
-      {name: 'Basic',
-        _default: {
-          color: {
-            background: colorBlueprint.lightGray,
-          }
-        },
-        groups: {
-          item:{
-            _default: { name: 'HeadingParagraph' },
-          }
-        }
-      },
-      {name: 'BasicWide1_2',
-        _defaults: {
-          layouts: {
-            order: 1,
-          },
-          color: {
-            background: palette[2],
-          },
-        },
-        groups: {
-          tp: {
-            _default: {
-              name: 'IconHeadingParagraph',
-              style: {
-                _default: {
-                  align: 'left'
-                }
-              },
+            },
+            subheading: {
               color: {
-                background: palette[2],
+                text: '#ffffff',
+                _textBackground: colorBlueprint.darkGray,
               },
             },
           },
+        }
+      }
+    },
+    {
+      name: 'Basic',
+      groups: {
+        item: {
+          name: 'Cards'
+        }
+      }
+    },
+    {
+      name: 'Basic',
+      groups: {
+        item: {
+          name: 'Gallery'
+        }
+      }
+    },
+    {name: 'Footer1',
+        color: {
+          background: colorBlueprint.lightGray,
         },
-        elements: {
-          image: {
-            _defaults : {
-              content: images[7],
-            }   
-          },
-        },
-        layout: {
-          order: 1,
-        },
+      elements: {
+        copyright: {
+          name: 'Copyright',
+        }
       },
-      {name: 'Footer1',
-        _defaults: {
-          color: {
-            background: colorBlueprint.lightGray,
-          }
+      groups: {
+        button: {
+            name: 'ButtonList',
         },
-        elements: {
-          copyright: {
-            _default: {
-              name: 'Copyright',
-            }
-          }
-        },
-        groups: {
-          button: {
-            _default: {
-              name: 'ButtonList',
-            }
-          },
-          links: {
-            _default: {
-              name: 'HorizontalList',
-            }
-          }
-        },
+        links: {
+            name: 'HorizontalList',
+        }
       },
-      {name: 'Navbar1'},
-      {name: 'Basic'},
-    ]
-  }
+    }
+  ]
 }
+}
+
+// export default {
+//   palette,
+//   backgroundImages,
+//   images,
+//   headerImages,
+//   colorBlueprint,
+
+//   page: {
+//     sections: [
+//       {name: 'Navbar1',
+//         _default: {
+//           style: {
+//             paddingTop: 2,
+//             paddingBottom: 2,
+//           },
+//           color: { 
+//             background: "#transparent",
+//           },
+//         }
+//       },
+//       {name: 'Basic',
+//         _defaults: {
+//           style: {
+//             paddingBottom: 4,
+//             paddingTop: 7,
+//             fontFamily: 'Montserrat',
+//             fontSize: 4,
+//           },
+//           color: {
+//             backgroundImage: backgroundImages[2].key,
+//             _backgroundImage: backgroundImages[2].url,
+//             background: palette[0],
+//           }
+//         },
+//         groups: {
+//           tp: {
+//             _default: {
+//               name: 'HeadingSubheadingButton',
+//               elements: {
+//                 heading: {
+//                   _defaults: {
+//                     color: {
+//                       text: '#ffffff',
+//                       _textBackground: palette[0],
+//                     },
+//                     style: {
+//                       fontSize: 6,
+//                       lineHeight: 3,
+//                     }
+//                   }
+//                 },
+//                 subheading: {
+//                   _defaults: {
+//                     color: {
+//                       text: '#ffffff',
+//                       _textBackground: palette[0],
+//                     },
+//                   }
+//                 },
+//               },
+//               groups: {
+//                 buttonList : {
+//                   _default: {
+//                     name: 'ButtonList',
+//                     elements: {
+//                       buttons: {
+//                         _defaults: {
+//                           color: {
+//                             background: "#transparent",
+//                             text: '#ffffff',
+//                           }
+//                         }
+//                       }
+//                     }
+//                   }
+//                 }
+//               }
+//             } 
+//           }
+//         }
+//       },
+//       {name: 'Basic',
+//         groups: {
+//           item:{
+//             _default: { name: 'HeadingParagraph' },
+//           }
+//         }
+//       },
+//       {name: 'BasicWide1_2',
+//         _defaults: {
+//           color: {
+//             background: palette[2],
+//           },
+//         },
+//         groups: {
+//           tp: {
+//             _default: {
+//               name: 'HeadingParagraphButton',
+//               style: {
+//                 _default: {
+//                   align: 'right'
+//                 }
+//               },
+//               color: {
+//                 background: palette[2],
+//               }
+//             }
+//           },
+//         },
+//         elements: {
+//           image: {
+//             _defaults : {
+//               content: images[3],
+//             }   
+//           },
+//         },
+//         layout: {
+//           order: 3,
+//         },
+//       },
+//       {name: 'Basic',
+//         _default: {
+//           color: {
+//             background: colorBlueprint.lightGray,
+//           }
+//         },
+//         groups: {
+//           item:{
+//             _default: { name: 'HeadingParagraph' },
+//           }
+//         }
+//       },
+//       {name: 'BasicWide1_2',
+//         _defaults: {
+//           layouts: {
+//             order: 1,
+//           },
+//           color: {
+//             background: palette[2],
+//           },
+//         },
+//         groups: {
+//           tp: {
+//             _default: {
+//               name: 'IconHeadingParagraph',
+//               style: {
+//                 _default: {
+//                   align: 'left'
+//                 }
+//               },
+//               color: {
+//                 background: palette[2],
+//               },
+//             },
+//           },
+//         },
+//         elements: {
+//           image: {
+//             _defaults : {
+//               content: images[7],
+//             }   
+//           },
+//         },
+//         layout: {
+//           order: 1,
+//         },
+//       },
+//       {name: 'Footer1',
+//         _defaults: {
+//           color: {
+//             background: colorBlueprint.lightGray,
+//           }
+//         },
+//         elements: {
+//           copyright: {
+//             _default: {
+//               name: 'Copyright',
+//             }
+//           }
+//         },
+//         groups: {
+//           button: {
+//             _default: {
+//               name: 'ButtonList',
+//             }
+//           },
+//           links: {
+//             _default: {
+//               name: 'HorizontalList',
+//             }
+//           }
+//         },
+//       },
+//       {name: 'Navbar1'},
+//       {name: 'Basic'},
+//     ]
+//   }
+// }

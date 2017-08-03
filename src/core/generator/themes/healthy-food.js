@@ -5,11 +5,13 @@ const palette = ['#ffeecc','#59a029','#ced1cc'];
 const colorBlueprint = buildPageColorBlueprint(palette);
 
 const backgroundImages = [
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/473646/pexels-photo-473646.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
   {key: uniqueId(), url: 'https://images.pexels.com/photos/503175/pexels-photo-503175.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
   {key: uniqueId(), url: 'https://images.pexels.com/photos/349610/pexels-photo-349610.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
   {key: uniqueId(), url: 'https://images.pexels.com/photos/52533/orange-fruit-vitamins-healthy-eating-52533.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
 ];
 const images = [
+  {key: uniqueId(), url: 'https://images.pexels.com/photos/473646/pexels-photo-473646.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
   {key: uniqueId(), url: 'https://images.pexels.com/photos/503175/pexels-photo-503175.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
   {key: uniqueId(), url: 'https://images.pexels.com/photos/139259/pexels-photo-139259.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
   {key: uniqueId(), url: 'https://images.pexels.com/photos/106877/pexels-photo-106877.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
@@ -26,7 +28,7 @@ const images = [
   {key: uniqueId(), url: 'https://images.pexels.com/photos/95004/pexels-photo-95004.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
   {key: uniqueId(), url: 'https://images.pexels.com/photos/406152/pexels-photo-406152.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
   {key: uniqueId(), url: 'https://images.pexels.com/photos/520207/pexels-photo-520207.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), url: 'https://images.pexels.com/photos/473646/pexels-photo-473646.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'}
+  
 ];
 const headerImages = [
   {key: uniqueId(), url: 'https://images.pexels.com/photos/503175/pexels-photo-503175.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
@@ -49,10 +51,11 @@ page: {
         name: 'Basic',
         style: {
           height: 10,
+          parallax: true,
         },
         color: {
-          backgroundImage: backgroundImages[1].key,
-          _backgroundImage: backgroundImages[1].url,
+          backgroundImage: backgroundImages[2].key,
+          _backgroundImage: backgroundImages[2].url,
           background: colorBlueprint.darkGray,
         },
         groups: {
