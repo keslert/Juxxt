@@ -65,6 +65,7 @@ export const blueprint = {
   },
   groups: {
     item: {
+      _default: 'KickerHeadingParagraphButton',
       options: ['HeadingButton','KickerHeadingButton', 'KickerHeadingSubheadingButton','HeadingSubheadingButton','IconHeadingButton','IconHeadingParagraphButton', 'HeadingParagraphButton','KickerHeadingParagraphButton','Heading','HeadingParagraph','HeadingSubheading', 'KickerHeading', 'KickerHeadingParagraph','KickerHeadingSubheading', 'IconHeadingParagraph','IconHeadingSubheading','Gallery','Cards', 'ImageHeadingParagraph'],
     },
   },

@@ -155,7 +155,7 @@ function resolveTextModification(dispatch, state, selected) {
   resolveModificationSelection(dispatch, state, 'text', keys, options);
 }
 
-const imageStyles = ['content', 'crop', 'filter', 'aspectRatio']
+const imageStyles = ['content', 'crop', 'filter', 'aspectRatio', 'borderRadius'];
 function resolveImageModification(dispatch, state, selected) {
   const {keys, options} = getModificationKeysAndOptions(imageStyles, selected, selected.blueprint.image);
   resolveModificationSelection(dispatch, state, 'image', keys, options)

@@ -87,73 +87,74 @@ export function generateElementLayoutAlternatives(modify, element, sectionSkelet
 }
 
 export function generateElementBackgroundAlternatives(modify, element, sectionSkeleton, page) {
-  const elementIndex = findIndex(element.section._elements, e => e.fullRelativeId === element.fullRelativeId);
-  
-  let sections = [];
   if(modify.color) {
-    const background = getBackground(element.parent);
-    
-    // Regular Buttons
-    sections = map(page.colorBlueprint.bgBlueprints[background].solids, color => {
-      const skeleton = cloneDeep(sectionSkeleton);
-      linkSkeleton(skeleton);
-      skeleton._elements[elementIndex].color = {
-        background: color,
-        borderColor: color,
-        text: page.colorBlueprint.bgBlueprints[color].texts[0],
-        _textBackground: color,
-        _parentBackground: background,
-      }
-      skeleton.changes = { background: color };
-      return skeleton;
-    });
-
-    // Outline buttons
-    sections = sections.concat(map(page.colorBlueprint.bgBlueprints[background].texts, color => {
-      const skeleton = cloneDeep(sectionSkeleton);
-      linkSkeleton(skeleton);
-      skeleton._elements[elementIndex].color = {
-        background: '#transparent',
-        borderColor: color,
-        text: color,
-        _textBackground: background,
-        _parentBackground: background,
-      }
-      skeleton.changes = { outline: color };
-      return skeleton;
-    }));
-
-    // Ghost buttons
-    sections = sections.concat(map(page.colorBlueprint.bgBlueprints[background].texts, color => {
-      const skeleton = cloneDeep(sectionSkeleton);
-      linkSkeleton(skeleton);
-      skeleton._elements[elementIndex].color = {
-        background: '#transparent',
-        borderColor: '#transparent',
-        text: color,
-        _textBackground: background,
-        _parentBackground: background,
-      }
-      skeleton.changes = { transparent: color };
-      return skeleton;
-    }));
-
-    // Are there more items like this?
-    if(filter(element.section._elements, e => e.id === element.id).length > 1) {
-      sections = sections.concat(sections.map((_, i) => {
-        const skeleton = cloneDeep(sectionSkeleton);
-        linkSkeleton(skeleton);
-        const _element = sections[i]._elements[elementIndex];
-        const elements = filter(skeleton._elements, e => e.id === _element.id);
-        elements.forEach(e => e.color = _element.color);
-        skeleton.changes = sections[i].changes;
-        return skeleton;
-      }))
-    }
-    return sections;
+    return generateElementColorAlternatives(modify, element, sectionSkeleton, page);
   }
-
   return generateStyleCombinations(modify, element, sectionSkeleton);
+}
+
+function generateElementColorAlternatives(modify, element, sectionSkeleton, page) {
+  const elementIndex = findIndex(element.section._elements, e => e.fullRelativeId === element.fullRelativeId);
+  const background = getBackground(element.parent);
+  
+  // Regular Buttons
+  let sections = map(page.colorBlueprint.bgBlueprints[background].solids, color => {
+    const skeleton = cloneDeep(sectionSkeleton);
+    linkSkeleton(skeleton);
+    skeleton._elements[elementIndex].color = {
+      background: color,
+      borderColor: color,
+      text: page.colorBlueprint.bgBlueprints[color].texts[0],
+      _textBackground: color,
+      _parentBackground: background,
+    }
+    skeleton.changes = { background: color };
+    return skeleton;
+  });
+
+  // Outline buttons
+  sections = sections.concat(map(page.colorBlueprint.bgBlueprints[background].texts, color => {
+    const skeleton = cloneDeep(sectionSkeleton);
+    linkSkeleton(skeleton);
+    skeleton._elements[elementIndex].color = {
+      background: '#transparent',
+      borderColor: color,
+      text: color,
+      _textBackground: background,
+      _parentBackground: background,
+    }
+    skeleton.changes = { outline: color };
+    return skeleton;
+  }));
+
+  // Ghost buttons
+  sections = sections.concat(map(page.colorBlueprint.bgBlueprints[background].texts, color => {
+    const skeleton = cloneDeep(sectionSkeleton);
+    linkSkeleton(skeleton);
+    skeleton._elements[elementIndex].color = {
+      background: '#transparent',
+      borderColor: '#transparent',
+      text: color,
+      _textBackground: background,
+      _parentBackground: background,
+    }
+    skeleton.changes = { transparent: color };
+    return skeleton;
+  }));
+
+  // Are there more items like this?
+  if(filter(element.section._elements, e => e.id === element.id).length > 1) {
+    sections = sections.concat(sections.map((_, i) => {
+      const skeleton = cloneDeep(sectionSkeleton);
+      linkSkeleton(skeleton);
+      const _element = sections[i]._elements[elementIndex];
+      const elements = filter(skeleton._elements, e => e.id === _element.id);
+      elements.forEach(e => e.color = _element.color);
+      skeleton.changes = sections[i].changes;
+      return skeleton;
+    }))
+  }
+  return sections;
 }
 
 export function generateElementTextAlternatives(modify, element, sectionSkeleton, page) {
