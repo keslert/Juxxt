@@ -82,7 +82,10 @@ class ColorPanel extends React.Component {
     turnOnModification('page');
     this.setState({palette});
     const alternative = generatePageFromPalette(page, map(palette, 'color'));
-    pushAlternative(alternative);
+
+    setTimeout(() => {
+      pushAlternative(alternative);
+    }, 1);
   }
 
   handleColorChange(color, index) {
@@ -101,6 +104,13 @@ class ColorPanel extends React.Component {
     const palette = this.state.palette.map((color) => ({...color, locked: true}));
     palette.push({locked: false});
     this.exchangeColorPalette(palette);
+  }
+
+  handleColorRemove(index) {
+    this.updatePalette([
+      ...this.state.palette.slice(0, index),
+      ...this.state.palette.slice(index + 1)
+    ]);
   }
 
   exchangeColorPalette(palette) {
@@ -128,7 +138,7 @@ class ColorPanel extends React.Component {
 
   renderColor(color, index) {
 
-    
+    const canDelete = this.state.palette.length > 1;
     return (
       <Box display="flex" justify="space-between" marginBottom="4px">
         <Box display="flex">
@@ -138,6 +148,13 @@ class ColorPanel extends React.Component {
           <Box marginLeft="4px">{color.color}</Box>
         </Box>
         <Box display="flex">
+
+          {canDelete && 
+            <StyledIcon highlight={color.locked} onClick={() => this.handleColorRemove(index)}>
+              <i className='fa fa-times' />
+            </StyledIcon>
+          }
+
           <StyledIcon highlight={color.locked} onClick={() => this.toggleColorLock(index)}>
             <i className={`fa fa-${color.locked ? 'lock' :  'unlock-alt'}`} />
           </StyledIcon>
@@ -154,6 +171,7 @@ class ColorPanel extends React.Component {
   render() {
     const { palette, open } = this.state;
 
+    const canAdd = palette.length < 5;
     return (
       <StyledColorPanel>
         <StyledWrap inset>
@@ -168,7 +186,7 @@ class ColorPanel extends React.Component {
                 {this.renderColor(color, i)}
               </div>
             ))}
-            {palette.length < 5 &&
+            {canAdd &&
               <Box marginLeft="3px" marginTop="4px">
                 <StyledTextButton onClick={() => this.handleColorAdd()}>
                   <i className="fa fa-plus-circle" /> Add color
