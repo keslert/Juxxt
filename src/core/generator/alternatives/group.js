@@ -9,11 +9,11 @@ import { filter, range, find, flatMap, mapValues, size, pick, cloneDeep, forEach
 import { getCombinations } from '../../utils';
 import { containsClone } from '../../ui/actions'
 import { generateElementBackgroundAlternatives } from './element';
-
+import { colorElement } from '../color/element';
 import { findItemInSection, getBlueprint, getBackground, getParents, linkSkeleton } from '../generator-utils';
 import styles from '../style/shared-styles';
 import { filterStyle } from '../style/utils';
-import { getSortedByMostVibrant } from '../color/utils';
+import { getSortedByPreference } from '../color/utils';
 import { generateStyleCombinations } from './alternatives-utils';
 
 export function generateGroupComponentAlternatives(group, sectionSkeleton) {
@@ -38,21 +38,32 @@ export function generateGroupLayoutAlternatives(modify, group, sectionSkeleton) 
   return generateStyleCombinations(modify, group, sectionSkeleton);
 }
 
-export function generateGroupBackgroundAlternatives(modify, selected, sectionSkeleton, page) {
-  const elements = filter(selected.section._elements, e => e.parent.fullId === selected.fullId);  
-  const backgroundElements = filter(elements, e => 
-    e.blueprint.background && e.blueprint.background.color === 'vibrant'
-  );
-  const textElements = filter(elements, e => 
-    e.blueprint.text && e.blueprint.text.color === 'whiteOrVibrant'
-  );  
+export function generateGroupBackgroundAlternatives(modify, group, sectionSkeleton, page) {
+  if(modify.color) {
+    const sections = generateGroupSolidBackgroundAlternatives(group, sectionSkeleton, page);
+    forEach(sections, s => s._elements.forEach(e => colorElement(e, page)));
+    return sections;
+  }
 
-  const sections = [
-    ...flatMap(backgroundElements, e => generateElementBackgroundAlternatives({background: true}, e, sectionSkeleton, page)),
-    ...flatMap(textElements, e => generateElementBackgroundAlternatives({text: true}, e, sectionSkeleton, page)),
-  ];
+  return generateStyleCombinations(modify, group, sectionSkeleton);
+}
 
-  return sections;
+function generateGroupSolidBackgroundAlternatives(selected, sectionSkeleton, page) {
+  const variants = {
+    background: ['#transparent', '#ffffff'],
+    borderColor: ['#transparent', page.colorBlueprint.lightGray],
+  }
+  const combos = getCombinations(variants);
+
+  const skeletons = combos.map(variant => {
+    const skeleton = cloneDeep(sectionSkeleton);
+    linkSkeleton(skeleton);
+    const groupSkeleton = find(skeleton._groups, g => g.fullRelativeId === selected.fullRelativeId);
+    groupSkeleton.color = variant;
+    skeleton.changes = variant;
+    return skeleton;
+  })
+  return skeletons;
 }
 
 export function generateGroupContentAlternatives(sectionSkeleton, group) {

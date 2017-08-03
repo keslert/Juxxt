@@ -14,14 +14,6 @@ import { generatePageFromPalette } from '../../../core/generator/alternatives/pa
 
 import toastr from 'toastr';
 
-const StyledPixel = styled.div`
-  width: 18px;
-  height: 18px;
-  background: ${props => props.color};
-  border-radius: 2px;
-  cursor: pointer;
-`;
-
 const StyledIcon = styled.div`
   color: #999;
   padding: 4px;
@@ -44,13 +36,13 @@ const StyledTextButton = styled.div`
   cursor: pointer;
 `
 
-const StyledColorPanel = styled.div`
+const StyledTextPanel = styled.div`
   color: #999;
   font-size: 14px;
 `
 
 
-class ColorPanel extends React.Component {
+class TextPanel extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -97,12 +89,6 @@ class ColorPanel extends React.Component {
     this.exchangeColorPalette(palette);  
   }
 
-  handleColorAdd() {
-    const palette = this.state.palette.map((color) => ({...color, locked: true}));
-    palette.push({locked: false});
-    this.exchangeColorPalette(palette);
-  }
-
   exchangeColorPalette(palette) {
     const { page, pushAlternative } = this.props;
     fetchColorMindPalette(
@@ -126,58 +112,22 @@ class ColorPanel extends React.Component {
     })
   }
 
-  renderColor(color, index) {
-
-    
-    return (
-      <Box display="flex" justify="space-between" marginBottom="4px">
-        <Box display="flex">
-          <ColorPicker color={color.color} onChange={value => this.handleColorChange(value, index)}>
-            <StyledPixel color={color.color} />
-          </ColorPicker>
-          <Box marginLeft="4px">{color.color}</Box>
-        </Box>
-        <Box display="flex">
-          <StyledIcon highlight={color.locked} onClick={() => this.toggleColorLock(index)}>
-            <i className={`fa fa-${color.locked ? 'lock' :  'unlock-alt'}`} />
-          </StyledIcon>
-          <StyledIcon>
-            <i className='fa fa-exchange' onClick={() => this.handleColorExchange(index)} />
-          </StyledIcon>
-        </Box>
-      </Box>
-    )
-  }
-
-  
-
   render() {
     const { palette, open } = this.state;
 
     return (
-      <StyledColorPanel>
+      <StyledTextPanel>
         <StyledWrap inset>
           <Collection 
-            heading={"Palette"} 
+            heading={"Typography"} 
             open={open} 
             onToggleOpen={() => this.setState({open: !open})}
             onExchange={e => (e.stopPropagation(), this.exchangeColorPalette(palette))}
             >
-            {palette.map((color, i) => (
-              <div key={i}>
-                {this.renderColor(color, i)}
-              </div>
-            ))}
-            {palette.length < 5 &&
-              <Box marginLeft="3px" marginTop="4px">
-                <StyledTextButton onClick={() => this.handleColorAdd()}>
-                  <i className="fa fa-plus-circle" /> Add color
-                </StyledTextButton>
-              </Box>
-            }
+            
           </Collection>
         </StyledWrap>
-      </StyledColorPanel>
+      </StyledTextPanel>
     )
   }
 }
@@ -187,4 +137,4 @@ const mapDispatchToProps = {
   setAlternatives,
   turnOnModification,
 }
-export default connect(undefined, mapDispatchToProps)(ColorPanel);
+export default connect(undefined, mapDispatchToProps)(TextPanel);

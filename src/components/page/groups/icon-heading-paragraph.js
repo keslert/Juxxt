@@ -36,4 +36,5 @@ export const blueprint = {
     heading: { name: BasicHeading.name },
     paragraph: { name: BasicParagraph.name },
   },
+  layout: { iconPosition: ['iconPosition'] },
 }

@@ -25,30 +25,18 @@ export const blueprint = {
   style: {
     textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
   },
-  color: {},
-  background: {
-    color: true,
-    border: true,
-    borderRadius: true,
-    shadow: true,
-  },
+  color: {}, 
   elements: {
     heading: {
       name: BasicHeading.name,
     },
     paragraph: {
       name: BasicParagraph.name,
-      // blueprint: {
-      //   style: {
-      //     marginBottom: {
-      //       _default:0 ,
-      //       hide: _=> true,
-      //     }
-      //   }
-      // }
     },
   },
-  variants: [{
-    
-  }]
+  background: {
+    border: ['border'],
+    boxShadow: ['boxShadow'],
+    // shadow: true,
+  },
 }

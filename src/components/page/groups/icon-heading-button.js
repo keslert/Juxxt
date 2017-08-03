@@ -40,4 +40,5 @@ export const blueprint = {
       options: ['ButtonList'],
     }
   },
+  layout: { iconPosition: ['iconPosition'] },
 }

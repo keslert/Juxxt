@@ -2,6 +2,7 @@ import { linkSkeleton, generatePageCSSRules } from '../generator-utils';
 import { extractSkeletonFromItem } from '../skeletons/utils';
 import { getSortedByPreference } from '../color/utils';
 import { buildPageColorBlueprint } from '../color/page';
+import { colorGroup } from '../color/group';
 import { colorElement } from '../color/element';
 import { cloneDeep, omit, values, filter, isEqual, reduce, uniqueId } from 'lodash';
 import tinycolor from 'tinycolor2';
@@ -33,10 +34,6 @@ export function generatePageBrandColorAlternatives(page) {
   return pages;
 }
 
-export function generateTypographyAlternatives(page) {
-
-}
-
 export function generatePageFromPalette(page, palette) {
   const _page = { id: uniqueId(), style: page.style, maxWidth: page.maxWidth }
 
@@ -65,6 +62,7 @@ export function generatePageFromPalette(page, palette) {
     skeleton._elements.forEach(e => e.color = {});
     
     const tempPage = {sections, colorBlueprint};
+    skeleton._groups.forEach(g => colorGroup(g, tempPage));
     skeleton._elements.forEach(e => colorElement(e, tempPage));
 
     return [...sections, skeleton];
@@ -73,4 +71,57 @@ export function generatePageFromPalette(page, palette) {
   _page.sections[0].changes = { palette };
   generatePageCSSRules(_page);
   return _page;
+}
+
+
+
+// If the heading is cursive or only one weight, must choose a second font
+
+
+
+
+
+// Single Font w/ multiple boldness
+// {
+//   heading: {
+//     fontFamily: font1,
+//     fontWeight: bold,
+//   },
+//   subheading: {
+//     // must be larger
+//   },
+//   smallheading: {
+//     fontFamily: font1,
+//     fontWeight: bold,
+//   },
+//   kicker: {
+//     fontFamily: font1,
+//     textTransform: ['uppercase', 'none'],
+//     fontWeight: 400,
+//     fontSize: 4,
+//   },
+//   paragraph: {
+//     fontFamily: font1,
+//     fontWeight: 'normal',
+//     textTransform: 'none',
+//   } 
+// }
+
+
+
+// {heading: 'Montserrat', paragraph: 'Montserrat'}
+export function generateTypographyAlternatives(fonts, page) {
+  
+  const typography = {
+    heading: { fontFamily: fonts.heading },
+    paragraph: { fontFamily: fonts.paragraph },
+  }
+  calculateHeading(typography);
+  // calculateParagraph(typography);
+  // calcualteKicker(typography);
+
+}
+
+function calculateHeading(typography) {
+  typography.fontFamily = 'Montserrat';
 }

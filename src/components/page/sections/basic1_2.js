@@ -78,18 +78,8 @@ export const blueprint = {
     }
   },
   color: {
-    color: 'default',
-    pattern: true,
-    gradient: true,
-    image: true,
+    background: 'default',
   },
-  image: { 
-    content: ['content'], 
-  },
-  layout: {
-    splitRatio: ['splitRatio', 'constrained'],
-  },
-  component: { basic: ['basic'], header: ['header'], action: ['action'] },
   elements: {},
   groups: {
     tp: {
@@ -104,13 +94,29 @@ export const blueprint = {
         {
           name: 'Gallery', 
           style: { columns: 2 },
-          elements: { images: { 
-            blueprint: { 
-              clones: { _default: 4, min: 2, max: 9 }
+          elements: { 
+            images: { 
+              blueprint: { 
+                clones: { _default: 4, min: 2, max: 9 }
+              }
             }
-          }},
+          },
         }
       ],
     },
+  },
+  background: { 
+    pattern: ['pattern'],
+    gradient: ['gradient'],
+    image: ['image'],
+  },
+  image: { content: ['content'] },
+  layout: { splitRatio: ['splitRatio', 'constrained'] },
+  component: { 
+    basic: ['basic'], 
+    header: ['header'], 
+    action: ['action'],
+    grid: ['grid'],
+    gallery: ['gallery'],
   },
 }

@@ -6,7 +6,7 @@ import { colorElement } from './element';
 
 export function assignColor(section, page) {
   colorSection(section, page.sections);
-  forEach(section._groups, group => colorGroup(group, page.sections));
+  forEach(section._groups, group => colorGroup(group, page));
   forEach(section._elements, element => colorElement(element, page));
 }
 

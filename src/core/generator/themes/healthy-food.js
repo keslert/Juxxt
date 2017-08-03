@@ -136,13 +136,6 @@ page: {
           },
         },
       },
-      {name: 'StackedGrid',
-        groups: {
-          tp: {
-            name: 'HeadingSubheading',
-          },
-        },
-      },
       {
         name: 'Basic',
         color: {
@@ -170,6 +163,14 @@ page: {
                 },
               },
             },
+          }
+        }
+      },
+      {
+        name: 'Basic',
+        groups: {
+          item: {
+            name: 'Cards'
           }
         }
       },

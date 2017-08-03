@@ -11,6 +11,7 @@ import { getSelected, getMaster } from '../../core/page';
 
 import ContentPanel from './panels/content-panel';
 import ColorPanel from './panels/color-panel';
+import FontPanel from './panels/font-panel';
 
 import ThemeSidebar from './theme-sidebar';
 
@@ -52,6 +53,7 @@ class Sidebar extends React.PureComponent {
         <StyledHeading>Page Settings</StyledHeading>
         <ContentPanel element={selected} hidden={!selected.isElement} />
         <ColorPanel page={master} />
+        <FontPanel page={master} />
       </StyledSidebar>
     )
   }

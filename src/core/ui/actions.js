@@ -135,11 +135,13 @@ function resolveComponentModification(dispatch, state, selected) {
   resolveModificationSelection(dispatch, state, 'component', keys, options);
 }
 
-const bgStyles = ['color', 'gradient', 'pattern', 'image'];
+const bgStyles = ['borderRadius', 'dropShadow'];
 function resolveBackgroundModification(dispatch, state, selected) {
-  const bgKeys = Object.keys(selected.blueprint.color);
-  const keys = intersection(bgStyles, [...bgKeys, 'color']);
-  const options = keys.map(key => ({label: key, keys: [key]}));
+  const {keys, options} = getModificationKeysAndOptions(bgStyles, selected, selected.blueprint.background);
+  if(selected.blueprint.color.background) {
+    keys.push('color');
+    options.unshift({label: 'color', keys: ['color']});
+  }
   resolveModificationSelection(dispatch, state, 'background', keys, options);
 }
 
@@ -162,7 +164,7 @@ function resolveImageModification(dispatch, state, selected) {
 const layoutStyles = [
   'splitRatio', 'order', 'height', 'columns', 'constrained', 
   'maxWidth', 'buffer', 'textAlign', 'position', 'marginBottom',
-  'paddingHorizontal', 'paddingVertical', 'gutter', 'fixed',
+  'paddingHorizontal', 'paddingVertical', 'padding', 'gutter', 'fixed',
 ]
 function resolveLayoutModification(dispatch, state, selected) {
   const {keys, options} = getModificationKeysAndOptions(layoutStyles, selected, selected.blueprint.layout);
@@ -200,8 +202,7 @@ function getModificationKeysAndOptions(standardKeys, selected, blueprint={}) {
   const specialKeys = Object.keys(blueprint);
   const condensedKeys = flatMap(blueprint);  
 
-  
-  const styleKeys = filter(Object.keys(selected.style), key => {
+  const styleKeys = filter(Object.keys(selected.blueprint._allStyles), key => {
     const style = selected.blueprint._allStyles[key];
     return !style.hide || !style.hide(selected);
   })

@@ -210,20 +210,6 @@ export default {
           order: 1,
         },
       },
-      {name: 'StackedGrid',
-        groups: {
-          tp: {
-            _default: {
-              name: 'HeadingSubheading',
-            },
-          },
-          // gridItem: {
-          //   _default: {
-          //     name: 'HeadingParagraph', clones:6,  elements:{heading:{name:'SmallHeading'}},
-          //   },
-          // }
-        },
-      },
       {name: 'Footer1',
         _defaults: {
           color: {
@@ -252,7 +238,6 @@ export default {
       },
       {name: 'Navbar1'},
       {name: 'Basic'},
-      {name: 'StackedGrid'},
     ]
   }
 }

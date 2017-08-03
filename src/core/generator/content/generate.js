@@ -32,7 +32,7 @@ export function generateContent(element) {
     case 'Heading':
       return getHeadingContent(element);
     case 'SmallHeading':
-      return getSubheaderContent(element);
+      return getSmallHeadingContent(element);
     case 'BasicSubheading':
       return getSubheaderContent(element);
     default: 
@@ -70,7 +70,7 @@ function getButtonContent() {
 
 function getParagraphContent() {
   const text = LoremIpsum({
-    count: random(2, 4),
+    count: random(2, 3),
     units: 'sentences',
   });
   return { text };
@@ -81,7 +81,7 @@ function getSubheaderContent() {
     {text: "Oval is creating a platform that helps everyone be money wise."},
     {text: "Business Oriented. Gamer Driven."},
     {text: "Borrow specialized talent or add revenue by sharing your roster."},
-    {text: "From Dog Walkers and Babysitters, to Hairstylists and Personal Trainers, to ...."},
+    {text: "From Dog Walkers and Babysitters, to Hairstylists and Personal Trainers"},
     {text: "Fully automated invoicing directly from your CRM."},
     {text: "Upload images from your webapp directly to Amazon S3"},
     {text: "Zendesk builds software for better customer relationships"},

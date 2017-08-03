@@ -67,10 +67,7 @@ export const blueprint = {
   inherits: ['Guttered', 'Ordered', 'ConstrainedSection', 'Section'],
   color: {
     color: 'default',
-    pattern: true,
-    gradient: true,
   },
-  component: { basic: ['basic'], header: ['header'], action: ['action'] },
   style: {},
   groups: {
     tp: {
@@ -82,5 +79,16 @@ export const blueprint = {
       name: 'CoverImage',
     },
   },
-
+  background: { 
+    color: ['color'],
+    pattern: ['pattern'],
+    gradient: ['gradient'],
+  },
+  component: { 
+    basic: ['basic'], 
+    header: ['header'], 
+    action: ['action'],
+    grid: ['grid'],
+    gallery: ['gallery'],
+  },
 }

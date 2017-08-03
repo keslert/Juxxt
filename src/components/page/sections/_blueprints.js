@@ -8,5 +8,3 @@ export { blueprint as Footer1 } from './footers/footer1';
 export { blueprint as Footer2 } from './footers/footer2';
 export { blueprint as FooterVerticalLists } from './footers/footer-vertical-lists';
 export { blueprint as CallToAction } from './C2A/call-to-action';
-export { blueprint as StackedGrid } from './stacked_grid';
-export { blueprint as Grid } from './grid';

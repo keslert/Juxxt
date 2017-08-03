@@ -343,35 +343,6 @@ page: {
           order: 1,
         },
       },
-      {name: 'StackedGrid',
-        groups: {
-          tp: {
-            _default: {
-              name: 'HeadingSubheading',
-              content: {
-                  text: 'Meet the team',
-              }
-            },
-          },
-          gridItem: {
-            _default: {
-              name: 'ImageHeadingParagraph', clones: {_default: 3, min: 1, max: 16},  
-                elements:{
-                    image: { 
-                        _default : {
-                            name: 'BasicImage' ,
-                            content: images[0],
-                        },
-                    
-                    },
-                    heading: {
-                        name:'SmallHeading'
-                    }
-                },
-            },
-          }
-        },
-      },
       {name: 'Basic',
         _defaults: {
           style: {

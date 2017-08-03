@@ -17,16 +17,26 @@ const colorBlueprint = buildPageColorBlueprint(palette);
 
 const page = {
   sections: [
-    {name: 'Navbar1'},
-    {name: 'Navbar2'},
-    {name: 'Navbar3'},
-    {name: 'Basic1_2'},
-    {name: 'BasicWide1_2'},
-    {name: 'Basic'},
-    {name: 'Grid'},
-    {name: 'Footer1'},
-    {name: 'Footer2'},
-    {name: 'FooterVerticalLists'},
+    // {name: 'Navbar1'},
+    // {name: 'Navbar2'},
+    // {name: 'Navbar3'},
+    // {name: 'Basic1_2'},
+    // {name: 'BasicWide1_2'},
+    // {name: 'Basic'},
+    {
+      name: 'Basic',
+      color: {
+        // background: colorBlueprint.darkGray,
+      },
+      groups: {
+        item: {
+          name: 'Cards'
+        }
+      }
+    },
+    // {name: 'Footer1'},
+    // {name: 'Footer2'},
+    // {name: 'FooterVerticalLists'},
   ]
 }
 

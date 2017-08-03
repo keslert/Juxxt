@@ -8,5 +8,3 @@ export { default as Footer1 } from './footers/footer1';
 export { default as Footer2 } from './footers/footer2';
 export { default as FooterVerticalLists } from './footers/footer-vertical-lists';
 export { default as CallToAction } from './C2A/call-to-action';
-export { default as StackedGrid } from './stacked_grid';
-export { default as Grid } from './grid';

@@ -23,7 +23,9 @@ export const blueprint = {
   style: {
     textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
   },
-  color: {},
+  color: {
+    background: 'none',
+  },
   elements: {
     heading: {
       name: BasicHeading.name,

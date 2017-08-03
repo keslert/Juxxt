@@ -28,24 +28,24 @@ import { colorElement } from '../color/element';
 import styles from '../style/shared-styles';
 import { filterStyle } from '../style/utils';
 import { generateGroupLayoutAlternatives } from './group';
-import { getSortedByPreference, getSortedByMostBrightness } from '../color/utils';
+import { getSortedByPreference } from '../color/utils';
 import { generateItemClones, generateStyleCombinations } from './alternatives-utils';
 
-import { getHeaders } from '../prebuilt/headers';
+import prebuilt from '../prebuilt';
 
 import tinycolor from 'tinycolor2';
 import defaultTheme from '../themes';
 
 export function generateSectionComponentAlternatives(section, modify, sectionSkeleton, page) {
-  let validSkeletons = [];
-  if(modify.header) {
-    validSkeletons = getHeaders(sectionSkeleton, page);
-  } else {
-    validSkeletons = filter(Object.keys(blueprints), name => modify[blueprints[name].type])
-                     .map(name => ({name}))
+  const sectionType = getTruthyKeys(modify)[0];
+  const sections = Object.keys(blueprints);
+  
+  const valid = filter(sections, name => modify[blueprints[name].type]).map(name => ({name}))
+  if(prebuilt[sectionType]) {
+    valid.push(...prebuilt[sectionType](sectionSkeleton, page));
   }
 
-  const skeletons = validSkeletons.map(skeleton => {
+  const skeletons = valid.map(skeleton => {
     const _skeleton = generateSectionSkeleton({...skeleton, id: section.id});
     linkSkeleton(_skeleton);
     return _skeleton;
@@ -76,6 +76,8 @@ export function generateSectionBackgroundAlternatives(modify, sectionSkeleton, p
     sections = generateSectionGradientsBackground(sectionSkeleton, page);
   } else if(modify.image) {
     sections = generateSectionImagesBackground(sectionSkeleton, page);
+  } else if(modify.cardStyle) {
+    sections = generateSectionCardStyleAlternatives(sectionSkeleton, page);
   }
 
   forEach(sections, s => s._groups.forEach(e => colorGroup(e, page)));
@@ -86,12 +88,11 @@ export function generateSectionBackgroundAlternatives(modify, sectionSkeleton, p
 
 
 function generateSectionImagesBackground(sectionSkeleton, page) {
-  const darkestBackground = last(getSortedByMostBrightness(page.colorBlueprint.backgrounds))
   const skeletons = defaultTheme.backgroundImages.map(({key, url}) => {
     const skeleton = cloneDeep(sectionSkeleton);
     linkSkeleton(skeleton);
     skeleton.color = {
-      background: darkestBackground,
+      background: page.colorBlueprint.darkGray,
       backgroundImage: key,
       _backgroundImage: url,
     }
@@ -159,6 +160,28 @@ function generateSectionGradientsBackground(sectionSkeleton, page) {
     }
     skeleton.changes = { direction: direction };
     return skeleton;
+  })
+
+  return skeletons;
+}
+
+function generateSectionCardStyleAlternatives(sectionSkeleton, page) {
+  const lightGray = page.colorBlueprint.lightGray;
+
+  const variants = [
+    {},
+    { background: '#ffffff', borderColor: lightGray, boxShadow: true },
+    { background: lightGray, borderColor: lightGray, boxShadow: true },
+    { background: '#ffffff', borderColor: lightGray, boxShadow: false },
+    { background: lightGray, borderColor: lightGray, boxShadow: false },
+  ]
+
+  const skeletons = variants.map(variant => {
+    const _skeleton = cloneDeep(sectionSkeleton);
+    linkSkeleton(_skeleton);
+    const groups = [_skeleton.groups.gridItem, ..._skeleton.groups.gridItem.clones];
+    groups.forEach(g => g.color = variant);
+    return _skeleton;
   })
 
   return skeletons;
