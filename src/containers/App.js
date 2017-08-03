@@ -72,7 +72,7 @@ class App extends React.Component {
       on_keyup: () => setShiftDown(false),
     })
 
-    turnOnModification('background');
+    turnOnModification('component');
   }
 
   componentWillReceiveProps(newProps) {

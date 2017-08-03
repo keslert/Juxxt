@@ -18,15 +18,15 @@ export function init() {
 
   const master = {
     id: 'p_' + uniqueId(),
-    palette: defaultTheme.palette,
     colorBlueprint,
     style: {
-      fontFamily: 'Source Sans Pro',
-      fontSize: '16px',
+      maxWidth: 1024,
+      baseFontSize: 16,
+      typography: {
+        heading: 'Open Sans',
+        normal: 'Montserrat',
+      }
     },
-    maxWidth: 1024,
-    isPage: true,
-    isMaster: true,
     sections: reduce(defaultTheme.page.sections, (sections, blueprint) => {
       const page = {sections, colorBlueprint};
 
@@ -45,9 +45,7 @@ export function init() {
     }, [])
   }
 
-  master.sections.forEach(section => { section.master = true });
   generatePageCSSRules(master);
-
   return master;
 }
 

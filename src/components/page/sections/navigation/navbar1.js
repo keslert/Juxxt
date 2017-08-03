@@ -52,7 +52,7 @@ export const blueprint = {
   style: {
     linksAlign: { options: ['left', 'right'] },
     height: {
-      _default: 2,
+      _default: 0,
       options: [0,6,2,4],
     }
   },

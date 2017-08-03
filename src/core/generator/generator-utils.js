@@ -94,9 +94,9 @@ export function generatePageCSSRules(page) {
   
   const rules = [];
 
-  rules.push(`.mxw-page { max-width: ${page.maxWidth}px; }`);
+  rules.push(`.mxw-page { max-width: ${page.style.maxWidth}px; }`);
   [33,50,66,67].forEach(ratio => {
-    rules.push(`.mxw-page-${ratio}P { max-width: ${page.maxWidth * (ratio / 100)}px; }`)
+    rules.push(`.mxw-page-${ratio}P { max-width: ${page.style.maxWidth * (ratio / 100)}px; }`)
   })
   
 

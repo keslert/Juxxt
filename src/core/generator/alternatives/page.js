@@ -2,6 +2,7 @@ import { linkSkeleton, generatePageCSSRules } from '../generator-utils';
 import { extractSkeletonFromItem } from '../skeletons/utils';
 import { getSortedByPreference } from '../color/utils';
 import { buildPageColorBlueprint } from '../color/page';
+import { colorGroup } from '../color/group';
 import { colorElement } from '../color/element';
 import { cloneDeep, omit, values, filter, isEqual, reduce, uniqueId, merge } from 'lodash';
 import tinycolor from 'tinycolor2';
@@ -30,17 +31,16 @@ export const palettes = [
 ]
 
 export function generatePageBrandColorAlternatives(page) {
-  const validPalettes = filter(palettes, palette => !isEqual(palette, page.palette))
+  const validPalettes = filter(palettes, palette => !isEqual(palette, page.colorBlueprint.colors))
   const pages = validPalettes.map(palette => generatePageFromPalette(page, palette));
   return pages;
 }
 
 export function generatePageFromPalette(page, palette) {
-  const _page = { id: uniqueId(), style: page.style, maxWidth: page.maxWidth }
+  const _page = { id: uniqueId(), style: page.style }
 
   const colorBlueprint = buildPageColorBlueprint(palette);
   
-  _page.palette = palette;
   _page.colorBlueprint = colorBlueprint;
 
   const colorMapping = {
@@ -63,6 +63,7 @@ export function generatePageFromPalette(page, palette) {
     skeleton._elements.forEach(e => e.color = {});
     
     const tempPage = {sections, colorBlueprint};
+    skeleton._groups.forEach(g => colorGroup(g, tempPage));
     skeleton._elements.forEach(e => colorElement(e, tempPage));
 
     return [...sections, skeleton];
@@ -72,6 +73,31 @@ export function generatePageFromPalette(page, palette) {
   generatePageCSSRules(_page);
   return _page;
 }
+
+
+export function generatePageFromTypography(page, typography) {
+  const _page = {...page, id: uniqueId()};
+  _page.style.typography = typography;
+  _page.sections = page.sections.map(section => {
+    const skeleton = extractSkeletonFromItem(section);
+    linkSkeleton(skeleton);
+    skeleton._elements.forEach(e => {
+      let _typography = typography.paragraph;
+      if(e.name === 'BasicHeading') {
+        _typography = typography.heading;
+      } else if(e.name === 'BasicKicker') {
+        _typography = typography.kicker;
+      }
+
+      e.style = {...e.style, ..._typography};
+    })
+
+    return skeleton;
+  })
+
+  return _page;
+}
+
 
 export function generateTypographyAlternatives(fonts, page) {
   const typography = {

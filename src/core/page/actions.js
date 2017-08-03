@@ -78,9 +78,7 @@ export function pageUndo() {
 export function replaceMaster(page) {
   return (dispatch, getState) => {
     const selected = getSelected(getState());
-    page.sections.forEach(section => section.master = true);
     const section = find(page.sections, s => s.id === selected.section.id);
-
     dispatch(setMaster(page));
     dispatch(setSelected(section));
   }
@@ -120,7 +118,6 @@ export function updateAlternatives() {
       ]
     }
     const alternatives = generateAlternatives(page, pick(modifications, [selectedModification]), selected);
-    alternatives.forEach(({sections}) => sections.forEach(section => section.master = false));
     dispatch(setAlternatives(alternatives));
   }
 }
