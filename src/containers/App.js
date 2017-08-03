@@ -58,7 +58,12 @@ class App extends React.Component {
 
     this.listener = new window.keypress.Listener();
     this.listener.simple_combo('escape', () => setShowPreview(false));
-    this.listener.simple_combo('backspace', () => deleteSection(this.props.selected.section));
+    this.listener.simple_combo('backspace', (e) => { 
+      if ((e.target.tagName !== "TEXTAREA") && this.props.selected.isSection)
+        deleteSection(this.props.selected.section)
+      else
+        return true
+    });
     this.listener.simple_combo('cmd z', pageUndo);
 
     this.listener.register_combo({
