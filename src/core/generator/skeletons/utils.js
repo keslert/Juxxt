@@ -10,6 +10,7 @@ import {
   isString, 
   merge,
   get,
+  keys,
   isArray, 
   cloneDeep,
   range,
@@ -43,6 +44,8 @@ export function generateItemSkeleton(skeleton, blueprint) {
 
   const _sharedStyles = map(merged.inherits, name => sharedStyles[name]);
   merged._allStyles = Object.assign({}, ..._sharedStyles, merged.style);
+  merged.groups = pick(merged.groups, keys(blueprint.groups));
+  merged.elements = pick(merged.elements, keys(blueprint.elements));
   
   const _skeleton = {
     content: {},
