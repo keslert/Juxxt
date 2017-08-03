@@ -137,22 +137,23 @@ export function generateElementBackgroundAlternatives(modify, element, sectionSk
       skeleton.changes = { transparent: color };
       return skeleton;
     }));
+
+    // Are there more items like this?
+    if(filter(element.section._elements, e => e.id === element.id).length > 1) {
+      sections = sections.concat(sections.map((_, i) => {
+        const skeleton = cloneDeep(sectionSkeleton);
+        linkSkeleton(skeleton);
+        const _element = sections[i]._elements[elementIndex];
+        const elements = filter(skeleton._elements, e => e.id === _element.id);
+        elements.forEach(e => e.color = _element.color);
+        skeleton.changes = sections[i].changes;
+        return skeleton;
+      }))
+    }
+    return sections;
   }
 
-  // Are there more items like this?
-  if(filter(element.section._elements, e => e.id === element.id).length > 1) {
-    sections = sections.concat(sections.map((_, i) => {
-      const skeleton = cloneDeep(sectionSkeleton);
-      linkSkeleton(skeleton);
-      const _element = sections[i]._elements[elementIndex];
-      const elements = filter(skeleton._elements, e => e.id === _element.id);
-      elements.forEach(e => e.color = _element.color);
-      skeleton.changes = sections[i].changes;
-      return skeleton;
-    }))
-  }
-
-  return sections;
+  return generateStyleCombinations(modify, element, sectionSkeleton);
 }
 
 export function generateElementTextAlternatives(modify, element, sectionSkeleton, page) {
