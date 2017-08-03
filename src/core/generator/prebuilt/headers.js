@@ -3,7 +3,7 @@ import merge from 'lodash/merge';
 import cloneDeep from 'lodash/cloneDeep';
 
 export function getHeaders(sectionSkeleton, page) {
-  const headers = [h1,h2,h3];
+  const headers = [h1,h2,h3,h4];
   return headers.map(header => {
     const skeleton = cloneDeep(sectionSkeleton);
     const merged = merge({}, skeleton, header.blueprint);
@@ -185,4 +185,51 @@ const h3 = {
     }
   }
 }
-}
+};
+const h4 = {
+  blueprint: {
+    name: 'Basic',
+    style: {
+      height: 1,
+      verticalPosition: 2,
+      horizontalPosition: 'left',
+      parallax: true,
+    },
+    groups: {
+      item: {
+        name: 'ImageHeadingParagraph',
+        style: {
+          textTransform: "none",
+          textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
+        },    
+        elements: {
+        image: { 
+          name: 'BasicImage' ,
+          content: defaultTheme.images[0],
+          style: {
+            marginBottom: 4,
+          }
+        },
+
+        },
+        groups: {
+          tp: {
+            options: ['HeadingParagraph'],
+            style: {
+              textAlign: 'center',
+            }
+          }
+        },          
+      }
+    }
+  },
+  post: (blueprint, page) => {
+     if(blueprint.color.backgroundImage) {
+      blueprint.color = {
+         backgroundImage: {},
+         _backgroundImage: {},
+        background: '#ffffff',
+      }
+     }
+  }
+};
