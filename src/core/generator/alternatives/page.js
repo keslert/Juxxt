@@ -88,26 +88,24 @@ export function generatePageFromTypography(page, typography) {
       } else if(e.name === 'BasicKicker') {
         _typography = typography.kicker;
       }
-
       e.style = {...e.style, ..._typography};
     })
-
     return skeleton;
   })
-
   return _page;
 }
 
-
+// input : {heading: "stuff"} or {paragraph: "stuff"};
 export function generateTypographyAlternatives(fonts, page) {
   const typography = {
     heading: { fontFamily: fonts.heading, fontWeight: 8 },//or 7 or 9
-    paragraph: { fontFamily: fonts.paragraph, fontWeight: 4 },//or 1
+    paragraph: { fontFamily: fonts.normal, fontWeight: 4 },//or 1
   }
   calculateHeaderAndParagraph(typography);
-  typography.smallHeading = { fontFamily: typography.paragraph, fontWeight: 8 },
-  typography.subHeading = { fontFamily: typography.paragraph, fontWeight: 4 },
-  typography.kicker = { fontFamily: typography.paragraph, textTransform: "uppercase" }
+  typography.smallHeading = { fontFamily: typography.paragraph.fontFamily, fontWeight: 8 },
+  typography.subHeading = { fontFamily: typography.paragraph.fontFamily, fontWeight: 4 },
+  typography.kicker = { fontFamily: typography.paragraph.fontFamily, textTransform: "uppercase" }
+  return typography
 }
 
 function calculateHeaderAndParagraph(typography) {

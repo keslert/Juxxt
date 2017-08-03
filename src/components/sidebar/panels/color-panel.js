@@ -82,7 +82,7 @@ class ColorPanel extends React.Component {
     turnOnModification('page');
     this.setState({palette});
     const alternative = generatePageFromPalette(page, map(palette, 'color'));
-
+    debugger;
     setTimeout(() => {
       pushAlternative(alternative);
     }, 1);

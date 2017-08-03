@@ -10,7 +10,7 @@ import { fetchColorMindPalette } from '../../../core/generator/color/utils';
 
 import { pushAlternative, setAlternatives } from '../../../core/page';
 import { turnOnModification } from '../../../core/ui';
-import { generatePageFromPalette } from '../../../core/generator/alternatives/page';
+import { generatePageFromPalette, generateTypographyAlternatives, generatePageFromTypography } from '../../../core/generator/alternatives/page';
 import { lowerCamelCaseToRegular } from '../../../core/utils';
 import Select from '../common/select';
 import { paragraphs, headings } from '../../../core/generator/fonts';
@@ -70,55 +70,41 @@ class TextPanel extends React.Component {
   }
 
   handleFontExchange(index) {
-    const palette = this.state.palette.map((color, i) => ({
-      ...color, locked: i !== index
-    }));
-    this.exchangeColorPalette(palette);  
+
   }
 
-  exchangeFonts(palette) {
-    const { page, pushAlternative } = this.props;
-    fetchColorMindPalette(
-      palette, 
-      _palette => {
-        const __palette = palette.map((color, i) => ({
-          color: _palette[i],
-          locked: this.state.palette[i] && this.state.palette[i].locked,
-        }))
-        this.updatePalette(__palette);
-      },
-      error => toastr.error('There was an error when we tried to fetch a new palette...', error)
-    )
-  }
-
-  toggleColorLock(index) {
-    this.setState({
-      palette: this.state.palette.map((color, i) =>
-        i !== index ? color : {...color, locked: !color.locked}
-      )
-    })
+  exchangeFonts(restrictions) {
+    const { page, pushAlternative, turnOnModification } = this.props;
+    const typ = generateTypographyAlternatives(restrictions,page);
+    turnOnModification('page');
+    const _page = generatePageFromTypography(page,typ);
+    const n = {fonts: {heading: _page.style.typography.heading.fontFamily, normal: _page.style.typography.paragraph.fontFamily}};
+    this.setState(n);
+    setTimeout(() => {
+      pushAlternative(_page);
+    }, 1);
   }
 
   renderFont(fontType, otherFontType) {
-    
     const value = this.state.fonts[fontType];
     const otherValue = this.state.fonts[otherFontType];
     const options = fontOptions[otherFontType][otherValue] || [];
-
+    const normal = this.props.page.style.typography.normal;
     return (
       <Box display="flex" justify="space-between" marginBottom="4px">
         <Box display="flex">
           {lowerCamelCaseToRegular(fontType)}
         </Box>
+
         <Box display="flex">
           <Select 
             name={fontType}
             options={options.map(f => ({label: f, value: f}))}
             value={{value, label: value}}
-            onChange={() => null}
+            onChange={_value => { this.exchangeFonts({[fontType] : _value.value, [otherFontType]: otherValue});}}
             />
           <StyledIcon>
-            <i className='fa fa-exchange' onClick={() => this.handleFontExchange(fontType)} />
+            <i className='fa fa-exchange' onClick={() => this.exchangeFonts({ [fontType] : normal }, this.props.page)} />
           </StyledIcon>
         </Box>
       </Box>
@@ -127,7 +113,7 @@ class TextPanel extends React.Component {
 
   render() {
     const { palette, open } = this.state;
-
+    const normal = this.props.page.style.typography.normal;
     return (
       <StyledTextPanel>
         <StyledWrap inset>
@@ -135,7 +121,7 @@ class TextPanel extends React.Component {
             heading={"Typography"}
             open={open}
             onToggleOpen={() => this.setState({open: !open})}
-            onExchange={e => (e.stopPropagation(), this.exchangeFonts({}))}
+            onExchange={e => (e.stopPropagation(), this.exchangeFonts({},this.props.page))}
             >
             {this.renderFont('heading', 'normal')}
             {this.renderFont('normal', 'heading')}

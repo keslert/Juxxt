@@ -24,7 +24,7 @@ export const headings = {
 const allHeadings = Object.keys(headings);  
 const paragraphNames = uniq(flatten(values(headings)))
 export const paragraphs = zipObject(paragraphNames, map(paragraphNames, name => (
-	filter(allHeadings, filter(allHeadings, heading => includes(headings[heading], name)))
+	filter(allHeadings, heading => includes(headings[heading], name))
 )))
 
 export const fontDetails = {
