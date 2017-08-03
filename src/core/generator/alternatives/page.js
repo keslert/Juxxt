@@ -2,10 +2,11 @@ import { linkSkeleton, generatePageCSSRules } from '../generator-utils';
 import { extractSkeletonFromItem } from '../skeletons/utils';
 import { getSortedByPreference } from '../color/utils';
 import { buildPageColorBlueprint } from '../color/page';
-import { colorGroup } from '../color/group';
 import { colorElement } from '../color/element';
 import { cloneDeep, omit, values, filter, isEqual, reduce, uniqueId } from 'lodash';
 import tinycolor from 'tinycolor2';
+import { getMode, randomItem } from '../../utils'
+import { headings, paragraphs } from './../fonts'
 
 export const palettes = [
   // ["#E37222","#07889B","#66B98F","#EEAA7B"],
@@ -62,7 +63,6 @@ export function generatePageFromPalette(page, palette) {
     skeleton._elements.forEach(e => e.color = {});
     
     const tempPage = {sections, colorBlueprint};
-    skeleton._groups.forEach(g => colorGroup(g, tempPage));
     skeleton._elements.forEach(e => colorElement(e, tempPage));
 
     return [...sections, skeleton];
@@ -73,55 +73,26 @@ export function generatePageFromPalette(page, palette) {
   return _page;
 }
 
-
-
-// If the heading is cursive or only one weight, must choose a second font
-
-
-
-
-
-// Single Font w/ multiple boldness
-// {
-//   heading: {
-//     fontFamily: font1,
-//     fontWeight: bold,
-//   },
-//   subheading: {
-//     // must be larger
-//   },
-//   smallheading: {
-//     fontFamily: font1,
-//     fontWeight: bold,
-//   },
-//   kicker: {
-//     fontFamily: font1,
-//     textTransform: ['uppercase', 'none'],
-//     fontWeight: 400,
-//     fontSize: 4,
-//   },
-//   paragraph: {
-//     fontFamily: font1,
-//     fontWeight: 'normal',
-//     textTransform: 'none',
-//   } 
-// }
-
-
-
-// {heading: 'Montserrat', paragraph: 'Montserrat'}
 export function generateTypographyAlternatives(fonts, page) {
-  
   const typography = {
-    heading: { fontFamily: fonts.heading },
+    heading: { fontFamily: fonts.heading, fontWeight: 8 },
     paragraph: { fontFamily: fonts.paragraph },
   }
-  calculateHeading(typography);
-  // calculateParagraph(typography);
-  // calcualteKicker(typography);
-
+  calculateHeaderAndParagraph(typography);
+  typography.smallHeading = { fontFamily: typography.paragraph, fontWeight: 8 },
+  typography.subHeading = { fontFamily: typography.paragraph, fontWeight: 4 },
+  typography.kicker = { fontFamily: typography.paragraph, textTransform: "uppercase" }
 }
 
-function calculateHeading(typography) {
-  typography.fontFamily = 'Montserrat';
+function calculateHeaderAndParagraph(typography) {
+  const pFamily = typography.paragraph.fontFamily;
+  if(!typography.heading.fontFamily) {
+    typography.heading.fontFamily = pFamily 
+      ? randomItem(paragraphs[pFamily])
+      : randomItem(Object.keys(headings));
+  }
+  const hFamily = typography.heading.fontFamily;
+  if(!pFamily) {
+    typography.paragraph.fontFamily = randomItem(headings[hFamily]);
+  }
 }
