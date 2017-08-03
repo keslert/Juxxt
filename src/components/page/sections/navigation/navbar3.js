@@ -13,6 +13,8 @@ class Navbar3 extends React.PureComponent {
     const colorClassNames = convertColorToAtomic(color);
     const containerClassNames = convertStyleToAtomic({
       ...style,
+      paddingBottom: '-l-' + (style.height / 2),
+      paddingTop: '-l-' + (style.height / 2),
       paddingHorizontal: style.edgePadding,
       display: 'flex',
       align: 'center',
@@ -42,7 +44,12 @@ export default Navbar3;
 export const blueprint = {
   type: 'navigation',
   inherits: ['GutterSection', 'NavigationSection', 'FixedSection', 'Section'],
-  style: {},
+  style: {
+    height: {
+      _default: 2,
+      options: [0,6,2,4],
+    }
+  },
   color: {
     background: 'default',
   },

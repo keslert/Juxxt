@@ -52,8 +52,7 @@ export const blueprint = {
       options: ['tc','tl', 'tr'],
     },
   },
-  color: {},
-  component: { footer: ['footer'] },
+  color: { background: 'vibrant' },
   elements: {
     copyright: {
       name: 'Copyright',
@@ -67,4 +66,10 @@ export const blueprint = {
       options: ['HorizontalList']
     }
   },
+  component: { footer: ['footer'] },
+  background: {
+    pattern: ['pattern'],
+    gradient: ['gradient'],
+    image: ['image'],
+  }
 }

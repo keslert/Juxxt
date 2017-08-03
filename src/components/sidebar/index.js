@@ -17,10 +17,12 @@ import ThemeSidebar from './theme-sidebar';
 
 const StyledSidebar = styled.div`
   position: relative;
-  width: ${props => props.open ? '240px' : 0};
+  width: 240px;
   height: 100vh;
   background: ${theme.black};
   box-sizing: border-box;
+  transform: translateX(${props => props.open ? 0 : 240}px);
+  width: ${props => props.open ? 240 : 0};
 `
 
 const StyledHeading = styled.div`

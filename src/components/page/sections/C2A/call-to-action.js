@@ -52,7 +52,6 @@ export const blueprint = {
     },
   },
   color: {},
-  components: { basic: ['basic'], header: ['header'], action: ['action'] },
   groups: {
     tp: {
       options: [
@@ -67,5 +66,12 @@ export const blueprint = {
         {name: 'ButtonList', elements: { buttons: { blueprint: { clones: {_default: 1}}}}},
       ],
     },
+  },
+  component: { 
+    basic: ['basic'], 
+    header: ['header'], 
+    action: ['action'],
+    grid: ['grid'],
+    gallery: ['gallery'],
   },
 }

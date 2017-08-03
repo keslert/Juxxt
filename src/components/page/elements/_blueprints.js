@@ -5,7 +5,7 @@ export const BasicKicker = {
   name: 'BasicKicker', 
   is: 'Text',
   inherits: ['Heading'],
-  color: { text: 'readable' },
+  color: { text: 'whiteOrReadable' },
   component: { section: ['section'] },
   style: {
     fontSize: { _default: 3, options: [1,2,3] },
@@ -45,7 +45,7 @@ export const BasicSubheading = {
   name: 'BasicSubheading', 
   is: 'Text',
   inherits: ['Heading'],
-  color: { text: 'readable' },
+  color: { text: 'whiteOrReadable' },
   component: { section: ['section'] },
   style: {
     fontSize: { _default: 4, options: [2,3,4,5,6,7] },
@@ -58,7 +58,7 @@ export const Copyright = {
   name: 'Copyright', 
   is: 'Text',
   inherits: [],
-  color: { text: 'readable' },
+  color: { text: 'whiteOrReadable' },
   component: { section: ['section'] },
   style: {
     fontSize: { _default: 3, options: [2,3,4] },
@@ -71,7 +71,7 @@ export const ListTitle = {
   name: 'ListTitle', 
   is: 'Text',
   inherits: ['Heading'],
-  color: { text: 'readable' },
+  color: { text: 'whiteOrReadable' },
   component: { section: ['section'] },
   style: {
     fontSize: { _default: 4, options: [2,3,4,5,6,7] },
@@ -89,7 +89,7 @@ export const BasicParagraph = {
   name: 'BasicParagraph', 
   is: 'Text',
   inherits: ['Paragraph'],
-  color: { text: 'readable' },
+  color: { text: 'whiteOrReadable' },
   
   component: { section: ['section'] },
   style: {
@@ -161,7 +161,7 @@ export const ReadableLink = {
   name: 'ReadableLink',
   is: 'Link',
   inherits: [],
-  color: { text: 'readable' },
+  color: { text: 'whiteOrReadable' },
   
   component: { section: ['section'] },
   style: {
