@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import Box from '../common/box';
 import { getSelectedModification, getModifications, setModification, getModificationOptions } from '../../core/ui';
-import { lowerCamelCaseToRegular } from '../../core/utils';
+import { lowerCamelCaseToRegular, translateToNovice } from '../../core/utils';
 import { map, uniq, sortBy, zipObject, some, includes } from 'lodash';
 
 import { Toolbar, ToolbarItem } from './styled';
@@ -28,7 +28,7 @@ class ModificationToolbar extends React.Component {
               onClick={() => this.updateModification(option)}
               selected={some(option.keys, key => modification[key])}
               >
-              {lowerCamelCaseToRegular(option.label)}
+              {lowerCamelCaseToRegular(translateToNovice(option.label))}
             </ToolbarItem>
           )}
         </Box>

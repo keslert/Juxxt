@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import IconButton from '../common/icon-button';
 import PaletteSwatch from '../common/palette-swatch';
-import { lowerCamelCaseToRegular } from '../../core/utils';
+import { lowerCamelCaseToRegular, translateToNovice } from '../../core/utils';
 import { map, isObject } from 'lodash';
 
 const StyledAlternative = styled.div`
@@ -68,6 +68,7 @@ export default Alternative;
 
 function getLabel(obj) {
   return map(obj, (value, key) =>
-    isObject(value) ? getLabel(value) : `${lowerCamelCaseToRegular(key)}: ${value}`
+    isObject(value) ? getLabel(value) 
+                    : `${lowerCamelCaseToRegular(translateToNovice(key))}: ${value}`
   ).join(', ');
 }

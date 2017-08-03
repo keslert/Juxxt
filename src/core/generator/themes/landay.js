@@ -66,12 +66,15 @@ export default {
           }
         },
         color: { background: colorBlueprint.darkGray },
-        style: { paddingVertical: 4, constrained: 'page', margin: 'auto' },
+        style: { constrained: 'page' },
       },
       {
         name: 'BasicWide1_2',
-        color: { background: colorBlueprint.primary },
-        style: { order: 'right' },
+        // color: { background: '#ffffff' },
+        style: { 
+          order: 'right',
+          height: 8
+        },
         elements: {
           image: {
             content: images[0],
@@ -98,6 +101,9 @@ export default {
       },
       {
         name: 'Basic',
+        style: {
+          height: 8,
+        },
         color: { background: colorBlueprint.primary },
         groups: {
           item: {

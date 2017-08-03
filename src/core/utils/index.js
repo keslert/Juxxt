@@ -92,3 +92,12 @@ export function absDiff(a, b) {
 export function getTruthyKeys(obj) {
   return filter(Object.keys(obj), key => obj[key])
 }
+
+export function translateToNovice(label) {
+  switch(label) {
+    case 'gutter':
+      return 'spaceBetween';
+    default:
+      return label;
+  }
+}
