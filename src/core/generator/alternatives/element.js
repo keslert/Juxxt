@@ -50,15 +50,6 @@ function findPathsToElement(item, elementName, path, paths) {
 }
 
 export function generateElementComponentAlternatives(modify, element, sectionSkeleton) {
-  // const test = [
-  //   {color: "#FFF", locked:false},
-  //   {color: "#F2DC", locked:false},
-  //   {color: "#A2FE", locked:false},
-  //   {color: "#BB23", locked:true},
-  //   {color: "#000", locked:true},
-  // ];
-  // colorMind(test,(err,he)=>{alert(err)} , (body)=>{debugger;});
-
   if(modify.section && !element.parent.isSection) {
     const blueprint = getBlueprint(element.parent);
     const _element = find(element.section._elements, e => e.id === element.id);

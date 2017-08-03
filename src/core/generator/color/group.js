@@ -14,6 +14,10 @@ export function colorGroup(group, sections) {
     g => true,
   ]
   */
+  group.color = group.color || {};
 
-  group.color = {};
+  if(group.blueprint.color.background === 'white' && !group.color.background) {
+    group.color.background = '#ffffff';
+    group.color.borderColor = '#transparent';
+  }
 }

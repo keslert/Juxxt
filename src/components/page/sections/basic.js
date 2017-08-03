@@ -49,13 +49,7 @@ export default Basic;
 
 export const blueprint = {
   type: 'basic',
-
   inherits: ['BackgroundImageSection', 'Section'],
-  image: { content: ['content'] },
-  layout: {
-    position: ['verticalPosition', 'horizontalPosition']
-  },
-  component: { basic: ['basic'], header: ['header'], action: ['action'] },
   style: {
     verticalPosition: {
       _default: POSITIONS / 2,
@@ -68,13 +62,18 @@ export const blueprint = {
   },
   color: {
     background: 'default',
-    pattern: true,
-    gradient: true,
-    image: true,
   },
   groups: {
     item: {
       options: ['HeadingButton','KickerHeadingButton', 'KickerHeadingSubheadingButton','HeadingSubheadingButton','IconHeadingButton','IconHeadingParagraphButton', 'HeadingParagraphButton','KickerHeadingParagraphButton','Heading','HeadingParagraph','HeadingSubheading', 'KickerHeading', 'KickerHeadingParagraph','KickerHeadingSubheading', 'IconHeadingParagraph','IconHeadingSubheading','Gallery'],
     },
   },
+  image: { content: ['content'] },
+  layout: { position: ['verticalPosition', 'horizontalPosition'] },
+  background: { 
+    pattern: ['pattern'],
+    gradient: ['gradient'],
+    image: ['image'],
+  },
+  component: { basic: ['basic'], header: ['header'], action: ['action'] },
 }

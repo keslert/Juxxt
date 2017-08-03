@@ -55,7 +55,7 @@ const sections = {
 
 const groups = {
   BaseGroup: {
-    paddingHorizontal: {
+    padding: {
       _default: 0,
       options: [0,7,1,2,3,4,5,6],
     },
@@ -76,6 +76,20 @@ const groups = {
       options: [0,4,1,2,3],
     },
   },
+  Carded: {
+    padding: {
+      _default: 4,
+      options: [0,5,4,3,2,1],
+    },
+    borderRadius: {
+      _default: 3,
+      options: [0,1,2,3,4],
+    },
+    dropShadow: {
+      _default: 'medium',
+      options: ['none', 'small', 'medium', 'large'],
+    }
+  }
 }
 
 const elements = {
@@ -163,7 +177,7 @@ export default {
   ...elements,
   Guttered: {
     gutter: {
-      _default: 4,
+      _default: 3,
       options: [0,5,1,2,3,4],
     }
   },

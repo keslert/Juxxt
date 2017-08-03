@@ -17,8 +17,10 @@ const conversions = {
 
   order: v => 'order-' + v,
   shape: v => 'br' + v,//br for border radius
-  borderStyle: v => 'b-' + v,
+
+  border: v => 'b-' + v,
   borderWidth: v => 'bw' + v,
+  borderRadius: v => 'br' + v,
   height: v => 'h-' + v,
   minHeight: v => 'minh-' + v,
   parallax: v => v ? 'parallax': '',
@@ -26,6 +28,7 @@ const conversions = {
   crop: v => 'bg-' + v,
   buttonType: v => 'shadow-' + v,
   shadow: v=> 'shadow-' + v,
+  dropShadow: v => 'drop-shadow-' + v[0],
   // unstyledButton: v=> v ? 'unstyledButton' : '',
 }
 

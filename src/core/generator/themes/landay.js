@@ -147,29 +147,34 @@ export default {
         }
       },
       {
-        name: 'Grid',
-        color: { background: colorBlueprint.darkGray },
+        name: 'Basic',
         groups: {
-          gridItem: {
-            name: 'IconHeadingParagraph', 
-            style: {
-              iconPosition: 'above',
-              textAlign: 'center',
-            },
-            elements: {
-              heading: {
-                name:'SmallHeading', 
-                style: { 
-                  fontWeight: 4,
+          item: {
+            name: 'Card',
+            color: { background: colorBlueprint.darkGray },
+            groups: {
+              gridItem: {
+                name: 'IconHeadingParagraph', 
+                style: {
+                  iconPosition: 'above',
+                  textAlign: 'center',
                 },
-                color: { 
-                  text: colorBlueprint.lightGray,
-                  _textBackground: colorBlueprint.darkGray,
-                },
+                elements: {
+                  heading: {
+                    name:'SmallHeading', 
+                    style: { 
+                      fontWeight: 4,
+                    },
+                    color: { 
+                      text: colorBlueprint.lightGray,
+                      _textBackground: colorBlueprint.darkGray,
+                    },
+                  }
+                }
               }
-            }
+            },
           }
-        },
+        }
       },
       {
         name: 'Basic',
@@ -198,25 +203,30 @@ export default {
         }
       },
       {
-        name: 'Grid',
+        name: 'Basic',
         color: { background: palette[0] },
         groups: {
-          tp: {
-            name: 'HeadingSubheading',
-          },
-          gridItem: {
-            name: 'IconHeadingParagraph',
-            elements: {
-              heading: { 
-                name:'SmallHeading', 
-                color: {
-                  text: colorBlueprint.lightGray,
-                  _textBackground: palette[0],
-                },
-              }
-            }
-          },
-        },
+          item: {
+            name: 'Cards',
+            groups: {
+              tp: {
+                name: 'HeadingSubheading',
+              },
+              gridItem: {
+                name: 'IconHeadingParagraph',
+                elements: {
+                  heading: { 
+                    name:'SmallHeading', 
+                    color: {
+                      text: colorBlueprint.lightGray,
+                      _textBackground: palette[0],
+                    },
+                  }
+                }
+              },
+            },
+          }
+        }
       },
     
       {

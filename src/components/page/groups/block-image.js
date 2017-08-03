@@ -11,7 +11,6 @@ class BlockImage extends React.Component {
 
     const styleClassNames = convertStyleToAtomic(style);
     const colorClassNames = convertColorToAtomic(color);
-    debugger;
     return (
       <div className={styleClassNames + ' ' + colorClassNames}>
         <Element {...elements.image} />

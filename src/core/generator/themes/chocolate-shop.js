@@ -201,20 +201,6 @@ page: {
           order: 1,
         },
       },
-      {name: 'Grid',
-        groups: {
-          tp: {
-            _default: {
-              name: 'HeadingSubheading',
-            },
-          },
-          // gridItem: {
-          //   _default: {
-          //     name: 'HeadingParagraph', clones:6,  elements:{heading:{name:'SmallHeading'}},
-          //   },
-          // }
-        },
-      },
       {name: 'Basic',
         _defaults: {
           style: {
