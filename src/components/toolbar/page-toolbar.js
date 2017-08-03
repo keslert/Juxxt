@@ -16,11 +16,11 @@ class PageToolbar extends React.Component {
             
           </Box>
           <Box display="flex">
-            {canUndo && 
-              <ToolbarItem onClick={pageUndo}><i className="fa fa-undo"></i></ToolbarItem>
-            }
             {canRedo && 
               <ToolbarItem onClick={pageRedo}><i className="fa fa-repeat"></i></ToolbarItem>
+            }
+            {canUndo && 
+              <ToolbarItem onClick={pageUndo}><i className="fa fa-undo"></i></ToolbarItem>
             }
             <ToolbarButton onClick={() => setShowPreview(true)}>
               Preview

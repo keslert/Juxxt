@@ -26,25 +26,65 @@ const paragraphNames = uniq(flatten(values(headings)))
 export const paragraphs = zipObject(paragraphNames, map(paragraphNames, name => (
 	filter(allHeadings, filter(allHeadings, heading => includes(headings[heading], name)))
 )))
-export const fontWeights = {
-	'Alice': [400],
-	'Amatic SC': [400, 700],
-	'Bitter': [400, 700, '400-italic'],
-	'Josefin Sans': [100, 300, 400, 600, 700, '100-italic', '300-italic', '400-italic', '600-italic', '700-italic'],
-	'La Belle Aurore': [400],
-	'Lato':[100, 300, 400, 700, 900, '100-italic', '300-italic', '400-italic', '700-italic', '900-italic'],
-	'Meddon': [400],
-	'Merriweather': [300, 400, 700, 900, '300-italic', '400-italic', '700-italic', '900-italic'],
-	'Montserrat': [400, 700],
-	'Muli': [300, 400, '300-italic', '400-italic'],
-	'Open Sans': [300, 400, 600, 700, 900, '300-italic', '400-italic', '600-italic', '700-italic', '900-italic'],
-	'Open Sans Condensed': [300, 700, '300-italic'],
-	'Oswald': [300, 400, 700],
-	'Playfair Display': [400, 700, 900, '400-italic', '700-italic', '900-italic'],
-	'Quicksand': [300, 400, 700],
-	'Raleway': [100, 200, 300, 400, 500, 600, 700, 900],
-	'Roboto': [100, 300, 400, 500, 700, 900, '100-italic', '300-italic', '400-italic', '500-italic', '700-italic', '900-italic'],
-	'Roboto Slab': [100, 300, 400, 700],
-	'Sacramento': [400],
-	'Work Sans': [100, 200, 300, 400, 500, 600, 700, 900],
+export const fontDetails = {
+	'Alice': {
+		weights: [400],
+	},
+	'Amatic SC': {
+		weights: [400, 700],
+	},
+	'Bitter': {
+		weights: [400, 700, '400-italic'],
+	},
+	'Josefin Sans': {
+		weights: [100, 300, 400, 600, 700, '100-italic', '300-italic', '400-italic', '600-italic', '700-italic'],
+	},
+	'La Belle Aurore': {
+		weights: [400],
+	},
+	'Lato': {
+		weights: [100, 300, 400, 700, 900, '100-italic', '300-italic', '400-italic', '700-italic', '900-italic'],
+	},
+	'Meddon': {
+		weights: [400],
+	},
+	'Merriweather': {
+		weights: [300, 400, 700, 900, '300-italic', '400-italic', '700-italic', '900-italic'],
+	},
+	'Montserrat': {
+		weights: [400, 700],
+	},
+	'Muli': {
+		weights: [300, 400, '300-italic', '400-italic'],
+	},
+	'Open Sans': {
+		weights: [300, 400, 600, 700, 900, '300-italic', '400-italic', '600-italic', '700-italic', '900-italic'],
+	},
+	'Open Sans Condensed': {
+		weights: [300, 700, '300-italic'],
+	},
+	'Oswald': {
+		weights: [300, 400, 700],
+	},
+	'Playfair Display': {
+		weights: [400, 700, 900, '400-italic', '700-italic', '900-italic'],
+	},
+	'Quicksand': {
+		weights: [300, 400, 700],
+	},
+	'Raleway': {
+		weights: [100, 200, 300, 400, 500, 600, 700, 900],
+	},
+	'Roboto': {
+		weights: [100, 300, 400, 500, 700, 900, '100-italic', '300-italic', '400-italic', '500-italic', '700-italic', '900-italic'],
+	},
+	'Roboto Slab': {
+		weights: [100, 300, 400, 700],
+	},
+	'Sacramento': {
+		weights: [400],
+	},
+	'Work Sans': {
+		weights: [100, 200, 300, 400, 500, 600, 700, 900],
+	},
 }
