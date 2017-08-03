@@ -84,5 +84,11 @@ export const blueprint = {
     pattern: ['pattern'],
     gradient: ['gradient'],
   },
-  component: { basic: ['basic'], header: ['header'], action: ['action'] },
+  component: { 
+    basic: ['basic'], 
+    header: ['header'], 
+    action: ['action'],
+    grid: ['grid'],
+    gallery: ['gallery'],
+  },
 }

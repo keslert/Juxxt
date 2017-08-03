@@ -78,7 +78,6 @@ export const blueprint = {
       ]
     },
   },
-  component: { basic: ['basic'], header: ['header'], action: ['action'] },
   background: {},
 }
 

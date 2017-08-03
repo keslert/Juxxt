@@ -75,5 +75,11 @@ export const blueprint = {
     gradient: ['gradient'],
     image: ['image'],
   },
-  component: { basic: ['basic'], header: ['header'], action: ['action'] },
+  component: { 
+    basic: ['basic'], 
+    header: ['header'], 
+    action: ['action'],
+    grid: ['grid'],
+    gallery: ['gallery'],
+  },
 }

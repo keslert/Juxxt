@@ -112,5 +112,11 @@ export const blueprint = {
   },
   image: { content: ['content'] },
   layout: { splitRatio: ['splitRatio', 'constrained'] },
-  component: { basic: ['basic'], header: ['header'], action: ['action'] },
+  component: { 
+    basic: ['basic'], 
+    header: ['header'], 
+    action: ['action'],
+    grid: ['grid'],
+    gallery: ['gallery'],
+  },
 }

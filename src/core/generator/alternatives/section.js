@@ -31,21 +31,21 @@ import { generateGroupLayoutAlternatives } from './group';
 import { getSortedByPreference } from '../color/utils';
 import { generateItemClones, generateStyleCombinations } from './alternatives-utils';
 
-import { getHeaders } from '../prebuilt/headers';
+import prebuilt from '../prebuilt';
 
 import tinycolor from 'tinycolor2';
 import defaultTheme from '../themes';
 
 export function generateSectionComponentAlternatives(section, modify, sectionSkeleton, page) {
-  let validSkeletons = [];
-  if(modify.header) {
-    validSkeletons = getHeaders(sectionSkeleton, page);
-  } else {
-    validSkeletons = filter(Object.keys(blueprints), name => modify[blueprints[name].type])
-                     .map(name => ({name}))
+  const sectionType = getTruthyKeys(modify)[0];
+  const sections = Object.keys(blueprints);
+  
+  const valid = filter(sections, name => modify[blueprints[name].type]).map(name => ({name}))
+  if(prebuilt[sectionType]) {
+    valid.push(...prebuilt[sectionType](sectionSkeleton, page));
   }
 
-  const skeletons = validSkeletons.map(skeleton => {
+  const skeletons = valid.map(skeleton => {
     const _skeleton = generateSectionSkeleton({...skeleton, id: section.id});
     linkSkeleton(_skeleton);
     return _skeleton;
