@@ -28,12 +28,12 @@ export const blueprint = {
       name: BasicImage.name,
       blueprint: {
         image: {
-          shadow: ['shadow'],
+          dropShadow: ['dropShadow'],
         },
         style: {
-          shadow: {
-            _default: 0,
-            options: [0,'light','dark']
+          dropShadow: {
+            _default: 'medium',
+            options: ['none', 'medium']
           }
         }
       }

@@ -139,9 +139,8 @@ export function generatePageCSSRules(page) {
     //should I say "#transparent"??
     //      background: ${page.colorBlueprint.backgrounds.border.substr(1)};
     //      color: transparent;
-
-    rules.push(`.bg-${color.substr(1)}.shadow-highlight:hover { 
-    }`);
+    /*    rules.push(`.bg-${color.substr(1)}.shadow-highlight:hover { 
+    }`);*/
 
   });
   
