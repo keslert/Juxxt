@@ -69,10 +69,6 @@ class TextPanel extends React.Component {
     this.setState({fonts});
   }
 
-  handleFontExchange(index) {
-
-  }
-
   exchangeFonts(restrictions) {
     const { page, pushAlternative, turnOnModification } = this.props;
     const typ = generateTypographyAlternatives(restrictions,page);
@@ -104,7 +100,7 @@ class TextPanel extends React.Component {
             onChange={_value => { this.exchangeFonts({[fontType] : _value.value, [otherFontType]: otherValue});}}
             />
           <StyledIcon>
-            <i className='fa fa-exchange' onClick={() => this.exchangeFonts({ [fontType] : normal }, this.props.page)} />
+            <i className='fa fa-exchange' onClick={() => this.exchangeFonts({ [otherFontType] : otherValue }, this.props.page)} />
           </StyledIcon>
         </Box>
       </Box>
