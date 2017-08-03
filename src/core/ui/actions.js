@@ -202,8 +202,7 @@ function getModificationKeysAndOptions(standardKeys, selected, blueprint={}) {
   const specialKeys = Object.keys(blueprint);
   const condensedKeys = flatMap(blueprint);  
 
-  
-  const styleKeys = filter(Object.keys(selected.style), key => {
+  const styleKeys = filter(Object.keys(selected.blueprint._allStyles), key => {
     const style = selected.blueprint._allStyles[key];
     return !style.hide || !style.hide(selected);
   })

@@ -32,7 +32,7 @@ export function generateContent(element) {
     case 'Heading':
       return getHeadingContent(element);
     case 'SmallHeading':
-      return getSubheaderContent(element);
+      return getSmallHeadingContent(element);
     case 'BasicSubheading':
       return getSubheaderContent(element);
     default: 
@@ -70,7 +70,7 @@ function getButtonContent() {
 
 function getParagraphContent() {
   const text = LoremIpsum({
-    count: random(2, 4),
+    count: random(2, 3),
     units: 'sentences',
   });
   return { text };

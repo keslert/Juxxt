@@ -47,8 +47,8 @@ export function generateItemSkeleton(skeleton, blueprint) {
   const _skeleton = {
     content: {},
     color: {},
-    style: {},
     ...skeleton,
+    style: pick(skeleton.style, Object.keys(merged._allStyles)),
     elements: mapValues(merged.elements, (e, elementKey) => {
       const element = merge({}, e, get(skeleton, ['elements', elementKey]));
       return generateElementSkeleton(element);
