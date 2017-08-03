@@ -3,7 +3,7 @@ import { extractSkeletonFromItem } from '../skeletons/utils';
 import { getSortedByPreference } from '../color/utils';
 import { buildPageColorBlueprint } from '../color/page';
 import { colorElement } from '../color/element';
-import { cloneDeep, omit, values, filter, isEqual, reduce, uniqueId } from 'lodash';
+import { cloneDeep, omit, values, filter, isEqual, reduce, uniqueId, merge } from 'lodash';
 import tinycolor from 'tinycolor2';
 import { getMode, randomItem } from '../../utils'
 import { headings, paragraphs } from './../fonts'
@@ -75,8 +75,8 @@ export function generatePageFromPalette(page, palette) {
 
 export function generateTypographyAlternatives(fonts, page) {
   const typography = {
-    heading: { fontFamily: fonts.heading, fontWeight: 8 },
-    paragraph: { fontFamily: fonts.paragraph },
+    heading: { fontFamily: fonts.heading, fontWeight: 8 },//or 7 or 9
+    paragraph: { fontFamily: fonts.paragraph, fontWeight: 4 },//or 1
   }
   calculateHeaderAndParagraph(typography);
   typography.smallHeading = { fontFamily: typography.paragraph, fontWeight: 8 },
@@ -95,4 +95,37 @@ function calculateHeaderAndParagraph(typography) {
   if(!pFamily) {
     typography.paragraph.fontFamily = randomItem(headings[hFamily]);
   }
+}
+
+function calculateTypographyWeights(typography) {
+  const typeOptionA = {
+    heading: { fontWeight: 7 },//6-9, usually 7 or 8
+    paragraph: { fontWeight: 4 },//1-5, usually 4
+    smallHeading: { fontWeight: 7 },//5, 6, 7, 8, usually medium bold
+    subHeading: { fontWeight: 4 },//anything, usually 5-8
+    kicker: { fontWeight: 4 }//this could be anything 1-9
+  }
+  const typeOptionB = {
+    heading: { fontWeight: 7 },//6-9, usually 7 or 8
+    paragraph: { fontWeight: 4 },//1-5, usually 4
+    smallHeading: { fontWeight: 7 },//5, 6, 7, 8, usually medium bold
+    subHeading: { fontWeight: 7 },//anything, usually 5-8
+    kicker: { fontWeight: 1 }//this could be anything 1-9
+  }
+  const typeOptionC = {
+    heading: { fontWeight: 4 },//6-9, usually 7 or 8
+    paragraph: { fontWeight: 1 },//1-5, usually 4
+    smallHeading: { fontWeight: 4 },//5, 6, 7, 8, usually medium bold
+    subHeading: { fontWeight: 4 },//anything, usually 5-8
+    kicker: { fontWeight: 1 }//this could be anything 1-9
+  }
+  const typeOptionD = {
+    heading: { fontWeight: 4 },//6-9, usually 7 or 8
+    paragraph: { fontWeight: 4 },//1-5, usually 4
+    smallHeading: { fontWeight: 4 },//5, 6, 7, 8, usually medium bold
+    subHeading: { fontWeight: 4 },//anything, usually 5-8
+    kicker: { fontWeight: 4 }//this could be anything 1-9
+  }
+  const option = randomItem([typeOptionA, typeOptionB, typeOptionC, typeOptionD]);
+  merge(typography, option);
 }
