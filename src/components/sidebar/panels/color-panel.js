@@ -150,7 +150,7 @@ class ColorPanel extends React.Component {
         <Box display="flex">
 
           {canDelete && 
-            <StyledIcon highlight={color.locked} onClick={() => this.handleColorRemove(index)}>
+            <StyledIcon onClick={() => this.handleColorRemove(index)}>
               <i className='fa fa-times' />
             </StyledIcon>
           }

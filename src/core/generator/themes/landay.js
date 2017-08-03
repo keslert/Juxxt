@@ -158,12 +158,17 @@ export default {
         groups: {
           item: {
             name: 'Cards',
+            color: {
+              background: '#transparent',
+              borderColor: '#transparent',
+            },
+            style: { dropShadow: 'none' },
             groups: {
-              gridItem: {
+              card: {
                 name: 'IconHeadingParagraph', 
                 style: {
                   iconPosition: 'above',
-                  textAlign: 'center',
+                  textAlign: 'left',
                 },
                 elements: {
                   heading: {

@@ -23,7 +23,6 @@ const StyledSidebar = styled.div`
   box-sizing: border-box;
   transform: translateX(${props => props.open ? 0 : 240}px);
   width: ${props => props.open ? 240 : 0};
-  overflow-y: scroll;
 `
 
 const StyledHeading = styled.div`
