@@ -148,10 +148,10 @@ export default {
       },
       {
         name: 'Basic',
+        color: { background: colorBlueprint.darkGray },
         groups: {
           item: {
-            name: 'Card',
-            color: { background: colorBlueprint.darkGray },
+            name: 'Cards',
             groups: {
               gridItem: {
                 name: 'IconHeadingParagraph', 
