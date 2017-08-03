@@ -52,7 +52,7 @@ export const blueprint = {
       options: ['tc','tl', 'tr'],
     },
   },
-  color: {},
+  color: { background: 'vibrant' },
   component: { footer: ['footer'] },
   elements: {
     copyright: {

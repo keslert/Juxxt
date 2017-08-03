@@ -52,7 +52,7 @@ export const blueprint = {
   type: 'footer',
   inherits: ['ConstrainedSection', 'Section'],
   style: {},
-  color: {},
+  color: { background: 'vibrant' },
   component: { footer: ['footer'] },
   elements: {
     logo: {

@@ -43,7 +43,7 @@ export const blueprint = {
       options: [1,3],
     },
   },
-  color: {},
+  color: { background: 'vibrant' },
   component: { footer: ['footer'] },
   elements: {
     copyright: {
