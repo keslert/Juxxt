@@ -184,7 +184,7 @@ export default {
   Columned: {
     columns: {
       _default: 3,
-      options: [2,6,3,4,5],
+      options: [1,2,3,4,5,6],
     }
   },
   Ordered: {

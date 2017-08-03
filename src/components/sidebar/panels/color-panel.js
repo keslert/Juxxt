@@ -97,6 +97,12 @@ class ColorPanel extends React.Component {
     this.exchangeColorPalette(palette);  
   }
 
+  handleColorAdd() {
+    const palette = this.state.palette.map((color) => ({...color, locked: true}));
+    palette.push({locked: false});
+    this.exchangeColorPalette(palette);
+  }
+
   exchangeColorPalette(palette) {
     const { page, pushAlternative } = this.props;
     fetchColorMindPalette(
@@ -164,7 +170,7 @@ class ColorPanel extends React.Component {
             ))}
             {palette.length < 5 &&
               <Box marginLeft="3px" marginTop="4px">
-                <StyledTextButton onClick={() => this.exchangeColorPalette([...palette, {locked: false}])}>
+                <StyledTextButton onClick={() => this.handleColorAdd()}>
                   <i className="fa fa-plus-circle" /> Add color
                 </StyledTextButton>
               </Box>

@@ -56,6 +56,7 @@ export const blueprint = {
   style: {},
   color: {
     background: 'white',
+    borderColor: 'light',
   },
   groups: {
     card: {

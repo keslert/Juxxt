@@ -36,7 +36,7 @@ export function init() {
       skeleton.color.background = skeleton.color.background || '#ffffff';
       
       const page2 = {...page, sections: [...page.sections, skeleton]};
-      forEach(skeleton._groups, group => colorGroup(group, page2.sections));
+      forEach(skeleton._groups, group => colorGroup(group, page2));
       forEach(skeleton._elements, element => colorElement(element, page2));
 
       assignContent(skeleton, []);

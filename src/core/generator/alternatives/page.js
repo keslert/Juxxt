@@ -2,6 +2,7 @@ import { linkSkeleton, generatePageCSSRules } from '../generator-utils';
 import { extractSkeletonFromItem } from '../skeletons/utils';
 import { getSortedByPreference } from '../color/utils';
 import { buildPageColorBlueprint } from '../color/page';
+import { colorGroup } from '../color/group';
 import { colorElement } from '../color/element';
 import { cloneDeep, omit, values, filter, isEqual, reduce, uniqueId } from 'lodash';
 import tinycolor from 'tinycolor2';
@@ -61,6 +62,7 @@ export function generatePageFromPalette(page, palette) {
     skeleton._elements.forEach(e => e.color = {});
     
     const tempPage = {sections, colorBlueprint};
+    skeleton._groups.forEach(g => colorGroup(g, tempPage));
     skeleton._elements.forEach(e => colorElement(e, tempPage));
 
     return [...sections, skeleton];

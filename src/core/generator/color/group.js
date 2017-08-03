@@ -1,7 +1,7 @@
 //import blueprints from '../../../components/page/groups/_blueprints';
-//import { flatMap, filter, values } from 'lodash';
+import { includes } from 'lodash';
 
-export function colorGroup(group, sections) {
+export function colorGroup(group, page) {
   /*
   const blueprint = blueprints[group.name];
 
@@ -18,6 +18,9 @@ export function colorGroup(group, sections) {
 
   if(group.blueprint.color.background === 'white' && !group.color.background) {
     group.color.background = '#ffffff';
+    group.color.borderColor = '#transparent';
+  }
+  if(group.color.borderColor && !includes(page.colorBlueprint.texts, group.color.borderColor)) {
     group.color.borderColor = '#transparent';
   }
 }
