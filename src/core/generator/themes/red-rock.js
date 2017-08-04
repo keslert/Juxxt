@@ -57,7 +57,7 @@ export default {
       {name: 'Basic',
         style: {
           height: 10,
-          fontFamily: 'Montserrat',
+          fontFamily: 'Amatic SC',
           fontSize: 4,
         },
         color: {

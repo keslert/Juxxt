@@ -30,82 +30,82 @@ export const paragraphs = zipObject(paragraphNames, map(paragraphNames, name => 
 export const fontDetails = {
 	'Alice': {
 		weights: [400],
-		canUppercase: true,
+		canTransform: ['upper', 'lower'],
 	},
 	'Amatic SC': {
 		weights: [400, 700],
-		canUppercase: false,
+		canTransform: ['upper'],
 	},
 	'Bitter': {
 		weights: [400, 700, '400-italic'],
-		canUppercase: true,
+		canTransform: ['upper', 'lower'],
 	},
 	'Josefin Sans': {
 		weights: [100, 300, 400, 600, 700, '100-italic', '300-italic', '400-italic', '600-italic', '700-italic'],
-		canUppercase: true,
+		canTransform: ['upper', 'lower'],
 	},
 	'La Belle Aurore': {
 		weights: [400],
-		canUppercase: true,
+		canTransform: ['lower'],
 	},
 	'Lato': {
 		weights: [100, 300, 400, 700, 900, '100-italic', '300-italic', '400-italic', '700-italic', '900-italic'],
-		canUppercase: true,
+		canTransform: ['upper', 'lower'],
 	},
 	'Meddon': {
 		weights: [400],
-		canUppercase: false,
+		canTransform: ['lower'],
 	},
 	'Merriweather': {
 		weights: [300, 400, 700, 900, '300-italic', '400-italic', '700-italic', '900-italic'],
-		canUppercase: true,
+		canTransform: ['upper', 'lower'],
 	},
 	'Montserrat': {
 		weights: [400, 700],
-		canUppercase: true,
+		canTransform: ['upper', 'lower'],
 	},
 	'Muli': {
 		weights: [300, 400, '300-italic', '400-italic'],
-		canUppercase: true,
+		canTransform: ['upper', 'lower'],
 	},
 	'Open Sans': {
 		weights: [300, 400, 600, 700, 900, '300-italic', '400-italic', '600-italic', '700-italic', '900-italic'],
-		canUppercase: true,
+		canTransform: ['upper', 'lower'],
 	},
 	'Open Sans Condensed': {
 		weights: [300, 700, '300-italic'],
-		canUppercase: true,
+		canTransform: ['upper', 'lower'],
 	},
 	'Oswald': {
 		weights: [300, 400, 700],
-		canUppercase: true,
+		canTransform: ['upper', 'lower'],
 	},
 	'Playfair Display': {
 		weights: [400, 700, 900, '400-italic', '700-italic', '900-italic'],
-		canUppercase: true,
+		canTransform: ['upper', 'lower'],
 	},
 	'Quicksand': {
 		weights: [300, 400, 700],
-		canUppercase: true,
+		canTransform: ['upper', 'lower'],
 	},
 	'Raleway': {
 		weights: [100, 200, 300, 400, 500, 600, 700, 900],
-		canUppercase: true,
+		canTransform: ['upper', 'lower'],
 	},
 	'Roboto': {
 		weights: [100, 300, 400, 500, 700, 900, '100-italic', '300-italic', '400-italic', '500-italic', '700-italic', '900-italic'],
-		canUppercase: true,
+		canTransform: ['upper', 'lower'],
 	},
 	'Roboto Slab': {
 		weights: [100, 300, 400, 700],
-		canUppercase: true,
+		canTransform: ['upper', 'lower'],
 	},
 	'Sacramento': {
 		weights: [400],
-		canUppercase: false,
+		canTransform: ['lower'],
 	},
 	'Work Sans': {
 		weights: [100, 200, 300, 400, 500, 600, 700, 900],
-		canUppercase: true,
+		canTransform: ['upper', 'lower'],
 	},
 }

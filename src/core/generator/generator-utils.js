@@ -109,11 +109,7 @@ export function generatePageCSSRules(page) {
     rules.push(`.c-${key}.bg-transparent.shadow-highlight:not(.b-transparent):hover { 
       color: ${page.colorBlueprint.bgBlueprints[color].texts[0]};
       background: ${color};
-    }`);
-    //TODO keep unstyled buttons from being raised/bounce buttons
-    
-
-
+    }`);    
   });
 
   page.colorBlueprint.backgrounds.forEach(color => {
