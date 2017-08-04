@@ -43,7 +43,7 @@ const StyledTextButton = styled.div`
 
 const StyledTextPanel = styled.div`
   color: #999;
-  font-size: 14px;
+  font-size: 12px;
 `
 
 
@@ -52,7 +52,8 @@ class TextPanel extends React.Component {
     super();
     this.state = {
       open: true,
-      fonts: [],
+      fonts: {},
+      style: {},
     }
   }
 
@@ -86,6 +87,7 @@ class TextPanel extends React.Component {
     const otherValue = this.state.fonts[otherFontType];
     const options = fontOptions[otherFontType][otherValue] || [];
     const normal = this.props.page.style.typography.normal;
+    const locked = false;
     return (
       <Box display="flex" justify="space-between" marginBottom="4px">
         <Box display="flex">
@@ -99,8 +101,33 @@ class TextPanel extends React.Component {
             value={{value, label: value}}
             onChange={_value => { this.exchangeFonts({[fontType] : _value.value, [otherFontType]: otherValue});}}
             />
+
+          <StyledIcon highlight={locked} onClick={() => null}>
+            <i className={`fa fa-${locked ? 'lock' :  'unlock-alt'}`} />
+          </StyledIcon>
           <StyledIcon>
             <i className='fa fa-exchange' onClick={() => this.exchangeFonts({ [otherFontType] : otherValue }, this.props.page)} />
+          </StyledIcon>
+        </Box>
+      </Box>
+    )
+  }
+
+  renderFontStyle(fontStyle) {
+    const locked = false;
+    return (
+      <Box display="flex" justify="space-between" marginBottom="4px">
+        <Box display="flex">
+          {lowerCamelCaseToRegular(fontStyle)}
+        </Box>
+
+        <Box display="flex">
+
+          <StyledIcon highlight={locked} onClick={() => null }>
+            <i className={`fa fa-${locked ? 'lock' :  'unlock-alt'}`} />
+          </StyledIcon>
+          <StyledIcon>
+            <i className='fa fa-exchange' onClick={() => null } />
           </StyledIcon>
         </Box>
       </Box>
@@ -121,6 +148,8 @@ class TextPanel extends React.Component {
             >
             {this.renderFont('heading', 'normal')}
             {this.renderFont('normal', 'heading')}
+            {this.renderFontStyle('weight')}
+            {this.renderFontStyle('size')}
           </Collection>
         </StyledWrap>
       </StyledTextPanel>

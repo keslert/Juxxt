@@ -108,9 +108,11 @@ export function generateTypographyAlternatives(fonts, page) {
     paragraph: { fontFamily: fonts.normal, fontWeight: 4 },//or 1
   }
   calculateHeaderAndParagraph(typography);
-  typography.smallHeading = { fontFamily: typography.paragraph.fontFamily, fontWeight: 8 },
-  typography.subHeading = { fontFamily: typography.paragraph.fontFamily, fontWeight: 4 },
-  typography.kicker = { fontFamily: typography.paragraph.fontFamily, textTransform: "uppercase" }
+  typography.smallHeading = { fontFamily: typography.paragraph.fontFamily, fontWeight: 8 };
+  typography.subHeading = { fontFamily: typography.paragraph.fontFamily, fontWeight: 4 };
+  typography.kicker = { fontFamily: typography.paragraph.fontFamily, textTransform: "uppercase" };
+  calculateTypographySizes(typography);
+  calculateTypographyWeights(typography);
   return typography
 }
 
