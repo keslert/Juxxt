@@ -36,6 +36,9 @@ const peopleImages = [
   // {key: uniqueId(), url: 'https://lh3.googleusercontent.com/-amOgRh8TJvQ/AAAAAAAAAAI/AAAAAAAAByI/AK7kUFKHFXU/s640/photo.jpg'},
   // {key: uniqueId(), url: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/5/005/053/34e/0524ee5.jpg'},
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

@@ -2,6 +2,7 @@ import uniqueId from 'lodash/uniqueId';
 import { buildPageColorBlueprint } from '../color/page';
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 const page = {
   sections: [
     {
@@ -35,12 +36,17 @@ const page = {
 const palette = ['#1c919e', '#7fd2d2', '#d2e7ca'];
 const colorBlueprint = buildPageColorBlueprint(palette);
 >>>>>>> Stashed changes
+=======
+const palette = ['#1c919e', '#7fd2d2', '#d2e7ca'];
+const colorBlueprint = buildPageColorBlueprint(palette);
+>>>>>>> Stashed changes
 
 const backgroundImages = [
   {key: uniqueId(), url: 'https://static1.squarespace.com/static/560c1513e4b0c2b900450ac1/t/5939b06ee3df282dbda0888f/1496952956394/Tori%27s+Bakeshop+Ca'},
   {key: uniqueId(), url: 'https://www.theurbanlist.com/content/article/New-Opening-Elisabeth-Dessert-Cafe-5.jpg'},
   {key: uniqueId(), url: 'http://www.howsweeteats.com/wp-content/uploads/2014/08/boozy-coconut-hot-fudge-milkshakes-I-howsweeteats.com-2.jpg'},
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 export default {
   palette: ['#ffc4c4', '#7ec6cc', '#fffac6'],
@@ -65,6 +71,8 @@ export default {
   page
 }
 =======
+=======
+>>>>>>> Stashed changes
 ];
 const images = [
   {key: uniqueId(), url: 'https://s-media-cache-ak0.pinimg.com/736x/8f/dd/3c/8fdd3ccb3a6e4efa9d6750ac2dbdf893--chocolate-layer-cakes-chocolate-coffee.jpg'},
@@ -96,6 +104,9 @@ const peopleImages = [
   {key: uniqueId(), url: 'https://lh3.googleusercontent.com/-amOgRh8TJvQ/AAAAAAAAAAI/AAAAAAAAByI/AK7kUFKHFXU/s640/photo.jpg'},
   {key: uniqueId(), url: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/5/005/053/34e/0524ee5.jpg'},
 ];
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 
