@@ -7,7 +7,7 @@ import theme from '../../styles/theme';
 // import PropsPanel from '../panels/props-panel';
 
 import { getSidebarOpen, setSidebarOpen } from '../../core/ui';
-import { getSelected, getMaster } from '../../core/page';
+import { getSelected, getMaster, getAlternatives } from '../../core/page';
 
 import ContentPanel from './panels/content-panel';
 import ColorPanel from './panels/color-panel';
@@ -52,7 +52,7 @@ const CloseButton = styled.div`
 class Sidebar extends React.PureComponent {
 
   render() {
-    const { open, selected, master, setSidebarOpen } = this.props;
+    const { open, selected, master, alternative, setSidebarOpen } = this.props;
 
     return (
       <StyledSidebar open={open}>
@@ -60,8 +60,8 @@ class Sidebar extends React.PureComponent {
           <CloseButton onClick={() => setSidebarOpen(false)}><i className="fa fa-times"></i></CloseButton>
           <StyledHeading>Page Settings</StyledHeading>
           <ContentPanel element={selected} hidden={!selected.isElement} />
-          <ColorPanel page={master} />
-          <FontPanel page={master} />
+          <ColorPanel page={master} alternative={alternative} />
+          <FontPanel page={master} alternative={alternative} />
         </Box>
         <Box>
           <TemplatePicker />
@@ -75,10 +75,12 @@ const mapStateToProps = createSelector(
   getSidebarOpen,
   getSelected,
   getMaster,
-  (open, selected, master) => ({
+  getAlternatives,
+  (open, selected, master, alternatives) => ({
     open,
     selected,
     master,
+    alternative: alternatives[0],
   })
 )
 

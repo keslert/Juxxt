@@ -55,7 +55,8 @@ export function generatePageFromPalette(page, palette) {
     '#ffffff': '#ffffff',
     '#transparent': '#transparent',
   }
-
+  _page.images = cloneDeep(page.images);
+  _page.backgroundImages = cloneDeep(page.backgroundImages);
   _page.sections = reduce(page.sections, (sections, section) => {
     const skeleton = extractSkeletonFromItem(section);
     

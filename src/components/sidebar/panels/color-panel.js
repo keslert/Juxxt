@@ -148,7 +148,6 @@ class ColorPanel extends React.Component {
   }
 
   renderColor(color, index) {
-
     const canDelete = this.state.palette.length > 1;
     return (
       <Box display="flex" justify="space-between" marginBottom="4px">
@@ -181,8 +180,15 @@ class ColorPanel extends React.Component {
 
   render() {
     const { palette, open } = this.state;
-
-    const canAdd = palette.length < 5;
+    const alternative = this.props.alternative;
+    let _palette;
+    
+    alternative ? (_palette = alternative.colorBlueprint.colors) : (_palette = palette)
+    const __palette = _palette.map((color, i) => ({
+      color: _palette[i].color ? _palette[i].color : _palette[i],
+      locked: _palette[i].locked ? _palette[i] : (this.state.palette[i] && this.state.palette[i].locked),
+    }))
+    const canAdd = __palette.length < 5;
     return (
       <StyledColorPanel>
         <StyledWrap inset>
@@ -190,9 +196,9 @@ class ColorPanel extends React.Component {
             heading={"Palette"} 
             open={open} 
             onToggleOpen={() => this.setState({open: !open})}
-            onExchange={e => (e.stopPropagation(), this.exchangeColorPalette(palette))}
+            onExchange={e => (e.stopPropagation(), this.exchangeColorPalette(__palette))}
             >
-            {palette.map((color, i) => (
+            {__palette.map((color, i) => (
               <div key={i}>
                 {this.renderColor(color, i)}
               </div>
