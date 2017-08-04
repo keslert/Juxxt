@@ -1,4 +1,3 @@
-import defaultTheme from '../themes';
 import merge from 'lodash/merge';
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -6,14 +5,14 @@ export function getHeaders(sectionSkeleton, page) {
   const headers = [h1,h2,h3,h4];
   return headers.map(header => {
     const skeleton = cloneDeep(sectionSkeleton);
-    const merged = merge({}, skeleton, header.blueprint);
+    const merged = merge({}, skeleton, header.blueprint(page));
     header.post && header.post(merged, page);
     return merged;
   })
 }
 
 const h1 = {
-  blueprint: {
+  blueprint: page => ({
     name: 'Basic',
     style: {
       height: 12,
@@ -55,58 +54,58 @@ const h1 = {
         },
       }
     }
-  },
+  }),
   post: (blueprint, page) => {
     if(!blueprint.color.backgroundImage) {
       blueprint.color = {
-        backgroundImage: defaultTheme.backgroundImages[1].key,
-        _backgroundImage: defaultTheme.backgroundImages[1].url,
+        backgroundImage: page.backgroundImages[1].key,
+        _backgroundImage: page.backgroundImages[1].url,
         background: page.colorBlueprint.darkGray,
       }
     }
   }
 };
 const h2 = {
-  blueprint: {
+  blueprint: page => ({
     name: 'BasicWide1_2',
     style: {
       height: 12,
     },
     elements: {
-          image: {
-            content: defaultTheme.images[0],
-          }
-        },
+      image: {
+        content: page.images[0],
+      }
+    },
     groups: {
-          tp: {
-            name: 'KickerHeadingButton',
+      tp: {
+        name: 'KickerHeadingButton',
+        elements: {
+          kicker: {
+            content: {text: 'Life Made Clearer'},
+            style: { textTransform: 'none', fontSize: 5, fontFamily: 'Meddon', fontWeight: 1, },
+          },
+          heading: {
+            content: {text: 'monocle'},
+            style: { fontSize: 9, fontFamily: 'Source Sans Pro', fontWeight: 3 },
+          },
+        },
+        groups: {
+          buttonList: {
+            name: 'ButtonList',
             elements: {
-              kicker: {
-                content: {text: 'Life Made Clearer'},
-                style: { textTransform: 'none', fontSize: 5, fontFamily: 'Meddon', fontWeight: 1, },
-              },
-              heading: {
-                content: {text: 'monocle'},
-                style: { fontSize: 9, fontFamily: 'Source Sans Pro', fontWeight: 3 },
-              },
-            },
-            groups: {
-              buttonList: {
-                name: 'ButtonList',
-                elements: {
-                  buttons: {
-                    clones: [
-                      {
-                        content: {text: 'Create'}
-                      },
-                    ]
-                  }
-                }
+              buttons: {
+                clones: [
+                  {
+                    content: {text: 'Create'}
+                  },
+                ]
               }
-            },
+            }
           }
         },
-  },
+      }
+    },
+  }),
   post: (blueprint, page) => {
      if(blueprint.color.backgroundImage) {
       blueprint.color = {
@@ -118,7 +117,7 @@ const h2 = {
   }
 };
 const h3 = {
-  blueprint: {
+  blueprint: page => ({
     name: 'Basic',
     style: {
       height: 12,
@@ -168,26 +167,26 @@ const h3 = {
         },
       }
     }
-  },
+  }),
  post: (blueprint, page) => {
     if(!blueprint.color.backgroundImage) {
       blueprint.color = {
-        backgroundImage: defaultTheme.backgroundImages[0].key,
-        _backgroundImage: defaultTheme.backgroundImages[0].url,
+        backgroundImage: page.backgroundImages[0].key,
+        _backgroundImage: page.backgroundImages[0].url,
         background: page.colorBlueprint.darkGray,
       }
     }
     else {
       blueprint.color = {
-        backgroundImage: defaultTheme.backgroundImages[0].key,
-        _backgroundImage: defaultTheme.backgroundImages[0].url,
+        backgroundImage: page.backgroundImages[0].key,
+        _backgroundImage: page.backgroundImages[0].url,
         background: page.colorBlueprint.darkGray,
     }
   }
 }
 };
 const h4 = {
-  blueprint: {
+  blueprint: page => ({
     name: 'Basic',
     style: {
       height: 1,
@@ -205,7 +204,7 @@ const h4 = {
         elements: {
         image: { 
           name: 'BasicImage' ,
-          content: defaultTheme.images[0],
+          content: page.images[0],
           style: {
             marginBottom: 4,
           }
@@ -222,7 +221,7 @@ const h4 = {
         },          
       }
     }
-  },
+  }),
   post: (blueprint, page) => {
      if(blueprint.color.backgroundImage) {
       blueprint.color = {

@@ -5,8 +5,6 @@ import * as groupBlueprintList from '../../../components/page/groups/_blueprints
 // import * as sectionBlueprints from '../../../components/page/sections/_blueprints';   
 import { generateGroupSkeleton } from '../skeletons/group';
 import { extractSkeletonFromItem } from '../skeletons/utils';
-import { assignContent } from '../content';
-import { generateContent } from '../content/generate';
 import { colorMind } from '../color/utils';
 import { 
   map, 
@@ -32,7 +30,6 @@ import { getBackground, getBlueprint, linkSkeleton } from '../generator-utils';
 import { generateStyleCombinations } from './alternatives-utils';
 import { generateSectionLayoutAlternatives } from './section';
 import { generateGroupLayoutAlternatives, generateGroupComponentAlternatives } from './group';
-import defaultTheme from '../themes';
 
 
 function findPathsToElement(item, elementName, path, paths) {
@@ -199,7 +196,7 @@ function generateElementTextColorAlternatives(element, sectionSkeleton, page) {
 
 export function generateElementImageAlternatives(modify, element, sectionSkeleton, page) {
   if(modify.content) {
-    return defaultTheme.images.map(image => {
+    return page.images.map(image => {
       const skeleton = cloneDeep(sectionSkeleton);
       linkSkeleton(skeleton);
       const _element = find(skeleton._elements, e => e.fullRelativeId === element.fullRelativeId);

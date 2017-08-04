@@ -12,18 +12,23 @@ import { getSelected, getMaster } from '../../core/page';
 import ContentPanel from './panels/content-panel';
 import ColorPanel from './panels/color-panel';
 import FontPanel from './panels/font-panel';
+import Box from '../common/box';
 
 import ThemeSidebar from './theme-sidebar';
 
+import TemplatePicker from '../../containers/template-picker';
+
 const StyledSidebar = styled.div`
   position: relative;
-  width: 240px;
   height: 100vh;
   background: ${theme.black};
   box-sizing: border-box;
   transform: translateX(${props => props.open ? 0 : 240}px);
-  width: ${props => props.open ? 240 : 0};
-`
+  width: ${props => props.open ? 240 : 0}px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
 const StyledHeading = styled.div`
   font-size: 14px;
@@ -42,7 +47,7 @@ const CloseButton = styled.div`
   &:hover {
     color: rgba(255,255,255,0.8);
   }
-`
+`;
 
 class Sidebar extends React.PureComponent {
 
@@ -51,11 +56,16 @@ class Sidebar extends React.PureComponent {
 
     return (
       <StyledSidebar open={open}>
-        <CloseButton onClick={() => setSidebarOpen(false)}><i className="fa fa-times"></i></CloseButton>
-        <StyledHeading>Page Settings</StyledHeading>
-        <ContentPanel element={selected} hidden={!selected.isElement} />
-        <ColorPanel page={master} />
-        <FontPanel page={master} />
+        <Box>
+          <CloseButton onClick={() => setSidebarOpen(false)}><i className="fa fa-times"></i></CloseButton>
+          <StyledHeading>Page Settings</StyledHeading>
+          <ContentPanel element={selected} hidden={!selected.isElement} />
+          <ColorPanel page={master} />
+          <FontPanel page={master} />
+        </Box>
+        <Box>
+          <TemplatePicker />
+        </Box>
       </StyledSidebar>
     )
   }

@@ -2,9 +2,8 @@ import { randomItem } from '../../utils';
 import { getSection } from '../generator-utils';
 import { random } from 'lodash';
 import LoremIpsum from 'lorem-ipsum';
-import defaultTheme from '../themes';
 
-export function generateContent(element) {
+export function generateContent(element, page) {
 
   switch(element.name) {
     case 'BasicHeading':
@@ -15,7 +14,7 @@ export function generateContent(element) {
       return getReadableLinkContent(element);
 
     case 'BasicImage':
-      return getBlockImageContent(element);
+      return getBlockImageContent(element, page);
     case 'BasicButton':
     case 'SmallButton':
       return getButtonContent();
@@ -36,17 +35,17 @@ export function generateContent(element) {
     case 'BasicSubheading':
       return getSubheaderContent(element);
     default: 
-      return getGenericContent(element)
+      return getGenericContent(element, page)
   }
 }
 
-function getGenericContent(element) {
+function getGenericContent(element, page) {
   switch(element.is) {
     case 'Text':
     case 'Link':
       return { text: 'I am a ' + element.name };
     case 'Image':
-      return getImageContent();
+      return getImageContent(page);
     default:
       return { badContent: true };
   }
@@ -118,8 +117,8 @@ function getIconContent() {
   ])
 }
 
-function getImageContent(props) {
-  return randomItem(defaultTheme.images);
+function getImageContent(page) {
+  return randomItem(page.images);
 }
 
 function getLinkContent(props) {
@@ -146,11 +145,8 @@ function getSmallHeadingContent(props) {
   return { text };
 }
 
-function getBlockImageContent(element) {
-  if(element.section.type === 'header') {
-    return randomItem(defaultTheme.headerImages);
-  }
-  return getImageContent();
+function getBlockImageContent(element, page) {
+  return getImageContent(page);
 }
 
 function getReadableLinkContent(element) {

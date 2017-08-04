@@ -1,8 +1,10 @@
 import * as types from './action-types';
-import { init } from '../generator';
+import { generatePage } from '../generator';
 import find from 'lodash/find';
 
-const master = init();
+import defaultTheme from '../generator/themes';
+
+const master = generatePage(defaultTheme);
 const PageState = () => ({
   selected: master.sections[3 % master.sections.length],
   stack: [master],

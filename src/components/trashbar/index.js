@@ -20,7 +20,7 @@ const StyledTrashbar = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
-  z-index: 999;
+  z-index: ${props => props.show ? 999 : -1};
 
   transition: opacity 0.3s ease-in;
   opacity: ${props => props.show ? (props.hovered ? 1 : 0.5) : 0};

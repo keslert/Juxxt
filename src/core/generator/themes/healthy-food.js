@@ -38,13 +38,14 @@ const headerImages = [
 ];
 
 export default {
-  
+  name: 'Healthy Food',
+  preview: '/images/themes/healthy-food.jpg',
   palette,
   backgroundImages,
   images,
   headerImages,
   colorBlueprint,
-page: {
+  page: {
     sections: [
       {name: 'Navbar3'},
       {

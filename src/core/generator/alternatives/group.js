@@ -2,9 +2,7 @@ import * as sectionBlueprints from '../../../components/page/sections/_blueprint
 import * as elementBlueprints from '../../../components/page/elements/_blueprints';
 import * as blueprints from '../../../components/page/groups/_blueprints';
 import { generateGroupSkeleton } from '../skeletons/group';
-import { assignContent } from '../content';
 import { extractSkeletonFromItem, generateItemSkeleton } from '../skeletons/utils'
-import { generateContent } from '../content/generate';
 import { filter, range, find, flatMap, mapValues, size, pick, cloneDeep, forEach, includes, map, isString } from 'lodash';
 import { getCombinations } from '../../utils';
 import { containsClone } from '../../ui/actions'
@@ -63,20 +61,5 @@ function generateGroupSolidBackgroundAlternatives(selected, sectionSkeleton, pag
     skeleton.changes = variant;
     return skeleton;
   })
-  return skeletons;
-}
-
-export function generateGroupContentAlternatives(sectionSkeleton, group) {
-  const skeletons = range(0, 6).map(_ => {
-    const skeleton = cloneDeep(sectionSkeleton);
-    linkSkeleton(skeleton);
-    forEach(skeleton._elements, e => {
-      if(includes(map(getParents(e), 'fullRelativeId'), group.fullRelativeId)) {
-        e.content = generateContent(e);
-      }
-    });
-    return skeleton;
-  });
-  
   return skeletons;
 }

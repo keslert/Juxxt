@@ -10,15 +10,15 @@ import { buildPageColorBlueprint } from './color/page';
 
 import { getSection, getParents, linkSkeleton, generatePageCSSRules } from './generator-utils';
 import { range, reduce, uniqueId, forEach, clone, sortBy, map, max, some, filter, cloneDeep, find } from 'lodash';
-import defaultTheme from './themes';
 
 const NUM_SECTIONS = 7;
-export function init() {
-  const colorBlueprint = buildPageColorBlueprint(defaultTheme.palette);
+export function generatePage(theme) {
 
   const master = {
     id: 'p_' + uniqueId(),
-    colorBlueprint,
+    colorBlueprint: buildPageColorBlueprint(theme.palette),
+    backgroundImages: theme.backgroundImages,
+    images: theme.images,
     style: {
       maxWidth: 1024,
       baseFontSize: 16,
@@ -27,23 +27,24 @@ export function init() {
         normal: 'Montserrat',
       }
     },
-    sections: reduce(defaultTheme.page.sections, (sections, blueprint) => {
-      const page = {sections, colorBlueprint};
+  };
 
-      const skeleton = generateSectionSkeleton(blueprint);
-      linkSkeleton(skeleton);
-      
-      skeleton.color.background = skeleton.color.background || '#ffffff';
-      
-      const page2 = {...page, sections: [...page.sections, skeleton]};
-      forEach(skeleton._groups, group => colorGroup(group, page2));
-      forEach(skeleton._elements, element => colorElement(element, page2));
+  master.sections = reduce(theme.page.sections, (sections, blueprint) => {
+    const page = {...master, sections};
 
-      assignContent(skeleton, []);
-      assignStyles(skeleton, page);
-      return [...sections, skeleton];
-    }, [])
-  }
+    const skeleton = generateSectionSkeleton(blueprint);
+    linkSkeleton(skeleton);
+    
+    skeleton.color.background = skeleton.color.background || '#ffffff';
+    
+    const page2 = {...page, sections: [...page.sections, skeleton]};
+    forEach(skeleton._groups, group => colorGroup(group, page2));
+    forEach(skeleton._elements, element => colorElement(element, page2));
+
+    assignContent(skeleton, [], page);
+    assignStyles(skeleton, page);
+    return [...sections, skeleton];
+  }, [])
 
   generatePageCSSRules(master);
   return master;

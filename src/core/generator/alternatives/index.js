@@ -76,7 +76,7 @@ function generateComponentAlternatives(page, modify, selected) {
 
   skeletons.forEach(skeleton => {
     assignColor(skeleton, page);
-    assignContent(skeleton, getContentStore(selected.section._elements));
+    assignContent(skeleton, getContentStore(selected.section._elements), page);
     assignStyles(skeleton, page);
   });
 
@@ -90,7 +90,7 @@ function generateLayoutAlternatives(page, modify, selected) {
   
   let skeletons;
   if(modify.clones) {
-    skeletons = generateItemCloneAlternatives(selected.isClone ? selected.parent : selected, sectionSkeleton);
+    skeletons = generateItemCloneAlternatives(selected.isClone ? selected.parent : selected, sectionSkeleton, page);
   } else if(selected.isSection) {
     skeletons = generateSectionLayoutAlternatives(modify, selected, sectionSkeleton);
   } else if(selected.isGroup) {

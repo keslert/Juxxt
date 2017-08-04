@@ -4,7 +4,7 @@ import { generateContent } from '../content/generate';
 import { range, cloneDeep, filter, values, find, flatMap, mapValues, pick } from 'lodash';
 import { getTruthyKeys, getCombinations } from '../../utils';
 
-export function generateItemClones(item, numClones) {
+export function generateItemClones(item, numClones, page) {
   item.clones = range(0, numClones).map(i => {
     if(item.clones[i]) {
       return item.clones[i];
@@ -12,13 +12,13 @@ export function generateItemClones(item, numClones) {
     const clone = cloneDeep(item);
     clone.relativeId = clone.id + '_' + i;
     if(clone.isElement) {
-      clone.content = generateContent(item);
+      clone.content = generateContent(item, page);
     }
     return clone;
   })
 }
 
-export function generateItemCloneAlternatives(item, sectionSkeleton) {
+export function generateItemCloneAlternatives(item, sectionSkeleton, page) {
   const cloneableChildren = filter([...values(item.elements), ...values(item.groups)], child => child.clones.length)
   
   const skeletons = flatMap(cloneableChildren, child => {
@@ -28,7 +28,7 @@ export function generateItemCloneAlternatives(item, sectionSkeleton) {
       linkSkeleton(skeleton);
       const items = child.isGroup ? skeleton._groups : skeleton._elements;
       const _item = find(items, ({id}) => id === child.id)
-      generateItemClones(_item, numClones)
+      generateItemClones(_item, numClones, page)
       linkSkeleton(skeleton);
       return skeleton;
     })

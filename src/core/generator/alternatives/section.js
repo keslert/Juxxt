@@ -18,9 +18,6 @@ import {
   last,
 } from 'lodash';
 
-import { assignContent } from '../content';
-import { generateContent } from '../content/generate';
-
 import { linkSkeleton } from '../generator-utils';
 import { getTruthyKeys, getCombinations } from '../../utils';
 import { colorGroup } from '../color/group';
@@ -34,7 +31,6 @@ import { generateItemClones, generateStyleCombinations } from './alternatives-ut
 import prebuilt from '../prebuilt';
 
 import tinycolor from 'tinycolor2';
-import defaultTheme from '../themes';
 
 export function generateSectionComponentAlternatives(section, modify, sectionSkeleton, page) {
   const sectionType = getTruthyKeys(modify)[0];
@@ -88,7 +84,7 @@ export function generateSectionBackgroundAlternatives(modify, sectionSkeleton, p
 
 
 function generateSectionImagesBackground(sectionSkeleton, page) {
-  const skeletons = defaultTheme.backgroundImages.map(({key, url}) => {
+  const skeletons = page.backgroundImages.map(({key, url}) => {
     const skeleton = cloneDeep(sectionSkeleton);
     linkSkeleton(skeleton);
     skeleton.color = {
@@ -183,18 +179,6 @@ function generateSectionCardStyleAlternatives(sectionSkeleton, page) {
     groups.forEach(g => g.color = variant);
     return _skeleton;
   })
-
-  return skeletons;
-}
-
-
-export function generateSectionContentAlternatives(sectionSkeleton) {
-  const skeletons = range(0, 6).map(_ => {
-    const skeleton = cloneDeep(sectionSkeleton);
-    linkSkeleton(skeleton);
-    forEach(skeleton._elements, e => e.content = generateContent(e));
-    return skeleton;
-  });
 
   return skeletons;
 }

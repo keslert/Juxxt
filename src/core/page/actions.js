@@ -78,7 +78,7 @@ export function pageUndo() {
 export function replaceMaster(page) {
   return (dispatch, getState) => {
     const selected = getSelected(getState());
-    const section = find(page.sections, s => s.id === selected.section.id);
+    const section = find(page.sections, s => s.id === selected.section.id) || page.sections[0];
     dispatch(setMaster(page));
     dispatch(setSelected(section));
   }
@@ -87,7 +87,7 @@ export function replaceMaster(page) {
 export function pushAlternative(alternative) {
   return (dispatch, getState) => {
     const alternatives = getAlternatives(getState());
-    dispatch(setAlternatives([alternative, ...alternatives]));
+    dispatch(setAlternatives([alternative, ...alternatives.slice(0, 7)]));
   }
 }
 

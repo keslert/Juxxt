@@ -4,7 +4,7 @@ import { pick, map, flatMap, filter, isEmpty } from 'lodash';
 
 const CONTENT_TYPES = ['text', 'url', 'href', 'type'];
 
-export function assignContent(section, contentStore) {
+export function assignContent(section, contentStore, page) {
   const store = contentStore.map(content => ({...content, matched: false}));
 
   const rules = [
@@ -28,7 +28,7 @@ export function assignContent(section, contentStore) {
   // Generate new content
   section._elements.forEach(element => {
     if(isEmpty(element.content)) { 
-      const content = generateContent(element);
+      const content = generateContent(element, page);
       element.content = pick(content, CONTENT_TYPES);
       content.elementId = element.fullRelativeId;
       content.elementName = element.name;
