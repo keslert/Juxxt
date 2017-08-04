@@ -3,14 +3,14 @@ import { buildPageColorBlueprint } from '../color/page';
 const palette = ['#bc1515'];
 const colorBlueprint = buildPageColorBlueprint(palette);
 const backgroundImages = [  
-  {key: uniqueId(), url: 'https://static.wixstatic.com/media/e549d4_7d9454e8a4f24493b614498e7821098e~mv2_d_3264_2448_s_4_2.jpg/v1/fill/w_2882,h_1596,al_c,q_90,usm_0.66_1.00_0.01/e549d4_7d9454e8a4f24493b614498e7821098e~mv2_d_3264_2448_s_4_2.webp'},
-  {key: uniqueId(), url: 'https://static.wixstatic.com/media/e549d4_b85e34d89bd94dfda7a3c63a6700aa84~mv2_d_1901_1214_s_2.png/v1/fill/w_1901,h_1053,al_t/e549d4_b85e34d89bd94dfda7a3c63a6700aa84~mv2_d_1901_1214_s_2.png'},
+  {url:'https://static.wixstatic.com/media/e549d4_7d9454e8a4f24493b614498e7821098e~mv2_d_3264_2448_s_4_2.jpg/v1/fill/w_2882,h_1596,al_c,q_90,usm_0.66_1.00_0.01/e549d4_7d9454e8a4f24493b614498e7821098e~mv2_d_3264_2448_s_4_2.webp'},
+  {url:'https://static.wixstatic.com/media/e549d4_b85e34d89bd94dfda7a3c63a6700aa84~mv2_d_1901_1214_s_2.png/v1/fill/w_1901,h_1053,al_t/e549d4_b85e34d89bd94dfda7a3c63a6700aa84~mv2_d_1901_1214_s_2.png'},
 ];
 const images = [
-  {key: uniqueId(), url: 'https://static.wixstatic.com/media/e549d4_88ac53cb54f14901b841971a01e0c505~mv2_d_4896_3268_s_4_2.jpg/v1/fill/w_1442,h_1680,al_c,q_90,usm_0.66_1.00_0.01/e549d4_88ac53cb54f14901b841971a01e0c505~mv2_d_4896_3268_s_4_2.webp'},
-  {key: uniqueId(), url: 'https://images.pexels.com/photos/490025/pexels-photo-490025.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), url: 'https://images.pexels.com/photos/505845/pexels-photo-505845.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), url: 'https://images.pexels.com/photos/488449/pexels-photo-488449.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {url:'https://static.wixstatic.com/media/e549d4_88ac53cb54f14901b841971a01e0c505~mv2_d_4896_3268_s_4_2.jpg/v1/fill/w_1442,h_1680,al_c,q_90,usm_0.66_1.00_0.01/e549d4_88ac53cb54f14901b841971a01e0c505~mv2_d_4896_3268_s_4_2.webp'},
+  {url:'https://images.pexels.com/photos/490025/pexels-photo-490025.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {url:'https://images.pexels.com/photos/505845/pexels-photo-505845.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {url:'https://images.pexels.com/photos/488449/pexels-photo-488449.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
 ];
 
 export default {
@@ -25,7 +25,7 @@ export default {
         name: 'Navbar1',
         elements: {
           logo: {
-            content: {key: uniqueId(), url: '/images/landay.png'}
+            content: {url:'/images/landay.png'}
           }
         },
         groups: {
@@ -121,8 +121,7 @@ export default {
           parallax: true,
         },
         color: {
-          backgroundImage: backgroundImages[1].key,
-          _backgroundImage: backgroundImages[1].url,
+          backgroundImage: backgroundImages[1].url,
           background: palette[0],
         },
         BackgroundImageSection: {
@@ -188,8 +187,7 @@ export default {
           parallax: true,
         },
         color: {
-          backgroundImage: backgroundImages[0].key,
-          _backgroundImage: backgroundImages[0].url,
+          backgroundImage: backgroundImages[0].url,
           background: palette[0],
         },
         groups: {

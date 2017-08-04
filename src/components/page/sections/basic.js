@@ -1,9 +1,8 @@
 import React from 'react';
 import Group from '../groups';
+import Container from './container';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
-import { convertColorToAtomic } from '../../../core/generator/color/conversions';
-import pick from 'lodash/pick';
-import clamp from 'lodash/clamp';
+
 import range from 'lodash/range';
 
 const POSITIONS = 6;
@@ -30,17 +29,14 @@ class Basic extends React.PureComponent {
       paddingTop: '-l-' + (style.height - paddingBottom), 
     })
 
-    const colorClassNames = convertColorToAtomic(color);
-    const imageStyle = pick(style, ['crop', 'filter', 'parallax'])
-    const imageClassNames = convertStyleToAtomic(imageStyle);
     return (
-      <div className={colorClassNames + ' ' + imageClassNames}>
+      <Container style={style} color={color}>
         <div className={containerClassNames}>
           <div>
             <Group {...groups.item} />
           </div>
         </div>
-      </div>
+      </Container>
     )
   }
 }

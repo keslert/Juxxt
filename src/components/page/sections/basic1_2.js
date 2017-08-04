@@ -1,11 +1,8 @@
 import React from 'react';
 import Element from '../elements';
 import Group from '../groups';
-import Box from '../../common/box';
+import Container from './container';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
-import { convertColorToAtomic } from '../../../core/generator/color/conversions';
-import pick from 'lodash/pick';
-import clamp from 'lodash/clamp';
 import range from 'lodash/range';
 
 const POSITIONS = 6;
@@ -13,7 +10,7 @@ class Basic1_2 extends React.Component {
   render() {
     const { elements, style, groups, color, image } = this.props;
 
-    const paddingBottom = clamp(Math.floor(style.height * (style.position / POSITIONS)), 1, style.height);
+    const paddingBottom = Math.floor(style.height * (style.position / POSITIONS));
     const containerClassNames = convertStyleToAtomic({
       ...style,
       paddingBottom: '-l-' + paddingBottom,
@@ -46,23 +43,20 @@ class Basic1_2 extends React.Component {
       paddingHorizontal: style.gutter,
     })
 
-    const colorClassNames = convertColorToAtomic(color);
 
-    const imageStyle = pick(style, ['crop', 'filter'])
-    const imageClassNames = convertStyleToAtomic(imageStyle);
     return (
-      <Box className={colorClassNames + ' ' + imageClassNames}>
-        <Box className={containerClassNames}>
-          <Box className={wrapInnerClassNames}>
-            <Box className={tpWrapClassNames}>
+      <Container style={style} color={color}>
+        <div className={containerClassNames}>
+          <div className={wrapInnerClassNames}>
+            <div className={tpWrapClassNames}>
               <Group {...groups.tp} />
-            </Box>
-            <Box className={mediaWrapClassNames}>
+            </div>
+            <div className={mediaWrapClassNames}>
               <Group {...groups.media} />
-            </Box>
-          </Box>
-        </Box>
-      </Box>
+            </div>
+          </div>
+        </div>
+      </Container>
     )
   }
 }

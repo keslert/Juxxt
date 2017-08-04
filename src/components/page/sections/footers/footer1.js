@@ -1,6 +1,7 @@
 import React from 'react';
 import Element from '../../elements';
 import Group from '../../groups';
+import Container from '../container';
 import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
 import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
 
@@ -18,9 +19,9 @@ class Footer1 extends React.PureComponent {
     }
 
     const styleClassNames = convertStyleToAtomic(boxStyle);
-    const colorClassNames = convertColorToAtomic(color);
+    
     return (
-      <div className={ colorClassNames + ' Footer1'}>
+      <Container style={style} color={color}>
         <div className={styleClassNames }>
           <div className={"order-" + style.order[0]}>
             <Element {...elements.copyright} />
@@ -32,7 +33,7 @@ class Footer1 extends React.PureComponent {
             <Group {...groups.button} />
           </div>
         </div>
-      </div>
+      </Container>
     )
   }
 }

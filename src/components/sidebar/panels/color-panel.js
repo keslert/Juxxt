@@ -7,10 +7,11 @@ import { StyledWrap, StyledButton } from '../common/styled';
 import Box from '../../common/box';
 import ColorPicker from '../../common/color-picker';
 import { fetchColorMindPalette } from '../../../core/generator/color/utils';
+import { flatMap } from 'lodash';
 
 import { pushAlternative, setAlternatives } from '../../../core/page';
 import { turnOnModification } from '../../../core/ui';
-import { generatePageFromPalette } from '../../../core/generator/alternatives/page';
+import { generatePageFromPalette, generateRandomPalette } from '../../../core/generator/alternatives/page';
 
 import toastr from 'toastr';
 
@@ -82,7 +83,6 @@ class ColorPanel extends React.Component {
     turnOnModification('page');
     this.setState({palette});
     const alternative = generatePageFromPalette(page, map(palette, 'color'));
-    debugger;
     setTimeout(() => {
       pushAlternative(alternative);
     }, 1);
@@ -115,17 +115,28 @@ class ColorPanel extends React.Component {
 
   exchangeColorPalette(palette) {
     const { page, pushAlternative } = this.props;
-    fetchColorMindPalette(
-      palette, 
-      _palette => {
-        const __palette = palette.map((color, i) => ({
-          color: _palette[i],
-          locked: this.state.palette[i] && this.state.palette[i].locked,
-        }))
-        this.updatePalette(__palette);
-      },
-      error => toastr.error('There was an error when we tried to fetch a new palette...', error)
-    )
+    if(flatMap(palette,'locked').every((e)=> (e == undefined) || (e==false))) {
+      const paletteArr = generateRandomPalette();
+      const _palette = paletteArr.map((color,i) => ({
+        color: paletteArr[i],
+        locked: this.state.palette[i] && this.state.palette[i].locked,
+      }));
+      this.updatePalette(_palette);
+    } else {
+      fetchColorMindPalette(
+        palette, 
+        _palette => {
+          const __palette = palette.map((color, i) => ({
+            color: _palette[i],
+            locked: this.state.palette[i] && this.state.palette[i].locked,
+          }))
+          this.updatePalette(__palette);
+        },
+        error => toastr.error('There was an error when we tried to fetch a new palette...', error)
+      )
+    }
+
+
   }
 
   toggleColorLock(index) {

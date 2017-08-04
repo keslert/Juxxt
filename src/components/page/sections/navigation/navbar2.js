@@ -1,14 +1,13 @@
 import React from 'react';
 import Elements from '../../elements';
 import Group from '../../groups';
+import Container from '../container';
 import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
-import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
 
 class Navbar2 extends React.PureComponent {
   render () {
     const { elements, groups, style, color } = this.props;
 
-    const colorClassNames = convertColorToAtomic(color);
     const containerClassNames = convertStyleToAtomic({
       ...style,
       paddingBottom: '-l-' + (style.height / 2),
@@ -22,7 +21,7 @@ class Navbar2 extends React.PureComponent {
 
     const fixedClassNames = convertStyleToAtomic({fixed: style.fixed});
     return (
-      <div className={colorClassNames + ' ' + fixedClassNames}>
+      <Container style={style} color={color} classNames={fixedClassNames} noBackgroundImage>
         <div className={containerClassNames}>        
           <div>
             <Elements {...elements.logo} />
@@ -31,7 +30,7 @@ class Navbar2 extends React.PureComponent {
             <Group {...groups.buttonList} />
           </div>
         </div>
-      </div>
+      </Container>
     )
   }
 }
