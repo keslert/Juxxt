@@ -64,16 +64,6 @@ To modify the size of the iMac for your particular use case, adjust the 'width' 
     box-shadow: inset 0px -2px 0px #909090;
 }
 
-.iMac .body .shine {
-  width: 0;
-  height: 0;
-  border-top: 75px solid rgba(255, 255, 255, 0.04);
-  border-bottom: 75px solid transparent;
-  border-left: 140px solid transparent;
-  border-right: 140px solid rgba(255, 255, 255, 0.04);
-  position: absolute;
-}
-
 .iMac .body .screen {
   border: 12px solid #000;
   background: #101010;
@@ -91,14 +81,6 @@ To modify the size of the iMac for your particular use case, adjust the 'width' 
   text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.iMac .body:hover .screen {
-  background: #444;
-}
-
-.iMac .body:hover .screen h1 {
-  opacity: 1;
-}
-
 .iMac .body .logo {
   width: 16px;
   height: 16px;
@@ -108,16 +90,13 @@ To modify the size of the iMac for your particular use case, adjust the 'width' 
   box-shadow: inset 0px 2px 0px rgba(0, 0, 0, 0.2);
 }
 
-
-
 .iMac .stand {
-    width: 10em;
-    height: 4em;
-    background: #aeaeae;
-    border-top: 0;
-    border-bottom: 20px solid #c5c5c5;
-    border-radius: 5px;
-    box-shadow: 0px 4px 0px -2px #909090;
-    margin: 0 auto;
+  width: 10em;
+  height: 4em;
+  background: #aeaeae;
+  border-top: 0;
+  border-bottom: 20px solid #c5c5c5;
+  border-radius: 5px;
+  box-shadow: 0px 4px 0px -2px #909090;
+  margin: 0 auto;
 }
-

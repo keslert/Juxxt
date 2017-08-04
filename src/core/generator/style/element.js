@@ -18,5 +18,5 @@ export function styleElement(element, page) {
     e => true,
   ]
   
-  styleItem(element, elements, rules, {style: blueprint.style, sharedStyles});
+  styleItem(element, elements, rules, sharedStyles);
 }

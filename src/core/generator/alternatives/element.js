@@ -17,6 +17,7 @@ import {
   findIndex, 
   find,
   pick,
+  omit,
   includes,
   forEach,
   mapValues,
@@ -62,7 +63,7 @@ export function generateElementComponentAlternatives(modify, element, sectionSke
         item.groups = {[key]: {name: value}};
         item = item.groups[key];
       })
-      item.elements = {[element.parentKey]: extractSkeletonFromItem(_element)};
+      item.elements = {[element.parentKey]: extractSkeletonFromItem(omit(_element, ['blueprint']))};
 
       const groupKey = Object.keys(_root.groups)[0];
       const groupSkeleton = generateGroupSkeleton(_root.groups[groupKey]);
