@@ -8,7 +8,7 @@ export const BasicKicker = {
   color: { text: 'whiteOrReadable' },
   component: { section: ['section'] },
   style: {
-    fontSize: { _default: 3, options: [1,2,3] },
+    fontSize: { _default: 3, options: [1,2,3,4] },
     marginBottom: { _default: 2, options: [0,1,2,3] },
     textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
   },
@@ -34,7 +34,7 @@ export const BasicHeading = {
   color: { text: 'whiteOrVibrant' },
   component: { section: ['section'] },
   style: {
-    fontSize: { _default: 5, options: [3,4,5,6,7,8,9] },
+    fontSize: { _default: 5, options: [3,4,5,6,7,8,9,10] },
     fontWeight: { _default: 6, options: [2,4,6,8] },
     lineHeight: { _default: 1, options: [0,1,2,3,4] },
     textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
@@ -111,8 +111,8 @@ export const BasicImage = {
       options: ['auto', '1x1', '16x9', '4x3', '3x4', '6x4', '8x5', '7x5'],
     },
     BorderRadius: {
-      _default: 'pill',
-      options: [0,'pill',1,2,3,4]
+      _default: '0',
+      options: [0,'pill',1,2,3,4],
     }
   },
   image: { content: ['content'] },
