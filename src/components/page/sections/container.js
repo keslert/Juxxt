@@ -13,7 +13,10 @@ class Container extends React.PureComponent {
     if(color.backgroundImage && !noBackgroundImage) {
       const imageStyle = pick(style, ['crop', 'filter', 'parallax'])
       colorClassNames = colorClassNames.concat(convertStyleToAtomic(imageStyle));
-      inlineStyle.backgroundImage = `url(${color.backgroundImage})`;
+      inlineStyle.backgroundImage = `
+        linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
+        url(${color.backgroundImage})
+      `;
     }
     return (
       <div className={colorClassNames} style={inlineStyle}>

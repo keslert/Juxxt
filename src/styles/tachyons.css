@@ -832,7 +832,7 @@ img { max-width: 100%; }
 .bg-bottom-right { background-position: bottom right !important; }
 
 .bg-transparent { background: transparent; }
-
+.bg-image { background-size: cover !important; }
 
 
 .pointer { cursor: pointer; }

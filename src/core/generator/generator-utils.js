@@ -159,18 +159,7 @@ export function generatePageCSSRules(page) {
         background-color: ${section.color.background}; 
         background-image: url('${section.color._pattern}') !important;
         background-repeat: repeat;
-      }
-      `);
-    }
-
-    if(section.color.backgroundImage) {
-      rules.push(`
-        .bgimg-${btoa(section.color.backgroundImage)} {
-          background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${section.color.backgroundImage}) !important;
-          background-size: cover !important;
-          background-blend-mode: 
-        }
-      `);
+      }`);
     }
   })
 

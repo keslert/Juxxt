@@ -4,7 +4,7 @@ const conversions = {
   pattern: v => 'ptrn-' + v,
   gradient: v => 'grd-' + v.substr(1),
   text: v => 'c-' + v.substr(1),
-  // backgroundImage: v=> 'bgimg-' + btoa(v),
+  backgroundImage: v => v ? 'bg-image' : '',
   background: v => 'bg-' + v.substr(1),
   borderColor: v => 'b-' + v.substr(1),
 }
