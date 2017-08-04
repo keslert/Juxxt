@@ -733,19 +733,19 @@ img { max-width: 100%; }
 .shadow-raised:hover {
   transform: translateY(-.125em);
 }
-.shadow-raised:active {
+.shadow-raised:not(.b-transparent):active {
   box-shadow: none !important;
   transform: translateY(.25em);
 }
-.shadow-bounce {
+.shadow-bounce:not(.b-transparent) {
   transition: all .2s ease;
   box-shadow: 0 0.286em 0.429em rgba(50,50,93,.055), 0 0.071em 0.214em rgba(0,0,0,.04);
 }
-.shadow-bounce:hover {
+.shadow-bounce:not(.b-transparent):hover {
   transform: translateY(-.1em);
   box-shadow: 0 10px 25px rgba(0,0,0,.15);
 }
-.shadow-bounce:active {
+.shadow-bounce:not(.b-transparent):active {
   transition-duration: .15s;
   transform: translateY(0.05em);
   box-shadow: 0 0.20599999999999996em 0.429em rgba(50,50,93,.055), 0 -0.009000000000000008em 0.214em rgba(0,0,0,.04);

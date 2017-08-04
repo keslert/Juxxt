@@ -142,8 +142,10 @@ const elements = {
     },
     buttonType: {
       _default: 'highlight',
+
       options: ['highlight', 'raised', 'bounce'],
       consistent: true,
+      hide: item => item.color.borderColor === '#transparent',
     },
     icon: {
       default: 'none',
