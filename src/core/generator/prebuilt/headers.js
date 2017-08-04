@@ -19,6 +19,7 @@ const h1 = {
       verticalPosition: 2,
       horizontalPosition: 'left',
       parallax: true,
+      textAlign: 'left'
     },
     groups: {
       item: {
@@ -29,12 +30,12 @@ const h1 = {
         elements: {
           kicker: {
             content: {text: 'Life Made Clearer'},
-            style: { textTransform: 'none', fontSize: 6, fontFamily: 'Meddon', fontWeight: 1, },
+            style: { textTransform: 'none', fontSize: 4, fontFamily: 'Open Sans', fontWeight: 1, },
             
           },
           heading: {
             content: {text: 'monocle'},
-            style: { fontSize: 10, fontFamily: 'Source Sans Pro', fontWeight: 3 },
+            style: { fontSize: 9, fontFamily: 'Open Sans', fontWeight: 3 },
             
           },
         },
@@ -68,8 +69,11 @@ const h2 = {
   blueprint: page => ({
     name: 'BasicWide1_2',
     style: {
-      height: 12,
+      height: 10,
+      textAlign: 'left',
+      padding: 5,
     },
+    
     elements: {
       image: {
         content: page.images[0],
@@ -78,14 +82,18 @@ const h2 = {
     groups: {
       tp: {
         name: 'KickerHeadingButton',
+        style: {
+            textAlign: 'left',
+            padding: 5,
+          },
         elements: {
           kicker: {
             content: {text: 'Life Made Clearer'},
-            style: { textTransform: 'none', fontSize: 5, fontFamily: 'Meddon', fontWeight: 1, },
+            style: { textTransform: 'none', fontSize: 5, fontFamily: 'Open Sans', fontWeight: 1, },
           },
           heading: {
             content: {text: 'monocle'},
-            style: { fontSize: 9, fontFamily: 'Source Sans Pro', fontWeight: 3 },
+            style: { fontSize: 9, fontFamily: 'Open Sans', fontWeight: 3 },
           },
         },
         groups: {
@@ -117,7 +125,7 @@ const h3 = {
   blueprint: page => ({
     name: 'Basic',
     style: {
-      height: 12,
+      height: 10,
       verticalPosition: 3,
       horizontalPosition: 'center',
       parallax: true,
@@ -137,12 +145,12 @@ const h3 = {
         elements: {
           kicker: {
             content: {text: 'Life Made Clearer'},
-            style: { textTransform: 'none', fontSize: 6, fontFamily: 'Raleway', fontWeight: 1, },
+            style: { textTransform: 'none', fontSize: 6, fontFamily: 'Open Sans', fontWeight: 1, },
             
           },
           heading: {
             content: {text: 'monocle'},
-            style: {fontSize: 10, fontFamily: 'Raleway', fontWeight: 3 },
+            style: {fontSize: 10, fontFamily: 'Open Sans', fontWeight: 3 },
             
           },
         },
@@ -184,7 +192,7 @@ const h4 = {
   blueprint: page => ({
     name: 'Basic',
     style: {
-      height: 1,
+      height: 2,
       verticalPosition: 2,
       horizontalPosition: 'left',
       parallax: true,
@@ -221,6 +229,7 @@ const h4 = {
      if(blueprint.color.backgroundImage) {
       blueprint.color = {
         background: '#ffffff',
+        backgroundImage: undefined,
       }
      }
   }
