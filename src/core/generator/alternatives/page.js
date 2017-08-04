@@ -131,64 +131,64 @@ function calculateHeaderAndParagraph(typography) {
 
 function calculateTypographyWeights(typography) {
   const typeOptionA = {
-    heading: { fontWeight: 7 },//6-9, usually 7 or 8
-    paragraph: { fontWeight: 4 },//1-5, usually 4
-    smallHeading: { fontWeight: 7 },//5, 6, 7, 8, usually medium bold
-    subHeading: { fontWeight: 4 },//anything, usually 5-8
-    kicker: { fontWeight: 4 }//this could be anything 1-9
+    heading: { fontWeight: 7 },
+    paragraph: { fontWeight: 4 },
+    smallHeading: { fontWeight: 7 },
+    subHeading: { fontWeight: 4 },
+    kicker: { fontWeight: 4 },
   }
   const typeOptionB = {
-    heading: { fontWeight: 7 },//6-9, usually 7 or 8
-    paragraph: { fontWeight: 4 },//1-5, usually 4
-    smallHeading: { fontWeight: 7 },//5, 6, 7, 8, usually medium bold
-    subHeading: { fontWeight: 7 },//anything, usually 5-8
-    kicker: { fontWeight: 1 }//this could be anything 1-9
+    heading: { fontWeight: 7 },
+    paragraph: { fontWeight: 4 },
+    smallHeading: { fontWeight: 7 },
+    subHeading: { fontWeight: 7 },
+    kicker: { fontWeight: 1 }, 
   }
   const typeOptionC = {
-    heading: { fontWeight: 4 },//6-9, usually 7 or 8
-    paragraph: { fontWeight: 1 },//1-5, usually 4
-    smallHeading: { fontWeight: 4 },//5, 6, 7, 8, usually medium bold
-    subHeading: { fontWeight: 4 },//anything, usually 5-8
-    kicker: { fontWeight: 1 }//this could be anything 1-9
+    heading: { fontWeight: 4 },
+    paragraph: { fontWeight: 1 },
+    smallHeading: { fontWeight: 4 },
+    subHeading: { fontWeight: 4 },
+    kicker: { fontWeight: 1 },
   }
   const typeOptionD = {
-    heading: { fontWeight: 4 },//6-9, usually 7 or 8
-    paragraph: { fontWeight: 4 },//1-5, usually 4
-    smallHeading: { fontWeight: 4 },//5, 6, 7, 8, usually medium bold
-    subHeading: { fontWeight: 4 },//anything, usually 5-8
-    kicker: { fontWeight: 4 }//this could be anything 1-9
+    heading: { fontWeight: 4 },
+    paragraph: { fontWeight: 4 },
+    smallHeading: { fontWeight: 4 },
+    subHeading: { fontWeight: 4 },
+    kicker: { fontWeight: 4 },
   }
   const option = randomItem([typeOptionA, typeOptionB, typeOptionC, typeOptionD]);
   merge(typography, option);
 }
 function calculateTypographySizes(typography) {
   const sizeOptionA = {
-    heading: { fontSize: 10 },//6-9, usually 7 or 8
-    paragraph: { fontSize: 4 },//1-5, usually 4
-    smallHeading: { fontSize: 6 },//5, 6, 7, 8, usually medium bold
-    subHeading: { fontSize: 5 },//anything, usually 5-8
-    kicker: { fontSize: 3 }//this could be anything 1-9
+    heading: { fontSize: 10 },
+    paragraph: { fontSize: 4 },
+    smallHeading: { fontSize: 6 },
+    subHeading: { fontSize: 5 },
+    kicker: { fontSize: 3 },
   }
   const sizeOptionB = {
-    heading: { fontSize: 9 },//6-9, usually 7 or 8
-    paragraph: { fontSize: 3 },//1-5, usually 4
-    smallHeading: { fontSize: 5 },//5, 6, 7, 8, usually medium bold
-    subHeading: { fontSize: 4 },//anything, usually 5-8
-    kicker: { fontSize: 2 }//this could be anything 1-9
+    heading: { fontSize: 9 },
+    paragraph: { fontSize: 3 },
+    smallHeading: { fontSize: 5 },
+    subHeading: { fontSize: 4 },
+    kicker: { fontSize: 2 },
   }
   const sizeOptionC = {
-    heading: { fontSize: 9 },//6-9, usually 7 or 8
-    paragraph: { fontSize: 4 },//1-5, usually 4
-    smallHeading: { fontSize: 7 },//5, 6, 7, 8, usually medium bold
-    subHeading: { fontSize: 4 },//anything, usually 5-8
-    kicker: { fontSize: 4 }//this could be anything 1-9
+    heading: { fontSize: 9 },
+    paragraph: { fontSize: 4 },
+    smallHeading: { fontSize: 7 },
+    subHeading: { fontSize: 4 },
+    kicker: { fontSize: 4 },
   }
   const sizeOptionD = {
-    heading: { fontSize: 8 },//6-9, usually 7 or 8
-    paragraph: { fontSize: 1 },//1-5, usually 4
-    smallHeading: { fontSize: 5 },//5, 6, 7, 8, usually medium bold
-    subHeading: { fontSize: 4 },//anything, usually 5-8
-    kicker: { fontSize: 2 }//this could be anything 1-9
+    heading: { fontSize: 8 },
+    paragraph: { fontSize: 1 },
+    smallHeading: { fontSize: 5 },
+    subHeading: { fontSize: 4 },
+    kicker: { fontSize: 2 },
   }
   const option = randomItem([sizeOptionA, sizeOptionB, sizeOptionC, sizeOptionD]);
   merge(typography, option);
