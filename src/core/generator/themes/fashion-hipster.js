@@ -52,7 +52,11 @@ headerImages,
 colorBlueprint,
 page: {
   sections: [
-    {name: 'Navbar3'},
+    {name: 'Navbar3',
+      color: { 
+        background: palette[2],
+      },
+    },
     {
       name: 'Basic',
       style: {
@@ -175,6 +179,9 @@ page: {
     },
     {
       name: 'Basic',
+      color: {
+        background: palette[1],
+      },
       groups: {
         item: {
           name: 'Cards'

@@ -19,6 +19,8 @@ export function generatePage(theme) {
     colorBlueprint: buildPageColorBlueprint(theme.palette),
     backgroundImages: theme.backgroundImages,
     images: theme.images,
+    peopleImages: theme.peopleImages,
+
     style: {
       maxWidth: 1024,
       baseFontSize: 16,

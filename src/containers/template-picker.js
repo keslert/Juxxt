@@ -4,7 +4,12 @@ import { connect } from 'react-redux';
 
 import Landay from '../core/generator/themes/landay';
 import HealthyFood from '../core/generator/themes/healthy-food';
+<<<<<<< Updated upstream
 import RedRock from '../core/generator/themes/red-rock';
+=======
+>>>>>>> Stashed changes
+import FashionHipster from '../core/generator/themes/fashion-hipster';
+import DessertShop from '../core/generator/themes/dessert-shop';
 import { generatePage } from '../core/generator';
 import { setAlternatives } from '../core/page';
 
@@ -22,7 +27,11 @@ const StyledLabel = styled.div`
 class TemplatePicker extends React.Component {
 
   handleClick() {
-    const templates = [HealthyFood, Landay, RedRock];
+<<<<<<< Updated upstream
+    const templates = [HealthyFood, Landay, FashionHipster, DessertShop, RedRock];
+=======
+    const templates = [HealthyFood, Landay, FashionHipster, DessertShop];
+>>>>>>> Stashed changes
     const pages = templates.map(generatePage);
     this.props.setAlternatives(pages);
   }
