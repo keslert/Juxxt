@@ -153,3 +153,35 @@ function calculateTypographyWeights(typography) {
   const option = randomItem([typeOptionA, typeOptionB, typeOptionC, typeOptionD]);
   merge(typography, option);
 }
+function calculateTypographySizes(typography) {
+  const sizeOptionA = {
+    heading: { fontSize: 10 },//6-9, usually 7 or 8
+    paragraph: { fontSize: 4 },//1-5, usually 4
+    smallHeading: { fontSize: 6 },//5, 6, 7, 8, usually medium bold
+    subHeading: { fontSize: 5 },//anything, usually 5-8
+    kicker: { fontSize: 3 }//this could be anything 1-9
+  }
+  const sizeOptionB = {
+    heading: { fontSize: 9 },//6-9, usually 7 or 8
+    paragraph: { fontSize: 3 },//1-5, usually 4
+    smallHeading: { fontSize: 5 },//5, 6, 7, 8, usually medium bold
+    subHeading: { fontSize: 4 },//anything, usually 5-8
+    kicker: { fontSize: 2 }//this could be anything 1-9
+  }
+  const sizeOptionC = {
+    heading: { fontSize: 9 },//6-9, usually 7 or 8
+    paragraph: { fontSize: 4 },//1-5, usually 4
+    smallHeading: { fontSize: 7 },//5, 6, 7, 8, usually medium bold
+    subHeading: { fontSize: 4 },//anything, usually 5-8
+    kicker: { fontSize: 4 }//this could be anything 1-9
+  }
+  const sizeOptionD = {
+    heading: { fontSize: 8 },//6-9, usually 7 or 8
+    paragraph: { fontSize: 1 },//1-5, usually 4
+    smallHeading: { fontSize: 5 },//5, 6, 7, 8, usually medium bold
+    subHeading: { fontSize: 4 },//anything, usually 5-8
+    kicker: { fontSize: 2 }//this could be anything 1-9
+  }
+  const option = randomItem([sizeOptionA, sizeOptionB, sizeOptionC, sizeOptionD]);
+  merge(typography, option);
+}
