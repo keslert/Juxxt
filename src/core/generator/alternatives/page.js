@@ -4,10 +4,11 @@ import { getSortedByPreference } from '../color/utils';
 import { buildPageColorBlueprint } from '../color/page';
 import { colorGroup } from '../color/group';
 import { colorElement } from '../color/element';
-import { cloneDeep, omit, values, filter, isEqual, reduce, uniqueId, merge } from 'lodash';
+import { cloneDeep, omit, values, filter, isEqual, reduce, uniqueId, merge, forEach, includes } from 'lodash';
 import tinycolor from 'tinycolor2';
 import { getMode, randomItem } from '../../utils'
 import { headings, paragraphs } from './../fonts'
+import { fontDetails } from './../fonts'
 
 export const palettes = [
   // ["#E37222","#07889B","#66B98F","#EEAA7B"],
@@ -103,7 +104,7 @@ export function generatePageFromTypography(page, typography) {
 
 export function generateTypographyAlternatives(fonts, page) {
   const typography = {
-    heading: { fontFamily: fonts.heading, fontWeight: 8 },//or 7 or 9
+    heading: { fontFamily: fonts.heading, fontWeight: 8 , },
     paragraph: { fontFamily: fonts.normal, fontWeight: 4 },//or 1
   }
   calculateHeaderAndParagraph(typography);
@@ -112,7 +113,14 @@ export function generateTypographyAlternatives(fonts, page) {
   typography.kicker = { fontFamily: typography.paragraph.fontFamily, textTransform: "uppercase" };
   calculateTypographySizes(typography);
   calculateTypographyWeights(typography);
+  calculateTypographyTransform(typography);
   return typography
+}
+
+export function calculateTypographyTransform(typography) {
+  const fontDetail = fontDetails[typography.heading.fontFamily];
+  const textTransform = randomItem(fontDetail.canTransform);
+  typography.heading.textTransform = textTransform;
 }
 
 export function calculateHeaderAndParagraph(typography) {

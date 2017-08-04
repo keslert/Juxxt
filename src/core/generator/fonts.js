@@ -30,82 +30,82 @@ export const paragraphs = zipObject(paragraphNames, map(paragraphNames, name => 
 export const fontDetails = {
 	'Alice': {
 		weights: [400],
-		canTransform: ['upper', 'lower'],
+		canTransform: ['uppercase', 'none'],
 	},
 	'Amatic SC': {
 		weights: [400, 700],
-		canTransform: ['upper'],
+		canTransform: ['uppercase'],
 	},
 	'Bitter': {
 		weights: [400, 700, '400-italic'],
-		canTransform: ['upper', 'lower'],
+		canTransform: ['uppercase', 'none'],
 	},
 	'Josefin Sans': {
 		weights: [100, 300, 400, 600, 700, '100-italic', '300-italic', '400-italic', '600-italic', '700-italic'],
-		canTransform: ['upper', 'lower'],
+		canTransform: ['uppercase', 'none'],
 	},
 	'La Belle Aurore': {
 		weights: [400],
-		canTransform: ['lower'],
+		canTransform: ['none'],
 	},
 	'Lato': {
 		weights: [100, 300, 400, 700, 900, '100-italic', '300-italic', '400-italic', '700-italic', '900-italic'],
-		canTransform: ['upper', 'lower'],
+		canTransform: ['uppercase', 'none'],
 	},
 	'Meddon': {
 		weights: [400],
-		canTransform: ['lower'],
+		canTransform: ['none'],
 	},
 	'Merriweather': {
 		weights: [300, 400, 700, 900, '300-italic', '400-italic', '700-italic', '900-italic'],
-		canTransform: ['upper', 'lower'],
+		canTransform: ['uppercase', 'none'],
 	},
 	'Montserrat': {
 		weights: [400, 700],
-		canTransform: ['upper', 'lower'],
+		canTransform: ['uppercase', 'none'],
 	},
 	'Muli': {
 		weights: [300, 400, '300-italic', '400-italic'],
-		canTransform: ['upper', 'lower'],
+		canTransform: ['uppercase', 'none'],
 	},
 	'Open Sans': {
 		weights: [300, 400, 600, 700, 900, '300-italic', '400-italic', '600-italic', '700-italic', '900-italic'],
-		canTransform: ['upper', 'lower'],
+		canTransform: ['uppercase', 'none'],
 	},
 	'Open Sans Condensed': {
 		weights: [300, 700, '300-italic'],
-		canTransform: ['upper', 'lower'],
+		canTransform: ['uppercase', 'none'],
 	},
 	'Oswald': {
 		weights: [300, 400, 700],
-		canTransform: ['upper', 'lower'],
+		canTransform: ['uppercase', 'none'],
 	},
 	'Playfair Display': {
 		weights: [400, 700, 900, '400-italic', '700-italic', '900-italic'],
-		canTransform: ['upper', 'lower'],
+		canTransform: ['uppercase', 'none'],
 	},
 	'Quicksand': {
 		weights: [300, 400, 700],
-		canTransform: ['upper', 'lower'],
+		canTransform: ['uppercase', 'none'],
 	},
 	'Raleway': {
 		weights: [100, 200, 300, 400, 500, 600, 700, 900],
-		canTransform: ['upper', 'lower'],
+		canTransform: ['uppercase', 'none'],
 	},
 	'Roboto': {
 		weights: [100, 300, 400, 500, 700, 900, '100-italic', '300-italic', '400-italic', '500-italic', '700-italic', '900-italic'],
-		canTransform: ['upper', 'lower'],
+		canTransform: ['uppercase', 'none'],
 	},
 	'Roboto Slab': {
 		weights: [100, 300, 400, 700],
-		canTransform: ['upper', 'lower'],
+		canTransform: ['uppercase', 'none'],
 	},
 	'Sacramento': {
 		weights: [400],
-		canTransform: ['lower'],
+		canTransform: ['none'],
 	},
 	'Work Sans': {
 		weights: [100, 200, 300, 400, 500, 600, 700, 900],
-		canTransform: ['upper', 'lower'],
+		canTransform: ['uppercase', 'none'],
 	},
 }
