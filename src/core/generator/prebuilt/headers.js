@@ -58,8 +58,7 @@ const h1 = {
   post: (blueprint, page) => {
     if(!blueprint.color.backgroundImage) {
       blueprint.color = {
-        backgroundImage: page.backgroundImages[1].key,
-        _backgroundImage: page.backgroundImages[1].url,
+        backgroundImage: page.backgroundImages[1].url,
         background: page.colorBlueprint.darkGray,
       }
     }
@@ -109,8 +108,6 @@ const h2 = {
   post: (blueprint, page) => {
      if(blueprint.color.backgroundImage) {
       blueprint.color = {
-         backgroundImage: {},
-         _backgroundImage: {},
         background: page.colorBlueprint.lightGray,
       }
      }
@@ -171,15 +168,13 @@ const h3 = {
  post: (blueprint, page) => {
     if(!blueprint.color.backgroundImage) {
       blueprint.color = {
-        backgroundImage: page.backgroundImages[0].key,
-        _backgroundImage: page.backgroundImages[0].url,
+        backgroundImage: page.backgroundImages[0].url,
         background: page.colorBlueprint.darkGray,
       }
     }
     else {
       blueprint.color = {
-        backgroundImage: page.backgroundImages[0].key,
-        _backgroundImage: page.backgroundImages[0].url,
+        backgroundImage: page.backgroundImages[0].url,
         background: page.colorBlueprint.darkGray,
     }
   }
@@ -225,8 +220,6 @@ const h4 = {
   post: (blueprint, page) => {
      if(blueprint.color.backgroundImage) {
       blueprint.color = {
-         backgroundImage: {},
-         _backgroundImage: {},
         background: '#ffffff',
       }
      }

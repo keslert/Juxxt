@@ -165,9 +165,10 @@ export function generatePageCSSRules(page) {
 
     if(section.color.backgroundImage) {
       rules.push(`
-        .bgimg-${section.color.backgroundImage} {
-          background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${section.color._backgroundImage}) !important;
+        .bgimg-${btoa(section.color.backgroundImage)} {
+          background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${section.color.backgroundImage}) !important;
           background-size: cover !important;
+          background-blend-mode: 
         }
       `);
     }

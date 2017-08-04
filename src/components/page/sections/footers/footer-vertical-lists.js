@@ -1,8 +1,8 @@
 import React from 'react';
 import Elements from '../../elements';
 import Group from '../../groups';
+import Container from '../container';
 import { convertStyleToAtomic } from '../../../../core/generator/style/conversions';
-import { convertColorToAtomic } from '../../../../core/generator/color/conversions';
 
 class FooterVerticalLists extends React.PureComponent {
   render () {
@@ -25,8 +25,9 @@ class FooterVerticalLists extends React.PureComponent {
       paddingHorizontal: style.gutter,
     })
 
+    
     return (
-      <div className={convertColorToAtomic(color) + ' FooterVerticalLists'}>
+      <Container style={style} color={color}>
         <div className={containerClassNames}>
           <div className={wrapClassNames}>
             
@@ -41,7 +42,7 @@ class FooterVerticalLists extends React.PureComponent {
             ))}
           </div>
         </div>
-      </div>
+      </Container>
     )
   }
 }

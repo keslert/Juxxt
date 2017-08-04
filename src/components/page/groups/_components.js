@@ -38,3 +38,6 @@ export {default as IpadMockup} from './ipad-mockup';
 export {default as ImacMockup} from './imac-mockup';
 
 export {default as Cards} from './cards';
+
+
+// export const IconSmallHeadingParagraph = IconHeadingParagraph;

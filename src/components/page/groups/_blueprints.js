@@ -13,16 +13,10 @@ export { blueprint as KickerHeadingParagraphButton } from './kicker-heading-para
 export { blueprint as KickerHeadingButton } from './kicker-heading-button';
 export { blueprint as KickerHeading } from './kicker-heading';
 
-
-
-
 export { blueprint as IconHeadingParagraph } from './icon-heading-paragraph';
 export { blueprint as IconHeadingSubheading } from './icon-heading-subheading';
 export { blueprint as IconHeadingButton } from './icon-heading-button';
 export { blueprint as IconHeadingParagraphButton } from './icon-heading-paragraph-button';
-
-
-
 
 export { blueprint as InputButton } from './input-button';
 export { blueprint as NameEmailForm } from './name-email-form';
@@ -41,3 +35,8 @@ export { blueprint as IpadMockup } from './ipad-mockup';
 export { blueprint as ImacMockup } from './imac-mockup';
 
 export { blueprint as Cards} from './cards';
+
+
+// export const IconSmallHeadingParagraph = merge({}, IconHeadingParagraph, {
+//   elements: { heading: { name: 'SmallHeading' }}
+// });

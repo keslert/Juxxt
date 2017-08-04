@@ -84,13 +84,12 @@ export function generateSectionBackgroundAlternatives(modify, sectionSkeleton, p
 
 
 function generateSectionImagesBackground(sectionSkeleton, page) {
-  const skeletons = page.backgroundImages.map(({key, url}) => {
+  const skeletons = page.backgroundImages.map(image => {
     const skeleton = cloneDeep(sectionSkeleton);
     linkSkeleton(skeleton);
     skeleton.color = {
       background: page.colorBlueprint.darkGray,
-      backgroundImage: key,
-      _backgroundImage: url,
+      backgroundImage: image.url,
     }
     return skeleton;
   })

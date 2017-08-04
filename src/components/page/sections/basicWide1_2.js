@@ -1,9 +1,8 @@
 import React from 'react';
 import Group from '../groups';
 import Element from '../elements';
+import Container from './container';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
-import { convertColorToAtomic } from '../../../core/generator/color/conversions';
-import pick from 'lodash/pick';
 
 class BasicWide1_2 extends React.Component {
 
@@ -41,11 +40,8 @@ class BasicWide1_2 extends React.Component {
       flexWrap: "wrap",
     });
     
-    const colorClassNames = convertColorToAtomic(color);
-    const imageStyle = pick(style, ['crop', 'filter'])
-    const imageClassNames = convertStyleToAtomic(imageStyle);
     return (
-      <div className={colorClassNames + ' ' + imageClassNames}>
+      <Container style={style} color={color} noBackgroundImage>
         <div className={wrapClassNames}>
           <div className={mediaWrapClassNames}>
             <Element {...elements.image} />
@@ -56,7 +52,7 @@ class BasicWide1_2 extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     )
   }
 }
