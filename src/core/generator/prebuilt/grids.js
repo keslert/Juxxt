@@ -62,7 +62,7 @@ const team = {
               {
                 elements: {
                   image: { 
-                    content: defaultTheme.peopleImages[0],  
+                    content: {url:'https://images.pexels.com/photos/258641/pexels-photo-258641.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'} 
                   }
                 },
                  groups: {
@@ -82,7 +82,7 @@ const team = {
               {
                 elements: {
                   image: { 
-                    content: defaultTheme.peopleImages[1],  
+                    content: {url:'https://images.pexels.com/photos/301284/pexels-photo-301284.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'}  
                   }
                 },
                  groups: {
@@ -102,7 +102,7 @@ const team = {
               {
                 elements: {
                   image: { 
-                    content: defaultTheme.peopleImages[2],  
+                    content: {url:'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'}
                   }
                 },
                  groups: {
