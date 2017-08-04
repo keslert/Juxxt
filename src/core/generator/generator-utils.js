@@ -56,13 +56,14 @@ export function getGroupsInItem(item, groups=[]) {
   return groups;
 }
 
-export function findItemInSection(item, section) {
-  const itemsPath = filter([...getParents(item), item], item => !item.isSection);
+// export function findItemInSection(item, section) {
 
-  return reduce(itemsPath, (parent, item) => (
-    item.isGroup ? parent.groups[item.parentKey] : parent.elements[item.parentKey]
-  ), section);
-}
+//   const itemsPath = filter([...getParents(item), item], item => !item.isSection);
+
+//   return reduce(itemsPath, (parent, item) => (
+//     item.isGroup ? parent.groups[item.parentKey] : parent.elements[item.parentKey]
+//   ), section);
+// }
 
 function getNuclearItems(items) {
   return flatMap(items, item => [item, ...item.clones]);

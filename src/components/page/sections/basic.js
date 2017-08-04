@@ -18,15 +18,15 @@ class Basic extends React.PureComponent {
       
     const paddingBottom = Math.floor(style.height * (style.verticalPosition / POSITIONS));
     const containerClassNames = convertStyleToAtomic({
-      maxWidth: (groups.item.name === "GalleryWide" ? 1350 : 'page'),
+      ...style,
       margin: 'auto',
-      display: (groups.item.name === "Gallery" || "GalleryWide"? '' : 'flex'),
-      align: (isTop ? "start" : isMid ? "center" : "end"),
-      justify: (isLeft ? "start" : isCenter ? "center" : "end"),
+      display: groups.item.name !== "Gallery" ? 'flex' : '',
+      align: isTop ? "start" : isMid ? "center" : "end",
+      justify: isLeft ? "start" : isCenter ? "center" : "end",
       minHeight: style.height,
       paddingHorizontal: style.edgePadding,
-      paddingBottom: (groups.item.name === "GalleryWide"? '-l-' + 1 : '-l-' + paddingBottom),
-      paddingTop: (groups.item.name === "GalleryWide"? '-l-' + 1 : '-l-' + (style.height - paddingBottom)), 
+      paddingBottom: '-l-' + paddingBottom,
+      paddingTop: '-l-' + (style.height - paddingBottom),
     })
 
     return (

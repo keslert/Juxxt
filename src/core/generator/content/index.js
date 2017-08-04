@@ -28,12 +28,7 @@ export function assignContent(section, contentStore, page) {
   // Generate new content
   section._elements.forEach(element => {
     if(isEmpty(element.content)) { 
-      const content = generateContent(element, page);
-      element.content = pick(content, CONTENT_TYPES);
-      content.elementId = element.fullRelativeId;
-      content.elementName = element.name;
-      content.elementIs = element.is;
-      content.parentIds = map(getParents(element), 'fullId');
+      element.content = generateContent(element, page);
     }
   })
 

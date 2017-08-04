@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import theme from '../../styles/theme';
-// import ContentPanel from '../panels/content-panel';
-// import PropsPanel from '../panels/props-panel';
 
 import { getSidebarOpen, setSidebarOpen } from '../../core/ui';
 import { getSelected, getMaster, getAlternatives } from '../../core/page';
@@ -59,7 +57,7 @@ class Sidebar extends React.PureComponent {
         <Box>
           <CloseButton onClick={() => setSidebarOpen(false)}><i className="fa fa-times"></i></CloseButton>
           <StyledHeading>Page Settings</StyledHeading>
-          <ContentPanel element={selected} hidden={!selected.isElement} />
+          <ContentPanel item={selected} hidden={!selected.isElement} />
           <ColorPanel page={master} alternative={alternative} />
           <FontPanel page={master} alternative={alternative} />
         </Box>

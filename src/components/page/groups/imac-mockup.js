@@ -9,7 +9,6 @@ class ImacMockup extends React.Component {
     return (
       <div className="iMac">
         <div className="body">
-          <div className="shine"/>
           <div className="screen">
             <Element {...elements.image} />
           </div>

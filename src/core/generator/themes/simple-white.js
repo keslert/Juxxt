@@ -24,13 +24,24 @@ const page = {
     // {name: 'BasicWide1_2'},
     // {name: 'Basic'},
     {
-      name: 'Basic',
+      name: 'Basic1_2',
       color: {
         // background: colorBlueprint.darkGray,
       },
       groups: {
-        item: {
-          name: 'Cards'
+        media: {
+          name: 'ImacMockup'
+        }
+      }
+    },
+    {
+      name: 'Basic1_2',
+      color: {
+        // background: colorBlueprint.darkGray,
+      },
+      groups: {
+        media: {
+          name: 'BrowserMockup'
         }
       }
     },

@@ -8,7 +8,7 @@ import { getCombinations } from '../../utils';
 import { containsClone } from '../../ui/actions'
 import { generateElementBackgroundAlternatives } from './element';
 import { colorElement } from '../color/element';
-import { findItemInSection, getBlueprint, getBackground, getParents, linkSkeleton } from '../generator-utils';
+import { getBlueprint, getBackground, getParents, linkSkeleton } from '../generator-utils';
 import styles from '../style/shared-styles';
 import { filterStyle } from '../style/utils';
 import { getSortedByPreference } from '../color/utils';
@@ -21,7 +21,8 @@ export function generateGroupComponentAlternatives(group, sectionSkeleton) {
   const validGroups = filter(possibleGroups, groupName => (groupName !== group.name));
   const skeletons = validGroups.map(option => {
     const skeleton = cloneDeep(sectionSkeleton);
-    const parentSkeleton = findItemInSection(group.parent, skeleton);
+    linkSkeleton(skeleton);
+    const parentSkeleton = find(skeleton._items, i => i.fullRelativeId === group.parent.fullRelativeId);
 
     const _group = isString(option) ? {name: option} : option;
     parentSkeleton.groups[group.parentKey] = generateGroupSkeleton({..._group, id: group.id, layout: group.layout});

@@ -1,5 +1,5 @@
 import * as types from './action-types';
-import { overrideElementContent, duplicateSection } from '../../core/generator';
+import { overrideItemContent, duplicateSection } from '../../core/generator';
 import { generateAlternatives } from '../../core/generator/alternatives';
 import { getMaster, getSelected, getAlternatives } from './selectors';
 import { mapValues, sortBy, cloneDeep, uniqueId, forEach, findIndex, pick, find, filter, map } from 'lodash';
@@ -209,15 +209,15 @@ export function deleteSection(section) {
   }
 }
 
-export function setElementContent(element, content) {
+export function setItemContent(item, content) {
   return (dispatch, getState) => {
     const state = getState();
     const master = getMaster(state);
-    const section = overrideElementContent(element, content, master);
-    const _element = find(section._elements, e => e.fullRelativeId === element.fullRelativeId);
+    const section = overrideItemContent(item, content, master);
+    const _item = find(section._items, i => i.fullRelativeId === item.fullRelativeId);
 
-    replaceSection(dispatch, state, element.section, section);
-    dispatch(setSelected(_element));
+    replaceSection(dispatch, state, item.section, section);
+    dispatch(setSelected(_item));
   }
 }
 

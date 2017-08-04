@@ -1,6 +1,5 @@
 import React from 'react';
 import Element from '../elements';
-import { ReadableLink, ListTitle } from '../elements/_blueprints';
 import { convertStyleToAtomic } from '../../../core/generator/style/conversions';
 
 class VerticalList extends React.Component {
@@ -38,10 +37,10 @@ export const blueprint = {
   color: {},
   elements: {
   	title: {
-  		name: ListTitle.name,
+  		name: 'ListTitle',
   	},
     links: {
-      name: ReadableLink.name,
+      name: 'ReadableLink',
       blueprint: {
         clones: { _default: 3, min: 1, max: 7 },
       }

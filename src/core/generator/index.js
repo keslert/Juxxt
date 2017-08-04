@@ -48,11 +48,12 @@ export function generatePage(theme) {
   return master;
 }
 
-export function overrideElementContent(element, content, page) {
-  const skeleton = extractSkeletonFromItem(element.section);
+export function overrideItemContent(item, content, page) {
+  const skeleton = extractSkeletonFromItem(item.section);
   linkSkeleton(skeleton);
-  const _element = find(skeleton._elements, e => e.fullRelativeId === element.fullRelativeId);
-  _element.content = content;
+  
+  const _item = find(skeleton._items, i => i.fullRelativeId === item.fullRelativeId);
+  _item.content = content;
 
   return skeleton;
 }

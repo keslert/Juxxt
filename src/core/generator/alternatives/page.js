@@ -43,7 +43,7 @@ export function generatePageBrandColorAlternatives(page) {
 }
 
 export function generatePageFromPalette(page, palette) {
-  const _page = { id: uniqueId(), style: page.style }
+  const _page = { ...page, id: uniqueId() }
 
   const colorBlueprint = buildPageColorBlueprint(palette);
   
@@ -56,8 +56,7 @@ export function generatePageFromPalette(page, palette) {
     '#ffffff': '#ffffff',
     '#transparent': '#transparent',
   }
-  _page.images = cloneDeep(page.images);
-  _page.backgroundImages = cloneDeep(page.backgroundImages);
+
   _page.sections = reduce(page.sections, (sections, section) => {
     const skeleton = extractSkeletonFromItem(section);
     

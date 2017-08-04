@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { setElementContent } from '../../../core/page';
+import { setItemContent } from '../../../core/page';
 import Collection from '../common/collection';
 import TextArea from '../common/text-area';
 import { map, isEqual } from 'lodash';
@@ -24,7 +24,7 @@ class ContentPanel extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    this.resetContent(props.element.content)
+    this.resetContent(props.item.content)
   }
 
   resetContent(content) {
@@ -32,25 +32,25 @@ class ContentPanel extends React.Component {
   }
 
   updateContent(key, value) {
-    const { element, setElementContent } = this.props;
+    const { item, setItemContent } = this.props;
     const content = {...this.state.content, [key]: value };
     this.setState({content});
   }
 
   saveContent() {
-    const { element, setElementContent } = this.props;
-    setElementContent(element, this.state.content);
+    const { item, setItemContent } = this.props;
+    setItemContent(item, this.state.content);
   }
 
   render() {
     const { content, open } = this.state;
-    const { element, hidden } = this.props;
+    const { item, hidden } = this.props;
 
     if(hidden) {
       return null;
     }
 
-    const showButtons = element && !isEqual(content, element.content);
+    const showButtons = item && !isEqual(content, item.content);
     return (
       <StyledWrap inset>
         <Collection heading={"Content"} open={open} onToggleOpen={() => this.setState({open: !open})}>
@@ -65,7 +65,7 @@ class ContentPanel extends React.Component {
           ))}
           {showButtons && (
             <StyledButtons>
-              <StyledButton background='transparent' onClick={() => this.resetContent(element.content)}>Cancel</StyledButton>
+              <StyledButton background='transparent' onClick={() => this.resetContent(item.content)}>Cancel</StyledButton>
               <StyledButton onClick={() => this.saveContent()}>Save</StyledButton>
             </StyledButtons>
           )}
@@ -75,5 +75,5 @@ class ContentPanel extends React.Component {
   }
 }
 
-const mapDispatchToProps = Object.assign({setElementContent});
+const mapDispatchToProps = Object.assign({setItemContent});
 export default connect(undefined, mapDispatchToProps)(ContentPanel);
