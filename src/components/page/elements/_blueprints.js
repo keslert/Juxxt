@@ -9,7 +9,6 @@ export const BasicKicker = {
   component: { section: ['section'] },
   style: {
     fontSize: { _default: 3, options: [1,2,3] },
-    marginTop: { _default: 0, options: [0,1,2,3] },
     marginBottom: { _default: 2, options: [0,1,2,3] },
     textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
   },
@@ -35,7 +34,6 @@ export const BasicHeading = {
   color: { text: 'whiteOrVibrant' },
   component: { section: ['section'] },
   style: {
-    marginTop: { _default: 0, options: [0,1,2,3] },
     fontSize: { _default: 5, options: [3,4,5,6,7,8,9] },
     fontWeight: { _default: 6, options: [2,4,6,8] },
     lineHeight: { _default: 1, options: [0,1,2,3,4] },
@@ -50,7 +48,6 @@ export const BasicSubheading = {
   color: { text: 'whiteOrReadable' },
   component: { section: ['section'] },
   style: {
-    marginTop: { _default: 0, options: [0,1,2,3] },
     fontSize: { _default: 4, options: [2,3,4,5,6,7] },
     textTransform: { _defaults: 'none', options: ['none', 'uppercase'] },
     textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
@@ -113,6 +110,10 @@ export const BasicImage = {
       _default: '3x4',
       options: ['auto', '1x1', '16x9', '4x3', '3x4', '6x4', '8x5', '7x5'],
     },
+    BorderRadius: {
+      _default: 'pill',
+      options: [0,'pill',1,2,3,4]
+    }
   },
   image: { content: ['content'] },
 };

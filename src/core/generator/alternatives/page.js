@@ -101,7 +101,6 @@ export function generatePageFromTypography(page, typography) {
   return _page;
 }
 
-// input : {heading: "stuff"} or {paragraph: "stuff"};
 export function generateTypographyAlternatives(fonts, page) {
   const typography = {
     heading: { fontFamily: fonts.heading, fontWeight: 8 },//or 7 or 9
@@ -116,7 +115,7 @@ export function generateTypographyAlternatives(fonts, page) {
   return typography
 }
 
-function calculateHeaderAndParagraph(typography) {
+export function calculateHeaderAndParagraph(typography) {
   const pFamily = typography.paragraph.fontFamily;
   if(!typography.heading.fontFamily) {
     typography.heading.fontFamily = pFamily 
@@ -129,7 +128,7 @@ function calculateHeaderAndParagraph(typography) {
   }
 }
 
-function calculateTypographyWeights(typography) {
+export function calculateTypographyWeights(typography) {
   const typeOptionA = {
     heading: { fontWeight: 7 },
     paragraph: { fontWeight: 4 },
@@ -161,7 +160,7 @@ function calculateTypographyWeights(typography) {
   const option = randomItem([typeOptionA, typeOptionB, typeOptionC, typeOptionD]);
   merge(typography, option);
 }
-function calculateTypographySizes(typography) {
+export function calculateTypographySizes(typography) {
   const sizeOptionA = {
     heading: { fontSize: 10 },
     paragraph: { fontSize: 4 },

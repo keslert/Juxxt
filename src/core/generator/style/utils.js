@@ -1,40 +1,52 @@
 import { filter, some, find, includes, values, map, forEach, zipObject, pick } from 'lodash';
 import { randomItem, getMode } from '../../utils';
 
-export function styleItem(item, items, rules, blueprint) {
+export function styleItem(item, items, rules, sharedStyles) {
   const matches = filter(items, i => i.name === item.name);
   if(matches.length) {
     styleItemLikeItems(item, matches, rules);
-  } else {
-    styleItemByBlueprint(item, items, blueprint);
   }
+  styleItemByBlueprint(item, items, sharedStyles);
 }
 
-function styleItemByBlueprint(item, items, blueprint) {
-  forEach(blueprint.style, ({options, _default}, key) => {
-    const value = item.style[key];
-    if(value === undefined || !includes(options, value)) {
-      item.style[key] = _default !== undefined ? _default : randomItem(options);
+function styleItemByBlueprint(item, items, sharedStyles) {
+  const style = {};
+
+  // Transfer existing styles
+  forEach(item.blueprint._allStyles, ({options}, key) => {
+    if(includes(options, item.style[key])) {
+      style[key] = item.style[key];
     }
   })
 
-  item.inherits.forEach(name => {
+  // Style by item blueprint
+  forEach(item.blueprint.style, ({options, _default}, key) => {
+    if(style[key] === undefined) {
+      style[key] = _default !== undefined ? _default : randomItem(options);
+    }
+  })
+
+  // Style by family items
+  forEach(sharedStyles, (sharedStyle, name) => {
     const matches = filter(items, i => includes(i.inherits, name));
     if(matches.length) {
-      Object.keys(blueprint.sharedStyles[name]).forEach(key => {
-        if(item.style[key] === undefined) {
-          item.style[key] = getMode(map(matches, i => i.style[key]));
+      forEach(sharedStyle, (_, key) => {
+        if(style[key] === undefined) {
+          style[key] = getMode(map(matches, i => i.style[key]));
         }
       })
     }
   })
 
-  const combinedStyle = Object.assign({}, ...values(blueprint.sharedStyles));
+  // Style by shared styles
+  const combinedStyle = Object.assign({}, ...values(sharedStyles));
   forEach(combinedStyle, ({options, _default}, key) => {
-    if(item.style[key] === undefined) {
-      item.style[key] = _default !== undefined ? _default : randomItem(options);
+    if(style[key] === undefined) {
+      style[key] = _default !== undefined ? _default : randomItem(options);
     }
   })
+
+  item.style = style;
 }
 
 function styleItemLikeItems(item, items, rules) {

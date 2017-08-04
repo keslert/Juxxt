@@ -7,8 +7,9 @@ import {
   sortBy, 
   isEmpty, 
   pick, 
-  isString, 
+  isString,
   merge,
+  mergeWith,
   get,
   keys,
   isArray, 
@@ -40,7 +41,7 @@ export function extractSkeletonFromItem(item) {
 }
 
 export function generateItemSkeleton(skeleton, blueprint) {
-  const merged = merge({}, blueprint, skeleton.blueprint);
+  const merged = mergeWith({}, blueprint, skeleton.blueprint, (o, s) => isArray(s) ? s : undefined);
 
   const _sharedStyles = map(merged.inherits, name => sharedStyles[name]);
   merged._allStyles = Object.assign({}, ..._sharedStyles, merged.style);

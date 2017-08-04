@@ -16,5 +16,5 @@ export function styleGroup(group, page) {
     g => true,
   ]
   
-  styleItem(group, groups, rules, {style: blueprint.style, sharedStyles});
+  styleItem(group, groups, rules, sharedStyles);
 }

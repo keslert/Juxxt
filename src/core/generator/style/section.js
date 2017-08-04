@@ -13,5 +13,5 @@ export function styleSection(section, page) {
     s => true,
   ]
 
-  styleItem(section, page.sections, rules, {style: blueprint.style, sharedStyles});
+  styleItem(section, page.sections, rules, sharedStyles);
 }

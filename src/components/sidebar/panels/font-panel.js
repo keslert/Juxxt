@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Collection from '../common/collection';
-import { map, isEqual, find } from 'lodash';
+import { map, isEqual, find, cloneDeep } from 'lodash';
 import { StyledWrap, StyledButton } from '../common/styled';
 import Box from '../../common/box';
 import ColorPicker from '../../common/color-picker';
@@ -10,14 +10,14 @@ import { fetchColorMindPalette } from '../../../core/generator/color/utils';
 
 import { pushAlternative, setAlternatives } from '../../../core/page';
 import { turnOnModification } from '../../../core/ui';
-import { generatePageFromPalette, generateTypographyAlternatives, generatePageFromTypography } from '../../../core/generator/alternatives/page';
+import { generatePageFromPalette, generateTypographyAlternatives, generatePageFromTypography, calculateTypographyWeights, calculateTypographySizes } from '../../../core/generator/alternatives/page';
 import { lowerCamelCaseToRegular } from '../../../core/utils';
 import Select from '../common/select';
 import { paragraphs, headings } from '../../../core/generator/fonts';
 
 import toastr from 'toastr';
 
-const fontOptions = {heading: headings, normal: paragraphs};
+const fontOptions = {heading: headings, paragraph: paragraphs};
 
 const StyledIcon = styled.div`
   color: #999;
@@ -70,12 +70,28 @@ class TextPanel extends React.Component {
     this.setState({fonts});
   }
 
+  exchangeStyles(type) {
+    const { pushAlternative, turnOnModification } = this.props;
+    const typography = cloneDeep(this.props.page.style.typography);
+    if (type==="weight")
+      calculateTypographyWeights(typography);
+    else
+      calculateTypographySizes(typography);
+    turnOnModification('page');
+    const _page = generatePageFromTypography(this.props.page,typography);
+    const n = {fonts: {heading: _page.style.typography.heading.fontFamily, paragraph: _page.style.typography.paragraph.fontFamily}};
+    this.setState(n);
+    setTimeout(() => {
+      pushAlternative(_page);
+    }, 1);
+  }
+
   exchangeFonts(restrictions) {
     const { page, pushAlternative, turnOnModification } = this.props;
     const typ = generateTypographyAlternatives(restrictions,page);
     turnOnModification('page');
     const _page = generatePageFromTypography(page,typ);
-    const n = {fonts: {heading: _page.style.typography.heading.fontFamily, normal: _page.style.typography.paragraph.fontFamily}};
+    const n = {fonts: {heading: _page.style.typography.heading.fontFamily, paragraph: _page.style.typography.paragraph.fontFamily}};
     this.setState(n);
     setTimeout(() => {
       pushAlternative(_page);
@@ -83,10 +99,10 @@ class TextPanel extends React.Component {
   }
 
   renderFont(fontType, otherFontType) {
-    const value = this.state.fonts[fontType];
-    const otherValue = this.state.fonts[otherFontType];
+    const value = this.state.fonts[fontType] ? this.state.fonts[fontType].fontFamily : this.state.fonts[fontType];
+    const otherValue = this.state.fonts[otherFontType] ? this.state.fonts[otherFontType].fontFamily : this.state.fonts[otherFontType];
     const options = fontOptions[otherFontType][otherValue] || [];
-    const normal = this.props.page.style.typography.normal;
+    const normal = this.props.page.style.typography;
     const locked = false;
     return (
       <Box display="flex" justify="space-between" marginBottom="4px">
@@ -127,7 +143,7 @@ class TextPanel extends React.Component {
             <i className={`fa fa-${locked ? 'lock' :  'unlock-alt'}`} />
           </StyledIcon>
           <StyledIcon>
-            <i className='fa fa-exchange' onClick={() => null } />
+            <i className='fa fa-exchange' onClick={() => this.exchangeStyles(fontStyle) } />
           </StyledIcon>
         </Box>
       </Box>
@@ -136,7 +152,7 @@ class TextPanel extends React.Component {
 
   render() {
     const { palette, open } = this.state;
-    const normal = this.props.page.style.typography.normal;
+    const typography = this.props.page.style.typography;
     return (
       <StyledTextPanel>
         <StyledWrap inset>
@@ -146,8 +162,8 @@ class TextPanel extends React.Component {
             onToggleOpen={() => this.setState({open: !open})}
             onExchange={e => (e.stopPropagation(), this.exchangeFonts({},this.props.page))}
             >
-            {this.renderFont('heading', 'normal')}
-            {this.renderFont('normal', 'heading')}
+            {this.renderFont('heading', 'paragraph')}
+            {this.renderFont('paragraph', 'heading')}
             {this.renderFontStyle('weight')}
             {this.renderFontStyle('size')}
           </Collection>
