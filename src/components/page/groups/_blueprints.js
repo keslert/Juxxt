@@ -28,6 +28,7 @@ export { blueprint as VerticalList } from './vertical-list';
 export { blueprint as StackedButtons } from './stacked-buttons';
 export { blueprint as ButtonList } from './button-list';
 export { blueprint as Gallery } from './gallery';
+export { blueprint as GalleryWide } from './galleryWide';
 export { blueprint as BlockImage } from './block-image';
 export { blueprint as ImageHeadingParagraph } from './image-heading-paragraph';
 export { blueprint as BrowserMockup } from './browser-mockup';

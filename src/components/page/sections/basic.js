@@ -18,15 +18,15 @@ class Basic extends React.PureComponent {
       
     const paddingBottom = Math.floor(style.height * (style.verticalPosition / POSITIONS));
     const containerClassNames = convertStyleToAtomic({
-      maxWidth: 'page',
+      maxWidth: (groups.item.name === "GalleryWide" ? 1350 : 'page'),
       margin: 'auto',
-      display: (groups.item.name === "Gallery" ? '' : 'flex'),
+      display: (groups.item.name === "Gallery" || "GalleryWide"? '' : 'flex'),
       align: (isTop ? "start" : isMid ? "center" : "end"),
       justify: (isLeft ? "start" : isCenter ? "center" : "end"),
       minHeight: style.height,
       paddingHorizontal: style.edgePadding,
-      paddingBottom: '-l-' + paddingBottom,
-      paddingTop: '-l-' + (style.height - paddingBottom), 
+      paddingBottom: (groups.item.name === "GalleryWide"? '-l-' + 1 : '-l-' + paddingBottom),
+      paddingTop: (groups.item.name === "GalleryWide"? '-l-' + 1 : '-l-' + (style.height - paddingBottom)), 
     })
 
     return (
@@ -62,7 +62,7 @@ export const blueprint = {
   groups: {
     item: {
       _default: 'KickerHeadingParagraphButton',
-      options: ['HeadingButton','KickerHeadingButton', 'KickerHeadingSubheadingButton','HeadingSubheadingButton','IconHeadingButton','IconHeadingParagraphButton', 'HeadingParagraphButton','KickerHeadingParagraphButton','Heading','HeadingParagraph','HeadingSubheading', 'KickerHeading', 'KickerHeadingParagraph','KickerHeadingSubheading', 'IconHeadingParagraph','IconHeadingSubheading','Gallery','Cards', 'ImageHeadingParagraph'],
+      options: ['HeadingButton','KickerHeadingButton', 'KickerHeadingSubheadingButton','HeadingSubheadingButton','IconHeadingButton','IconHeadingParagraphButton', 'HeadingParagraphButton','KickerHeadingParagraphButton','Heading','HeadingParagraph','HeadingSubheading', 'KickerHeading', 'KickerHeadingParagraph','KickerHeadingSubheading', 'IconHeadingParagraph','IconHeadingSubheading','Gallery','GalleryWide','Cards', 'ImageHeadingParagraph'],
     },
   },
   image: { content: ['content'] },
@@ -73,7 +73,7 @@ export const blueprint = {
     image: ['image'],
   },
   component: { 
-    basic: ['basic'], 
+    basic: ['basic', 'basicWide'], 
     header: ['header'], 
     action: ['action'],
     grid: ['grid'],
