@@ -51,110 +51,31 @@ export default {
   page: {
     sections: [
       {name: 'Navbar2',
-          style: {
-            paddingTop: 2,
-            paddingBottom: 2,
-          },
-          color: { 
-            background: colorBlueprint.lightGray,
-          },
+        style: {
+        },
       },
       {name: 'Basic',
-        _defaults: {
-          style: {
-            paddingBottom: 8,
-            paddingTop: 6,
-            fontFamily: 'Montserrat',
-            fontSize: 4,
-          },
-          color: {
-            backgroundImage: backgroundImages[0].url,
-            background: palette[0],
-          }
+        style: {
+          height: 10,
+          fontFamily: 'Montserrat',
+          fontSize: 4,
         },
-        groups: {
-          tp: {//
-            _default: {
-              name: 'HeadingSubheadingButton',
-              elements: {
-                heading: {
-                  _defaults: {
-                    color: {
-                      text: '#ffffff',
-                      //_textBackground: palette[0],
-                    },
-                    style: {
-                      fontSize: 8,
-                    }
-                  }
-                },
-                subheading: {
-                  _defaults: {
-                    color: {
-                      text: '#ffffff',
-                      _textBackground: palette[0],
-                    },
-                  }
-                },
-              },
-              groups: {
-                buttonList : {
-                  _default: {
-                    name: 'ButtonList',
-                    elements: {
-                      buttons: {
-                        _defaults: {
-                          color: {
-                            background: "#transparent",
-                            text: '#ffffff',
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            } 
-          }//*/
+        color: {
+          backgroundImage: backgroundImages[0].url,
+          background: palette[0],
         }
       },
       {name: 'Basic',
         groups: {
           item:{
-            _default: { 
-              name: 'HeadingParagraph',              
-            },
+            name: 'Gallery',
           }
-        },
-        /*_defaults: {
-          color: { 
-            background: '#B26E3E',//#f7f6f5
-          },
-        },*/
-      },
-      {name: 'Basic',
-        groups: {
-          item:{
-            _default: { name: 'Gallery' },
-          }
-        },
-        _defaults: {
-          color: { 
-            background: '#f7f6f5',
-          },
         },
       },
       {name: 'BasicWide1_2',
         groups: {
           tp: {
             name: 'HeadingParagraph',
-          },
-        },
-        elements: {
-          image: {
-            _defaults : {
-              content: images[3],
-            }   
           },
         },
         layout: {
@@ -166,33 +87,17 @@ export default {
         name: 'Basic1_2',
         groups: {
           tp: {
-            _default: {
-              name: 'HeadingParagraph',
-            }
+            name: 'HeadingParagraph',
           },
           media: {
-            _defaults : {
-              name: 'BlockImage',
-/*              BlockImage: images[5],
-*/            }
+            name: 'BlockImage',
           },
         },
         layout: {
-          order: 1,
+          order: 3,
         }
       },
       {name: 'Footer1',
-        _default: {
-          style: {
-            paddingTop: 2,
-            paddingBottom: 2,
-          },
-        _defaults: {
-          color: { 
-            background: '#4B7176',
-          },
-        },
-        }
       },
     ]
   }
