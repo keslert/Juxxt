@@ -30,6 +30,11 @@ export const palettes = [
   ["#062F4F","#813772","#B82601"],
 ]
 
+export function generateRandomPalette() {
+  //TODO: input a number and generate that many colors?
+  return randomItem(palettes);
+}
+
 export function generatePageBrandColorAlternatives(page) {
   const validPalettes = filter(palettes, palette => !isEqual(palette, page.colorBlueprint.colors))
   const pages = validPalettes.map(palette => generatePageFromPalette(page, palette));
