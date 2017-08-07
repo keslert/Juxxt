@@ -3,45 +3,65 @@ import { buildPageColorBlueprint } from '../color/page';
 const palette = ['#233B4B', '#4B7176','#B26E3E'];
 const colorBlueprint = buildPageColorBlueprint(palette);
 const headerImages = [
-    {url:'https://images.pexels.com/photos/499607/pexels-photo-499607.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/220147/pexels-photo-220147.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/432832/pexels-photo-432832.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/492966/pexels-photo-492966.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/164226/pexels-photo-164226.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/290101/pexels-photo-290101.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/33688/delicate-arch-night-stars-landscape.jpg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/62600/pexels-photo-62600.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/481237/pexels-photo-481237.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  ];
-  const images = [
-    {url:'https://images.pexels.com/photos/499607/pexels-photo-499607.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/220147/pexels-photo-220147.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/432832/pexels-photo-432832.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/492966/pexels-photo-492966.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/164226/pexels-photo-164226.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/290101/pexels-photo-290101.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/33688/delicate-arch-night-stars-landscape.jpg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/62600/pexels-photo-62600.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/481237/pexels-photo-481237.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/297755/pexels-photo-297755.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/297642/pexels-photo-297642.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://static.pexels.com/photos/504499/pexels-photo-504499.jpeg'},
-    {url:'https://images.pexels.com/photos/475355/pexels-photo-475355.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/471239/pexels-photo-471239.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://static.pexels.com/photos/508095/pexels-photo-508095.jpeg'},
-    {url:'https://images.pexels.com/photos/34107/milky-way-stars-night-sky.jpg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/262503/pexels-photo-262503.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://static.pexels.com/photos/508095/pexels-photo-508095.jpeg'},
-    {url:'https://images.pexels.com/photos/2224/road-people-street-smartphone.jpg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/248820/pexels-photo-248820.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-/*    {url:''},
-*/
- ];
-  const backgroundImages = [
-    {url:'https://images.pexels.com/photos/432832/pexels-photo-432832.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/492966/pexels-photo-492966.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-    {url:'https://images.pexels.com/photos/220147/pexels-photo-220147.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
- ];
+  { url: '/images/pexel/redRock/arches_split.jpeg' },
+  { url: '/images/pexel/redRock/bluesky_redrock.jpeg' },
+  { url: '/images/pexel/redRock/cactus_sun_canyon.jpeg' },
+  { url: '/images/pexel/redRock/canyon_panaromai.jpeg' },
+  { url: '/images/pexel/redRock/compass.jpeg' },
+  { url: '/images/pexel/redRock/delicate-arch-night-stars-landscape.jpg' },
+  { url: '/images/pexel/redRock/map_cafe.jpeg' },
+  { url: '/images/pexel/redRock/map_laptop.jpeg' },
+  { url: '/images/pexel/redRock/milky-way-stars-night-sky.jpg' },
+  { url: '/images/pexel/redRock/red_rock_fog.jpeg' },
+  { url: '/images/pexel/redRock/red_rock_waterfall.jpeg' },
+  { url: '/images/pexel/redRock/red_swirls.jpeg' },
+  { url: '/images/pexel/redRock/river_trees_canyon.jpeg' },
+  { url: '/images/pexel/redRock/road_red_rock.jpeg' },
+  { url: '/images/pexel/redRock/snow_arch.jpeg' },
+  { url: '/images/pexel/redRock/sunlight_car_trip.jpg' },
+  { url: '/images/pexel/redRock/tent_red_rock.jpeg' },
+  { url: '/images/pexel/redRock/white_van_in_dust.jpeg' },
+];
+const images = [
+  { url: '/images/pexel/redRock/arches_split.jpeg' },
+  { url: '/images/pexel/redRock/bluesky_redrock.jpeg' },
+  { url: '/images/pexel/redRock/cactus_sun_canyon.jpeg' },
+  { url: '/images/pexel/redRock/canyon_panaromai.jpeg' },
+  { url: '/images/pexel/redRock/compass.jpeg' },
+  { url: '/images/pexel/redRock/delicate-arch-night-stars-landscape.jpg' },
+  { url: '/images/pexel/redRock/map_cafe.jpeg' },
+  { url: '/images/pexel/redRock/map_laptop.jpeg' },
+  { url: '/images/pexel/redRock/milky-way-stars-night-sky.jpg' },
+  { url: '/images/pexel/redRock/red_rock_fog.jpeg' },
+  { url: '/images/pexel/redRock/red_rock_waterfall.jpeg' },
+  { url: '/images/pexel/redRock/red_swirls.jpeg' },
+  { url: '/images/pexel/redRock/river_trees_canyon.jpeg' },
+  { url: '/images/pexel/redRock/road_red_rock.jpeg' },
+  { url: '/images/pexel/redRock/snow_arch.jpeg' },
+  { url: '/images/pexel/redRock/sunlight_car_trip.jpg' },
+  { url: '/images/pexel/redRock/tent_red_rock.jpeg' },
+  { url: '/images/pexel/redRock/white_van_in_dust.jpeg' },
+];
+const backgroundImages = [
+  { url: '/images/pexel/redRock/arches_split.jpeg' },
+  { url: '/images/pexel/redRock/bluesky_redrock.jpeg' },
+  { url: '/images/pexel/redRock/cactus_sun_canyon.jpeg' },
+  { url: '/images/pexel/redRock/canyon_panaromai.jpeg' },
+  { url: '/images/pexel/redRock/compass.jpeg' },
+  { url: '/images/pexel/redRock/delicate-arch-night-stars-landscape.jpg' },
+  { url: '/images/pexel/redRock/map_cafe.jpeg' },
+  { url: '/images/pexel/redRock/map_laptop.jpeg' },
+  { url: '/images/pexel/redRock/milky-way-stars-night-sky.jpg' },
+  { url: '/images/pexel/redRock/red_rock_fog.jpeg' },
+  { url: '/images/pexel/redRock/red_rock_waterfall.jpeg' },
+  { url: '/images/pexel/redRock/red_swirls.jpeg' },
+  { url: '/images/pexel/redRock/river_trees_canyon.jpeg' },
+  { url: '/images/pexel/redRock/road_red_rock.jpeg' },
+  { url: '/images/pexel/redRock/snow_arch.jpeg' },
+  { url: '/images/pexel/redRock/sunlight_car_trip.jpg' },
+  { url: '/images/pexel/redRock/tent_red_rock.jpeg' },
+  { url: '/images/pexel/redRock/white_van_in_dust.jpeg' },
+];
 export default {
   palette,
   backgroundImages,
@@ -56,12 +76,15 @@ export default {
       },
       {name: 'Basic',
         style: {
-          height: 10,
+          height: 12,
           fontFamily: 'Amatic SC',
           fontSize: 4,
+          //Vertical Position: 5, Horizontal Position: left
+          verticalPosition: 5,
+          horizontalPosition: 'left',  
         },
         color: {
-          backgroundImage: backgroundImages[0].url,
+          backgroundImage: backgroundImages[13].url,
           background: palette[0],
         }
       },
@@ -78,9 +101,8 @@ export default {
             name: 'HeadingParagraph',
           },
         },
-        layout: {
-          order: 1,
-          align: "left"
+        style: {
+          order: 'left',
         }
       },
       {
@@ -93,8 +115,8 @@ export default {
             name: 'BlockImage',
           },
         },
-        layout: {
-          order: 3,
+        style: {
+          order: 'right',
         }
       },
       {name: 'Footer1',
