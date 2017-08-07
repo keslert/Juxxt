@@ -5,36 +5,31 @@ const palette = ['#ffeecc','#59a029','#ced1cc'];
 const colorBlueprint = buildPageColorBlueprint(palette);
 
 const backgroundImages = [
-  {url:'https://images.pexels.com/photos/473646/pexels-photo-473646.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/503175/pexels-photo-503175.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/349610/pexels-photo-349610.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/52533/orange-fruit-vitamins-healthy-eating-52533.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
+  {url: '/images/pexel/healthyFood/avacado_banana_breakfast.jpeg'},
+  {url: '/images/pexel/healthyFood/bread_veggies.jpeg'},
+  {url: '/images/pexel/healthyFood/orange_half.jpeg'},
+  {url: '/images/pexel/healthyFood/passion_fruit_tea.jpeg'},
 ];
 const images = [
-  {url:'https://images.pexels.com/photos/473646/pexels-photo-473646.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/503175/pexels-photo-503175.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/139259/pexels-photo-139259.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/106877/pexels-photo-106877.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/52533/orange-fruit-vitamins-healthy-eating-52533.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/503174/pexels-photo-503174.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/262896/pexels-photo-262896.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/499761/pexels-photo-499761.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/247685/pexels-photo-247685.png?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/5506/bread-food-salad-sandwich.jpg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/470460/pexels-photo-470460.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/8844/red-lunch-green-knolling.jpg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/236813/pexels-photo-236813.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/128865/pexels-photo-128865.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/95004/pexels-photo-95004.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/406152/pexels-photo-406152.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/520207/pexels-photo-520207.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  
+  {url: '/images/pexel/healthyFood/avacado_banana_breakfast.jpeg'},
+  {url: '/images/pexel/healthyFood/passion_fruit_tea.jpeg'},
+  {url:'/images/pexel/healthyFood/four_pineapples.jpeg'},
+  {url:'/images/pexel/healthyFood/raw_egg_half_avacado.jpeg'},
+  {url: '/images/pexel/healthyFood/orange_half.jpeg'},
+  {url:'/images/pexel/healthyFood/telephone_avacado.jpeg'},
+  {url: '/images/pexel/healthyFood/background/fork_on_green.jpeg'},
+  {url:'/images/pexel/healthyFood/cropped_passion_fruit.png'},
+  {url:'/images/pexel/healthyFood/sprout_sandwhich.jpg'},
+  {url:'/images/pexel/healthyFood/cute_pastry_lineup.jpeg'},
+  {url:'/images/pexel/healthyFood/chicken_broccoli_bell_pepper.jpg'},
+  {url:'/images/pexel/healthyFood/avacado_egg_toast.jpeg'},
+  {url:'/images/pexel/healthyFood/oatmeal_berries.jpeg'},
+  {url:'/images/pexel/healthyFood/salad_in_hands.jpeg'},
+  {url:'/images/pexel/healthyFood/avacado_veggies_cutting_board.jpeg'},
 ];
 const headerImages = [
-  {url:'https://images.pexels.com/photos/503175/pexels-photo-503175.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/262896/pexels-photo-262896.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/499761/pexels-photo-499761.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/471327/pexels-photo-471327.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'}
+  {url: '/images/pexel/healthyFood/background/passion_fruit_tea.jpeg'},
+  {url: '/images/pexel/healthyFood/background/fork_on_green.jpeg'},
 ];
 
 export default {
