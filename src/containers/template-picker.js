@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import Landay from '../core/generator/themes/landay';
+import TechStartup from '../core/generator/themes/tech-startup';
 import HealthyFood from '../core/generator/themes/healthy-food';
 import RedRock from '../core/generator/themes/red-rock';
 import FashionHipster from '../core/generator/themes/fashion-hipster';
-import DessertShop from '../core/generator/themes/dessert-shop';
+// import DessertShop from '../core/generator/themes/dessert-shop';
 import { generatePage } from '../core/generator';
 import { setAlternatives } from '../core/page';
 
@@ -25,7 +26,7 @@ class TemplatePicker extends React.Component {
 
   handleClick() {
 
-    const templates = [HealthyFood, Landay, FashionHipster, DessertShop, RedRock];
+    const templates = [HealthyFood, Landay, FashionHipster, TechStartup, RedRock];
 
     const pages = templates.map(generatePage);
     this.props.setAlternatives(pages);

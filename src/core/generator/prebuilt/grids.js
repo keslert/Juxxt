@@ -70,7 +70,7 @@ const team = {
                     name: 'HeadingParagraph',
                     elements: {
                       heading: {
-                        content: {text: 'Kesler Tanner'},
+                        content: {text: 'Name 1'},
                       },
                       paragraph: {
                         content: {text: 'Kesler is a great programmer and a brilliant innovator. I would work with Kesler again in a heart beat and fully expect to read about him in scientific journals and prestigious business magazines.'},
@@ -90,7 +90,7 @@ const team = {
                     name: 'HeadingParagraph',
                     elements: {
                       heading: {
-                        content: {text: 'James Landay'},
+                        content: {text: 'Name 2'},
                       },
                       paragraph: {
                         content: {text: 'James Landay is a Professor of Computer Science at Stanford University, specializing in human-computer interaction (HCI). Previously, Dr. Landay was a Professor of Information Science at Cornell Tech in New York City and prior to that a Professor of Computer Science & Engineering at the University of Washington. '},
@@ -110,7 +110,7 @@ const team = {
                     name: 'HeadingParagraph',
                     elements: {
                       heading: {
-                        content: {text: 'Maneesh Agrawala'},
+                        content: {text: 'Name 3'},
                       },
                       paragraph: {
                         content: {text: 'Maneesh Agrawala is the Forest Baskett Professor of Computer Science and Director of the Brown Institute for Media Innovation at Stanford University. He was previously a Professor of Electrical Engineering and Computer Science at the University of California, Berkeley (2005 - 2015).'},

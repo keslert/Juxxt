@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Collection from '../common/collection';
-import { map, isEqual, find, cloneDeep } from 'lodash';
+import { map, isEqual, isEmpty , find, cloneDeep } from 'lodash';
 import { StyledWrap, StyledButton } from '../common/styled';
 import Box from '../../common/box';
 import ColorPicker from '../../common/color-picker';
@@ -66,8 +66,9 @@ class TextPanel extends React.Component {
   }
 
   resetFonts(page) {
-    const fonts = page.style.typography;
-    this.setState({fonts});
+    const { alternative } = this.props;
+    const fonts = isEmpty(this.state.fonts) ? (page.style.typography) : this.state.fonts;
+    this.setState({fonts: fonts});
   }
 
   exchangeStyles(type) {
@@ -79,7 +80,7 @@ class TextPanel extends React.Component {
       calculateTypographySizes(typography);
     turnOnModification('page');
     const _page = generatePageFromTypography(this.props.page,typography);
-    const n = {fonts: {heading: _page.style.typography.heading.fontFamily, paragraph: _page.style.typography.paragraph.fontFamily}};
+    const n = {fonts: _page.style.typography};
     this.setState(n);
     setTimeout(() => {
       pushAlternative(_page);
@@ -87,11 +88,11 @@ class TextPanel extends React.Component {
   }
 
   exchangeFonts(restrictions) {
-    const { page, pushAlternative, turnOnModification } = this.props;
+    const { page, pushAlternative, turnOnModification, setState } = this.props;
     const typ = generateTypographyAlternatives(restrictions,page);
     turnOnModification('page');
     const _page = generatePageFromTypography(page,typ);
-    const n = {fonts: {heading: _page.style.typography.heading.fontFamily, paragraph: _page.style.typography.paragraph.fontFamily}};
+    const n = {fonts: _page.style.typography};
     this.setState(n);
     setTimeout(() => {
       pushAlternative(_page);
@@ -99,8 +100,10 @@ class TextPanel extends React.Component {
   }
 
   renderFont(fontType, otherFontType) {
-    const value = this.state.fonts[fontType] ? this.state.fonts[fontType].fontFamily : this.state.fonts[fontType];
-    const otherValue = this.state.fonts[otherFontType] ? this.state.fonts[otherFontType].fontFamily : this.state.fonts[otherFontType];
+    const alt = this.props.alternative;
+    const fonts = alt ? alt.style.typography : this.state.fonts;
+    const value = fonts[fontType] ? fonts[fontType].fontFamily : fonts[fontType];
+    const otherValue = fonts[otherFontType] ? fonts[otherFontType].fontFamily : fonts[otherFontType];
     const options = fontOptions[otherFontType][otherValue] || [];
     const normal = this.props.page.style.typography;
     const locked = false;
@@ -152,7 +155,7 @@ class TextPanel extends React.Component {
 
   render() {
     const { palette, open } = this.state;
-    const typography = this.props.page.style.typography;
+    const alternative = this.props.alternative;
     return (
       <StyledTextPanel>
         <StyledWrap inset>
@@ -160,7 +163,7 @@ class TextPanel extends React.Component {
             heading={"Typography"}
             open={open}
             onToggleOpen={() => this.setState({open: !open})}
-            onExchange={e => (e.stopPropagation(), this.exchangeFonts({},this.props.page))}
+            onExchange={e => (e.stopPropagation(), this.exchangeFonts({},alternative ? alternative : this.props.page))}
             >
             {this.renderFont('heading', 'paragraph')}
             {this.renderFont('paragraph', 'heading')}

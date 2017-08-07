@@ -245,8 +245,9 @@ export const BasicIcon = {
   color: { text: 'vibrant' },
   component: { section: ['section'] },
   style: {
+    marginBottom: { _default: 4, options: [0,1,2,3,4,5] },
     fontSize: {
-      _default: 5,
+      _default: 6,
       options: range(2, 10),
     },
     marginHorizontal: {
