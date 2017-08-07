@@ -105,7 +105,7 @@ export const BasicImage = {
   color: {},
   component: { section: ['section'] },
   style: {
-    marginBottom: { _default: 2, options: [0,1,2,3,4,5] },
+    marginBottom: { _default: 0, options: [0,1,2,3,4,5] },
     aspectRatio: {
       _default: '3x4',
       options: ['auto', '1x1', '16x9', '4x3', '3x4', '6x4', '8x5', '7x5'],

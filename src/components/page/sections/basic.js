@@ -16,15 +16,16 @@ class Basic extends React.PureComponent {
     const isCenter = style.horizontalPosition === 'center';
 
       
+    const isGallery = groups.item.name === "Gallery";
     const paddingBottom = Math.floor(style.height * (style.verticalPosition / POSITIONS));
     const containerClassNames = convertStyleToAtomic({
       ...style,
       margin: 'auto',
-      display: groups.item.name !== "Gallery" ? 'flex' : '',
+      display: isGallery ? '' : 'flex',
       align: isTop ? "start" : isMid ? "center" : "end",
       justify: isLeft ? "start" : isCenter ? "center" : "end",
       minHeight: style.height,
-      paddingHorizontal: style.edgePadding,
+      paddingHorizontal: isGallery ? 0 : style.edgePadding,
       paddingBottom: '-l-' + paddingBottom,
       paddingTop: '-l-' + (style.height - paddingBottom),
     })
@@ -45,7 +46,7 @@ export default Basic;
 
 export const blueprint = {
   type: 'basic',
-  inherits: ['BackgroundImageSection', 'Section'],
+  inherits: ['BackgroundImageSection', 'ConstrainedSection', 'Section'],
   style: {
     verticalPosition: {
       _default: POSITIONS / 2,
@@ -62,7 +63,7 @@ export const blueprint = {
   groups: {
     item: {
       _default: 'KickerHeadingParagraphButton',
-      options: ['HeadingButton','KickerHeadingButton', 'KickerHeadingSubheadingButton','HeadingSubheadingButton','IconHeadingButton','IconHeadingParagraphButton', 'HeadingParagraphButton','KickerHeadingParagraphButton','Heading','HeadingParagraph','HeadingSubheading', 'KickerHeading', 'KickerHeadingParagraph','KickerHeadingSubheading', 'IconHeadingParagraph','IconHeadingSubheading','Gallery','GalleryWide','Cards', 'ImageHeadingParagraph'],
+      options: ['HeadingButton','KickerHeadingButton', 'KickerHeadingSubheadingButton','HeadingSubheadingButton','IconHeadingButton','IconHeadingParagraphButton', 'HeadingParagraphButton','KickerHeadingParagraphButton','Heading','HeadingParagraph','HeadingSubheading', 'KickerHeading', 'KickerHeadingParagraph','KickerHeadingSubheading', 'IconHeadingParagraph','IconHeadingSubheading','Gallery','Cards', 'ImageHeadingParagraph'],
     },
   },
   image: { content: ['content'] },

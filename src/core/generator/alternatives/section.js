@@ -41,13 +41,15 @@ export function generateSectionComponentAlternatives(section, modify, sectionSke
     valid.push(...prebuilt[sectionType](sectionSkeleton, page));
   }
 
-  const combos = getCombinations(mapValues(section.blueprint.groups, g => g.options));
-  forEach(combos, groups => {
-    valid.push({
-      name: section.name,
-      groups: mapValues(groups, g => ({name: g})),
-    })
-  })
+  // if(modify.basic) {
+  //   const combos = getCombinations(mapValues(section.blueprint.groups, g => g.options));
+  //   forEach(combos, groups => {
+  //     valid.push({
+  //       name: section.name,
+  //       groups: mapValues(groups, g => ({name: g})),
+  //     })
+  //   })
+  // }
 
   const skeletons = valid.map(skeleton => {
     const _skeleton = generateSectionSkeleton({...skeleton, id: section.id});
