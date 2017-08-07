@@ -83,7 +83,7 @@ export function generatePageFromPalette(page, palette) {
 
 export function generatePageFromTypography(page, typography) {
   const _page = {...page, id: uniqueId()};
-  _page.style.typography = typography;
+  _page.style = {...page.style, typography};
   _page.sections = page.sections.map(section => {
     const skeleton = extractSkeletonFromItem(section);
     linkSkeleton(skeleton);
@@ -103,13 +103,13 @@ export function generatePageFromTypography(page, typography) {
 
 export function generateTypographyAlternatives(fonts, page) {
   const typography = {
-    heading: { fontFamily: fonts.heading, fontWeight: 8 , },
-    paragraph: { fontFamily: fonts.normal, fontWeight: 4 },//or 1
+    heading: { fontFamily: fonts.heading, fontWeight: 8, parentKey: 'heading' },//or 7 or 9
+    paragraph: { fontFamily: fonts.normal, fontWeight: 4, parentKey: 'paragraph' },//or 1
   }
   calculateHeaderAndParagraph(typography);
-  typography.smallHeading = { fontFamily: typography.paragraph.fontFamily, fontWeight: 8 };
-  typography.subHeading = { fontFamily: typography.paragraph.fontFamily, fontWeight: 4 };
-  typography.kicker = { fontFamily: typography.paragraph.fontFamily, textTransform: "uppercase" };
+  typography.smallHeading = { fontFamily: typography.paragraph.fontFamily, fontWeight: 8, parentKey: 'smallHeading' };
+  typography.subHeading = { fontFamily: typography.paragraph.fontFamily, fontWeight: 4, parentKey: 'subHeading' };
+  typography.kicker = { fontFamily: typography.paragraph.fontFamily, textTransform: "uppercase", parentKey: 'kicker' };
   calculateTypographySizes(typography);
   calculateTypographyWeights(typography);
   calculateTypographyTransform(typography);
