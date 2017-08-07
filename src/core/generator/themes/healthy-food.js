@@ -11,13 +11,13 @@ const backgroundImages = [
   {url: '/images/pexel/healthyFood/passion_fruit_tea.jpeg'},
 ];
 const images = [
-  {url: '/images/pexel/healthyFood/avacado_banana_breakfast.jpeg'},
-  {url: '/images/pexel/healthyFood/passion_fruit_tea.jpeg'},
-  {url:'/images/pexel/healthyFood/four_pineapples.jpeg'},
+  {url:'/images/pexel/healthyFood/avacado_banana_breakfast.jpeg'},
+  {url:'/images/pexel/healthyFood/passion_fruit_tea.jpeg'},
+  {url:'/images/pexel/healthyFood/four_pineapple.jpeg'},
   {url:'/images/pexel/healthyFood/raw_egg_half_avacado.jpeg'},
-  {url: '/images/pexel/healthyFood/orange_half.jpeg'},
+  {url:'/images/pexel/healthyFood/orange_half.jpeg'},
   {url:'/images/pexel/healthyFood/telephone_avacado.jpeg'},
-  {url: '/images/pexel/healthyFood/background/fork_on_green.jpeg'},
+  {url:'/images/pexel/healthyFood/fork_on_green.jpeg'},
   {url:'/images/pexel/healthyFood/cropped_passion_fruit.png'},
   {url:'/images/pexel/healthyFood/sprout_sandwhich.jpg'},
   {url:'/images/pexel/healthyFood/cute_pastry_lineup.jpeg'},
@@ -28,8 +28,8 @@ const images = [
   {url:'/images/pexel/healthyFood/avacado_veggies_cutting_board.jpeg'},
 ];
 const headerImages = [
-  {url: '/images/pexel/healthyFood/background/passion_fruit_tea.jpeg'},
-  {url: '/images/pexel/healthyFood/background/fork_on_green.jpeg'},
+  {url: '/images/pexel/healthyFood/passion_fruit_tea.jpeg'},
+  {url: '/images/pexel/healthyFood/fork_on_green.jpeg'},
 ];
 
 export default {
