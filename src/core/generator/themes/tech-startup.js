@@ -5,37 +5,37 @@ const palette = ['#EAF4F6','#A3CFD7','#0B3259'];
 const colorBlueprint = buildPageColorBlueprint(palette);
 
 const backgroundImages = [
-  {url:'https://images.pexels.com/photos/487812/pexels-photo-487812.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/317383/pexels-photo-317383.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/493091/pexels-photo-493091.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/38554/girl-people-landscape-sun-38554.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/428339/pexels-photo-428339.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/247932/pexels-photo-247932.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/516961/pexels-photo-516961.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
+  { url: '/images/pexel/techStartup/laptopCoffee.jpeg' },
+  { url: '/images/pexel/techStartup/keyboardCoffee.jpeg' },
+  { url: '/images/pexel/techStartup/laptopGreens.jpeg' },
+  { url: '/images/pexel/techStartup/laptopStats.jpeg' },
+  { url: '/images/pexel/techStartup/point.jpeg' },
+  { url: '/images/pexel/techStartup/startupCode.jpeg' },
+  { url: '/images/pexel/techStartup/usingCell.jpeg' },
+  { url: '/images/pexel/techStartup/wallE.jpeg' },
+  { url: '/images/pexel/techStartup/artsCrafts.jpeg' },
+
 
 ];
 const images = [
-  
-  {url:'https://jimmycrow.com/wp-content/uploads/2016/10/Divi-Google-Maps.png'},
-  {url:'https://tctechcrunch2011.files.wordpress.com/2012/12/navigation1.png'},
-  {url:'https://images.pexels.com/photos/520772/pexels-photo-520772.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/493091/pexels-photo-493091.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/38554/girl-people-landscape-sun-38554.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/428339/pexels-photo-428339.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/247932/pexels-photo-247932.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/516961/pexels-photo-516961.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/355988/pexels-photo-355988.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/85886/lamp-finger-touch-hand-85886.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/85886/lamp-finger-touch-hand-85886.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/296878/pexels-photo-296878.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/160107/pexels-photo-160107.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/473822/pexels-photo-473822.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/35550/ipad-tablet-technology-touch.jpg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/513271/pexels-photo-513271.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/288530/pexels-photo-288530.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {url:'https://images.pexels.com/photos/248528/pexels-photo-248528.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-//   {url:''},
-//   {url:''}
+  { url: '/images/pexel/techStartup/cellMap.png' },
+  { url: '/images/pexel/techStartup/laptopCoffee.jpeg' },
+  { url: '/images/pexel/techStartup/keyboardCoffee.jpeg' },
+  { url: '/images/pexel/techStartup/laptopGreens.jpeg' },
+  { url: '/images/pexel/techStartup/laptopStats.jpeg' },
+  { url: '/images/pexel/techStartup/point.jpeg' },
+  { url: '/images/pexel/techStartup/startupCode.jpeg' },
+  { url: '/images/pexel/techStartup/usingCell.jpeg' },
+  { url: '/images/pexel/techStartup/wallE.jpeg' },
+  { url: '/images/pexel/techStartup/googleMaps.png' },
+  { url: '/images/pexel/techStartup/lightBulb.png' },
+  { url: '/images/pexel/techStartup/manageHome.jpeg' },
+  { url: '/images/pexel/techStartup/workForIt.jpeg' },
+  { url: '/images/pexel/techStartup/usingIpad.jpeg' },
+  { url: '/images/pexel/techStartup/doMore.jpeg' },
+  { url: '/images/pexel/techStartup/artsCrafts.jpeg' },
+  { url: '/images/pexel/techStartup/usingAppleWatch.jpeg' },
+
 ];
 const headerImages = [
   {url:'https://images.pexels.com/photos/503175/pexels-photo-503175.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
@@ -124,7 +124,7 @@ export default {
         },
         elements: {
           image: {
-            content: images[1],
+            content: images[0],
             style: {
               crop: 10,
             },
@@ -198,7 +198,7 @@ export default {
           parallax: true,
         },
         color: {
-          backgroundImage: backgroundImages[6].url,
+          backgroundImage: backgroundImages[3].url,
           background: palette[0],
         },
         BackgroundImageSection: {
@@ -266,7 +266,7 @@ export default {
           horizontalPosition: 'left',
         },
         color: {
-          backgroundImage: backgroundImages[5].url,
+          backgroundImage: backgroundImages[7].url,
           background: palette[0],
         },
         groups: {
