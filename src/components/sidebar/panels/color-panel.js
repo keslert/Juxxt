@@ -6,10 +6,11 @@ import { map, isEqual, find } from 'lodash';
 import { StyledWrap, StyledButton } from '../common/styled';
 import Box from '../../common/box';
 import ColorPicker from '../../common/color-picker';
-import { fetchColorMindPalette } from '../../../core/generator/color/utils';
-import { flatMap } from 'lodash';
-
+import { fetchColorMindPalette, shuffleSectionColor } from '../../../core/generator/color/utils';
+import { flatMap, forEach, cloneDeep } from 'lodash';
+import { linkSkeleton } from '../../../core/generator/generator-utils';
 import { pushAlternative, setAlternatives } from '../../../core/page';
+import {  extractSkeletonFromItem } from '../../../core/generator/skeletons/utils';
 import { turnOnModification } from '../../../core/ui';
 import { generatePageFromPalette, generateRandomPalette } from '../../../core/generator/alternatives/page';
 
@@ -147,6 +148,23 @@ class ColorPanel extends React.Component {
     })
   }
 
+  renderShuffle() {
+    const { page, pushAlternative, turnOnModification } = this.props;
+    turnOnModification('page');
+
+    const skeletons = [];
+    forEach(page.sections,(section)=> {
+      const _skeleton = extractSkeletonFromItem((section));
+      const new_skele = shuffleSectionColor(_skeleton,page,[_skeleton.color.background]);
+      skeletons.push(new_skele);
+    });
+    const _page = cloneDeep(page);
+    _page.sections = skeletons;
+    setTimeout(() => {
+      pushAlternative(_page);
+    }, 1);
+  }
+
   renderColor(color, index) {
     const canDelete = this.state.palette.length > 1;
     return (
@@ -208,6 +226,9 @@ class ColorPanel extends React.Component {
                 <StyledTextButton onClick={() => this.handleColorAdd()}>
                   <i className="fa fa-plus-circle" /> Add color
                 </StyledTextButton>
+                <StyledTextButton onClick={() => this.renderShuffle()}>
+                  <i className="fa fa-plus-circle" /> Shuffle
+                </StyledTextButton>      
               </Box>
             }
           </Collection>
