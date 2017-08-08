@@ -11,6 +11,9 @@ export function styleElement(element, page) {
 
   const rules = [
     e => e.fullId === element.fullId,
+    e => e.section.id === element.section.id && 
+         e.parent.name === element.parent.name,
+    e => e.section.id === element.section.id,
     e => e.parent.name === element.parent.name &&
          e.section.name === element.section.name,
     e => e.parent.name === element.parent.name,
