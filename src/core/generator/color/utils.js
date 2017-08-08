@@ -1,20 +1,24 @@
 import { getMode, randomItem } from '../../utils';
 import tinycolor from 'tinycolor2';
 import request from 'request';
+import { colorGroup } from './group';
+import { colorElement } from './element';
 import { 
   range, 
   reduce, 
   uniqueId, 
   forEach, 
+  cloneDeep,
   clone, 
   sortBy, 
   map, 
+  includes,
   max, 
   some, 
   filter,
   zipObject,
 } from 'lodash';
-
+import { linkSkeleton } from '../generator-utils';
 
 
 const COLORMIND_API = "http://colormind.io/api/";
@@ -37,6 +41,31 @@ export function fetchColorMindPalette(paletteObj, onSuccess, onFailure) {
       onSuccess(palette);
     }
   });
+}
+
+
+
+
+export function shuffleSectionColor(sectionSkeleton, page, restricted) {
+  const bgblueprint = page.colorBlueprint.bgBlueprint;
+  const oldSectionBgColor = sectionSkeleton.color.background;
+
+  if(tinycolor(oldSectionBgColor).toHsv().s < 0.11) {//if color's hella white
+    linkSkeleton(sectionSkeleton);
+    return sectionSkeleton;
+  }
+  const backgrounds = filter(getSortedByPreference(page.colorBlueprint.backgrounds, sectionSkeleton.blueprint.color.background),(color)=> {
+    return (!(tinycolor(color).toHsv().s < 0.11) && !includes(restricted,color)); //make sure it's not hella white
+  });
+
+  const skeleton = cloneDeep(sectionSkeleton);
+  skeleton.color = {background:backgrounds[0]};
+  skeleton.changes = {background:backgrounds[0]};
+  linkSkeleton(skeleton);
+  skeleton._groups.forEach(e => colorGroup(e, page));
+  skeleton._elements.forEach(e => colorElement(e, page));
+
+  return skeleton;
 }
 
 export function isSimilar(color1, color2) {
@@ -68,7 +97,6 @@ export function getSortedByPreference(colors, preference) {
   if(preference === 'vibrant') {
     return getSortedByMostVibrant(colors);
   }
-
   return getSortedByMostNeutral(colors);
 }
 

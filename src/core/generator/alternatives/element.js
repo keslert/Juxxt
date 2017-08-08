@@ -5,7 +5,7 @@ import * as groupBlueprintList from '../../../components/page/groups/_blueprints
 // import * as sectionBlueprints from '../../../components/page/sections/_blueprints';   
 import { generateGroupSkeleton } from '../skeletons/group';
 import { extractSkeletonFromItem } from '../skeletons/utils';
-import { colorMind } from '../color/utils';
+import { colorMind, shuffleSectionColor } from '../color/utils';
 import { 
   map, 
   uniq, 
@@ -47,7 +47,17 @@ function findPathsToElement(item, elementName, path, paths) {
   )
 }
 
-export function generateElementComponentAlternatives(modify, element, sectionSkeleton) {
+export function generateElementComponentAlternatives(modify, element, sectionSkeleton,page) {
+  // const skeletons = [];
+  // forEach(page.sections,(section)=> {
+  //   const _skeleton = extractSkeletonFromItem(section);
+  //   shuffleSectionColor(_skeleton,page,[_skeleton.color.background]);
+  //   linkSkeleton(_skeleton);
+  //   skeletons.push(_skeleton);
+  // });
+  // const _page = cloneDeep(page);
+  // _page.sections = skeletons;
+
   if(modify.section && !element.parent.isSection) {
     const blueprint = getBlueprint(element.parent);
     const _element = find(element.section._elements, e => e.id === element.id);
