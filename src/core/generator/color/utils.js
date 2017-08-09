@@ -20,7 +20,6 @@ import {
 } from 'lodash';
 import { linkSkeleton } from '../generator-utils';
 
-
 const COLORMIND_API = "http://colormind.io/api/";
 
 export function fetchColorMindPalette(paletteObj, onSuccess, onFailure) {
@@ -43,10 +42,7 @@ export function fetchColorMindPalette(paletteObj, onSuccess, onFailure) {
   });
 }
 
-
-
-
-export function shuffleSectionColor(sectionSkeleton, page, restricted) {
+export function shuffleSectionColor(sectionSkeleton, page, restricted, primaries) {
   const bgblueprint = page.colorBlueprint.bgBlueprint;
   const oldSectionBgColor = sectionSkeleton.color.background;
 
@@ -54,13 +50,21 @@ export function shuffleSectionColor(sectionSkeleton, page, restricted) {
     linkSkeleton(sectionSkeleton);
     return sectionSkeleton;
   }
-  const backgrounds = filter(getSortedByPreference(page.colorBlueprint.backgrounds, sectionSkeleton.blueprint.color.background),(color)=> {
+  let backgrounds = filter(getSortedByPreference(page.colorBlueprint.backgrounds, sectionSkeleton.blueprint.color.background),(color)=> {
     return (!(tinycolor(color).toHsv().s < 0.11) && !includes(restricted,color)); //make sure it's not hella white
   });
-
+  if(backgrounds[0]==undefined) {
+    restricted.length = 0;
+    primaries.length = 0;
+    backgrounds = filter(getSortedByPreference(page.colorBlueprint.backgrounds, sectionSkeleton.blueprint.color.background),(color)=> {
+      return (!(tinycolor(color).toHsv().s < 0.11) && !includes(restricted,color)); //make sure it's not hella white
+    });
+  }
   const skeleton = cloneDeep(sectionSkeleton);
   skeleton.color = {background:backgrounds[0]};
   skeleton.changes = {background:backgrounds[0]};
+
+  if(!includes(primaries,backgrounds[0])) primaries.push(backgrounds[0]);
   linkSkeleton(skeleton);
   skeleton._groups.forEach(e => colorGroup(e, page));
   skeleton._elements.forEach(e => colorElement(e, page));

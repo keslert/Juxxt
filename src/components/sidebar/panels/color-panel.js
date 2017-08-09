@@ -6,7 +6,7 @@ import { map, isEqual, find } from 'lodash';
 import { StyledWrap, StyledButton } from '../common/styled';
 import Box from '../../common/box';
 import ColorPicker from '../../common/color-picker';
-import { fetchColorMindPalette, shuffleSectionColor } from '../../../core/generator/color/utils';
+import { fetchColorMindPalette, shuffleSectionColor, getSortedByPreference } from '../../../core/generator/color/utils';
 import { flatMap, forEach, cloneDeep } from 'lodash';
 import { linkSkeleton } from '../../../core/generator/generator-utils';
 import { pushAlternative, setAlternatives } from '../../../core/page';
@@ -52,13 +52,16 @@ const StyledColorPanel = styled.div`
 `
 
 
+
 class ColorPanel extends React.Component {
+
   constructor() {
     super();
     this.state = {
       open: true,
       palette: [],
-    }
+    };
+    this.primaries = [];
   }
 
   componentDidMount() {
@@ -76,7 +79,7 @@ class ColorPanel extends React.Component {
         const old = find(this.state.palette, c => c.color === color) || {};
         return { color, locked: old.locked }
       })
-    })
+    });
   }
 
   updatePalette(palette) {
@@ -136,8 +139,7 @@ class ColorPanel extends React.Component {
         error => toastr.error('There was an error when we tried to fetch a new palette...', error)
       )
     }
-
-
+    this.primaries = [];
   }
 
   toggleColorLock(index) {
@@ -149,17 +151,20 @@ class ColorPanel extends React.Component {
   }
 
   renderShuffle() {
-    const { page, pushAlternative, turnOnModification } = this.props;
+    const { pushAlternative, turnOnModification, alternative } = this.props;
+    const page = (alternative && (alternative.sections.length === this.props.page.sections.length)) ? alternative : this.props.page;
     turnOnModification('page');
-
     const skeletons = [];
+    const restricted = cloneDeep(this.primaries);
     forEach(page.sections,(section)=> {
       const _skeleton = extractSkeletonFromItem((section));
-      const new_skele = shuffleSectionColor(_skeleton,page,[_skeleton.color.background]);
+      const new_skele = shuffleSectionColor(_skeleton,page,restricted,this.primaries);
       skeletons.push(new_skele);
     });
+
     const _page = cloneDeep(page);
     _page.sections = skeletons;
+
     setTimeout(() => {
       pushAlternative(_page);
     }, 1);
@@ -176,13 +181,11 @@ class ColorPanel extends React.Component {
           <Box marginLeft="4px">{color.color}</Box>
         </Box>
         <Box display="flex">
-
           {canDelete && 
             <StyledIcon onClick={() => this.handleColorRemove(index)}>
               <i className='fa fa-times' />
             </StyledIcon>
           }
-
           <StyledIcon highlight={color.locked} onClick={() => this.toggleColorLock(index)}>
             <i className={`fa fa-${color.locked ? 'lock' :  'unlock-alt'}`} />
           </StyledIcon>
@@ -223,11 +226,11 @@ class ColorPanel extends React.Component {
             ))}
             {canAdd &&
               <Box marginLeft="3px" marginTop="4px">
-                <StyledTextButton onClick={() => this.handleColorAdd()}>
+                <StyledTextButton onClick={() => this.handleColorAdd()} className="pt1">
                   <i className="fa fa-plus-circle" /> Add color
                 </StyledTextButton>
-                <StyledTextButton onClick={() => this.renderShuffle()}>
-                  <i className="fa fa-plus-circle" /> Shuffle
+                <StyledTextButton className="pt2" onClick={() => this.renderShuffle()}>
+                  <i className="fa fa-random" /> Shuffle
                 </StyledTextButton>      
               </Box>
             }
