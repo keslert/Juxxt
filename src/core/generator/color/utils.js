@@ -42,6 +42,25 @@ export function fetchColorMindPalette(paletteObj, onSuccess, onFailure) {
   });
 }
 
+
+
+export function darkenSectionColor(sectionSkeleton, page) {
+  const darkMap= { "#ffffff" : page.colorBlueprint.darkGray, [page.colorBlueprint.lightGray] : page.colorBlueprint.lightDarkGray}
+  const oldSectionBgColor = sectionSkeleton.color.background;
+  const tc = tinycolor(oldSectionBgColor);
+  if(!includes(Object.keys(darkMap),tc.toHexString())) {
+    linkSkeleton(sectionSkeleton);
+    return sectionSkeleton;
+  }
+  const skeleton = cloneDeep(sectionSkeleton);
+  skeleton.color = {background: darkMap[tc.toHexString()]};
+  skeleton.changes = {background: darkMap[tc.toHexString()]};
+  linkSkeleton(skeleton);
+  skeleton._groups.forEach(e => colorGroup(e, page));
+  skeleton._elements.forEach(e => colorElement(e, page));
+  return skeleton;
+}
+
 export function shuffleSectionColor(sectionSkeleton, page, restricted, primaries) {
   const bgblueprint = page.colorBlueprint.bgBlueprint;
   const oldSectionBgColor = sectionSkeleton.color.background;

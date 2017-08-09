@@ -67,11 +67,7 @@ function getImageLightness(imageSrc,callback) {
 
 function isColorVisibleOnPattern(color) {
   const tc = tinycolor(color);
-  if(tc.getBrightness() < 127.5 )
-    return true;
-  else if (tc.getLuminance() > 0.5)
-    return false;
-  return false;
+  return (tc.getBrightness() < 127.5)
 }
 
 
@@ -80,7 +76,8 @@ export function buildPageColorBlueprint(colors) {
   const primary = getMostVibrantColor(_colors);
   const darkGray = tintColor("#211b1a", primary, 20);
   const lightGray = tintColor('#f5f6f7', primary, 20);
-  const allColors = [..._colors, darkGray, lightGray];
+  const lightDarkGray = tinycolor(darkGray).brighten(2).toString()
+  const allColors = [..._colors, darkGray, lightGray, lightDarkGray];
 
   const blueprints = filter(allColors.map(color => ({
     color,
@@ -97,6 +94,7 @@ export function buildPageColorBlueprint(colors) {
   return {
     colors,
     primary,
+    lightDarkGray,
     lightGray,
     darkGray,
     texts: uniq(flatMap(blueprints, 'texts')),

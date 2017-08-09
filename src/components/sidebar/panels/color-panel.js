@@ -6,7 +6,7 @@ import { map, isEqual, find } from 'lodash';
 import { StyledWrap, StyledButton } from '../common/styled';
 import Box from '../../common/box';
 import ColorPicker from '../../common/color-picker';
-import { fetchColorMindPalette, shuffleSectionColor, getSortedByPreference } from '../../../core/generator/color/utils';
+import { fetchColorMindPalette, shuffleSectionColor, getSortedByPreference, darkenSectionColor } from '../../../core/generator/color/utils';
 import { flatMap, forEach, cloneDeep } from 'lodash';
 import { linkSkeleton } from '../../../core/generator/generator-utils';
 import { pushAlternative, setAlternatives } from '../../../core/page';
@@ -150,6 +150,24 @@ class ColorPanel extends React.Component {
     })
   }
 
+  renderNightMode() {
+    const { pushAlternative, turnOnModification, alternative } = this.props;
+    const page = (alternative && (alternative.sections.length === this.props.page.sections.length)) ? alternative : this.props.page;
+    turnOnModification('page');
+    const skeletons = [];
+    forEach(page.sections,(section)=> {
+      const _skeleton = extractSkeletonFromItem(section);
+      const sectionSkeleton = darkenSectionColor(_skeleton, page);
+      skeletons.push(sectionSkeleton);
+    });
+    const _page = cloneDeep(page);
+    _page.sections = skeletons;
+    setTimeout(() => {
+      pushAlternative(_page);
+    }, 1);
+  }
+
+
   renderShuffle() {
     const { pushAlternative, turnOnModification, alternative } = this.props;
     const page = (alternative && (alternative.sections.length === this.props.page.sections.length)) ? alternative : this.props.page;
@@ -232,6 +250,9 @@ class ColorPanel extends React.Component {
                 <StyledTextButton className="pt2" onClick={() => this.renderShuffle()}>
                   <i className="fa fa-random" /> Shuffle
                 </StyledTextButton>      
+                <StyledTextButton className="pt2" onClick={()=>this.renderNightMode()} >
+                  <i className="fa fa-moon-o" /> NightMode
+                </StyledTextButton>
               </Box>
             }
           </Collection>
