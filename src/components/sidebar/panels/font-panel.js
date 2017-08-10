@@ -2,7 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Collection from '../common/collection';
-import { map, isEqual, isEmpty , find, cloneDeep } from 'lodash';
+import { map, 
+  isEqual, 
+  isEmpty , 
+  find, 
+  cloneDeep, 
+  mapValues, 
+  includes,
+} from 'lodash';
 import { StyledWrap, StyledButton } from '../common/styled';
 import Box from '../../common/box';
 import ColorPicker from '../../common/color-picker';
@@ -10,10 +17,16 @@ import { fetchColorMindPalette } from '../../../core/generator/color/utils';
 
 import { pushAlternative, setAlternatives } from '../../../core/page';
 import { turnOnModification } from '../../../core/ui';
-import { generatePageFromPalette, generateTypographyAlternatives, generatePageFromTypography, calculateTypographyWeights, calculateTypographySizes } from '../../../core/generator/alternatives/page';
+import { generatePageFromPalette, generatePageFromTypography } from '../../../core/generator/alternatives/page';
 import { lowerCamelCaseToRegular } from '../../../core/utils';
 import Select from '../common/select';
-import { paragraphs, headings } from '../../../core/generator/fonts';
+import { 
+  generateTypography, 
+  calculateTypographyWeights,
+  calculateTypographySizes,
+} from '../../../core/generator/font/font-utils';
+
+import { paragraphs, headings } from '../../../core/generator/font';
 
 import toastr from 'toastr';
 
@@ -53,7 +66,12 @@ class TextPanel extends React.Component {
     this.state = {
       open: true,
       fonts: {},
-      style: {},
+      locked: {
+        heading: false,
+        paragraph: false,
+        weight: false,
+        size: false,
+      }
     }
   }
 
@@ -71,32 +89,55 @@ class TextPanel extends React.Component {
     this.setState({fonts: fonts});
   }
 
-  exchangeStyles(type) {
-    const { pushAlternative, turnOnModification } = this.props;
-    const typography = cloneDeep(this.props.page.style.typography);
-    if (type==="weight")
-      calculateTypographyWeights(typography);
-    else
-      calculateTypographySizes(typography);
+  exchange() {
+    const { locked } = this.state;
+    const blueprint = mapValues(this.props.page.style.typography, (obj, key) => {
+      const fontType = includes(fontBuckets.heading, key) ? 'heading' : 'paragraph';
+      return {
+        ...obj,
+        fontFamily: locked[fontType] ? obj.fontFamily : undefined,
+        fontSize: locked['size'] ? obj.fontSize : undefined,
+        fontWeight: locked['weight'] ? obj.fontWeight : undefined,
+      }
+    })
+
+    this.exchangeTypography(blueprint);
+  }
+
+  exchangeStyle(type) {
+    const _type = type === 'weight' ? 'fontWeight' : 'fontSize';
+    const blueprint = mapValues(this.props.page.style.typography, obj => ({
+      ...obj,
+      [_type]: undefined,
+    }))
+    this.exchangeTypography(blueprint);
+  }
+
+  exchangeFont(type, value) {
+    const bucket = fontBuckets[type];
+    const blueprint = mapValues(this.props.page.style.typography, (obj, key) => ({
+      ...obj,
+      fontFamily: includes(bucket, key) ? value : obj.fontFamily,
+    }))
+    this.exchangeTypography(blueprint);
+  }
+
+  exchangeTypography(blueprint) {
+    const { page, pushAlternative, turnOnModification } = this.props;
     turnOnModification('page');
-    const _page = generatePageFromTypography(this.props.page,typography);
-    const n = {fonts: _page.style.typography};
-    this.setState(n);
+
+    const typography = generateTypography(blueprint, page);
+    const _page = generatePageFromTypography(page, typography);
+    this.setState({fonts: _page.style.typography});
+    
     setTimeout(() => {
       pushAlternative(_page);
     }, 1);
   }
 
-  exchangeFonts(restrictions) {
-    const { page, pushAlternative, turnOnModification, setState } = this.props;
-    const typ = generateTypographyAlternatives(restrictions,page);
-    turnOnModification('page');
-    const _page = generatePageFromTypography(page,typ);
-    const n = {fonts: _page.style.typography};
-    this.setState(n);
-    setTimeout(() => {
-      pushAlternative(_page);
-    }, 1);
+  toggleLocked(name) {
+    const locked = {...this.state.locked, [name]: !this.state.locked[name]};
+    this.setState({locked});
   }
 
   renderFont(fontType, otherFontType) {
@@ -106,7 +147,8 @@ class TextPanel extends React.Component {
     const otherValue = fonts[otherFontType] ? fonts[otherFontType].fontFamily : fonts[otherFontType];
     const options = fontOptions[otherFontType][otherValue] || [];
     const normal = this.props.page.style.typography;
-    const locked = false;
+    
+    const locked = this.state.locked[fontType];
     return (
       <Box display="flex" justify="space-between" marginBottom="4px">
         <Box display="flex">
@@ -118,14 +160,14 @@ class TextPanel extends React.Component {
             name={fontType}
             options={options.map(f => ({label: f, value: f}))}
             value={{value, label: value}}
-            onChange={_value => { this.exchangeFonts({[fontType] : _value.value, [otherFontType]: otherValue});}}
+            onChange={({value}) => this.exchangeFont(fontType, value)}
             />
 
-          <StyledIcon highlight={locked} onClick={() => null}>
+          <StyledIcon highlight={locked} onClick={() => this.toggleLocked(fontType)}>
             <i className={`fa fa-${locked ? 'lock' :  'unlock-alt'}`} />
           </StyledIcon>
           <StyledIcon>
-            <i className='fa fa-exchange' onClick={() => this.exchangeFonts({ [otherFontType] : otherValue }, this.props.page)} />
+            <i className='fa fa-exchange' onClick={() => this.exchangeFont(fontType) }/>
           </StyledIcon>
         </Box>
       </Box>
@@ -133,7 +175,7 @@ class TextPanel extends React.Component {
   }
 
   renderFontStyle(fontStyle) {
-    const locked = false;
+    const locked = this.state.locked[fontStyle];
     return (
       <Box display="flex" justify="space-between" marginBottom="4px">
         <Box display="flex">
@@ -142,11 +184,11 @@ class TextPanel extends React.Component {
 
         <Box display="flex">
 
-          <StyledIcon highlight={locked} onClick={() => null }>
+          <StyledIcon highlight={locked} onClick={() => this.toggleLocked(fontStyle) }>
             <i className={`fa fa-${locked ? 'lock' :  'unlock-alt'}`} />
           </StyledIcon>
           <StyledIcon>
-            <i className='fa fa-exchange' onClick={() => this.exchangeStyles(fontStyle) } />
+            <i className='fa fa-exchange' onClick={() => this.exchangeStyle(fontStyle) } />
           </StyledIcon>
         </Box>
       </Box>
@@ -163,7 +205,7 @@ class TextPanel extends React.Component {
             heading={"Typography"}
             open={open}
             onToggleOpen={() => this.setState({open: !open})}
-            onExchange={e => (e.stopPropagation(), this.exchangeFonts({},alternative ? alternative : this.props.page))}
+            onExchange={e => (e.stopPropagation(), this.exchange())}
             >
             {this.renderFont('heading', 'paragraph')}
             {this.renderFont('paragraph', 'heading')}
@@ -182,3 +224,8 @@ const mapDispatchToProps = {
   turnOnModification,
 }
 export default connect(undefined, mapDispatchToProps)(TextPanel);
+
+const fontBuckets = {
+  heading: ['heading', 'largeHeading', 'smallHeading'],
+  paragraph: ['kicker', 'subheading', 'paragraph'],
+}

@@ -17,35 +17,39 @@ const colorBlueprint = buildPageColorBlueprint(palette);
 
 const page = {
   sections: [
-    // {name: 'Navbar1'},
+    {name: 'Navbar1'},
     // {name: 'Navbar2'},
     // {name: 'Navbar3'},
     // {name: 'Basic1_2'},
     // {name: 'BasicWide1_2'},
-    // {name: 'Basic'},
     {
-      name: 'Basic1_2',
-      color: {
-        // background: colorBlueprint.darkGray,
-      },
+      name: 'Basic',
+      style: { height: 6 },
       groups: {
-        media: {
-          name: 'ImacMockup'
+        item: {
+          name: 'HeadingParagraph',
+          elements: {
+            heading: {
+              name: 'LargeHeading',
+            }
+          }
         }
       }
     },
-    {
-      name: 'Basic1_2',
-      color: {
-        // background: colorBlueprint.darkGray,
-      },
-      groups: {
-        media: {
-          name: 'BrowserMockup'
-        }
-      }
-    },
-    // {name: 'Footer1'},
+    {name: 'Basic'},
+    {name: 'Basic'},
+    // {
+    //   name: 'Basic1_2',
+    //   color: {
+    //     background: colorBlueprint.darkGray,
+    //   },
+    //   groups: {
+    //     media: {
+    //       name: 'ImacMockup'
+    //     }
+    //   }
+    // },
+    {name: 'Footer1'},
     // {name: 'Footer2'},
     // {name: 'FooterVerticalLists'},
   ]
@@ -53,6 +57,7 @@ const page = {
 
 export default {
   palette,
+  typography: {},
   backgroundImages,
   images,
   headerImages,

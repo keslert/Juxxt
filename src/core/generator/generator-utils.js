@@ -1,7 +1,6 @@
 import * as sectionBlueprints from '../../components/page/sections/_blueprints';
 import * as groupBlueprints from '../../components/page/groups/_blueprints';
 import * as elementBlueprints from '../../components/page/elements/_blueprints';
-import { paragraphs } from './fonts';
 import { replaceWhiteSpace } from '../utils';
 import tinycolor from 'tinycolor2';
 

@@ -22,7 +22,7 @@ const StyledAlternatives = styled.div`
 `;
 
 const StyledContent = styled.div`
-  max-height: 100vh;
+  max-height: calc(100vh - 72px);
   display: flex;
   flex-wrap: wrap;
   overflow-y: auto;

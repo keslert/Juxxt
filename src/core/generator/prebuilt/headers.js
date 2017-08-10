@@ -6,6 +6,7 @@ export function getHeaders(sectionSkeleton, page) {
   return headers.map(header => {
     const skeleton = cloneDeep(sectionSkeleton);
     const merged = merge({}, skeleton, header.blueprint(page));
+    // const blueprint = header.blueprint(page);
     header.post && header.post(merged, page);
     return merged;
   })

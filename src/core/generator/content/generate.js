@@ -6,6 +6,7 @@ import LoremIpsum from 'lorem-ipsum';
 export function generateContent(element, page) {
 
   switch(element.name) {
+    case 'LargeHeading':
     case 'BasicHeading':
       return getHeaderContent();
     case 'BasicParagraph':

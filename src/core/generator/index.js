@@ -7,7 +7,8 @@ import { assignColor } from './color';
 import { colorGroup } from './color/group';
 import { colorElement } from './color/element';
 import { buildPageColorBlueprint } from './color/page';
-import { generateTypographyAlternatives } from './alternatives/page';
+import { generateTypography } from './font/font-utils';
+import { generatePageFromTypography } from './alternatives/page';
 import { getSection, getParents, linkSkeleton, generatePageCSSRules } from './generator-utils';
 import { range, reduce, uniqueId, forEach, clone, sortBy, map, max, some, filter, cloneDeep, find } from 'lodash';
 
@@ -18,12 +19,10 @@ export function generatePage(theme) {
     colorBlueprint: buildPageColorBlueprint(theme.palette),
     backgroundImages: theme.backgroundImages,
     images: theme.images,
-    peopleImages: theme.peopleImages,
-
     style: {
       maxWidth: 1024,
       baseFontSize: 16,
-      typography: generateTypographyAlternatives({heading: "Open Sans", normal: "Montserrat"}),
+      typography: generateTypography(theme.typography || {}),
     },
   };
 
@@ -44,8 +43,9 @@ export function generatePage(theme) {
     return [...sections, skeleton];
   }, [])
 
-  generatePageCSSRules(master);
-  return master;
+  const page = generatePageFromTypography(master, master.style.typography);
+  generatePageCSSRules(page);
+  return page;
 }
 
 export function overrideItemContent(item, content, page) {

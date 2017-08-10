@@ -11,25 +11,6 @@ const images = [
   {url:'https://images.pexels.com/photos/490025/pexels-photo-490025.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
   {url:'https://images.pexels.com/photos/505845/pexels-photo-505845.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
   {url:'https://images.pexels.com/photos/488449/pexels-photo-488449.jpeg?w=940&h=650&auto=compress&cs=tinysrgb'},
-
-];
-const peopleImages = [
-  // {key: uniqueId(), url: 'https://images.pexels.com/photos/160911/portrait-girl-red-hair-160911.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  // {key: uniqueId(), url: 'https://images.pexels.com/photos/371168/pexels-photo-371168.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  // {key: uniqueId(), url: 'https://images.pexels.com/photos/60682/pexels-photo-60682.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  // {key: uniqueId(), url: 'https://images.pexels.com/photos/33111/author-jewellery-lipstick-eyelashes.jpg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  // {key: uniqueId(), url: 'https://images.pexels.com/photos/264486/pexels-photo-264486.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  // {key: uniqueId(), url: 'https://images.pexels.com/photos/275496/pexels-photo-275496.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), url: 'https://images.pexels.com/photos/258641/pexels-photo-258641.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), url: '  https://images.pexels.com/photos/301284/pexels-photo-301284.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  {key: uniqueId(), url: '  https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  // {key: uniqueId(), url: 'https://images.pexels.com/photos/325682/pexels-photo-325682.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  // {key: uniqueId(), url: 'https://images.pexels.com/photos/32976/pexels-photo.jpg?w=1260&h=750&auto=compress&cs=tinysrgb'},
-  // {key: uniqueId(), url: 'http://graphics.stanford.edu/~maneesh/images/agrawala-macarthur3-head-square.jpg'},
-  // {key: uniqueId(), url: 'http://hci.stanford.edu/msb/img/msb-hoover2-small.png'},
-  // {key: uniqueId(), url: 'https://lh3.googleusercontent.com/-amOgRh8TJvQ/AAAAAAAAAAI/AAAAAAAAByI/AK7kUFKHFXU/s640/photo.jpg'},
-  // {key: uniqueId(), url: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/5/005/053/34e/0524ee5.jpg'},
-
 ];
 
 export default {
@@ -37,8 +18,11 @@ export default {
   preview: '/images/themes/landay.jpg',
   palette,
   backgroundImages,
-  peopleImages,
   images,
+  typography: {
+    kicker: { fontFamily: 'Anton' }, 
+    heading: { fontFamily: 'Anton' }, 
+  },
   page: {
     sections: [
       {
@@ -100,9 +84,9 @@ export default {
             elements: {
               kicker: {
                 content: {text: 'Stanford University Computer Science'},
-                style: { fontSize: 4, fontFamily: 'Anton', fontWeight: 4, },
               },
               heading: {
+                name: 'LargeHeading',
                 content: {text: 'James Landay'},
                 style: { fontSize: 9, textTransform: 'uppercase', fontFamily: 'Anton', fontWeight: 4 },
               },
@@ -142,7 +126,7 @@ export default {
         },
         color: {
           backgroundImage: backgroundImages[1].url,
-          background: palette[0],
+          background: colorBlueprint.darkGray,
         },
         BackgroundImageSection: {
           parallax: '',
@@ -158,7 +142,7 @@ export default {
                 },
                 color: {
                   text: '#ffffff',
-                  _textBackground: palette[0],
+                  _textBackground: colorBlueprint.darkGray,
                 },
               }
             },
@@ -186,11 +170,8 @@ export default {
                 elements: {
                   heading: {
                     name:'SmallHeading', 
-                    style: { 
-                      fontWeight: 4,
-                    },
                     color: { 
-                      text: colorBlueprint.lightGray,
+                      text: '#ffffff',
                       _textBackground: colorBlueprint.darkGray,
                     },
                   }
@@ -208,7 +189,7 @@ export default {
         },
         color: {
           backgroundImage: backgroundImages[0].url,
-          background: palette[0],
+          background: colorBlueprint.darkGray,
         },
         groups: {
           item: {
@@ -218,7 +199,7 @@ export default {
                 content: {text: 'Teaching'},
                 color: {
                   text: '#ffffff',
-                  _textBackground: palette[0],
+                  _textBackground: colorBlueprint.darkGray,
                 },
               },
             },
@@ -227,7 +208,7 @@ export default {
       },
       {
         name: 'Basic',
-        color: { background: palette[0] },
+        color: { background: colorBlueprint.primary },
         groups: {
           item: {
             name: 'Cards',
@@ -241,8 +222,8 @@ export default {
                   heading: { 
                     name:'SmallHeading', 
                     color: {
-                      text: colorBlueprint.lightGray,
-                      _textBackground: palette[0],
+                      text: '#ffffff',
+                      _textBackground: colorBlueprint.primary,
                     },
                   }
                 }
@@ -258,10 +239,11 @@ export default {
         groups: {
           item: {
             name: 'HeadingParagraph',
+            style: {textAlign: 'center'},
             elements: {
               heading: {
+                name: 'SmallHeading',
                 content: { text: 'landay@stanford.edu' },
-                style: { fontSize: 5 },
               },
               paragraph: {
                 content: { text: "390 Gates Hall, 353 Serra Mall, Stanford CA 94305" }

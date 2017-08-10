@@ -41,6 +41,20 @@ export const BasicHeading = {
   }
 };
 
+export const LargeHeading = {
+  name: 'LargeHeading',
+  is: 'Text',
+  inherits: ['Heading'],
+  color: { text: 'whiteOrVibrant' },
+  component: { section: ['section'] },
+  style: {
+    fontSize: { _default: 6, options: [5,6,7,8,9,10] },
+    fontWeight: { _default: 6, options: [2,4,6,8] },
+    lineHeight: { _default: 1, options: [0,1,2,3,4] },
+    textAlign: {_default:"inherit", options: ["inherit","center","left","right"]},
+  }
+}
+
 export const BasicSubheading = { 
   name: 'BasicSubheading', 
   is: 'Text',
