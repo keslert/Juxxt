@@ -124,9 +124,6 @@ export default {
         groups: {
           tp: {
             name: 'IconHeadingParagraph',
-            color: {
-              background: palette[2],
-            },
           },
         },
         elements: {

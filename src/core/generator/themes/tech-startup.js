@@ -135,6 +135,7 @@ export default {
             name: 'HeadingParagraphButton',
             elements: {
               heading: {
+                name: 'LargeHeading',
                 content: {text: 'EDNA'},
                 style: { fontSize: 9, textTransform: 'uppercase', fontFamily: 'Anton', fontWeight: 4 },
               },
