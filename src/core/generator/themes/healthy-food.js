@@ -58,6 +58,7 @@ export default {
             name: 'HeadingSubheadingButton',
             elements: {
               heading: {
+                name: 'LargeHeading',
                 color: {
                   text: '#ffffff',
                   _textBackground: colorBlueprint.darkGray,
@@ -74,9 +75,9 @@ export default {
           }
         }
       },
-      {name: 'Basic',
-        style: {
-          },  
+      {
+        name: 'Basic',
+        style: {},  
         groups: {
           item: {
             name: 'HeadingParagraph',

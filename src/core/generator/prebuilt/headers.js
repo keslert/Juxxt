@@ -35,6 +35,7 @@ const h1 = {
             
           },
           heading: {
+            name: 'LargeHeading',
             content: {text: 'monocle'},
             style: { fontSize: 9, fontFamily: 'Open Sans', fontWeight: 3 },
             
@@ -93,6 +94,7 @@ const h2 = {
             style: { textTransform: 'none', fontSize: 5, fontFamily: 'Open Sans', fontWeight: 1, },
           },
           heading: {
+            name: 'LargeHeading',
             content: {text: 'monocle'},
             style: { fontSize: 9, fontFamily: 'Open Sans', fontWeight: 3 },
           },
@@ -150,6 +152,7 @@ const h3 = {
             
           },
           heading: {
+            name: 'LargeHeading',
             content: {text: 'monocle'},
             style: {fontSize: 10, fontFamily: 'Open Sans', fontWeight: 3 },
             
@@ -217,9 +220,14 @@ const h4 = {
         },
         groups: {
           tp: {
-            options: ['HeadingParagraph'],
+            name: 'HeadingParagraph',
             style: {
               textAlign: 'center',
+            },
+            elements: {
+              heading: {
+                name: 'LargeHeading',
+              }
             }
           }
         },          

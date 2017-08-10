@@ -70,11 +70,12 @@ export default {
   colorBlueprint,
   page: {
     sections: [
-      {name: 'Navbar2',
-        style: {
-        },
+      {
+        name: 'Navbar2',
+        style: {},
       },
-      {name: 'Basic',
+      {
+        name: 'Basic',
         style: {
           height: 12,
           fontFamily: 'Amatic SC',
@@ -86,6 +87,15 @@ export default {
         color: {
           backgroundImage: backgroundImages[13].url,
           background: palette[0],
+        },
+        groups: {
+          item: {
+            elements: {
+              heading: {
+                name: 'LargeHeading',
+              }
+            }
+          }
         }
       },
       {name: 'Basic',

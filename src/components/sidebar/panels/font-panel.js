@@ -113,11 +113,11 @@ class TextPanel extends React.Component {
     this.exchangeTypography(blueprint);
   }
 
-  exchangeFont(type, value) {
+  exchangeFont(type, _family) {
     const bucket = fontBuckets[type];
     const blueprint = mapValues(this.props.page.style.typography, (obj, key) => ({
       ...obj,
-      fontFamily: includes(bucket, key) ? value : obj.fontFamily,
+      fontFamily: includes(bucket, key) ? _family : obj.fontFamily,
     }))
     this.exchangeTypography(blueprint);
   }
