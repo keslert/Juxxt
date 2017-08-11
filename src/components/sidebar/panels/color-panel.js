@@ -173,10 +173,9 @@ class ColorPanel extends React.Component {
     const page = (alternative && (alternative.sections.length === this.props.page.sections.length)) ? alternative : this.props.page;
     turnOnModification('page');
     const skeletons = [];
-    const restricted = cloneDeep(this.primaries);
     forEach(page.sections,(section)=> {
       const _skeleton = extractSkeletonFromItem((section));
-      const new_skele = shuffleSectionColor(_skeleton,page,restricted,this.primaries);
+      const new_skele = shuffleSectionColor(_skeleton,page,this.primaries);
       skeletons.push(new_skele);
     });
 

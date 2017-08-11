@@ -61,34 +61,29 @@ export function darkenSectionColor(sectionSkeleton, page) {
   return skeleton;
 }
 
-export function shuffleSectionColor(sectionSkeleton, page, restricted, primaries) {
+export function shuffleSectionColor(sectionSkeleton, page, primaries) {
   const bgblueprint = page.colorBlueprint.bgBlueprint;
   const oldSectionBgColor = sectionSkeleton.color.background;
-
-  console.log(sectionSkeleton)
-
-
   if(tinycolor(oldSectionBgColor).toHsv().s < 0.02 || sectionSkeleton.color.backgroundImage) {//if color's hella white
-    console.log("TOO WHITE: " + (tinycolor(oldSectionBgColor).toHsv().s < 0.02) + " HAS IMAGE:" + sectionSkeleton.color.backgroundImage)
     linkSkeleton(sectionSkeleton);
     return sectionSkeleton;
   }
-  
   let backgrounds = filter(getSortedByPreference(page.colorBlueprint.backgrounds, sectionSkeleton.blueprint.color.background),(color)=> {
-    return (!(tinycolor(color).toHsv().s < 0.02) && !includes(restricted,color) && (oldSectionBgColor !== color)); //make sure it's not hella white
+    return !(tinycolor(color).toHsv().s < 0.02); //make sure it's not hella white
   });
   if(backgrounds[0]==undefined) {
-    restricted.length = 0;
     primaries.length = 0;
     backgrounds = filter(getSortedByPreference(page.colorBlueprint.backgrounds, sectionSkeleton.blueprint.color.background),(color)=> {
-      return (!(tinycolor(color).toHsv().s < 0.02) && !includes(restricted,color) && (oldSectionBgColor !== color)); //make sure it's not hella white
+      return !(tinycolor(color).toHsv().s < 0.02); //make sure it's not hella white
     });
   }
+  const bgIndex = backgrounds.indexOf(oldSectionBgColor);
+  const background = (bgIndex >= backgrounds.length-1) ? backgrounds[0] : backgrounds[bgIndex + 1];
   const skeleton = cloneDeep(sectionSkeleton);
-  skeleton.color = {background:backgrounds[0]};
-  skeleton.changes = {background:backgrounds[0]};
+  skeleton.color = {background};
+  skeleton.changes = {background};
 
-  if(!includes(primaries,backgrounds[0])) primaries.push(backgrounds[0]);
+  if(!includes(primaries,background)) primaries.push(background);
   linkSkeleton(skeleton);
   skeleton._groups.forEach(e => colorGroup(e, page));
   skeleton._elements.forEach(e => colorElement(e, page));
