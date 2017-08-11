@@ -65,18 +65,23 @@ export function shuffleSectionColor(sectionSkeleton, page, restricted, primaries
   const bgblueprint = page.colorBlueprint.bgBlueprint;
   const oldSectionBgColor = sectionSkeleton.color.background;
 
-  if(tinycolor(oldSectionBgColor).toHsv().s < 0.11) {//if color's hella white
+  console.log(sectionSkeleton)
+
+
+  if(tinycolor(oldSectionBgColor).toHsv().s < 0.02 || sectionSkeleton.color.backgroundImage) {//if color's hella white
+    console.log("TOO WHITE: " + (tinycolor(oldSectionBgColor).toHsv().s < 0.02) + " HAS IMAGE:" + sectionSkeleton.color.backgroundImage)
     linkSkeleton(sectionSkeleton);
     return sectionSkeleton;
   }
+  
   let backgrounds = filter(getSortedByPreference(page.colorBlueprint.backgrounds, sectionSkeleton.blueprint.color.background),(color)=> {
-    return (!(tinycolor(color).toHsv().s < 0.11) && !includes(restricted,color)); //make sure it's not hella white
+    return (!(tinycolor(color).toHsv().s < 0.02) && !includes(restricted,color) && (oldSectionBgColor !== color)); //make sure it's not hella white
   });
   if(backgrounds[0]==undefined) {
     restricted.length = 0;
     primaries.length = 0;
     backgrounds = filter(getSortedByPreference(page.colorBlueprint.backgrounds, sectionSkeleton.blueprint.color.background),(color)=> {
-      return (!(tinycolor(color).toHsv().s < 0.11) && !includes(restricted,color)); //make sure it's not hella white
+      return (!(tinycolor(color).toHsv().s < 0.02) && !includes(restricted,color) && (oldSectionBgColor !== color)); //make sure it's not hella white
     });
   }
   const skeleton = cloneDeep(sectionSkeleton);
