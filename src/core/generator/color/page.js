@@ -5,6 +5,10 @@ import { getVibrancy, colorMind } from './utils';
 import tinycolor from 'tinycolor2';
 
 const PATTERNS = [
+  "/images/patterns/texturetastic-gray.png",
+  "/images/patterns/binding-dark.png",
+  "/images/patterns/light-sketch.png",
+  "/images/patterns/tex2res2.png",
   "/images/patterns/escheresque.png",
   "/images/patterns/inspiration-geometry.png",
   "/images/patterns/simple-dashed.png",
@@ -14,7 +18,6 @@ const PATTERNS = [
   "/images/patterns/gplay.png",
   "/images/patterns/stardust.png",
   "/images/patterns/cubes.png",
-  "/images/patterns/shattered-dark.png",
   "/images/patterns/type.png",
   "/images/patterns/escheresque-dark.png",
   "/images/patterns/diamonds.png",

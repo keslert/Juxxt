@@ -145,7 +145,7 @@ function resolveBackgroundModification(dispatch, state, selected) {
   resolveModificationSelection(dispatch, state, 'background', keys, options);
 }
 
-const textStyles = ['color', 'fontSize', 'fontWeight', 'fontFamily', 'lineHeight']
+const textStyles = ['color', 'textAlign', 'fontSize', 'fontWeight', 'fontFamily', 'lineHeight']
 function resolveTextModification(dispatch, state, selected) {
   const {keys, options} = getModificationKeysAndOptions(textStyles, selected, selected.blueprint.text);
   if(selected.blueprint.color.text) {

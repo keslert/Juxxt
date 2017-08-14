@@ -10,4 +10,4 @@ import Landay from './landay';
 import NationalGuard from './national-guard';
 import TechStartup from './tech-startup';
 
-export default TechStartup;
+export default RedRock;

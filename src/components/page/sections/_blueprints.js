@@ -4,6 +4,7 @@ export { blueprint as BasicWide1_2  } from './basicWide1_2';
 export { blueprint as Navbar1 } from './navigation/navbar1';
 export { blueprint as Navbar2 } from './navigation/navbar2';
 export { blueprint as Navbar3 } from './navigation/navbar3';
+export { blueprint as Navbar4 } from './navigation/navbar4';
 export { blueprint as Footer1 } from './footers/footer1';
 export { blueprint as Footer2 } from './footers/footer2';
 export { blueprint as FooterVerticalLists } from './footers/footer-vertical-lists';

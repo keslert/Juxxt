@@ -65,6 +65,9 @@ const backgroundImages = [
 export default {
   palette,
   backgroundImages,
+  typography: {
+    heading: { fontFamily: 'Open Sans Condensed' },
+  },
   images,
   headerImages,
   colorBlueprint,
@@ -80,8 +83,7 @@ export default {
           height: 12,
           fontFamily: 'Amatic SC',
           fontSize: 4,
-          //Vertical Position: 5, Horizontal Position: left
-          verticalPosition: 5,
+          verticalPosition: 3,
           horizontalPosition: 'left',  
         },
         color: {

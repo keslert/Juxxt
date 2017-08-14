@@ -17,7 +17,6 @@ class Navbar3 extends React.PureComponent {
       paddingHorizontal: style.edgePadding,
       display: 'flex',
       align: 'center',
-      direction: 'column',
       fixed: false,
     });
 
@@ -42,11 +41,11 @@ export default Navbar3;
 
 export const blueprint = {
   type: 'navigation',
-  inherits: ['GutterSection', 'NavigationSection', 'FixedSection', 'Section'],
+  inherits: ['NavigationSection', 'FixedSection', 'Section'],
   style: {
     height: {
       _default: 2,
-      options: [0,6,2,4],
+      options: [0,4,2],
     }
   },
   color: {
@@ -56,7 +55,6 @@ export const blueprint = {
   elements: {
     logo: {
       name: 'LogoImage',
-      _defaults: { style: {marginBottom: 2}}
     },
   },
   groups: {

@@ -35,6 +35,9 @@ const headerImages = [
 export default {
   name: 'Healthy Food',
   preview: '/images/themes/healthy-food.jpg',
+  typography: {
+    heading: { fontFamily: 'Merriweather' },
+  },
   palette,
   backgroundImages,
   images,
