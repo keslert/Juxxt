@@ -204,11 +204,13 @@ export const SmallButton = {
   style: {
     paddingVertical: {
       _default: 2,
-      options: range(2,5),
+      options: [2],
+      hide: _ => true,
     },
     paddingHorizontal: {
       _default: 3,
-      options: range(3,6),
+      options: [3],
+      hide: _ => true,
     },
     fontSize: { _default: 2, options: range(1, 4) },
   },
@@ -226,11 +228,13 @@ export const BasicButton = {
   style: {
     paddingVertical: {
       _default: 3,
-      options: range(3,4),
+      options: [3],
+      hide: _ => true,
     },
     paddingHorizontal: {
       _default: 4,
-      options: range(3,6),
+      hide: _ => true,
+      options: [4],
     },
     fontSize: {
       _default: 2,

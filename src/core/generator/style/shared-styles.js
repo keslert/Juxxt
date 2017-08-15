@@ -17,10 +17,6 @@ const sections = {
     }
   },
   NavigationSection: {
-    paddingVertical: {
-      _default: 3,
-      options: [1,2,3,4],
-    },
     constrained: {
       _default: 'page',
       options: ['none', 'page'],
@@ -155,7 +151,7 @@ const elements = {
   BorderRadius: {
     borderRadius: {
       _default: 0,
-      options: [0,1,2,3,4,100,'-pill'],
+      options: [0,1,2,3,4,'-100','-pill'],
     },
   },
   Cropped: {

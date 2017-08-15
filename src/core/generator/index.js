@@ -21,6 +21,7 @@ export function generatePage(theme) {
     images: theme.images,
     style: {
       maxWidth: 1024,
+      margin: 'auto',
       baseFontSize: 16,
       typography: generateTypography(theme.typography || {}),
     },

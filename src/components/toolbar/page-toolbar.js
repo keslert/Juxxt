@@ -13,7 +13,10 @@ class PageToolbar extends React.Component {
       <Toolbar>
         <Box display="flex" justify="space-between">
           <Box display="flex">
-            
+            <ToolbarButton>
+              <i className="fa fa-home" />
+            </ToolbarButton>
+            <ToolbarItem>Untitled</ToolbarItem>
           </Box>
           <Box display="flex">
             {canRedo && 

@@ -26,45 +26,14 @@ export default {
   page: {
     sections: [
       {
-        name: 'Navbar1',
+        name: 'Navbar4',
         elements: {
           logo: {
             content: {url:'/images/landay.png'}
           }
         },
-        groups: {
-          buttonList: {
-            name: 'ButtonList',
-            elements: {
-              buttons: {
-                clones: [
-                  {
-                    color: {
-                      background: '#transparent',
-                      _parentBackground: colorBlueprint.darkGray,
-                      text: '#ffffff',
-                      _textBackground: colorBlueprint.darkGray,
-                      borderColor: '#ffffff',
-                    },
-                    content: {text: 'Stop'}
-                  },
-                  {
-                    color: {
-                      background: colorBlueprint.primary,
-                      _parentBackground: colorBlueprint.darkGray,
-                      text: '#ffffff',
-                      _textBackground: colorBlueprint.darkGray,
-                      borderColor: colorBlueprint.primary,
-                    },
-                    content: {text: 'Play'}
-                  }
-                ]
-              }
-            }
-          }
-        },
         color: { background: colorBlueprint.darkGray },
-        style: { constrained: 'page' },
+        style: { constrained: 'page', height: 8 },
       },
       {
         name: 'BasicWide1_2',

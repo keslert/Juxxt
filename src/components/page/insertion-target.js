@@ -42,7 +42,7 @@ const StyledInsertionTarget = styled.div`
     align-items: center;
     font-size: 12px;
     
-    background: #8bc34a;
+    background: #3accab;
     color: #fff;
     ${props => `
       top: ${props.enlarge ? '-32px' : '-10px'};

@@ -32,7 +32,7 @@ export const ToolbarItem = styled.div`
 export const ToolbarButton = styled.div`
   font-size: 12px;
   // font-weight: 600;
-  background: #8bc34a;
+  background: #3accab;
   color: #fff;
   padding: 0 16px;
   cursor: pointer;

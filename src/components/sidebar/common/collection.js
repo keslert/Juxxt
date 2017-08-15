@@ -57,7 +57,7 @@ class Collection extends React.PureComponent {
       <StyledCollection>
         <StyledHeading open={open} onClick={onToggleOpen}>
           {heading}
-          <i className='fa fa-exchange' onClick={onExchange}></i>
+          {onExchange && <i className='fa fa-exchange' onClick={onExchange}></i>}
         </StyledHeading>
         <StyledContent open={open}>
           {children}

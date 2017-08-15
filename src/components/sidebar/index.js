@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import theme from '../../styles/theme';
 
 import { getSidebarOpen, setSidebarOpen } from '../../core/ui';
 import { getSelected, getMaster, getAlternatives } from '../../core/page';
@@ -16,24 +15,7 @@ import ThemeSidebar from './theme-sidebar';
 
 import TemplatePicker from '../../containers/template-picker';
 
-const StyledSidebar = styled.div`
-  position: relative;
-  height: 100vh;
-  background: ${theme.black};
-  box-sizing: border-box;
-  transform: translateX(${props => props.open ? 0 : 240}px);
-  width: ${props => props.open ? 240 : 0}px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
-const StyledHeading = styled.div`
-  font-size: 14px;
-  color: rgba(255,255,255,0.8);
-  text-align: center;
-  padding: 10px;
-`;
+import { StyledSidebar, StyledHeading } from './common/styled'; 
 
 const CloseButton = styled.div`
   position: absolute;

@@ -25,6 +25,7 @@ import {
 
 import Page from '../components/page';
 import Sidebar from '../components/sidebar';
+import VanillaSidebar from '../components/sidebar/vanilla-sidebar';
 import Trashbar from '../components/trashbar';
 import Alternatives from '../components/alternatives';
 import PageToolbar from '../components/toolbar/page-toolbar';
@@ -38,10 +39,13 @@ import Box from '../components/common/box';
 import Notification from '../components/common/notification';
 
 const StyledColumn = styled.div`
-  width: ${props => props.width}%;
-  height: calc(100vh - 40px);
+  width: 100%;
+  
+  height: calc(100vh - ${props => props.hasToolbar ? 40 : 0}px);
   overflow-y: auto;
 `
+
+const vanillaVersion = true;
 
 class App extends React.Component {
 
@@ -96,6 +100,21 @@ class App extends React.Component {
         </div>
       )
     }
+
+    if(vanillaVersion) {
+      return (
+        <Box display="flex">
+          <Box display="flex" position="relative" flex="1">
+            <StyledColumn>
+              <Page {...master} master={true} preview={false} />
+            </StyledColumn>
+          </Box>
+          <Box>
+            <VanillaSidebar />
+          </Box>
+        </Box>
+      )
+    }
     
     return (
       <Box display="flex">
@@ -103,7 +122,7 @@ class App extends React.Component {
           <SplitPane minSize={200} defaultSize='45%' split="vertical">
             <div>
               <PageToolbar />
-              <StyledColumn>
+              <StyledColumn hasToolbar>
                 <Page {...master} master={true} preview={false} />
               </StyledColumn>
             </div>

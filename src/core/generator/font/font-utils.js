@@ -33,13 +33,9 @@ export function assignTransform(typography) {
 
 export function assignFontFamily(typography) {
   const pFamily = typography.paragraph.fontFamily;
-  const hFamily = typography.heading.fontFamily;
-  if(!hFamily) {
-    typography.heading.fontFamily = pFamily 
-      ? randomItem(paragraphs[pFamily])
-      : randomItem(Object.keys(headings));
-  }
-  
+  if(!typography.heading.fontFamily) {
+    typography.heading.fontFamily = randomItem(pFamily ? paragraphs[pFamily] : Object.keys(headings));
+  }  
   if(!pFamily) {
     typography.paragraph.fontFamily = randomItem(headings[typography.heading.fontFamily]);
   }

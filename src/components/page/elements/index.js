@@ -28,9 +28,9 @@ const StyledElement = styled.div`
       right: -8px;
       bottom: -4px;
 
-      border: 4px solid #8bc34a;      
+      border: 4px solid #3accab;      
       border-image: ${props.selected 
-        ? 'linear-gradient(to right, #8bc34a 0%,#8bc34a 2%, transparent 2%, transparent 98%, #8bc34a 98%, #8bc34a 100%);'
+        ? 'linear-gradient(to right, #3accab 0%,#3accab 2%, transparent 2%, transparent 98%, #3accab 98%, #3accab 100%);'
         : 'linear-gradient(to right, rgba(122,122,122,0.3) 0%,rgba(122,122,122,0.3) 2%, transparent 2%, transparent 98%, rgba(122,122,122,0.3) 98%, rgba(122,122,122,0.3) 100%);'
       };
       border-image-slice: 1;

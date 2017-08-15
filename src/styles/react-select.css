@@ -163,8 +163,8 @@
   position: relative;
   text-align: center;
   vertical-align: middle;
-  width: 25px;
-  padding-right: 5px;
+  width: 18px;
+  padding-right: 0px;
 }
 .Select-arrow {
   border-color: rgba(255,255,255,0.4) transparent transparent;

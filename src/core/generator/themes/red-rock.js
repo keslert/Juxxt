@@ -1,6 +1,6 @@
 import uniqueId from 'lodash/uniqueId';
 import { buildPageColorBlueprint } from '../color/page';
-const palette = ['#233B4B', '#4B7176','#B26E3E'];
+const palette = ['#233b4b', '#4b7176','#b26e3e'];
 const colorBlueprint = buildPageColorBlueprint(palette);
 const headerImages = [
   { url: '/images/pexel/redRock/arches_split.jpeg' },
@@ -75,7 +75,9 @@ export default {
     sections: [
       {
         name: 'Navbar2',
-        style: {},
+        style: {
+          height: 6,
+        },
       },
       {
         name: 'Basic',
@@ -115,7 +117,10 @@ export default {
         },
         style: {
           order: 'left',
-        }
+        },
+        color: {
+          background: colorBlueprint.lightGray,
+        },
       },
       {
         name: 'Basic1_2',
@@ -131,7 +136,11 @@ export default {
           order: 'right',
         }
       },
-      {name: 'Footer1',
+      {
+        name: 'Footer1',
+        color: {
+          background: colorBlueprint.primary,
+        }
       },
     ]
   }

@@ -75,12 +75,12 @@ function isColorVisibleOnPattern(color) {
 
 
 export function buildPageColorBlueprint(colors) {
-  const _colors = uniq([...colors, '#ffffff'])
+  const _colors = uniq([...colors, '#ffffff']).map(color => color.toLowerCase());
   const primary = getMostVibrantColor(_colors);
   const darkGray = tintColor("#211b1a", primary, 20);
   const lightGray = tintColor('#f5f6f7', primary, 20);
   const lightDarkGray = tinycolor(darkGray).brighten(2).toString()
-  const allColors = [..._colors, darkGray, lightGray, lightDarkGray];
+  const allColors = [..._colors, darkGray, lightGray]; // , lightDarkGray];
 
   const blueprints = filter(allColors.map(color => ({
     color,
@@ -91,11 +91,11 @@ export function buildPageColorBlueprint(colors) {
   let _patterns = {};
   forEach(blueprints, blueprint => {
     blueprint.solids = getReadableColors(backgrounds, blueprint.color, 1.4);
-    blueprint.gradients = getGradients(blueprint.color, colors);
+    blueprint.gradients = getGradients(blueprint.color, _colors);
     blueprint.patterns = PATTERNS;
   });
   return {
-    colors,
+    colors: _colors,
     primary,
     lightDarkGray,
     lightGray,

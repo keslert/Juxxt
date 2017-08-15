@@ -12,8 +12,8 @@ class Navbar3 extends React.PureComponent {
     
     const containerClassNames = convertStyleToAtomic({
       ...style,
-      paddingBottom: '-l-' + (style.height / 2),
-      paddingTop: '-l-' + (style.height / 2),
+      paddingBottom: style.height / 2,
+      paddingTop: style.height / 2,
       paddingHorizontal: style.edgePadding,
       display: 'flex',
       align: 'center',
@@ -44,8 +44,8 @@ export const blueprint = {
   inherits: ['NavigationSection', 'FixedSection', 'Section'],
   style: {
     height: {
-      _default: 2,
-      options: [0,4,2],
+      _default: 4,
+      options: [2,8,4,6],
     }
   },
   color: {

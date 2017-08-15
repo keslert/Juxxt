@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import theme from '../../../styles/theme';
 
 
 export const StyledWrap = styled.div`
@@ -24,12 +24,6 @@ export const StyledInputWrapper = styled.div`
   width: 180px;
 `
 
-export const StyledHeading = styled.div`
-  font-size: 13px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
-`;
-
 export const StyledButton = styled.div`
   padding: 4px 8px;
   background: ${props => props.background || '#1d1d1d'};
@@ -43,4 +37,23 @@ export const StyledButton = styled.div`
   &:hover {
     color: #aaa;
   }
+`;
+
+export const StyledSidebar = styled.div`
+  position: relative;
+  height: 100vh;
+  background: ${theme.black};
+  box-sizing: border-box;
+  transform: translateX(${props => props.open ? 0 : 240}px);
+  width: ${props => props.open ? 240 : 0}px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+export const StyledHeading = styled.div`
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  text-align: center;
+  padding: 10px;
 `;

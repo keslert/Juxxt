@@ -161,7 +161,7 @@ function resolveImageModification(dispatch, state, selected) {
   resolveModificationSelection(dispatch, state, 'image', keys, options)
 }
 
-const layoutStyles = [
+export const layoutStyles = [
   'splitRatio', 'order', 'height', 'columns', 'constrained', 
   'maxWidth', 'buffer', 'textAlign', 'position', 'marginBottom',
   'paddingHorizontal', 'paddingVertical', 'padding', 'gutter', 'fixed',

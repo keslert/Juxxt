@@ -62,7 +62,7 @@ export const blueprint = {
   type: 'basic',
   inherits: ['Guttered', 'Ordered', 'ConstrainedSection', 'Section'],
   color: {
-    color: 'default',
+    background: 'default',
   },
   style: {},
   groups: {
