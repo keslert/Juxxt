@@ -103,7 +103,6 @@ class App extends React.Component {
     }
 
     if(vanillaVersion) {
-      console.log(master.sections[1].style.height);
       return (
         <Box display="flex">
           <Box display="flex" position="relative" flex="1">

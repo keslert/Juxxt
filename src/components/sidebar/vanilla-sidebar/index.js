@@ -22,6 +22,7 @@ import BackgroundPanel from './background-panel';
 import LayoutPanel from './layout-panel';
 import ImagePanel from './image-panel';
 import TextPanel from './text-panel';
+import ContentPanel from '../panels/content-panel';
 
 
 const StyledButton = styled.div`
@@ -53,6 +54,7 @@ class VanillaSidebar extends React.Component {
           <StyledButton highlight onClick={() => setShowPreview(true)}>
             Preview
           </StyledButton>
+          <ContentPanel item={selected} hidden={false} />
           <SectionPanel selected={selected} page={master} />
           <BackgroundPanel selected={selected} page={master} />
           <LayoutPanel selected={selected} page={master} />
