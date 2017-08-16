@@ -72,7 +72,7 @@ class ColorPanel extends React.Component {
     return (
       <Box display="flex" justify="space-between" marginBottom="4px">
         <Box display="flex">
-          <Box marginLeft="4px">Background</Box>
+          Background
         </Box>
         <Box display="flex">
           <GithubColorPicker onChange={value => this.handleChange(value, 'background')} colors={colors} >

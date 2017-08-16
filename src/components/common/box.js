@@ -13,8 +13,10 @@ export default styled.div`
     ${props.padding && `padding: ${props.padding};`};
 
     ${props.marginTop && `margin-top: ${props.marginTop};`};
-    ${props.marginLeft && `margin-left: ${props.marginLeft};`};
+    ${props.marginRight && `margin-right: ${props.marginRight};`};
     ${props.marginBottom && `margin-bottom: ${props.marginBottom};`};
+    ${props.marginLeft && `margin-left: ${props.marginLeft};`};
+    
 
     ${props.textAlign && `text-align: ${props.textAlign};`};
     ${props.position && `position: ${props.position};`};

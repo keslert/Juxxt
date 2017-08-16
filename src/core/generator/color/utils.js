@@ -20,7 +20,7 @@ import {
 } from 'lodash';
 import { linkSkeleton } from '../generator-utils';
 
-const COLORMIND_API = "http://colormind.io/api/";
+const COLORMIND_API = (process.env.NODE_ENV === 'production' ? 'https' : 'http') + '://colormind.io/api/';
 
 export function fetchColorMindPalette(paletteObj, onSuccess, onFailure) {
   const rgbArr = map(paletteObj, (o)=> {

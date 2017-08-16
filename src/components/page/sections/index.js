@@ -168,8 +168,18 @@ class Section extends React.Component {
                 isDragging={isDragging}
                 selected={isSelected && !preview && master} 
                 hovered={isHovered && !preview && master}
-                onClick={(e) => { e.stopPropagation(); this.handleClick()}}
-                onDoubleClick={(e) => { e.stopPropagation(); setSidebarOpen(true); }}
+                onClick={(e) => { 
+                  if(master) {
+                    e.stopPropagation(); 
+                    this.handleClick();
+                  }
+                }}
+                onDoubleClick={(e) => { 
+                  if(master) {
+                    e.stopPropagation(); 
+                    setSidebarOpen(true); 
+                  }
+                }}
                 onMouseEnter={() => onHoverableMouseEnter(id)}
                 onMouseLeave={() => onHoverableMouseLeave(id)}
                 >

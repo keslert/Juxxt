@@ -137,6 +137,14 @@ export default {
         }
       },
       {
+        name: 'Basic',
+        groups: {
+          item:{
+            name: 'Cards',
+          }
+        },
+      },
+      {
         name: 'Footer1',
         color: {
           background: colorBlueprint.primary,

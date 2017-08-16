@@ -7,14 +7,16 @@ import Select from '../common/select';
 import Box from '../../common/box';
 import GithubColorPicker from '../../common/github-color-picker';
 
-import { find, intersection, sortBy, range } from 'lodash';
+import { find, intersection, sortBy, range, map } from 'lodash';
 import { replaceSectionWithAlternative } from '../../../core/page';
 import { linkSkeleton } from '../../../core/generator/generator-utils';
 import { generateItemClones } from '../../../core/generator/alternatives/alternatives-utils';
 import { extractSkeletonFromItem } from '../../../core/generator/skeletons/utils';
 import { lowerCamelCaseToRegular } from '../../../core/utils'
 
-import { layoutStyles } from '../../../core/ui/actions';
+import { imageStyles } from '../../../core/ui/actions';
+import { showModal } from '../../../core/modal';
+import { IMAGE_MODAL } from '../../modal/modal-types';
 
 const StyledPixel = styled.div`
   width: 18px;
@@ -24,12 +26,12 @@ const StyledPixel = styled.div`
   cursor: pointer;
 `;
 
-const StyledLayoutPanel = styled.div`
+const StyledImagePanel = styled.div`
   color: #999;
   font-size: 14px;
 `
 
-class LayoutPanel extends React.Component {
+class ImagePanel extends React.Component {
 
   constructor() {
     super();
@@ -37,6 +39,34 @@ class LayoutPanel extends React.Component {
     this.state = {
       open: true,
     }
+
+    this.handleImageChange = this.handleImageChange.bind(this);
+  }
+
+  handleImageChange(url) {
+    const { selected, replaceSectionWithAlternative } = this.props;
+
+    const skeleton = extractSkeletonFromItem(selected.section);
+    linkSkeleton(skeleton);
+    const item = find(skeleton._items, i => i.fullRelativeId === selected.fullRelativeId);
+    if(item.isSection) {
+      item.color.backgroundImage = url;
+    } else {
+      item.content.url = url;
+    }
+
+    replaceSectionWithAlternative(skeleton, selected.section);
+  }
+
+  handleBrowseImages() {
+    const { selected, page, showModal } = this.props;
+
+    const images = selected.isSection ? page.backgroundImages : page.images;
+
+    showModal(IMAGE_MODAL, {
+      images: map(images, 'url'),
+      onClick: this.handleImageChange,
+    });
   }
 
   handleChange(value, key) {
@@ -52,11 +82,11 @@ class LayoutPanel extends React.Component {
   
   renderStyle(key, value, options) {
     return (
-      <Box display="flex" justify="space-between" marginBottom="4px">
-        <Box display="flex">
+      <Box display="flex" justify="space-between">
+        <Box>
           {lowerCamelCaseToRegular(key)}
         </Box>
-        <Box display="flex">
+        <Box>
           <Select 
             name={key}
             options={options.map(value => ({label: value, value}))}
@@ -68,35 +98,21 @@ class LayoutPanel extends React.Component {
     )
   }
 
-  renderClones() {
-    const { selected, page, replaceSectionWithAlternative } = this.props;
-    
-    const source = find(selected.section._items, i => i.id === selected.id);
-    const numClones = source.clones.length;
-    const clones = source.blueprint.clones;
-    const options = range(clones.min, clones.max);
-    return (
-      <Box display="flex" justify="space-between" marginBottom="4px">
-        <Box display="flex">
-          Clones
+  renderImage() {
+    const { selected, showModal } = this.props;
+
+    const label = selected.isSection ? 'Background Image' : 'Image';
+
+    if(selected.content.url || selected.isSection) {
+      return (
+        <Box display="flex" justify="space-between">
+          {label}
+          <StyledButton onClick={() => this.handleBrowseImages()}>
+            Browse Images
+          </StyledButton>
         </Box>
-        <Box display="flex">
-          <Select 
-            name='clones'
-            options={options.map(value => ({label: value, value}))}
-            value={{value: numClones, label: numClones}}
-            onChange={({value}) => {
-              const skeleton = extractSkeletonFromItem(source.section);
-              linkSkeleton(skeleton);
-              const item = find(skeleton._items, i => i.id === source.id)
-              generateItemClones(item, value, page)
-              linkSkeleton(skeleton);
-              replaceSectionWithAlternative(skeleton, source.section);
-            }}
-            />
-        </Box>
-      </Box>
-    )
+      )
+    }
   }
 
   render() {
@@ -104,16 +120,17 @@ class LayoutPanel extends React.Component {
     const { selected } = this.props;
     const blueprint = selected.blueprint;
     
-    const keys = intersection(layoutStyles, Object.keys(selected.style));
+    const keys = intersection(imageStyles, Object.keys(selected.style));
 
     return (
-      <StyledLayoutPanel>
+      <StyledImagePanel>
         <StyledWrap inset>
           <Collection 
-            heading={"Layout"} 
+            heading={"Image"} 
             open={open}
             onToggleOpen={() => this.setState({open: !open})}
             >
+            {this.renderImage()}
             {keys.map(key => {
               const { options, hide } = blueprint._allStyles[key];
               if(!hide || !hide(selected)) {
@@ -125,15 +142,15 @@ class LayoutPanel extends React.Component {
                 )
               }
             })}
-            {selected.isClone && this.renderClones()}
           </Collection>
         </StyledWrap>
-      </StyledLayoutPanel>
+      </StyledImagePanel>
     )
   }
 }
 
 const mapDispatchToProps = {
   replaceSectionWithAlternative,
+  showModal,
 }
-export default connect(undefined, mapDispatchToProps)(LayoutPanel);
+export default connect(undefined, mapDispatchToProps)(ImagePanel);

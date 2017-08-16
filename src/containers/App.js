@@ -37,6 +37,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import SplitPane from 'react-split-pane';
 import Box from '../components/common/box';
 import Notification from '../components/common/notification';
+import RootModal from '../components/modal/root-modal';
 
 const StyledColumn = styled.div`
   width: 100%;
@@ -112,6 +113,7 @@ class App extends React.Component {
           <Box>
             <VanillaSidebar />
           </Box>
+          <RootModal />
         </Box>
       )
     }
@@ -134,6 +136,7 @@ class App extends React.Component {
         </Box>
         <Sidebar />
         <Trashbar />
+        <RootModal />
       </Box>
     ); 
   }

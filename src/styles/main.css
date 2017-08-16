@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700');
+
 body {
   margin: 0;
   padding: 0;
@@ -19,4 +21,8 @@ img {
 ::-webkit-scrollbar {
     width: 0px;  /* remove scrollbar space */
     background: transparent;  /* optional: just make scrollbar invisible */
+}
+
+.bg-subtle {
+  background-image: radial-gradient(ellipse 59% 90% at 93% 30%,#a6b6b6,rgba(219,232,231,.2) 90%),radial-gradient(ellipse 59% 140% at 0 120%,#a6b6b6,rgba(219,232,231,.2) 60%),radial-gradient(ellipse 60% 100% at 5% 20%,#b3d7d5,rgba(219,232,231,.2) 100%),radial-gradient(ellipse 60% 100% at 100% 110%,#b3d7d5,rgba(219,232,231,.2) 90%);
 }

@@ -129,13 +129,13 @@ function getLayoutKeysFromSelected(section) {
 }
 
 
-const componentStyles = ['shape', 'buttonType', 'unstyled', 'icon']
+export const componentStyles = ['shape', 'buttonType', 'unstyled', 'icon']
 function resolveComponentModification(dispatch, state, selected) {
   const {keys, options} = getModificationKeysAndOptions(componentStyles, selected, selected.blueprint.component);
   resolveModificationSelection(dispatch, state, 'component', keys, options);
 }
 
-const bgStyles = ['borderRadius', 'dropShadow'];
+export const bgStyles = ['borderRadius', 'dropShadow'];
 function resolveBackgroundModification(dispatch, state, selected) {
   const {keys, options} = getModificationKeysAndOptions(bgStyles, selected, selected.blueprint.background);
   if(selected.blueprint.color.background) {
@@ -145,7 +145,7 @@ function resolveBackgroundModification(dispatch, state, selected) {
   resolveModificationSelection(dispatch, state, 'background', keys, options);
 }
 
-const textStyles = ['color', 'textAlign', 'fontSize', 'fontWeight', 'fontFamily', 'lineHeight']
+export const textStyles = ['color', 'textAlign', 'fontSize', 'fontWeight', 'fontFamily', 'lineHeight']
 function resolveTextModification(dispatch, state, selected) {
   const {keys, options} = getModificationKeysAndOptions(textStyles, selected, selected.blueprint.text);
   if(selected.blueprint.color.text) {
@@ -155,7 +155,7 @@ function resolveTextModification(dispatch, state, selected) {
   resolveModificationSelection(dispatch, state, 'text', keys, options);
 }
 
-const imageStyles = ['content', 'crop', 'aspectRatio', 'borderRadius'];
+export const imageStyles = ['content', 'crop', 'aspectRatio', 'borderRadius'];
 function resolveImageModification(dispatch, state, selected) {
   const {keys, options} = getModificationKeysAndOptions(imageStyles, selected, selected.blueprint.image);
   resolveModificationSelection(dispatch, state, 'image', keys, options)
