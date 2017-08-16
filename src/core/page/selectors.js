@@ -12,6 +12,8 @@ export function getSelected(state) {
 
 export function getMaster(state) {
   const { stack, stackIndex } =  getPage(state);
+  console.log(stack);
+  console.log(stackIndex);
   return stack[stackIndex];
 }
 

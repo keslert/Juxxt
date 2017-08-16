@@ -13,6 +13,7 @@ import { linkSkeleton } from '../../../core/generator/generator-utils';
 import { generateItemClones } from '../../../core/generator/alternatives/alternatives-utils';
 import { extractSkeletonFromItem } from '../../../core/generator/skeletons/utils';
 import { lowerCamelCaseToRegular } from '../../../core/utils'
+import StyleFields from './style-fields';
 
 import { layoutStyles } from '../../../core/ui/actions';
 
@@ -37,35 +38,6 @@ class LayoutPanel extends React.Component {
     this.state = {
       open: true,
     }
-  }
-
-  handleChange(value, key) {
-    const { selected, page, replaceSectionWithAlternative } = this.props;
-
-    const skeleton = extractSkeletonFromItem(selected.section);
-    linkSkeleton(skeleton);
-    const item = find(skeleton._items, i => i.fullId === selected.fullId)
-    item.style[key] = value;
-
-    replaceSectionWithAlternative(skeleton, selected.section);
-  }
-  
-  renderStyle(key, value, options) {
-    return (
-      <Box display="flex" justify="space-between" marginBottom="4px">
-        <Box display="flex">
-          {lowerCamelCaseToRegular(key)}
-        </Box>
-        <Box display="flex">
-          <Select 
-            name={key}
-            options={options.map(value => ({label: value, value}))}
-            value={{value, label: value}}
-            onChange={({value}) => this.handleChange(value, key)}
-            />
-        </Box>
-      </Box>
-    )
   }
 
   renderClones() {
@@ -102,9 +74,6 @@ class LayoutPanel extends React.Component {
   render() {
     const { open } = this.state;
     const { selected } = this.props;
-    const blueprint = selected.blueprint;
-    
-    const keys = intersection(layoutStyles, Object.keys(selected.style));
 
     return (
       <StyledLayoutPanel>
@@ -114,17 +83,7 @@ class LayoutPanel extends React.Component {
             open={open}
             onToggleOpen={() => this.setState({open: !open})}
             >
-            {keys.map(key => {
-              const { options, hide } = blueprint._allStyles[key];
-              if(!hide || !hide(selected)) {
-                const sortedOptions = sortBy(options);
-                return (
-                  <div key={key}>
-                    {this.renderStyle(key, selected.style[key], sortedOptions)}
-                  </div>
-                )
-              }
-            })}
+            <StyleFields styles={layoutStyles} selected={selected} />
             {selected.isClone && this.renderClones()}
           </Collection>
         </StyledWrap>

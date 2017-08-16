@@ -12,8 +12,8 @@ const sections = {
   },
   FixedSection: {
     fixed: {
-      _default: true,
-      options: [true, false],
+      _default: 1,
+      options: [1, 0],
     }
   },
   NavigationSection: {
@@ -35,8 +35,8 @@ const sections = {
       hide: section => !section.color.backgroundImage,
     },
     parallax: {
-      _default: false,
-      options: [true, false],
+      _default: 0,
+      options: [1, 0],
       hide: section => !section.color.backgroundImage,
     }
   },

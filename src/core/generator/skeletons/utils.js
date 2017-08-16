@@ -27,10 +27,13 @@ import { getElementsInItem, getGroupsInItem, linkChildren, getParents } from '..
 
 export function extractSkeletonFromItem(item) {
   const skeleton = {
-    ...pick(item, ['id', 'is', 'type', 'relativeId', 'name', 'color', 'style', 
-      'content', 'blueprint', 'isSection', 'isGroup', 'isElement', 'isClone', 
-      'fullRelativeId', 'fullId', 'index',
+    ...pick(item, ['id', 'is', 'type', 'relativeId', 'name', 'blueprint', 
+      'isSection', 'isGroup', 'isElement', 'isClone', 'fullRelativeId', 
+      'fullId', 'index',
     ]),
+    style: {...item.style},
+    color: {...item.color},
+    content: {...item.content},
     groups: mapValues(item.groups, extractSkeletonFromItem),
     elements: mapValues(item.elements, extractSkeletonFromItem),
     clones: map(item.clones, extractSkeletonFromItem),

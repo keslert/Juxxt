@@ -3,35 +3,71 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
-import { getSelected, getMaster } from '../../../core/page';
-import { getModificationOptions } from '../../../core/ui';
+import { 
+  getSelected, 
+  getMaster, 
+  canUndo, 
+  canRedo, 
+  pageUndo, 
+  pageRedo, 
+} from '../../../core/page';
+
+import { getModificationOptions, setShowPreview } from '../../../core/ui';
 import Box from '../../common/box';
 
 import { StyledSidebar, StyledHeading } from '../common/styled'; 
 
 import SectionPanel from './section-panel';
-import ColorPanel from './color-panel';
+import BackgroundPanel from './background-panel';
 import LayoutPanel from './layout-panel';
 import ImagePanel from './image-panel';
+import TextPanel from './text-panel';
+
+
+const StyledButton = styled.div`
+  font-size: 16px;
+  width: 100%;
+  background: ${props => props.highlight ? '#3accab' : 'rgba(255,255,255,0.05)'};
+  color: #fff;
+  padding: 12px 16px;
+  cursor: pointer;
+  text-align: center;
+`
 
 class VanillaSidebar extends React.Component {
 
   render() {
-    const { selected, master } = this.props;
-
-    // Section Panel
-    // Background Panel
-    // Text Panel
-    // Image Panel
+    const { 
+      selected, 
+      master, 
+      setShowPreview, 
+      canUndo, 
+      canRedo,
+      pageUndo,
+      pageRedo,
+    } = this.props;
 
     return (
       <StyledSidebar open={true}>
         <Box>
-          <StyledHeading>Settings</StyledHeading>
+          <StyledButton highlight onClick={() => setShowPreview(true)}>
+            Preview
+          </StyledButton>
           <SectionPanel selected={selected} page={master} />
-          <ColorPanel selected={selected} page={master} />
+          <BackgroundPanel selected={selected} page={master} />
           <LayoutPanel selected={selected} page={master} />
           <ImagePanel selected={selected} page={master} />
+          <TextPanel selected={selected} page={master} />
+        </Box>
+        <Box>
+          <Box display="flex">
+            {canUndo && <Box flex="1">
+              <StyledButton onClick={pageUndo}><i className="fa fa-undo" /></StyledButton>
+            </Box>}
+            {canRedo && <Box flex="1">
+              <StyledButton onClick={pageRedo}><i className="fa fa-repeat" /></StyledButton>
+            </Box>}
+          </Box>
         </Box>
       </StyledSidebar>
     )
@@ -41,13 +77,20 @@ class VanillaSidebar extends React.Component {
 const mapStateToProps = createSelector(
   getSelected,
   getMaster,
-  (selected, master) => ({
+  canUndo,
+  canRedo,
+  (selected, master, canUndo, canRedo) => ({
     selected,
     master,
+    canUndo,
+    canRedo,
   })
 )
 
 const mapDispatchToProps = {
+  setShowPreview,
+  pageUndo,
+  pageRedo,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(VanillaSidebar);

@@ -6,6 +6,7 @@ import { StyledWrap, StyledButton } from '../common/styled';
 import Select from '../common/select';
 import Box from '../../common/box';
 import GithubColorPicker from '../../common/github-color-picker';
+import StyleFields from './style-fields';
 
 import { find, intersection, sortBy, range, map } from 'lodash';
 import { replaceSectionWithAlternative } from '../../../core/page';
@@ -69,35 +70,6 @@ class ImagePanel extends React.Component {
     });
   }
 
-  handleChange(value, key) {
-    const { selected, page, replaceSectionWithAlternative } = this.props;
-
-    const skeleton = extractSkeletonFromItem(selected.section);
-    linkSkeleton(skeleton);
-    const item = find(skeleton._items, i => i.fullId === selected.fullId)
-    item.style[key] = value;
-
-    replaceSectionWithAlternative(skeleton, selected.section);
-  }
-  
-  renderStyle(key, value, options) {
-    return (
-      <Box display="flex" justify="space-between">
-        <Box>
-          {lowerCamelCaseToRegular(key)}
-        </Box>
-        <Box>
-          <Select 
-            name={key}
-            options={options.map(value => ({label: value, value}))}
-            value={{value, label: value}}
-            onChange={({value}) => this.handleChange(value, key)}
-            />
-        </Box>
-      </Box>
-    )
-  }
-
   renderImage() {
     const { selected, showModal } = this.props;
 
@@ -118,9 +90,6 @@ class ImagePanel extends React.Component {
   render() {
     const { open } = this.state;
     const { selected } = this.props;
-    const blueprint = selected.blueprint;
-    
-    const keys = intersection(imageStyles, Object.keys(selected.style));
 
     return (
       <StyledImagePanel>
@@ -131,17 +100,7 @@ class ImagePanel extends React.Component {
             onToggleOpen={() => this.setState({open: !open})}
             >
             {this.renderImage()}
-            {keys.map(key => {
-              const { options, hide } = blueprint._allStyles[key];
-              if(!hide || !hide(selected)) {
-                const sortedOptions = sortBy(options);
-                return (
-                  <div key={key}>
-                    {this.renderStyle(key, selected.style[key], sortedOptions)}
-                  </div>
-                )
-              }
-            })}
+            <StyleFields styles={imageStyles} selected={selected} />
           </Collection>
         </StyledWrap>
       </StyledImagePanel>

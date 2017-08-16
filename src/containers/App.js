@@ -103,6 +103,7 @@ class App extends React.Component {
     }
 
     if(vanillaVersion) {
+      console.log(master.sections[1].style.height);
       return (
         <Box display="flex">
           <Box display="flex" position="relative" flex="1">
@@ -113,6 +114,7 @@ class App extends React.Component {
           <Box>
             <VanillaSidebar />
           </Box>
+          <Trashbar />
           <RootModal />
         </Box>
       )
@@ -135,7 +137,6 @@ class App extends React.Component {
           </SplitPane>
         </Box>
         <Sidebar />
-        <Trashbar />
         <RootModal />
       </Box>
     ); 

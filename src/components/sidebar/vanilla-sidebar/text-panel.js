@@ -11,6 +11,9 @@ import { replaceSectionWithAlternative } from '../../../core/page';
 import { linkSkeleton } from '../../../core/generator/generator-utils';
 import { extractSkeletonFromItem } from '../../../core/generator/skeletons/utils';
 
+import { textStyles } from '../../../core/ui/actions';
+import StyleFields from './style-fields';
+
 const StyledPixel = styled.div`
   width: 18px;
   height: 18px;
@@ -19,12 +22,12 @@ const StyledPixel = styled.div`
   cursor: pointer;
 `;
 
-const StyledColorPanel = styled.div`
+const StyledTextPanel = styled.div`
   color: #999;
   font-size: 14px;
 `
 
-class ColorPanel extends React.Component {
+class TextPanel extends React.Component {
 
   constructor() {
     super();
@@ -34,7 +37,7 @@ class ColorPanel extends React.Component {
     }
   }
 
-  handleChange(value, key) {
+  handleColorChange(value, key) {
     const { selected, page, replaceSectionWithAlternative } = this.props;
 
     const skeleton = extractSkeletonFromItem(selected.section);
@@ -51,58 +54,32 @@ class ColorPanel extends React.Component {
 
     const colors = blueprint.texts; // blueprint.bgBlueprints[selected.color._textBackground].texts;
     return (
-      <Box display="flex" justify="space-between" marginBottom="4px">
-        <Box display="flex">
-          <Box marginLeft="4px">Text</Box>
-        </Box>
-        <Box display="flex">
-          <GithubColorPicker onChange={value => this.handleChange(value, 'text')} colors={colors} >
-            <StyledPixel color={selected.color.text} />
-          </GithubColorPicker>
-        </Box>
+      <Box display="flex" justify="space-between">
+        Color
+        <GithubColorPicker onChange={value => this.handleColorChange(value, 'text')} colors={colors} >
+          <StyledPixel color={selected.color.text} />
+        </GithubColorPicker>
       </Box>
     )
-  }
-
-  renderBackground() {
-    const { selected, page } = this.props;
-    const blueprint = page.colorBlueprint;
-
-    const colors = blueprint.backgrounds; // blueprint.bgBlueprints[selected.color._parentBackground] || {solids: blueprint.backgrounds};
-    return (
-      <Box display="flex" justify="space-between" marginBottom="4px">
-        <Box display="flex">
-          Background
-        </Box>
-        <Box display="flex">
-          <GithubColorPicker onChange={value => this.handleChange(value, 'background')} colors={colors} >
-            <StyledPixel color={selected.color.background} />
-          </GithubColorPicker>
-        </Box>
-      </Box>
-    )
-  }
-
-  
+  }  
 
   render() {
     const { open } = this.state;
     const { selected } = this.props;
-    const blueprint = selected.blueprint;
     
     return (
-      <StyledColorPanel>
+      <StyledTextPanel>
         <StyledWrap inset>
           <Collection 
-            heading={"Color"} 
+            heading={"Text"} 
             open={open}
             onToggleOpen={() => this.setState({open: !open})}
             >
-            {blueprint.color.background && this.renderBackground()}
-            {blueprint.color.text && this.renderText()}
+            {selected.blueprint.color.text && this.renderText()}
+            <StyleFields styles={textStyles} selected={selected} />
           </Collection>
         </StyledWrap>
-      </StyledColorPanel>
+      </StyledTextPanel>
     )
   }
 }
@@ -110,4 +87,4 @@ class ColorPanel extends React.Component {
 const mapDispatchToProps = {
   replaceSectionWithAlternative,
 }
-export default connect(undefined, mapDispatchToProps)(ColorPanel);
+export default connect(undefined, mapDispatchToProps)(TextPanel);

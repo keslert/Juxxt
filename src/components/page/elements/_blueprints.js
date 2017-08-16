@@ -141,7 +141,8 @@ export const CoverImage = {
   style: {
     aspectRatio: {
       _default: "object",
-      options:['object']
+      options:['object'],
+      hide: () => true,
     }
   },
   image: { content: ['content'] },

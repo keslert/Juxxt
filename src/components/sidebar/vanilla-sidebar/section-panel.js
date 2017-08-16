@@ -19,6 +19,9 @@ import { lowerCamelCaseToRegular } from '../../../core/utils'
 import { showModal } from '../../../core/modal';
 import { SECTION_MODAL } from '../../modal/modal-types';
 
+import { componentStyles } from '../../../core/ui/actions';
+import StyleFields from './style-fields';
+
 const StyledSectionPanel = styled.div`
   color: #999;
   font-size: 14px;
@@ -39,7 +42,13 @@ class SectionPanel extends React.Component {
   handleBrowseSections() {
     const { selected, page, showModal } = this.props;
 
-    const types = ['basic', 'navigation', 'header', 'footer', 'action', 'grid', 'gallery'];
+    let types;
+    const type = selected.section.type;
+    if(type === 'navigation' || type === 'footer') {
+      types = [type];
+    } else {
+      types = ['basic', 'header', 'action', 'grid', 'gallery'];
+    }
 
     const categories = types.map(type => ({
       label: type,
@@ -75,7 +84,7 @@ class SectionPanel extends React.Component {
       <Box display="flex" justify="space-between">
         Type
         <StyledButton onClick={() => this.handleBrowseSections()}>
-          Browse Sections
+          Browse Components
         </StyledButton>
       </Box>
     )
@@ -84,18 +93,17 @@ class SectionPanel extends React.Component {
   render() {
     const { open } = this.state;
     const { selected, showModal } = this.props;
-    const blueprint = selected.blueprint;
 
     return (
       <StyledSectionPanel>
         <StyledWrap inset>
           <Collection 
-            heading={"Section"} 
+            heading={"Component"} 
             open={open}
             onToggleOpen={() => this.setState({open: !open})}
             >
-
             {this.renderBrowse()}
+            <StyleFields styles={componentStyles} selected={selected} />
           </Collection>
         </StyledWrap>
       </StyledSectionPanel>
