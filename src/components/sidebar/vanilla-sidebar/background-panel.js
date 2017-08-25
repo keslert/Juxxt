@@ -43,7 +43,9 @@ class BackgroundPanel extends React.Component {
     const skeleton = extractSkeletonFromItem(selected.section);
     linkSkeleton(skeleton);
     const item = find(skeleton._items, i => i.fullRelativeId === selected.fullRelativeId)
-    item.color[key] = value;
+    item.color.background = value;
+    item.color.borderColor = value;
+    item.color.backgroundImage = null;
 
     replaceSectionWithAlternative(skeleton, selected.section);
   }

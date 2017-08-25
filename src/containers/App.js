@@ -47,6 +47,7 @@ const StyledColumn = styled.div`
 `
 
 const vanillaVersion = true;
+const system = null;
 
 class App extends React.Component {
 
